@@ -18,6 +18,7 @@
 #include <SoftwareSerial.h>
 
 
+
 #define SPI_MOSI_PIN PA12
 #define NUM_WS2812B_CRGB  450
 #define NUM_OF_LEDS NUM_WS2812B_CRGB
