@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{58E81480-BD04-45B4-8B36-3B2FF7729846}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>H_Pannel_lib</RootNamespace>
+    <AssemblyName>H_Pannel_lib</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Basic">
+      <HintPath>..\..\DLL\Basic.dll</HintPath>
+    </Reference>
+    <Reference Include="DrawingClass, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\DrawingClass.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MyUI">
+      <HintPath>..\..\DLL\MyUI.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLUI">
+      <HintPath>..\..\DLL\SQLUI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>bin\Release\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Release\System.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding" />
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.6.0.0\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="zxing">
+      <HintPath>..\..\DLL\zxing.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class\DeviceClass.cs" />
+    <Compile Include="Class\RFIDClass.cs" />
+    <Compile Include="Class\RowsLEDClass.cs" />
+    <Compile Include="Dialog\Dialog_Pannel35.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Dialog_Pannel35.Designer.cs">
+      <DependentUpon>Dialog_Pannel35.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\Dialog_RFID_DeviceSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Dialog_RFID_DeviceSetting.Designer.cs">
+      <DependentUpon>Dialog_RFID_DeviceSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\Dialog_選取顯示網段.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Dialog_選取顯示網段.Designer.cs">
+      <DependentUpon>Dialog_選取顯示網段.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Class\DrawerClass.cs" />
+    <Compile Include="Dialog\Dialog_RowsLED.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Dialog_RowsLED.Designer.cs">
+      <DependentUpon>Dialog_RowsLED.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\Dialog_RFID測試頁面.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Dialog_RFID測試頁面.Designer.cs">
+      <DependentUpon>Dialog_RFID測試頁面.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\Dialog_IO測試.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Dialog_IO測試.Designer.cs">
+      <DependentUpon>Dialog_IO測試.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\Dialog_LED_Setting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Dialog_LED_Setting.Designer.cs">
+      <DependentUpon>Dialog_LED_Setting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DrawerUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DrawerUI_EPD_583.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RFID_UI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RFID_UI.Designer.cs">
+      <DependentUpon>RFID_UI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RowsLEDUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewUI\Pannel35_Pannel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewUI\Pannel35_Pannel.Designer.cs">
+      <DependentUpon>Pannel35_Pannel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewUI\RowsLED_Pannel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewUI\RowsLED_Pannel.Designer.cs">
+      <DependentUpon>RowsLED_Pannel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewUI\EPD_266_Pannel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewUI\EPD_266_Pannel.Designer.cs">
+      <DependentUpon>EPD_266_Pannel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewUI\EPD_583_Pannel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewUI\EPD_583_Pannel.Designer.cs">
+      <DependentUpon>EPD_583_Pannel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="DeviceBasicUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DeviceBasicUI.Designer.cs">
+      <DependentUpon>DeviceBasicUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Class\StorageClass.cs" />
+    <Compile Include="StorageUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Communication.cs" />
+    <Compile Include="StorageUI_EPD_266.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StorageUI_WT32.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Class\UDP_Class.cs" />
+    <Compile Include="ViewUI\WT32-GPADC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewUI\WT32-GPADC.Designer.cs">
+      <DependentUpon>WT32-GPADC.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dialog\Dialog_Pannel35.resx">
+      <DependentUpon>Dialog_Pannel35.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Dialog_RFID_DeviceSetting.resx">
+      <DependentUpon>Dialog_RFID_DeviceSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Dialog_選取顯示網段.resx">
+      <DependentUpon>Dialog_選取顯示網段.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Dialog_RowsLED.resx">
+      <DependentUpon>Dialog_RowsLED.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Dialog_RFID測試頁面.resx">
+      <DependentUpon>Dialog_RFID測試頁面.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Dialog_IO測試.resx">
+      <DependentUpon>Dialog_IO測試.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Dialog_LED_Setting.resx">
+      <DependentUpon>Dialog_LED_Setting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RFID_UI.resx">
+      <DependentUpon>RFID_UI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RowsLEDUI.resx">
+      <DependentUpon>RowsLEDUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StorageUI_WT32.resx">
+      <DependentUpon>StorageUI_WT32.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewUI\EPD_266_Pannel.resx">
+      <DependentUpon>EPD_266_Pannel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeviceBasicUI.resx">
+      <DependentUpon>DeviceBasicUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewUI\EPD_583_Pannel.resx">
+      <DependentUpon>EPD_583_Pannel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewUI\Pannel35_Pannel.resx">
+      <DependentUpon>Pannel35_Pannel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewUI\RowsLED_Pannel.resx">
+      <DependentUpon>RowsLED_Pannel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewUI\WT32-GPADC.resx">
+      <DependentUpon>WT32-GPADC.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Resources\green_lamp_on_.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red_lamp_off_.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red_lamp_on_.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green_lamp_off_.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green_lamp_off_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green_lamp_off_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\green_lamp_off_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LOCK.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UNLOCK.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets'))" />
+  </Target>
+</Project>
