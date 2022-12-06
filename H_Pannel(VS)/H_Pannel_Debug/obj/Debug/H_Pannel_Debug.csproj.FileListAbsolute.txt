@@ -1,0 +1,5 @@
+C:\Users\HS\Desktop\H_Pannel 20220606\H_Pannel(VS)\H_Pannel_Debug\obj\Debug\H_Pannel_Debug.csproj.AssemblyReference.cache
+C:\Users\HS\Desktop\H_Pannel 20220606\H_Pannel(VS)\H_Pannel_Debug\obj\Debug\WT32_SC01.Form1.resources
+C:\Users\HS\Desktop\H_Pannel 20220606\H_Pannel(VS)\H_Pannel_Debug\obj\Debug\H_Pannel_Debug.Properties.Resources.resources
+C:\Users\HS\Desktop\H_Pannel 20220606\H_Pannel(VS)\H_Pannel_Debug\obj\Debug\H_Pannel_Debug.csproj.GenerateResource.cache
+C:\Users\HS\Desktop\H_Pannel 20220606\H_Pannel(VS)\H_Pannel_Debug\obj\Debug\H_Pannel_Debug.csproj.CoreCompileInputs.cache

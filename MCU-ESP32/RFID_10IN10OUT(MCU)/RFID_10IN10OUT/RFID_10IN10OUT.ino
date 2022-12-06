@@ -18,7 +18,7 @@
 #define PIN_485_Tx_Eanble 12
 #define WAKEUP_MS 100
 
-String Version = "Ver 1.2.2";
+String Version = "Ver 1.2.3";
   
 MyLED MyLED_IS_Connented;
 byte* framebuffer_RW;

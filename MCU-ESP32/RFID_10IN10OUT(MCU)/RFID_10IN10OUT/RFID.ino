@@ -7,6 +7,7 @@ byte rFID_Enable = 0;
 byte rFID_Enable_buf = -1;
 bool RFID_Init = true;
 String CardID_temp = "";
+int RFID_Error = 0;
 void sub_RFID_program()
 {
     rFID_Enable = Get_RFID_Enable();
@@ -43,7 +44,10 @@ void sub_RFID_program()
            CardID_buf[i] = "00000000000000";     
         } 
       }
-               
+      if(RFID_Error >= 20)
+      {
+         ESP.restart();       
+      }
     }
     RFID_Init = false;
     
@@ -84,7 +88,11 @@ String Get_7CardID(byte station)
    bool flag_rx_Start = false;
    while(true)
    {
-     if(retry >= 3) break;
+     if(retry >= 3) 
+     {
+        RFID_Error++;
+        break;
+     }
      flag_rx_ok = 0;
      flag_rx_Start = false;
      Set_RS485_Tx_Enable();
@@ -163,6 +171,7 @@ String Get_7CardID(byte station)
         HEX_6.toUpperCase();
         HEX_7.toUpperCase();
         HEX_7 = "00";
+        RFID_Error = 0;
         return HEX_0 + HEX_1 + HEX_2 + HEX_3 + HEX_4 + HEX_5 + HEX_6;
      }
      else
