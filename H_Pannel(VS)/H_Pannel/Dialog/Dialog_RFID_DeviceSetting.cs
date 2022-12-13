@@ -14,6 +14,7 @@ namespace H_Pannel_lib
     {
         public RFIDClass rFIDClass;
         private List<CheckBox> checkBoxes_儲位致能 = new List<CheckBox>();
+        private List<CheckBox> checkBoxes_刷卡直接開門 = new List<CheckBox>();
         public Dialog_RFID_DeviceSetting(RFIDClass rFIDClass)
         {
             InitializeComponent();
@@ -24,9 +25,19 @@ namespace H_Pannel_lib
             this.checkBoxes_儲位致能.Add(this.checkBox_儲位致能_04);
             this.checkBoxes_儲位致能.Add(this.checkBox_儲位致能_05);
 
-            for(int i = 0; i < this.rFIDClass.DeviceClasses.Length; i++)
+            this.checkBoxes_刷卡直接開門.Add(this.checkBox_刷卡直接開門_01);
+            this.checkBoxes_刷卡直接開門.Add(this.checkBox_刷卡直接開門_02);
+            this.checkBoxes_刷卡直接開門.Add(this.checkBox_刷卡直接開門_03);
+            this.checkBoxes_刷卡直接開門.Add(this.checkBox_刷卡直接開門_04);
+            this.checkBoxes_刷卡直接開門.Add(this.checkBox_刷卡直接開門_05);
+
+            for (int i = 0; i < this.rFIDClass.DeviceClasses.Length; i++)
             {
                 this.checkBoxes_儲位致能[i].Checked = this.rFIDClass.DeviceClasses[i].Enable;
+            }
+            for (int i = 0; i < this.rFIDClass.DeviceClasses.Length; i++)
+            {
+                this.checkBoxes_刷卡直接開門[i].Checked = this.rFIDClass.DeviceClasses[i].IsLocker;
             }
         }
 
@@ -39,8 +50,35 @@ namespace H_Pannel_lib
             this.checkBox_儲位致能_03.CheckStateChanged += CheckBox_儲位致能_03_CheckStateChanged;
             this.checkBox_儲位致能_04.CheckStateChanged += CheckBox_儲位致能_04_CheckStateChanged;
             this.checkBox_儲位致能_05.CheckStateChanged += CheckBox_儲位致能_05_CheckStateChanged;
+
+            this.checkBox_刷卡直接開門_01.CheckStateChanged += CheckBox_刷卡直接開門_01_CheckStateChanged;
+            this.checkBox_刷卡直接開門_02.CheckStateChanged += CheckBox_刷卡直接開門_02_CheckStateChanged;
+            this.checkBox_刷卡直接開門_03.CheckStateChanged += CheckBox_刷卡直接開門_03_CheckStateChanged;
+            this.checkBox_刷卡直接開門_04.CheckStateChanged += CheckBox_刷卡直接開門_04_CheckStateChanged;
+            this.checkBox_刷卡直接開門_05.CheckStateChanged += CheckBox_刷卡直接開門_05_CheckStateChanged;
         }
 
+
+        private void CheckBox_刷卡直接開門_01_CheckStateChanged(object sender, EventArgs e)
+        {
+            this.rFIDClass.DeviceClasses[0].IsLocker = this.checkBox_刷卡直接開門_01.Checked;
+        }
+        private void CheckBox_刷卡直接開門_02_CheckStateChanged(object sender, EventArgs e)
+        {
+            this.rFIDClass.DeviceClasses[1].IsLocker = this.checkBox_刷卡直接開門_02.Checked;
+        }
+        private void CheckBox_刷卡直接開門_03_CheckStateChanged(object sender, EventArgs e)
+        {
+            this.rFIDClass.DeviceClasses[2].IsLocker = this.checkBox_刷卡直接開門_03.Checked;
+        }
+        private void CheckBox_刷卡直接開門_04_CheckStateChanged(object sender, EventArgs e)
+        {
+            this.rFIDClass.DeviceClasses[3].IsLocker = this.checkBox_刷卡直接開門_04.Checked;
+        }
+        private void CheckBox_刷卡直接開門_05_CheckStateChanged(object sender, EventArgs e)
+        {
+            this.rFIDClass.DeviceClasses[4].IsLocker = this.checkBox_刷卡直接開門_05.Checked;
+        }
 
         private void CheckBox_儲位致能_01_CheckStateChanged(object sender, EventArgs e)
         {

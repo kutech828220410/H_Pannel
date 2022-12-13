@@ -259,7 +259,7 @@ namespace H_Pannel_lib
             private DateTime unlock_start_dateTime;
             private DateTime unlock_end_dateTime;
             private bool unlockTimeEnable = false;
-
+            private bool isLocker = false;
       
             public string IP { get => iP; set => iP = value; }
             public int Port { get => port; set => port = value; }
@@ -268,6 +268,8 @@ namespace H_Pannel_lib
             public string GUID { get => gUID; set => gUID = value; }
             public bool Enable { get => enable; set => enable = value; }
             public int Index { get => index; set => index = value; }
+            public bool IsLocker { get => isLocker; set => isLocker = value; }
+
             [JsonIgnore]
             public Font Name_font = new Font("微軟正黑體", 12, FontStyle.Bold);
             [Browsable(false)]
@@ -279,7 +281,7 @@ namespace H_Pannel_lib
 
             public DateTime Unlock_start_dateTime { get => unlock_start_dateTime; set => unlock_start_dateTime = value; }
             public DateTime Unlock_end_dateTime { get => unlock_end_dateTime; set => unlock_end_dateTime = value; }
-            public bool UnlockTimeEnable { get => unlockTimeEnable; set => unlockTimeEnable = value; }
+            public bool UnlockTimeEnable { get => unlockTimeEnable; set => unlockTimeEnable = value; }         
 
             public void Add()
             {
@@ -349,7 +351,6 @@ namespace H_Pannel_lib
         private string name = "";
         private string gUID = "";
         private DeviceClass[] deviceClasses = new DeviceClass[5];
-
 
         public bool UpToSQL = false;
         public string IP { get => iP; set => iP = value; }

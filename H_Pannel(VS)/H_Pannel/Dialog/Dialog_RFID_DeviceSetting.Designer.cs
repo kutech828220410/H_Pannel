@@ -31,16 +31,24 @@ namespace H_Pannel_lib
         {
             this.rJ_Button_退出 = new MyUI.RJ_Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox_儲位致能_01 = new System.Windows.Forms.CheckBox();
-            this.checkBox_儲位致能_02 = new System.Windows.Forms.CheckBox();
-            this.checkBox_儲位致能_03 = new System.Windows.Forms.CheckBox();
-            this.checkBox_儲位致能_04 = new System.Windows.Forms.CheckBox();
             this.checkBox_儲位致能_05 = new System.Windows.Forms.CheckBox();
+            this.checkBox_儲位致能_04 = new System.Windows.Forms.CheckBox();
+            this.checkBox_儲位致能_03 = new System.Windows.Forms.CheckBox();
+            this.checkBox_儲位致能_02 = new System.Windows.Forms.CheckBox();
+            this.checkBox_儲位致能_01 = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox_刷卡直接開門_05 = new System.Windows.Forms.CheckBox();
+            this.checkBox_刷卡直接開門_04 = new System.Windows.Forms.CheckBox();
+            this.checkBox_刷卡直接開門_03 = new System.Windows.Forms.CheckBox();
+            this.checkBox_刷卡直接開門_02 = new System.Windows.Forms.CheckBox();
+            this.checkBox_刷卡直接開門_01 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // rJ_Button_退出
             // 
+            this.rJ_Button_退出.AutoResetState = false;
             this.rJ_Button_退出.BackColor = System.Drawing.Color.Gray;
             this.rJ_Button_退出.BackgroundColor = System.Drawing.Color.Gray;
             this.rJ_Button_退出.BorderColor = System.Drawing.Color.PaleVioletRed;
@@ -53,7 +61,7 @@ namespace H_Pannel_lib
             this.rJ_Button_退出.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_退出.Location = new System.Drawing.Point(238, 13);
             this.rJ_Button_退出.Name = "rJ_Button_退出";
-            this.rJ_Button_退出.Size = new System.Drawing.Size(98, 60);
+            this.rJ_Button_退出.Size = new System.Drawing.Size(98, 124);
             this.rJ_Button_退出.State = false;
             this.rJ_Button_退出.TabIndex = 11;
             this.rJ_Button_退出.Text = "退出";
@@ -74,35 +82,15 @@ namespace H_Pannel_lib
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "儲位致能";
             // 
-            // checkBox_儲位致能_01
+            // checkBox_儲位致能_05
             // 
-            this.checkBox_儲位致能_01.AutoSize = true;
-            this.checkBox_儲位致能_01.Location = new System.Drawing.Point(10, 27);
-            this.checkBox_儲位致能_01.Name = "checkBox_儲位致能_01";
-            this.checkBox_儲位致能_01.Size = new System.Drawing.Size(36, 16);
-            this.checkBox_儲位致能_01.TabIndex = 13;
-            this.checkBox_儲位致能_01.Text = "01";
-            this.checkBox_儲位致能_01.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_儲位致能_02
-            // 
-            this.checkBox_儲位致能_02.AutoSize = true;
-            this.checkBox_儲位致能_02.Location = new System.Drawing.Point(52, 27);
-            this.checkBox_儲位致能_02.Name = "checkBox_儲位致能_02";
-            this.checkBox_儲位致能_02.Size = new System.Drawing.Size(36, 16);
-            this.checkBox_儲位致能_02.TabIndex = 14;
-            this.checkBox_儲位致能_02.Text = "02";
-            this.checkBox_儲位致能_02.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_儲位致能_03
-            // 
-            this.checkBox_儲位致能_03.AutoSize = true;
-            this.checkBox_儲位致能_03.Location = new System.Drawing.Point(94, 27);
-            this.checkBox_儲位致能_03.Name = "checkBox_儲位致能_03";
-            this.checkBox_儲位致能_03.Size = new System.Drawing.Size(36, 16);
-            this.checkBox_儲位致能_03.TabIndex = 15;
-            this.checkBox_儲位致能_03.Text = "03";
-            this.checkBox_儲位致能_03.UseVisualStyleBackColor = true;
+            this.checkBox_儲位致能_05.AutoSize = true;
+            this.checkBox_儲位致能_05.Location = new System.Drawing.Point(178, 27);
+            this.checkBox_儲位致能_05.Name = "checkBox_儲位致能_05";
+            this.checkBox_儲位致能_05.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_儲位致能_05.TabIndex = 17;
+            this.checkBox_儲位致能_05.Text = "05";
+            this.checkBox_儲位致能_05.UseVisualStyleBackColor = true;
             // 
             // checkBox_儲位致能_04
             // 
@@ -114,23 +102,108 @@ namespace H_Pannel_lib
             this.checkBox_儲位致能_04.Text = "04";
             this.checkBox_儲位致能_04.UseVisualStyleBackColor = true;
             // 
-            // checkBox_儲位致能_05
+            // checkBox_儲位致能_03
             // 
-            this.checkBox_儲位致能_05.AutoSize = true;
-            this.checkBox_儲位致能_05.Location = new System.Drawing.Point(178, 27);
-            this.checkBox_儲位致能_05.Name = "checkBox_儲位致能_05";
-            this.checkBox_儲位致能_05.Size = new System.Drawing.Size(36, 16);
-            this.checkBox_儲位致能_05.TabIndex = 17;
-            this.checkBox_儲位致能_05.Text = "05";
-            this.checkBox_儲位致能_05.UseVisualStyleBackColor = true;
+            this.checkBox_儲位致能_03.AutoSize = true;
+            this.checkBox_儲位致能_03.Location = new System.Drawing.Point(94, 27);
+            this.checkBox_儲位致能_03.Name = "checkBox_儲位致能_03";
+            this.checkBox_儲位致能_03.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_儲位致能_03.TabIndex = 15;
+            this.checkBox_儲位致能_03.Text = "03";
+            this.checkBox_儲位致能_03.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_儲位致能_02
+            // 
+            this.checkBox_儲位致能_02.AutoSize = true;
+            this.checkBox_儲位致能_02.Location = new System.Drawing.Point(52, 27);
+            this.checkBox_儲位致能_02.Name = "checkBox_儲位致能_02";
+            this.checkBox_儲位致能_02.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_儲位致能_02.TabIndex = 14;
+            this.checkBox_儲位致能_02.Text = "02";
+            this.checkBox_儲位致能_02.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_儲位致能_01
+            // 
+            this.checkBox_儲位致能_01.AutoSize = true;
+            this.checkBox_儲位致能_01.Location = new System.Drawing.Point(10, 27);
+            this.checkBox_儲位致能_01.Name = "checkBox_儲位致能_01";
+            this.checkBox_儲位致能_01.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_儲位致能_01.TabIndex = 13;
+            this.checkBox_儲位致能_01.Text = "01";
+            this.checkBox_儲位致能_01.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.checkBox_刷卡直接開門_05);
+            this.groupBox2.Controls.Add(this.checkBox_刷卡直接開門_04);
+            this.groupBox2.Controls.Add(this.checkBox_刷卡直接開門_03);
+            this.groupBox2.Controls.Add(this.checkBox_刷卡直接開門_02);
+            this.groupBox2.Controls.Add(this.checkBox_刷卡直接開門_01);
+            this.groupBox2.Location = new System.Drawing.Point(12, 77);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(220, 60);
+            this.groupBox2.TabIndex = 13;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "刷卡直接開門";
+            // 
+            // checkBox_刷卡直接開門_05
+            // 
+            this.checkBox_刷卡直接開門_05.AutoSize = true;
+            this.checkBox_刷卡直接開門_05.Location = new System.Drawing.Point(178, 27);
+            this.checkBox_刷卡直接開門_05.Name = "checkBox_刷卡直接開門_05";
+            this.checkBox_刷卡直接開門_05.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_刷卡直接開門_05.TabIndex = 17;
+            this.checkBox_刷卡直接開門_05.Text = "05";
+            this.checkBox_刷卡直接開門_05.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_刷卡直接開門_04
+            // 
+            this.checkBox_刷卡直接開門_04.AutoSize = true;
+            this.checkBox_刷卡直接開門_04.Location = new System.Drawing.Point(136, 27);
+            this.checkBox_刷卡直接開門_04.Name = "checkBox_刷卡直接開門_04";
+            this.checkBox_刷卡直接開門_04.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_刷卡直接開門_04.TabIndex = 16;
+            this.checkBox_刷卡直接開門_04.Text = "04";
+            this.checkBox_刷卡直接開門_04.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_刷卡直接開門_03
+            // 
+            this.checkBox_刷卡直接開門_03.AutoSize = true;
+            this.checkBox_刷卡直接開門_03.Location = new System.Drawing.Point(94, 27);
+            this.checkBox_刷卡直接開門_03.Name = "checkBox_刷卡直接開門_03";
+            this.checkBox_刷卡直接開門_03.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_刷卡直接開門_03.TabIndex = 15;
+            this.checkBox_刷卡直接開門_03.Text = "03";
+            this.checkBox_刷卡直接開門_03.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_刷卡直接開門_02
+            // 
+            this.checkBox_刷卡直接開門_02.AutoSize = true;
+            this.checkBox_刷卡直接開門_02.Location = new System.Drawing.Point(52, 27);
+            this.checkBox_刷卡直接開門_02.Name = "checkBox_刷卡直接開門_02";
+            this.checkBox_刷卡直接開門_02.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_刷卡直接開門_02.TabIndex = 14;
+            this.checkBox_刷卡直接開門_02.Text = "02";
+            this.checkBox_刷卡直接開門_02.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_刷卡直接開門_01
+            // 
+            this.checkBox_刷卡直接開門_01.AutoSize = true;
+            this.checkBox_刷卡直接開門_01.Location = new System.Drawing.Point(10, 27);
+            this.checkBox_刷卡直接開門_01.Name = "checkBox_刷卡直接開門_01";
+            this.checkBox_刷卡直接開門_01.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_刷卡直接開門_01.TabIndex = 13;
+            this.checkBox_刷卡直接開門_01.Text = "01";
+            this.checkBox_刷卡直接開門_01.UseVisualStyleBackColor = true;
             // 
             // Dialog_RFID_DeviceSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(348, 85);
+            this.ClientSize = new System.Drawing.Size(348, 149);
             this.ControlBox = false;
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.rJ_Button_退出);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -139,6 +212,8 @@ namespace H_Pannel_lib
             this.Load += new System.EventHandler(this.Dialog_RFID_DeviceSetting_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -152,5 +227,11 @@ namespace H_Pannel_lib
         private System.Windows.Forms.CheckBox checkBox_儲位致能_03;
         private System.Windows.Forms.CheckBox checkBox_儲位致能_02;
         private System.Windows.Forms.CheckBox checkBox_儲位致能_01;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox checkBox_刷卡直接開門_05;
+        private System.Windows.Forms.CheckBox checkBox_刷卡直接開門_04;
+        private System.Windows.Forms.CheckBox checkBox_刷卡直接開門_03;
+        private System.Windows.Forms.CheckBox checkBox_刷卡直接開門_02;
+        private System.Windows.Forms.CheckBox checkBox_刷卡直接開門_01;
     }
 }
