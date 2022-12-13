@@ -353,7 +353,18 @@ namespace H_Pannel_lib
         private DeviceClass[] deviceClasses = new DeviceClass[5];
 
         public bool UpToSQL = false;
-        public string IP { get => iP; set => iP = value; }
+        public string IP
+        { 
+            get => iP;
+            set
+            {
+                for (int i = 0; i < deviceClasses.Length; i++)
+                {
+                    deviceClasses[i].IP = value;
+                }
+                iP = value;
+            }
+        }
         public int Port { get => port; set => port = value; }
         public string Name { get => name; set => name = value; }
         public string GUID { get => gUID; set => gUID = value; }
