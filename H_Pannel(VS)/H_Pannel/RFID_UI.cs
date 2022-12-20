@@ -691,7 +691,7 @@ namespace H_Pannel_lib
         virtual public bool Set_LockOpen(string IP, int Port, int Num)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return Set_LockOpen(uDP_Class, IP, Num + 1);
+            return Set_LockOpen(uDP_Class, IP, Num);
         }
         virtual public bool Set_OutputPIN(string IP, int Port, int Num, bool value)
         {

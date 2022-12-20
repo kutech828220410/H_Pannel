@@ -360,7 +360,7 @@ namespace H_Pannel_lib
             {
                 for (int i = 0; i < deviceClasses.Length; i++)
                 {
-                    deviceClasses[i].IP = value;
+                    if (deviceClasses[i] != null) deviceClasses[i].IP = value;
                 }
                 iP = value;
             }

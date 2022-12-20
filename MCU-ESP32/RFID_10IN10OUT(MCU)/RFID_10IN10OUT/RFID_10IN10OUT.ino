@@ -93,9 +93,9 @@ void setup()
 //    xTaskCreatePinnedToCore(Core1Task1,"Core1Task1", 10000,NULL,1,&Core1Task1Handle,1); 
 //    xTaskCreatePinnedToCore(Core1Task2,"Core1Task2", 10000,NULL,1,&Core1Task2Handle,1); 
 //    xTaskCreatePinnedToCore(Core1Task3,"Core1Task3", 10000,NULL,1,&Core1Task3Handle,1); 
-    
-    //xTaskCreatePinnedToCore(Core1Task4,"Core1Task4", 10000,NULL,1,&Core1Task4Handle,1); 
-    //xTaskCreatePinnedToCore(Core1Task5,"Core1Task5", 10000,NULL,1,&Core1Task5Handle,1); 
+//    
+//    xTaskCreatePinnedToCore(Core1Task4,"Core1Task4", 10000,NULL,1,&Core1Task4Handle,1); 
+//    xTaskCreatePinnedToCore(Core1Task5,"Core1Task5", 10000,NULL,1,&Core1Task5Handle,1); 
 }
 
 void loop()                                                                                                                                                                                                                                                           
