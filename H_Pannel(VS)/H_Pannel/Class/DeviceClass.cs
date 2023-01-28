@@ -221,7 +221,15 @@ namespace H_Pannel_lib
     [Serializable]
     public class DeviceBasic
     {
-        public string GUID { get => gUID; set => gUID = value; }
+        public string GUID 
+        {
+            get
+            {
+                if (this.gUID.StringIsEmpty()) gUID = Guid.NewGuid().ToString();
+                return gUID;
+            }
+            set => gUID = value;
+        }
         private string gUID = "";
         public DeviceType DeviceType { get => deviceType; set => deviceType = value; }
         private DeviceType deviceType = DeviceType.None;

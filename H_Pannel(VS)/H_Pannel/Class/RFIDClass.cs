@@ -248,6 +248,13 @@ namespace H_Pannel_lib
                 this.IP = IP;
                 this.Port = Port;
                 this.Index = index;
+                for (int i = 0; i < rFIDDevices.Count; i++)
+                {
+                    rFIDDevices[i].IP = IP;
+                    rFIDDevices[i].Port = Port;
+                    rFIDDevices[i].Index = index;
+
+                }
             }
             private string iP = "0.0.0.0";
             private int port = 0;
@@ -260,8 +267,19 @@ namespace H_Pannel_lib
             private DateTime unlock_end_dateTime;
             private bool unlockTimeEnable = false;
             private bool isLocker = false;
-      
-            public string IP { get => iP; set => iP = value; }
+
+            public string IP
+            {
+                get => iP;
+                set
+                {
+                    for (int i = 0; i < rFIDDevices.Count; i++)
+                    {
+                        if (rFIDDevices[i] != null) rFIDDevices[i].IP = value;
+                    }
+                    iP = value;
+                }
+            }
             public int Port { get => port; set => port = value; }
             public List<RFIDDevice> RFIDDevices { get => rFIDDevices; set => rFIDDevices = value; }
             public string Name { get => name; set => name = value; }
@@ -282,6 +300,7 @@ namespace H_Pannel_lib
             public DateTime Unlock_start_dateTime { get => unlock_start_dateTime; set => unlock_start_dateTime = value; }
             public DateTime Unlock_end_dateTime { get => unlock_end_dateTime; set => unlock_end_dateTime = value; }
             public bool UnlockTimeEnable { get => unlockTimeEnable; set => unlockTimeEnable = value; }         
+
 
             public void Add()
             {

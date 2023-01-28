@@ -191,6 +191,7 @@ void EPD::WaitUntilIdle()
 {
    //delay(50);
     while(digitalRead(PIN_BUSY) == HIGH) {      //LOW: idle, HIGH: busy
+      mySerial -> println("Watting for PIN_BUSY!");
         //delay(10);
     }
     //delay(50);

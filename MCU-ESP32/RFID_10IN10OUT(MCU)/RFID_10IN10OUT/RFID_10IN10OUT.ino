@@ -1,4 +1,4 @@
-#include <WiFiUdp.h> 
+include <WiFiUdp.h> 
 #include <WiFi.h>
 #include <Wire.h>
 #include "WiFiConfig.h"
@@ -36,7 +36,7 @@ MyTimer MyTimer_BoardInit;
 bool flag_boradInit = false;
 bool flag_httpInit = false;
 bool flag_JsonSend = false;
-bool flag_udp_232back = true;
+bool flag_udp_232back = false;
 
 #define WDT_TIMEOUT 5
 const int wdtTimeout = 5;  //time in ms to trigger the watchdog

@@ -1078,6 +1078,10 @@ namespace H_Pannel_lib
                 RFIDClass rFIDClass = jsonString.JsonDeserializet<RFIDClass>();
                 if (rFIDClass == null) return;
                 rFIDClass.IP = IP;
+                for(int i = 0; i < rFIDClass.DeviceClasses.Length; i++)
+                {
+                    rFIDClass.DeviceClasses[i].IP = IP;
+                }
                 value[(int)enum_DeviceTable.Value] = rFIDClass.JsonSerializationt();
                 this.sqL_DataGridView_DeviceTable.SQL_Replace(value, true);
             }

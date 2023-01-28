@@ -21,7 +21,7 @@
 #define SPI_MOSI_PIN PA12
 #define NUM_WS2812B_CRGB  450
 #define NUM_OF_LEDS NUM_WS2812B_CRGB
-#define SYSTEM_LED_PIN -1
+#define SYSTEM_LED_PIN PA30
 
 bool flag_udp_232back = true;
 bool flag_JsonSend = false;
