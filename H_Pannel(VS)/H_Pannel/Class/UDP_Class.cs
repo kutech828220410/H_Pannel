@@ -194,7 +194,7 @@ namespace H_Pannel_lib
             list_header.Add((byte)(len >> 24));
             list_bytes_out.Add(list_header.ToArray());
 
-            int WritePackageSize = 1300;
+            int WritePackageSize = 1400;
             int div = bytes.Length / WritePackageSize;
             int mod = bytes.Length % WritePackageSize;
             for (int i = 0; i < div; i++)

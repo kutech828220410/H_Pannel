@@ -138,6 +138,11 @@ void onPacketCallBack()
             Get_Checksum_UDP();
            
           }  
+          else if(*(UdpRead + 1) == 'g' && UdpRead_len == 3)
+          {                                  
+             Send_String(str_distance , wiFiConfig.localport);
+             if(flag_udp_232back)printf("LaserDistance : %d\n" ,str_distance);
+          } 
           else if (*(UdpRead + 1) == 'e')
           {
             int len = UdpRead_len - 7;

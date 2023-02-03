@@ -50,15 +50,18 @@ TaskHandle_t Core0Task3Handle;
 TaskHandle_t Core0Task4Handle;
 
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
-//SoftwareSerial mySerial(PB2, PB1); // RX, TX
+SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.0.12";
+String Version = "Ver 1.1.0";
 
 void setup() 
 {
 
     mySerial.begin(115200);   
+    mySerial2.begin(9600);   
     mySerial.println(Version);
+
+
     
     wiFiConfig.mySerial = &mySerial;
     epd.mySerial = &mySerial;
@@ -127,6 +130,7 @@ void Core0Task1( void * pvParameters )
        if(flag_boradInit)
        {
           serialEvent();
+          serial2Event();
           sub_IO_Program();
           MyLED_IS_Connented.Blink();
           if( WiFi.status() == WL_CONNECTED  )

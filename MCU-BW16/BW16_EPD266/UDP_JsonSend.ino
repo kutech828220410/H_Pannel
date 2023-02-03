@@ -42,6 +42,7 @@ void sub_UDP_Send()
          doc["Output"] = Output;
          doc["Input_dir"] = Input_dir;
          doc["Output_dir"] = Output_dir;
+         doc["LaserDistance"] = LaserDistance;  
          JsonOutput = "";
          serializeJson(doc, JsonOutput);
          Send_StringTo(JsonOutput, wiFiConfig.server_IPAdress, wiFiConfig.serverport);

@@ -19,7 +19,7 @@ class EPD
   int PIN_MOSI = PA12;
   int PIN_MISO = PA13;
   int PIN_CS = PA15;
-  int PIN_RST = PA30;
+  int PIN_RST = PA25;
   int PIN_DC = PA26;
   int PIN_BUSY = PA27;
   
