@@ -80,7 +80,6 @@ void setup()
     mySerial.println(os_get_free_heap_size_arduino());
     mySerial.println();
     
-    IO_Init();
     MyLED_IS_Connented.Init(SYSTEM_LED_PIN);
 
     
@@ -99,7 +98,7 @@ void loop()
    }
    if(flag_boradInit)
    {
-      
+      sub_IO_Program();
       if(WiFi.status() != WL_CONNECTED)
       {
          wiFiConfig.WIFI_Connenct();
@@ -130,8 +129,8 @@ void Core0Task1( void * pvParameters )
        if(flag_boradInit)
        {
           serialEvent();
-          serial2Event();
-          sub_IO_Program();
+         // serial2Event();
+          
           MyLED_IS_Connented.Blink();
           if( WiFi.status() == WL_CONNECTED  )
           {

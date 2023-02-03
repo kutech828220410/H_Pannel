@@ -70,7 +70,7 @@ void setup()
 
     SPI.begin(); //SCLK, MISO, MOSI, SS
     myWS2812.Init(NUM_WS2812B_CRGB);
-    //epd.Init(); 
+    epd.Init(); 
 
     mySerial.print("Dynamic memory size: ");
     mySerial.println(os_get_free_heap_size_arduino());
@@ -137,7 +137,7 @@ void Core0Task1( void * pvParameters )
               MyLED_IS_Connented.BlinkTime = 500;
           }
           
-          //epd.Sleep_Check();
+          epd.Sleep_Check();
        }
           
        delay(10);

@@ -1,4 +1,4 @@
-#define INPUT_PIN01 PB1
+#define INPUT_PIN01 PB2
 #define INPUT_PIN02 -1
 #define INPUT_PIN03 -1
 #define INPUT_PIN04 -1
@@ -9,7 +9,7 @@
 #define INPUT_PIN09 -1
 #define INPUT_PIN10 -1
 
-#define OUTPUT_PIN01 PA13
+#define OUTPUT_PIN01 PB1
 #define OUTPUT_PIN02 -1
 #define OUTPUT_PIN03 -1
 #define OUTPUT_PIN04 -1

@@ -44,7 +44,7 @@ bool MyOutput::GetLogic(bool value)
 void MyOutput::Blink()
 {
   int PIN = this -> PIN_NUM;
-
+  printf("123\n");
   if( (this -> cnt) == 254)
   {
     State = false;
@@ -84,7 +84,7 @@ void MyOutput::Blink()
     State = true;
     if(PIN != -1)digitalWrite(PIN, this -> GetLogic(true));
     if(Output_ON != nullptr) Output_ON();
-    //Serial.printf("Output ON PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
+    printf("Output ON PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
     myTimer.StartTickTime(this -> OnDelayTime);
     (this -> cnt) = (this -> cnt) + 1 ;
   }
@@ -96,7 +96,7 @@ void MyOutput::Blink()
       if(PIN != -1)digitalWrite(PIN, this -> GetLogic(false));
       if(Output_OFF != nullptr) Output_OFF();
       myTimer.StartTickTime(this -> OnDelayTime);
-      //Serial.printf("Output OFF PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
+      printf("Output OFF PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
       (this -> cnt) = (this -> cnt) + 1 ;
     }
   }
