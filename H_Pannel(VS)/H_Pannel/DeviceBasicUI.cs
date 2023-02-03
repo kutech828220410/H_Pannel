@@ -685,6 +685,19 @@ namespace H_Pannel_lib
         #region Event
         private void RJ_Button_Write_Click(object sender, EventArgs e)
         {
+
+            string Version = "";
+       
+            if (Communication.UART_Command_Get_Version(mySerialPort, out Version))
+            {
+             
+            }
+            else
+            {
+                MyMessageBox.ShowDialog("UART Command get Version failed!");
+                return;
+            }
+
             bool flag_OK = true;
             int localport = this.Local_Port.StringToInt32();
             int serverport = this.Server_Port.StringToInt32();
@@ -722,11 +735,11 @@ namespace H_Pannel_lib
             if (!Communication.UART_Command_Set_UDP_SendTime(mySerialPort, udp_sendtime)) flag_OK = false;
             if (flag_OK)
             {
-                MyMessageBox.ShowDialog("Write data sucessed!");
+                MyMessageBox.ShowDialog($"Write data sucessed! {Version}");
             }
             else
             {
-                MyMessageBox.ShowDialog("Write data failed!");
+                MyMessageBox.ShowDialog($"Write data failed! {Version}");
             }
         }
         private void RJ_Button_Read_Click(object sender, EventArgs e)

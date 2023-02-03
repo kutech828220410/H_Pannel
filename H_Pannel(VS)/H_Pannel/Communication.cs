@@ -3545,6 +3545,8 @@ namespace H_Pannel_lib
             Set_UDP_SendTime = (byte)'B',
 
             Sset_RFID_Enable = (byte)'Z',
+            Get_Version = (byte)'v',
+
         }
         static public bool UART_Command_Get_Setting(MySerialPort MySerialPort, out string IP_Adress, out string Subnet, out string Gateway, out string DNS, out string Server_IP_Adress, out string Local_Port, out string Server_Port, out string SSID, out string Password, out string Station, out string UDP_SendTime ,out string RFID_Enable)
         {
@@ -4627,6 +4629,70 @@ namespace H_Pannel_lib
                                 break;
 
                             }
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(1);
+                }
+            }
+            MySerialPort.SerialPortClose();
+            return flag_OK;
+        }
+        static public bool UART_Command_Get_Version(MySerialPort MySerialPort , out string Version)
+        {
+            bool flag_OK = false;
+            Version = "";
+            if (MySerialPort.SerialPortOpen())
+            {
+                MyTimer myTimer_Timeout = new MyTimer();
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(UART_Command.Get_Version));
+                list_byte.Add(3);
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+                int retry = 0;
+                int cnt = 0;
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            if (ConsoleWrite) Console.Write("Receive data lenth error!\n");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByte();
+                        if (UART_RX != null)
+                        {
+                            string str = "";
+                            for (int i = 0; i < (UART_RX.Length); i++)
+                            {
+                                str += (char)UART_RX[i];
+                            }
+                            Version = str;
+                            if (ConsoleWrite) Console.Write($"Receive data sucessed! {Version}\n");
+                            flag_OK = true;
+                            break;
                         }
 
                     }

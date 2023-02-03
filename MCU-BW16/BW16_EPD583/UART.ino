@@ -47,6 +47,7 @@ void serialEvent()
 
       mySerial.println("WS2812 TEST End");
     }
+    
     if (UART0_RX[0] == 2 && UART0_RX[UART0_len - 1] == 3)
     {
       if (UART0_RX[1] == '0' && UART0_len == 3)
@@ -76,6 +77,12 @@ void serialEvent()
         str += ",";
         str += wiFiConfig.Get_UDP_SemdTime_Str();
         str += (char)3;
+        mySerial.print(str);
+        mySerial.flush();
+      }
+      else if (UART0_RX[1] == 'v')
+      {
+        String str = Version;
         mySerial.print(str);
         mySerial.flush();
       }

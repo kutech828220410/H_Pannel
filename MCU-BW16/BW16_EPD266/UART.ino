@@ -79,6 +79,12 @@ void serialEvent()
         mySerial.print(str);
         mySerial.flush();
       }
+      else if (UART0_RX[1] == 'v')
+      {
+        String str = Version;
+        mySerial.print(str);
+        mySerial.flush();
+      }
       else if (UART0_RX[1] == '1' && UART0_len == 5)
       {
         flag_writeMode = true;
