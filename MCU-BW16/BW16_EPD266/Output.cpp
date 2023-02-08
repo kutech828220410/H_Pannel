@@ -44,7 +44,6 @@ bool MyOutput::GetLogic(bool value)
 void MyOutput::Blink()
 {
   int PIN = this -> PIN_NUM;
-  printf("123\n");
   if( (this -> cnt) == 254)
   {
     State = false;

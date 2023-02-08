@@ -687,7 +687,7 @@ namespace H_Pannel_lib
         {
 
             string Version = "";
-       
+            mySerialPort.PortName = this.textBox_COM.Text;
             if (Communication.UART_Command_Get_Version(mySerialPort, out Version))
             {
              
