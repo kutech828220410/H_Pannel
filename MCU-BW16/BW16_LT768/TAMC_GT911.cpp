@@ -148,7 +148,7 @@ void TAMC_GT911::readBlockData(uint8_t *buf, uint16_t reg, uint8_t size) {
   Wire.requestFrom(addr, size);
   for (uint8_t i=0; i<size; i++) {
     buf[i] = Wire.read();
-    Serial.print("block value : ");Serial.print(buf[i]);Serial.println("");
+//    Serial.print("block value : ");Serial.print(buf[i]);Serial.println("");
   }
 }
 TP_Point::TP_Point(void) {

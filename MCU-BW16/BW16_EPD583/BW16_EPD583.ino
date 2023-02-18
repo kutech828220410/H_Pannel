@@ -51,32 +51,18 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 //SoftwareSerial mySerial(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.0.14";
+String Version = "Ver 1.0.17";
 
 void setup() 
 {
 
-    mySerial.begin(115200);   
-    mySerial.println(Version);
     
-    wiFiConfig.mySerial = &mySerial;
-    epd.mySerial = &mySerial;
-    wiFiConfig.Init(Version);
-    Localport = wiFiConfig.Get_Localport();
-    Serverport = wiFiConfig.Get_Serverport();
-    ServerIp = wiFiConfig.Get_Server_IPAdressClass();
-    UDP_SemdTime = wiFiConfig.Get_UDP_SemdTime();
-    GetwayStr = wiFiConfig.Get_Gateway_Str();
 
-    SPI.begin(); //SCLK, MISO, MOSI, SS
-    myWS2812.Init(NUM_WS2812B_CRGB);
-    epd.Init(); 
-
-    mySerial.print("Dynamic memory size: ");
-    mySerial.println(os_get_free_heap_size_arduino());
-    mySerial.println();
+//    mySerial.print("Dynamic memory size: ");
+//    mySerial.println(os_get_free_heap_size_arduino());
+//    mySerial.println();
     
-    IO_Init();
+    
     MyLED_IS_Connented.Init(SYSTEM_LED_PIN);
 
     
@@ -91,6 +77,21 @@ void loop()
    
    if(MyTimer_BoardInit.IsTimeOut() && !flag_boradInit)
    {     
+       mySerial.begin(115200);   
+//       mySerial.println(Version);
+        
+       wiFiConfig.mySerial = &mySerial;
+       epd.mySerial = &mySerial;
+       wiFiConfig.Init(Version);
+       Localport = wiFiConfig.Get_Localport();
+       Serverport = wiFiConfig.Get_Serverport();
+       ServerIp = wiFiConfig.Get_Server_IPAdressClass();
+       UDP_SemdTime = wiFiConfig.Get_UDP_SemdTime();
+       GetwayStr = wiFiConfig.Get_Gateway_Str();
+    
+       SPI.begin(); //SCLK, MISO, MOSI, SS
+       myWS2812.Init(NUM_WS2812B_CRGB);
+       epd.Init(); 
        flag_boradInit = true;
    }
    if(flag_boradInit)

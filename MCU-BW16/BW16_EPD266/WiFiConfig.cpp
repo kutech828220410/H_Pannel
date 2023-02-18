@@ -57,7 +57,7 @@ void WiFiConfig::WIFI_Disconnenct()
 void WiFiConfig::WIFI_Connenct()
 {
     WiFi.disablePowerSave();
-    WiFi.disconnect();
+//    WiFi.disconnect();
    
     byte* ipAdress_ptr = this -> Get_IPAdress();
     byte* gateway_ptr = this -> Get_Gateway();

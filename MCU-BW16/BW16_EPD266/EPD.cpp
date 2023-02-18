@@ -165,7 +165,7 @@ void EPD::Wakeup()
 {
     this -> MyTimer_SleepWaitTime.TickStop();  
     this -> MyTimer_SleepWaitTime.StartTickTime(10000);
-    mySerial -> println("Wake up!");
+//    mySerial -> println("Wake up!");
     this -> SetToSleep = false;
     this -> HardwareReset();
     SPI_Begin();
@@ -191,7 +191,7 @@ void EPD::WaitUntilIdle()
 {
    //delay(50);
     while(digitalRead(PIN_BUSY) == HIGH) {      //LOW: idle, HIGH: busy
-      mySerial -> println("Watting for PIN_BUSY!");
+//      mySerial -> println("Watting for PIN_BUSY!");
         //delay(10);
     }
     //delay(50);

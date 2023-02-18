@@ -22,6 +22,7 @@ void MyInput::GetState(int Time)
 }
 void MyInput::GetState()
 {
+  if(PIN_NUM == -1)return;
   int PIN = this -> PIN_NUM;
   this -> flag_state = digitalRead(this -> PIN_NUM);
   if(this -> flag_toogle)
