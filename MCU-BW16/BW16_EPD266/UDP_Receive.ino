@@ -191,7 +191,7 @@ void onPacketCallBack()
 //            {
 //                Serial.println(*(myWS2812.rgbBuffer + i));
 //            }
-            Send_Bytes(myWS2812.rgbBuffer, num ,wiFiConfig.server_IPAdress, wiFiConfig.localport);                    
+            Send_Bytes(myWS2812.rgbBuffer, num ,Udp.remoteIP(), wiFiConfig.localport);                    
           }
           else if(*(UdpRead + 1) == 'B')
           {                  
@@ -297,13 +297,12 @@ void Get_Checksum_UDP()
    if(str0.length() < 3) str0 = "0" + str0;
    if(flag_udp_232back)printf("Checksum String : %d\n",str0);
    if(flag_udp_232back)printf("Checksum Byte : %d \n" , checksum);
-   Send_StringTo(str0 ,wiFiConfig.server_IPAdress, wiFiConfig.localport);
-   if(flag_udp_232back)printf("Send_StringTo");
+   Send_StringTo(str0 ,Udp.remoteIP(), wiFiConfig.localport);
+ 
 }
 void Connect_UDP(int localport)
 {
     Udp.begin(localport);
-    //Serial.printf("UDP lisen : %D \n" ,localport);
 }
 void Send_Bytes(uint8_t *value ,int Size ,IPAddress RemoteIP ,int RemotePort)
 { 
@@ -322,6 +321,8 @@ void Send_StringTo(String str ,IPAddress RemoteIP ,int RemotePort)
    Udp.beginPacket(RemoteIP, RemotePort); //準備傳送資料
    Udp.print(str); //複製資料到傳送快取
    Udp.endPacket();            //傳送資料
+   mySerial.print("Send_StringTo ");
+   
 }
 
 String IpAddress2String(const IPAddress& ipAddress)

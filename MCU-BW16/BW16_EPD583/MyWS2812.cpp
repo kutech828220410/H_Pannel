@@ -8,7 +8,7 @@ void MyWS2812::Init(int NumOfLed)
     rgbBuffer = (byte*) malloc(500 * 3);
     for(int i = 0 ; i < 1500 ;i++)
     {
-       *(rgbBuffer + i) = 255;
+       *(rgbBuffer + i) = 0;
     }
 }
 void MyWS2812::SetRGB(int lednum ,byte R, byte G, byte B)
@@ -25,6 +25,7 @@ void MyWS2812::Show()
 {    
     
     digitalWrite(this -> PIN_CS , HIGH);
+    delay(100);
     SPI.begin(); 
     SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
     for(int i = 0 ; i < offset * 24; i++)
@@ -58,6 +59,9 @@ void MyWS2812::RGBConvert2812Bytes(byte R, byte G, byte B, byte* bytes)
 {
     unsigned char bitnum = 24;
     unsigned long value = 0x00000000;
+    R = R / 5 ;
+    G = G / 5;
+    B = B / 5 ;
     value = (((unsigned long)G << 16) | ((unsigned long)R << 8) | ((unsigned long)B));
   
     for (int i = 0; i < bitnum; i++)

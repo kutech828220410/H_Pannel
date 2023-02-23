@@ -50,28 +50,15 @@ void MyOutput::Set_State(bool ON_OFF)
     if(this -> PIN_NUM == -1) return;
     if(this -> flag_mcp) 
     {
-       if(this -> PIN_NUM == 0) _mcp -> digitalWrite(_mcp->eGPA0 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 1) _mcp -> digitalWrite(_mcp->eGPA1 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 2) _mcp -> digitalWrite(_mcp->eGPA2 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 3) _mcp -> digitalWrite(_mcp->eGPA3 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 4) _mcp -> digitalWrite(_mcp->eGPA4 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 5) _mcp -> digitalWrite(_mcp->eGPA5 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 6) _mcp -> digitalWrite(_mcp->eGPA6 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 7) _mcp -> digitalWrite(_mcp->eGPA7 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 8) _mcp -> digitalWrite(_mcp->eGPB0 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 9) _mcp -> digitalWrite(_mcp->eGPB1 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 10) _mcp -> digitalWrite(_mcp->eGPB2 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 11) _mcp -> digitalWrite(_mcp->eGPB3 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 12) _mcp -> digitalWrite(_mcp->eGPB4 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 13) _mcp -> digitalWrite(_mcp->eGPB5 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 14) _mcp -> digitalWrite(_mcp->eGPB6 , this -> GetLogic(ON_OFF));
-       else if(this -> PIN_NUM == 15) _mcp -> digitalWrite(_mcp->eGPB7 , this -> GetLogic(ON_OFF));
+       if(ON_OFF) State_ON = true;
+       else State_OFF = true;
     }
     else
     {
        digitalWrite(this -> PIN_NUM, this -> GetLogic(ON_OFF));
     }
 }
+
 void MyOutput::Blink(int Time)
 {
   this -> OnDelayTime = Time;
@@ -124,9 +111,10 @@ void MyOutput::Blink()
     }
     (this -> cnt) = 255 ;
   }
-  if( this -> OnDelayTime == 1 ) 
+  if( this -> OnDelayTime == 1 || State_ON ) 
   {
     State = true;
+    State_ON = false;
     if(PIN != -1)
     {
        if(this -> flag_mcp)
@@ -158,9 +146,10 @@ void MyOutput::Blink()
     this -> OnDelayTime_buf = OnDelayTime;    
     return;
   }
-  if( this -> OnDelayTime == 0 ) 
+  if( this -> OnDelayTime == 0 || State_OFF) 
   {
     State = false;
+    State_OFF = false;
     if(PIN != -1)
     {
        if(this -> flag_mcp)
@@ -236,7 +225,7 @@ void MyOutput::Blink()
        
     }
     if(Output_ON != nullptr) Output_ON();
-    //Serial.printf("Output ON PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
+    //printf("Output ON PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
     myTimer.StartTickTime(this -> OnDelayTime);
     (this -> cnt) = (this -> cnt) + 1 ;
   }

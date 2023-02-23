@@ -22,7 +22,7 @@
 #define SYSTEM_LED_PIN PA30
 #define PIN_485_Tx_Eanble PB3
 
-bool flag_udp_232back = false;
+bool flag_udp_232back = true;
 bool flag_JsonSend = false;
 bool flag_writeMode = false;
 String CardID[5];
