@@ -34,7 +34,7 @@ IPAddress ServerIp;
 int Serverport;
 String GetwayStr;
 
-bool flag_WS2812B_Refresh = false;
+bool flag_WS2812B_Refresh = true;
 MyWS2812 myWS2812;
 
 byte* framebuffer;
@@ -51,7 +51,7 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 //SoftwareSerial mySerial(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.1.1";
+String Version = "Ver 1.2.0";
 
 void setup() 
 {

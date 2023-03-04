@@ -68,6 +68,7 @@ namespace H_Pannel_lib
                     return rowsLEDs;
                 }
             }
+            rowsLEDs.Add(rowsLED);
             return rowsLEDs;
 
         }

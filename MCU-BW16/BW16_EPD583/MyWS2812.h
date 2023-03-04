@@ -18,6 +18,7 @@ class MyWS2812
     byte* GetRGB();
     void Show();
     int numOfLed = 0;
+    double brightness = 80;
    private:  
     
     int offset = 5;

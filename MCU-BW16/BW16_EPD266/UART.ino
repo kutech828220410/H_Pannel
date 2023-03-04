@@ -47,6 +47,19 @@ void serialEvent()
 
       mySerial.println("WS2812 TEST End");
     }
+    if (UART0_RX[0] == 'b')
+    {
+      String str_int = "";
+      str_int += (char)UART0_RX[1];
+      str_int += (char)UART0_RX[2];
+      int val = str_int.toInt();
+      myWS2812.brightness = val;
+      mySerial.print("Set WS2812 Brightness : int>>");
+      mySerial.print(val);
+      mySerial.print(" string>>");
+      mySerial.println(str_int);
+      flag_WS2812B_Refresh = true;
+    }
     if (UART0_RX[0] == 2 && UART0_RX[UART0_len - 1] == 3)
     {
       if (UART0_RX[1] == '0' && UART0_len == 3)

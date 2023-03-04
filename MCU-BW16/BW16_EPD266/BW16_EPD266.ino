@@ -52,7 +52,7 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.1.7";
+String Version = "Ver 1.2.0";
 
 void setup() 
 {

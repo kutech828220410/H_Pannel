@@ -59,9 +59,9 @@ void MyWS2812::RGBConvert2812Bytes(byte R, byte G, byte B, byte* bytes)
 {
     unsigned char bitnum = 24;
     unsigned long value = 0x00000000;
-    R = R / 5 ;
-    G = G / 5;
-    B = B / 5 ;
+    R = R * (brightness / 100) ;
+    G = G * (brightness / 100) ;
+    B = B * (brightness / 100) ;
     value = (((unsigned long)G << 16) | ((unsigned long)R << 8) | ((unsigned long)B));
   
     for (int i = 0; i < bitnum; i++)
