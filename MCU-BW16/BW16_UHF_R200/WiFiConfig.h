@@ -18,8 +18,12 @@ class WiFiConfig
    int serverport;
    int station;
    int uDP_SemdTime = 0;
+   byte rFID_Enable = 0;
    int input_dir = 0;
    int output_dir = 0;
+   int LED_OutputPIN[5];
+   int LED_InputPIN[5];
+   
    void WIFI_Connenct();
    void WIFI_Disconnenct();
    void Init(String Version);
@@ -38,7 +42,7 @@ class WiFiConfig
    void Set_UDP_SemdTime(int ms);
    void Set_Input_dir(int value);
    void Set_Output_dir(int value);
-   
+   void Set_RFID_Enable(byte value);
    void HandleClient();
    void httpInit();
   
@@ -54,8 +58,11 @@ class WiFiConfig
    byte Get_PC_Restart();
    byte Get_IsUpdate();
    int Get_UDP_SemdTime();
+   byte Get_RFID_Enable();
    int Get_Input_dir();
    int Get_Output_dir();
+   int Get_LED_OutputPIN(int index);
+   int Get_LED_InputPIN(int index);
    
    String Get_IPAdress_Str();
    IPAddress Get_IPAdressClass();
@@ -70,6 +77,8 @@ class WiFiConfig
    String Get_Password_Str();
    String Get_Station_Str();
    String Get_UDP_SemdTime_Str();
+   String Get_RFID_Enable_Str();
+   
    private:
    byte iP_Adress[4];
    byte subnet[4];
@@ -88,12 +97,15 @@ class WiFiConfig
    const int pc_restart_ADDR = 27;
    const int IsUpdate_ADDR = 28;
    const int UDP_SemdTime_ADDR[2] = {29 ,30}; 
+   const int RFID_Enable_ADDR = 31;  
    const int Input_dir_ADDR[2] = {32 ,33}; 
    const int Output_dir_ADDR[2] = {34 ,35};   
    const int SSID_ADDR = 40;
    const int SSID_SIZE = 20;
    const int Password_ADDR = 60;
    const int Password_SIZE = 20; 
+   const int LED_OutputPIN_ADDR[5] = {100 , 101 , 102 , 103 , 104};
+   const int LED_InputPIN_ADDR[5] = {110 , 111 , 112 , 113 , 114};
 };
 
 #endif

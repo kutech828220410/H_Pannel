@@ -210,7 +210,7 @@ void Get_Checksum_UDP()
    if(str0.length() < 3) str0 = "0" + str0;
    if(flag_udp_232back)printf("Checksum String : %d\n",str0);
    if(flag_udp_232back)printf("Checksum Byte : %d \n" , checksum);
-   Send_StringTo(str0 ,wiFiConfig.server_IPAdress, wiFiConfig.localport);
+   Send_StringTo(str0 ,Udp.remoteIP(), wiFiConfig.localport);
    if(flag_udp_232back)printf("Send_StringTo");
 }
 void Connect_UDP(int localport)

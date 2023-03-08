@@ -229,6 +229,12 @@ void WiFiConfig::Set_UDP_SemdTime(int ms)
     EEPROM.write(this -> UDP_SemdTime_ADDR[1] , H);
     EEPROM.commit();
 }
+void WiFiConfig::Set_RFID_Enable(byte value)
+{
+    EEPROM.write(this -> RFID_Enable_ADDR , value);
+    EEPROM.commit();
+    this -> rFID_Enable = value;
+}
 void WiFiConfig::Set_Input_dir(int value)
 {
     byte value_L = value;
@@ -247,7 +253,18 @@ void WiFiConfig::Set_Output_dir(int value)
     EEPROM.commit();
     this -> output_dir = value;
 }
-
+int WiFiConfig::Get_LED_OutputPIN(int index)
+{
+    byte value = EEPROM.read(this -> LED_OutputPIN_ADDR[index]);
+    this -> LED_OutputPIN[index] = value;
+    return this -> LED_OutputPIN[index];
+}
+int WiFiConfig::Get_LED_InputPIN(int index)
+{
+    byte value = EEPROM.read(this -> LED_InputPIN_ADDR[index]);
+    this -> LED_InputPIN[index] = value;
+    return this -> LED_InputPIN[index];
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 int WiFiConfig::GetRSSI()
@@ -331,6 +348,12 @@ int WiFiConfig::Get_UDP_SemdTime()
     byte H = EEPROM.read(this -> UDP_SemdTime_ADDR[1]);
     this -> uDP_SemdTime = ( L | (H << 8));
     return this -> uDP_SemdTime;
+}
+byte WiFiConfig::Get_RFID_Enable()
+{
+    byte value = EEPROM.read(this -> RFID_Enable_ADDR);
+    this -> rFID_Enable = value;
+    return this -> rFID_Enable;
 }
 int WiFiConfig::Get_Input_dir()
 {
@@ -447,4 +470,8 @@ String WiFiConfig::Get_Station_Str()
 String WiFiConfig::Get_UDP_SemdTime_Str()
 {
     return String(this -> Get_UDP_SemdTime());
+}
+String WiFiConfig::Get_RFID_Enable_Str()
+{
+    return String(this -> Get_RFID_Enable());
 }

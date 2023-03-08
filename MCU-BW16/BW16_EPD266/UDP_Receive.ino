@@ -321,7 +321,6 @@ void Send_StringTo(String str ,IPAddress RemoteIP ,int RemotePort)
    Udp.beginPacket(RemoteIP, RemotePort); //準備傳送資料
    Udp.print(str); //複製資料到傳送快取
    Udp.endPacket();            //傳送資料
-   mySerial.print("Send_StringTo ");
    
 }
 

@@ -153,6 +153,9 @@
     <Compile Include="DrawerUI_EPD_583.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="H_RFID_UI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="RFID_UI.cs">
       <SubType>UserControl</SubType>
     </Compile>

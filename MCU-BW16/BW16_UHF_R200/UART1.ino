@@ -3,12 +3,13 @@
 static byte UART1_RX[UART0_RX_SIZE];
 int UART1_len = 0;
 MyTimer MyTimer_UART1;
-void serialEven1()
+void serialEvent1()
 {
   if (mySerial_R200.available())
   {
-    mySerial.println("OK");
     UART1_RX[UART1_len] = mySerial_R200.read();
+    String HEX_0 =  String(UART1_RX[UART1_len], HEX); 
+    mySerial.println(HEX_0);
     UART1_len++;
     MyTimer_UART1.TickStop();
     MyTimer_UART1.StartTickTime(2);

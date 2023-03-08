@@ -3,7 +3,8 @@ int cnt_UDP_Send = 65534;
 MyTimer UDP_Send_Timer;
 DynamicJsonDocument doc(1024);
 String JsonOutput = "";
-
+String RFID01 = "AA";
+String RFID02 = "BB";
 int RSSI;
 void sub_UDP_Send()
 {
@@ -42,6 +43,18 @@ void sub_UDP_Send()
          doc["Output"] = Output;
          doc["Input_dir"] = Input_dir;
          doc["Output_dir"] = Output_dir;
+         doc["Card_00"] = Card_00;
+         doc["Card_01"] = Card_01;
+         doc["Card_02"] = Card_02;
+         doc["Card_03"] = Card_03;
+         doc["Card_04"] = Card_04;
+         
+         doc["RSSI_00"] = RSSI_00;
+         doc["RSSI_01"] = RSSI_01;
+         doc["RSSI_02"] = RSSI_02;
+         doc["RSSI_03"] = RSSI_03;
+         doc["RSSI_04"] = RSSI_04;
+     
          JsonOutput = "";
          serializeJson(doc, JsonOutput);
          Send_StringTo(JsonOutput, wiFiConfig.server_IPAdress, wiFiConfig.serverport);

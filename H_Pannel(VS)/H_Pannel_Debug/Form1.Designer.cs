@@ -36,6 +36,7 @@
             this.rJ_Button_WT32_初始化 = new MyUI.RJ_Button();
             this.storageUI_WT32 = new H_Pannel_lib.StorageUI_WT32();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.rJ_Button_WT32_測試 = new MyUI.RJ_Button();
             this.rJ_Button_WT32_上傳畫面 = new MyUI.RJ_Button();
             this.pannel35_Pannel = new H_Pannel_lib.Pannel35_Pannel();
             this.rJ_GroupBox1 = new MyUI.RJ_GroupBox();
@@ -100,11 +101,12 @@
             this.rJ_Button_RowsLED_初始化 = new MyUI.RJ_Button();
             this.rowsLEDUI = new H_Pannel_lib.RowsLEDUI();
             this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.rJ_Button1 = new MyUI.RJ_Button();
+            this.RFID = new System.Windows.Forms.TabPage();
             this.rJ_Button_RFID_初始化 = new MyUI.RJ_Button();
             this.rfiD_UI = new H_Pannel_lib.RFID_UI();
-            this.rJ_Button_WT32_測試 = new MyUI.RJ_Button();
+            this.H_RFID = new System.Windows.Forms.TabPage();
+            this.h_RFID_UI = new H_Pannel_lib.H_RFID_UI();
+            this.rJ_Button_H_RFID_初始化 = new MyUI.RJ_Button();
             this.tabControl1.SuspendLayout();
             this.WT32.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -131,7 +133,8 @@
             this.RowsLED.SuspendLayout();
             this.tabControl5.SuspendLayout();
             this.tabPage7.SuspendLayout();
-            this.tabPage9.SuspendLayout();
+            this.RFID.SuspendLayout();
+            this.H_RFID.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -140,7 +143,8 @@
             this.tabControl1.Controls.Add(this.EPD_266);
             this.tabControl1.Controls.Add(this.EPD_583);
             this.tabControl1.Controls.Add(this.RowsLED);
-            this.tabControl1.Controls.Add(this.tabPage9);
+            this.tabControl1.Controls.Add(this.RFID);
+            this.tabControl1.Controls.Add(this.H_RFID);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -177,7 +181,6 @@
             this.tabPage3.Controls.Add(this.storageUI_WT32);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(1888, 989);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "資料設定";
@@ -213,11 +216,11 @@
             this.storageUI_WT32.DataBaseName = "test";
             this.storageUI_WT32.Dock = System.Windows.Forms.DockStyle.Left;
             this.storageUI_WT32.IP = "localhost";
-            this.storageUI_WT32.Location = new System.Drawing.Point(3, 3);
+            this.storageUI_WT32.Location = new System.Drawing.Point(0, 0);
             this.storageUI_WT32.Name = "storageUI_WT32";
             this.storageUI_WT32.Password = "user82822040";
             this.storageUI_WT32.Port = ((uint)(3306u));
-            this.storageUI_WT32.Size = new System.Drawing.Size(1378, 983);
+            this.storageUI_WT32.Size = new System.Drawing.Size(1378, 989);
             this.storageUI_WT32.TabIndex = 0;
             this.storageUI_WT32.TableName = "WT32_Jsonstring";
             this.storageUI_WT32.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_WT32.UDP_LocalPorts")));
@@ -241,6 +244,28 @@
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "面板設定";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // rJ_Button_WT32_測試
+            // 
+            this.rJ_Button_WT32_測試.AutoResetState = false;
+            this.rJ_Button_WT32_測試.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Button_WT32_測試.BackgroundColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Button_WT32_測試.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_WT32_測試.BorderRadius = 10;
+            this.rJ_Button_WT32_測試.BorderSize = 0;
+            this.rJ_Button_WT32_測試.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_WT32_測試.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_WT32_測試.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_WT32_測試.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_WT32_測試.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_測試.Location = new System.Drawing.Point(1608, 812);
+            this.rJ_Button_WT32_測試.Name = "rJ_Button_WT32_測試";
+            this.rJ_Button_WT32_測試.Size = new System.Drawing.Size(150, 55);
+            this.rJ_Button_WT32_測試.State = false;
+            this.rJ_Button_WT32_測試.TabIndex = 33;
+            this.rJ_Button_WT32_測試.Text = "測試";
+            this.rJ_Button_WT32_測試.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_測試.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_WT32_上傳畫面
             // 
@@ -928,7 +953,6 @@
             this.tabPage1.Controls.Add(this.storageUI_EPD_266);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1888, 989);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "資料設定";
@@ -972,11 +996,11 @@
             this.storageUI_EPD_266.DataBaseName = "TEST";
             this.storageUI_EPD_266.Dock = System.Windows.Forms.DockStyle.Left;
             this.storageUI_EPD_266.IP = "localhost";
-            this.storageUI_EPD_266.Location = new System.Drawing.Point(3, 3);
+            this.storageUI_EPD_266.Location = new System.Drawing.Point(0, 0);
             this.storageUI_EPD_266.Name = "storageUI_EPD_266";
             this.storageUI_EPD_266.Password = "user82822040";
             this.storageUI_EPD_266.Port = ((uint)(3306u));
-            this.storageUI_EPD_266.Size = new System.Drawing.Size(1378, 983);
+            this.storageUI_EPD_266.Size = new System.Drawing.Size(1378, 989);
             this.storageUI_EPD_266.TabIndex = 0;
             this.storageUI_EPD_266.TableName = "EPD266_Jsonstring";
             this.storageUI_EPD_266.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_LocalPorts")));
@@ -1028,7 +1052,6 @@
             this.tabPage5.Controls.Add(this.drawerUI_EPD_583);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(1888, 989);
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "資料設定";
@@ -1230,11 +1253,11 @@
             this.drawerUI_EPD_583.DataBaseName = "test";
             this.drawerUI_EPD_583.Dock = System.Windows.Forms.DockStyle.Left;
             this.drawerUI_EPD_583.IP = "127.0.0.1";
-            this.drawerUI_EPD_583.Location = new System.Drawing.Point(3, 3);
+            this.drawerUI_EPD_583.Location = new System.Drawing.Point(0, 0);
             this.drawerUI_EPD_583.Name = "drawerUI_EPD_583";
             this.drawerUI_EPD_583.Password = "user82822040";
             this.drawerUI_EPD_583.Port = ((uint)(3306u));
-            this.drawerUI_EPD_583.Size = new System.Drawing.Size(1206, 983);
+            this.drawerUI_EPD_583.Size = new System.Drawing.Size(1206, 989);
             this.drawerUI_EPD_583.TabIndex = 37;
             this.drawerUI_EPD_583.TableName = "EPD583_Jsonstring";
             this.drawerUI_EPD_583.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_583.UDP_LocalPorts")));
@@ -1278,7 +1301,6 @@
             this.tabPage7.Controls.Add(this.rowsLEDUI);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage7.Size = new System.Drawing.Size(1888, 989);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "資料設定";
@@ -1312,11 +1334,11 @@
             this.rowsLEDUI.DataBaseName = "TEST";
             this.rowsLEDUI.Dock = System.Windows.Forms.DockStyle.Left;
             this.rowsLEDUI.IP = "localhost";
-            this.rowsLEDUI.Location = new System.Drawing.Point(3, 3);
+            this.rowsLEDUI.Location = new System.Drawing.Point(0, 0);
             this.rowsLEDUI.Name = "rowsLEDUI";
             this.rowsLEDUI.Password = "user82822040";
             this.rowsLEDUI.Port = ((uint)(3306u));
-            this.rowsLEDUI.Size = new System.Drawing.Size(1393, 983);
+            this.rowsLEDUI.Size = new System.Drawing.Size(1393, 989);
             this.rowsLEDUI.TabIndex = 0;
             this.rowsLEDUI.TableName = "RowsLED_Jsonstring";
             this.rowsLEDUI.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("rowsLEDUI.UDP_LocalPorts")));
@@ -1333,41 +1355,16 @@
             this.tabPage8.Text = "面板設定";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
-            // tabPage9
+            // RFID
             // 
-            this.tabPage9.Controls.Add(this.rJ_Button1);
-            this.tabPage9.Controls.Add(this.rJ_Button_RFID_初始化);
-            this.tabPage9.Controls.Add(this.rfiD_UI);
-            this.tabPage9.Location = new System.Drawing.Point(4, 22);
-            this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(1896, 1015);
-            this.tabPage9.TabIndex = 4;
-            this.tabPage9.Text = "RFID";
-            this.tabPage9.UseVisualStyleBackColor = true;
-            // 
-            // rJ_Button1
-            // 
-            this.rJ_Button1.AutoResetState = false;
-            this.rJ_Button1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button1.BackgroundColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button1.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button1.BorderRadius = 5;
-            this.rJ_Button1.BorderSize = 0;
-            this.rJ_Button1.buttonType = MyUI.RJ_Button.ButtonType.Push;
-            this.rJ_Button1.FlatAppearance.BorderSize = 0;
-            this.rJ_Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Button1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Button1.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button1.Location = new System.Drawing.Point(1399, 133);
-            this.rJ_Button1.Name = "rJ_Button1";
-            this.rJ_Button1.Size = new System.Drawing.Size(126, 67);
-            this.rJ_Button1.State = false;
-            this.rJ_Button1.TabIndex = 41;
-            this.rJ_Button1.Text = "初始化";
-            this.rJ_Button1.TextColor = System.Drawing.Color.White;
-            this.rJ_Button1.UseVisualStyleBackColor = false;
-            this.rJ_Button1.Click += new System.EventHandler(this.rJ_Button1_Click);
+            this.RFID.Controls.Add(this.rJ_Button_RFID_初始化);
+            this.RFID.Controls.Add(this.rfiD_UI);
+            this.RFID.Location = new System.Drawing.Point(4, 22);
+            this.RFID.Name = "RFID";
+            this.RFID.Size = new System.Drawing.Size(1896, 1015);
+            this.RFID.TabIndex = 4;
+            this.RFID.Text = "RFID";
+            this.RFID.UseVisualStyleBackColor = true;
             // 
             // rJ_Button_RFID_初始化
             // 
@@ -1402,14 +1399,14 @@
             this.rfiD_UI.IP = "localhost";
             this.rfiD_UI.IP_Adress = "0.0.0.0";
             this.rfiD_UI.Local_Port = "0";
-            this.rfiD_UI.Location = new System.Drawing.Point(3, 3);
+            this.rfiD_UI.Location = new System.Drawing.Point(0, 0);
             this.rfiD_UI.Name = "rfiD_UI";
             this.rfiD_UI.Password = "user82822040";
             this.rfiD_UI.Port = ((uint)(3306u));
             this.rfiD_UI.RFID_Enable = "0";
             this.rfiD_UI.Server_IP_Adress = "0.0.0.0";
             this.rfiD_UI.Server_Port = "0";
-            this.rfiD_UI.Size = new System.Drawing.Size(1393, 1009);
+            this.rfiD_UI.Size = new System.Drawing.Size(1393, 1015);
             this.rfiD_UI.SSID = "";
             this.rfiD_UI.Station = "0";
             this.rfiD_UI.Subnet = "0.0.0.0";
@@ -1419,27 +1416,54 @@
             this.rfiD_UI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("rfiD_UI.UDP_ServerPorts")));
             this.rfiD_UI.UserName = "root";
             // 
-            // rJ_Button_WT32_測試
+            // H_RFID
             // 
-            this.rJ_Button_WT32_測試.AutoResetState = false;
-            this.rJ_Button_WT32_測試.BackColor = System.Drawing.Color.RoyalBlue;
-            this.rJ_Button_WT32_測試.BackgroundColor = System.Drawing.Color.RoyalBlue;
-            this.rJ_Button_WT32_測試.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_WT32_測試.BorderRadius = 10;
-            this.rJ_Button_WT32_測試.BorderSize = 0;
-            this.rJ_Button_WT32_測試.buttonType = MyUI.RJ_Button.ButtonType.Push;
-            this.rJ_Button_WT32_測試.FlatAppearance.BorderSize = 0;
-            this.rJ_Button_WT32_測試.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Button_WT32_測試.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Button_WT32_測試.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_WT32_測試.Location = new System.Drawing.Point(1608, 812);
-            this.rJ_Button_WT32_測試.Name = "rJ_Button_WT32_測試";
-            this.rJ_Button_WT32_測試.Size = new System.Drawing.Size(150, 55);
-            this.rJ_Button_WT32_測試.State = false;
-            this.rJ_Button_WT32_測試.TabIndex = 33;
-            this.rJ_Button_WT32_測試.Text = "測試";
-            this.rJ_Button_WT32_測試.TextColor = System.Drawing.Color.White;
-            this.rJ_Button_WT32_測試.UseVisualStyleBackColor = false;
+            this.H_RFID.Controls.Add(this.rJ_Button_H_RFID_初始化);
+            this.H_RFID.Controls.Add(this.h_RFID_UI);
+            this.H_RFID.Location = new System.Drawing.Point(4, 22);
+            this.H_RFID.Name = "H_RFID";
+            this.H_RFID.Size = new System.Drawing.Size(1896, 1015);
+            this.H_RFID.TabIndex = 5;
+            this.H_RFID.Text = "H_RFID";
+            this.H_RFID.UseVisualStyleBackColor = true;
+            // 
+            // h_RFID_UI
+            // 
+            this.h_RFID_UI.DataBaseName = "TEST";
+            this.h_RFID_UI.Dock = System.Windows.Forms.DockStyle.Left;
+            this.h_RFID_UI.IP = "localhost";
+            this.h_RFID_UI.Location = new System.Drawing.Point(0, 0);
+            this.h_RFID_UI.Name = "h_RFID_UI";
+            this.h_RFID_UI.Password = "user82822040";
+            this.h_RFID_UI.Port = ((uint)(3306u));
+            this.h_RFID_UI.Size = new System.Drawing.Size(1393, 1015);
+            this.h_RFID_UI.TabIndex = 0;
+            this.h_RFID_UI.TableName = "H_RFID_Jsonstring";
+            this.h_RFID_UI.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("h_RFID_UI.UDP_LocalPorts")));
+            this.h_RFID_UI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("h_RFID_UI.UDP_ServerPorts")));
+            this.h_RFID_UI.UserName = "root";
+            // 
+            // rJ_Button_H_RFID_初始化
+            // 
+            this.rJ_Button_H_RFID_初始化.AutoResetState = false;
+            this.rJ_Button_H_RFID_初始化.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_H_RFID_初始化.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_H_RFID_初始化.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_H_RFID_初始化.BorderRadius = 5;
+            this.rJ_Button_H_RFID_初始化.BorderSize = 0;
+            this.rJ_Button_H_RFID_初始化.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_H_RFID_初始化.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_H_RFID_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_H_RFID_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_H_RFID_初始化.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_H_RFID_初始化.Location = new System.Drawing.Point(1399, 3);
+            this.rJ_Button_H_RFID_初始化.Name = "rJ_Button_H_RFID_初始化";
+            this.rJ_Button_H_RFID_初始化.Size = new System.Drawing.Size(126, 67);
+            this.rJ_Button_H_RFID_初始化.State = false;
+            this.rJ_Button_H_RFID_初始化.TabIndex = 41;
+            this.rJ_Button_H_RFID_初始化.Text = "初始化";
+            this.rJ_Button_H_RFID_初始化.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_H_RFID_初始化.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -1478,7 +1502,8 @@
             this.RowsLED.ResumeLayout(false);
             this.tabControl5.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
-            this.tabPage9.ResumeLayout(false);
+            this.RFID.ResumeLayout(false);
+            this.H_RFID.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1546,12 +1571,11 @@
         private MyUI.RJ_Button rJ_Button_RowsLED_初始化;
         private MyUI.RJ_Button rJ_Button_epD_583_Pannel_上傳;
         private H_Pannel_lib.EPD_583_Pannel epD_583_Pannel;
-        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.TabPage RFID;
         private MyUI.RJ_Button rJ_Button_RFID_初始化;
         private H_Pannel_lib.RFID_UI rfiD_UI;
         private H_Pannel_lib.Pannel35_Pannel pannel35_Pannel;
         private H_Pannel_lib.EPD_266_Pannel epD_266_Pannel;
-        private MyUI.RJ_Button rJ_Button1;
         private MyUI.RJ_Button rJ_Button_epD_583_Pannel_全部滅燈;
         private MyUI.RJ_Button rJ_Button_epD_583_Pannel_全部亮燈;
         private MyUI.RJ_Button rJ_Button_epD_583_Pannel_面板滅燈;
@@ -1560,6 +1584,9 @@
         private MyUI.RJ_Button rJ_Button_epD_583_Pannel_儲位亮燈;
         private MyUI.RJ_Button rJ_Button_WT32_上傳畫面;
         private MyUI.RJ_Button rJ_Button_WT32_測試;
+        private System.Windows.Forms.TabPage H_RFID;
+        private H_Pannel_lib.H_RFID_UI h_RFID_UI;
+        private MyUI.RJ_Button rJ_Button_H_RFID_初始化;
     }
 }
 

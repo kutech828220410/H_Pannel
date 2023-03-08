@@ -80,9 +80,11 @@ namespace WT32_SC01
             this.storageUI_EPD_266.sqL_DataGridView_DeviceTable.RowDoubleClickEvent += SqL_DataGridView_DeviceTable_RowDoubleClickEvent;
 
             this.rJ_Button_RFID_初始化.MouseDownEvent += RJ_Button_RFID_初始化_MouseDownEvent;
+
+            this.rJ_Button_H_RFID_初始化.MouseDownEvent += RJ_Button_H_RFID_初始化_MouseDownEvent;
         }
 
-  
+    
 
         private void rJ_Button_WT32_初始化_Click(object sender, EventArgs e)
         {
@@ -248,7 +250,6 @@ namespace WT32_SC01
         {
             this.epD_583_Pannel.BoxLightOn(Color.Blue);
         }
-
         private void rJ_Button_epD_583_Pannel_儲位滅燈_Click(object sender, EventArgs e)
         {
             this.epD_583_Pannel.BoxLightOff();
@@ -264,8 +265,7 @@ namespace WT32_SC01
         private void rJ_Button_epD_583_Pannel_全部亮燈_Click(object sender, EventArgs e)
         {
             this.epD_583_Pannel.AllLightOn(Color.White);
-        }
-        
+        }    
         private void RJ_Button_epD_583_Pannel_全部滅燈_MouseDownEvent(MouseEventArgs mevent)
         {
             this.epD_583_Pannel.AllLightOn(Color.Black);
@@ -276,17 +276,14 @@ namespace WT32_SC01
         }
 
 
-
         private void RJ_Button_RFID_初始化_MouseDownEvent(MouseEventArgs mevent)
         {
             this.rfiD_UI.Init();
         }
 
-        private void rJ_Button1_Click(object sender, EventArgs e)
+        private void RJ_Button_H_RFID_初始化_MouseDownEvent(MouseEventArgs mevent)
         {
-            List<RFID_UI.RFID_UID_Class> rFID_UID_Classes = this.rfiD_UI.GetRFID();
+            this.h_RFID_UI.Init();
         }
-
-
     }
 }
