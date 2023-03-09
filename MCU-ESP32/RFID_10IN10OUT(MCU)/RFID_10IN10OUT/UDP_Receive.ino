@@ -189,7 +189,7 @@ void onPacketCallBack()
              {
                 send_byte[i + 5] = wiFiConfig.Get_LED_OutputPIN(i);
              }
-             Send_Bytes(send_byte, 10 ,wiFiConfig.server_IPAdress, wiFiConfig.localport);    
+             Send_Bytes(send_byte, 10 ,Udp.remoteIP(), wiFiConfig.localport);    
           }
            else if(*(UdpRead + 1) == 'X')
           {                  
@@ -204,7 +204,7 @@ void onPacketCallBack()
 
 
              if(flag_udp_232back)Serial.printf("Get_IO [input]:%d ,[output]:%d\n" ,input ,output);
-             Send_Bytes(send_byte, 4 ,wiFiConfig.server_IPAdress, wiFiConfig.localport);    
+             Send_Bytes(send_byte, 4 ,Udp.remoteIP(), wiFiConfig.localport);    
           }
           else if(*(UdpRead + 1) == 'W')
           {                  

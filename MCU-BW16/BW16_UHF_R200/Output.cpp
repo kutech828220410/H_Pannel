@@ -225,7 +225,7 @@ void MyOutput::Blink()
        
     }
     if(Output_ON != nullptr) Output_ON();
-    //printf("Output ON PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
+    printf("Output ON PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
     myTimer.StartTickTime(this -> OnDelayTime);
     (this -> cnt) = (this -> cnt) + 1 ;
   }
@@ -263,7 +263,7 @@ void MyOutput::Blink()
       }
       if(Output_OFF != nullptr) Output_OFF();
       myTimer.StartTickTime(this -> OnDelayTime);
-      //printf("Output OFF PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
+      printf("Output OFF PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
       (this -> cnt) = (this -> cnt) + 1 ;
     }
   }

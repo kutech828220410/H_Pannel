@@ -125,6 +125,21 @@ void onPacketCallBack()
                 ota_platform_reset();
               }
           }
+          else if(*(UdpRead + 1) == 'F')
+          {                  
+              int ms_L = *(UdpRead + 2);
+              int ms_H = *(UdpRead + 3);  
+              
+              int ms= ms_L | (ms_H << 8);
+
+              if(flag_udp_232back)mySerial.println("Set_UDP_SendTime");
+              if(flag_udp_232back)mySerial.print("ms[");
+              if(flag_udp_232back)mySerial.print(ms);
+              if(flag_udp_232back)mySerial.println("]");
+
+              wiFiConfig.Set_UDP_SemdTime(ms);                                           
+              Get_Checksum_UDP();
+          }
           else if(*(UdpRead + 1) == 'J')
           {    
               int value_L = *(UdpRead + 2);
@@ -179,6 +194,18 @@ void onPacketCallBack()
              int temp = Get_Output_dir();
              if(flag_udp_232back)printf("Get_Output_dir : [value]%d\n" , temp);
              wiFiConfig.Set_Output_dir(temp);
+             Get_Checksum_UDP();
+          }
+          else if(*(UdpRead + 1) == 'Y')
+          {                  
+             int pin_num = *(UdpRead + 2);
+             int value = *(UdpRead + 3);
+             int ms_L = *(UdpRead + 4);
+             int ms_H = *(UdpRead + 5);  
+              
+             int ms = ms_L | (ms_H << 8);
+             if(flag_udp_232back)printf("Set_BlinkEnable : [PIN Num]%d [value]%d [BlinkTime]%d\n" , pin_num , value, ms);
+             SetBlinkTime(pin_num , (value == 1), ms);
              Get_Checksum_UDP();
           }
           if(flag_udp_232back)

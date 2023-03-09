@@ -75,6 +75,7 @@ namespace H_Pannel_lib
             Get_LEDSetting =(byte)'V',
             Set_LEDSetting = (byte)'W',
             Get_IO = (byte)'X',
+            Set_BlinkEnable = (byte)'Y',
 
             SendTestData = (byte)'Z',
 
@@ -406,7 +407,10 @@ namespace H_Pannel_lib
         {
             return Command_Get_IO(uDP_Class, IP, out input, out output);
         }
-
+        static public bool Set_BlinkEnable(UDP_Class uDP_Class, string IP, int PIN_Num, bool value ,int blinklTime)
+        {
+            return Command_Set_BlinkEnable(uDP_Class, IP, PIN_Num, value, blinklTime);
+        }
 
         static public int EPD_Get_LaserDistance(UDP_Class uDP_Class, string IP)
         {
@@ -3080,7 +3084,71 @@ namespace H_Pannel_lib
            // if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Get IO {string.Format(flag_OK ? "sucess" : "failed")}!");
             return true;
         }
-
+        static private bool Command_Set_BlinkEnable(UDP_Class uDP_Class, string IP, int PIN_Num, bool value ,int blinkTime)
+        {
+            bool flag_OK = true;
+            byte checksum = 0;
+            List<byte> list_byte = new List<byte>();
+            list_byte.Add(2);
+            list_byte.Add((byte)(UDP_Command.Set_BlinkEnable));
+            list_byte.Add((byte)(PIN_Num));
+            list_byte.Add((byte)(value ? 1 : 0));      
+            list_byte.Add((byte)(blinkTime));
+            list_byte.Add((byte)((blinkTime >> 8)));
+            list_byte.Add(3);
+            for (int i = 0; i < list_byte.Count; i++)
+            {
+                checksum += list_byte[i];
+            }
+            MyTimer MyTimer_UART_TimeOut = new MyTimer();
+            int retry = 0;
+            int cnt = 0;
+            while (true)
+            {
+                if (cnt == 0)
+                {
+                    if (retry >= UDP_RetryNum)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    uDP_Class.Set_ReadLineClearByIP(IP);
+                    uDP_Class.WriteByte(list_byte.ToArray(), IP);
+                    MyTimer_UART_TimeOut.TickStop();
+                    MyTimer_UART_TimeOut.StartTickTime(UDP_TimeOut);
+                    cnt++;
+                }
+                else if (cnt == 1)
+                {
+                    if (retry >= UDP_RetryNum)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    if (MyTimer_UART_TimeOut.IsTimeOut())
+                    {
+                        retry++;
+                        cnt = 0;
+                    }
+                    string UDP_RX = uDP_Class.Get_ReadLineByIP(IP);
+                    if (UDP_RX != "")
+                    {
+                        if (UDP_RX == checksum.ToString("000"))
+                        {
+                            flag_OK = true;
+                            break;
+                        }
+                        else
+                        {
+                            cnt = 0;
+                        }
+                    }
+                }
+                System.Threading.Thread.Sleep(1);
+            }
+            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Set Set_BlinkEnable {string.Format(flag_OK ? "sucess" : "failed")}!");
+            return flag_OK;
+        }
 
         static private int Command_EPD_Get_LaserDistance(UDP_Class uDP_Class, string IP)
         {

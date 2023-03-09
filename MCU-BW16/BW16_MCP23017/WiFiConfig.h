@@ -43,6 +43,8 @@ class WiFiConfig
    void Set_Input_dir(int value);
    void Set_Output_dir(int value);
    void Set_RFID_Enable(byte value);
+   void Set_LED_OutputPIN(int index , int pinNum);
+   void Set_LED_InputPIN(int index , int pinNum);
    void HandleClient();
    void httpInit();
   

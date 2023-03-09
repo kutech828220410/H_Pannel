@@ -265,6 +265,18 @@ int WiFiConfig::Get_LED_InputPIN(int index)
     this -> LED_InputPIN[index] = value;
     return this -> LED_InputPIN[index];
 }
+void WiFiConfig::Set_LED_OutputPIN(int index , int pinNum)
+{
+    EEPROM.write(this -> LED_OutputPIN_ADDR[index] , pinNum);
+    EEPROM.commit();
+    this -> LED_OutputPIN[index] = pinNum;
+}
+void WiFiConfig::Set_LED_InputPIN(int index , int pinNum)
+{
+    EEPROM.write(this -> LED_InputPIN_ADDR[index] , pinNum);
+    EEPROM.commit();
+    this -> LED_InputPIN[index] = pinNum;
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 int WiFiConfig::GetRSSI()

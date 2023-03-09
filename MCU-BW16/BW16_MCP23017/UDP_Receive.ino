@@ -128,6 +128,21 @@ void onPacketCallBack()
             flag_WS2812B_Refresh = true;
             Get_Checksum_UDP();
           }
+          else if(*(UdpRead + 1) == 'F')
+          {                  
+              int ms_L = *(UdpRead + 2);
+              int ms_H = *(UdpRead + 3);  
+              
+              int ms= ms_L | (ms_H << 8);
+
+              if(flag_udp_232back)mySerial.println("Set_UDP_SendTime");
+              if(flag_udp_232back)mySerial.print("ms[");
+              if(flag_udp_232back)mySerial.print(ms);
+              if(flag_udp_232back)mySerial.println("]");
+
+              wiFiConfig.Set_UDP_SemdTime(ms);                                           
+              Get_Checksum_UDP();
+          }
           else if (*(UdpRead + 1) == 'O')
           {           
             int num_L = *(UdpRead + 2);
@@ -229,7 +244,54 @@ void onPacketCallBack()
              {
                 send_byte[i + 5] = wiFiConfig.Get_LED_OutputPIN(i);
              }
-             Send_Bytes(send_byte, 10 ,wiFiConfig.server_IPAdress, wiFiConfig.localport);    
+             Send_Bytes(send_byte, 10 ,Udp.remoteIP(), wiFiConfig.localport);    
+          }
+          else if(*(UdpRead + 1) == 'V')
+          {                  
+             if(flag_udp_232back)printf("Get_LEDSetting  \n");
+             byte send_byte[10];
+             for(int i = 0 ; i < 5 ; i ++)
+             {
+                send_byte[i] = wiFiConfig.Get_LED_InputPIN(i);
+             }
+              for(int i = 0 ; i < 5 ; i ++)
+             {
+                send_byte[i + 5] = wiFiConfig.Get_LED_OutputPIN(i);
+             }
+             Send_Bytes(send_byte, 10 ,Udp.remoteIP(), wiFiConfig.localport);    
+          }
+           else if(*(UdpRead + 1) == 'X')
+          {                  
+             int input = GetInput();
+             int output = GetOutput();
+             
+             byte send_byte[4];
+             send_byte[0] = input >> 0;
+             send_byte[1] = input >> 8;
+             send_byte[2] = output >> 0;
+             send_byte[3] = output >> 8;
+
+
+             if(flag_udp_232back)printf("Get_IO [input]:%d ,[output]:%d\n" ,input ,output);
+             Send_Bytes(send_byte, 4 ,Udp.remoteIP(), wiFiConfig.localport);    
+          }
+          else if(*(UdpRead + 1) == 'W')
+          {                  
+             if(flag_udp_232back)printf("Set_LEDSetting  \n");            
+             byte temp;
+             for(int i = 0 ; i < 5 ; i ++)
+             {
+                temp = *(UdpRead + 2 + i);
+                wiFiConfig.Set_LED_InputPIN(i ,temp);
+                if(flag_udp_232back)printf("inputPIN : %d  \n",temp); 
+             }
+              for(int i = 0 ; i < 5 ; i ++)
+             {
+                temp = *(UdpRead + 7 + i);
+                wiFiConfig.Set_LED_OutputPIN(i ,temp);
+                if(flag_udp_232back)printf("outputPIN : %d  \n",temp); 
+             }
+             Get_Checksum_UDP();
           }
           if(flag_udp_232back)
           {

@@ -54,7 +54,18 @@ void sub_UDP_Send()
          doc["RSSI_03"] = RSSI_02;
          doc["RSSI_04"] = RSSI_03;
          doc["RSSI_05"] = RSSI_04;
-     
+         
+         doc["BlinkEnable01"] = MyOutput_PIN01.BlinkEnable;
+         doc["BlinkEnable02"] = MyOutput_PIN02.BlinkEnable;
+         doc["BlinkEnable03"] = MyOutput_PIN03.BlinkEnable;
+         doc["BlinkEnable04"] = MyOutput_PIN04.BlinkEnable;
+         doc["BlinkEnable05"] = MyOutput_PIN05.BlinkEnable;
+         doc["BlinkEnable06"] = MyOutput_PIN06.BlinkEnable;
+         doc["BlinkEnable07"] = MyOutput_PIN07.BlinkEnable;
+         doc["BlinkEnable08"] = MyOutput_PIN08.BlinkEnable;
+         doc["BlinkEnable09"] = MyOutput_PIN09.BlinkEnable;
+         doc["BlinkEnable10"] = MyOutput_PIN10.BlinkEnable;
+      
          JsonOutput = "";
          serializeJson(doc, JsonOutput);
          Send_StringTo(JsonOutput, wiFiConfig.server_IPAdress, wiFiConfig.serverport);

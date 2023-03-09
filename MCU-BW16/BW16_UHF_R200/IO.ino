@@ -105,7 +105,7 @@ void sub_IO_Program()
        flag_Init = true;
     }
     Input = GetInput();
-    OutputLED_Blink();
+    //OutputLED_Blink();
     Output = GetOutput();
     Input_dir = Get_Input_dir();
     Output_dir = Get_Output_dir();
@@ -137,7 +137,7 @@ void sub_IO_Program()
     if(Output_buf != Output)
     {       
        Output_buf = Output;
-       flag_JsonSend = true;
+       //flag_JsonSend = true;
     }
     if(Input_dir_buf != Input_dir)
     {       
@@ -154,11 +154,6 @@ void OutputLED_Blink()
 {
    int input_index = -1;
    int output_index = -1;
-   MyOutput_PIN01.BlinkEnable = false;
-   MyOutput_PIN02.BlinkEnable = false;
-   MyOutput_PIN03.BlinkEnable = false;
-   MyOutput_PIN04.BlinkEnable = false;
-   MyOutput_PIN05.BlinkEnable = false;
    for(int i = 0 ; i < 5 ; i++)
    {
       input_index = LED_Input[i];
@@ -179,16 +174,16 @@ void OutputLED_Blink()
 }
 void Output_Blink()
 {
-    MyOutput_PIN01.Blink(500);
-    MyOutput_PIN02.Blink(500);
-    MyOutput_PIN03.Blink(500);
-    MyOutput_PIN04.Blink(500);
-    MyOutput_PIN05.Blink(500);
-    MyOutput_PIN06.Blink(500);
-    MyOutput_PIN07.Blink(500);
-    MyOutput_PIN08.Blink(500);
-    MyOutput_PIN09.Blink(500);
-    MyOutput_PIN10.Blink(500);
+    MyOutput_PIN01.Blink();
+    MyOutput_PIN02.Blink();
+    MyOutput_PIN03.Blink();
+    MyOutput_PIN04.Blink();
+    MyOutput_PIN05.Blink();
+    MyOutput_PIN06.Blink();
+    MyOutput_PIN07.Blink();
+    MyOutput_PIN08.Blink();
+    MyOutput_PIN09.Blink();
+    MyOutput_PIN10.Blink();
 }
 void Set_Input_dir(byte pin_num , bool value)
 {
@@ -400,4 +395,57 @@ void SetOutputPIN(byte pin_num , bool value)
     else if(pin_num == 7) MyOutput_PIN08.Set_State(value);
     else if(pin_num == 8) MyOutput_PIN09.Set_State(value);
     else if(pin_num == 9) MyOutput_PIN10.Set_State(value);
+}
+void SetBlinkTime(byte pin_num , bool value ,int blinkTime)
+{
+    if(pin_num == 0) 
+    {
+        MyOutput_PIN01.BlinkEnable = value;
+        MyOutput_PIN01.OnDelayTime = blinkTime;
+    }
+    else if(pin_num == 1) 
+    {
+        MyOutput_PIN02.BlinkEnable = value;
+        MyOutput_PIN02.OnDelayTime = blinkTime;
+    }
+    else if(pin_num == 2) 
+    {
+        MyOutput_PIN03.BlinkEnable = value;
+        MyOutput_PIN03.OnDelayTime = blinkTime;
+    }
+    else if(pin_num == 3) 
+    {
+        MyOutput_PIN04.BlinkEnable = value;
+        MyOutput_PIN04.OnDelayTime = blinkTime;
+    }
+    else if(pin_num == 4) 
+    {
+        MyOutput_PIN05.BlinkEnable = value;
+        MyOutput_PIN05.OnDelayTime = blinkTime;
+    }
+    else if(pin_num == 5) 
+    {
+        MyOutput_PIN06.BlinkEnable = value;
+        MyOutput_PIN06.OnDelayTime = blinkTime;
+    }
+    else if(pin_num == 6) 
+    {
+        MyOutput_PIN07.BlinkEnable = value;
+        MyOutput_PIN07.OnDelayTime = blinkTime;
+    }
+    else if(pin_num == 7) 
+    {
+        MyOutput_PIN08.BlinkEnable = value;
+        MyOutput_PIN08.OnDelayTime = blinkTime;
+    }
+    else if(pin_num == 8) 
+    {
+        MyOutput_PIN09.BlinkEnable = value;
+        MyOutput_PIN09.OnDelayTime = blinkTime;
+    }
+    else if(pin_num == 9) 
+    {
+        MyOutput_PIN10.BlinkEnable = value;
+        MyOutput_PIN10.OnDelayTime = blinkTime;
+    }
 }

@@ -41,7 +41,7 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial_R200(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.0.0";
+String Version = "Ver 1.0.1";
 DFRobot_MCP23017 mcp(Wire, /*addr =*/0x20);//constructor, change the Level of A2, A1, A0 via DIP switch to revise the I2C address within 0x20~0x27.
 
 void setup() 
@@ -88,7 +88,7 @@ void loop()
    }
    if(flag_boradInit)
    {
-      sub_IO_Program();
+      
       if(WiFi.status() != WL_CONNECTED)
       {
          wiFiConfig.WIFI_Connenct();
@@ -117,6 +117,7 @@ void Core0Task1( void * pvParameters )
        
        if(flag_boradInit)
        {
+          sub_IO_Program();
           serialEvent();
           //serialEvent1();
           MyLED_IS_Connented.Blink();
