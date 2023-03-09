@@ -65,8 +65,9 @@ namespace WT32_SC01
         private void Form1_Load(object sender, EventArgs e)
         {
             this.MyThread_Program = new Basic.MyThread();
-            this.MyThread_Program.SetSleepTime(1);
+            this.MyThread_Program.SetSleepTime(10);
             this.MyThread_Program.AutoRun(true);
+            this.MyThread_Program.Add_Method(this.sub_H_RFID);
             this.MyThread_Program.Trigger();
 
             this.rJ_Button_WT32_上傳畫面.MouseDownEvent += RJ_Button_WT32_上傳畫面_MouseDownEvent;
@@ -280,10 +281,32 @@ namespace WT32_SC01
         {
             this.rfiD_UI.Init();
         }
-
         private void RJ_Button_H_RFID_初始化_MouseDownEvent(MouseEventArgs mevent)
         {
             this.h_RFID_UI.Init();
+        }
+        private enum enum_H_RFID_Datas
+        {
+            GUID,
+            IP,
+            CardID,
+            RSSI,
+        }
+        private void sub_H_RFID()
+        {
+            this.sqL_DataGridView_h_RFID_Datas.Init();
+            List<H_RFID_UI.UDP_READ.RFID_Data> rFID_UID_Classes = this.h_RFID_UI.GetRFID();
+            List<object[]> list_value = new List<object[]>();
+            for(int i = 0; i < rFID_UID_Classes.Count; i++)
+            {
+                object[] value = new object[new enum_H_RFID_Datas().GetLength()];
+                value[(int)enum_H_RFID_Datas.GUID] = Guid.NewGuid().ToString();
+                value[(int)enum_H_RFID_Datas.IP] = rFID_UID_Classes[i].IP;
+                value[(int)enum_H_RFID_Datas.CardID] = rFID_UID_Classes[i].Card_ID;
+                value[(int)enum_H_RFID_Datas.RSSI] = rFID_UID_Classes[i].RSSI;
+                list_value.Add(value);
+            }
+            this.sqL_DataGridView_h_RFID_Datas.RefreshGrid(list_value);
         }
     }
 }

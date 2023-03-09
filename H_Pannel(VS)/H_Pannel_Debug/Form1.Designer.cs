@@ -38,7 +38,6 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.rJ_Button_WT32_測試 = new MyUI.RJ_Button();
             this.rJ_Button_WT32_上傳畫面 = new MyUI.RJ_Button();
-            this.pannel35_Pannel = new H_Pannel_lib.Pannel35_Pannel();
             this.rJ_GroupBox1 = new MyUI.RJ_GroupBox();
             this.rJ_Button_WT32_資料寫入 = new MyUI.RJ_Button();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -73,6 +72,7 @@
             this.rJ_TextBox_WT32_藥品碼 = new MyUI.RJ_TextBox();
             this.rJ_Button_WT32_上傳選擇儲位 = new MyUI.RJ_Button();
             this.rJ_Button_WT32_讀取選擇儲位 = new MyUI.RJ_Button();
+            this.pannel35_Pannel = new H_Pannel_lib.Pannel35_Pannel();
             this.wT32_GPADC = new H_Pannel_lib.WT32_GPADC();
             this.EPD_266 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
@@ -105,8 +105,9 @@
             this.rJ_Button_RFID_初始化 = new MyUI.RJ_Button();
             this.rfiD_UI = new H_Pannel_lib.RFID_UI();
             this.H_RFID = new System.Windows.Forms.TabPage();
-            this.h_RFID_UI = new H_Pannel_lib.H_RFID_UI();
+            this.sqL_DataGridView_h_RFID_Datas = new SQLUI.SQL_DataGridView();
             this.rJ_Button_H_RFID_初始化 = new MyUI.RJ_Button();
+            this.h_RFID_UI = new H_Pannel_lib.H_RFID_UI();
             this.tabControl1.SuspendLayout();
             this.WT32.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -199,7 +200,7 @@
             this.rJ_Button_WT32_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_WT32_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_初始化.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_WT32_初始化.Location = new System.Drawing.Point(1384, 3);
+            this.rJ_Button_WT32_初始化.Location = new System.Drawing.Point(1384, 13);
             this.rJ_Button_WT32_初始化.Name = "rJ_Button_WT32_初始化";
             this.rJ_Button_WT32_初始化.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_WT32_初始化.State = false;
@@ -232,10 +233,10 @@
             this.tabPage4.AutoScroll = true;
             this.tabPage4.Controls.Add(this.rJ_Button_WT32_測試);
             this.tabPage4.Controls.Add(this.rJ_Button_WT32_上傳畫面);
-            this.tabPage4.Controls.Add(this.pannel35_Pannel);
             this.tabPage4.Controls.Add(this.rJ_GroupBox1);
             this.tabPage4.Controls.Add(this.rJ_Button_WT32_上傳選擇儲位);
             this.tabPage4.Controls.Add(this.rJ_Button_WT32_讀取選擇儲位);
+            this.tabPage4.Controls.Add(this.pannel35_Pannel);
             this.tabPage4.Controls.Add(this.wT32_GPADC);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
@@ -288,14 +289,6 @@
             this.rJ_Button_WT32_上傳畫面.Text = "上傳畫面";
             this.rJ_Button_WT32_上傳畫面.TextColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_上傳畫面.UseVisualStyleBackColor = false;
-            // 
-            // pannel35_Pannel
-            // 
-            this.pannel35_Pannel.Location = new System.Drawing.Point(1236, 627);
-            this.pannel35_Pannel.Margin = new System.Windows.Forms.Padding(0);
-            this.pannel35_Pannel.Name = "pannel35_Pannel";
-            this.pannel35_Pannel.Size = new System.Drawing.Size(360, 240);
-            this.pannel35_Pannel.TabIndex = 31;
             // 
             // rJ_GroupBox1
             // 
@@ -910,6 +903,14 @@
             this.rJ_Button_WT32_讀取選擇儲位.UseVisualStyleBackColor = false;
             this.rJ_Button_WT32_讀取選擇儲位.Click += new System.EventHandler(this.rJ_Button_WT32_讀取選擇儲位_Click);
             // 
+            // pannel35_Pannel
+            // 
+            this.pannel35_Pannel.Location = new System.Drawing.Point(1236, 627);
+            this.pannel35_Pannel.Margin = new System.Windows.Forms.Padding(0);
+            this.pannel35_Pannel.Name = "pannel35_Pannel";
+            this.pannel35_Pannel.Size = new System.Drawing.Size(360, 240);
+            this.pannel35_Pannel.TabIndex = 31;
+            // 
             // wT32_GPADC
             // 
             this.wT32_GPADC.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -1418,6 +1419,7 @@
             // 
             // H_RFID
             // 
+            this.H_RFID.Controls.Add(this.sqL_DataGridView_h_RFID_Datas);
             this.H_RFID.Controls.Add(this.rJ_Button_H_RFID_初始化);
             this.H_RFID.Controls.Add(this.h_RFID_UI);
             this.H_RFID.Location = new System.Drawing.Point(4, 22);
@@ -1426,6 +1428,78 @@
             this.H_RFID.TabIndex = 5;
             this.H_RFID.Text = "H_RFID";
             this.H_RFID.UseVisualStyleBackColor = true;
+            // 
+            // sqL_DataGridView_h_RFID_Datas
+            // 
+            this.sqL_DataGridView_h_RFID_Datas.AutoSelectToDeep = true;
+            this.sqL_DataGridView_h_RFID_Datas.backColor = System.Drawing.Color.LightBlue;
+            this.sqL_DataGridView_h_RFID_Datas.BorderColor = System.Drawing.Color.LightBlue;
+            this.sqL_DataGridView_h_RFID_Datas.BorderRadius = 10;
+            this.sqL_DataGridView_h_RFID_Datas.BorderSize = 2;
+            this.sqL_DataGridView_h_RFID_Datas.cellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.sqL_DataGridView_h_RFID_Datas.cellStylBackColor = System.Drawing.Color.LightBlue;
+            this.sqL_DataGridView_h_RFID_Datas.cellStyleFont = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
+            this.sqL_DataGridView_h_RFID_Datas.cellStylForeColor = System.Drawing.Color.Black;
+            this.sqL_DataGridView_h_RFID_Datas.columnHeaderBackColor = System.Drawing.Color.SkyBlue;
+            this.sqL_DataGridView_h_RFID_Datas.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
+            this.sqL_DataGridView_h_RFID_Datas.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
+            this.sqL_DataGridView_h_RFID_Datas.columnHeadersHeight = 26;
+            this.sqL_DataGridView_h_RFID_Datas.columnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.sqL_DataGridView_h_RFID_Datas.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_h_RFID_Datas.Columns"))));
+            this.sqL_DataGridView_h_RFID_Datas.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_h_RFID_Datas.Columns1"))));
+            this.sqL_DataGridView_h_RFID_Datas.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_h_RFID_Datas.Columns2"))));
+            this.sqL_DataGridView_h_RFID_Datas.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_h_RFID_Datas.Columns3"))));
+            this.sqL_DataGridView_h_RFID_Datas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.sqL_DataGridView_h_RFID_Datas.Font = new System.Drawing.Font("新細明體", 9F);
+            this.sqL_DataGridView_h_RFID_Datas.ImageBox = false;
+            this.sqL_DataGridView_h_RFID_Datas.Location = new System.Drawing.Point(1393, 0);
+            this.sqL_DataGridView_h_RFID_Datas.Name = "sqL_DataGridView_h_RFID_Datas";
+            this.sqL_DataGridView_h_RFID_Datas.OnlineState = SQLUI.SQL_DataGridView.OnlineEnum.Online;
+            this.sqL_DataGridView_h_RFID_Datas.Password = "user82822040";
+            this.sqL_DataGridView_h_RFID_Datas.Port = ((uint)(3306u));
+            this.sqL_DataGridView_h_RFID_Datas.rowHeaderBackColor = System.Drawing.Color.LightBlue;
+            this.sqL_DataGridView_h_RFID_Datas.rowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
+            this.sqL_DataGridView_h_RFID_Datas.RowsColor = System.Drawing.SystemColors.Control;
+            this.sqL_DataGridView_h_RFID_Datas.RowsHeight = 30;
+            this.sqL_DataGridView_h_RFID_Datas.SaveFileName = "SQL_DataGridView";
+            this.sqL_DataGridView_h_RFID_Datas.Server = "127.0.0.0";
+            this.sqL_DataGridView_h_RFID_Datas.Size = new System.Drawing.Size(503, 545);
+            this.sqL_DataGridView_h_RFID_Datas.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
+            this.sqL_DataGridView_h_RFID_Datas.TabIndex = 42;
+            this.sqL_DataGridView_h_RFID_Datas.UserName = "root";
+            this.sqL_DataGridView_h_RFID_Datas.可拖曳欄位寬度 = false;
+            this.sqL_DataGridView_h_RFID_Datas.可選擇多列 = false;
+            this.sqL_DataGridView_h_RFID_Datas.單格樣式 = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.sqL_DataGridView_h_RFID_Datas.自動換行 = true;
+            this.sqL_DataGridView_h_RFID_Datas.表單字體 = new System.Drawing.Font("新細明體", 9F);
+            this.sqL_DataGridView_h_RFID_Datas.邊框樣式 = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.sqL_DataGridView_h_RFID_Datas.顯示CheckBox = false;
+            this.sqL_DataGridView_h_RFID_Datas.顯示首列 = true;
+            this.sqL_DataGridView_h_RFID_Datas.顯示首行 = true;
+            this.sqL_DataGridView_h_RFID_Datas.首列樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
+            this.sqL_DataGridView_h_RFID_Datas.首行樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
+            // 
+            // rJ_Button_H_RFID_初始化
+            // 
+            this.rJ_Button_H_RFID_初始化.AutoResetState = false;
+            this.rJ_Button_H_RFID_初始化.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_H_RFID_初始化.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_H_RFID_初始化.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_H_RFID_初始化.BorderRadius = 5;
+            this.rJ_Button_H_RFID_初始化.BorderSize = 0;
+            this.rJ_Button_H_RFID_初始化.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_H_RFID_初始化.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_H_RFID_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_H_RFID_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_H_RFID_初始化.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_H_RFID_初始化.Location = new System.Drawing.Point(1422, 566);
+            this.rJ_Button_H_RFID_初始化.Name = "rJ_Button_H_RFID_初始化";
+            this.rJ_Button_H_RFID_初始化.Size = new System.Drawing.Size(126, 67);
+            this.rJ_Button_H_RFID_初始化.State = false;
+            this.rJ_Button_H_RFID_初始化.TabIndex = 41;
+            this.rJ_Button_H_RFID_初始化.Text = "初始化";
+            this.rJ_Button_H_RFID_初始化.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_H_RFID_初始化.UseVisualStyleBackColor = false;
             // 
             // h_RFID_UI
             // 
@@ -1442,28 +1516,6 @@
             this.h_RFID_UI.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("h_RFID_UI.UDP_LocalPorts")));
             this.h_RFID_UI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("h_RFID_UI.UDP_ServerPorts")));
             this.h_RFID_UI.UserName = "root";
-            // 
-            // rJ_Button_H_RFID_初始化
-            // 
-            this.rJ_Button_H_RFID_初始化.AutoResetState = false;
-            this.rJ_Button_H_RFID_初始化.BackColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_H_RFID_初始化.BackgroundColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_H_RFID_初始化.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_H_RFID_初始化.BorderRadius = 5;
-            this.rJ_Button_H_RFID_初始化.BorderSize = 0;
-            this.rJ_Button_H_RFID_初始化.buttonType = MyUI.RJ_Button.ButtonType.Push;
-            this.rJ_Button_H_RFID_初始化.FlatAppearance.BorderSize = 0;
-            this.rJ_Button_H_RFID_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Button_H_RFID_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Button_H_RFID_初始化.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_H_RFID_初始化.Location = new System.Drawing.Point(1399, 3);
-            this.rJ_Button_H_RFID_初始化.Name = "rJ_Button_H_RFID_初始化";
-            this.rJ_Button_H_RFID_初始化.Size = new System.Drawing.Size(126, 67);
-            this.rJ_Button_H_RFID_初始化.State = false;
-            this.rJ_Button_H_RFID_初始化.TabIndex = 41;
-            this.rJ_Button_H_RFID_初始化.Text = "初始化";
-            this.rJ_Button_H_RFID_初始化.TextColor = System.Drawing.Color.White;
-            this.rJ_Button_H_RFID_初始化.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -1587,6 +1639,7 @@
         private System.Windows.Forms.TabPage H_RFID;
         private H_Pannel_lib.H_RFID_UI h_RFID_UI;
         private MyUI.RJ_Button rJ_Button_H_RFID_初始化;
+        private SQLUI.SQL_DataGridView sqL_DataGridView_h_RFID_Datas;
     }
 }
 

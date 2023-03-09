@@ -43,17 +43,17 @@ void sub_UDP_Send()
          doc["Output"] = Output;
          doc["Input_dir"] = Input_dir;
          doc["Output_dir"] = Output_dir;
-         doc["Card_00"] = Card_00;
-         doc["Card_01"] = Card_01;
-         doc["Card_02"] = Card_02;
-         doc["Card_03"] = Card_03;
-         doc["Card_04"] = Card_04;
+         doc["CardID_01"] = Card_00;
+         doc["CardID_02"] = Card_01;
+         doc["CardID_03"] = Card_02;
+         doc["CardID_04"] = Card_03;
+         doc["CardID_05"] = Card_04;
          
-         doc["RSSI_00"] = RSSI_00;
-         doc["RSSI_01"] = RSSI_01;
-         doc["RSSI_02"] = RSSI_02;
-         doc["RSSI_03"] = RSSI_03;
-         doc["RSSI_04"] = RSSI_04;
+         doc["RSSI_01"] = RSSI_00;
+         doc["RSSI_02"] = RSSI_01;
+         doc["RSSI_03"] = RSSI_02;
+         doc["RSSI_04"] = RSSI_03;
+         doc["RSSI_05"] = RSSI_04;
      
          JsonOutput = "";
          serializeJson(doc, JsonOutput);

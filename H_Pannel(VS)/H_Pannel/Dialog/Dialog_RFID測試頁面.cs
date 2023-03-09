@@ -12,6 +12,12 @@ namespace H_Pannel_lib
 {
     public partial class Dialog_RFID測試頁面 : Form
     {
+        public enum enum_RFID_Type
+        {
+            Normal,
+            HighFQ,
+        }
+        public enum_RFID_Type RFID_Type = enum_RFID_Type.Normal;
         private UDP_Class udP_Class;
         private string IP = "";
         private List<object[]> list_UDP_Rx = new List<object[]>();

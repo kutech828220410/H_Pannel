@@ -228,7 +228,7 @@ namespace H_Pannel_lib
             this.DeviceTableMouseDownRightEvent += StorageUI_WT32_DeviceTableMouseDownRightEvent;
             this.UDP_DataReceiveMouseDownRightEvent += StorageUI_WT32_UDP_DataReceiveMouseDownRightEvent;
             Enum_ContextMenuStrip_DeviceTable = new ContextMenuStrip_Main();
-          Enum_ContextMenuStrip_UDP_DataReceive = new ContextMenuStrip_Main();
+            Enum_ContextMenuStrip_UDP_DataReceive = new ContextMenuStrip_Main();
         }
 
      

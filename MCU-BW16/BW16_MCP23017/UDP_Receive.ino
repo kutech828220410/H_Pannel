@@ -140,7 +140,7 @@ void onPacketCallBack()
 //            {
 //                Serial.println(*(myWS2812.rgbBuffer + i));
 //            }
-            Send_Bytes(myWS2812.rgbBuffer, num ,wiFiConfig.server_IPAdress, wiFiConfig.localport);                    
+            Send_Bytes(myWS2812.rgbBuffer, num ,Udp.remoteIP(), wiFiConfig.localport);                    
           }
           else if(*(UdpRead + 1) == 'B')
           {                  
@@ -152,7 +152,7 @@ void onPacketCallBack()
               mySerial.print(serverIP_char_array);
               mySerial.print(", port :");
               mySerial.println(8080);
-              
+              Get_Checksum_UDP();
               int ret = http_update_ota(serverIP_char_array, 8080, RESOURCE);
               printf("[%s] Update task exit\n\r", __FUNCTION__);
               if(!ret)
@@ -260,7 +260,7 @@ void Get_Checksum_UDP()
    if(str0.length() < 3) str0 = "0" + str0;
    if(flag_udp_232back)printf("Checksum String : %d\n",str0);
    if(flag_udp_232back)printf("Checksum Byte : %d \n" , checksum);
-   Send_StringTo(str0 ,wiFiConfig.server_IPAdress, wiFiConfig.localport);
+   Send_StringTo(str0 ,Udp.remoteIP(), wiFiConfig.localport);
    if(flag_udp_232back)printf("Send_StringTo");
 }
 void Connect_UDP(int localport)
