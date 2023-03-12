@@ -239,10 +239,9 @@ namespace H_Pannel_lib
         public string StorageName { get => _StorageName; set => _StorageName = value; }
         private string _IP = "";
         public string IP { get => _IP; set => _IP = value; }
-        public DeviceBasic()
-        {
-            this.GUID = Guid.NewGuid().ToString();
-        }
+        private bool isWarning = false;
+        public bool IsWarning { get => isWarning; set => isWarning = value; }
+
 
         public string Inventory
         {
@@ -278,6 +277,9 @@ namespace H_Pannel_lib
             }
             set => list_Lot_number = value;
         }
+
+
+
         protected List<string> list_Validity_period = new List<string>();
         protected List<string> list_Lot_number = new List<string>();
         protected List<string> list_Inventory = new List<string>();

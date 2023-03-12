@@ -312,6 +312,7 @@
             this.rJ_GroupBox1.ContentsPanel.Controls.Add(this.panel2);
             this.rJ_GroupBox1.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rJ_GroupBox1.ContentsPanel.ForeColor = System.Drawing.Color.White;
+            this.rJ_GroupBox1.ContentsPanel.IsSelected = false;
             this.rJ_GroupBox1.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox1.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox1.ContentsPanel.Size = new System.Drawing.Size(429, 567);
@@ -994,7 +995,7 @@
             // 
             this.storageUI_EPD_266.BackColor = System.Drawing.SystemColors.Window;
             this.storageUI_EPD_266.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.storageUI_EPD_266.DataBaseName = "TEST";
+            this.storageUI_EPD_266.DataBaseName = "dps01";
             this.storageUI_EPD_266.Dock = System.Windows.Forms.DockStyle.Left;
             this.storageUI_EPD_266.IP = "localhost";
             this.storageUI_EPD_266.Location = new System.Drawing.Point(0, 0);
