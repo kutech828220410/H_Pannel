@@ -1334,8 +1334,13 @@ namespace H_Pannel_lib
                         MyTimer myTimer = new MyTimer();
                         myTimer.StartTickTime(50000);
                         List<object[]> list_value_buf = this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(false);
+                        List<object[]> list_value_delete = (from value in list_value_buf
+                                                            where !value[(int)enum_DeviceTable.IP].ObjectToString().Check_IP_Adress()
+                                                            select value).ToList();
                         if (ConsoleWrite) Console.WriteLine($"Get data form SQL Time : {myTimer.GetTickTime().ToString("0.000")} ms");
                         this.sqL_DataGridView_DeviceTable.RefreshGrid(list_value_buf);
+                        this.sqL_DataGridView_DeviceTable.SQL_DeleteExtra(list_value_delete, false);
+                        this.sqL_DataGridView_DeviceTable.DeleteExtra(list_value_delete, true);
                     }
 
                     for (int i = 0; i < enum_ContextMenuStrip_DeviceTable.Length; i++)
@@ -1374,6 +1379,7 @@ namespace H_Pannel_lib
                 bool flag_add = true;
                 string IP = RowsList[i][(int)enum_DeviceTable.IP].ObjectToString();
                 IP_Array = IP.Split('.');
+                if (IP_Array.Length < 4) continue;
                 for (int k = 0; k < 4; k++)
                 {
                     if (IP_Array[k] != IP_DeviceTable_Mask_Array[k] && IP_DeviceTable_Mask_Array[k] != "XXX") flag_add = false;
@@ -1450,6 +1456,8 @@ namespace H_Pannel_lib
                 string[] IP_1_Array = IP_1.Split('.');
                 IP_0 = "";
                 IP_1 = "";
+                if (IP_0_Array.Length < 4) return 0;
+                if (IP_1_Array.Length < 4) return 0;
                 for (int i = 0; i < 4; i++)
                 {
                     if (IP_0_Array[i].Length < 3) IP_0_Array[i] = "0" + IP_0_Array[i];
