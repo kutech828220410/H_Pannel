@@ -1252,7 +1252,7 @@
             // 
             // drawerUI_EPD_583
             // 
-            this.drawerUI_EPD_583.DataBaseName = "test";
+            this.drawerUI_EPD_583.DataBaseName = "dps01";
             this.drawerUI_EPD_583.Dock = System.Windows.Forms.DockStyle.Left;
             this.drawerUI_EPD_583.IP = "127.0.0.1";
             this.drawerUI_EPD_583.Location = new System.Drawing.Point(0, 0);

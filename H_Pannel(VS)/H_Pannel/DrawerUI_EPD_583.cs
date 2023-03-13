@@ -392,8 +392,8 @@ namespace H_Pannel_lib
                         g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
                         g.DrawString(_box.Name, _box.Name_font, new SolidBrush(_box.ForeColor), rect, StringFormat.GenericDefault);
 
-                        SizeF size_Code = TextRenderer.MeasureText(_box.Code, _box.Code_font);
-                        g.DrawString(_box.Code, _box.Code_font, new SolidBrush(Color.Black), rect.X, ((rect.Y + rect.Height) - size_Code.Height));
+                        SizeF size_Code = TextRenderer.MeasureText($"{_box.Code}[{_box.Inventory}]", _box.Code_font);
+                        if (_box.Code.StringIsEmpty() == false) g.DrawString($"{_box.Code}[{_box.Inventory}]", _box.Code_font, new SolidBrush(Color.Black), rect.X, ((rect.Y + rect.Height) - size_Code.Height));
                     }
 
 
