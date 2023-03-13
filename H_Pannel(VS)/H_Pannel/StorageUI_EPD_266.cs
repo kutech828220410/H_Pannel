@@ -236,7 +236,7 @@ namespace H_Pannel_lib
                 //g.DrawString(storage.Package, storage.Package_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.包裝單位, Storage.ValueType.ForeColor)), 0, Pannel_Height - size_Code_font.Height - size_Package_font.Height);
                 //g.DrawRectangle(new Pen(new SolidBrush((Color)storage.GetValue(Storage.ValueName.包裝單位, Storage.ValueType.ForeColor)), 1), 0, Pannel_Height - size_Code_font.Height - size_Package_font.Height, size_Package_font.Width, size_Package_font.Height);
 
-                if (storage.BarCode_Visable || true)
+                if (storage.BarCode_Visable)
                 {
                     Bitmap bitmap_barcode = Communication.CreateBarCode(storage.BarCode, storage.BarCode_Width, storage.BarCode_Height);
                     g.DrawImage(bitmap_barcode, (Pannel_Width - storage.BarCode_Width) / 2, Pannel_Height - storage.BarCode_Height);
