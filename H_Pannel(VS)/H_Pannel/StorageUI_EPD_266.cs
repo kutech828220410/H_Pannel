@@ -186,7 +186,8 @@ namespace H_Pannel_lib
                 float posy = 0;
                 if(storage.Name_Visable)
                 {
-                    SizeF size_name = TextRenderer.MeasureText(g, storage.Name, storage.Name_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+                    SizeF size_name = g.MeasureString(storage.Name, storage.Name_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
+                    //SizeF size_name = TextRenderer.MeasureText(g, storage.Name, storage.Name_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
                     g.DrawString(storage.Name, storage.Name_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品名稱, Storage.ValueType.ForeColor)), new RectangleF(0, posy, Pannel_Width, Pannel_Height), StringFormat.GenericDefault);
                     posy += size_name.Height;
                     DrawingClass.Draw.線段繪製(new PointF(0, posy), new PointF(rect.Width, posy), Color.Black, 1.5F, g, 1, 1);
@@ -194,14 +195,16 @@ namespace H_Pannel_lib
        
                 if(storage.Scientific_Name_Visable)
                 {
-                    SizeF size_Scientific_Name_font = TextRenderer.MeasureText(storage.Scientific_Name, storage.Scientific_Name_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+                    SizeF size_Scientific_Name_font = g.MeasureString(storage.Scientific_Name, storage.Scientific_Name_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
+                   // SizeF size_Scientific_Name_font = TextRenderer.MeasureText(storage.Scientific_Name, storage.Scientific_Name_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
                     g.DrawString(storage.Scientific_Name, storage.Scientific_Name_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品學名, Storage.ValueType.ForeColor)), new RectangleF(0, posy, Pannel_Width, Pannel_Height), StringFormat.GenericDefault);
                     posy += size_Scientific_Name_font.Height;
                     DrawingClass.Draw.線段繪製(new PointF(0, posy), new PointF(rect.Width, posy), Color.Black, 1.5F, g, 1, 1);
                 }
                 if (storage.ChineseName_Visable)
                 {
-                    SizeF size_ChineseName = TextRenderer.MeasureText(storage.ChineseName, storage.ChineseName_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+                    SizeF size_ChineseName = g.MeasureString(storage.ChineseName, storage.ChineseName_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
+                   // SizeF size_ChineseName = TextRenderer.MeasureText(storage.ChineseName, storage.ChineseName_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
                     g.DrawString(storage.ChineseName, storage.ChineseName_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品中文名稱, Storage.ValueType.ForeColor)), new RectangleF(0, posy, Pannel_Width, Pannel_Height), StringFormat.GenericDefault);
                     posy += size_ChineseName.Height;
                    // DrawingClass.Draw.線段繪製(new PointF(0, posy), new PointF(rect.Width, posy), Color.Black, 1.5F, g, 1, 1);

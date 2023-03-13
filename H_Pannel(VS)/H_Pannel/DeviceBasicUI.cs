@@ -34,7 +34,7 @@ namespace H_Pannel_lib
     }
     public partial class DeviceBasicUI : UserControl
     {
-        static public int TimeOut = 3000;
+        static public int TimeOut = 5000;
 
         public bool ConsoleWrite = true;
         public List<object[]> list_UDP_Rx = new List<object[]>();
