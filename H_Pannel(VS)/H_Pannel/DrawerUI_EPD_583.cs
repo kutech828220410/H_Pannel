@@ -383,6 +383,8 @@ namespace H_Pannel_lib
                     Box _box = Boxes[i][k];
                     if (Boxes[i][k].Slave == false)
                     {
+                        float posy = 0;
+
                         g.FillRectangle(new SolidBrush(_box.BackColor), rect);
                         g.DrawRectangle(new Pen(Color.Black, _box.Pen_Width), rect);
 
@@ -390,7 +392,48 @@ namespace H_Pannel_lib
                         g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                         g.CompositingQuality = CompositingQuality.HighQuality;
                         g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+
+                        _box.SetValue(Device.ValueName.藥品碼, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                        _box.SetValue(Device.ValueName.藥品碼, Device.ValueType.BackColor, _box.BackColor);
+
+                        _box.SetValue(Device.ValueName.藥品名稱, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                        _box.SetValue(Device.ValueName.藥品名稱, Device.ValueType.BackColor, _box.BackColor);
+
+                        _box.SetValue(Device.ValueName.藥品學名, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                        _box.SetValue(Device.ValueName.藥品學名, Device.ValueType.BackColor, _box.BackColor);
+
+                        _box.SetValue(Device.ValueName.藥品中文名稱, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                        _box.SetValue(Device.ValueName.藥品中文名稱, Device.ValueType.BackColor, _box.BackColor);
+
+                        _box.SetValue(Device.ValueName.包裝單位, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                        _box.SetValue(Device.ValueName.包裝單位, Device.ValueType.BackColor, _box.BackColor);
+
+                        _box.SetValue(Device.ValueName.效期, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                        _box.SetValue(Device.ValueName.效期, Device.ValueType.BackColor, _box.BackColor);
+
+                        _box.SetValue(Device.ValueName.庫存, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                        _box.SetValue(Device.ValueName.庫存, Device.ValueType.BackColor, _box.BackColor);
+
+                        SizeF size_Name = g.MeasureString(_box.Name, _box.Name_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
+                        size_Name = new SizeF((int)size_Name.Width, (int)size_Name.Height);
                         g.DrawString(_box.Name, _box.Name_font, new SolidBrush(_box.ForeColor), rect, StringFormat.GenericDefault);
+                        posy += size_Name.Height;
+                        posy += 3;
+
+                        if (_box.Validity_period_Visable)
+                        {
+                            for (int m = 0; m < _box.List_Validity_period.Count; m++)
+                            {
+                                if (_box.List_Inventory[m] == "00") continue;
+                                string str = $"{_box.List_Validity_period[m]} [{_box.List_Inventory[m]}]";
+                                _box.Validity_period_font = new Font(_box.Validity_period_font, FontStyle.Bold);
+                                SizeF size_Validity_period = TextRenderer.MeasureText(str, _box.Validity_period_font);
+                                g.DrawString(str, _box.Validity_period_font, new SolidBrush((Color)_box.GetValue(Box.ValueName.效期, Box.ValueType.ForeColor)), rect.X + 5, rect.Y + posy);
+                                Color color_pen = _box.IsWarning ? Color.Black : Color.Red;
+                                g.DrawRectangle(new Pen(new SolidBrush(color_pen), 1), rect.X + 5, rect.Y + posy, size_Validity_period.Width, size_Validity_period.Height);
+                                posy += size_Validity_period.Height;
+                            }
+                        }
 
                         SizeF size_Code = TextRenderer.MeasureText($"{_box.Code}[{_box.Inventory}]", _box.Code_font);
                         if (_box.Code.StringIsEmpty() == false) g.DrawString($"{_box.Code}[{_box.Inventory}]", _box.Code_font, new SolidBrush(Color.Black), rect.X, ((rect.Y + rect.Height) - size_Code.Height));
