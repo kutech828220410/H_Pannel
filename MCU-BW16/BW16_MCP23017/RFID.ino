@@ -172,6 +172,12 @@ String Get_7CardID(byte station)
         HEX_7.toUpperCase();
         HEX_7 = "00";
         RFID_Error = 0;
+        String CardID = HEX_0 + HEX_1 + HEX_2 + HEX_3 + HEX_4 + HEX_5 + HEX_6;
+        if(flag_udp_232back)
+        {
+           printf("station : %d , ID : " ,station);
+           mySerial.println(CardID);
+        }
         return HEX_0 + HEX_1 + HEX_2 + HEX_3 + HEX_4 + HEX_5 + HEX_6;
      }
      else

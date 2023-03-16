@@ -315,6 +315,13 @@ namespace H_Pannel_lib
             return null;
         }
     }
+
+    [Serializable]
+    public class DrawerBasic
+    {
+        private List<DeviceBasic[]> boxes = new List<DeviceBasic[]>();
+        public List<DeviceBasic[]> Boxes { get => boxes; set => boxes = value; }
+    }
     [Serializable]
     public class Drawer
     {

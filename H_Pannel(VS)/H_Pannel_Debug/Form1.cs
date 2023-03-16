@@ -77,15 +77,18 @@ namespace WT32_SC01
             this.drawerUI_EPD_583.sqL_DataGridView_DeviceTable.RowDoubleClickEvent += SqL_DataGridView_DeviceTable_EPD583_RowDoubleClickEvent;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.MouseDownEvent += RJ_Button_epD_583_Pannel_儲位亮燈_MouseDownEvent;
             this.rJ_Button_epD_583_Pannel_全部滅燈.MouseDownEvent += RJ_Button_epD_583_Pannel_全部滅燈_MouseDownEvent;
+            this.rJ_Button_epD_583_Pannel_TEST.MouseDownEvent += RJ_Button_epD_583_Pannel_TEST_MouseDownEvent;
+
 
             this.storageUI_EPD_266.sqL_DataGridView_DeviceTable.RowDoubleClickEvent += SqL_DataGridView_DeviceTable_RowDoubleClickEvent;
+            this.rJ_Button_EPD266_TEST.MouseDownEvent += RJ_Button_EPD266_TEST_MouseDownEvent;
 
             this.rJ_Button_RFID_初始化.MouseDownEvent += RJ_Button_RFID_初始化_MouseDownEvent;
 
             this.rJ_Button_H_RFID_初始化.MouseDownEvent += RJ_Button_H_RFID_初始化_MouseDownEvent;
         }
 
-    
+
 
         private void rJ_Button_WT32_初始化_Click(object sender, EventArgs e)
         {
@@ -189,12 +192,25 @@ namespace WT32_SC01
 
         private void pictureBox_2_66_Click(object sender, EventArgs e)
         {
+
         }
         private void rJ_Button_EPD_266_初始化_Click(object sender, EventArgs e)
         {
             this.storageUI_EPD_266.Init();
-            this.epD_266_Pannel.Init(this.storageUI_EPD_266.List_UDP_Local);
+            this.epD_266_Pannel.Init(this.storageUI_EPD_266.List_UDP_Local);        
         }
+        private void RJ_Button_EPD266_TEST_MouseDownEvent(MouseEventArgs mevent)
+        {
+            MyUI.MyTimer myTimer = new MyUI.MyTimer();
+            myTimer.StartTickTime(5000);
+            this.storageUI_EPD_266.SQL_GetAllDevice();
+            Console.WriteLine($"SQL_GetAllDevice ,耗時{myTimer.ToString()}ms");
+            this.storageUI_EPD_266.SQL_GetAllStorage();
+            Console.WriteLine($"SQL_GetAllStorage ,耗時{myTimer.ToString()}ms");
+            this.storageUI_EPD_266.SQL_GetAllDeviceBasic();
+            Console.WriteLine($"SQL_GetAllDeviceBasic ,耗時{myTimer.ToString()}ms");
+        }
+
         private void SqL_DataGridView_DeviceTable_RowDoubleClickEvent(object[] RowValue)
         {
             string IP = RowValue[(int)enum_DeviceTable.IP].ObjectToString();
@@ -230,6 +246,17 @@ namespace WT32_SC01
             Drawer drawer = this.drawerUI_EPD_583.SQL_GetDrawer(epD_583_Pannel_IP);
             if (drawer == null) return;
             this.epD_583_Pannel.DrawToPictureBox(drawer);
+        }
+        private void RJ_Button_epD_583_Pannel_TEST_MouseDownEvent(MouseEventArgs mevent)
+        {
+            MyUI.MyTimer myTimer = new MyUI.MyTimer();
+            myTimer.StartTickTime(5000);
+            this.drawerUI_EPD_583.SQL_GetAllDevice();
+            Console.WriteLine($"SQL_GetAllDevice ,耗時{myTimer.ToString()}");
+
+            this.drawerUI_EPD_583.SQL_GetAllDeviceBasic();
+            Console.WriteLine($"SQL_GetAllDeviceBasic ,耗時{myTimer.ToString()}");
+
         }
 
         private void rJ_Button_EPD_583_設定IP_Click(object sender, EventArgs e)

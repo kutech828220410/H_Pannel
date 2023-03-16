@@ -22,9 +22,11 @@
 #define SYSTEM_LED_PIN PA30
 #define PIN_485_Tx_Eanble PB3
 
-bool flag_udp_232back = true;
+bool flag_udp_232back = false;
 bool flag_JsonSend = false;
 bool flag_writeMode = false;
+
+bool flag_CardID_IsChanged = false;
 String CardID[5];
 String CardID_buf[5];
 
@@ -54,7 +56,7 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial_485(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.0.2";
+String Version = "Ver 1.0.3";
 
 void setup() 
 {
@@ -140,7 +142,19 @@ void Core0Task1( void * pvParameters )
           {
               MyLED_IS_Connented.BlinkTime = 500;
           }
-          
+          flag_CardID_IsChanged = false;
+          for(int i = 0 ; i < 5 ; i++)
+          {
+             if(CardID_buf[i] != CardID[i])
+             {
+                 CardID_buf[i] = CardID[i];
+                 flag_CardID_IsChanged = true;
+             }
+          }
+          if(flag_CardID_IsChanged) 
+          {
+            flag_JsonSend = true;
+          }
        }
           
        delay(10);

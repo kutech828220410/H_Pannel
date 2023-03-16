@@ -19,6 +19,24 @@ int RSSI_02 = 0;
 int RSSI_03 = 0;
 int RSSI_04 = 0;
 MyTimer MyTimer_RFID;
+
+void Set_RF_Power()
+{
+  //BB 00 B6 00 02 05 DC 99 7E  15 dbm
+  //BB 00 B6 00 02 03 E8 A3 7E  10 dbm
+   byte tx[9];
+   tx[0] = 0xBB;
+   tx[1] = 0x00;
+   tx[2] = 0xB6;
+   tx[3] = 0x00;
+   tx[4] = 0x02;
+   tx[5] = 0x03;
+   tx[6] = 0xE8;
+   tx[7] = 0xA3;
+   tx[8] = 0x7E;
+   mySerial_R200.write(tx , 9);
+   mySerial_R200.flush();
+}
 void Get_CardID()
 {
    int retry = 0;

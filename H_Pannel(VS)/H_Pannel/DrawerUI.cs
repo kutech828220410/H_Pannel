@@ -144,7 +144,32 @@ namespace H_Pannel_lib
             devices = drawers.GetAllDevice();
             return devices;
         }
+        public List<DeviceBasic> SQL_GetAllDeviceBasic()
+        {
+            List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
+            List<DrawerBasic> drawers = new List<DrawerBasic>();
+            List<object[]> list_value = this.SQL_GetAllDeviceTableRows();
+            Parallel.ForEach(list_value, value =>
+            {
+                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+                DrawerBasic drawer = jsonString.JsonDeserializet<DrawerBasic>();
+                if (drawer != null) drawers.LockAdd(drawer);
+                for (int i = 0; i < drawer.Boxes.Count; i++)
+                {
+                    for (int k = 0; k < drawer.Boxes[i].Length; k++)
+                    {
+                        deviceBasics.LockAdd(drawer.Boxes[i][k]);
+                    }
+                }
+            });
 
+            deviceBasics = (from value in deviceBasics
+                            where value != null
+                            select value).ToList();
+            return deviceBasics;
+            
+        }
+    
         protected override void Import()
         {
             if (this.openFileDialog_LoadExcel.ShowDialog() == DialogResult.OK)

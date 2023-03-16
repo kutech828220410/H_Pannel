@@ -15,7 +15,7 @@
 
 #define SYSTEM_LED_PIN PA30
 
-bool flag_udp_232back = false;
+bool flag_udp_232back = true;
 bool flag_JsonSend = false;
 bool flag_writeMode = false;
 
@@ -41,7 +41,7 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial_R200(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.0.1";
+String Version = "Ver 1.0.4";
 DFRobot_MCP23017 mcp(Wire, /*addr =*/0x20);//constructor, change the Level of A2, A1, A0 via DIP switch to revise the I2C address within 0x20~0x27.
 
 void setup() 
@@ -136,6 +136,7 @@ void Core0Task1( void * pvParameters )
     }
     
 }
+bool flag_Set_RF_Power = false;
 void Core0Task2( void * pvParameters )
 {
     for(;;)
@@ -143,7 +144,12 @@ void Core0Task2( void * pvParameters )
        
        if(flag_boradInit)
        {
-
+          if(!flag_Set_RF_Power)
+          {
+             //Set_RF_Power();
+             flag_Set_RF_Power = true;
+          }
+         
           Get_CardID();
        }
           

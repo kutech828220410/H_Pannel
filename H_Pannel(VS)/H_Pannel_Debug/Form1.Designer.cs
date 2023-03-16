@@ -108,6 +108,8 @@
             this.sqL_DataGridView_h_RFID_Datas = new SQLUI.SQL_DataGridView();
             this.rJ_Button_H_RFID_初始化 = new MyUI.RJ_Button();
             this.h_RFID_UI = new H_Pannel_lib.H_RFID_UI();
+            this.rJ_Button_EPD266_TEST = new MyUI.RJ_Button();
+            this.rJ_Button_epD_583_Pannel_TEST = new MyUI.RJ_Button();
             this.tabControl1.SuspendLayout();
             this.WT32.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -950,6 +952,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.rJ_Button_EPD266_TEST);
             this.tabPage1.Controls.Add(this.epD_266_Pannel);
             this.tabPage1.Controls.Add(this.rJ_Button_EPD_266_初始化);
             this.tabPage1.Controls.Add(this.storageUI_EPD_266);
@@ -1042,6 +1045,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.rJ_Button_epD_583_Pannel_TEST);
             this.tabPage5.Controls.Add(this.rJ_Button_epD_583_Pannel_全部滅燈);
             this.tabPage5.Controls.Add(this.rJ_Button_epD_583_Pannel_全部亮燈);
             this.tabPage5.Controls.Add(this.rJ_Button_epD_583_Pannel_面板滅燈);
@@ -1518,6 +1522,50 @@
             this.h_RFID_UI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("h_RFID_UI.UDP_ServerPorts")));
             this.h_RFID_UI.UserName = "root";
             // 
+            // rJ_Button_EPD266_TEST
+            // 
+            this.rJ_Button_EPD266_TEST.AutoResetState = false;
+            this.rJ_Button_EPD266_TEST.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_EPD266_TEST.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_EPD266_TEST.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_EPD266_TEST.BorderRadius = 5;
+            this.rJ_Button_EPD266_TEST.BorderSize = 0;
+            this.rJ_Button_EPD266_TEST.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_EPD266_TEST.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_EPD266_TEST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_EPD266_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_EPD266_TEST.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD266_TEST.Location = new System.Drawing.Point(1516, 161);
+            this.rJ_Button_EPD266_TEST.Name = "rJ_Button_EPD266_TEST";
+            this.rJ_Button_EPD266_TEST.Size = new System.Drawing.Size(126, 67);
+            this.rJ_Button_EPD266_TEST.State = false;
+            this.rJ_Button_EPD266_TEST.TabIndex = 37;
+            this.rJ_Button_EPD266_TEST.Text = "TEST";
+            this.rJ_Button_EPD266_TEST.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD266_TEST.UseVisualStyleBackColor = false;
+            // 
+            // rJ_Button_epD_583_Pannel_TEST
+            // 
+            this.rJ_Button_epD_583_Pannel_TEST.AutoResetState = false;
+            this.rJ_Button_epD_583_Pannel_TEST.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_epD_583_Pannel_TEST.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_epD_583_Pannel_TEST.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_epD_583_Pannel_TEST.BorderRadius = 5;
+            this.rJ_Button_epD_583_Pannel_TEST.BorderSize = 0;
+            this.rJ_Button_epD_583_Pannel_TEST.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_epD_583_Pannel_TEST.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_epD_583_Pannel_TEST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_epD_583_Pannel_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_epD_583_Pannel_TEST.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_TEST.Location = new System.Drawing.Point(1520, 3);
+            this.rJ_Button_epD_583_Pannel_TEST.Name = "rJ_Button_epD_583_Pannel_TEST";
+            this.rJ_Button_epD_583_Pannel_TEST.Size = new System.Drawing.Size(126, 67);
+            this.rJ_Button_epD_583_Pannel_TEST.State = false;
+            this.rJ_Button_epD_583_Pannel_TEST.TabIndex = 53;
+            this.rJ_Button_epD_583_Pannel_TEST.Text = "TEST";
+            this.rJ_Button_epD_583_Pannel_TEST.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_TEST.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1641,6 +1689,8 @@
         private H_Pannel_lib.H_RFID_UI h_RFID_UI;
         private MyUI.RJ_Button rJ_Button_H_RFID_初始化;
         private SQLUI.SQL_DataGridView sqL_DataGridView_h_RFID_Datas;
+        private MyUI.RJ_Button rJ_Button_EPD266_TEST;
+        private MyUI.RJ_Button rJ_Button_epD_583_Pannel_TEST;
     }
 }
 

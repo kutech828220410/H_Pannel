@@ -126,11 +126,35 @@ namespace H_Pannel_lib
         {
             List<Device> devices = new List<Device>();
             List<Storage> storages = this.SQL_GetAllStorage();
-            for(int i = 0; i < storages.Count; i++)
+            for (int i = 0; i < storages.Count; i++)
             {
                 devices.Add((Device)storages[i]);
             }
             return devices;
+        }
+        public List<DeviceBasic> SQL_GetAllDeviceBasic()
+        {
+            lock (this)
+            {
+                List<DeviceBasic> storages = new List<DeviceBasic>();
+                List<object[]> list_value = this.SQL_GetAllDeviceTableRows();
+
+                Parallel.ForEach(list_value, value =>
+                {
+                    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+                    DeviceBasic storage = jsonString.JsonDeserializet<DeviceBasic>();
+                    if (storage != null)
+                    {
+                        storage.確認效期庫存(true);
+                        storages.LockAdd(storage);
+                    }
+
+                });
+                storages = (from value in storages
+                            where value != null
+                            select value).ToList();
+                return storages;
+            }
         }
         public Storage SQL_GetStorage(Storage storage)
         {
