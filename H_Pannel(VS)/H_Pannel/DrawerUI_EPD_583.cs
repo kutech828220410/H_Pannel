@@ -113,6 +113,17 @@ namespace H_Pannel_lib
             }
             return LED_Bytes;
         }
+
+        static public byte[] Set_LEDBytes(Drawer drawer, Color color)
+        {
+            for (int i = 0; i < NumOfLED; i++)
+            {
+                drawer.LED_Bytes[i * 3 + 0] = color.R;
+                drawer.LED_Bytes[i * 3 + 1] = color.G;
+                drawer.LED_Bytes[i * 3 + 2] = color.B;
+            }
+            return drawer.LED_Bytes;
+        }
         static public byte[] Set_LEDBytes(Drawer drawer, List<Box> boxes, Color color)
         {
             byte[] led_bytes = drawer.LED_Bytes;
@@ -651,10 +662,8 @@ namespace H_Pannel_lib
         {
             畫面設置,
             IO設定,
-            設為大抽屜4X8,
-            設為小抽屜3X8,
-            設為有鎖控,
-            設為無鎖控,
+            參數設定,
+         
         }
         private enum ContextMenuStrip_DeviceTable_畫面設置
         {
@@ -668,6 +677,15 @@ namespace H_Pannel_lib
             清除燈號,
             IO測試,
         }
+        private enum ContextMenuStrip_DeviceTable_參數設定
+        {
+            設為大抽屜4X8,
+            設為小抽屜3X8,
+            設為有鎖控,
+            設為無鎖控,
+            設為隔板亮燈,
+            設為把手亮燈,
+        }
         private enum ContextMenuStrip_UDP_DataReceive_畫面設置
         {
             測試資訊,
@@ -680,7 +698,15 @@ namespace H_Pannel_lib
             清除燈號,
             IO測試,
         }
-
+        private enum ContextMenuStrip_UDP_DataReceive_參數設定
+        {
+            設為大抽屜4X8,
+            設為小抽屜3X8,
+            設為有鎖控,
+            設為無鎖控,
+            設為隔板亮燈,
+            設為把手亮燈,
+        }
         public DrawerUI_EPD_583()
         {
             this.TableName = "EPD583_Jsonstring";
@@ -1008,81 +1034,126 @@ namespace H_Pannel_lib
                 }
 
             }
-            else if (selectedText == ContextMenuStrip_Main.設為大抽屜4X8.GetEnumName())
+            else if (selectedText == ContextMenuStrip_Main.參數設定.GetEnumName())
             {
-                if (MyMessageBox.ShowDialog("確認將設為大抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
+                Dialog_ContextMenuStrip dialog_ContextMenuStrip = new Dialog_ContextMenuStrip(new ContextMenuStrip_UDP_DataReceive_參數設定().GetEnumNames());
+                if (dialog_ContextMenuStrip.ShowDialog() == DialogResult.Yes)
                 {
-                    List<Task> taskList = new List<Task>();
-                    for (int i = 0; i < iPEndPoints.Count; i++)
+                    if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_參數設定.設為大抽屜4X8.GetEnumName())
                     {
-                        string IP = iPEndPoints[i].Address.ToString();
-                        int Port = iPEndPoints[i].Port;
-                        Drawer drawer = this.SQL_GetDrawer(IP);
-                        if (drawer == null) continue;
-                        drawer.SetDrawerType(Drawer.Enum_DrawerType._4X8);
-                        taskList.Add(Task.Run(() =>
+                        if (MyMessageBox.ShowDialog("確認將設為大抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
                         {
-                            SQL_ReplaceDrawer(drawer);
-                        }));
+                            List<Task> taskList = new List<Task>();
+                            for (int i = 0; i < iPEndPoints.Count; i++)
+                            {
+                                string IP = iPEndPoints[i].Address.ToString();
+                                int Port = iPEndPoints[i].Port;
+                                Drawer drawer = this.SQL_GetDrawer(IP);
+                                if (drawer == null) continue;
+                                drawer.SetDrawerType(Drawer.Enum_DrawerType._4X8);
+                                taskList.Add(Task.Run(() =>
+                                {
+                                    SQL_ReplaceDrawer(drawer);
+                                }));
+                            }
+                            Task allTask = Task.WhenAll(taskList);
+                        }
                     }
-                    Task allTask = Task.WhenAll(taskList);
-                }
-            }
-            else if (selectedText == ContextMenuStrip_Main.設為小抽屜3X8.GetEnumName())
-            {
-                if (MyMessageBox.ShowDialog("確認將設為小抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
-                {
-                    List<Task> taskList = new List<Task>();
-                    for (int i = 0; i < iPEndPoints.Count; i++)
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_參數設定.設為小抽屜3X8.GetEnumName())
                     {
-                        string IP = iPEndPoints[i].Address.ToString();
-                        int Port = iPEndPoints[i].Port;
-                        Drawer drawer = this.SQL_GetDrawer(IP);
-                        if (drawer == null) continue;
-                        drawer.SetDrawerType(Drawer.Enum_DrawerType._3X8);
-                        taskList.Add(Task.Run(() =>
+                        if (MyMessageBox.ShowDialog("確認將設為小抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
                         {
-                            SQL_ReplaceDrawer(drawer);
-                        }));
+                            List<Task> taskList = new List<Task>();
+                            for (int i = 0; i < iPEndPoints.Count; i++)
+                            {
+                                string IP = iPEndPoints[i].Address.ToString();
+                                int Port = iPEndPoints[i].Port;
+                                Drawer drawer = this.SQL_GetDrawer(IP);
+                                if (drawer == null) continue;
+                                drawer.SetDrawerType(Drawer.Enum_DrawerType._3X8);
+                                taskList.Add(Task.Run(() =>
+                                {
+                                    SQL_ReplaceDrawer(drawer);
+                                }));
+                            }
+                            Task allTask = Task.WhenAll(taskList);
+                        }
                     }
-                    Task allTask = Task.WhenAll(taskList);
-                }
-            }
-            else if (selectedText == ContextMenuStrip_Main.設為有鎖控.GetEnumName())
-            {
-                List<Task> taskList = new List<Task>();
-                for (int i = 0; i < iPEndPoints.Count; i++)
-                {
-                    string IP = iPEndPoints[i].Address.ToString();
-                    int Port = iPEndPoints[i].Port;
-                    Drawer drawer = this.SQL_GetDrawer(IP);
-                    if (drawer == null) continue;
-                    drawer.SetDeviceType(DeviceType.EPD583_lock);
-                    taskList.Add(Task.Run(() =>
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_參數設定.設為有鎖控.GetEnumName())
                     {
-                        SQL_ReplaceDrawer(drawer);
-                    }));
-                }
-                Task allTask = Task.WhenAll(taskList);
-                this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
-            }
-            else if (selectedText == ContextMenuStrip_Main.設為無鎖控.GetEnumName())
-            {
-                List<Task> taskList = new List<Task>();
-                for (int i = 0; i < iPEndPoints.Count; i++)
-                {
-                    string IP = iPEndPoints[i].Address.ToString();
-                    int Port = iPEndPoints[i].Port;
-                    Drawer drawer = this.SQL_GetDrawer(IP);
-                    if (drawer == null) continue;
-                    drawer.SetDeviceType(DeviceType.EPD583);
-                    taskList.Add(Task.Run(() =>
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Drawer drawer = this.SQL_GetDrawer(IP);
+                            if (drawer == null) continue;
+                            drawer.SetDeviceType(DeviceType.EPD583_lock);
+                            taskList.Add(Task.Run(() =>
+                            {
+                                SQL_ReplaceDrawer(drawer);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                        this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                    }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_參數設定.設為無鎖控.GetEnumName())
                     {
-                        SQL_ReplaceDrawer(drawer);
-                    }));
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Drawer drawer = this.SQL_GetDrawer(IP);
+                            if (drawer == null) continue;
+                            drawer.SetDeviceType(DeviceType.EPD583);
+                            taskList.Add(Task.Run(() =>
+                            {
+                                SQL_ReplaceDrawer(drawer);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                        this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                    }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_參數設定.設為隔板亮燈.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Drawer drawer = this.SQL_GetDrawer(IP);
+                            if (drawer == null) continue;
+                            drawer.IsAllLight = true;
+                            taskList.Add(Task.Run(() =>
+                            {
+                                SQL_ReplaceDrawer(drawer);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                        this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                    }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_參數設定.設為把手亮燈.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Drawer drawer = this.SQL_GetDrawer(IP);
+                            if (drawer == null) continue;
+                            drawer.IsAllLight = false;
+                            taskList.Add(Task.Run(() =>
+                            {
+                                SQL_ReplaceDrawer(drawer);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                        this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                    }
+
+
                 }
-                Task allTask = Task.WhenAll(taskList);
-                this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
             }
         }
         private void DrawerUI_EPD_583_DeviceTableMouseDownRightEvent(string selectedText, List<System.Net.IPEndPoint> iPEndPoints)
@@ -1107,9 +1178,9 @@ namespace H_Pannel_lib
                             }));
                         }
                         Task allTask = Task.WhenAll(taskList);
-               
+
                     }
-                    else if(dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_畫面設置.測試資訊.GetEnumName())
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_畫面設置.測試資訊.GetEnumName())
                     {
                         List<Task> taskList = new List<Task>();
                         for (int i = 0; i < iPEndPoints.Count; i++)
@@ -1125,7 +1196,7 @@ namespace H_Pannel_lib
                             }));
                         }
                         Task allTask = Task.WhenAll(taskList);
-                     
+
                     }
 
                 }
@@ -1160,7 +1231,7 @@ namespace H_Pannel_lib
                         string IP = list_value[0][(int)enum_DeviceTable.IP].ObjectToString();
                         int Port = list_value[0][(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
                         UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-                        if (uDP_Class == null) return;                       
+                        if (uDP_Class == null) return;
                         Dialog_IO測試 Dialog_IO測試 = new Dialog_IO測試(uDP_Class, IP, list_UDP_Rx);
                         Dialog_IO測試.ShowDialog();
                     }
@@ -1196,86 +1267,132 @@ namespace H_Pannel_lib
                         }
                         Task allTask = Task.WhenAll(taskList);
                     }
-                   
+
                 }
 
             }
-            else if (selectedText == ContextMenuStrip_Main.設為大抽屜4X8.GetEnumName())
+            else if (selectedText == ContextMenuStrip_Main.參數設定.GetEnumName())
             {
-                if (MyMessageBox.ShowDialog("確認將設為大抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
+                Dialog_ContextMenuStrip dialog_ContextMenuStrip = new Dialog_ContextMenuStrip(new ContextMenuStrip_DeviceTable_參數設定().GetEnumNames());
+                if (dialog_ContextMenuStrip.ShowDialog() == DialogResult.Yes)
                 {
-                    List<Task> taskList = new List<Task>();
-                    for (int i = 0; i < iPEndPoints.Count; i++)
+                    if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為大抽屜4X8.GetEnumName())
                     {
-                        string IP = iPEndPoints[i].Address.ToString();
-                        int Port = iPEndPoints[i].Port;
-                        Drawer drawer = this.SQL_GetDrawer(IP);
-                        if (drawer == null) continue;
-                        drawer.SetDrawerType(Drawer.Enum_DrawerType._4X8);
-                        taskList.Add(Task.Run(() =>
+                        if (MyMessageBox.ShowDialog("確認將設為大抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
                         {
-                            SQL_ReplaceDrawer(drawer);
-                        }));
+                            List<Task> taskList = new List<Task>();
+                            for (int i = 0; i < iPEndPoints.Count; i++)
+                            {
+                                string IP = iPEndPoints[i].Address.ToString();
+                                int Port = iPEndPoints[i].Port;
+                                Drawer drawer = this.SQL_GetDrawer(IP);
+                                if (drawer == null) continue;
+                                drawer.SetDrawerType(Drawer.Enum_DrawerType._4X8);
+                                taskList.Add(Task.Run(() =>
+                                {
+                                    SQL_ReplaceDrawer(drawer);
+                                }));
+                            }
+                            Task allTask = Task.WhenAll(taskList);
+                        }
                     }
-                    Task allTask = Task.WhenAll(taskList);
-                }
-            }
-            else if (selectedText == ContextMenuStrip_Main.設為小抽屜3X8.GetEnumName())
-            {
-                if (MyMessageBox.ShowDialog("確認將設為小抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
-                {
-                    List<Task> taskList = new List<Task>();
-                    for (int i = 0; i < iPEndPoints.Count; i++)
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為小抽屜3X8.GetEnumName())
                     {
-                        string IP = iPEndPoints[i].Address.ToString();
-                        int Port = iPEndPoints[i].Port;
-                        Drawer drawer = this.SQL_GetDrawer(IP);
-                        if (drawer == null) continue;
-                        drawer.SetDrawerType(Drawer.Enum_DrawerType._3X8);
-                        taskList.Add(Task.Run(() =>
+                        if (MyMessageBox.ShowDialog("確認將設為小抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
                         {
-                            SQL_ReplaceDrawer(drawer);
-                        }));
+                            List<Task> taskList = new List<Task>();
+                            for (int i = 0; i < iPEndPoints.Count; i++)
+                            {
+                                string IP = iPEndPoints[i].Address.ToString();
+                                int Port = iPEndPoints[i].Port;
+                                Drawer drawer = this.SQL_GetDrawer(IP);
+                                if (drawer == null) continue;
+                                drawer.SetDrawerType(Drawer.Enum_DrawerType._3X8);
+                                taskList.Add(Task.Run(() =>
+                                {
+                                    SQL_ReplaceDrawer(drawer);
+                                }));
+                            }
+                            Task allTask = Task.WhenAll(taskList);
+                        }
                     }
-                    Task allTask = Task.WhenAll(taskList);
-                }
-            }
-            else if (selectedText == ContextMenuStrip_Main.設為有鎖控.GetEnumName())
-            {
-                List<Task> taskList = new List<Task>();
-                for (int i = 0; i < iPEndPoints.Count; i++)
-                {
-                    string IP = iPEndPoints[i].Address.ToString();
-                    int Port = iPEndPoints[i].Port;
-                    Drawer drawer = this.SQL_GetDrawer(IP);
-                    if (drawer == null) continue;
-                    drawer.SetDeviceType(DeviceType.EPD583_lock);
-                    taskList.Add(Task.Run(() =>
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為有鎖控.GetEnumName())
                     {
-                        SQL_ReplaceDrawer(drawer);
-                    }));
-                }
-                Task allTask = Task.WhenAll(taskList);
-                this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
-            }
-            else if (selectedText == ContextMenuStrip_Main.設為無鎖控.GetEnumName())
-            {
-                List<Task> taskList = new List<Task>();
-                for (int i = 0; i < iPEndPoints.Count; i++)
-                {
-                    string IP = iPEndPoints[i].Address.ToString();
-                    int Port = iPEndPoints[i].Port;
-                    Drawer drawer = this.SQL_GetDrawer(IP);
-                    if (drawer == null) continue;
-                    drawer.SetDeviceType(DeviceType.EPD583);
-                    taskList.Add(Task.Run(() =>
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Drawer drawer = this.SQL_GetDrawer(IP);
+                            if (drawer == null) continue;
+                            drawer.SetDeviceType(DeviceType.EPD583_lock);
+                            taskList.Add(Task.Run(() =>
+                            {
+                                SQL_ReplaceDrawer(drawer);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                        this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                    }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為無鎖控.GetEnumName())
                     {
-                        SQL_ReplaceDrawer(drawer);
-                    }));
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Drawer drawer = this.SQL_GetDrawer(IP);
+                            if (drawer == null) continue;
+                            drawer.SetDeviceType(DeviceType.EPD583);
+                            taskList.Add(Task.Run(() =>
+                            {
+                                SQL_ReplaceDrawer(drawer);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                        this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                    }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為隔板亮燈.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Drawer drawer = this.SQL_GetDrawer(IP);
+                            if (drawer == null) continue;
+                            drawer.IsAllLight = true;
+                            taskList.Add(Task.Run(() =>
+                            {
+                                SQL_ReplaceDrawer(drawer);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                        this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                    }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為把手亮燈.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Drawer drawer = this.SQL_GetDrawer(IP);
+                            if (drawer == null) continue;
+                            drawer.IsAllLight = false;
+                            taskList.Add(Task.Run(() =>
+                            {
+                                SQL_ReplaceDrawer(drawer);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                        this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                    }
+
+                 
                 }
-                Task allTask = Task.WhenAll(taskList);
-                this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
             }
+            
         }
 
     }
