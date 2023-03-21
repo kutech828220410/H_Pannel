@@ -86,6 +86,8 @@ namespace WT32_SC01
             this.rJ_Button_RFID_初始化.MouseDownEvent += RJ_Button_RFID_初始化_MouseDownEvent;
 
             this.rJ_Button_H_RFID_初始化.MouseDownEvent += RJ_Button_H_RFID_初始化_MouseDownEvent;
+
+            MyUI.數字鍵盤.音效 = false;
         }
 
 

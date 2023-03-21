@@ -147,6 +147,12 @@
     <Compile Include="Dialog\Dialog_LED_Setting.Designer.cs">
       <DependentUpon>Dialog_LED_Setting.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\Dialog_燈數設定.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Dialog_燈數設定.Designer.cs">
+      <DependentUpon>Dialog_燈數設定.cs</DependentUpon>
+    </Compile>
     <Compile Include="DrawerUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -241,6 +247,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dialog\Dialog_LED_Setting.resx">
       <DependentUpon>Dialog_LED_Setting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Dialog_燈數設定.resx">
+      <DependentUpon>Dialog_燈數設定.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RFID_UI.resx">
       <DependentUpon>RFID_UI.cs</DependentUpon>

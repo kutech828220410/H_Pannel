@@ -27,7 +27,7 @@ namespace H_Pannel_lib
     public partial class RowsLEDUI : DeviceBasicUI
     {
         #region 靜態參數
-        static public int NumOfLED = 100;
+        static public int NumOfLED = 250;
         static public byte[] Get_Empty_LEDBytes()
         {
             return new byte[NumOfLED * 3];
@@ -109,6 +109,7 @@ namespace H_Pannel_lib
         private enum ContextMenuStrip_Main
         {
             設定亮燈,
+            設定燈數,
         }
 
         public RowsLEDUI()
@@ -430,6 +431,18 @@ namespace H_Pannel_lib
 
                 Dialog_RowsLED dialog_RowsLED = new Dialog_RowsLED(list_UDP_Class, list_IP, colorDialog.Color);
                 dialog_RowsLED.ShowDialog();
+            }
+            if (selectedText == ContextMenuStrip_Main.設定燈數.GetEnumName())
+            {
+                if (iPEndPoints.Count == 0) return;
+                string IP = iPEndPoints[0].Address.ToString();
+                RowsLED rowsLED = this.SQL_GetRowsLED(IP);
+                if (rowsLED == null) return;
+                Dialog_NumPannel dialog_NumPannel = new Dialog_NumPannel("請輸入[燈數]", rowsLED.Maximum);
+                dialog_NumPannel.ShowDialog();
+                if (dialog_NumPannel.Value < 50) dialog_NumPannel.Value = 50;
+                rowsLED.Maximum = dialog_NumPannel.Value;
+                this.SQL_ReplaceRowsLED(rowsLED);
             }
         }
         #endregion

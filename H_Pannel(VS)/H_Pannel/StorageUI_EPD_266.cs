@@ -54,7 +54,6 @@ namespace H_Pannel_lib
             {
                 return this.myConvert.Int32GetBit(Output, index);
             }
-
         }
 
         #region 靜態參數
