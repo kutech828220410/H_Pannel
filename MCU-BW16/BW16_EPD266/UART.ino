@@ -98,6 +98,22 @@ void serialEvent()
         mySerial.print(str);
         mySerial.flush();
       }
+      else if (UART0_RX[1] == 'L')
+      {
+        String str = "Set Loker sucess :";
+        if(UART0_RX[2] >= 1)
+        {
+           str += "1"; 
+           wiFiConfig.Set_IsLocker(true);
+        }
+        else
+        {
+           str += "0"; 
+           wiFiConfig.Set_IsLocker(false);
+        }
+        mySerial.print(str);
+        mySerial.flush();
+      }
       else if (UART0_RX[1] == '1' && UART0_len == 5)
       {
         flag_writeMode = true;

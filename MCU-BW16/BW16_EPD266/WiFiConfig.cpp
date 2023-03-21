@@ -31,6 +31,7 @@ void WiFiConfig::Init(String Version)
     String MacAdress = "MacAdress :" + HEX_0 + ":"+ HEX_1 + ":"+ HEX_2 + ":"+ HEX_3 + ":"+ HEX_4 + ":"+ HEX_5;   
     String PC_Restart = "PC Restart :" +   String(this -> Get_PC_Restart());
     String IsUpdate = "PC IsUpdate :" +   String(this -> Get_IsUpdate());
+    String IsLocker = "IsLocker :" +   String(this -> Get_IsLocker());
     
     mySerial -> println(ipAdress);
     mySerial -> println(_Localport);
@@ -44,6 +45,7 @@ void WiFiConfig::Init(String Version)
     mySerial -> println(MacAdress);  
     mySerial -> println(PC_Restart);   
     mySerial -> println(IsUpdate); 
+    mySerial -> println(IsLocker); 
 
     //this -> WIFI_Connenct();
 
@@ -57,7 +59,6 @@ void WiFiConfig::WIFI_Disconnenct()
 void WiFiConfig::WIFI_Connenct()
 {
     WiFi.disablePowerSave();
-//    WiFi.disconnect();
    
     byte* ipAdress_ptr = this -> Get_IPAdress();
     byte* gateway_ptr = this -> Get_Gateway();
@@ -220,6 +221,18 @@ void WiFiConfig::Set_IsUpdate(bool state)
     }    
     EEPROM.commit();
 }
+void WiFiConfig::Set_IsLocker(bool state)
+{
+    if(state)
+    {
+      EEPROM.write(this -> IsLocker_ADDR , 1);
+    }
+    else
+    {
+      EEPROM.write(this -> IsLocker_ADDR , 0);
+    }    
+    EEPROM.commit();
+}
 void WiFiConfig::Set_UDP_SemdTime(int ms)
 {
     byte L = ms;
@@ -324,6 +337,11 @@ byte WiFiConfig::Get_IsUpdate()
 {
     byte flag = EEPROM.read(this -> IsUpdate_ADDR);    
     return flag;
+}
+bool WiFiConfig::Get_IsLocker()
+{
+    byte flag = EEPROM.read(this -> IsLocker_ADDR);    
+    return (flag >= 1);
 }
 int WiFiConfig::Get_UDP_SemdTime()
 {

@@ -17,7 +17,7 @@
 #include <HTTPClient.h>
 #include <HTTPUpdate.h>
 
-String Version = "Ver 1.5.0";
+String Version = "Ver 1.5.3";
 
 #define SYSTEM_LED_PIN 2
 #define NUM_WS2812B_CRGB 100             // LED灯珠数量
@@ -73,8 +73,10 @@ void setup()
     MyLED_IS_Connented.Init(SYSTEM_LED_PIN);
   
     wiFiConfig.Init(Version);
-    Localport = wiFiConfig.Get_Localport();
-    Serverport = wiFiConfig.Get_Serverport();
+    wiFiConfig.Set_Localport(29000);
+    wiFiConfig.Set_Serverport(30000);
+    Localport = 29000;
+    Serverport = 30000;
     ServerIp = wiFiConfig.Get_Server_IPAdressClass();
     UDP_SemdTime = wiFiConfig.Get_UDP_SemdTime();
     GetwayStr = wiFiConfig.Get_Gateway_Str();

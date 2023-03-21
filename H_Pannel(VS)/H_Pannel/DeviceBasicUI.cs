@@ -463,6 +463,8 @@ namespace H_Pannel_lib
             this.rJ_Button_Station_Write.Click += RJ_Button_Station_Write_Click;
             this.rJ_Button_Read.Click += RJ_Button_Read_Click;
             this.rJ_Button_Write.Click += RJ_Button_Write_Click;
+            this.rJ_Button_Lock_On.MouseDownEvent += RJ_Button_Lock_On_MouseDownEvent;
+            this.rJ_Button_Lock_Off.MouseDownEvent += RJ_Button_Lock_Off_MouseDownEvent;
 
             mySerialPort.Init(this.textBox_COM.Text, 115200, 8, Parity.None, StopBits.One, false);
 
@@ -482,6 +484,9 @@ namespace H_Pannel_lib
 
 
         }
+    
+
+      
 
         virtual public bool Set_ESP32_Restart(string IP, int Port)
         {
@@ -792,6 +797,24 @@ namespace H_Pannel_lib
             {
                 MyMessageBox.ShowDialog("站號修改失敗!");
             }
+        }
+        private void RJ_Button_Lock_On_MouseDownEvent(MouseEventArgs mevent)
+        {
+            string result = "";
+            Communication.UART_Command_Set_Locker(mySerialPort, true, out result);
+            this.Invoke(new Action(delegate
+            {
+                MyMessageBox.ShowDialog($"{result}");
+            }));
+        }
+        private void RJ_Button_Lock_Off_MouseDownEvent(MouseEventArgs mevent)
+        {
+            string result = "";
+            Communication.UART_Command_Set_Locker(mySerialPort, false, out result);
+            this.Invoke(new Action(delegate
+            {
+                MyMessageBox.ShowDialog($"{result}");
+            }));
         }
         private void FormClosing(object sender, FormClosingEventArgs e)
         {

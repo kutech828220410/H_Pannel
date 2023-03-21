@@ -52,24 +52,11 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.2.0";
+String Version = "Ver 1.2.1";
 
 void setup() 
 {
-
-    
-    
-//    mySerial.print("Dynamic memory size: ");
-//    mySerial.println(os_get_free_heap_size_arduino());
-//    mySerial.println();
-    
-   
-
-    
-    MyTimer_BoardInit.StartTickTime(1000);
-        
-    
-
+    MyTimer_BoardInit.StartTickTime(1000);          
 }
 bool flag_pb2 = true;
 void loop() 
@@ -115,11 +102,7 @@ void loop()
            myWS2812.Show();
            flag_WS2812B_Refresh = false;
       }  
-   }
-   
-   
-      
-    
+   }    
 }
 
 void Core0Task1( void * pvParameters )

@@ -61,7 +61,7 @@ void IO_Init()
     Set_Output_dir(Output_dir);
 
     
-    MyOutput_PIN01.Init(OUTPUT_PIN01);
+    MyOutput_PIN01.Init(INPUT_PIN01,OUTPUT_PIN01);
     MyOutput_PIN02.Init(OUTPUT_PIN02);
     MyOutput_PIN03.Init(OUTPUT_PIN03);
     MyOutput_PIN04.Init(OUTPUT_PIN04);
@@ -143,16 +143,16 @@ void sub_IO_Program()
 
 void Output_Blink()
 {
-    MyOutput_PIN01.Blink(500);
-    MyOutput_PIN02.Blink(500);
-    MyOutput_PIN03.Blink(500);
-    MyOutput_PIN04.Blink(500);
-    MyOutput_PIN05.Blink(500);
-    MyOutput_PIN06.Blink(500);
-    MyOutput_PIN07.Blink(500);
-    MyOutput_PIN08.Blink(500);
-    MyOutput_PIN09.Blink(500);
-    MyOutput_PIN10.Blink(500);
+    MyOutput_PIN01.Blink(2000);
+    MyOutput_PIN02.Blink(2000);
+    MyOutput_PIN03.Blink(2000);
+    MyOutput_PIN04.Blink(2000);
+    MyOutput_PIN05.Blink(2000);
+    MyOutput_PIN06.Blink(2000);
+    MyOutput_PIN07.Blink(2000);
+    MyOutput_PIN08.Blink(2000);
+    MyOutput_PIN09.Blink(2000);
+    MyOutput_PIN10.Blink(2000);
 }
 void Set_Input_dir(byte pin_num , bool value)
 {

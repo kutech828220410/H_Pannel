@@ -20,6 +20,13 @@ void MyOutput::Init(int PIN_Num , bool flag_toogle)
    if(PIN_Num != -1)pinMode(PIN_Num, OUTPUT);
    if(PIN_Num != -1)digitalWrite(PIN_Num, this -> GetLogic(false));
 }
+void MyOutput::Init(int PIN_Num_I,int PIN_Num_O)
+{
+   this -> PIN_NUM_INPUT = PIN_Num_I ;
+   this -> PIN_NUM = PIN_Num_O ;
+   if(PIN_Num_O != -1)pinMode(PIN_Num_O, OUTPUT);
+   if(PIN_Num_O != -1)digitalWrite(PIN_Num_O, this -> GetLogic(false));
+}
 void MyOutput::Set_State(bool ON_OFF)
 {
     State = ON_OFF;
@@ -44,6 +51,7 @@ bool MyOutput::GetLogic(bool value)
 void MyOutput::Blink()
 {
   int PIN = this -> PIN_NUM;
+
   if( (this -> cnt) == 254)
   {
     State = false;
@@ -83,11 +91,26 @@ void MyOutput::Blink()
     State = true;
     if(PIN != -1)digitalWrite(PIN, this -> GetLogic(true));
     if(Output_ON != nullptr) Output_ON();
-    printf("Output ON PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
+    //Serial.printf("Output ON PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
     myTimer.StartTickTime(this -> OnDelayTime);
     (this -> cnt) = (this -> cnt) + 1 ;
   }
   if( (this -> cnt) == 3)
+  {    
+    if(PIN_NUM_INPUT == -1)
+    {
+       (this -> cnt) = (this -> cnt) + 1 ;
+    }
+    else
+    {
+       if(digitalRead(PIN_NUM_INPUT))
+       {
+           myTimer.StartTickTime(this -> OnDelayTime);
+          (this -> cnt) = (this -> cnt) + 1 ;
+       }
+    }
+  }
+  if( (this -> cnt) == 4)
   {
     if(myTimer.IsTimeOut())
     {
@@ -95,11 +118,11 @@ void MyOutput::Blink()
       if(PIN != -1)digitalWrite(PIN, this -> GetLogic(false));
       if(Output_OFF != nullptr) Output_OFF();
       myTimer.StartTickTime(this -> OnDelayTime);
-      printf("Output OFF PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
+      //Serial.printf("Output OFF PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
       (this -> cnt) = (this -> cnt) + 1 ;
     }
   }
-  if( (this -> cnt) == 4)
+  if( (this -> cnt) == 5)
   {
     if(myTimer.IsTimeOut())
     {      

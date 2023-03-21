@@ -35,6 +35,7 @@ class WiFiConfig
    void Set_Station(int station);
    void Set_PC_Restart(bool state);
    void Set_IsUpdate(bool state);
+   void Set_IsLocker(bool state);
    void Set_UDP_SemdTime(int ms);
    void Set_Input_dir(int value);
    void Set_Output_dir(int value);
@@ -53,6 +54,7 @@ class WiFiConfig
    int Get_Station();
    byte Get_PC_Restart();
    byte Get_IsUpdate();
+   bool Get_IsLocker();
    int Get_UDP_SemdTime();
    int Get_Input_dir();
    int Get_Output_dir();
@@ -90,6 +92,7 @@ class WiFiConfig
    const int UDP_SemdTime_ADDR[2] = {29 ,30}; 
    const int Input_dir_ADDR[2] = {32 ,33}; 
    const int Output_dir_ADDR[2] = {34 ,35};   
+   const int IsLocker_ADDR = 36;
    const int SSID_ADDR = 40;
    const int SSID_SIZE = 20;
    const int Password_ADDR = 60;

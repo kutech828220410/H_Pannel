@@ -58,6 +58,7 @@ namespace H_Pannel_lib
                     return rFIDClasses;
                 }
             }
+            rFIDClasses.Add(rFIDClass);
             return rFIDClasses;
 
         }

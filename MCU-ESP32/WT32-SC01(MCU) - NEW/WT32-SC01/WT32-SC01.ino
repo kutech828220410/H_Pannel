@@ -1,5 +1,5 @@
 // include the necessary libraries
-String Version = "Ver 1.2.1";
+String Version = "Ver 1.2.2";
 
 #include "FT62XXTouchScreen.h"
 #include "Fonts.h"

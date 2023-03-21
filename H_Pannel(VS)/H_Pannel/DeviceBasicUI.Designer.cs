@@ -120,6 +120,8 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_DeviceTable = new SQLUI.SQL_DataGridView();
             this.openFileDialog_LoadExcel = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog_SaveExcel = new System.Windows.Forms.SaveFileDialog();
+            this.rJ_Button_Lock_On = new MyUI.RJ_Button();
+            this.rJ_Button_Lock_Off = new MyUI.RJ_Button();
             this.panel23.SuspendLayout();
             this.rJ_GroupBox1.ContentsPanel.SuspendLayout();
             this.rJ_GroupBox1.SuspendLayout();
@@ -175,6 +177,7 @@ namespace H_Pannel_lib
             this.rJ_GroupBox1.ContentsPanel.Controls.Add(this.sqL_DataGridView_UDP_DataReceive);
             this.rJ_GroupBox1.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rJ_GroupBox1.ContentsPanel.ForeColor = System.Drawing.Color.White;
+            this.rJ_GroupBox1.ContentsPanel.IsSelected = false;
             this.rJ_GroupBox1.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox1.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox1.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
@@ -262,12 +265,15 @@ namespace H_Pannel_lib
             this.rJ_GroupBox2.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox2.ContentsPanel.BorderRadius = 5;
             this.rJ_GroupBox2.ContentsPanel.BorderSize = 2;
+            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Button_Lock_Off);
+            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Button_Lock_On);
             this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Button_Write);
             this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Button_Read);
             this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.groupBox1);
             this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.panel2);
             this.rJ_GroupBox2.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rJ_GroupBox2.ContentsPanel.ForeColor = System.Drawing.Color.Black;
+            this.rJ_GroupBox2.ContentsPanel.IsSelected = false;
             this.rJ_GroupBox2.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox2.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox2.ContentsPanel.Padding = new System.Windows.Forms.Padding(3);
@@ -1078,6 +1084,7 @@ namespace H_Pannel_lib
             this.rJ_GroupBox4.ContentsPanel.Controls.Add(this.sqL_DataGridView_PING);
             this.rJ_GroupBox4.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rJ_GroupBox4.ContentsPanel.ForeColor = System.Drawing.Color.White;
+            this.rJ_GroupBox4.ContentsPanel.IsSelected = false;
             this.rJ_GroupBox4.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox4.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox4.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
@@ -1163,6 +1170,7 @@ namespace H_Pannel_lib
             this.rJ_GroupBox3.ContentsPanel.Controls.Add(this.sqL_DataGridView_DeviceTable);
             this.rJ_GroupBox3.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rJ_GroupBox3.ContentsPanel.ForeColor = System.Drawing.Color.White;
+            this.rJ_GroupBox3.ContentsPanel.IsSelected = false;
             this.rJ_GroupBox3.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox3.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox3.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
@@ -1248,6 +1256,50 @@ namespace H_Pannel_lib
             // 
             this.saveFileDialog_SaveExcel.DefaultExt = "txt";
             this.saveFileDialog_SaveExcel.Filter = "txt File (*.txt)|*.txt;";
+            // 
+            // rJ_Button_Lock_On
+            // 
+            this.rJ_Button_Lock_On.AutoResetState = false;
+            this.rJ_Button_Lock_On.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Lock_On.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Lock_On.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_Lock_On.BorderRadius = 5;
+            this.rJ_Button_Lock_On.BorderSize = 0;
+            this.rJ_Button_Lock_On.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Lock_On.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_Lock_On.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_Lock_On.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_Lock_On.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Lock_On.Location = new System.Drawing.Point(284, 397);
+            this.rJ_Button_Lock_On.Name = "rJ_Button_Lock_On";
+            this.rJ_Button_Lock_On.Size = new System.Drawing.Size(90, 42);
+            this.rJ_Button_Lock_On.State = false;
+            this.rJ_Button_Lock_On.TabIndex = 34;
+            this.rJ_Button_Lock_On.Text = "Lock On";
+            this.rJ_Button_Lock_On.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Lock_On.UseVisualStyleBackColor = false;
+            // 
+            // rJ_Button_Lock_Off
+            // 
+            this.rJ_Button_Lock_Off.AutoResetState = false;
+            this.rJ_Button_Lock_Off.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Lock_Off.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Lock_Off.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_Lock_Off.BorderRadius = 5;
+            this.rJ_Button_Lock_Off.BorderSize = 0;
+            this.rJ_Button_Lock_Off.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Lock_Off.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_Lock_Off.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_Lock_Off.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_Lock_Off.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Lock_Off.Location = new System.Drawing.Point(188, 397);
+            this.rJ_Button_Lock_Off.Name = "rJ_Button_Lock_Off";
+            this.rJ_Button_Lock_Off.Size = new System.Drawing.Size(90, 42);
+            this.rJ_Button_Lock_Off.State = false;
+            this.rJ_Button_Lock_Off.TabIndex = 35;
+            this.rJ_Button_Lock_Off.Text = "Lock Off";
+            this.rJ_Button_Lock_Off.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Lock_Off.UseVisualStyleBackColor = false;
             // 
             // DeviceBasicUI
             // 
@@ -1398,5 +1450,7 @@ namespace H_Pannel_lib
         protected System.Windows.Forms.SaveFileDialog saveFileDialog_SaveExcel;
         public SQLUI.SQL_DataGridView sqL_DataGridView_DeviceTable;
         public SQLUI.SQL_DataGridView sqL_DataGridView_UDP_DataReceive;
+        private MyUI.RJ_Button rJ_Button_Lock_Off;
+        private MyUI.RJ_Button rJ_Button_Lock_On;
     }
 }

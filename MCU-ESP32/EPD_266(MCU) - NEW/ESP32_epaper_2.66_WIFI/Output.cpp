@@ -20,6 +20,13 @@ void MyOutput::Init(int PIN_Num , bool flag_toogle)
    if(PIN_Num != -1)pinMode(PIN_Num, OUTPUT);
    if(PIN_Num != -1)digitalWrite(PIN_Num, this -> GetLogic(false));
 }
+void MyOutput::Init(int PIN_Num_I,int PIN_Num_O)
+{
+   this -> PIN_NUM_INPUT = PIN_Num_I ;
+   this -> PIN_NUM = PIN_Num_O ;
+   if(PIN_Num_O != -1)pinMode(PIN_Num_O, OUTPUT);
+   if(PIN_Num_O != -1)digitalWrite(PIN_Num_O, this -> GetLogic(false));
+}
 void MyOutput::Set_State(bool ON_OFF)
 {
     State = ON_OFF;
@@ -89,6 +96,21 @@ void MyOutput::Blink()
     (this -> cnt) = (this -> cnt) + 1 ;
   }
   if( (this -> cnt) == 3)
+  {    
+    if(PIN_NUM_INPUT == -1)
+    {
+       (this -> cnt) = (this -> cnt) + 1 ;
+    }
+    else
+    {
+       if(digitalRead(PIN_NUM_INPUT))
+       {
+           myTimer.StartTickTime(this -> OnDelayTime);
+          (this -> cnt) = (this -> cnt) + 1 ;
+       }
+    }
+  }
+  if( (this -> cnt) == 4)
   {
     if(myTimer.IsTimeOut())
     {
@@ -100,7 +122,7 @@ void MyOutput::Blink()
       (this -> cnt) = (this -> cnt) + 1 ;
     }
   }
-  if( (this -> cnt) == 4)
+  if( (this -> cnt) == 5)
   {
     if(myTimer.IsTimeOut())
     {      

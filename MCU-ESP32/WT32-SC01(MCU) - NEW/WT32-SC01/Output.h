@@ -11,6 +11,7 @@ class MyOutput
    bool BlinkEnable = false;
    void Init(int PIN_Num);
    void Init(int PIN_Num , bool flag_toogle);
+   void Init(int PIN_Num_I,int PIN_Num_O);
    void Set_toggle(bool value);
    void Set_State(bool ON_OFF);
    void Blink(int Time);
@@ -25,6 +26,7 @@ class MyOutput
    bool state = false;
    bool GetLogic(bool value);
    int PIN_NUM = -1;
+   int PIN_NUM_INPUT = -1;
    int cnt = 254;
    MyTimer myTimer;
 };

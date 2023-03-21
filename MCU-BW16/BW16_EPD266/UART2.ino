@@ -10,7 +10,12 @@ void serial2Event()
 {
   if(!flag_UART1_Init)
   {
-     mySerial2.begin(9600); 
+     if(!wiFiConfig.Get_IsLocker())
+     {
+        mySerial.println("mySerial2 init done!!");
+        mySerial2.begin(9600);         
+     }
+     
      flag_UART1_Init = true;
   }
   

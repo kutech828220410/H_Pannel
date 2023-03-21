@@ -22,11 +22,14 @@ namespace H_Pannel_lib
         private string inputAdress = "";
         private string master_GUID = "";
 
+        private bool tOFON = false;
+
         public byte[] LED_Bytes = new byte[450 * 3];
 
         public string OutputAdress { get => outputAdress; set => outputAdress = value; }
         public string InputAdress { get => inputAdress; set => inputAdress = value; }
         public string Master_GUID { get => master_GUID; set => master_GUID = value; }
+        public bool TOFON { get => tOFON; set => tOFON = value; }
 
         public Storage(int station)
         {

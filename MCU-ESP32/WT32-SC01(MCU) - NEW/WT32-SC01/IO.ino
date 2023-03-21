@@ -67,7 +67,7 @@ void IO_Init()
        LED_Output[i] = wiFiConfig.Get_LED_OutputPIN(i);
     }
     
-    MyOutput_PIN01.Init(OUTPUT_PIN01);
+    MyOutput_PIN01.Init(INPUT_PIN01,OUTPUT_PIN01);
     MyOutput_PIN02.Init(OUTPUT_PIN02);
     MyOutput_PIN03.Init(OUTPUT_PIN03);
     MyOutput_PIN04.Init(OUTPUT_PIN04);
