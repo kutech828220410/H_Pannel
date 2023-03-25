@@ -38,11 +38,18 @@ void MyWS2812::Show()
     }      
     SPI.transfer(rgbBytesBuffer , numOfLed * 24 + offset * 24);
     SPI.endTransaction();
-    delay(100);
+    delay(10);
     digitalWrite(this -> PIN_CS , LOW);
 }
 
-
+bool MyWS2812::IsAllClear()
+{
+   for(int i = 0 ; i < numOfLed * 24 ; i++)
+   {
+     if((rgbBuffer[i]) != 0) return false;
+   }
+   return true;
+}
 
 void MyWS2812::RGBConvert2812Bytes(int lednum ,byte R, byte G, byte B)
 {

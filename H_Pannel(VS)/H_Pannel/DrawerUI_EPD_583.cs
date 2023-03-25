@@ -288,6 +288,10 @@ namespace H_Pannel_lib
         static public bool Set_LED_Clear_UDP(UDP_Class uDP_Class, string IP)
         {
             byte[] LED_Bytes = Get_Empty_LEDBytes();
+            if(!Set_LED_UDP(uDP_Class, IP, LED_Bytes))
+            {
+                return false;
+            }
             return Set_LED_UDP(uDP_Class, IP, LED_Bytes);
         }
 
