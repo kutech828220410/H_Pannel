@@ -444,7 +444,7 @@ namespace H_Pannel_lib
                                 _box.Validity_period_font = new Font(_box.Validity_period_font, FontStyle.Bold);
                                 SizeF size_Validity_period = TextRenderer.MeasureText(str, _box.Validity_period_font);
                                 g.DrawString(str, _box.Validity_period_font, new SolidBrush((Color)_box.GetValue(Box.ValueName.效期, Box.ValueType.ForeColor)), rect.X + 5, rect.Y + posy);
-                                Color color_pen = _box.IsWarning ? Color.Black : Color.Red;
+                                Color color_pen = _box.IsWarning ? Color.White : Color.Red;
                                 g.DrawRectangle(new Pen(new SolidBrush(color_pen), 1), rect.X + 5, rect.Y + posy, size_Validity_period.Width, size_Validity_period.Height);
                                 posy += size_Validity_period.Height;
                             }
@@ -851,6 +851,10 @@ namespace H_Pannel_lib
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
             return Set_LockOpen(uDP_Class, IP);
         }
+        public bool GetInput(Drawer drawer)
+        {
+            return GetInput(drawer.IP);
+        }
         public bool GetInput(string IP)
         {
             string jsonString = GetUDPJsonString(IP);
@@ -859,6 +863,73 @@ namespace H_Pannel_lib
             if(uDP_READ == null) return false;
             return ((uDP_READ.Input % 2) == 1);
         }
+        public bool GetOutput(Drawer drawer)
+        {
+            return this.GetOutput(drawer.IP);
+        }
+        public bool GetOutput(string IP)
+        {
+            string jsonString = GetUDPJsonString(IP);
+            if (jsonString.StringIsEmpty()) return false;
+            UDP_READ uDP_READ = jsonString.JsonDeserializet<UDP_READ>();
+            if (uDP_READ == null) return false;
+            return uDP_READ.Get_Output(0);
+        }
+        public void SetOutput(Drawer drawer, bool value)
+        {
+            SetOutput(drawer.IP, drawer.Port, value);
+        }
+        public void SetOutput(string IP, int Port, bool value)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+            if (uDP_Class == null) return;
+            Communication.Set_OutputPIN(uDP_Class, IP, 1, value);
+        }
+        public void SetInput_dir(Drawer drawer, bool value)
+        {
+            SetInput_dir(drawer.IP, drawer.Port, value);
+        }
+        public void SetInput_dir(string IP, int Port, bool value)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+            if (uDP_Class == null) return;
+            Communication.Set_Input_dir(uDP_Class, IP, 1, value);
+        }
+        public bool GetInput_dir(Drawer drawer)
+        {
+            return GetInput_dir(drawer.IP);
+        }
+        public bool GetInput_dir(string IP)
+        {
+            string jsonString = GetUDPJsonString(IP);
+            if (jsonString.StringIsEmpty()) return false;
+            UDP_READ uDP_READ = jsonString.JsonDeserializet<UDP_READ>();
+            if (uDP_READ == null) return false;
+            return uDP_READ.Get_Input_dir(0);
+        }
+        public void SetOutput_dir(Drawer drawer, bool value)
+        {
+            SetOutput_dir(drawer.IP, drawer.Port, value);
+        }
+        public void SetOutput_dir(string IP, int Port, bool value)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+            if (uDP_Class == null) return;
+            Communication.Set_Output_dir(uDP_Class, IP, 1, value);
+        }
+        public bool GetOutput_dir(Drawer drawer)
+        {
+            return GetOutput_dir(drawer.IP);
+        }
+        public bool GetOutput_dir(string IP)
+        {
+            string jsonString = GetUDPJsonString(IP);
+            if (jsonString.StringIsEmpty()) return false;
+            UDP_READ uDP_READ = jsonString.JsonDeserializet<UDP_READ>();
+            if (uDP_READ == null) return false;
+            return uDP_READ.Get_Output_dir(0);
+        }
+
         public bool Set_OutputPINTrigger(string IP, int Port, int PIN_Num, bool value)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);

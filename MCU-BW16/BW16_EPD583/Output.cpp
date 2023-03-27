@@ -103,7 +103,7 @@ void MyOutput::Blink()
     }
     else
     {
-       if(digitalRead(PIN_NUM_INPUT))
+       if(digitalRead(PIN_NUM_INPUT) || flag_toogle)
        {
            myTimer.StartTickTime(this -> OnDelayTime);
           (this -> cnt) = (this -> cnt) + 1 ;

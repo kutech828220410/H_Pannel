@@ -435,14 +435,31 @@ namespace H_Pannel_lib
             if (selectedText == ContextMenuStrip_Main.設定燈數.GetEnumName())
             {
                 if (iPEndPoints.Count == 0) return;
-                string IP = iPEndPoints[0].Address.ToString();
-                RowsLED rowsLED = this.SQL_GetRowsLED(IP);
-                if (rowsLED == null) return;
-                Dialog_NumPannel dialog_NumPannel = new Dialog_NumPannel("請輸入[燈數]", rowsLED.Maximum);
-                dialog_NumPannel.ShowDialog();
+
+                Dialog_NumPannel dialog_NumPannel = new Dialog_NumPannel("請輸入[燈數]");
+                if (dialog_NumPannel.ShowDialog() != DialogResult.Yes) return;
                 if (dialog_NumPannel.Value < 50) dialog_NumPannel.Value = 50;
-                rowsLED.Maximum = dialog_NumPannel.Value;
-                this.SQL_ReplaceRowsLED(rowsLED);
+              
+                List<Task> taskList = new List<Task>();
+                List<RowsLED> rowsLEDs = new List<RowsLED>();
+                for (int i = 0; i < iPEndPoints.Count; i++)
+                {
+                    int value = dialog_NumPannel.Value;
+                    string IP = iPEndPoints[i].Address.ToString();
+                    int Port = iPEndPoints[i].Port;
+                    taskList.Add(Task.Run(() =>
+                    {
+                        RowsLED rowsLED = this.SQL_GetRowsLED(IP);
+                        if (rowsLED != null)
+                        {
+                            rowsLED.Maximum = value;
+                            rowsLEDs.LockAdd(rowsLED);
+                        }                   
+                    }));
+                }
+                Task allTask = Task.WhenAll(taskList);
+                allTask.Wait();
+                this.SQL_ReplaceRowsLED(rowsLEDs);
             }
         }
         #endregion

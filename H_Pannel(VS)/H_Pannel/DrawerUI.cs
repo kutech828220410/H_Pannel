@@ -84,11 +84,9 @@ namespace H_Pannel_lib
     
         public string SQL_GetDrawerJsonString(string IP)
         {
-            List<object[]> list_value = this.SQL_GetAllDeviceTableRows();
-            List<object[]> list_value_buf = new List<object[]>();
-            list_value_buf = list_value.GetRows((int)enum_DeviceTable.IP, IP);
-            if (list_value_buf.Count == 0) return null;
-            return list_value_buf[0][(int)enum_DeviceTable.Value].ObjectToString();
+            List<object[]> list_value = this.SQL_GetDeviceTableRows(IP);
+            if (list_value.Count == 0) return null;
+            return list_value[0][(int)enum_DeviceTable.Value].ObjectToString();
         }
         public Drawer SQL_GetDrawer(Box box)
         {

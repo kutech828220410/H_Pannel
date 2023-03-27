@@ -484,9 +484,8 @@ namespace H_Pannel_lib
 
 
         }
-    
 
-      
+    
 
         virtual public bool Set_ESP32_Restart(string IP, int Port)
         {
@@ -609,7 +608,11 @@ namespace H_Pannel_lib
             }
             return list_IP;
         }
-
+        public List<object[]> SQL_GetDeviceTableRows(string IP)
+        {
+            List<object[]> list_value = this.sqL_DataGridView_DeviceTable.SQL_GetRows((int)enum_DeviceTable.IP, IP, false);
+            return list_value;
+        }
         public List<object[]> SQL_GetAllDeviceTableRows()
         {
             List<object[]> list_value = this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(false);
@@ -781,6 +784,7 @@ namespace H_Pannel_lib
                 MyMessageBox.ShowDialog("Receive data failed!");
             }
         }
+     
         private void RJ_Button_Station_Write_Click(object sender, EventArgs e)
         {
             int station = this.textBox_Station.Text.StringToInt32();
@@ -798,23 +802,18 @@ namespace H_Pannel_lib
                 MyMessageBox.ShowDialog("站號修改失敗!");
             }
         }
+
         private void RJ_Button_Lock_On_MouseDownEvent(MouseEventArgs mevent)
         {
             string result = "";
             Communication.UART_Command_Set_Locker(mySerialPort, true, out result);
-            this.Invoke(new Action(delegate
-            {
-                MyMessageBox.ShowDialog($"{result}");
-            }));
+            MyMessageBox.ShowDialog($"{result}");
         }
         private void RJ_Button_Lock_Off_MouseDownEvent(MouseEventArgs mevent)
         {
             string result = "";
             Communication.UART_Command_Set_Locker(mySerialPort, false, out result);
-            this.Invoke(new Action(delegate
-            {
-                MyMessageBox.ShowDialog($"{result}");
-            }));
+            MyMessageBox.ShowDialog($"{result}");
         }
         private void FormClosing(object sender, FormClosingEventArgs e)
         {

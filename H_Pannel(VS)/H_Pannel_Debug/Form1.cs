@@ -64,6 +64,7 @@ namespace WT32_SC01
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            MyMessageBox.form = this.FindForm();
             this.MyThread_Program = new Basic.MyThread();
             this.MyThread_Program.SetSleepTime(10);
             this.MyThread_Program.AutoRun(true);
