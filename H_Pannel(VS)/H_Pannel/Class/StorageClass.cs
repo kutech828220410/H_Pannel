@@ -73,7 +73,6 @@ namespace H_Pannel_lib
                         select value).ToList();
             return storages;
         }
-
         static public List<Storage> SQL_GetAllStorage(List<object[]> deviceTables)
         {
             List<Storage> storages = new List<Storage>();
@@ -93,6 +92,27 @@ namespace H_Pannel_lib
                         select value).ToList();
             return storages;
         }
+        public static List<DeviceBasic> GetAllDeviceBasic(List<object[]> deviceTables)
+        {
+            List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
+            List<object[]> list_value = deviceTables;
+            Parallel.ForEach(list_value, value =>
+            {
+                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+                DeviceBasic deviceBasic = jsonString.JsonDeserializet<DeviceBasic>();
+                if (deviceBasic != null)
+                {
+                    deviceBasic.確認效期庫存(true);
+                    deviceBasics.LockAdd(deviceBasic);
+                }
+
+            });
+            deviceBasics = (from value in deviceBasics
+                            where value != null
+                        select value).ToList();
+            return deviceBasics;
+        }
+
 
         static public List<Storage> Add_NewStorage(this List<Storage> Storages, string IP, int Port)
         {

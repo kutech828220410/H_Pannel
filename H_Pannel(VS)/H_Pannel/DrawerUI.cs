@@ -145,13 +145,11 @@ namespace H_Pannel_lib
         public List<DeviceBasic> SQL_GetAllDeviceBasic()
         {
             List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
-            List<DrawerBasic> drawers = new List<DrawerBasic>();
             List<object[]> list_value = this.SQL_GetAllDeviceTableRows();
             Parallel.ForEach(list_value, value =>
             {
                 string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
                 DrawerBasic drawer = jsonString.JsonDeserializet<DrawerBasic>();
-                if (drawer != null) drawers.LockAdd(drawer);
                 for (int i = 0; i < drawer.Boxes.Count; i++)
                 {
                     for (int k = 0; k < drawer.Boxes[i].Length; k++)

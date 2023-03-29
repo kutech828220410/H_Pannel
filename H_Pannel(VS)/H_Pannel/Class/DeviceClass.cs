@@ -166,6 +166,7 @@ namespace H_Pannel_lib
         }
 
    
+    
     }
     [Serializable]
     public class DeviceBasicClass
@@ -235,6 +236,12 @@ namespace H_Pannel_lib
         private DeviceType deviceType = DeviceType.None;
         private string _Code = "";
         public string Code { get => _Code; set => _Code = value; }
+        private string _Name = "";
+        public string Name { get => _Name; set => _Name = value; }
+        private string _Package = "";
+        public string Package { get => _Package; set => _Package = value; }
+
+
         private string _StorageName = "";
         public string StorageName { get => _StorageName; set => _StorageName = value; }
         private string _IP = "";
@@ -277,7 +284,6 @@ namespace H_Pannel_lib
             }
             set => list_Lot_number = value;
         }
-
 
 
         protected List<string> list_Validity_period = new List<string>();

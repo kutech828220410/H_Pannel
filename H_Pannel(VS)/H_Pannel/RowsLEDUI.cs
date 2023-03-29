@@ -334,6 +334,27 @@ namespace H_Pannel_lib
             devices = devices.GetAllDevice();
             return devices;
         }
+        public List<DeviceBasic> SQL_GetAllDeviceBasic()
+        {
+            List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
+            List<RowsLEDBasic> rowsLEDs = new List<RowsLEDBasic>();
+            List<object[]> list_value = this.SQL_GetAllDeviceTableRows();
+            Parallel.ForEach(list_value, value =>
+            {
+                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+                RowsLEDBasic rowsLEDBasic = jsonString.JsonDeserializet<RowsLEDBasic>();
+                for (int i = 0; i < rowsLEDBasic.RowsDevices.Count; i++)
+                {
+                    deviceBasics.LockAdd(rowsLEDBasic.RowsDevices[i]);
+                }
+            });
+
+            deviceBasics = (from value in deviceBasics
+                            where value != null
+                            select value).ToList();
+            return deviceBasics;
+
+        }
         public RowsLED SQL_GetRowsLED(RowsLED RowsLED)
         {
             return SQL_GetRowsLED(RowsLED.IP);

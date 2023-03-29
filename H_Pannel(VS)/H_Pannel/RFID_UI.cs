@@ -902,6 +902,28 @@ namespace H_Pannel_lib
                         select value).ToList();
             return rFIDClasses;
         }
+        public List<DeviceBasic> SQL_GetAllDeviceBasic()
+        {
+            List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
+            List<RFIDClassBasic> rFIDClassBasics = new List<RFIDClassBasic>();
+            List<object[]> list_value = this.SQL_GetAllDeviceTableRows();
+            Parallel.ForEach(list_value, value =>
+            {
+                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+                RFIDClassBasic rFIDClassBasic = jsonString.JsonDeserializet<RFIDClassBasic>();
+                for (int i = 0; i < rFIDClassBasic.RFIDDevices.Count; i++)
+                {
+                    deviceBasics.LockAdd(rFIDClassBasic.RFIDDevices[i]);
+                }
+            });
+
+            deviceBasics = (from value in deviceBasics
+                            where value != null
+                            select value).ToList();
+            return deviceBasics;
+
+        }
+
         public RFIDClass SQL_GetRFIDClass(RFIDClass rFIDClass)
         {
             return SQL_GetRFIDClass(rFIDClass.IP);

@@ -171,6 +171,10 @@ namespace H_Pannel_lib
 
         static public byte[] Set_Pannel_LEDBytes(Drawer drawer, Color color)
         {
+            if (drawer.IsAllLight == false)
+            {
+                return Set_LEDBytes(drawer, color);
+            }
             return Set_Pannel_LEDBytes(ref drawer.LED_Bytes, color);
         }
         static public byte[] Set_Pannel_LEDBytes(ref byte[] LED_Bytes, Color color)
@@ -288,11 +292,19 @@ namespace H_Pannel_lib
         static public bool Set_LED_Clear_UDP(UDP_Class uDP_Class, string IP)
         {
             byte[] LED_Bytes = Get_Empty_LEDBytes();
-            if(!Set_LED_UDP(uDP_Class, IP, LED_Bytes))
+            int cnt = 0;
+            while(true)
             {
-                return false;
+                if (cnt > 3) break;
+                if (!Set_LED_UDP(uDP_Class, IP, LED_Bytes))
+                {
+                    return false;
+                }
+                cnt++;
             }
-            return Set_LED_UDP(uDP_Class, IP, LED_Bytes);
+           
+           
+            return true;
         }
 
         static public bool DrawToEpd_UDP(UDP_Class uDP_Class, Drawer drawer)
@@ -469,7 +481,6 @@ namespace H_Pannel_lib
 
         }
         
-
         #endregion
         #region LED_Line
 

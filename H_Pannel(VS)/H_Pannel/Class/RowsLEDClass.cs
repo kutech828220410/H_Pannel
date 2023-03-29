@@ -35,7 +35,25 @@ namespace H_Pannel_lib
             return RowsLEDs;
         }
 
+        public static List<DeviceBasic> GetAllDeviceBasic(List<object[]> deviceTables)
+        {
+            List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
+            List<object[]> list_value = deviceTables;
+            Parallel.ForEach(list_value, value =>
+            {
+                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+                RowsLEDBasic rowsLEDBasic = jsonString.JsonDeserializet<RowsLEDBasic>();
+                for (int i = 0; i < rowsLEDBasic.RowsDevices.Count; i++)
+                {
+                    deviceBasics.LockAdd(rowsLEDBasic.RowsDevices[i]);
+                }
+            });
 
+            deviceBasics = (from value in deviceBasics
+                            where value != null
+                            select value).ToList();
+            return deviceBasics;
+        }
         static public List<RowsLED> Add_NewRowsLED(this List<RowsLED> rowsLEDs, RowsDevice rowsDevice)
         {
             if (rowsDevice == null) return rowsLEDs;
@@ -207,6 +225,12 @@ namespace H_Pannel_lib
 
             return devices;
         }
+    }
+    [Serializable]
+    public class RowsLEDBasic
+    {
+        private List<DeviceBasic> rowsDevices = new List<DeviceBasic>();
+        public List<DeviceBasic> RowsDevices { get => rowsDevices; set => rowsDevices = value; }
     }
     [Serializable]
     public class RowsLED

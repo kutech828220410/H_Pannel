@@ -34,6 +34,28 @@ namespace H_Pannel_lib
                        select value).ToList();
             return drawers;
         }
+        public static List<DeviceBasic> GetAllDeviceBasic(List<object[]> deviceTables)
+        {
+            List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
+            List<object[]> list_value = deviceTables;
+            Parallel.ForEach(list_value, value =>
+            {
+                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+                DrawerBasic drawer = jsonString.JsonDeserializet<DrawerBasic>();
+                for (int i = 0; i < drawer.Boxes.Count; i++)
+                {
+                    for (int k = 0; k < drawer.Boxes[i].Length; k++)
+                    {
+                        deviceBasics.LockAdd(drawer.Boxes[i][k]);
+                    }
+                }
+            });
+
+            deviceBasics = (from value in deviceBasics
+                            where value != null
+                            select value).ToList();
+            return deviceBasics;
+        }
 
         static public List<Drawer> Add_NewDrawer(this List<Drawer> Drawers, string IP, int Port)
         {

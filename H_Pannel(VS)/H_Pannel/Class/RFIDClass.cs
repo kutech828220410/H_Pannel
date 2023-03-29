@@ -33,6 +33,26 @@ namespace H_Pannel_lib
                            select value).ToList();
             return rFIDClasses;
         }
+        public static List<DeviceBasic> GetAllDeviceBasic(List<object[]> deviceTables)
+        {
+            List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
+            List<object[]> list_value = deviceTables;
+            Parallel.ForEach(list_value, value =>
+            {
+                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+                RFIDClassBasic rFIDClassBasic = jsonString.JsonDeserializet<RFIDClassBasic>();
+                for (int i = 0; i < rFIDClassBasic.RFIDDevices.Count; i++)
+                {
+                    deviceBasics.LockAdd(rFIDClassBasic.RFIDDevices[i]);
+                }
+            });
+
+            deviceBasics = (from value in deviceBasics
+                            where value != null
+                            select value).ToList();
+            return deviceBasics;
+        }
+
 
         static public List<RFIDClass> Add_NewRFIDClass(this List<RFIDClass> rFIDClasses, RFIDDevice rFIDDevice)
         {
@@ -237,6 +257,12 @@ namespace H_Pannel_lib
             List<Device> devices = rFIDClasses.GetAllRFIDDevices();
             return devices;
         }
+    }
+    public class RFIDClassBasic
+    {
+        private List<DeviceBasic> rFIDDevices = new List<DeviceBasic>();
+
+        public List<DeviceBasic> RFIDDevices { get => rFIDDevices; set => rFIDDevices = value; }
     }
     [Serializable]
     public class RFIDClass
