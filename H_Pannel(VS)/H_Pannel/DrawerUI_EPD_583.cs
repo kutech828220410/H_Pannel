@@ -307,6 +307,7 @@ namespace H_Pannel_lib
             return true;
         }
 
+
         static public bool DrawToEpd_UDP(UDP_Class uDP_Class, Drawer drawer)
         {
             using (Bitmap bitmap = Get_Drawer_bmp(drawer))
@@ -314,11 +315,20 @@ namespace H_Pannel_lib
                 return DrawToEpd_UDP(uDP_Class, drawer.IP, bitmap);
             }
         }
- 
+        static public bool DrawToEpd_BarCode_UDP(UDP_Class uDP_Class, Drawer drawer)
+        {
+            using (Bitmap bitmap = Get_Drawer_Barcode_bmp(drawer))
+            {
+                return DrawToEpd_UDP(uDP_Class, drawer.IP, bitmap);
+            }
+        }
         static public bool DrawToEpd_UDP(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
             return Communication.EPD_583_DrawImage(uDP_Class, IP, bmp);
         }
+
+
+
         static public byte[] Get_Drawer_LEDBytes_UDP(UDP_Class uDP_Class, string IP)
         {
             byte[] LED_Bytes = new byte[NumOfLED * 3];
@@ -396,6 +406,49 @@ namespace H_Pannel_lib
             return rectangle;
 
 
+        }
+        static public Bitmap Get_Drawer_Barcode_bmp(Drawer drawer)
+        {
+            Bitmap bitmap = new Bitmap(DrawerUI_EPD_583.Pannel_Width, DrawerUI_EPD_583.Pannel_Height);
+            Graphics g = Graphics.FromImage(bitmap);
+            List<Box[]> Boxes = drawer.Boxes;
+            for (int i = 0; i < Boxes.Count; i++)
+            {
+                for (int k = 0; k < Boxes[i].Length; k++)
+                {
+                    if (Boxes[i][k].Slave == false)
+                    {
+                        Box _box = Boxes[i][k];
+                        Rectangle rect = Get_Box_Combine(drawer, _box);
+
+                        g.FillRectangle(new SolidBrush(_box.BackColor), rect);
+                        g.DrawRectangle(new Pen(Color.Black, _box.Pen_Width), rect);
+
+                        g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        g.CompositingQuality = CompositingQuality.HighQuality;
+                        g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+
+                        if (_box.Code.StringIsEmpty() == true) _box.Code = "None";
+                        SizeF size_Code = TextRenderer.MeasureText($"{_box.Code}", new Font("微軟正黑體", 9));
+                        g.DrawString($"{_box.Code}", new Font("微軟正黑體", 9), new SolidBrush(Color.Black), ((rect.Width - size_Code.Width) / 2) + rect.X, (rect.Y + 3));
+
+                        Bitmap bitmap_barcode = Communication.CreateBarCode(_box.BarCode, 150, 40);
+                        g.DrawImage(bitmap_barcode, ((rect.Width - 150) / 2) + rect.X, (rect.Height - 40) + rect.Y);
+                        bitmap_barcode.Dispose();
+                    }
+                      
+                }
+            }
+            string[] ip_array = drawer.IP.Split('.');
+            if (ip_array.Length == 4)
+            {
+                string ip = ip_array[2] + "." + ip_array[3];
+                SizeF size_IP = TextRenderer.MeasureText(ip, new Font("微軟正黑體", 10, FontStyle.Bold));
+                g.DrawString(ip, new Font("微軟正黑體", 8, FontStyle.Bold), new SolidBrush(Color.Black), (DrawerUI_EPD_583.Pannel_Width - size_IP.Width), (DrawerUI_EPD_583.Pannel_Height - size_IP.Height));
+            }
+            g.Dispose();
+            return bitmap;
         }
         static public Bitmap Get_Drawer_bmp(Drawer drawer)
         {

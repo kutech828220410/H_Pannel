@@ -327,6 +327,10 @@ namespace H_Pannel_lib
         {
             return DrawerUI_EPD_583.Get_Drawer_bmp(drawer);
         }
+        virtual public Bitmap Get_Drawer_Barcode_bmp(Drawer drawer)
+        {
+            return DrawerUI_EPD_583.Get_Drawer_Barcode_bmp(drawer);
+        }
         async private void PictureBox_Paint(object sender, PaintEventArgs e)
         {
             Task task = Task.Factory.StartNew(new Action(delegate
@@ -339,6 +343,20 @@ namespace H_Pannel_lib
         public void DrawToPictureBox()
         {
             this.DrawToPictureBox(this.CurrentDrawer);
+        }
+
+        public void DrawBarCodeToPictureBox(Drawer drawer)
+        {
+            if (drawer == null) return;
+            this.CurrentDrawer = drawer;
+            using (Bitmap bitmap = this.Get_Drawer_Barcode_bmp(drawer))
+            {
+                using (Graphics g = pictureBox.CreateGraphics())
+                {
+                    g.DrawImage(bitmap, new PointF());
+                }
+            }
+
         }
         public void DrawToPictureBox(Drawer drawer)
         {
