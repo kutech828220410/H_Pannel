@@ -109,7 +109,7 @@ void EPD::Sleep_Check()
 {
    if(this -> SetToSleep)
    {     
-       this -> MyTimer_SleepWaitTime.StartTickTime(10000);
+       this -> MyTimer_SleepWaitTime.StartTickTime(30000);
        if(this -> MyTimer_SleepWaitTime.IsTimeOut())
        {
          if(this -> SetToSleep)

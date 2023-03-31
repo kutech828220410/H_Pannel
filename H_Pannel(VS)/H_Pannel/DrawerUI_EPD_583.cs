@@ -896,6 +896,12 @@ namespace H_Pannel_lib
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
             return Set_LED_Clear_UDP(uDP_Class, IP);
         }
+        public bool DrawToEpd_BarCode_UDP(Drawer drawer)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
+            return DrawToEpd_BarCode_UDP(uDP_Class, drawer);
+        }
+     
         public bool DrawToEpd_UDP(Drawer drawer)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
