@@ -6,6 +6,10 @@
 #define Zero 0b11100000
 #define One 0b11111000
 
+//#define Zero 0b11111000
+//#define One 0b11100000
+
+
 #define WS2812_BITNUM 24
 #define WS2812_CS PB3
 class MyWS2812
@@ -18,7 +22,7 @@ class MyWS2812
     byte* GetRGB();
     void Show();
     int numOfLed = 0;
-    double brightness = 100;
+    double brightness = 80;
     bool IsAllClear();
    private:  
     

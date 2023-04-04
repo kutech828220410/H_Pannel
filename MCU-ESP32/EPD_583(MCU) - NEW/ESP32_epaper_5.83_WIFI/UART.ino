@@ -58,6 +58,12 @@ void serialEvent()
         Serial.print(str);
         Serial.flush();
       }
+       else if (UART0_RX[1] == 'v')
+      {
+        String str = Version;
+        Serial.print(str);
+        Serial.flush();
+      }
       else if (UART0_RX[1] == '1' && UART0_len == 5)
       {
         int station = UART0_RX[2] | (UART0_RX[3] << 8);

@@ -171,6 +171,15 @@
     <Compile Include="RowsLEDUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="StorageUI_EPD_290.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewUI\EPD_290_Pannel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewUI\EPD_290_Pannel.Designer.cs">
+      <DependentUpon>EPD_290_Pannel.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewUI\Pannel35_Pannel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -259,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StorageUI_WT32.resx">
       <DependentUpon>StorageUI_WT32.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewUI\EPD_290_Pannel.resx">
+      <DependentUpon>EPD_290_Pannel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewUI\EPD_266_Pannel.resx">
       <DependentUpon>EPD_266_Pannel.cs</DependentUpon>

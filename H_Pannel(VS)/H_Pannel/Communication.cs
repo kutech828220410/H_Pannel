@@ -22,6 +22,12 @@ namespace H_Pannel_lib
         ESP32,
         BW16,
     }
+    public enum EPD_Type
+    {
+        EPD266_B,
+        EPD583,
+        EPD290_V3
+    }
     public class Communication
     {
         static public bool ConsoleWrite = false;
@@ -456,7 +462,7 @@ namespace H_Pannel_lib
             int height = bmp.Height;
             byte[] bytes_BW = new byte[81 * height];
             byte[] bytes_RW = new byte[81 * height];
-            BitmapToByte(bmp, ref bytes_BW, ref bytes_RW);
+            BitmapToByte(bmp, ref bytes_BW, ref bytes_RW , EPD_Type.EPD583);
             MyTimer myTimer = new MyTimer();
             myTimer.StartTickTime(50000);
             flag_OK = EPD_DrawImage(uDP_Class, IP, bytes_BW, bytes_RW, 81 * height / EPD583_frameDIV);
@@ -483,7 +489,7 @@ namespace H_Pannel_lib
                 _bmp.RotateFlip(RotateFlipType.Rotate90FlipXY);
                 byte[] bytes_BW = new byte[(height / 8) * width];
                 byte[] bytes_RW = new byte[(height / 8) * width];
-                BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW);
+                BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD266_B);
                 MyTimer myTimer = new MyTimer();
                 myTimer.StartTickTime(50000);
                 flag_OK =  EPD_DrawImage(uDP_Class, IP, bytes_BW, bytes_RW, (height / 8) * width / EPD266_frameDIV);
@@ -492,6 +498,34 @@ namespace H_Pannel_lib
             }
     
 
+        }
+        static public bool EPD_290_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
+        {
+            using (Bitmap _bmp = bmp.DeepClone())
+            {
+                int EPD290_frameDIV = 0;
+                if (Chip_Type == ChipType.ESP32)
+                {
+                    EPD290_frameDIV = 1;
+                }
+                if (Chip_Type == ChipType.BW16)
+                {
+                    EPD290_frameDIV = 1;
+                }
+
+                bool flag_OK;
+                int width = bmp.Width;
+                int height = bmp.Height;
+                _bmp.RotateFlip(RotateFlipType.Rotate90FlipXY);
+                byte[] bytes_BW = new byte[(height / 8) * width];
+                byte[] bytes_RW = new byte[(height / 8) * width];
+                BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD290_V3);
+                MyTimer myTimer = new MyTimer();
+                myTimer.StartTickTime(50000);
+                flag_OK = EPD_DrawImage(uDP_Class, IP, bytes_BW, bytes_RW, (height / 8) * width / EPD290_frameDIV);
+                if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 290 DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+                return flag_OK;
+            }
         }
         static public bool EPD_DrawImage(UDP_Class uDP_Class, string IP, byte[] BW_data, byte[] RW_data, int Split_DataSize)
         {
@@ -4856,6 +4890,8 @@ namespace H_Pannel_lib
         }
         #endregion
 
+       
+
         static public List<byte[]> SplitImage(List<byte> image, int Size)
         {
             List<byte[]> list_byte_image_array = new List<byte[]>();
@@ -4977,7 +5013,7 @@ namespace H_Pannel_lib
             list_byte_image = BmpByteToGray(list_byte_image, ref len);
             return list_byte_image;
         }
-        static unsafe public void BitmapToByte(Bitmap bimage, ref byte[] BW_bytes, ref byte[] RW_bytes)
+        static unsafe public void BitmapToByte(Bitmap bimage, ref byte[] BW_bytes, ref byte[] RW_bytes , EPD_Type ePD_Type)
         {
             List<byte> list_byte_image_BW = new List<byte>();
             List<byte> list_byte_image_RW = new List<byte>();
@@ -5044,24 +5080,47 @@ namespace H_Pannel_lib
                         {
                             temp_BW <<= 1;
                             temp_RW <<= 1;
-                            if (R[i] == 255 && G[i] == 255 && B[i] == 255)
+                            if (ePD_Type == EPD_Type.EPD583 || ePD_Type == EPD_Type.EPD266_B)
                             {
+                                if (R[i] == 255 && G[i] == 255 && B[i] == 255)
+                                {
 
-                                temp_BW |= (byte)(0x01);
-                            }
-                            else
-                            {
-                                temp_BW |= (byte)(0x00);
-                            }
-                            if (R[i] == 255 && G[i] == 0 && B[i] == 0)
-                            {
+                                    temp_BW |= (byte)(0x00);
+                                }
+                                else
+                                {
+                                    temp_BW |= (byte)(0x01);
+                                }
+                                if (R[i] == 255 && G[i] == 0 && B[i] == 0)
+                                {
 
-                                temp_RW |= (byte)(0x01);
+                                    temp_RW |= (byte)(0x01);
+                                }
+                                else
+                                {
+                                    temp_RW |= (byte)(0x00);
+                                }
                             }
-                            else
+                            else if (ePD_Type == EPD_Type.EPD290_V3)
                             {
-                                temp_RW |= (byte)(0x00);
+                                if (R[i] == 255 && G[i] == 255 && B[i] == 255)
+                                {
+                                    temp_RW |= (byte)(0x01);
+                                    temp_BW |= (byte)(0x01);
+                                }
+                                else if (R[i] == 0 && G[i] == 0 && B[i] == 0)
+                                {
+                                    temp_BW |= (byte)(0x01);
+                                    temp_RW |= (byte)(0x00);
+                                }
+                                else if (R[i] == 255 && G[i] == 0 && B[i] == 0)
+                                {
+                                    temp_BW |= (byte)(0x00);
+                                    temp_RW |= (byte)(0x00);
+                                }
                             }
+
+
                         }
 
 

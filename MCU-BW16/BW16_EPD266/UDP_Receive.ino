@@ -59,6 +59,8 @@ void onPacketCallBack()
              *(UdpRead + UdpRead_len + i) = *(UdpRead_buf + i);
           }
           UdpRead_len += len;
+          mySerial.print("Received len sumary :");
+          mySerial.println(UdpRead_len);
           if(UDPcheck_len == UdpRead_len)
           {
              if(*(UdpRead + UdpRead_len - 1) == 3)

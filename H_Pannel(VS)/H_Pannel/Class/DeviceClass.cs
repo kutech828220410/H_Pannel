@@ -877,6 +877,8 @@ namespace H_Pannel_lib
         RFID_Device = 6,
         Pannel35_lock = 7,
         Pannel35= 7,
+        EPD290_lock = 1,
+        EPD290 = 2,
     }
     public enum HorizontalAlignment
     {

@@ -12,6 +12,10 @@ using System.IO;
 using H_Pannel_lib;
 using System.Text.RegularExpressions;
 using Basic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
+
 namespace WT32_SC01
 {
     public partial class Form1 : Form
@@ -80,17 +84,25 @@ namespace WT32_SC01
             this.rJ_Button_epD_583_Pannel_全部滅燈.MouseDownEvent += RJ_Button_epD_583_Pannel_全部滅燈_MouseDownEvent;
             this.rJ_Button_epD_583_Pannel_TEST.MouseDownEvent += RJ_Button_epD_583_Pannel_TEST_MouseDownEvent;
 
-
             this.storageUI_EPD_266.sqL_DataGridView_DeviceTable.RowDoubleClickEvent += SqL_DataGridView_DeviceTable_RowDoubleClickEvent;
             this.rJ_Button_EPD266_TEST.MouseDownEvent += RJ_Button_EPD266_TEST_MouseDownEvent;
+           
+
+            this.rJ_Button_EPD_290_初始化.MouseDownEvent += RJ_Button_EPD_290_初始化_MouseDownEvent;
+            this.rJ_Button_EPD_290_TEST.MouseDownEvent += RJ_Button_EPD_290_TEST_MouseDownEvent;
 
             this.rJ_Button_RFID_初始化.MouseDownEvent += RJ_Button_RFID_初始化_MouseDownEvent;
 
             this.rJ_Button_H_RFID_初始化.MouseDownEvent += RJ_Button_H_RFID_初始化_MouseDownEvent;
 
+
+            this.storageUI_EPD_266.Init();
+            this.epD_266_Pannel.Init(this.storageUI_EPD_266.List_UDP_Local);
+            this.storageUI_EPD_290.Init();
+            this.epD_290_Pannel.Init(this.storageUI_EPD_290.List_UDP_Local);
+
             MyUI.數字鍵盤.音效 = false;
         }
-
 
 
         private void rJ_Button_WT32_初始化_Click(object sender, EventArgs e)
@@ -206,12 +218,48 @@ namespace WT32_SC01
         {
             MyUI.MyTimer myTimer = new MyUI.MyTimer();
             myTimer.StartTickTime(5000);
-            this.storageUI_EPD_266.SQL_GetAllDevice();
-            Console.WriteLine($"SQL_GetAllDevice ,耗時{myTimer.ToString()}ms");
-            this.storageUI_EPD_266.SQL_GetAllStorage();
-            Console.WriteLine($"SQL_GetAllStorage ,耗時{myTimer.ToString()}ms");
-            this.storageUI_EPD_266.SQL_GetAllDeviceBasic();
-            Console.WriteLine($"SQL_GetAllDeviceBasic ,耗時{myTimer.ToString()}ms");
+           Storage storage = this.storageUI_EPD_266.SQL_GetStorage("192.168.10.180");
+            //StorageUI_EPD_266.Get_Storage_bmp(storage);
+
+            using (Bitmap bitmap = StorageUI_EPD_266.Get_Storage_bmp(storage))
+            {
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.CompositingQuality = CompositingQuality.HighQuality;
+                    g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+                    Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+                  //  g.FillRectangle(new SolidBrush(Color.White), rect);
+                    this.storageUI_EPD_266.DrawToEpd_UDP("192.168.1.155", 29000, bitmap);
+                }
+            }
+                 
+        }
+        private void RJ_Button_EPD_290_初始化_MouseDownEvent(MouseEventArgs mevent)
+        {
+          
+        }
+        private void RJ_Button_EPD_290_TEST_MouseDownEvent(MouseEventArgs mevent)
+        {
+            MyUI.MyTimer myTimer = new MyUI.MyTimer();
+            myTimer.StartTickTime(5000);
+            Storage storage = this.storageUI_EPD_266.SQL_GetStorage("192.168.10.180");
+            //StorageUI_EPD_290.Get_Storage_bmp(storage);
+
+            using (Bitmap bitmap = StorageUI_EPD_290.Get_Storage_bmp(storage))
+            {
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.CompositingQuality = CompositingQuality.HighQuality;
+                    g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+                    Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
+                    //  g.FillRectangle(new SolidBrush(Color.White), rect);
+                    this.storageUI_EPD_290.DrawToEpd_UDP("192.168.1.155", 29015, bitmap);
+                }
+            }
         }
 
         private void SqL_DataGridView_DeviceTable_RowDoubleClickEvent(object[] RowValue)
