@@ -72,7 +72,13 @@ namespace H_Pannel_lib
                 return 320;
             }
         }
-
+        public bool ComIsOpen
+        {
+            get
+            {
+                return this.mySerialPort.IsConnected;
+            }
+        }
 
         private List<string> _UDP_ServerPorts = new List<string>();
         [Editor("System.Windows.Forms.Design.StringCollectionEditor, System.Design", "System.Drawing.Design.UITypeEditor, System.Drawing")]
@@ -408,7 +414,7 @@ namespace H_Pannel_lib
                 }
             }
         }
-        private MySerialPort mySerialPort = new MySerialPort();
+        public MySerialPort mySerialPort = new MySerialPort();
 
         public DeviceBasicUI()
         {
@@ -459,6 +465,7 @@ namespace H_Pannel_lib
                 List_UDP_Local.Add(uDP_Class);
             }
             Communication.ConsoleWrite = ConsoleWrite;
+
             this.FindForm().FormClosing += FormClosing;
             this.rJ_Button_Station_Write.Click += RJ_Button_Station_Write_Click;
             this.rJ_Button_Read.Click += RJ_Button_Read_Click;
@@ -484,8 +491,24 @@ namespace H_Pannel_lib
 
 
         }
+        public void Init_Offline()
+        {
+            this.FindForm().FormClosing += FormClosing;
+            this.rJ_Button_Station_Write.Click += RJ_Button_Station_Write_Click;
+            this.rJ_Button_Read.Click += RJ_Button_Read_Click;
+            this.rJ_Button_Write.Click += RJ_Button_Write_Click;
+            this.rJ_Button_Lock_On.MouseDownEvent += RJ_Button_Lock_On_MouseDownEvent;
+            this.rJ_Button_Lock_Off.MouseDownEvent += RJ_Button_Lock_Off_MouseDownEvent;
 
-    
+            mySerialPort.Init(this.textBox_COM.Text, 115200, 8, Parity.None, StopBits.One, false);
+        }
+        public void SerialPortOpen(string PortName)
+        {
+            mySerialPort.SerialPortClose();
+            mySerialPort.PortName = PortName;
+            mySerialPort.SerialPortOpen();
+        }
+
 
         virtual public bool Set_ESP32_Restart(string IP, int Port)
         {
@@ -541,6 +564,19 @@ namespace H_Pannel_lib
             }
             return false;
         }
+
+        public string Get_Version_UART()
+        {
+            return this.Get_Version_UART(mySerialPort.PortName);
+        }
+        public string Get_Version_UART(string PortName)
+        {
+            string ver = "";
+            mySerialPort.PortName = PortName;
+            Communication.UART_Command_Get_Version(mySerialPort, out ver);
+            return ver;
+        }
+
 
         public string GetUDPJsonString(string IP)
         {

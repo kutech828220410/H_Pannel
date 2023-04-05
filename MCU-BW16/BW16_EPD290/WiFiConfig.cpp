@@ -80,7 +80,7 @@ void WiFiConfig::WIFI_Connenct()
     char _password[sizeof(_Password)];
     _Password.toCharArray(_password , sizeof(_Password));
     WiFi.begin(_ssid, _password);
-    if(!this -> flag_Init)printf("connecting.");
+    if(!flag_Init && flag_consolewrite)printf("connecting.");
     int retry = 0;
     while (WiFi.status() != WL_CONNECTED) //等待网络连接成功
     {
@@ -89,19 +89,19 @@ void WiFiConfig::WIFI_Connenct()
          break;
       }
       delay(500);
-      if(!this -> flag_Init)printf(".");
+      if(!flag_Init && flag_consolewrite)printf(".");
       retry++;
     }
-     if(!this -> flag_Init)printf("\n\r");
+    if(!flag_Init && flag_consolewrite)printf("\n\r");
     this -> IsConnected = (WiFi.status() == WL_CONNECTED);
     if( this -> IsConnected)
     {
-      if(!this -> flag_Init)printf("WiFi connected!\n");
-      if(!this -> flag_Init)printf("IP address: %d\n",WiFi.localIP());
+      if(!flag_Init && flag_consolewrite)printf("WiFi connected!\n");
+      if(!flag_Init && flag_consolewrite)printf("IP address: %d\n",WiFi.localIP());
     }
     else
     {
-      if(!this -> flag_Init)printf("WiFi connect failed!\n");      
+      if(!flag_Init && flag_consolewrite)printf("WiFi connect failed!\n");      
     }
     this -> flag_Init = true;
     

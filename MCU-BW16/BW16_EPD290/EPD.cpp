@@ -195,7 +195,7 @@ void EPD::Wakeup()
 {
     this -> MyTimer_SleepWaitTime.TickStop();  
     this -> MyTimer_SleepWaitTime.StartTickTime(10000);
-    mySerial -> println("Wake up!");
+//    mySerial -> println("Wake up!");
     this -> SetToSleep = false;
     SPI_Begin();
     this -> HardwareReset();

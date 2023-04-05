@@ -14,7 +14,7 @@ void serialEvent()
     UART0_RX[UART0_len] = mySerial.read();
     UART0_len++;
     MyTimer_UART0.TickStop();
-    MyTimer_UART0.StartTickTime(2);
+    MyTimer_UART0.StartTickTime(10);
   }
   if (MyTimer_UART0.IsTimeOut())
   {
@@ -114,6 +114,28 @@ void serialEvent()
         mySerial.print(str);
         mySerial.flush();
       }
+      else if (UART0_RX[1] == 'C')
+      {
+        int len = UART0_len - 5;
+        int startpo =  UART0_RX[2] | (UART0_RX[3] << 8);
+        int numofLED = len / 3 ;
+        int startLED = startpo / 3;         
+          
+        for(int i = 0 ; i < numofLED ; i++)
+        {             
+           myWS2812.rgbBuffer[i * 3 + startLED + 0] = *(UART0_RX + 4 + i * 3 + 0);     // 将光带上第1个LED灯珠的RGB数值中R数值设置为255
+           myWS2812.rgbBuffer[i * 3 + startLED + 1] = *(UART0_RX + 4 + i * 3 + 1);   // 将光带上第1个LED灯珠的RGB数值中G数值设置为255
+           myWS2812.rgbBuffer[i * 3 + startLED + 2] = *(UART0_RX + 4 + i * 3 + 2);      // 将光带上第1个LED灯珠的RGB数值中B数值设置为0      
+        }     
+        flag_WS2812B_Refresh = true;
+        Get_Checksum();
+      }
+      else if (UART0_RX[1] == 'D')
+      {
+        epd.Wakeup();
+        epd.Clear();
+        Get_Checksum();
+      }
       else if (UART0_RX[1] == '1' && UART0_len == 5)
       {
         flag_writeMode = true;
@@ -204,6 +226,7 @@ void serialEvent()
   }
 
 }
+
 void Get_Checksum()
 {
   byte checksum = 0;
@@ -214,8 +237,7 @@ void Get_Checksum()
   int checksum_2 = checksum / 100;
   int checksum_1 = (checksum - checksum_2 * 100) / 10 ;
   int checksum_0 = (checksum - checksum_2 * 100 - checksum_1 * 10) ;
-  byte str_checksum[3] = {(checksum_2 + 48), (checksum_1 + 48), (checksum_0 + 48)};
-  mySerial.write(str_checksum , 3);
+  byte str_checksum[5] = {2 ,(checksum_2 + 48), (checksum_1 + 48), (checksum_0 + 48) , 3};
+  mySerial.write(str_checksum , 5);
   mySerial.flush();
-
 }

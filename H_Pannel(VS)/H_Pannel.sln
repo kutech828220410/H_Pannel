@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H_Pannel_Debug", "H_Pannel_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H_Pannel_lib", "H_Pannel\H_Pannel_lib.csproj", "{58E81480-BD04-45B4-8B36-3B2FF7729846}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestForm", "TestForm\TestForm.csproj", "{CE1C302F-8298-43F6-9DDE-C3AF57EBA794}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{58E81480-BD04-45B4-8B36-3B2FF7729846}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58E81480-BD04-45B4-8B36-3B2FF7729846}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58E81480-BD04-45B4-8B36-3B2FF7729846}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE1C302F-8298-43F6-9DDE-C3AF57EBA794}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE1C302F-8298-43F6-9DDE-C3AF57EBA794}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE1C302F-8298-43F6-9DDE-C3AF57EBA794}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE1C302F-8298-43F6-9DDE-C3AF57EBA794}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

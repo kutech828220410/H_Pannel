@@ -52,7 +52,7 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.2.2";
+String Version = "Ver 1.3.0";
 
 void setup() 
 {
@@ -68,6 +68,7 @@ void loop()
       mySerial.println(Version);  
       wiFiConfig.mySerial = &mySerial;
       epd.mySerial = &mySerial;
+      xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle);
       wiFiConfig.Init(Version);
       Localport = wiFiConfig.Get_Localport();
       Serverport = wiFiConfig.Get_Serverport();
@@ -78,7 +79,7 @@ void loop()
       SPI.begin(); //SCLK, MISO, MOSI, SS
       myWS2812.Init(NUM_WS2812B_CRGB);
       epd.Init(); 
-      xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle);
+      
       flag_boradInit = true;
    }
    if(flag_boradInit)
@@ -97,11 +98,7 @@ void loop()
           sub_UDP_Send();
           onPacketCallBack();
       } 
-      if(flag_WS2812B_Refresh)
-      {
-           myWS2812.Show();
-           flag_WS2812B_Refresh = false;
-      }  
+      
    }    
 }
 
@@ -125,7 +122,11 @@ void Core0Task1( void * pvParameters )
           {
               MyLED_IS_Connented.BlinkTime = 500;
           }
-          
+          if(flag_WS2812B_Refresh)
+          {
+               myWS2812.Show();
+               flag_WS2812B_Refresh = false;
+          }  
           epd.Sleep_Check();
        }
           

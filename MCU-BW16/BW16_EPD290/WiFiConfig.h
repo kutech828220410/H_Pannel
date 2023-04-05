@@ -10,6 +10,7 @@ class WiFiConfig
    public:     
    SoftwareSerial *mySerial;
    bool flag_Init = false;
+   bool flag_consolewrite = true;
    bool IsConnected = false;
    IPAddress ipAdress;
    IPAddress server_IPAdress;

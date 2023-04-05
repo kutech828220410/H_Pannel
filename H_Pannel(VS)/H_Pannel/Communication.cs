@@ -3645,10 +3645,14 @@ namespace H_Pannel_lib
             Set_SSID = (byte)'9',
             Set_Password = (byte)'A',
             Set_UDP_SendTime = (byte)'B',
+            Set_WS2812_Buffer = (byte)'C',
+            ClearCanvas = (byte)'D',
 
             Sset_RFID_Enable = (byte)'Z',
             Get_Version = (byte)'v',
             Set_Locker = (byte)'L',
+            
+
 
         }
         static public bool UART_Command_Get_Setting(MySerialPort MySerialPort, out string IP_Adress, out string Subnet, out string Gateway, out string DNS, out string Server_IP_Adress, out string Local_Port, out string Server_Port, out string SSID, out string Password, out string Station, out string UDP_SendTime ,out string RFID_Enable)
@@ -3687,6 +3691,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -3707,13 +3712,9 @@ namespace H_Pannel_lib
                         byte[] UART_RX = MySerialPort.ReadByte();
                         if (UART_RX != null)
                         {
-                            if (UART_RX[0] == 2 && UART_RX[UART_RX.Length - 1] == 3)
+                            string str = UART_GetString(UART_RX);
+                            if(!str.StringIsEmpty())
                             {
-                                string str = "";
-                                for (int i = 1; i < (UART_RX.Length - 1); i++)
-                                {
-                                    str += (char)UART_RX[i];
-                                }
                                 string[] str_array = str.Split(',');
                                 if (str_array.Length == 12)
                                 {
@@ -3738,8 +3739,8 @@ namespace H_Pannel_lib
                                     retry++;
                                     cnt = 0;
                                 }
-
                             }
+                     
                         }
                     }
                     System.Threading.Thread.Sleep(1);
@@ -3783,6 +3784,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -3803,13 +3805,9 @@ namespace H_Pannel_lib
                         byte[] UART_RX = MySerialPort.ReadByte();
                         if (UART_RX != null)
                         {
-                            if (UART_RX[0] == 2 && UART_RX[UART_RX.Length - 1] == 3)
+                            string str = UART_GetString(UART_RX);
+                            if (!str.StringIsEmpty())
                             {
-                                string str = "";
-                                for (int i = 1; i < (UART_RX.Length - 1); i++)
-                                {
-                                    str += (char)UART_RX[i];
-                                }
                                 string[] str_array = str.Split(',');
                                 if (str_array.Length == 11)
                                 {
@@ -3830,12 +3828,44 @@ namespace H_Pannel_lib
                                 }
                                 else
                                 {
-
                                     retry++;
                                     cnt = 0;
                                 }
-
                             }
+
+                            //if (UART_RX[0] == 2 && UART_RX[UART_RX.Length - 1] == 3)
+                            //{
+                            //    string str = "";
+                            //    for (int i = 1; i < (UART_RX.Length - 1); i++)
+                            //    {
+                            //        str += (char)UART_RX[i];
+                            //    }
+                            //    string[] str_array = str.Split(',');
+                            //    if (str_array.Length == 11)
+                            //    {
+                            //        IP_Adress = str_array[0];
+                            //        Subnet = str_array[1];
+                            //        Gateway = str_array[2];
+                            //        DNS = str_array[3];
+                            //        Server_IP_Adress = str_array[4];
+                            //        Local_Port = str_array[5];
+                            //        Server_Port = str_array[6];
+                            //        SSID = str_array[7];
+                            //        Password = str_array[8];
+                            //        Station = str_array[9];
+                            //        UDP_SendTime = str_array[10];
+                            //        if (ConsoleWrite) Console.Write("Receive data sucessed!\n");
+                            //        flag_OK = true;
+                            //        break;
+                            //    }
+                            //    else
+                            //    {
+
+                            //        retry++;
+                            //        cnt = 0;
+                            //    }
+
+                            //}
                         }
 
                     }
@@ -3880,6 +3910,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -3958,6 +3989,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -4036,6 +4068,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -4114,6 +4147,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -4192,6 +4226,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -4270,6 +4305,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -4342,6 +4378,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -4414,6 +4451,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -4488,6 +4526,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -4562,6 +4601,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -4634,6 +4674,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -4705,6 +4746,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -4767,6 +4809,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -4832,6 +4875,7 @@ namespace H_Pannel_lib
                             flag_OK = false;
                             break;
                         }
+                        MySerialPort.ClearReadByte();
                         MySerialPort.WriteByte(list_byte.ToArray());
                         MyTimer_UART_TimeOut.TickStop();
                         MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
@@ -4871,8 +4915,148 @@ namespace H_Pannel_lib
             MySerialPort.SerialPortClose();
             return flag_OK;
         }
+        static public bool UART_Command_Set_WS2812_Buffer(MySerialPort MySerialPort, int start_ptr, byte[] bytes_RGB)
+        {
+            bool flag_OK = false;
+            if (MySerialPort.SerialPortOpen())
+            {
+                MyTimer myTimer_Timeout = new MyTimer();
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(UART_Command.Set_WS2812_Buffer));
+                list_byte.Add((byte)start_ptr);
+                list_byte.Add((byte)(start_ptr >> 8));
+                for (int i = 0; i < bytes_RGB.Length; i++)
+                {
+                    list_byte.Add(bytes_RGB[i]);
+                }
+                list_byte.Add(3);
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+                int retry = 0;
+                int cnt = 0;
+                byte checksum = 0;
+                for (int i = 0; i < list_byte.Count; i++)
+                {
+                    checksum += list_byte[i];
+                }
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            if (ConsoleWrite) Console.Write("Receive data lenth error!\n");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByte();
+                        if (UART_RX != null)
+                        {
+                            if (UART_CheckSum(UART_RX, checksum))
+                            {
+                                if (ConsoleWrite) Console.Write($"Set WS2812_Buffer sucessed!  {DateTime.Now.ToDateTimeString()}\n");
+                                flag_OK = true;
+                                break;
+                            }
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(1);
+                }
+            }
+            MySerialPort.SerialPortClose();
+            return flag_OK;
+        }
+        static public bool UART_Command_Set_ClearCanvas(MySerialPort MySerialPort)
+        {
+            bool flag_OK = false;
+
+            if (MySerialPort.SerialPortOpen())
+            {
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+                int retry = 0;
+                int cnt = 0;
+                byte checksum = 0;
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(UART_Command.ClearCanvas));            
+                list_byte.Add(3);
+
+                for (int i = 0; i < list_byte.Count; i++)
+                {
+                    checksum += list_byte[i];
+                }
 
 
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            if (ConsoleWrite) Console.Write($"Set ClearCanvas error! {DateTime.Now.ToDateTimeString()}\n");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByte();
+                        if (UART_RX != null)
+                        {
+                            if (UART_CheckSum(UART_RX, checksum))
+                            {
+                                if (ConsoleWrite) Console.Write($"Set ClearCanvas sucessed! {DateTime.Now.ToDateTimeString()}\n");
+                                flag_OK = true;
+                                break;
+
+                            }
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(1);
+                }
+            }
+            MySerialPort.SerialPortClose();
+            return flag_OK;
+        }
         static private bool UART_CheckSum(byte[] UART_RX, byte checksum)
         {
             if (UART_RX.Length == 3)
@@ -4885,12 +5069,57 @@ namespace H_Pannel_lib
 
                 byte.TryParse(str, out temp);
                 if (temp == checksum) return true;
+
+            }
+            else
+            {
+                for (int i = 0; i < UART_RX.Length; i++)
+                {
+                    if (i + 4 >= UART_RX.Length) continue;
+                    if (UART_RX[i] == 2 && UART_RX[i + 4] == 3)
+                    {
+                        string str = "";
+                        str += (char)UART_RX[i + 1];
+                        str += (char)UART_RX[i + 2];
+                        str += (char)UART_RX[i + 3];
+                        byte temp = 0;
+
+                        byte.TryParse(str, out temp);
+                        if (temp == checksum) return true;
+                    }
+                }
+
             }
             return false;
         }
+        static private string UART_GetString(byte[] UART_RX)
+        {
+            string result = "";
+            bool flag_start = false;
+            for (int i = 0; i < UART_RX.Length; i++)
+            {
+                if (flag_start)
+                {
+                    for (int k = i; k < UART_RX.Length; k++)
+                    {
+                        if (UART_RX[k] == 3) return result;
+                        result += (char)UART_RX[k];
+                    }
+                    return "";
+                }
+                if (UART_RX[i] == 2)
+                {
+                    flag_start = true;
+                   
+                }
+              
+            }
+            return "";
+        }
+
         #endregion
 
-       
+
 
         static public List<byte[]> SplitImage(List<byte> image, int Size)
         {
