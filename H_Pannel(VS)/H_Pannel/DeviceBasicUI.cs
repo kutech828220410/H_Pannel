@@ -47,6 +47,7 @@ namespace H_Pannel_lib
         public List<UDP_Class> List_UDP_Server = new List<UDP_Class>();
         public List<UDP_Class> List_UDP_Local = new List<UDP_Class>();
 
+        private bool flag_UDP_Class_Init = false;
         private string dataBaseName = "TEST";
         private string userName = "root";
         private string password = "user82822040";
@@ -164,7 +165,7 @@ namespace H_Pannel_lib
 
         private Stopwatch stopwatch = new Stopwatch();
         private MyThread MyThread_SqlDataRefrsh;
-        private String IP_Adress
+        public String IP_Adress
         {
             get
             {
@@ -196,7 +197,7 @@ namespace H_Pannel_lib
                 }
             }
         }
-        private String Subnet
+        public String Subnet
         {
             get
             {
@@ -228,7 +229,7 @@ namespace H_Pannel_lib
                 }
             }
         }
-        private String Gateway
+        public String Gateway
         {
             get
             {
@@ -260,7 +261,7 @@ namespace H_Pannel_lib
                 }
             }
         }
-        private String DNS
+        public String DNS
         {
             get
             {
@@ -292,7 +293,7 @@ namespace H_Pannel_lib
                 }
             }
         }
-        private String Server_IP_Adress
+        public String Server_IP_Adress
         {
             get
             {
@@ -324,7 +325,7 @@ namespace H_Pannel_lib
                 }
             }
         }
-        private String Local_Port
+        public String Local_Port
         {
             get
             {
@@ -341,7 +342,7 @@ namespace H_Pannel_lib
                 }
             }
         }
-        private String Server_Port
+        public String Server_Port
         {
             get
             {
@@ -358,7 +359,7 @@ namespace H_Pannel_lib
                 }
             }
         }
-        private String SSID
+        public String SSID
         {
             get
             {
@@ -369,7 +370,7 @@ namespace H_Pannel_lib
                 this.textBox_SSID.Text = value;
             }
         }
-        private String _Password
+        public String _Password
         {
             get
             {
@@ -380,7 +381,7 @@ namespace H_Pannel_lib
                 this.textBox_Password.Text = value;
             }
         }
-        private String Station
+        public String Station
         {
             get
             {
@@ -397,7 +398,7 @@ namespace H_Pannel_lib
                 }
             }
         }
-        private String UDP_SendTime
+        public String UDP_SendTime
         {
             get
             {
@@ -452,28 +453,11 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_DeviceTable.MouseDown += SqL_DataGridView_DeviceTable_MouseDown;
             this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
 
-            for (int i = 0; i < this.UDP_ServerPorts.Count; i++)
-            {
-                UDP_Class uDP_Class = new UDP_Class("0.0.0.0", this.UDP_ServerPorts[i].StringToInt32());
-                uDP_Class.ConsoleWrite = false;
-                List_UDP_Server.Add(uDP_Class);
-            }
-            for (int i = 0; i < this.UDP_LocalPorts.Count; i++)
-            {
-                UDP_Class uDP_Class = new UDP_Class("0.0.0.0", this.UDP_LocalPorts[i].StringToInt32());
-                uDP_Class.ConsoleWrite = false;
-                List_UDP_Local.Add(uDP_Class);
-            }
+            this.UDP_Class_Init();
+
             Communication.ConsoleWrite = ConsoleWrite;
 
-            this.FindForm().FormClosing += FormClosing;
-            this.rJ_Button_Station_Write.Click += RJ_Button_Station_Write_Click;
-            this.rJ_Button_Read.Click += RJ_Button_Read_Click;
-            this.rJ_Button_Write.Click += RJ_Button_Write_Click;
-            this.rJ_Button_Lock_On.MouseDownEvent += RJ_Button_Lock_On_MouseDownEvent;
-            this.rJ_Button_Lock_Off.MouseDownEvent += RJ_Button_Lock_Off_MouseDownEvent;
-
-            mySerialPort.Init(this.textBox_COM.Text, 115200, 8, Parity.None, StopBits.One, false);
+            this.Init_Offline();
 
             this.MyThread_SqlDataRefrsh = new MyThread();
             this.MyThread_SqlDataRefrsh.AutoRun(true);
@@ -491,14 +475,39 @@ namespace H_Pannel_lib
 
 
         }
+        public void UDP_Class_Init()
+        {
+            if(flag_UDP_Class_Init == false)
+            {
+                for (int i = 0; i < this.UDP_ServerPorts.Count; i++)
+                {
+                    UDP_Class uDP_Class = new UDP_Class("0.0.0.0", this.UDP_ServerPorts[i].StringToInt32());
+                    uDP_Class.ConsoleWrite = false;
+                    List_UDP_Server.Add(uDP_Class);
+                }
+                for (int i = 0; i < this.UDP_LocalPorts.Count; i++)
+                {
+                    UDP_Class uDP_Class = new UDP_Class("0.0.0.0", this.UDP_LocalPorts[i].StringToInt32());
+                    uDP_Class.ConsoleWrite = false;
+                    List_UDP_Local.Add(uDP_Class);
+                }
+                flag_UDP_Class_Init = true;
+            }
+        
+        }
+     
+
         public void Init_Offline()
         {
             this.FindForm().FormClosing += FormClosing;
+            this.LoadConfig();
             this.rJ_Button_Station_Write.Click += RJ_Button_Station_Write_Click;
             this.rJ_Button_Read.Click += RJ_Button_Read_Click;
             this.rJ_Button_Write.Click += RJ_Button_Write_Click;
             this.rJ_Button_Lock_On.MouseDownEvent += RJ_Button_Lock_On_MouseDownEvent;
             this.rJ_Button_Lock_Off.MouseDownEvent += RJ_Button_Lock_Off_MouseDownEvent;
+            this.rJ_Button_Save.MouseDownEvent += RJ_Button_Save_MouseDownEvent;
+            this.rJ_Button_Load.MouseDownEvent += RJ_Button_Load_MouseDownEvent;
 
             mySerialPort.Init(this.textBox_COM.Text, 115200, 8, Parity.None, StopBits.One, false);
         }
@@ -686,6 +695,52 @@ namespace H_Pannel_lib
             return this.List_UDP_Local;
         }
 
+        public bool WriteConfig(string PortName)
+        {
+            mySerialPort.PortName = PortName;
+      
+
+            bool flag_OK = true;
+            int localport = this.Local_Port.StringToInt32();
+            int serverport = this.Server_Port.StringToInt32();
+            int udp_sendtime = this.UDP_SendTime.StringToInt32();
+            if (localport < 0)
+            {
+                MyMessageBox.ShowDialog("localport is invalid!");
+                return false;
+            }
+            if (serverport < 0)
+            {
+                MyMessageBox.ShowDialog("serverport is invalid!");
+                return false;
+            }
+            if (udp_sendtime < 0)
+            {
+                MyMessageBox.ShowDialog("udp_sendtime is invalid!");
+                return false;
+            }
+            if (!Communication.UART_Command_Set_IP_Adress(mySerialPort, this.IP_Adress))
+            {
+                flag_OK = false;
+            }
+            if (!Communication.UART_Command_Set_Subnet(mySerialPort, this.Subnet))
+            {
+                flag_OK = false;
+            }
+            if (!Communication.UART_Command_Set_Gateway(mySerialPort, this.Gateway)) flag_OK = false;
+            if (!Communication.UART_Command_Set_DNS(mySerialPort, this.DNS)) flag_OK = false;
+            if (!Communication.UART_Command_Set_Server_IP_Adress(mySerialPort, this.Server_IP_Adress)) flag_OK = false;
+            if (!Communication.UART_Command_Set_Local_Port(mySerialPort, localport)) flag_OK = false;
+            if (!Communication.UART_Command_Set_Server_Port(mySerialPort, serverport)) flag_OK = false;
+            if (!Communication.UART_Command_Set_SSID(mySerialPort, this.SSID)) flag_OK = false;
+            if (!Communication.UART_Command_Set_Password(mySerialPort, this._Password)) flag_OK = false;
+            if (!Communication.UART_Command_Set_UDP_SendTime(mySerialPort, udp_sendtime)) flag_OK = false;
+            return flag_OK;
+        }
+        public bool Ping(string IP)
+        {
+            return Basic.Net.Ping(IP, 3, 200);
+        }
         protected List<object[]> Get_UDP_RX()
         {
             List<List<object[]>> list_list_UDP_Rx = new List<List<object[]>>();
@@ -718,7 +773,7 @@ namespace H_Pannel_lib
             List<object[]> list_disconnected_IP = new List<object[]>();
             for (int i = 0; i < list_IP.Count; i++)
             {
-                if (!Basic.Net.Ping(list_IP[i], 3, 200))
+                if (!Ping(list_IP[i]))
                 {
                     list_disconnected_IP.Add(new object[] { list_IP[i] });
                 }
@@ -727,6 +782,17 @@ namespace H_Pannel_lib
         }
 
         #region Event
+        private void RJ_Button_Load_MouseDownEvent(MouseEventArgs mevent)
+        {
+            this.LoadConfig();
+            MyMessageBox.ShowDialog("讀取成功!");
+        }
+        private void RJ_Button_Save_MouseDownEvent(MouseEventArgs mevent)
+        {
+            this.SaveConfig();
+            MyMessageBox.ShowDialog("儲存成功!");
+
+        }
         private void RJ_Button_Write_Click(object sender, EventArgs e)
         {
 
@@ -742,41 +808,8 @@ namespace H_Pannel_lib
                 return;
             }
 
-            bool flag_OK = true;
-            int localport = this.Local_Port.StringToInt32();
-            int serverport = this.Server_Port.StringToInt32();
-            int udp_sendtime = this.UDP_SendTime.StringToInt32();
-            if (localport < 0)
-            {
-                MyMessageBox.ShowDialog("localport is invalid!");
-                return;
-            }
-            if (serverport < 0)
-            {
-                MyMessageBox.ShowDialog("serverport is invalid!");
-                return;
-            }
-            if (udp_sendtime < 0)
-            {
-                MyMessageBox.ShowDialog("udp_sendtime is invalid!");
-                return;
-            }
-            if (!Communication.UART_Command_Set_IP_Adress(mySerialPort, this.IP_Adress))
-            {
-                flag_OK = false;
-            }
-            if (!Communication.UART_Command_Set_Subnet(mySerialPort, this.Subnet))
-            {
-                flag_OK = false;
-            }
-            if (!Communication.UART_Command_Set_Gateway(mySerialPort, this.Gateway)) flag_OK = false;
-            if (!Communication.UART_Command_Set_DNS(mySerialPort, this.DNS)) flag_OK = false;
-            if (!Communication.UART_Command_Set_Server_IP_Adress(mySerialPort, this.Server_IP_Adress)) flag_OK = false;
-            if (!Communication.UART_Command_Set_Local_Port(mySerialPort, localport)) flag_OK = false;
-            if (!Communication.UART_Command_Set_Server_Port(mySerialPort, serverport)) flag_OK = false;
-            if (!Communication.UART_Command_Set_SSID(mySerialPort, this.SSID)) flag_OK = false;
-            if (!Communication.UART_Command_Set_Password(mySerialPort, this._Password)) flag_OK = false;
-            if (!Communication.UART_Command_Set_UDP_SendTime(mySerialPort, udp_sendtime)) flag_OK = false;
+            bool flag_OK = this.WriteConfig(mySerialPort.PortName);
+         
             if (flag_OK)
             {
                 MyMessageBox.ShowDialog($"Write data sucessed! {Version}");
@@ -1447,7 +1480,79 @@ namespace H_Pannel_lib
             RowsList = RowsList_buf;
         }
         #endregion
+        #region StreamIO
+        [Serializable]
+        private class SaveConfigClass
+        {
+            private string iP_Adress = "";
+            private string subnet = "";
+            private string gateway = "";
+            private string dNS = "";
+            private string server_IP_Adress = "";
+            private string local_Port = "";
+            private string server_Port = "";
+            private string sSID = "";
+            private string password = "";
+            private string station = "";
+            private string uDP_SendTime = "";
 
+            public string IP_Adress { get => iP_Adress; set => iP_Adress = value; }
+            public string Subnet { get => subnet; set => subnet = value; }
+            public string Gateway { get => gateway; set => gateway = value; }
+            public string DNS { get => dNS; set => dNS = value; }
+            public string Server_IP_Adress { get => server_IP_Adress; set => server_IP_Adress = value; }
+            public string Local_Port { get => local_Port; set => local_Port = value; }
+            public string Server_Port { get => server_Port; set => server_Port = value; }
+            public string SSID { get => sSID; set => sSID = value; }
+            public string Password { get => password; set => password = value; }
+            public string Station { get => station; set => station = value; }
+            public string UDP_SendTime { get => uDP_SendTime; set => uDP_SendTime = value; }
+        }
+        public void SaveConfig()
+        {
+            string StreamName = @".\\" + $"{this.Name}_Config" + ".pro";
+            SaveConfigClass saveConfig = new SaveConfigClass();
+            saveConfig.IP_Adress = this.IP_Adress;
+            saveConfig.Subnet = this.Subnet;
+            saveConfig.Gateway = this.Gateway;
+            saveConfig.DNS = this.DNS;
+            saveConfig.Server_IP_Adress = this.Server_IP_Adress;
+            saveConfig.Local_Port = this.Local_Port;
+            saveConfig.Server_Port = this.Server_Port;
+            saveConfig.SSID = this.SSID;
+            saveConfig.Password = this._Password;
+            saveConfig.Station = this.Station;
+            saveConfig.UDP_SendTime = this.UDP_SendTime;
+
+            Basic.FileIO.SaveProperties(saveConfig, StreamName);
+        }
+        public void LoadConfig()
+        {
+            string StreamName = @".\\" + $"{this.Name}_Config" + ".pro";
+            object temp = new object();
+            Basic.FileIO.LoadProperties(ref temp, StreamName);
+            if (temp is SaveConfigClass)
+            {
+                SaveConfigClass saveConfigClass = temp as SaveConfigClass;
+                this.Invoke(new Action(delegate
+                {
+                    this.IP_Adress = saveConfigClass.IP_Adress;
+                    this.Subnet = saveConfigClass.Subnet;
+                    this.Gateway = saveConfigClass.Gateway;
+                    this.DNS = saveConfigClass.DNS;
+                    this.Server_IP_Adress = saveConfigClass.Server_IP_Adress;
+                    this.Local_Port = saveConfigClass.Local_Port;
+                    this.Server_Port = saveConfigClass.Server_Port;
+                    this.SSID = saveConfigClass.SSID;
+                    this._Password = saveConfigClass.Password;
+                    this.Station = saveConfigClass.Station;
+                    this.UDP_SendTime = saveConfigClass.UDP_SendTime;
+
+                }));
+            }
+
+        }
+        #endregion
 
         private class ICP_UDP_Rx : IComparer<object[]>
         {

@@ -215,8 +215,7 @@ void Get_Checksum()
   int checksum_2 = checksum / 100;
   int checksum_1 = (checksum - checksum_2 * 100) / 10 ;
   int checksum_0 = (checksum - checksum_2 * 100 - checksum_1 * 10) ;
-  byte str_checksum[3] = {(checksum_2 + 48), (checksum_1 + 48), (checksum_0 + 48)};
-  mySerial.write(str_checksum , 3);
+  byte str_checksum[5] = {2 ,(checksum_2 + 48), (checksum_1 + 48), (checksum_0 + 48) , 3};
+  mySerial.write(str_checksum , 5);
   mySerial.flush();
-
 }

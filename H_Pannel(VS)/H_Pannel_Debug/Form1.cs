@@ -257,7 +257,7 @@ namespace WT32_SC01
                     g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
                     Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
                     //  g.FillRectangle(new SolidBrush(Color.White), rect);
-                    this.storageUI_EPD_290.DrawToEpd_UDP("192.168.1.155", 29015, bitmap);
+                    this.storageUI_EPD_290.DrawToEpd_UDP("192.168.1.205", 29015, bitmap);
                 }
             }
         }

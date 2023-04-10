@@ -122,6 +122,8 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_DeviceTable = new SQLUI.SQL_DataGridView();
             this.openFileDialog_LoadExcel = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog_SaveExcel = new System.Windows.Forms.SaveFileDialog();
+            this.rJ_Button_Load = new MyUI.RJ_Button();
+            this.rJ_Button_Save = new MyUI.RJ_Button();
             this.panel23.SuspendLayout();
             this.rJ_GroupBox1.ContentsPanel.SuspendLayout();
             this.rJ_GroupBox1.SuspendLayout();
@@ -162,7 +164,7 @@ namespace H_Pannel_lib
             this.panel23.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel23.Location = new System.Drawing.Point(0, 0);
             this.panel23.Name = "panel23";
-            this.panel23.Size = new System.Drawing.Size(1393, 482);
+            this.panel23.Size = new System.Drawing.Size(1393, 517);
             this.panel23.TabIndex = 38;
             // 
             // rJ_GroupBox1
@@ -181,7 +183,7 @@ namespace H_Pannel_lib
             this.rJ_GroupBox1.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox1.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox1.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.rJ_GroupBox1.ContentsPanel.Size = new System.Drawing.Size(1006, 445);
+            this.rJ_GroupBox1.ContentsPanel.Size = new System.Drawing.Size(1006, 480);
             this.rJ_GroupBox1.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rJ_GroupBox1.Location = new System.Drawing.Point(387, 0);
@@ -190,7 +192,7 @@ namespace H_Pannel_lib
             this.rJ_GroupBox1.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox1.PannelBorderRadius = 2;
             this.rJ_GroupBox1.PannelBorderSize = 2;
-            this.rJ_GroupBox1.Size = new System.Drawing.Size(1006, 482);
+            this.rJ_GroupBox1.Size = new System.Drawing.Size(1006, 517);
             this.rJ_GroupBox1.TabIndex = 35;
             this.rJ_GroupBox1.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
             this.rJ_GroupBox1.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
@@ -240,7 +242,7 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_UDP_DataReceive.RowsHeight = 40;
             this.sqL_DataGridView_UDP_DataReceive.SaveFileName = "SQL_DataGridView";
             this.sqL_DataGridView_UDP_DataReceive.Server = "127.0.0.0";
-            this.sqL_DataGridView_UDP_DataReceive.Size = new System.Drawing.Size(996, 435);
+            this.sqL_DataGridView_UDP_DataReceive.Size = new System.Drawing.Size(996, 470);
             this.sqL_DataGridView_UDP_DataReceive.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
             this.sqL_DataGridView_UDP_DataReceive.TabIndex = 1;
             this.sqL_DataGridView_UDP_DataReceive.UserName = "root";
@@ -265,6 +267,8 @@ namespace H_Pannel_lib
             this.rJ_GroupBox2.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox2.ContentsPanel.BorderRadius = 5;
             this.rJ_GroupBox2.ContentsPanel.BorderSize = 2;
+            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Button_Save);
+            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Button_Load);
             this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Button_Lock_Off);
             this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Button_Lock_On);
             this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Button_Write);
@@ -277,7 +281,7 @@ namespace H_Pannel_lib
             this.rJ_GroupBox2.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox2.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox2.ContentsPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.rJ_GroupBox2.ContentsPanel.Size = new System.Drawing.Size(387, 445);
+            this.rJ_GroupBox2.ContentsPanel.Size = new System.Drawing.Size(387, 480);
             this.rJ_GroupBox2.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox2.Dock = System.Windows.Forms.DockStyle.Left;
             this.rJ_GroupBox2.Location = new System.Drawing.Point(0, 0);
@@ -286,7 +290,7 @@ namespace H_Pannel_lib
             this.rJ_GroupBox2.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox2.PannelBorderRadius = 5;
             this.rJ_GroupBox2.PannelBorderSize = 2;
-            this.rJ_GroupBox2.Size = new System.Drawing.Size(387, 482);
+            this.rJ_GroupBox2.Size = new System.Drawing.Size(387, 517);
             this.rJ_GroupBox2.TabIndex = 36;
             this.rJ_GroupBox2.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
             this.rJ_GroupBox2.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
@@ -311,7 +315,7 @@ namespace H_Pannel_lib
             this.rJ_Button_Lock_Off.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Lock_Off.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Lock_Off.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_Lock_Off.Location = new System.Drawing.Point(188, 397);
+            this.rJ_Button_Lock_Off.Location = new System.Drawing.Point(186, 432);
             this.rJ_Button_Lock_Off.Name = "rJ_Button_Lock_Off";
             this.rJ_Button_Lock_Off.Size = new System.Drawing.Size(90, 42);
             this.rJ_Button_Lock_Off.State = false;
@@ -333,7 +337,7 @@ namespace H_Pannel_lib
             this.rJ_Button_Lock_On.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Lock_On.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Lock_On.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_Lock_On.Location = new System.Drawing.Point(284, 397);
+            this.rJ_Button_Lock_On.Location = new System.Drawing.Point(282, 432);
             this.rJ_Button_Lock_On.Name = "rJ_Button_Lock_On";
             this.rJ_Button_Lock_On.Size = new System.Drawing.Size(90, 42);
             this.rJ_Button_Lock_On.State = false;
@@ -355,7 +359,7 @@ namespace H_Pannel_lib
             this.rJ_Button_Write.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Write.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Write.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_Write.Location = new System.Drawing.Point(96, 397);
+            this.rJ_Button_Write.Location = new System.Drawing.Point(94, 432);
             this.rJ_Button_Write.Name = "rJ_Button_Write";
             this.rJ_Button_Write.Size = new System.Drawing.Size(80, 42);
             this.rJ_Button_Write.State = false;
@@ -377,7 +381,7 @@ namespace H_Pannel_lib
             this.rJ_Button_Read.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Read.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Read.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_Read.Location = new System.Drawing.Point(10, 397);
+            this.rJ_Button_Read.Location = new System.Drawing.Point(8, 432);
             this.rJ_Button_Read.Name = "rJ_Button_Read";
             this.rJ_Button_Read.Size = new System.Drawing.Size(80, 42);
             this.rJ_Button_Read.State = false;
@@ -402,7 +406,7 @@ namespace H_Pannel_lib
             this.groupBox1.Location = new System.Drawing.Point(3, 46);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(381, 345);
+            this.groupBox1.Size = new System.Drawing.Size(381, 333);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "參數";
@@ -1132,16 +1136,16 @@ namespace H_Pannel_lib
             this.rJ_GroupBox4.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox4.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox4.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.rJ_GroupBox4.ContentsPanel.Size = new System.Drawing.Size(163, 450);
+            this.rJ_GroupBox4.ContentsPanel.Size = new System.Drawing.Size(163, 415);
             this.rJ_GroupBox4.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rJ_GroupBox4.Location = new System.Drawing.Point(1230, 482);
+            this.rJ_GroupBox4.Location = new System.Drawing.Point(1230, 517);
             this.rJ_GroupBox4.Name = "rJ_GroupBox4";
             this.rJ_GroupBox4.PannelBackColor = System.Drawing.Color.White;
             this.rJ_GroupBox4.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox4.PannelBorderRadius = 2;
             this.rJ_GroupBox4.PannelBorderSize = 2;
-            this.rJ_GroupBox4.Size = new System.Drawing.Size(163, 487);
+            this.rJ_GroupBox4.Size = new System.Drawing.Size(163, 452);
             this.rJ_GroupBox4.TabIndex = 39;
             this.rJ_GroupBox4.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
             this.rJ_GroupBox4.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
@@ -1186,7 +1190,7 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_PING.RowsHeight = 25;
             this.sqL_DataGridView_PING.SaveFileName = "SQL_DataGridView";
             this.sqL_DataGridView_PING.Server = "127.0.0.0";
-            this.sqL_DataGridView_PING.Size = new System.Drawing.Size(153, 440);
+            this.sqL_DataGridView_PING.Size = new System.Drawing.Size(153, 405);
             this.sqL_DataGridView_PING.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
             this.sqL_DataGridView_PING.TabIndex = 34;
             this.sqL_DataGridView_PING.UserName = "root";
@@ -1218,16 +1222,16 @@ namespace H_Pannel_lib
             this.rJ_GroupBox3.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox3.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox3.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.rJ_GroupBox3.ContentsPanel.Size = new System.Drawing.Size(1230, 450);
+            this.rJ_GroupBox3.ContentsPanel.Size = new System.Drawing.Size(1230, 415);
             this.rJ_GroupBox3.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rJ_GroupBox3.Location = new System.Drawing.Point(0, 482);
+            this.rJ_GroupBox3.Location = new System.Drawing.Point(0, 517);
             this.rJ_GroupBox3.Name = "rJ_GroupBox3";
             this.rJ_GroupBox3.PannelBackColor = System.Drawing.Color.White;
             this.rJ_GroupBox3.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox3.PannelBorderRadius = 2;
             this.rJ_GroupBox3.PannelBorderSize = 2;
-            this.rJ_GroupBox3.Size = new System.Drawing.Size(1230, 487);
+            this.rJ_GroupBox3.Size = new System.Drawing.Size(1230, 452);
             this.rJ_GroupBox3.TabIndex = 40;
             this.rJ_GroupBox3.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
             this.rJ_GroupBox3.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
@@ -1275,7 +1279,7 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_DeviceTable.RowsHeight = 40;
             this.sqL_DataGridView_DeviceTable.SaveFileName = "SQL_DataGridView";
             this.sqL_DataGridView_DeviceTable.Server = "127.0.0.0";
-            this.sqL_DataGridView_DeviceTable.Size = new System.Drawing.Size(1220, 440);
+            this.sqL_DataGridView_DeviceTable.Size = new System.Drawing.Size(1220, 405);
             this.sqL_DataGridView_DeviceTable.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
             this.sqL_DataGridView_DeviceTable.TabIndex = 1;
             this.sqL_DataGridView_DeviceTable.UserName = "root";
@@ -1300,6 +1304,50 @@ namespace H_Pannel_lib
             // 
             this.saveFileDialog_SaveExcel.DefaultExt = "txt";
             this.saveFileDialog_SaveExcel.Filter = "txt File (*.txt)|*.txt;";
+            // 
+            // rJ_Button_Load
+            // 
+            this.rJ_Button_Load.AutoResetState = false;
+            this.rJ_Button_Load.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Load.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Load.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_Load.BorderRadius = 5;
+            this.rJ_Button_Load.BorderSize = 0;
+            this.rJ_Button_Load.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Load.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_Load.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_Load.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_Load.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Load.Location = new System.Drawing.Point(282, 385);
+            this.rJ_Button_Load.Name = "rJ_Button_Load";
+            this.rJ_Button_Load.Size = new System.Drawing.Size(90, 42);
+            this.rJ_Button_Load.State = false;
+            this.rJ_Button_Load.TabIndex = 36;
+            this.rJ_Button_Load.Text = "Load";
+            this.rJ_Button_Load.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Load.UseVisualStyleBackColor = false;
+            // 
+            // rJ_Button_Save
+            // 
+            this.rJ_Button_Save.AutoResetState = false;
+            this.rJ_Button_Save.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Save.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Save.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_Save.BorderRadius = 5;
+            this.rJ_Button_Save.BorderSize = 0;
+            this.rJ_Button_Save.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Save.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_Save.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_Save.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Save.Location = new System.Drawing.Point(186, 385);
+            this.rJ_Button_Save.Name = "rJ_Button_Save";
+            this.rJ_Button_Save.Size = new System.Drawing.Size(90, 42);
+            this.rJ_Button_Save.State = false;
+            this.rJ_Button_Save.TabIndex = 37;
+            this.rJ_Button_Save.Text = "Save";
+            this.rJ_Button_Save.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Save.UseVisualStyleBackColor = false;
             // 
             // DeviceBasicUI
             // 
@@ -1452,5 +1500,7 @@ namespace H_Pannel_lib
         public SQLUI.SQL_DataGridView sqL_DataGridView_UDP_DataReceive;
         private MyUI.RJ_Button rJ_Button_Lock_Off;
         private MyUI.RJ_Button rJ_Button_Lock_On;
+        private MyUI.RJ_Button rJ_Button_Save;
+        private MyUI.RJ_Button rJ_Button_Load;
     }
 }

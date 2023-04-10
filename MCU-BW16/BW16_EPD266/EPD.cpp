@@ -65,7 +65,7 @@ void EPD::Clear()
     }
     SPI_End();
     this -> RefreshCanvas(); 
-    WaitUntilIdle();
+   // WaitUntilIdle();
 
 }
 void EPD::DrawFrame_BW()

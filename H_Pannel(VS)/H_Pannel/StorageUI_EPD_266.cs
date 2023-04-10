@@ -71,7 +71,7 @@ namespace H_Pannel_lib
                 return 152;
             }
         }
-        static public int NumOfLED = 100;
+        static public int NumOfLED = 10;
         static public byte[] Get_Empty_LEDBytes()
         {
             return new byte[NumOfLED * 3];
@@ -405,7 +405,25 @@ namespace H_Pannel_lib
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
             return Communication.Get_WS2812_Buffer(uDP_Class, IP , NumOfLED * 3);
         }
-
+        public bool Set_ClearCanvas_UART()
+        {
+            return this.Set_ClearCanvas_UART(mySerialPort.PortName);
+        }
+        public bool Set_ClearCanvas_UART(string PortName)
+        {
+            mySerialPort.PortName = PortName;
+            return Communication.UART_Command_Set_ClearCanvas(mySerialPort);
+        }
+        public bool Set_Stroage_LED_UART(Color color)
+        {
+            return this.Set_Stroage_LED_UART(mySerialPort.PortName, color);
+        }
+        public bool Set_Stroage_LED_UART(string PortName, Color color)
+        {
+            mySerialPort.PortName = PortName;
+            byte[] LED_Bytes = Get_Pannel_LEDBytes(color);
+            return Communication.UART_Command_Set_WS2812_Buffer(mySerialPort, 0, LED_Bytes);
+        }
         public bool DrawToEpd_UDP(string IP)
         {
             Storage storage = this.SQL_GetStorage(IP);

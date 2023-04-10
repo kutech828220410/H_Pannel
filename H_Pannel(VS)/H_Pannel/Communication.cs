@@ -26,7 +26,8 @@ namespace H_Pannel_lib
     {
         EPD266_B,
         EPD583,
-        EPD290_V3
+        EPD290_V2,
+        EPD290_V3,
     }
     public class Communication
     {
@@ -519,7 +520,7 @@ namespace H_Pannel_lib
                 _bmp.RotateFlip(RotateFlipType.Rotate90FlipXY);
                 byte[] bytes_BW = new byte[(height / 8) * width];
                 byte[] bytes_RW = new byte[(height / 8) * width];
-                BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD290_V3);
+                BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD290_V2);
                 MyTimer myTimer = new MyTimer();
                 myTimer.StartTickTime(50000);
                 flag_OK = EPD_DrawImage(uDP_Class, IP, bytes_BW, bytes_RW, (height / 8) * width / EPD290_frameDIV);
@@ -5328,6 +5329,24 @@ namespace H_Pannel_lib
                                 else
                                 {
                                     temp_RW |= (byte)(0x00);
+                                }
+                            }
+                            else if (ePD_Type == EPD_Type.EPD290_V2)
+                            {
+                                if (R[i] == 255 && G[i] == 255 && B[i] == 255)
+                                {
+                                    temp_BW |= (byte)(0x01);
+                                    temp_RW |= (byte)(0x00);
+                                }
+                                else if (R[i] == 0 && G[i] == 0 && B[i] == 0)
+                                {
+                                    temp_BW |= (byte)(0x00);
+                                    temp_RW |= (byte)(0x00);
+                                }
+                                else if (R[i] == 255 && G[i] == 0 && B[i] == 0)
+                                {
+                                    temp_BW |= (byte)(0x00);
+                                    temp_RW |= (byte)(0x01);
                                 }
                             }
                             else if (ePD_Type == EPD_Type.EPD290_V3)
