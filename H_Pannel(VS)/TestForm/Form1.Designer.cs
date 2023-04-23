@@ -33,6 +33,14 @@ namespace TestForm
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.測試單元 = new System.Windows.Forms.TabPage();
             this.plC_RJ_GroupBox2 = new MyUI.PLC_RJ_GroupBox();
+            this.rJ_TextBox_EPD266_ServerIP = new MyUI.RJ_TextBox();
+            this.rJ_Lable2 = new MyUI.RJ_Lable();
+            this.rJ_TextBox_EPD266_Password = new MyUI.RJ_TextBox();
+            this.rJ_Lable = new MyUI.RJ_Lable();
+            this.rJ_TextBox_EPD266_SSID = new MyUI.RJ_TextBox();
+            this.rJ_Lable_EPD266_SSID = new MyUI.RJ_Lable();
+            this.rJ_TextBox_EPD266_IP = new MyUI.RJ_TextBox();
+            this.rJ_Lable1 = new MyUI.RJ_Lable();
             this.plC_RJ_Button_EPD266_OTA = new MyUI.PLC_RJ_Button();
             this.plC_RJ_Button_EPD266_寫入參數 = new MyUI.PLC_RJ_Button();
             this.plC_RJ_Button_EPD266_亮燈 = new MyUI.PLC_RJ_Button();
@@ -53,14 +61,7 @@ namespace TestForm
             this.PLC = new System.Windows.Forms.TabPage();
             this.plC_UI_Init = new MyUI.PLC_UI_Init();
             this.lowerMachine_Panel = new LadderUI.LowerMachine_Panel();
-            this.rJ_Lable1 = new MyUI.RJ_Lable();
-            this.rJ_TextBox_EPD266_IP = new MyUI.RJ_TextBox();
-            this.rJ_TextBox_EPD266_SSID = new MyUI.RJ_TextBox();
-            this.rJ_Lable_EPD266_SSID = new MyUI.RJ_Lable();
-            this.rJ_TextBox_EPD266_Password = new MyUI.RJ_TextBox();
-            this.rJ_Lable = new MyUI.RJ_Lable();
-            this.rJ_TextBox_EPD266_ServerIP = new MyUI.RJ_TextBox();
-            this.rJ_Lable2 = new MyUI.RJ_Lable();
+            this.plC_RJ_Button_EPD266_IP加1 = new MyUI.PLC_RJ_Button();
             this.tabControl1.SuspendLayout();
             this.測試單元.SuspendLayout();
             this.plC_RJ_GroupBox2.ContentsPanel.SuspendLayout();
@@ -109,6 +110,7 @@ namespace TestForm
             this.plC_RJ_GroupBox2.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.plC_RJ_GroupBox2.ContentsPanel.BorderRadius = 5;
             this.plC_RJ_GroupBox2.ContentsPanel.BorderSize = 2;
+            this.plC_RJ_GroupBox2.ContentsPanel.Controls.Add(this.plC_RJ_Button_EPD266_IP加1);
             this.plC_RJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_TextBox_EPD266_ServerIP);
             this.plC_RJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Lable2);
             this.plC_RJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_TextBox_EPD266_Password);
@@ -128,7 +130,7 @@ namespace TestForm
             this.plC_RJ_GroupBox2.ContentsPanel.Location = new System.Drawing.Point(0, 45);
             this.plC_RJ_GroupBox2.ContentsPanel.Margin = new System.Windows.Forms.Padding(11, 12, 11, 12);
             this.plC_RJ_GroupBox2.ContentsPanel.Name = "ContentsPanel";
-            this.plC_RJ_GroupBox2.ContentsPanel.Size = new System.Drawing.Size(532, 460);
+            this.plC_RJ_GroupBox2.ContentsPanel.Size = new System.Drawing.Size(678, 460);
             this.plC_RJ_GroupBox2.ContentsPanel.TabIndex = 2;
             this.plC_RJ_GroupBox2.Location = new System.Drawing.Point(200, 164);
             this.plC_RJ_GroupBox2.Margin = new System.Windows.Forms.Padding(6);
@@ -137,7 +139,7 @@ namespace TestForm
             this.plC_RJ_GroupBox2.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.plC_RJ_GroupBox2.PannelBorderRadius = 5;
             this.plC_RJ_GroupBox2.PannelBorderSize = 2;
-            this.plC_RJ_GroupBox2.Size = new System.Drawing.Size(532, 505);
+            this.plC_RJ_GroupBox2.Size = new System.Drawing.Size(678, 505);
             this.plC_RJ_GroupBox2.TabIndex = 42;
             this.plC_RJ_GroupBox2.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
             this.plC_RJ_GroupBox2.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
@@ -148,6 +150,170 @@ namespace TestForm
             this.plC_RJ_GroupBox2.TitleHeight = 45;
             this.plC_RJ_GroupBox2.TitleTextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.plC_RJ_GroupBox2.TitleTexts = "EPD266 [Port:29000,30000]";
+            // 
+            // rJ_TextBox_EPD266_ServerIP
+            // 
+            this.rJ_TextBox_EPD266_ServerIP.BackColor = System.Drawing.SystemColors.Window;
+            this.rJ_TextBox_EPD266_ServerIP.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.rJ_TextBox_EPD266_ServerIP.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.rJ_TextBox_EPD266_ServerIP.BorderRadius = 0;
+            this.rJ_TextBox_EPD266_ServerIP.BorderSize = 2;
+            this.rJ_TextBox_EPD266_ServerIP.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_TextBox_EPD266_ServerIP.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_EPD266_ServerIP.Location = new System.Drawing.Point(177, 299);
+            this.rJ_TextBox_EPD266_ServerIP.Multiline = false;
+            this.rJ_TextBox_EPD266_ServerIP.Name = "rJ_TextBox_EPD266_ServerIP";
+            this.rJ_TextBox_EPD266_ServerIP.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.rJ_TextBox_EPD266_ServerIP.PassWordChar = false;
+            this.rJ_TextBox_EPD266_ServerIP.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.rJ_TextBox_EPD266_ServerIP.PlaceholderText = "";
+            this.rJ_TextBox_EPD266_ServerIP.ShowTouchPannel = false;
+            this.rJ_TextBox_EPD266_ServerIP.Size = new System.Drawing.Size(250, 40);
+            this.rJ_TextBox_EPD266_ServerIP.TabIndex = 50;
+            this.rJ_TextBox_EPD266_ServerIP.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
+            this.rJ_TextBox_EPD266_ServerIP.Texts = "";
+            this.rJ_TextBox_EPD266_ServerIP.UnderlineStyle = false;
+            // 
+            // rJ_Lable2
+            // 
+            this.rJ_Lable2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable2.BackgroundColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable2.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Lable2.BorderRadius = 8;
+            this.rJ_Lable2.BorderSize = 0;
+            this.rJ_Lable2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Lable2.Font = new System.Drawing.Font("新細明體", 16F);
+            this.rJ_Lable2.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable2.Location = new System.Drawing.Point(39, 294);
+            this.rJ_Lable2.Name = "rJ_Lable2";
+            this.rJ_Lable2.Size = new System.Drawing.Size(123, 51);
+            this.rJ_Lable2.TabIndex = 49;
+            this.rJ_Lable2.Text = "Server IP";
+            this.rJ_Lable2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_Lable2.TextColor = System.Drawing.Color.White;
+            // 
+            // rJ_TextBox_EPD266_Password
+            // 
+            this.rJ_TextBox_EPD266_Password.BackColor = System.Drawing.SystemColors.Window;
+            this.rJ_TextBox_EPD266_Password.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.rJ_TextBox_EPD266_Password.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.rJ_TextBox_EPD266_Password.BorderRadius = 0;
+            this.rJ_TextBox_EPD266_Password.BorderSize = 2;
+            this.rJ_TextBox_EPD266_Password.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_TextBox_EPD266_Password.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_EPD266_Password.Location = new System.Drawing.Point(177, 238);
+            this.rJ_TextBox_EPD266_Password.Multiline = false;
+            this.rJ_TextBox_EPD266_Password.Name = "rJ_TextBox_EPD266_Password";
+            this.rJ_TextBox_EPD266_Password.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.rJ_TextBox_EPD266_Password.PassWordChar = false;
+            this.rJ_TextBox_EPD266_Password.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.rJ_TextBox_EPD266_Password.PlaceholderText = "";
+            this.rJ_TextBox_EPD266_Password.ShowTouchPannel = false;
+            this.rJ_TextBox_EPD266_Password.Size = new System.Drawing.Size(250, 40);
+            this.rJ_TextBox_EPD266_Password.TabIndex = 48;
+            this.rJ_TextBox_EPD266_Password.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
+            this.rJ_TextBox_EPD266_Password.Texts = "";
+            this.rJ_TextBox_EPD266_Password.UnderlineStyle = false;
+            // 
+            // rJ_Lable
+            // 
+            this.rJ_Lable.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable.BackgroundColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Lable.BorderRadius = 8;
+            this.rJ_Lable.BorderSize = 0;
+            this.rJ_Lable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Lable.Font = new System.Drawing.Font("新細明體", 16F);
+            this.rJ_Lable.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable.Location = new System.Drawing.Point(39, 233);
+            this.rJ_Lable.Name = "rJ_Lable";
+            this.rJ_Lable.Size = new System.Drawing.Size(123, 51);
+            this.rJ_Lable.TabIndex = 47;
+            this.rJ_Lable.Text = "Password";
+            this.rJ_Lable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_Lable.TextColor = System.Drawing.Color.White;
+            // 
+            // rJ_TextBox_EPD266_SSID
+            // 
+            this.rJ_TextBox_EPD266_SSID.BackColor = System.Drawing.SystemColors.Window;
+            this.rJ_TextBox_EPD266_SSID.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.rJ_TextBox_EPD266_SSID.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.rJ_TextBox_EPD266_SSID.BorderRadius = 0;
+            this.rJ_TextBox_EPD266_SSID.BorderSize = 2;
+            this.rJ_TextBox_EPD266_SSID.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_TextBox_EPD266_SSID.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_EPD266_SSID.Location = new System.Drawing.Point(177, 176);
+            this.rJ_TextBox_EPD266_SSID.Multiline = false;
+            this.rJ_TextBox_EPD266_SSID.Name = "rJ_TextBox_EPD266_SSID";
+            this.rJ_TextBox_EPD266_SSID.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.rJ_TextBox_EPD266_SSID.PassWordChar = false;
+            this.rJ_TextBox_EPD266_SSID.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.rJ_TextBox_EPD266_SSID.PlaceholderText = "";
+            this.rJ_TextBox_EPD266_SSID.ShowTouchPannel = false;
+            this.rJ_TextBox_EPD266_SSID.Size = new System.Drawing.Size(250, 40);
+            this.rJ_TextBox_EPD266_SSID.TabIndex = 46;
+            this.rJ_TextBox_EPD266_SSID.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
+            this.rJ_TextBox_EPD266_SSID.Texts = "";
+            this.rJ_TextBox_EPD266_SSID.UnderlineStyle = false;
+            // 
+            // rJ_Lable_EPD266_SSID
+            // 
+            this.rJ_Lable_EPD266_SSID.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable_EPD266_SSID.BackgroundColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable_EPD266_SSID.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Lable_EPD266_SSID.BorderRadius = 8;
+            this.rJ_Lable_EPD266_SSID.BorderSize = 0;
+            this.rJ_Lable_EPD266_SSID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Lable_EPD266_SSID.Font = new System.Drawing.Font("新細明體", 16F);
+            this.rJ_Lable_EPD266_SSID.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable_EPD266_SSID.Location = new System.Drawing.Point(39, 171);
+            this.rJ_Lable_EPD266_SSID.Name = "rJ_Lable_EPD266_SSID";
+            this.rJ_Lable_EPD266_SSID.Size = new System.Drawing.Size(123, 51);
+            this.rJ_Lable_EPD266_SSID.TabIndex = 45;
+            this.rJ_Lable_EPD266_SSID.Text = "SSID";
+            this.rJ_Lable_EPD266_SSID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_Lable_EPD266_SSID.TextColor = System.Drawing.Color.White;
+            // 
+            // rJ_TextBox_EPD266_IP
+            // 
+            this.rJ_TextBox_EPD266_IP.BackColor = System.Drawing.SystemColors.Window;
+            this.rJ_TextBox_EPD266_IP.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.rJ_TextBox_EPD266_IP.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.rJ_TextBox_EPD266_IP.BorderRadius = 0;
+            this.rJ_TextBox_EPD266_IP.BorderSize = 2;
+            this.rJ_TextBox_EPD266_IP.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_TextBox_EPD266_IP.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_EPD266_IP.Location = new System.Drawing.Point(177, 116);
+            this.rJ_TextBox_EPD266_IP.Multiline = false;
+            this.rJ_TextBox_EPD266_IP.Name = "rJ_TextBox_EPD266_IP";
+            this.rJ_TextBox_EPD266_IP.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.rJ_TextBox_EPD266_IP.PassWordChar = false;
+            this.rJ_TextBox_EPD266_IP.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.rJ_TextBox_EPD266_IP.PlaceholderText = "";
+            this.rJ_TextBox_EPD266_IP.ShowTouchPannel = false;
+            this.rJ_TextBox_EPD266_IP.Size = new System.Drawing.Size(250, 40);
+            this.rJ_TextBox_EPD266_IP.TabIndex = 44;
+            this.rJ_TextBox_EPD266_IP.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
+            this.rJ_TextBox_EPD266_IP.Texts = "";
+            this.rJ_TextBox_EPD266_IP.UnderlineStyle = false;
+            // 
+            // rJ_Lable1
+            // 
+            this.rJ_Lable1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable1.BackgroundColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable1.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Lable1.BorderRadius = 8;
+            this.rJ_Lable1.BorderSize = 0;
+            this.rJ_Lable1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Lable1.Font = new System.Drawing.Font("新細明體", 16F);
+            this.rJ_Lable1.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable1.Location = new System.Drawing.Point(39, 111);
+            this.rJ_Lable1.Name = "rJ_Lable1";
+            this.rJ_Lable1.Size = new System.Drawing.Size(123, 51);
+            this.rJ_Lable1.TabIndex = 43;
+            this.rJ_Lable1.Text = "IP";
+            this.rJ_Lable1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_Lable1.TextColor = System.Drawing.Color.White;
             // 
             // plC_RJ_Button_EPD266_OTA
             // 
@@ -688,169 +854,48 @@ namespace TestForm
             this.lowerMachine_Panel.TabIndex = 0;
             this.lowerMachine_Panel.掃描速度 = 0;
             // 
-            // rJ_Lable1
+            // plC_RJ_Button_EPD266_IP加1
             // 
-            this.rJ_Lable1.BackColor = System.Drawing.Color.RoyalBlue;
-            this.rJ_Lable1.BackgroundColor = System.Drawing.Color.RoyalBlue;
-            this.rJ_Lable1.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Lable1.BorderRadius = 8;
-            this.rJ_Lable1.BorderSize = 0;
-            this.rJ_Lable1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Lable1.Font = new System.Drawing.Font("新細明體", 16F);
-            this.rJ_Lable1.ForeColor = System.Drawing.Color.White;
-            this.rJ_Lable1.Location = new System.Drawing.Point(39, 111);
-            this.rJ_Lable1.Name = "rJ_Lable1";
-            this.rJ_Lable1.Size = new System.Drawing.Size(123, 51);
-            this.rJ_Lable1.TabIndex = 43;
-            this.rJ_Lable1.Text = "IP";
-            this.rJ_Lable1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_Lable1.TextColor = System.Drawing.Color.White;
-            // 
-            // rJ_TextBox_EPD266_IP
-            // 
-            this.rJ_TextBox_EPD266_IP.BackColor = System.Drawing.SystemColors.Window;
-            this.rJ_TextBox_EPD266_IP.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.rJ_TextBox_EPD266_IP.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.rJ_TextBox_EPD266_IP.BorderRadius = 0;
-            this.rJ_TextBox_EPD266_IP.BorderSize = 2;
-            this.rJ_TextBox_EPD266_IP.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_TextBox_EPD266_IP.ForeColor = System.Drawing.Color.DimGray;
-            this.rJ_TextBox_EPD266_IP.Location = new System.Drawing.Point(177, 116);
-            this.rJ_TextBox_EPD266_IP.Multiline = false;
-            this.rJ_TextBox_EPD266_IP.Name = "rJ_TextBox_EPD266_IP";
-            this.rJ_TextBox_EPD266_IP.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.rJ_TextBox_EPD266_IP.PassWordChar = false;
-            this.rJ_TextBox_EPD266_IP.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.rJ_TextBox_EPD266_IP.PlaceholderText = "";
-            this.rJ_TextBox_EPD266_IP.ShowTouchPannel = false;
-            this.rJ_TextBox_EPD266_IP.Size = new System.Drawing.Size(250, 40);
-            this.rJ_TextBox_EPD266_IP.TabIndex = 44;
-            this.rJ_TextBox_EPD266_IP.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
-            this.rJ_TextBox_EPD266_IP.Texts = "";
-            this.rJ_TextBox_EPD266_IP.UnderlineStyle = false;
-            // 
-            // rJ_TextBox_EPD266_SSID
-            // 
-            this.rJ_TextBox_EPD266_SSID.BackColor = System.Drawing.SystemColors.Window;
-            this.rJ_TextBox_EPD266_SSID.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.rJ_TextBox_EPD266_SSID.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.rJ_TextBox_EPD266_SSID.BorderRadius = 0;
-            this.rJ_TextBox_EPD266_SSID.BorderSize = 2;
-            this.rJ_TextBox_EPD266_SSID.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_TextBox_EPD266_SSID.ForeColor = System.Drawing.Color.DimGray;
-            this.rJ_TextBox_EPD266_SSID.Location = new System.Drawing.Point(177, 176);
-            this.rJ_TextBox_EPD266_SSID.Multiline = false;
-            this.rJ_TextBox_EPD266_SSID.Name = "rJ_TextBox_EPD266_SSID";
-            this.rJ_TextBox_EPD266_SSID.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.rJ_TextBox_EPD266_SSID.PassWordChar = false;
-            this.rJ_TextBox_EPD266_SSID.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.rJ_TextBox_EPD266_SSID.PlaceholderText = "";
-            this.rJ_TextBox_EPD266_SSID.ShowTouchPannel = false;
-            this.rJ_TextBox_EPD266_SSID.Size = new System.Drawing.Size(250, 40);
-            this.rJ_TextBox_EPD266_SSID.TabIndex = 46;
-            this.rJ_TextBox_EPD266_SSID.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
-            this.rJ_TextBox_EPD266_SSID.Texts = "";
-            this.rJ_TextBox_EPD266_SSID.UnderlineStyle = false;
-            // 
-            // rJ_Lable_EPD266_SSID
-            // 
-            this.rJ_Lable_EPD266_SSID.BackColor = System.Drawing.Color.RoyalBlue;
-            this.rJ_Lable_EPD266_SSID.BackgroundColor = System.Drawing.Color.RoyalBlue;
-            this.rJ_Lable_EPD266_SSID.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Lable_EPD266_SSID.BorderRadius = 8;
-            this.rJ_Lable_EPD266_SSID.BorderSize = 0;
-            this.rJ_Lable_EPD266_SSID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Lable_EPD266_SSID.Font = new System.Drawing.Font("新細明體", 16F);
-            this.rJ_Lable_EPD266_SSID.ForeColor = System.Drawing.Color.White;
-            this.rJ_Lable_EPD266_SSID.Location = new System.Drawing.Point(39, 171);
-            this.rJ_Lable_EPD266_SSID.Name = "rJ_Lable_EPD266_SSID";
-            this.rJ_Lable_EPD266_SSID.Size = new System.Drawing.Size(123, 51);
-            this.rJ_Lable_EPD266_SSID.TabIndex = 45;
-            this.rJ_Lable_EPD266_SSID.Text = "SSID";
-            this.rJ_Lable_EPD266_SSID.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_Lable_EPD266_SSID.TextColor = System.Drawing.Color.White;
-            // 
-            // rJ_TextBox_EPD266_Password
-            // 
-            this.rJ_TextBox_EPD266_Password.BackColor = System.Drawing.SystemColors.Window;
-            this.rJ_TextBox_EPD266_Password.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.rJ_TextBox_EPD266_Password.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.rJ_TextBox_EPD266_Password.BorderRadius = 0;
-            this.rJ_TextBox_EPD266_Password.BorderSize = 2;
-            this.rJ_TextBox_EPD266_Password.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_TextBox_EPD266_Password.ForeColor = System.Drawing.Color.DimGray;
-            this.rJ_TextBox_EPD266_Password.Location = new System.Drawing.Point(177, 238);
-            this.rJ_TextBox_EPD266_Password.Multiline = false;
-            this.rJ_TextBox_EPD266_Password.Name = "rJ_TextBox_EPD266_Password";
-            this.rJ_TextBox_EPD266_Password.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.rJ_TextBox_EPD266_Password.PassWordChar = false;
-            this.rJ_TextBox_EPD266_Password.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.rJ_TextBox_EPD266_Password.PlaceholderText = "";
-            this.rJ_TextBox_EPD266_Password.ShowTouchPannel = false;
-            this.rJ_TextBox_EPD266_Password.Size = new System.Drawing.Size(250, 40);
-            this.rJ_TextBox_EPD266_Password.TabIndex = 48;
-            this.rJ_TextBox_EPD266_Password.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
-            this.rJ_TextBox_EPD266_Password.Texts = "";
-            this.rJ_TextBox_EPD266_Password.UnderlineStyle = false;
-            // 
-            // rJ_Lable
-            // 
-            this.rJ_Lable.BackColor = System.Drawing.Color.RoyalBlue;
-            this.rJ_Lable.BackgroundColor = System.Drawing.Color.RoyalBlue;
-            this.rJ_Lable.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Lable.BorderRadius = 8;
-            this.rJ_Lable.BorderSize = 0;
-            this.rJ_Lable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Lable.Font = new System.Drawing.Font("新細明體", 16F);
-            this.rJ_Lable.ForeColor = System.Drawing.Color.White;
-            this.rJ_Lable.Location = new System.Drawing.Point(39, 233);
-            this.rJ_Lable.Name = "rJ_Lable";
-            this.rJ_Lable.Size = new System.Drawing.Size(123, 51);
-            this.rJ_Lable.TabIndex = 47;
-            this.rJ_Lable.Text = "Password";
-            this.rJ_Lable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_Lable.TextColor = System.Drawing.Color.White;
-            // 
-            // rJ_TextBox_EPD266_ServerIP
-            // 
-            this.rJ_TextBox_EPD266_ServerIP.BackColor = System.Drawing.SystemColors.Window;
-            this.rJ_TextBox_EPD266_ServerIP.BorderColor = System.Drawing.Color.MediumSlateBlue;
-            this.rJ_TextBox_EPD266_ServerIP.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.rJ_TextBox_EPD266_ServerIP.BorderRadius = 0;
-            this.rJ_TextBox_EPD266_ServerIP.BorderSize = 2;
-            this.rJ_TextBox_EPD266_ServerIP.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_TextBox_EPD266_ServerIP.ForeColor = System.Drawing.Color.DimGray;
-            this.rJ_TextBox_EPD266_ServerIP.Location = new System.Drawing.Point(177, 299);
-            this.rJ_TextBox_EPD266_ServerIP.Multiline = false;
-            this.rJ_TextBox_EPD266_ServerIP.Name = "rJ_TextBox_EPD266_ServerIP";
-            this.rJ_TextBox_EPD266_ServerIP.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.rJ_TextBox_EPD266_ServerIP.PassWordChar = false;
-            this.rJ_TextBox_EPD266_ServerIP.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.rJ_TextBox_EPD266_ServerIP.PlaceholderText = "";
-            this.rJ_TextBox_EPD266_ServerIP.ShowTouchPannel = false;
-            this.rJ_TextBox_EPD266_ServerIP.Size = new System.Drawing.Size(250, 40);
-            this.rJ_TextBox_EPD266_ServerIP.TabIndex = 50;
-            this.rJ_TextBox_EPD266_ServerIP.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
-            this.rJ_TextBox_EPD266_ServerIP.Texts = "";
-            this.rJ_TextBox_EPD266_ServerIP.UnderlineStyle = false;
-            // 
-            // rJ_Lable2
-            // 
-            this.rJ_Lable2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.rJ_Lable2.BackgroundColor = System.Drawing.Color.RoyalBlue;
-            this.rJ_Lable2.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Lable2.BorderRadius = 8;
-            this.rJ_Lable2.BorderSize = 0;
-            this.rJ_Lable2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Lable2.Font = new System.Drawing.Font("新細明體", 16F);
-            this.rJ_Lable2.ForeColor = System.Drawing.Color.White;
-            this.rJ_Lable2.Location = new System.Drawing.Point(39, 294);
-            this.rJ_Lable2.Name = "rJ_Lable2";
-            this.rJ_Lable2.Size = new System.Drawing.Size(123, 51);
-            this.rJ_Lable2.TabIndex = 49;
-            this.rJ_Lable2.Text = "Server IP";
-            this.rJ_Lable2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_Lable2.TextColor = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_IP加1.AutoResetState = false;
+            this.plC_RJ_Button_EPD266_IP加1.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.plC_RJ_Button_EPD266_IP加1.Bool = false;
+            this.plC_RJ_Button_EPD266_IP加1.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.plC_RJ_Button_EPD266_IP加1.BorderRadius = 5;
+            this.plC_RJ_Button_EPD266_IP加1.BorderSize = 0;
+            this.plC_RJ_Button_EPD266_IP加1.but_press = false;
+            this.plC_RJ_Button_EPD266_IP加1.buttonType = MyUI.RJ_Button.ButtonType.Toggle;
+            this.plC_RJ_Button_EPD266_IP加1.FlatAppearance.BorderSize = 0;
+            this.plC_RJ_Button_EPD266_IP加1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.plC_RJ_Button_EPD266_IP加1.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD266_IP加1.Icon = System.Windows.Forms.MessageBoxIcon.Warning;
+            this.plC_RJ_Button_EPD266_IP加1.Location = new System.Drawing.Point(436, 116);
+            this.plC_RJ_Button_EPD266_IP加1.Margin = new System.Windows.Forms.Padding(6);
+            this.plC_RJ_Button_EPD266_IP加1.Name = "plC_RJ_Button_EPD266_IP加1";
+            this.plC_RJ_Button_EPD266_IP加1.OFF_文字內容 = "+1";
+            this.plC_RJ_Button_EPD266_IP加1.OFF_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD266_IP加1.OFF_文字顏色 = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_IP加1.OFF_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_IP加1.ON_BorderSize = 5;
+            this.plC_RJ_Button_EPD266_IP加1.ON_文字內容 = "+1";
+            this.plC_RJ_Button_EPD266_IP加1.ON_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD266_IP加1.ON_文字顏色 = System.Drawing.Color.Black;
+            this.plC_RJ_Button_EPD266_IP加1.ON_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_IP加1.Size = new System.Drawing.Size(78, 40);
+            this.plC_RJ_Button_EPD266_IP加1.State = false;
+            this.plC_RJ_Button_EPD266_IP加1.TabIndex = 51;
+            this.plC_RJ_Button_EPD266_IP加1.Text = "+1";
+            this.plC_RJ_Button_EPD266_IP加1.TextColor = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_IP加1.Texts = "+1";
+            this.plC_RJ_Button_EPD266_IP加1.UseVisualStyleBackColor = false;
+            this.plC_RJ_Button_EPD266_IP加1.字型鎖住 = false;
+            this.plC_RJ_Button_EPD266_IP加1.按鈕型態 = MyUI.PLC_RJ_Button.StatusEnum.保持型;
+            this.plC_RJ_Button_EPD266_IP加1.按鍵方式 = MyUI.PLC_RJ_Button.PressEnum.Mouse_左鍵;
+            this.plC_RJ_Button_EPD266_IP加1.文字鎖住 = false;
+            this.plC_RJ_Button_EPD266_IP加1.讀取位元反向 = false;
+            this.plC_RJ_Button_EPD266_IP加1.讀寫鎖住 = false;
+            this.plC_RJ_Button_EPD266_IP加1.音效 = true;
+            this.plC_RJ_Button_EPD266_IP加1.顯示 = false;
+            this.plC_RJ_Button_EPD266_IP加1.顯示狀態 = false;
             // 
             // Form1
             // 
@@ -915,6 +960,7 @@ namespace TestForm
         private MyUI.RJ_Lable rJ_Lable_EPD266_SSID;
         private MyUI.RJ_TextBox rJ_TextBox_EPD266_ServerIP;
         private MyUI.RJ_Lable rJ_Lable2;
+        private MyUI.PLC_RJ_Button plC_RJ_Button_EPD266_IP加1;
     }
 }
 

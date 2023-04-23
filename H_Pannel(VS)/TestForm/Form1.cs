@@ -51,6 +51,7 @@ namespace TestForm
             this.plC_RJ_Button_EPD266_測試一次.MouseDownEvent += PlC_RJ_Button_EPD266_測試一次_MouseDownEvent;
             this.plC_RJ_Button_EPD266_寫入參數.MouseDownEvent += PlC_RJ_Button_EPD266_寫入參數_MouseDownEvent;
             this.plC_RJ_Button_EPD266_OTA.MouseDownEvent += PlC_RJ_Button_EPD266_OTA_MouseDownEvent;
+            this.plC_RJ_Button_EPD266_IP加1.MouseDownEvent += PlC_RJ_Button_EPD266_IP加1_MouseDownEvent;
             this.plC_UI_Init.UI_Finished_Event += PlC_UI_Init_UI_Finished_Event;
             this.plC_UI_Init.Run(this.FindForm(), this.lowerMachine_Panel);
             MyMessageBox.音效 = false;
@@ -168,6 +169,17 @@ namespace TestForm
                 this.storageUI_EPD_266.Set_OTAUpdate(this.storageUI_EPD_266.IP_Adress, 29000);
             }
    
+        }
+        private void PlC_RJ_Button_EPD266_IP加1_MouseDownEvent(MouseEventArgs mevent)
+        {
+            string IP = rJ_TextBox_EPD266_IP.Text;
+            string[] IP_Ary = IP.Split('.');
+            if (IP_Ary.Length != 4) return;
+            int temp = IP_Ary[3].StringToInt32();
+            this.Invoke(new Action(delegate 
+            {
+                rJ_TextBox_EPD266_IP.Text = $"{IP_Ary[0]}.{IP_Ary[1]}.{IP_Ary[2]}.{temp + 1}";
+            }));
         }
         #endregion
     }
