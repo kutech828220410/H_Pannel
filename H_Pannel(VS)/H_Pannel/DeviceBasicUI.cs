@@ -721,20 +721,20 @@ namespace H_Pannel_lib
             }
             if (!Communication.UART_Command_Set_IP_Adress(mySerialPort, this.IP_Adress))
             {
-                flag_OK = false;
+                return false;
             }
             if (!Communication.UART_Command_Set_Subnet(mySerialPort, this.Subnet))
             {
-                flag_OK = false;
+                return false;
             }
-            if (!Communication.UART_Command_Set_Gateway(mySerialPort, this.Gateway)) flag_OK = false;
-            if (!Communication.UART_Command_Set_DNS(mySerialPort, this.DNS)) flag_OK = false;
-            if (!Communication.UART_Command_Set_Server_IP_Adress(mySerialPort, this.Server_IP_Adress)) flag_OK = false;
-            if (!Communication.UART_Command_Set_Local_Port(mySerialPort, localport)) flag_OK = false;
-            if (!Communication.UART_Command_Set_Server_Port(mySerialPort, serverport)) flag_OK = false;
-            if (!Communication.UART_Command_Set_SSID(mySerialPort, this.SSID)) flag_OK = false;
-            if (!Communication.UART_Command_Set_Password(mySerialPort, this._Password)) flag_OK = false;
-            if (!Communication.UART_Command_Set_UDP_SendTime(mySerialPort, udp_sendtime)) flag_OK = false;
+            if (!Communication.UART_Command_Set_Gateway(mySerialPort, this.Gateway)) return false;
+            if (!Communication.UART_Command_Set_DNS(mySerialPort, this.DNS)) return false;
+            if (!Communication.UART_Command_Set_Server_IP_Adress(mySerialPort, this.Server_IP_Adress)) return false;
+            if (!Communication.UART_Command_Set_Local_Port(mySerialPort, localport)) return false;
+            if (!Communication.UART_Command_Set_Server_Port(mySerialPort, serverport)) return false;
+            if (!Communication.UART_Command_Set_SSID(mySerialPort, this.SSID)) return false;
+            if (!Communication.UART_Command_Set_Password(mySerialPort, this._Password)) return false;
+            if (!Communication.UART_Command_Set_UDP_SendTime(mySerialPort, udp_sendtime)) return false;
             return flag_OK;
         }
         public bool Ping(string IP)
