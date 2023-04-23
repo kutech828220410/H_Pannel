@@ -159,7 +159,10 @@ namespace TestForm
             this.storageUI_EPD_266._Password = this.rJ_TextBox_EPD266_Password.Texts;
             this.storageUI_EPD_266.Server_IP_Adress = this.rJ_TextBox_EPD266_ServerIP.Texts;
 
-            this.storageUI_EPD_266.WriteConfig(PortName);
+            if(this.storageUI_EPD_266.WriteConfig(PortName))
+            {
+                PlC_RJ_Button_EPD266_IP加1_MouseDownEvent(null);
+            }
         }
         private void PlC_RJ_Button_EPD266_OTA_MouseDownEvent(MouseEventArgs mevent)
         {
