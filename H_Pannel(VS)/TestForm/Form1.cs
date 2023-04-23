@@ -154,13 +154,14 @@ namespace TestForm
         }  
         private void PlC_RJ_Button_EPD266_寫入參數_MouseDownEvent(MouseEventArgs mevent)
         {
-            this.storageUI_EPD_266.IP_Adress = this.rJ_TextBox_EPD266_IP.Texts;
-            this.storageUI_EPD_266.SSID = this.rJ_TextBox_EPD266_SSID.Texts;
-            this.storageUI_EPD_266._Password = this.rJ_TextBox_EPD266_Password.Texts;
-            this.storageUI_EPD_266.Server_IP_Adress = this.rJ_TextBox_EPD266_ServerIP.Texts;
+            this.storageUI_EPD_266.IP_Adress = this.rJ_TextBox_EPD266_IP.Text;
+            this.storageUI_EPD_266.SSID = this.rJ_TextBox_EPD266_SSID.Text;
+            this.storageUI_EPD_266._Password = this.rJ_TextBox_EPD266_Password.Text;
+            this.storageUI_EPD_266.Server_IP_Adress = this.rJ_TextBox_EPD266_ServerIP.Text;
 
             if(this.storageUI_EPD_266.WriteConfig(PortName))
             {
+                if(this.checkBox_EPD266_自動加1.Checked)
                 PlC_RJ_Button_EPD266_IP加1_MouseDownEvent(null);
             }
         }

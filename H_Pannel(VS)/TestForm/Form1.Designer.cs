@@ -62,6 +62,7 @@ namespace TestForm
             this.plC_UI_Init = new MyUI.PLC_UI_Init();
             this.lowerMachine_Panel = new LadderUI.LowerMachine_Panel();
             this.plC_RJ_Button_EPD266_IP加1 = new MyUI.PLC_RJ_Button();
+            this.checkBox_EPD266_自動加1 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.測試單元.SuspendLayout();
             this.plC_RJ_GroupBox2.ContentsPanel.SuspendLayout();
@@ -110,6 +111,7 @@ namespace TestForm
             this.plC_RJ_GroupBox2.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.plC_RJ_GroupBox2.ContentsPanel.BorderRadius = 5;
             this.plC_RJ_GroupBox2.ContentsPanel.BorderSize = 2;
+            this.plC_RJ_GroupBox2.ContentsPanel.Controls.Add(this.checkBox_EPD266_自動加1);
             this.plC_RJ_GroupBox2.ContentsPanel.Controls.Add(this.plC_RJ_Button_EPD266_IP加1);
             this.plC_RJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_TextBox_EPD266_ServerIP);
             this.plC_RJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Lable2);
@@ -897,6 +899,17 @@ namespace TestForm
             this.plC_RJ_Button_EPD266_IP加1.顯示 = false;
             this.plC_RJ_Button_EPD266_IP加1.顯示狀態 = false;
             // 
+            // checkBox_EPD266_自動加1
+            // 
+            this.checkBox_EPD266_自動加1.AutoSize = true;
+            this.checkBox_EPD266_自動加1.ForeColor = System.Drawing.Color.Black;
+            this.checkBox_EPD266_自動加1.Location = new System.Drawing.Point(472, 426);
+            this.checkBox_EPD266_自動加1.Name = "checkBox_EPD266_自動加1";
+            this.checkBox_EPD266_自動加1.Size = new System.Drawing.Size(60, 16);
+            this.checkBox_EPD266_自動加1.TabIndex = 52;
+            this.checkBox_EPD266_自動加1.Text = "自動+1";
+            this.checkBox_EPD266_自動加1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -911,6 +924,7 @@ namespace TestForm
             this.tabControl1.ResumeLayout(false);
             this.測試單元.ResumeLayout(false);
             this.plC_RJ_GroupBox2.ContentsPanel.ResumeLayout(false);
+            this.plC_RJ_GroupBox2.ContentsPanel.PerformLayout();
             this.plC_RJ_GroupBox2.ResumeLayout(false);
             this.plC_RJ_GroupBox1.ContentsPanel.ResumeLayout(false);
             this.plC_RJ_GroupBox1.ResumeLayout(false);
@@ -961,6 +975,7 @@ namespace TestForm
         private MyUI.RJ_TextBox rJ_TextBox_EPD266_ServerIP;
         private MyUI.RJ_Lable rJ_Lable2;
         private MyUI.PLC_RJ_Button plC_RJ_Button_EPD266_IP加1;
+        private System.Windows.Forms.CheckBox checkBox_EPD266_自動加1;
     }
 }
 
