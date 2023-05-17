@@ -83,7 +83,49 @@ namespace H_Pannel_lib
         }
 
 
+        public Drawer CombineBoxes(List<int> list_Col, List<int> list_Row, Drawer drawer)
+        {
+            if (list_Col.Count == 1 || list_Row.Count == 1) return drawer;
+            if (list_Col.Count != list_Row.Count) return drawer; 
+            int col;
+            int row;
+            int seletedNum = list_Col.Count;
+            for (int i = 0; i < list_Col.Count; i++)
+            {
+                col = list_Col[i];
+                row = list_Row[i];
 
+                if (i == 0)
+                {
+                  drawer.Boxes[col][row].Slave = false;
+                  drawer.Boxes[col][row].SlaveBox_Column = list_Col[i + 1];
+                  drawer.Boxes[col][row].SlaveBox_Row = list_Row[i + 1];
+                  drawer.Boxes[col][row].MasterBox_Column = -1;
+                  drawer.Boxes[col][row].MasterBox_Row = -1;
+                }
+                else if (i == list_Col.Count - 1)
+                {
+                  drawer.Boxes[col][row].Slave = true;
+                  drawer.Boxes[col][row].SlaveBox_Column = -1;
+                  drawer.Boxes[col][row].SlaveBox_Row = -1;
+                  drawer.Boxes[col][row].MasterBox_Column = list_Col[0];
+                  drawer.Boxes[col][row].MasterBox_Row = list_Row[0];
+                }
+                else
+                {
+                  drawer.Boxes[col][row].Slave = true;
+                  drawer.Boxes[col][row].SlaveBox_Column = list_Col[i + 1];
+                  drawer.Boxes[col][row].SlaveBox_Row = list_Row[i + 1];
+                  drawer.Boxes[col][row].MasterBox_Column = list_Col[0];
+                  drawer.Boxes[col][row].MasterBox_Row = list_Row[0];
+                }
+              drawer.Boxes[col][row].Name = "";
+              drawer.Boxes[col][row].Code = "";
+              drawer.Boxes[col][row].Clear();
+
+            }
+            return drawer;
+        }
         public void CombineBoxes()
         {
             int col;
@@ -132,6 +174,51 @@ namespace H_Pannel_lib
             }
             this.DrawToPictureBox(this.CurrentDrawer);
             if (DrawerChangeEvent != null) DrawerChangeEvent(CurrentDrawer);
+        }
+        public Drawer SeparateBoxesAll(Drawer drawer)
+        {
+            List<int> list_Col = new List<int>();
+            List<int> list_Row = new List<int>();
+            for (int i = 0; i < 4; i++)
+            {
+                for (int k = 0; k < 8; k++)
+                {
+                    list_Col.Add(i);
+                    list_Row.Add(k);
+                }
+            }
+            return this.SeparateBoxes(list_Col, list_Row, drawer);
+        }
+        public Drawer SeparateBoxes(List<int> list_Col, List<int> list_Row, Drawer drawer)
+        {
+            int col;
+            int row;
+            if (list_Col.Count == 1 || list_Row.Count == 1) return drawer;
+            if (list_Col.Count != list_Row.Count) return drawer;
+
+            List<int[]> list_Col_Row = new List<int[]>();
+
+            for (int i = 0; i < list_Row.Count; i++)
+            {
+                list_Col_Row.Add(new int[] { list_Col[i], list_Row[i] });
+            }
+            list_Col_Row.Sort(new IcpCol());
+
+
+            for (int i = 0; i < list_Col_Row.Count; i++)
+            {
+                col = list_Col_Row[i][0];
+                row = list_Col_Row[i][1];
+                drawer.Boxes[col][row].Slave = false;
+                drawer.Boxes[col][row].SlaveBox_Column = -1;
+                drawer.Boxes[col][row].SlaveBox_Row = -1;
+                drawer.Boxes[col][row].MasterBox_Column = -1;
+                drawer.Boxes[col][row].MasterBox_Row = -1;
+                drawer.Boxes[col][row].Name = "";
+                drawer.Boxes[col][row].Code = "";
+                drawer.Boxes[col][row].Clear();
+            }
+            return drawer;
         }
         public void SeparateBoxes()
         {

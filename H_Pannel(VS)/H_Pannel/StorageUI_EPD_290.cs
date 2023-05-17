@@ -37,6 +37,7 @@ namespace H_Pannel_lib
             public int Input_dir { get => input_dir; set => input_dir = value; }
             public int Output_dir { get => output_dir; set => output_dir = value; }
             public int LaserDistance { get => laserDistance; set => laserDistance = value; }
+            public bool WS2812_State { get; set; }
 
             public bool Get_Input_dir(int index)
             {
@@ -472,6 +473,22 @@ namespace H_Pannel_lib
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
             return Get_LaserDistance(uDP_Class, IP);
+        }
+
+        public List<UDP_READ> GerAllUDP_READ()
+        {
+            List<UDP_READ> uDP_READs = new List<UDP_READ>();
+
+            List<string> list_UDPJsonString = this.GetAllUDPJsonString();
+
+            Parallel.ForEach(list_UDPJsonString, value =>
+            {
+                string jsonString = value;
+                UDP_READ uDP_READ = jsonString.JsonDeserializet<UDP_READ>();
+                if (uDP_READ != null) uDP_READs.LockAdd(uDP_READ);
+            });
+
+            return uDP_READs;
         }
 
         private void StorageUI_EPD_290_DeviceTableMouseDownRightEvent(string selectedText, List<System.Net.IPEndPoint> iPEndPoints)

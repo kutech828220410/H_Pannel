@@ -196,8 +196,16 @@ namespace H_Pannel_lib
             }
             return null;
         }
+        static public RowsLED SortByName(this List<RowsLED> rowsLEDs, string SotrageName)
+        {
+            for (int i = 0; i < rowsLEDs.Count; i++)
+            {
+                if (rowsLEDs[i].Name == SotrageName) return rowsLEDs[i];
+            }
+            return null;
+        }
 
-    
+
         static public void ReplaceIP(this RowsLED rowsLED, string IP)
         {
             rowsLED.ReplaceIP(IP, rowsLED.Port);

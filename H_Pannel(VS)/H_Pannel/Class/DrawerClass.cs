@@ -227,6 +227,15 @@ namespace H_Pannel_lib
 
             return null;
         }
+        static public Drawer SortByName(this List<Drawer> Drawers, string Name)
+        {
+            for (int i = 0; i < Drawers.Count; i++)
+            {
+                if (Drawers[i].Name == Name) return Drawers[i];
+            }
+
+            return null;
+        }
         static public Drawer ReplaceBox(this List<Drawer> Drawers, Box box)
         {
             Drawer drawer = Drawers.SortByIP(box.IP);
@@ -359,6 +368,25 @@ namespace H_Pannel_lib
         }
         public Drawer()
         {
+            this.BoxInit();
+        }
+        public Drawer(string IP, int Port, int PannelWidth, int PannelHeight)
+        {
+            this.IP = IP;
+            this.Port = Port;
+            this.PannelWidth = PannelWidth;
+            this.PannelHeight = PannelHeight;
+            this.drawerType = Enum_DrawerType._4X8;
+            if (this.drawerType == Enum_DrawerType._4X8)
+            {
+                this.Num_Of_Columns = 4;
+                this.Num_Of_Rows = 8;
+            }
+            else if (this.drawerType == Enum_DrawerType._3X8)
+            {
+                this.Num_Of_Columns = 3;
+                this.Num_Of_Rows = 8;
+            }
             this.BoxInit();
         }
         public Drawer(string IP, int Port)

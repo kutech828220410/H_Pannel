@@ -19,6 +19,7 @@ class MyWS2812
     void Show();
     int numOfLed = 0;
     double brightness = 100;
+    bool IsON(int lednum);
    private:  
     
     int offset = 5;

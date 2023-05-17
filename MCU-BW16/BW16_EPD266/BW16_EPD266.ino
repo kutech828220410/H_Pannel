@@ -41,6 +41,7 @@ MyWS2812 myWS2812;
 byte* framebuffer;
 
 MyTimer MyTimer_BoardInit;
+MyTimer MyTimer_CheckWS2812;
 bool flag_boradInit = false;
 MyLED MyLED_IS_Connented;
 
@@ -52,7 +53,7 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.3.0";
+String Version = "Ver 1.3.2";
 
 void setup() 
 {
@@ -79,6 +80,7 @@ void loop()
       myWS2812.Init(NUM_WS2812B_CRGB);
       epd.Init(); 
       xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle);
+      xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
       flag_boradInit = true;
    }
    if(flag_boradInit)
@@ -97,9 +99,12 @@ void loop()
           sub_UDP_Send();
           onPacketCallBack();
       } 
+      MyTimer_CheckWS2812.StartTickTime(30000);
+      
       if(flag_WS2812B_Refresh)
       {
            myWS2812.Show();
+           flag_JsonSend = true;
            flag_WS2812B_Refresh = false;
       }  
    }    
@@ -130,6 +135,23 @@ void Core0Task1( void * pvParameters )
        }
           
        delay(1);
+    }
+    
+}
+void Core0Task2( void * pvParameters )
+{
+    for(;;)
+    {      
+       
+       if(flag_boradInit)
+       {
+          if(!myWS2812.IsON(200))
+          {
+            flag_WS2812B_Refresh = true;
+          }
+       }
+          
+       delay(20000);
     }
     
 }

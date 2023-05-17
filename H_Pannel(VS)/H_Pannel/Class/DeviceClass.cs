@@ -242,13 +242,18 @@ namespace H_Pannel_lib
         public string Package { get => _Package; set => _Package = value; }
 
 
+        private int max_shipping = 1;
+        public int Max_shipping { get => max_shipping; set => max_shipping = value; }
+        private int max_Inventory = 0;
+        public int Max_Inventory { get => max_Inventory; set => max_Inventory = value; }
         private string _StorageName = "";
         public string StorageName { get => _StorageName; set => _StorageName = value; }
         private string _IP = "";
         public string IP { get => _IP; set => _IP = value; }
         private bool isWarning = false;
         public bool IsWarning { get => isWarning; set => isWarning = value; }
-
+        private string _Min_Package_Num = "";
+        public string Min_Package_Num { get => _Min_Package_Num; set => _Min_Package_Num = value; }
 
         public string Inventory
         {
@@ -285,6 +290,7 @@ namespace H_Pannel_lib
             set => list_Lot_number = value;
         }
 
+  
 
         protected List<string> list_Validity_period = new List<string>();
         protected List<string> list_Lot_number = new List<string>();
@@ -876,9 +882,13 @@ namespace H_Pannel_lib
         RowsLED = 5,
         RFID_Device = 6,
         Pannel35_lock = 7,
-        Pannel35= 7,
-        EPD290_lock = 1,
-        EPD290 = 2,
+        Pannel35= 8,
+        EPD290_lock = 9,
+        EPD290 = 10,
+        EPD1020 = 11,
+        EPD1020_lock = 12,
+        EPD420 = 13,
+        EPD420_lock = 14,
     }
     public enum HorizontalAlignment
     {
@@ -2737,8 +2747,7 @@ namespace H_Pannel_lib
         #region Min_Package_Num
         private string _Min_Package_Num_Title = "";
         public string Min_Package_Num_Title { get => _Min_Package_Num_Title; set => _Min_Package_Num_Title = value; }
-        private string _Min_Package_Num = "";
-        public string Min_Package_Num { get => _Min_Package_Num; set => _Min_Package_Num = value; }
+    
         [JsonIgnore]
         public Font Min_Package_Num_font = new Font("微軟正黑體", 12, FontStyle.Bold);
         [Browsable(false)]
@@ -3004,17 +3013,15 @@ namespace H_Pannel_lib
         public int station = -1;  
         public int Station { get => station; set => station = value; }
 
-     
-   
+
+        
+
+        private int masterIndex = -1;
         public int MasterIndex { get => masterIndex; set => masterIndex = value; }
         public int Index { get => index; set => index = value; }
-
-    
-    
-        private int masterIndex = -1;
+       
         private int index = 0;
 
-    
 
         public void PasteFormat(Device device)
         {

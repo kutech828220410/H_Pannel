@@ -45,6 +45,15 @@ void EPD::Clear()
     WaitUntilIdle();
 
 }
+void EPD::SendSPI(char* framebuffer ,int size, int offset)
+{
+   SPI_Begin();
+   for (int i = offset; i < size; i++) 
+   {
+      SendData(*(framebuffer + i));
+   }
+   SPI_End();
+}
 void EPD::DrawFrame_BW()
 {
     //send black data
@@ -100,11 +109,15 @@ void EPD::Sleep_Check()
 }
 void EPD::BW_Command()
 {
+   SPI_Begin();
    SendCommand(0x10);
+   SPI_End();
 } 
 void EPD::RW_Command()
 {
+   SPI_Begin();
    SendCommand(0x13);
+   SPI_End();
 } 
 void EPD::SendCommand(unsigned char command)
 {
@@ -118,7 +131,7 @@ void EPD::SendData(unsigned char data)
 }
 void EPD::SPI_Begin()
 {
-   SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
+   SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
 }
 void EPD::SPI_End()
 {

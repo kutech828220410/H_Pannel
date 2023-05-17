@@ -43,6 +43,7 @@ void sub_UDP_Send()
          doc["Input_dir"] = Input_dir;
          doc["Output_dir"] = Output_dir;
          doc["LaserDistance"] = LaserDistance;  
+         doc["WS2812_State"] = myWS2812.IsON(200);
          JsonOutput = "";
          serializeJson(doc, JsonOutput);
          Send_StringTo(JsonOutput, wiFiConfig.server_IPAdress, wiFiConfig.serverport);

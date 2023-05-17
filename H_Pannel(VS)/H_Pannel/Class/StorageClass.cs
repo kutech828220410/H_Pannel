@@ -171,6 +171,18 @@ namespace H_Pannel_lib
             }
             return storages;
         }
+        static public Storage SortByName(this List<Storage> Storages, string StorageName)
+        {
+            List<Storage> storages = new List<Storage>();
+            foreach (Storage storage in Storages)
+            {
+                if (storage.StorageName.ToUpper() == StorageName.ToUpper())
+                {
+                    return storage;
+                }
+            }
+            return null;
+        }
         static public List<Storage> SortLikeByCode(this List<Storage> Storages, string Code)
         {
             List<Storage> storages = new List<Storage>();

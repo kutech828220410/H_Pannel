@@ -153,6 +153,37 @@ void onPacketCallBack()
             if(flag_udp_232back)printf("startpo : %d\n" ,startpo);
             Get_Checksum_UDP();
           }
+          else if(*(UdpRead + 1) == 'g' && UdpRead_len == 3)
+          {                                  
+            // Send_String(str_distance , wiFiConfig.localport);
+            // if(flag_udp_232back)printf("LaserDistance : %d\n" ,str_distance);
+          }          
+          else if(*(UdpRead + 1) == 'h')
+          {
+            if(flag_udp_232back)printf("EPD EPD_BW_Command\n");
+            epd.BW_Command();
+            Get_Checksum_UDP();           
+          }
+           else if(*(UdpRead + 1) == 'i')
+          {
+            if(flag_udp_232back)printf("EPD EPD_RW_Command\n");
+            epd.RW_Command();
+            Get_Checksum_UDP();          
+          }
+          else if(*(UdpRead + 1) == 'j')
+          {
+            int len = UdpRead_len - 7;
+            int startpo_L = (*(UdpRead + 2)) | (*(UdpRead + 3) << 8);
+            int startpo_H = (*(UdpRead + 4)) | (*(UdpRead + 5) << 8);
+            long startpo = startpo_L | (startpo_H << 16);
+            epd.SendSPI(UdpRead ,len , 6);
+            if(flag_udp_232back)printf("EPD EPD_SendSPI\n");
+            if(flag_udp_232back)printf("len : %d\n" ,len);
+            if(flag_udp_232back)printf("startpo : %d\n" ,startpo);
+    
+            Get_Checksum_UDP();
+           
+          }
           else if (*(UdpRead + 1) == 'L')
           {
             int len = UdpRead_len - 5;
@@ -206,6 +237,23 @@ void onPacketCallBack()
                 printf("[%s] Ready to reboot\n\r", __FUNCTION__); 
                 ota_platform_reset();
               }
+          }
+          else if(*(UdpRead + 1) == 'H')
+          {                  
+              int IPA = *(UdpRead + 2);
+              int IPB = *(UdpRead + 3);
+              int IPC = *(UdpRead + 4);
+              int IPD = *(UdpRead + 5);
+              int port_L = *(UdpRead + 6);
+              int port_H = *(UdpRead + 7);
+              int port= port_L | (port_H << 8);
+              
+              if(flag_udp_232back)printf("Server IP : %d.%d.%d.%d\n", (byte)IPA,(byte)IPB,(byte)IPC,(byte)IPD);
+              if(flag_udp_232back)printf("Server Port : %d",port);
+
+              wiFiConfig.Set_Server_IPAdress((byte)IPA,(byte)IPB,(byte)IPC,(byte)IPD);
+              wiFiConfig.Set_Serverport(port);
+              Get_Checksum_UDP();
           }
           else if(*(UdpRead + 1) == 'J')
           {    

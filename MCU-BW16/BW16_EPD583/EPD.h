@@ -34,6 +34,7 @@ class EPD
   void RefreshCanvas();
   void BW_Command();
   void RW_Command();
+  void SendSPI(char* framebuffer , int size, int offset);
   bool GetReady();
   void Sleep_Check();
   void Sleep();

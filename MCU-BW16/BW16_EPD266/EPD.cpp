@@ -198,6 +198,8 @@ void EPD::WaitUntilIdle()
 }
 void EPD::Sleep()
 {  
+    SPI_Begin();
     SendCommand(0x10);
     SendData(0x01);
+    SPI_End();
 }

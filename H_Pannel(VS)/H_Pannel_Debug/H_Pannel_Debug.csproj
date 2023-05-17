@@ -44,6 +44,10 @@
     <Reference Include="Basic">
       <HintPath>..\..\DLL\Basic.dll</HintPath>
     </Reference>
+    <Reference Include="DrawingClass, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLL\DrawingClass.dll</HintPath>
+    </Reference>
     <Reference Include="H_Pannel_lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\H_Pannel\bin\Release\H_Pannel_lib.dll</HintPath>

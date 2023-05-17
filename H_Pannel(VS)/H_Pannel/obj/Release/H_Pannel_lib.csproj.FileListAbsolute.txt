@@ -1445,7 +1445,6 @@ C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\System.Text.Enc
 C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\System.Text.Json.xml
 C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\System.Threading.Tasks.Extensions.xml
 C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\System.ValueTuple.xml
-C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.csproj.AssemblyReference.cache
 C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Dialog_Pannel35.resources
 C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Dialog_RFID_DeviceSetting.resources
 C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Dialog_選取顯示網段.resources
@@ -1470,3 +1469,7 @@ C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.dl
 C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.pdb
 C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Dialog_燈數設定.resources
 C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.EPD_290_Pannel.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.EPD_1020_Pannel.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.DrawerUI_EPD_420.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.EPD_420_Pannel.resources

@@ -84,7 +84,7 @@ namespace WT32_SC01
             this.rJ_Button_epD_583_Pannel_全部滅燈.MouseDownEvent += RJ_Button_epD_583_Pannel_全部滅燈_MouseDownEvent;
             this.rJ_Button_epD_583_Pannel_TEST.MouseDownEvent += RJ_Button_epD_583_Pannel_TEST_MouseDownEvent;
 
-            this.storageUI_EPD_266.sqL_DataGridView_DeviceTable.RowDoubleClickEvent += SqL_DataGridView_DeviceTable_RowDoubleClickEvent;
+            this.storageUI_EPD_266.sqL_DataGridView_DeviceTable.RowDoubleClickEvent += SqL_DataGridView_DeviceTable_EPD266_RowDoubleClickEvent1;
             this.rJ_Button_EPD266_TEST.MouseDownEvent += RJ_Button_EPD266_TEST_MouseDownEvent;
            
 
@@ -101,10 +101,27 @@ namespace WT32_SC01
             this.storageUI_EPD_290.Init();
             this.epD_290_Pannel.Init(this.storageUI_EPD_290.List_UDP_Local);
 
+            this.drawerUI_EPD_420.Init();
+            this.epD_420_Pannel.Init(this.drawerUI_EPD_420.List_UDP_Local);
+            this.rJ_Button_EPD_420_填入測試畫面.MouseDownEvent += RJ_Button_EPD_420_填入測試畫面_MouseDownEvent;
+
+            this.drawerUI_EPD_1020.Init();
+            this.epD_1020_Pannel.Init(this.drawerUI_EPD_1020.List_UDP_Local);
+            this.rJ_Button_EPD_1020_填入測試畫面.MouseDownEvent += RJ_Button_EPD_1020_填入測試畫面_MouseDownEvent;
+            this.rJ_Button_EPD1020_初始化.MouseDownEvent += RJ_Button_EPD1020_初始化_MouseDownEvent;
+
             MyUI.數字鍵盤.音效 = false;
         }
 
+    
 
+
+
+
+
+
+
+        #region WT32
         private void rJ_Button_WT32_初始化_Click(object sender, EventArgs e)
         {
             this.storageUI_WT32.Init();
@@ -148,13 +165,6 @@ namespace WT32_SC01
                 MyMessageBox.ShowDialog("未選擇儲位!");
             }
         }
-
-        private void Pannel35_Pannel_EditFinishedEvent(Storage storage)
-        {
-            this.wT32_GPADC.Set_Stroage(storage);
-            this.storageUI_WT32.SQL_ReplaceStorage(storage);
-        }
-
         private void rJ_Button_WT32_讀取選擇儲位_Click(object sender, EventArgs e)
         {
             List<string> list_selectedIP = this.storageUI_WT32.GetAllSelectDeviceTableIP();
@@ -204,7 +214,14 @@ namespace WT32_SC01
 
             }
         }
+        #endregion
+        private void Pannel35_Pannel_EditFinishedEvent(Storage storage)
+        {
+            this.wT32_GPADC.Set_Stroage(storage);
+            this.storageUI_WT32.SQL_ReplaceStorage(storage);
+        }
 
+        #region EPD266
         private void pictureBox_2_66_Click(object sender, EventArgs e)
         {
 
@@ -262,14 +279,44 @@ namespace WT32_SC01
             }
         }
 
-        private void SqL_DataGridView_DeviceTable_RowDoubleClickEvent(object[] RowValue)
+        private void SqL_DataGridView_DeviceTable_EPD266_RowDoubleClickEvent1(object[] RowValue)
         {
             string IP = RowValue[(int)enum_DeviceTable.IP].ObjectToString();
             Storage storage = this.storageUI_EPD_266.SQL_GetStorage(IP);
             if (storage == null) return;
             this.epD_266_Pannel.DrawToPictureBox(storage);
         }
+        #endregion
+        #region EPD420
+        private void RJ_Button_EPD_420_填入測試畫面_MouseDownEvent(MouseEventArgs mevent)
+        {
+            Drawer drawer = new Drawer("192.168.1.230", 29013, DrawerUI_EPD_420.Pannel_Width, DrawerUI_EPD_420.Pannel_Height);
+            Bitmap bitmap = new Bitmap(DrawerUI_EPD_420.Pannel_Width, DrawerUI_EPD_420.Pannel_Height);
+            Graphics g = Graphics.FromImage(bitmap);
 
+            g.FillRectangle(new SolidBrush(Color.White), new RectangleF(0, 0, DrawerUI_EPD_420.Pannel_Width, DrawerUI_EPD_420.Pannel_Height));
+            Rectangle rectangle_姓名 = new Rectangle(0, 0, DrawerUI_EPD_420.Pannel_Width, 150);
+            g.FillRectangle(new SolidBrush(Color.Black), rectangle_姓名);
+            DrawingClass.Draw.文字中心繪製("5B", rectangle_姓名, rectangle_姓名.Width - 200, new Font("標楷體", 70, FontStyle.Bold), Color.White, g);
+
+            Rectangle rectangle_生日 = new Rectangle(0, 150, DrawerUI_EPD_420.Pannel_Width, 150);
+            g.FillRectangle(new SolidBrush(Color.White), rectangle_生日);
+            DrawingClass.Draw.文字中心繪製("16-01", rectangle_生日, rectangle_生日.Width - 30, new Font("微軟正黑體", 50, FontStyle.Bold), Color.Red, g);
+
+
+
+
+            this.epD_420_Pannel.DrawToPictureBox(bitmap);
+            string BW = "";
+            string RW = "";
+            //this.drawerUI_EPD_420.DrawToEpd_UDP("192.168.1.230", 29013, bitmap);
+           // bitmap.RotateFlip(RotateFlipType.);
+            Communication.BitmapToHexString(bitmap, ref BW, ref RW, EPD_Type.EPD420);
+            bitmap.Dispose();
+            g.Dispose();
+        }
+        #endregion
+        #region EPD583
         string epD_583_Pannel_IP = "";
         async private void rJ_Button_EPD_583_初始化_Click(object sender, EventArgs e)
         {
@@ -353,8 +400,7 @@ namespace WT32_SC01
         {
             this.rowsLEDUI.Init();
         }
-
-
+        #endregion
         private void RJ_Button_RFID_初始化_MouseDownEvent(MouseEventArgs mevent)
         {
             this.rfiD_UI.Init();
@@ -370,6 +416,130 @@ namespace WT32_SC01
             CardID,
             RSSI,
         }
+        #region EPD1020
+        private void RJ_Button_EPD1020_初始化_MouseDownEvent(MouseEventArgs mevent)
+        {
+           // this.drawerUI_EPD_1020.Init();
+        }
+        private void RJ_Button_EPD_1020_填入測試畫面_MouseDownEvent(MouseEventArgs mevent)
+        {
+            Drawer drawer = new Drawer("192.168.43.230", 29012, 960, 640);
+            Bitmap bitmap = new Bitmap(DrawerUI_EPD_1020.Pannel_Width, DrawerUI_EPD_1020.Pannel_Height);
+           // this.Invoke(new Action(delegate { panel_TEST.DrawToBitmap(bitmap, new Rectangle(0, 0, bitmap.Width, bitmap.Height)); }));
+
+
+            Graphics g = Graphics.FromImage(bitmap);
+
+            g.FillRectangle(new SolidBrush(Color.White), new RectangleF(0, 0, 960, 640));
+            //g.DrawRectangle(new Pen(Color.Black, _box.Pen_Width), rect);
+            SizeF size_Name;
+            g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+
+            Rectangle rectangle_LOGO = new Rectangle(0, 0, 200, 100);
+
+            Rectangle rectangle_病房代碼 = new Rectangle(rectangle_LOGO.Right + 5, 0, 200, 100);
+            g.DrawRectangle(new Pen(Color.Black, 1), rectangle_病房代碼);
+            g.FillRectangle(new SolidBrush(Color.Black), new RectangleF(rectangle_病房代碼.X, rectangle_病房代碼.Y, rectangle_病房代碼.Width, 30));
+
+            DrawingClass.Draw.文字中心繪製("病房號碼", new Rectangle(rectangle_病房代碼.X, rectangle_病房代碼.Y, rectangle_病房代碼.Width, 30), rectangle_病房代碼.Width - 20, new Font("微軟正黑體", 14, FontStyle.Bold), Color.White, g);
+            DrawingClass.Draw.文字中心繪製("501-G", new Rectangle(rectangle_病房代碼.X, rectangle_病房代碼.Y + 30, rectangle_病房代碼.Width, rectangle_病房代碼.Height - 30), rectangle_病房代碼.Width - 50, new Font("微軟正黑體", 20, FontStyle.Bold), Color.Black, g);
+
+
+            Rectangle rectangle_出院日期 = new Rectangle(rectangle_病房代碼.Right + 5, 0, 300, 100);
+            g.DrawRectangle(new Pen(Color.Black, 1), rectangle_出院日期);
+            g.FillRectangle(new SolidBrush(Color.Black), new RectangleF(rectangle_出院日期.X, rectangle_出院日期.Y, rectangle_出院日期.Width, 30));
+            DrawingClass.Draw.文字中心繪製("出院日期", new Rectangle(rectangle_出院日期.X, rectangle_出院日期.Y, rectangle_出院日期.Width, 30), rectangle_出院日期.Width - 20, new Font("微軟正黑體", 14, FontStyle.Bold), Color.White, g);
+            DrawingClass.Draw.文字中心繪製("2023/05/28 週五", new Rectangle(rectangle_出院日期.X, rectangle_出院日期.Y + 30, rectangle_出院日期.Width, rectangle_出院日期.Height - 30), rectangle_出院日期.Width - 50, new Font("微軟正黑體", 20, FontStyle.Bold), Color.Black, g);
+
+            Rectangle rectangle_病人資訊 = new Rectangle(0, rectangle_病房代碼.Bottom + 5, rectangle_出院日期.Right, 300);
+            g.DrawRectangle(new Pen(Color.Black, 1), rectangle_病人資訊);
+
+            DrawingClass.Draw.文字左上繪製("病人姓名", 100, new Point(rectangle_病人資訊.X + 20, rectangle_病人資訊.Y + 20), new Font("標楷體", 12), Color.Black, g);
+            DrawingClass.Draw.文字左上繪製("李偉豪", 250, new Point(rectangle_病人資訊.X + 30, rectangle_病人資訊.Y + 50), new Font("微軟正黑體", 30,FontStyle.Bold), Color.Black, g);
+
+            DrawingClass.Draw.文字左上繪製("性別", 50, new Point(rectangle_病人資訊.X + 350, rectangle_病人資訊.Y + 20), new Font("標楷體", 12), Color.Black, g);
+            DrawingClass.Draw.文字左上繪製("男", 50, new Point(rectangle_病人資訊.X + 380, rectangle_病人資訊.Y + 50), new Font("微軟正黑體", 30, FontStyle.Bold), Color.Black, g);
+
+            DrawingClass.Draw.文字左上繪製("年齡", 50, new Point(rectangle_病人資訊.X + 500, rectangle_病人資訊.Y + 20), new Font("標楷體", 12), Color.Black, g);
+            DrawingClass.Draw.文字左上繪製("35歲", 150, new Point(rectangle_病人資訊.X + 530, rectangle_病人資訊.Y + 50), new Font("微軟正黑體", 30, FontStyle.Bold), Color.Black, g);
+
+            g.DrawLine(new Pen(Color.Black, 1), 30, (rectangle_病人資訊.Y + rectangle_病人資訊.Height / 2) , rectangle_病人資訊.Right - 30, (rectangle_病人資訊.Y + rectangle_病人資訊.Height / 2));
+
+            DrawingClass.Draw.文字左上繪製("病歷號碼", 100, new Point(rectangle_病人資訊.X + 20, (rectangle_病人資訊.Y + rectangle_病人資訊.Height / 2) + 20), new Font("標楷體", 12), Color.Black, g);
+            DrawingClass.Draw.文字左上繪製("A5665", 180, new Point(rectangle_病人資訊.X + 30, (rectangle_病人資訊.Y + rectangle_病人資訊.Height / 2) + 50), new Font("微軟正黑體", 30, FontStyle.Bold), Color.Black, g);
+
+            DrawingClass.Draw.文字左上繪製("科別", 50, new Point(rectangle_病人資訊.X + 250, (rectangle_病人資訊.Y + rectangle_病人資訊.Height / 2) + 20), new Font("標楷體", 12), Color.Black, g);
+            DrawingClass.Draw.文字左上繪製("耳鼻喉科", 180, new Point(rectangle_病人資訊.X + 255, (rectangle_病人資訊.Y + rectangle_病人資訊.Height / 2) + 50), new Font("微軟正黑體", 30, FontStyle.Bold), Color.Black, g);
+
+            DrawingClass.Draw.文字左上繪製("入住日期", 100, new Point(rectangle_病人資訊.X + 400, (rectangle_病人資訊.Y + rectangle_病人資訊.Height / 2) + 20), new Font("標楷體", 12), Color.Black, g);
+            DrawingClass.Draw.文字左上繪製("2021/11/25", 300, new Point(rectangle_病人資訊.X + 420, (rectangle_病人資訊.Y + rectangle_病人資訊.Height / 2) + 50), new Font("微軟正黑體", 30, FontStyle.Bold), Color.Black, g);
+
+
+            Rectangle rectangle_入住資訊 = new Rectangle(rectangle_出院日期.Right + 5, 0, 960 - (rectangle_出院日期.Right + 11), rectangle_病人資訊.Bottom);
+            g.DrawRectangle(new Pen(Color.Black, 1), rectangle_入住資訊);
+            g.FillRectangle(new SolidBrush(Color.Black), new RectangleF(rectangle_入住資訊.X, rectangle_入住資訊.Y, rectangle_入住資訊.Width, 30));
+            DrawingClass.Draw.文字中心繪製("入住資訊", new Rectangle(rectangle_入住資訊.X, rectangle_入住資訊.Y, rectangle_入住資訊.Width, 30), rectangle_入住資訊.Width - 20, new Font("微軟正黑體", 14, FontStyle.Bold), Color.White, g);
+            DrawingClass.Draw.文字中心繪製("主治醫師", new Rectangle(rectangle_入住資訊.X, rectangle_入住資訊.Y + 50, rectangle_入住資訊.Width, 30), 120, new Font("標楷體", 12), Color.Black, g);
+            DrawingClass.Draw.文字中心繪製("林冠宇", new Rectangle(rectangle_入住資訊.X, rectangle_入住資訊.Y + 90, rectangle_入住資訊.Width, 30), 180, new Font("微軟正黑體", 25, FontStyle.Bold), Color.Black, g);
+          
+            DrawingClass.Draw.文字中心繪製("臨床藥師", new Rectangle(rectangle_入住資訊.X, rectangle_入住資訊.Y + 180, rectangle_入住資訊.Width, 30), 120, new Font("標楷體", 12), Color.Black, g);
+            DrawingClass.Draw.文字中心繪製("傑恩", new Rectangle(rectangle_入住資訊.X, rectangle_入住資訊.Y + 220, rectangle_入住資訊.Width, 30), 180, new Font("微軟正黑體", 25, FontStyle.Bold), Color.Black, g);
+
+            DrawingClass.Draw.文字中心繪製("護理師", new Rectangle(rectangle_入住資訊.X, rectangle_入住資訊.Y + 310, rectangle_入住資訊.Width, 30), 120, new Font("標楷體", 12), Color.Black, g);
+            DrawingClass.Draw.文字中心繪製("澄程", new Rectangle(rectangle_入住資訊.X, rectangle_入住資訊.Y + 350, rectangle_入住資訊.Width, 30), 180, new Font("微軟正黑體", 25, FontStyle.Bold), Color.Black, g);
+
+            Rectangle rectangle_溫馨提醒 = new Rectangle(rectangle_病人資訊.X, rectangle_病人資訊.Bottom + 5, rectangle_病人資訊.Width, 640 - ( rectangle_病人資訊.Bottom + 10));
+            g.DrawRectangle(new Pen(Color.Black, 1), rectangle_溫馨提醒);
+
+            Image image_buf;
+            Bitmap bitmap_buf;
+            image_buf = Bitmap.FromFile(@"C:\Users\User\Desktop\H_Pannel\10.2inch ICON\防止跌倒.bmp");
+            bitmap_buf = EPD_1020_Pannel.ScaleImage((Bitmap)image_buf, (int)(image_buf.Width * 0.13), (int)(image_buf.Height * 0.13));
+            g.DrawImage(bitmap_buf, new Point(rectangle_溫馨提醒.X + 20, rectangle_溫馨提醒.Y + (int)((rectangle_溫馨提醒.Height - image_buf.Height * 0.13) / 2)));
+            bitmap_buf.Dispose();
+            image_buf.Dispose();
+
+            image_buf = Bitmap.FromFile(@"C:\Users\User\Desktop\H_Pannel\10.2inch ICON\禁止下床.bmp");
+            bitmap_buf = EPD_1020_Pannel.ScaleImage((Bitmap)image_buf, (int)(image_buf.Width * 0.13), (int)(image_buf.Height * 0.13));
+            g.DrawImage(bitmap_buf, new Point(rectangle_溫馨提醒.X + 20  + (int)((image_buf.Width * 0.13 + 20) * 1), rectangle_溫馨提醒.Y + (int)((rectangle_溫馨提醒.Height - image_buf.Height * 0.13) / 2)));
+            bitmap_buf.Dispose();
+            image_buf.Dispose();
+
+            image_buf = Bitmap.FromFile(@"C:\Users\User\Desktop\H_Pannel\10.2inch ICON\禁食.bmp");
+            bitmap_buf = EPD_1020_Pannel.ScaleImage((Bitmap)image_buf, (int)(image_buf.Width * 0.13), (int)(image_buf.Height * 0.13));
+            g.DrawImage(bitmap_buf, new Point(rectangle_溫馨提醒.X + 20 + (int)((image_buf.Width * 0.13 + 20) * 2), rectangle_溫馨提醒.Y + (int)((rectangle_溫馨提醒.Height - image_buf.Height * 0.13) / 2)));
+            bitmap_buf.Dispose();
+            image_buf.Dispose();
+
+            Rectangle rectangle_注意事項 = new Rectangle(rectangle_溫馨提醒.Right + 5, rectangle_溫馨提醒.Y, rectangle_入住資訊.Width, rectangle_溫馨提醒.Height);
+            g.FillRectangle(new SolidBrush(Color.Red), new RectangleF(rectangle_注意事項.X, rectangle_注意事項.Y, rectangle_注意事項.Width, rectangle_注意事項.Height));
+
+
+            image_buf = Bitmap.FromFile(@"C:\Users\User\Desktop\H_Pannel\10.2inch ICON\佩戴口罩.bmp");
+            bitmap_buf = EPD_1020_Pannel.ScaleImage((Bitmap)image_buf, (int)(image_buf.Width * 0.12), (int)(image_buf.Height * 0.12));;
+            g.DrawImage(bitmap_buf, new Point((int)(rectangle_注意事項.X + (rectangle_注意事項.Width - bitmap_buf.Width) / 2), (int)(rectangle_注意事項.Y + (rectangle_注意事項.Height - bitmap_buf.Height) / 2)));
+
+            bitmap_buf.Dispose();
+            image_buf.Dispose();
+            string BW = "";
+            string RW = "";
+  
+           
+            this.epD_1020_Pannel.DrawToPictureBox(bitmap);
+
+
+            this.drawerUI_EPD_1020.DrawToEpd_UDP("192.168.0.150", 29012, bitmap);
+            bitmap.RotateFlip(RotateFlipType.Rotate180FlipX);
+            Communication.BitmapToHexString(bitmap, ref BW, ref RW, EPD_Type.EPD1020);
+            bitmap.Dispose();
+            g.Dispose();
+            
+
+        }
+        #endregion
         private void sub_H_RFID()
         {
             this.sqL_DataGridView_h_RFID_Datas.Init();
@@ -386,5 +556,6 @@ namespace WT32_SC01
             }
             this.sqL_DataGridView_h_RFID_Datas.RefreshGrid(list_value);
         }
+
     }
 }

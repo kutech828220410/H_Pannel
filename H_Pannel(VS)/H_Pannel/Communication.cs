@@ -28,6 +28,8 @@ namespace H_Pannel_lib
         EPD583,
         EPD290_V2,
         EPD290_V3,
+        EPD420,
+        EPD1020,
     }
     public class Communication
     {
@@ -93,7 +95,9 @@ namespace H_Pannel_lib
             EPD_Send_Framebuffer = (byte)'e',
             EPD_RefreshCanvas = (byte)'f',
             EPD_Get_LaserDistance = (byte)'g',
-           
+            EPD_BW_Command = (byte)'h',
+            EPD_RW_Command = (byte)'i',
+            EPD_SendSPI = (byte)'j',
         }
   
 
@@ -447,6 +451,20 @@ namespace H_Pannel_lib
         {
             return Command_EPD_Send_Framebuffer(uDP_Class, IP, start_ptr, value);
         }
+        static public bool EPD_BW_Command(UDP_Class uDP_Class, string IP)
+        {
+            return Command_EPD_BW_Command(uDP_Class, IP);
+        }
+        static public bool EPD_RW_Command(UDP_Class uDP_Class, string IP)
+        {
+            return Command_EPD_RW_Command(uDP_Class, IP);
+        }
+        static public bool EPD_SendSPI(UDP_Class uDP_Class, string IP, long start_ptr, byte[] value)
+        {
+            return Command_EPD_SendSPI(uDP_Class, IP, start_ptr, value);
+        }
+
+
         static public bool EPD_583_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
             int EPD583_frameDIV = 0;
@@ -528,6 +546,50 @@ namespace H_Pannel_lib
                 return flag_OK;
             }
         }
+        static public bool EPD_1020_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
+        {
+            using (Bitmap _bmp = bmp.DeepClone())
+            {
+                int frameDIV = 10;
+
+                bool flag_OK;
+                int width = bmp.Width;
+                int height = bmp.Height;
+                byte[] bytes_BW = new byte[(width / 8) * height];
+                byte[] bytes_RW = new byte[(width / 8) * height];
+                _bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
+                BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD1020);
+                MyTimer myTimer = new MyTimer();
+                myTimer.StartTickTime(50000);
+                flag_OK = EPD_DrawImageEx0(uDP_Class, IP, bytes_BW, bytes_RW, (width / 8) * height / frameDIV);
+                if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 1020 DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+                return flag_OK;
+            }
+
+
+        }
+        static public bool EPD_420_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
+        {
+            using (Bitmap _bmp = bmp.DeepClone())
+            {
+                int frameDIV = 10;
+
+                bool flag_OK;
+                int width = bmp.Width;
+                int height = bmp.Height;
+                byte[] bytes_BW = new byte[(width / 8) * height];
+                byte[] bytes_RW = new byte[(width / 8) * height];
+                _bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD420);
+                MyTimer myTimer = new MyTimer();
+                myTimer.StartTickTime(50000);
+                flag_OK = EPD_DrawImageEx0(uDP_Class, IP, bytes_BW, bytes_RW, (width / 8) * height / frameDIV);
+                if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 420 DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+                return flag_OK;
+            }
+
+
+        }
         static public bool EPD_DrawImage(UDP_Class uDP_Class, string IP, byte[] BW_data, byte[] RW_data, int Split_DataSize)
         {
             int Width_Size = Split_DataSize;
@@ -589,7 +651,67 @@ namespace H_Pannel_lib
             return true;
 
         }
+        static public bool EPD_DrawImageEx0(UDP_Class uDP_Class, string IP, byte[] BW_data, byte[] RW_data, int Split_DataSize)
+        {
+            int Width_Size = Split_DataSize;
+            int NumOfArray = BW_data.Length / (Split_DataSize);
+            List<byte[]> list_BW_data = new List<byte[]>();
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                byte[] Array_temp = new byte[Width_Size];
+                for (int k = 0; k < Width_Size; k++)
+                {
+                    Array_temp[k] = BW_data[i * Width_Size + k];
+                }
+                list_BW_data.Add(Array_temp);
+            }
+            List<byte[]> list_RW_data = new List<byte[]>();
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                byte[] Array_temp = new byte[Width_Size];
+                for (int k = 0; k < Width_Size; k++)
+                {
+                    Array_temp[k] = RW_data[i * Width_Size + k];
+                }
+                list_RW_data.Add(Array_temp);
+            }
 
+            if (!EPD_Set_WakeUp(uDP_Class, IP))
+            {
+                return false;
+            }
+            if (!EPD_BW_Command(uDP_Class, IP))
+            {
+                return false;
+            }
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                if (!EPD_SendSPI(uDP_Class, IP, i * Width_Size, list_BW_data[i]))
+                {
+                    return false;
+                }
+            }
+            if (!EPD_RW_Command(uDP_Class, IP))
+            {
+                return false;
+            }
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                if (!EPD_SendSPI(uDP_Class, IP, i * Width_Size, list_RW_data[i]))
+                {
+                    return false;
+                }
+            }
+   
+
+            if (!EPD_RefreshCanvas(uDP_Class, IP))
+            {
+                return false;
+            }
+
+            return true;
+
+        }
         static private bool Command_Set_Cusor_position(UDP_Class uDP_Class, string IP, int x, int y, int width, int height)
         {
             bool flag_OK = true;
@@ -3552,6 +3674,128 @@ namespace H_Pannel_lib
             if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD RefreshCanvas {string.Format(flag_OK ? "sucess" : "failed")}!");
             return flag_OK;
         }
+        static private bool Command_EPD_BW_Command(UDP_Class uDP_Class, string IP)
+        {
+            bool flag_OK = true;
+            byte checksum = 0;
+            List<byte> list_byte = new List<byte>();
+            list_byte.Add(2);
+            list_byte.Add((byte)UDP_Command.EPD_BW_Command);
+            list_byte.Add(3);
+            for (int i = 0; i < list_byte.Count; i++)
+            {
+                checksum += list_byte[i];
+            }
+            MyTimer MyTimer_UART_TimeOut = new MyTimer();
+            int retry = 0;
+            int cnt = 0;
+            while (true)
+            {
+                if (cnt == 0)
+                {
+                    if (retry >= UDP_RetryNum)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    uDP_Class.Set_ReadLineClearByIP(IP);
+                    uDP_Class.WriteByte(list_byte.ToArray(), IP);
+                    MyTimer_UART_TimeOut.TickStop();
+                    MyTimer_UART_TimeOut.StartTickTime(UDP_TimeOut);
+                    cnt++;
+                }
+                else if (cnt == 1)
+                {
+                    if (retry >= UDP_RetryNum)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    if (MyTimer_UART_TimeOut.IsTimeOut())
+                    {
+                        retry++;
+                        cnt = 0;
+                    }
+                    string UDP_RX = uDP_Class.Get_ReadLineByIP(IP);
+                    if (UDP_RX != "")
+                    {
+                        if (UDP_RX == checksum.ToString("000"))
+                        {
+                            flag_OK = true;
+                            break;
+                        }
+                        else
+                        {
+                            cnt = 0;
+                        }
+                    }
+                }
+                System.Threading.Thread.Sleep(1);
+            }
+            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD BW_Command {string.Format(flag_OK ? "sucess" : "failed")}!");
+            return flag_OK;
+        }
+        static private bool Command_EPD_RW_Command(UDP_Class uDP_Class, string IP)
+        {
+            bool flag_OK = true;
+            byte checksum = 0;
+            List<byte> list_byte = new List<byte>();
+            list_byte.Add(2);
+            list_byte.Add((byte)UDP_Command.EPD_RW_Command);
+            list_byte.Add(3);
+            for (int i = 0; i < list_byte.Count; i++)
+            {
+                checksum += list_byte[i];
+            }
+            MyTimer MyTimer_UART_TimeOut = new MyTimer();
+            int retry = 0;
+            int cnt = 0;
+            while (true)
+            {
+                if (cnt == 0)
+                {
+                    if (retry >= UDP_RetryNum)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    uDP_Class.Set_ReadLineClearByIP(IP);
+                    uDP_Class.WriteByte(list_byte.ToArray(), IP);
+                    MyTimer_UART_TimeOut.TickStop();
+                    MyTimer_UART_TimeOut.StartTickTime(UDP_TimeOut);
+                    cnt++;
+                }
+                else if (cnt == 1)
+                {
+                    if (retry >= UDP_RetryNum)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    if (MyTimer_UART_TimeOut.IsTimeOut())
+                    {
+                        retry++;
+                        cnt = 0;
+                    }
+                    string UDP_RX = uDP_Class.Get_ReadLineByIP(IP);
+                    if (UDP_RX != "")
+                    {
+                        if (UDP_RX == checksum.ToString("000"))
+                        {
+                            flag_OK = true;
+                            break;
+                        }
+                        else
+                        {
+                            cnt = 0;
+                        }
+                    }
+                }
+                System.Threading.Thread.Sleep(1);
+            }
+            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD RW_Command {string.Format(flag_OK ? "sucess" : "failed")}!");
+            return flag_OK;
+        }
         static private bool Command_EPD_Send_Framebuffer(UDP_Class uDP_Class, string IP, long start_ptr, byte[] value)
         {
             bool flag_OK = true;
@@ -3626,6 +3870,82 @@ namespace H_Pannel_lib
                 System.Threading.Thread.Sleep(1);
             }
             if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD Send Framebuffer {string.Format(flag_OK ? "sucess" : "failed")}!");
+            return flag_OK;
+        }
+        static private bool Command_EPD_SendSPI(UDP_Class uDP_Class, string IP, long start_ptr,  byte[] value)
+        {
+            bool flag_OK = true;
+            byte checksum = 0;
+            List<byte> list_byte = new List<byte>();
+            list_byte.Add(2);
+            list_byte.Add((byte)UDP_Command.EPD_SendSPI);
+            list_byte.Add((byte)start_ptr);
+            list_byte.Add((byte)(start_ptr >> 8));
+            list_byte.Add((byte)(start_ptr >> 16));
+            list_byte.Add((byte)(start_ptr >> 24));
+            for (int i = 0; i < value.Length; i++)
+            {
+                list_byte.Add(value[i]);
+            }
+            list_byte.Add(3);
+            for (int i = 0; i < list_byte.Count; i++)
+            {
+                checksum += list_byte[i];
+            }
+            MyTimer MyTimer_UART_TimeOut = new MyTimer();
+            int retry = 0;
+            int cnt = 0;
+            while (true)
+            {
+                if (cnt == 0)
+                {
+                    if (retry >= UDP_RetryNum)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    uDP_Class.Set_ReadLineClearByIP(IP);
+                    uDP_Class.WriteByte(list_byte.ToArray(), IP);
+                    MyTimer_UART_TimeOut.TickStop();
+                    MyTimer_UART_TimeOut.StartTickTime(2000);
+                    cnt++;
+                }
+                else if (cnt == 1)
+                {
+                    if (retry >= 3)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    if (MyTimer_UART_TimeOut.IsTimeOut())
+                    {
+                        retry++;
+                        cnt = 0;
+                        if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD Send EPD_SendSPI timeout!");
+                    }
+                    string UDP_RX = uDP_Class.Get_ReadLineByIP(IP);
+                    if (UDP_RX != "")
+                    {
+                        if (UDP_RX == "RETRY")
+                        {
+                            retry++;
+                            cnt = 0;
+                            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD Send EPD_SendSPI recieve 'RETRY'!");
+                        }
+                        else if (UDP_RX == checksum.ToString("000"))
+                        {
+                            flag_OK = true;
+                            break;
+                        }
+                        else
+                        {
+                            cnt = 0;
+                        }
+                    }
+                }
+                System.Threading.Thread.Sleep(1);
+            }
+            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD Send EPD_SendSPI {string.Format(flag_OK ? "sucess" : "failed")}!");
             return flag_OK;
         }
 
@@ -5243,6 +5563,40 @@ namespace H_Pannel_lib
             list_byte_image = BmpByteToGray(list_byte_image, ref len);
             return list_byte_image;
         }
+        static unsafe public void BitmapToHexString(Bitmap bimage, ref string BW, ref string RW, EPD_Type ePD_Type)
+        {
+            byte[] BW_bytes = new byte[0];
+            byte[] RW_bytes = new byte[0];
+            BitmapToByte(bimage, ref BW_bytes, ref RW_bytes, ePD_Type);
+            BW = "";
+            RW = "";
+            System.Text.StringBuilder sb_BW = new StringBuilder();
+            System.Text.StringBuilder sb_RW = new StringBuilder();
+            int index = 0;
+            for (int i = 0; i < BW_bytes.Length; i++)
+            {
+                sb_BW.Append($"0x{BW_bytes[i].ToString("X2")},");
+                index++;
+                if (index >= 20)
+                {
+                    sb_BW.Append($"\n");
+                    index = 0;
+                }         
+            }
+            BW = sb_BW.ToString().ToUpper();
+            for (int i = 0; i < RW_bytes.Length; i++)
+            {
+                sb_RW.Append($"0x{RW_bytes[i].ToString("X2")},");
+                index++;
+                if (index >= 20)
+                {
+                    sb_RW.Append($"\n");
+                    index = 0;
+                }
+
+            }
+            RW = sb_RW.ToString().ToUpper();
+        }
         static unsafe public void BitmapToByte(Bitmap bimage, ref byte[] BW_bytes, ref byte[] RW_bytes , EPD_Type ePD_Type)
         {
             List<byte> list_byte_image_BW = new List<byte>();
@@ -5310,48 +5664,66 @@ namespace H_Pannel_lib
                         {
                             temp_BW <<= 1;
                             temp_RW <<= 1;
-                            if (ePD_Type == EPD_Type.EPD583 || ePD_Type == EPD_Type.EPD266_B)
+                            if (ePD_Type == EPD_Type.EPD583 || ePD_Type == EPD_Type.EPD266_B || ePD_Type == EPD_Type.EPD1020 )
                             {
-                                if (R[i] == 255 && G[i] == 255 && B[i] == 255)
+                                if (R[i] > 0 && G[i] <= 128 && B[i] <= 128)
                                 {
-
                                     temp_BW |= (byte)(0x00);
-                                }
-                                else
-                                {
-                                    temp_BW |= (byte)(0x01);
-                                }
-                                if (R[i] == 255 && G[i] == 0 && B[i] == 0)
-                                {
-
                                     temp_RW |= (byte)(0x01);
                                 }
-                                else
+                                else if (R[i] > 0 && G[i] > 0 && B[i] >= 0)
                                 {
+                                    temp_BW |= (byte)(0x01);
                                     temp_RW |= (byte)(0x00);
                                 }
+                                else if (R[i] == 0 && G[i] == 0 && B[i] == 0)
+                                {
+                                    temp_BW |= (byte)(0x00);
+                                    temp_RW |= (byte)(0x00);
+                                }
+
+                            }
+                            else if (ePD_Type == EPD_Type.EPD420)
+                            {
+                                if (R[i] > 0 && G[i] <= 128 && B[i] <= 128)
+                                {
+                                    temp_BW |= (byte)(0x00);
+                                    temp_RW |= (byte)(0x00);                    
+                                }
+                                else if (R[i] > 0 && G[i] > 0 && B[i] >= 0)
+                                {
+                                    temp_BW |= (byte)(0x01);
+                                    temp_RW |= (byte)(0x01);
+                                }
+                                else if (R[i] == 0 && G[i] == 0 && B[i] == 0)
+                                {
+                                    temp_BW |= (byte)(0x00);
+                                    temp_RW |= (byte)(0x01);
+                                }
+                                
                             }
                             else if (ePD_Type == EPD_Type.EPD290_V2)
                             {
-                                if (R[i] == 255 && G[i] == 255 && B[i] == 255)
-                                {
-                                    temp_BW |= (byte)(0x01);
-                                    temp_RW |= (byte)(0x00);
-                                }
-                                else if (R[i] == 0 && G[i] == 0 && B[i] == 0)
+                                if (R[i] > 0 && G[i] <= 128 && B[i] <= 128)
                                 {
                                     temp_BW |= (byte)(0x00);
                                     temp_RW |= (byte)(0x00);
                                 }
-                                else if (R[i] == 255 && G[i] == 0 && B[i] == 0)
+                                else if (R[i] > 0 && G[i] > 0 && B[i] >= 0)
                                 {
                                     temp_BW |= (byte)(0x00);
                                     temp_RW |= (byte)(0x01);
                                 }
+                                else if (R[i] == 0 && G[i] == 0 && B[i] == 0)
+                                {
+                                    temp_BW |= (byte)(0x01);
+                                    temp_RW |= (byte)(0x01);
+                                }
+
                             }
                             else if (ePD_Type == EPD_Type.EPD290_V3)
                             {
-                                if (R[i] == 255 && G[i] == 255 && B[i] == 255)
+                                if (R[i] > 0 && G[i] > 0 && B[i] >= 0)
                                 {
                                     temp_RW |= (byte)(0x01);
                                     temp_BW |= (byte)(0x01);
@@ -5361,7 +5733,7 @@ namespace H_Pannel_lib
                                     temp_BW |= (byte)(0x01);
                                     temp_RW |= (byte)(0x00);
                                 }
-                                else if (R[i] == 255 && G[i] == 0 && B[i] == 0)
+                                else if (R[i] > 0 && G[i] <= 128 && B[i] <= 128)
                                 {
                                     temp_BW |= (byte)(0x00);
                                     temp_RW |= (byte)(0x00);

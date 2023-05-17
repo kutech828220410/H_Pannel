@@ -34,6 +34,8 @@ namespace H_Pannel_lib
             this.rJ_GroupBox1 = new MyUI.RJ_GroupBox();
             this.sqL_DataGridView_UDP_DataReceive = new SQLUI.SQL_DataGridView();
             this.rJ_GroupBox2 = new MyUI.RJ_GroupBox();
+            this.rJ_Button_Save = new MyUI.RJ_Button();
+            this.rJ_Button_Load = new MyUI.RJ_Button();
             this.rJ_Button_Lock_Off = new MyUI.RJ_Button();
             this.rJ_Button_Lock_On = new MyUI.RJ_Button();
             this.rJ_Button_Write = new MyUI.RJ_Button();
@@ -122,8 +124,6 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_DeviceTable = new SQLUI.SQL_DataGridView();
             this.openFileDialog_LoadExcel = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog_SaveExcel = new System.Windows.Forms.SaveFileDialog();
-            this.rJ_Button_Load = new MyUI.RJ_Button();
-            this.rJ_Button_Save = new MyUI.RJ_Button();
             this.panel23.SuspendLayout();
             this.rJ_GroupBox1.ContentsPanel.SuspendLayout();
             this.rJ_GroupBox1.SuspendLayout();
@@ -301,6 +301,50 @@ namespace H_Pannel_lib
             this.rJ_GroupBox2.TitleHeight = 37;
             this.rJ_GroupBox2.TitleTextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rJ_GroupBox2.TitleTexts = "UART";
+            // 
+            // rJ_Button_Save
+            // 
+            this.rJ_Button_Save.AutoResetState = false;
+            this.rJ_Button_Save.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Save.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Save.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_Save.BorderRadius = 5;
+            this.rJ_Button_Save.BorderSize = 0;
+            this.rJ_Button_Save.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Save.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_Save.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_Save.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Save.Location = new System.Drawing.Point(186, 385);
+            this.rJ_Button_Save.Name = "rJ_Button_Save";
+            this.rJ_Button_Save.Size = new System.Drawing.Size(90, 42);
+            this.rJ_Button_Save.State = false;
+            this.rJ_Button_Save.TabIndex = 37;
+            this.rJ_Button_Save.Text = "Save";
+            this.rJ_Button_Save.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Save.UseVisualStyleBackColor = false;
+            // 
+            // rJ_Button_Load
+            // 
+            this.rJ_Button_Load.AutoResetState = false;
+            this.rJ_Button_Load.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Load.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Load.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_Load.BorderRadius = 5;
+            this.rJ_Button_Load.BorderSize = 0;
+            this.rJ_Button_Load.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Load.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_Load.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_Load.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_Load.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Load.Location = new System.Drawing.Point(282, 385);
+            this.rJ_Button_Load.Name = "rJ_Button_Load";
+            this.rJ_Button_Load.Size = new System.Drawing.Size(90, 42);
+            this.rJ_Button_Load.State = false;
+            this.rJ_Button_Load.TabIndex = 36;
+            this.rJ_Button_Load.Text = "Load";
+            this.rJ_Button_Load.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Load.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_Lock_Off
             // 
@@ -1304,50 +1348,6 @@ namespace H_Pannel_lib
             // 
             this.saveFileDialog_SaveExcel.DefaultExt = "txt";
             this.saveFileDialog_SaveExcel.Filter = "txt File (*.txt)|*.txt;";
-            // 
-            // rJ_Button_Load
-            // 
-            this.rJ_Button_Load.AutoResetState = false;
-            this.rJ_Button_Load.BackColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_Load.BackgroundColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_Load.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_Load.BorderRadius = 5;
-            this.rJ_Button_Load.BorderSize = 0;
-            this.rJ_Button_Load.buttonType = MyUI.RJ_Button.ButtonType.Push;
-            this.rJ_Button_Load.FlatAppearance.BorderSize = 0;
-            this.rJ_Button_Load.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Button_Load.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Button_Load.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_Load.Location = new System.Drawing.Point(282, 385);
-            this.rJ_Button_Load.Name = "rJ_Button_Load";
-            this.rJ_Button_Load.Size = new System.Drawing.Size(90, 42);
-            this.rJ_Button_Load.State = false;
-            this.rJ_Button_Load.TabIndex = 36;
-            this.rJ_Button_Load.Text = "Load";
-            this.rJ_Button_Load.TextColor = System.Drawing.Color.White;
-            this.rJ_Button_Load.UseVisualStyleBackColor = false;
-            // 
-            // rJ_Button_Save
-            // 
-            this.rJ_Button_Save.AutoResetState = false;
-            this.rJ_Button_Save.BackColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_Save.BackgroundColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_Save.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_Save.BorderRadius = 5;
-            this.rJ_Button_Save.BorderSize = 0;
-            this.rJ_Button_Save.buttonType = MyUI.RJ_Button.ButtonType.Push;
-            this.rJ_Button_Save.FlatAppearance.BorderSize = 0;
-            this.rJ_Button_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Button_Save.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Button_Save.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_Save.Location = new System.Drawing.Point(186, 385);
-            this.rJ_Button_Save.Name = "rJ_Button_Save";
-            this.rJ_Button_Save.Size = new System.Drawing.Size(90, 42);
-            this.rJ_Button_Save.State = false;
-            this.rJ_Button_Save.TabIndex = 37;
-            this.rJ_Button_Save.Text = "Save";
-            this.rJ_Button_Save.TextColor = System.Drawing.Color.White;
-            this.rJ_Button_Save.UseVisualStyleBackColor = false;
             // 
             // DeviceBasicUI
             // 

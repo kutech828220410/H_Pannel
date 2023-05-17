@@ -160,6 +160,7 @@ namespace H_Pannel_lib
             設定LocalPort,
             選取顯示網段,
             刷新,
+         
         }
 
 
@@ -674,6 +675,10 @@ namespace H_Pannel_lib
             }
             return list_DeviceTableValue;
         }
+
+
+
+
         virtual protected void Export()
         {
 
@@ -764,6 +769,7 @@ namespace H_Pannel_lib
             this.list_UDP_Rx = this.Get_UDP_RX();
             if (this.CanSelect)
             {
+                
                 this.sqL_DataGridView_UDP_DataReceive.RefreshGrid(list_UDP_Rx);
             }
         }
@@ -940,6 +946,7 @@ namespace H_Pannel_lib
                                     Set_OTAUpdate(IP, Port);
                                 }));
                             }
+
                             Task allTask = Task.WhenAll(taskList);
                         }
                         else
