@@ -5563,6 +5563,30 @@ namespace H_Pannel_lib
             list_byte_image = BmpByteToGray(list_byte_image, ref len);
             return list_byte_image;
         }
+        static unsafe public string BitmapToHexString(string filename)
+        {
+            Bitmap bitmap = (Bitmap)Bitmap.FromFile(filename);
+            string str = BitmapToHexString(bitmap);
+            bitmap.Dispose();
+            return str;
+        }
+        static unsafe public string BitmapToHexString(Bitmap bitmap)
+        {
+            List<byte> list_bytes = BitmapToByte(bitmap);
+            System.Text.StringBuilder sb_bytes = new StringBuilder();
+            int index = 0;
+            for (int i = 0; i < list_bytes.Count; i++)
+            {
+                sb_bytes.Append($"0x{list_bytes[i].ToString("X2")},");
+                index++;
+                if (index >= 20)
+                {
+                    sb_bytes.Append($"\n");
+                    index = 0;
+                }
+            }
+            return sb_bytes.ToString().ToUpper();
+        }
         static unsafe public void BitmapToHexString(Bitmap bimage, ref string BW, ref string RW, EPD_Type ePD_Type)
         {
             byte[] BW_bytes = new byte[0];
