@@ -5576,14 +5576,10 @@ namespace H_Pannel_lib
             List<ushort> list_uint16 = new List<ushort>();
             System.Text.StringBuilder sb_uint16s = new StringBuilder();
             int index = 0;
+   
             for (int i = 0; i < list_bytes.Count / 2; i++)
             {
-                ushort temp = (ushort)(list_bytes[i] | (list_bytes[i + 1] << 8));
-                list_uint16.Add(temp);
-            }
-            for (int i = 0; i < list_uint16.Count; i++)
-            {
-                sb_uint16s.Append($"0x{list_uint16[i].ToString("X4")},");
+                sb_uint16s.Append($"0x{list_bytes[i+1].ToString("X2")}{list_bytes[i].ToString("X2")},");
                 index++;
                 if (index >= 20)
                 {
