@@ -17,6 +17,11 @@ using System.Drawing.Drawing2D;
 
 namespace H_Pannel_lib
 {
+    public enum Hex_Type
+    {
+        H_L,
+        L_H,
+    }
     public enum ChipType
     {
         ESP32,
@@ -5563,23 +5568,24 @@ namespace H_Pannel_lib
             list_byte_image = BmpByteToGray(list_byte_image, ref len);
             return list_byte_image;
         }
-        static unsafe public string BitmapToHexString(string filename)
+        static unsafe public string BitmapToHexString(string filename, Hex_Type hex_Type)
         {
             Bitmap bitmap = (Bitmap)Bitmap.FromFile(filename);
-            string str = BitmapToHexString(bitmap);
+            string str = BitmapToHexString(bitmap , hex_Type);
             bitmap.Dispose();
             return str;
         }
-        static unsafe public string BitmapToHexString(Bitmap bitmap)
+        static unsafe public string BitmapToHexString(Bitmap bitmap , Hex_Type hex_Type)
         {
             List<byte> list_bytes = BitmapToByte(bitmap);
-            List<ushort> list_uint16 = new List<ushort>();
             System.Text.StringBuilder sb_uint16s = new StringBuilder();
             int index = 0;
-   
+            string temp = "";
             for (int i = 0; i < list_bytes.Count / 2; i++)
             {
-                sb_uint16s.Append($"0x{list_bytes[(i * 2) + 1].ToString("X2")}{list_bytes[(i * 2) + 0].ToString("X2")},");
+                if (hex_Type == Hex_Type.H_L) temp = $"0x{list_bytes[(i * 2) + 1].ToString("X2")}{list_bytes[(i * 2) + 0].ToString("X2")},";
+                if (hex_Type == Hex_Type.L_H) temp = $"0x{list_bytes[(i * 2) + 0].ToString("X2")}{list_bytes[(i * 2) + 1].ToString("X2")},";
+                sb_uint16s.Append(temp);
                 index++;
                 if (index >= 20)
                 {
