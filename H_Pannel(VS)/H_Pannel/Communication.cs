@@ -5579,7 +5579,7 @@ namespace H_Pannel_lib
    
             for (int i = 0; i < list_bytes.Count / 2; i++)
             {
-                sb_uint16s.Append($"0x{list_bytes[i+1].ToString("X2")}{list_bytes[i].ToString("X2")},");
+                sb_uint16s.Append($"0x{list_bytes[(i * 2) + 1].ToString("X2")}{list_bytes[(i * 2)].ToString("X2")},");
                 index++;
                 if (index >= 20)
                 {
