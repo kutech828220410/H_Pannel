@@ -5583,7 +5583,7 @@ namespace H_Pannel_lib
             }
             for (int i = 0; i < list_uint16.Count; i++)
             {
-                sb_uint16s.Append($"0x{list_bytes[i].ToString("X4")},");
+                sb_uint16s.Append($"0x{list_uint16[i].ToString("X4")},");
                 index++;
                 if (index >= 20)
                 {
