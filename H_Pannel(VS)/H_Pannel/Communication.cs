@@ -5573,19 +5573,25 @@ namespace H_Pannel_lib
         static unsafe public string BitmapToHexString(Bitmap bitmap)
         {
             List<byte> list_bytes = BitmapToByte(bitmap);
-            System.Text.StringBuilder sb_bytes = new StringBuilder();
+            List<ushort> list_uint16 = new List<ushort>();
+            System.Text.StringBuilder sb_uint16s = new StringBuilder();
             int index = 0;
-            for (int i = 0; i < list_bytes.Count; i++)
+            for (int i = 0; i < list_bytes.Count / 2; i++)
             {
-                sb_bytes.Append($"0x{list_bytes[i].ToString("X2")},");
+                ushort temp = (ushort)(list_bytes[i] | (list_bytes[i + 1] << 8));
+                list_uint16.Add(temp);
+            }
+            for (int i = 0; i < list_uint16.Count; i++)
+            {
+                sb_uint16s.Append($"0x{list_bytes[i].ToString("X4")},");
                 index++;
                 if (index >= 20)
                 {
-                    sb_bytes.Append($"\n");
+                    sb_uint16s.Append($"\n");
                     index = 0;
                 }
             }
-            return sb_bytes.ToString().ToUpper();
+            return sb_uint16s.ToString().ToUpper();
         }
         static unsafe public void BitmapToHexString(Bitmap bimage, ref string BW, ref string RW, EPD_Type ePD_Type)
         {
