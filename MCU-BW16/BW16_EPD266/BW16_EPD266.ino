@@ -18,6 +18,7 @@
 #include <SoftwareSerial.h>
 
 
+
 #define SPI_MOSI_PIN PA12
 #define NUM_WS2812B_CRGB  450
 #define NUM_OF_LEDS NUM_WS2812B_CRGB
@@ -53,7 +54,7 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.3.2";
+String Version = "Ver 1.3.3";
 
 void setup() 
 {
@@ -70,6 +71,9 @@ void loop()
       wiFiConfig.mySerial = &mySerial;
       epd.mySerial = &mySerial;
       wiFiConfig.Init(Version);
+      wiFiConfig.Set_Localport(29000);
+      wiFiConfig.Set_Serverport(30000);
+      
       Localport = wiFiConfig.Get_Localport();
       Serverport = wiFiConfig.Get_Serverport();
       ServerIp = wiFiConfig.Get_Server_IPAdressClass();

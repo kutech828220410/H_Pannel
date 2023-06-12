@@ -33,6 +33,8 @@ namespace TestForm
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.測試單元 = new System.Windows.Forms.TabPage();
             this.plC_RJ_GroupBox2 = new MyUI.PLC_RJ_GroupBox();
+            this.checkBox_EPD266_自動加1 = new System.Windows.Forms.CheckBox();
+            this.plC_RJ_Button_EPD266_IP加1 = new MyUI.PLC_RJ_Button();
             this.rJ_TextBox_EPD266_ServerIP = new MyUI.RJ_TextBox();
             this.rJ_Lable2 = new MyUI.RJ_Lable();
             this.rJ_TextBox_EPD266_Password = new MyUI.RJ_TextBox();
@@ -55,14 +57,12 @@ namespace TestForm
             this.系統 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.EPD290 = new System.Windows.Forms.TabPage();
-            this.storageUI_EPD_290 = new H_Pannel_lib.StorageUI_EPD_290();
             this.EPD266 = new System.Windows.Forms.TabPage();
-            this.storageUI_EPD_266 = new H_Pannel_lib.StorageUI_EPD_266();
             this.PLC = new System.Windows.Forms.TabPage();
             this.plC_UI_Init = new MyUI.PLC_UI_Init();
             this.lowerMachine_Panel = new LadderUI.LowerMachine_Panel();
-            this.plC_RJ_Button_EPD266_IP加1 = new MyUI.PLC_RJ_Button();
-            this.checkBox_EPD266_自動加1 = new System.Windows.Forms.CheckBox();
+            this.storageUI_EPD_290 = new H_Pannel_lib.StorageUI_EPD_290();
+            this.storageUI_EPD_266 = new H_Pannel_lib.StorageUI_EPD_266();
             this.tabControl1.SuspendLayout();
             this.測試單元.SuspendLayout();
             this.plC_RJ_GroupBox2.ContentsPanel.SuspendLayout();
@@ -152,6 +152,60 @@ namespace TestForm
             this.plC_RJ_GroupBox2.TitleHeight = 45;
             this.plC_RJ_GroupBox2.TitleTextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.plC_RJ_GroupBox2.TitleTexts = "EPD266 [Port:29000,30000]";
+            // 
+            // checkBox_EPD266_自動加1
+            // 
+            this.checkBox_EPD266_自動加1.AutoSize = true;
+            this.checkBox_EPD266_自動加1.ForeColor = System.Drawing.Color.Black;
+            this.checkBox_EPD266_自動加1.Location = new System.Drawing.Point(472, 426);
+            this.checkBox_EPD266_自動加1.Name = "checkBox_EPD266_自動加1";
+            this.checkBox_EPD266_自動加1.Size = new System.Drawing.Size(60, 16);
+            this.checkBox_EPD266_自動加1.TabIndex = 52;
+            this.checkBox_EPD266_自動加1.Text = "自動+1";
+            this.checkBox_EPD266_自動加1.UseVisualStyleBackColor = true;
+            // 
+            // plC_RJ_Button_EPD266_IP加1
+            // 
+            this.plC_RJ_Button_EPD266_IP加1.AutoResetState = false;
+            this.plC_RJ_Button_EPD266_IP加1.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.plC_RJ_Button_EPD266_IP加1.Bool = false;
+            this.plC_RJ_Button_EPD266_IP加1.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.plC_RJ_Button_EPD266_IP加1.BorderRadius = 5;
+            this.plC_RJ_Button_EPD266_IP加1.BorderSize = 0;
+            this.plC_RJ_Button_EPD266_IP加1.but_press = false;
+            this.plC_RJ_Button_EPD266_IP加1.buttonType = MyUI.RJ_Button.ButtonType.Toggle;
+            this.plC_RJ_Button_EPD266_IP加1.FlatAppearance.BorderSize = 0;
+            this.plC_RJ_Button_EPD266_IP加1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.plC_RJ_Button_EPD266_IP加1.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD266_IP加1.Icon = System.Windows.Forms.MessageBoxIcon.Warning;
+            this.plC_RJ_Button_EPD266_IP加1.Location = new System.Drawing.Point(436, 116);
+            this.plC_RJ_Button_EPD266_IP加1.Margin = new System.Windows.Forms.Padding(6);
+            this.plC_RJ_Button_EPD266_IP加1.Name = "plC_RJ_Button_EPD266_IP加1";
+            this.plC_RJ_Button_EPD266_IP加1.OFF_文字內容 = "+1";
+            this.plC_RJ_Button_EPD266_IP加1.OFF_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD266_IP加1.OFF_文字顏色 = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_IP加1.OFF_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_IP加1.ON_BorderSize = 5;
+            this.plC_RJ_Button_EPD266_IP加1.ON_文字內容 = "+1";
+            this.plC_RJ_Button_EPD266_IP加1.ON_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD266_IP加1.ON_文字顏色 = System.Drawing.Color.Black;
+            this.plC_RJ_Button_EPD266_IP加1.ON_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_IP加1.Size = new System.Drawing.Size(78, 40);
+            this.plC_RJ_Button_EPD266_IP加1.State = false;
+            this.plC_RJ_Button_EPD266_IP加1.TabIndex = 51;
+            this.plC_RJ_Button_EPD266_IP加1.Text = "+1";
+            this.plC_RJ_Button_EPD266_IP加1.TextColor = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_IP加1.Texts = "+1";
+            this.plC_RJ_Button_EPD266_IP加1.UseVisualStyleBackColor = false;
+            this.plC_RJ_Button_EPD266_IP加1.字型鎖住 = false;
+            this.plC_RJ_Button_EPD266_IP加1.按鈕型態 = MyUI.PLC_RJ_Button.StatusEnum.保持型;
+            this.plC_RJ_Button_EPD266_IP加1.按鍵方式 = MyUI.PLC_RJ_Button.PressEnum.Mouse_左鍵;
+            this.plC_RJ_Button_EPD266_IP加1.文字鎖住 = false;
+            this.plC_RJ_Button_EPD266_IP加1.讀取位元反向 = false;
+            this.plC_RJ_Button_EPD266_IP加1.讀寫鎖住 = false;
+            this.plC_RJ_Button_EPD266_IP加1.音效 = true;
+            this.plC_RJ_Button_EPD266_IP加1.顯示 = false;
+            this.plC_RJ_Button_EPD266_IP加1.顯示狀態 = false;
             // 
             // rJ_TextBox_EPD266_ServerIP
             // 
@@ -755,69 +809,15 @@ namespace TestForm
             this.EPD290.Text = "EPD290";
             this.EPD290.UseVisualStyleBackColor = true;
             // 
-            // storageUI_EPD_290
-            // 
-            this.storageUI_EPD_290._Password = "";
-            this.storageUI_EPD_290.DataBaseName = "TEST";
-            this.storageUI_EPD_290.DNS = "0.0.0.0";
-            this.storageUI_EPD_290.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.storageUI_EPD_290.Gateway = "0.0.0.0";
-            this.storageUI_EPD_290.IP = "localhost";
-            this.storageUI_EPD_290.IP_Adress = "0.0.0.0";
-            this.storageUI_EPD_290.Local_Port = "0";
-            this.storageUI_EPD_290.Location = new System.Drawing.Point(3, 3);
-            this.storageUI_EPD_290.Name = "storageUI_EPD_290";
-            this.storageUI_EPD_290.Password = "user82822040";
-            this.storageUI_EPD_290.Port = ((uint)(3306u));
-            this.storageUI_EPD_290.Server_IP_Adress = "0.0.0.0";
-            this.storageUI_EPD_290.Server_Port = "0";
-            this.storageUI_EPD_290.Size = new System.Drawing.Size(1411, 857);
-            this.storageUI_EPD_290.SSID = "";
-            this.storageUI_EPD_290.Station = "0";
-            this.storageUI_EPD_290.Subnet = "0.0.0.0";
-            this.storageUI_EPD_290.TabIndex = 2;
-            this.storageUI_EPD_290.TableName = "EPD290_Jsonstring";
-            this.storageUI_EPD_290.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_LocalPorts")));
-            this.storageUI_EPD_290.UDP_SendTime = "0";
-            this.storageUI_EPD_290.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_ServerPorts")));
-            this.storageUI_EPD_290.UserName = "root";
-            // 
             // EPD266
             // 
             this.EPD266.Controls.Add(this.storageUI_EPD_266);
             this.EPD266.Location = new System.Drawing.Point(4, 22);
             this.EPD266.Name = "EPD266";
-            this.EPD266.Size = new System.Drawing.Size(178, 42);
+            this.EPD266.Size = new System.Drawing.Size(1417, 863);
             this.EPD266.TabIndex = 2;
             this.EPD266.Text = "EPD266";
             this.EPD266.UseVisualStyleBackColor = true;
-            // 
-            // storageUI_EPD_266
-            // 
-            this.storageUI_EPD_266._Password = "";
-            this.storageUI_EPD_266.DataBaseName = "TEST";
-            this.storageUI_EPD_266.DNS = "0.0.0.0";
-            this.storageUI_EPD_266.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.storageUI_EPD_266.Gateway = "0.0.0.0";
-            this.storageUI_EPD_266.IP = "localhost";
-            this.storageUI_EPD_266.IP_Adress = "0.0.0.0";
-            this.storageUI_EPD_266.Local_Port = "0";
-            this.storageUI_EPD_266.Location = new System.Drawing.Point(0, 0);
-            this.storageUI_EPD_266.Name = "storageUI_EPD_266";
-            this.storageUI_EPD_266.Password = "user82822040";
-            this.storageUI_EPD_266.Port = ((uint)(3306u));
-            this.storageUI_EPD_266.Server_IP_Adress = "0.0.0.0";
-            this.storageUI_EPD_266.Server_Port = "0";
-            this.storageUI_EPD_266.Size = new System.Drawing.Size(178, 42);
-            this.storageUI_EPD_266.SSID = "";
-            this.storageUI_EPD_266.Station = "0";
-            this.storageUI_EPD_266.Subnet = "0.0.0.0";
-            this.storageUI_EPD_266.TabIndex = 0;
-            this.storageUI_EPD_266.TableName = "EPD266_Jsonstring";
-            this.storageUI_EPD_266.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_LocalPorts")));
-            this.storageUI_EPD_266.UDP_SendTime = "0";
-            this.storageUI_EPD_266.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_ServerPorts")));
-            this.storageUI_EPD_266.UserName = "root";
             // 
             // PLC
             // 
@@ -825,7 +825,7 @@ namespace TestForm
             this.PLC.Controls.Add(this.lowerMachine_Panel);
             this.PLC.Location = new System.Drawing.Point(4, 22);
             this.PLC.Name = "PLC";
-            this.PLC.Size = new System.Drawing.Size(178, 42);
+            this.PLC.Size = new System.Drawing.Size(1417, 863);
             this.PLC.TabIndex = 1;
             this.PLC.Text = "PLC";
             this.PLC.UseVisualStyleBackColor = true;
@@ -856,59 +856,59 @@ namespace TestForm
             this.lowerMachine_Panel.TabIndex = 0;
             this.lowerMachine_Panel.掃描速度 = 0;
             // 
-            // plC_RJ_Button_EPD266_IP加1
+            // storageUI_EPD_290
             // 
-            this.plC_RJ_Button_EPD266_IP加1.AutoResetState = false;
-            this.plC_RJ_Button_EPD266_IP加1.BackgroundColor = System.Drawing.Color.DodgerBlue;
-            this.plC_RJ_Button_EPD266_IP加1.Bool = false;
-            this.plC_RJ_Button_EPD266_IP加1.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.plC_RJ_Button_EPD266_IP加1.BorderRadius = 5;
-            this.plC_RJ_Button_EPD266_IP加1.BorderSize = 0;
-            this.plC_RJ_Button_EPD266_IP加1.but_press = false;
-            this.plC_RJ_Button_EPD266_IP加1.buttonType = MyUI.RJ_Button.ButtonType.Toggle;
-            this.plC_RJ_Button_EPD266_IP加1.FlatAppearance.BorderSize = 0;
-            this.plC_RJ_Button_EPD266_IP加1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.plC_RJ_Button_EPD266_IP加1.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
-            this.plC_RJ_Button_EPD266_IP加1.Icon = System.Windows.Forms.MessageBoxIcon.Warning;
-            this.plC_RJ_Button_EPD266_IP加1.Location = new System.Drawing.Point(436, 116);
-            this.plC_RJ_Button_EPD266_IP加1.Margin = new System.Windows.Forms.Padding(6);
-            this.plC_RJ_Button_EPD266_IP加1.Name = "plC_RJ_Button_EPD266_IP加1";
-            this.plC_RJ_Button_EPD266_IP加1.OFF_文字內容 = "+1";
-            this.plC_RJ_Button_EPD266_IP加1.OFF_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
-            this.plC_RJ_Button_EPD266_IP加1.OFF_文字顏色 = System.Drawing.Color.White;
-            this.plC_RJ_Button_EPD266_IP加1.OFF_背景顏色 = System.Drawing.SystemColors.Control;
-            this.plC_RJ_Button_EPD266_IP加1.ON_BorderSize = 5;
-            this.plC_RJ_Button_EPD266_IP加1.ON_文字內容 = "+1";
-            this.plC_RJ_Button_EPD266_IP加1.ON_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
-            this.plC_RJ_Button_EPD266_IP加1.ON_文字顏色 = System.Drawing.Color.Black;
-            this.plC_RJ_Button_EPD266_IP加1.ON_背景顏色 = System.Drawing.SystemColors.Control;
-            this.plC_RJ_Button_EPD266_IP加1.Size = new System.Drawing.Size(78, 40);
-            this.plC_RJ_Button_EPD266_IP加1.State = false;
-            this.plC_RJ_Button_EPD266_IP加1.TabIndex = 51;
-            this.plC_RJ_Button_EPD266_IP加1.Text = "+1";
-            this.plC_RJ_Button_EPD266_IP加1.TextColor = System.Drawing.Color.White;
-            this.plC_RJ_Button_EPD266_IP加1.Texts = "+1";
-            this.plC_RJ_Button_EPD266_IP加1.UseVisualStyleBackColor = false;
-            this.plC_RJ_Button_EPD266_IP加1.字型鎖住 = false;
-            this.plC_RJ_Button_EPD266_IP加1.按鈕型態 = MyUI.PLC_RJ_Button.StatusEnum.保持型;
-            this.plC_RJ_Button_EPD266_IP加1.按鍵方式 = MyUI.PLC_RJ_Button.PressEnum.Mouse_左鍵;
-            this.plC_RJ_Button_EPD266_IP加1.文字鎖住 = false;
-            this.plC_RJ_Button_EPD266_IP加1.讀取位元反向 = false;
-            this.plC_RJ_Button_EPD266_IP加1.讀寫鎖住 = false;
-            this.plC_RJ_Button_EPD266_IP加1.音效 = true;
-            this.plC_RJ_Button_EPD266_IP加1.顯示 = false;
-            this.plC_RJ_Button_EPD266_IP加1.顯示狀態 = false;
+            this.storageUI_EPD_290._Password = "";
+            this.storageUI_EPD_290.DataBaseName = "TEST";
+            this.storageUI_EPD_290.DNS = "0.0.0.0";
+            this.storageUI_EPD_290.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.storageUI_EPD_290.Gateway = "0.0.0.0";
+            this.storageUI_EPD_290.IP = "localhost";
+            this.storageUI_EPD_290.IP_Adress = "0.0.0.0";
+            this.storageUI_EPD_290.Local_Port = "0";
+            this.storageUI_EPD_290.Location = new System.Drawing.Point(3, 3);
+            this.storageUI_EPD_290.Name = "storageUI_EPD_290";
+            this.storageUI_EPD_290.Password = "user82822040";
+            this.storageUI_EPD_290.Port = ((uint)(3306u));
+            this.storageUI_EPD_290.Server_IP_Adress = "0.0.0.0";
+            this.storageUI_EPD_290.Server_Port = "0";
+            this.storageUI_EPD_290.Size = new System.Drawing.Size(1411, 857);
+            this.storageUI_EPD_290.SSID = "";
+            this.storageUI_EPD_290.Station = "0";
+            this.storageUI_EPD_290.Subnet = "0.0.0.0";
+            this.storageUI_EPD_290.TabIndex = 2;
+            this.storageUI_EPD_290.TableName = "EPD290_Jsonstring";
+            this.storageUI_EPD_290.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_LocalPorts")));
+            this.storageUI_EPD_290.UDP_SendTime = "0";
+            this.storageUI_EPD_290.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_ServerPorts")));
+            this.storageUI_EPD_290.UserName = "root";
             // 
-            // checkBox_EPD266_自動加1
+            // storageUI_EPD_266
             // 
-            this.checkBox_EPD266_自動加1.AutoSize = true;
-            this.checkBox_EPD266_自動加1.ForeColor = System.Drawing.Color.Black;
-            this.checkBox_EPD266_自動加1.Location = new System.Drawing.Point(472, 426);
-            this.checkBox_EPD266_自動加1.Name = "checkBox_EPD266_自動加1";
-            this.checkBox_EPD266_自動加1.Size = new System.Drawing.Size(60, 16);
-            this.checkBox_EPD266_自動加1.TabIndex = 52;
-            this.checkBox_EPD266_自動加1.Text = "自動+1";
-            this.checkBox_EPD266_自動加1.UseVisualStyleBackColor = true;
+            this.storageUI_EPD_266._Password = "";
+            this.storageUI_EPD_266.DataBaseName = "TEST";
+            this.storageUI_EPD_266.DNS = "0.0.0.0";
+            this.storageUI_EPD_266.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.storageUI_EPD_266.Gateway = "0.0.0.0";
+            this.storageUI_EPD_266.IP = "localhost";
+            this.storageUI_EPD_266.IP_Adress = "0.0.0.0";
+            this.storageUI_EPD_266.Local_Port = "0";
+            this.storageUI_EPD_266.Location = new System.Drawing.Point(0, 0);
+            this.storageUI_EPD_266.Name = "storageUI_EPD_266";
+            this.storageUI_EPD_266.Password = "user82822040";
+            this.storageUI_EPD_266.Port = ((uint)(3306u));
+            this.storageUI_EPD_266.Server_IP_Adress = "0.0.0.0";
+            this.storageUI_EPD_266.Server_Port = "0";
+            this.storageUI_EPD_266.Size = new System.Drawing.Size(1417, 863);
+            this.storageUI_EPD_266.SSID = "";
+            this.storageUI_EPD_266.Station = "0";
+            this.storageUI_EPD_266.Subnet = "0.0.0.0";
+            this.storageUI_EPD_266.TabIndex = 0;
+            this.storageUI_EPD_266.TableName = "EPD266_Jsonstring";
+            this.storageUI_EPD_266.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_LocalPorts")));
+            this.storageUI_EPD_266.UDP_SendTime = "0";
+            this.storageUI_EPD_266.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_ServerPorts")));
+            this.storageUI_EPD_266.UserName = "root";
             // 
             // Form1
             // 

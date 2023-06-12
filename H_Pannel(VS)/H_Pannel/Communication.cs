@@ -68,6 +68,7 @@ namespace H_Pannel_lib
             Set_PIN = (byte)'A',
             OTAUpdate = (byte)'B',
             SetToPage = (byte)'C',
+            Set_TOF = (byte)'D',
             DrawRect = (byte)'E',
             Set_UDP_SendTime = (byte)'F',
             Set_ScreenPageInit = (byte)'G',
@@ -103,8 +104,14 @@ namespace H_Pannel_lib
             EPD_BW_Command = (byte)'h',
             EPD_RW_Command = (byte)'i',
             EPD_SendSPI = (byte)'j',
+            EPD_GetType = (byte)'k',
+
         }
-  
+
+        static public bool Set_TOF(UDP_Class uDP_Class, string IP, bool Statu)
+        {
+            return Command_Set_TOF(uDP_Class, IP, Statu);
+        }
 
         static public bool Set_ClearCanvas(UDP_Class uDP_Class, string IP, int x, int y, int width, int height, Color color)
         {
@@ -495,6 +502,7 @@ namespace H_Pannel_lib
         }
         static public bool EPD_266_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
+            Console.WriteLine($"EPD290 DrawImage start {DateTime.Now.ToDateTimeString()} ");
             using (Bitmap _bmp = bmp.DeepClone())
             {
                 int EPD266_frameDIV = 0;
@@ -525,6 +533,7 @@ namespace H_Pannel_lib
         }
         static public bool EPD_290_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
+            Console.WriteLine($"EPD290 DrawImage start {DateTime.Now.ToDateTimeString()} ");
             using (Bitmap _bmp = bmp.DeepClone())
             {
                 int EPD290_frameDIV = 0;
@@ -1811,7 +1820,7 @@ namespace H_Pannel_lib
                         cnt = 0;
                     }
                     string UDP_RX = uDP_Class.Get_ReadLineByIP(IP);
-                    
+
                     if (UDP_RX != "")
                     {
                         if (UDP_RX == checksum.ToString("000"))
@@ -1828,6 +1837,69 @@ namespace H_Pannel_lib
                 System.Threading.Thread.Sleep(1);
             }
             if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Set_PIN {string.Format(flag_OK ? "sucess" : "failed")}!");
+            return flag_OK;
+        }
+        static private bool Command_Set_TOF(UDP_Class uDP_Class, string IP, bool Statu)
+        {
+            bool flag_OK = true;
+            byte checksum = 0;
+            List<byte> list_byte = new List<byte>();
+            list_byte.Add(2);
+            list_byte.Add((byte)UDP_Command.Set_TOF);
+            list_byte.Add(Statu ? (byte)0 : (byte)1);
+            list_byte.Add(3);
+            for (int i = 0; i < list_byte.Count; i++)
+            {
+                checksum += list_byte[i];
+            }
+            MyTimer MyTimer_UART_TimeOut = new MyTimer();
+            int retry = 0;
+            int cnt = 0;
+            while (true)
+            {
+                if (cnt == 0)
+                {
+                    if (retry >= UDP_RetryNum)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    uDP_Class.Set_ReadLineClearByIP(IP);
+                    uDP_Class.WriteByte(list_byte.ToArray(), IP);
+                    MyTimer_UART_TimeOut.TickStop();
+                    MyTimer_UART_TimeOut.StartTickTime(UDP_TimeOut);
+                    cnt++;
+                }
+                else if (cnt == 1)
+                {
+                    if (retry >= UDP_RetryNum)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    if (MyTimer_UART_TimeOut.IsTimeOut())
+                    {
+                        retry++;
+                        cnt = 0;
+                    }
+                    string UDP_RX = uDP_Class.Get_ReadLineByIP(IP);
+
+                    if (UDP_RX != "")
+                    {
+                        if (UDP_RX == checksum.ToString("000"))
+                        {
+                            flag_OK = true;
+                            break;
+                        }
+                        else
+                        {
+                            cnt = 0;
+                        }
+                    }
+                }
+                System.Threading.Thread.Sleep(1);
+            }
+            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : 設定雷射狀態 {Statu} {string.Format(flag_OK ? "sucess" : "failed")}!");
             return flag_OK;
         }
         static private bool Command_DrawRect(UDP_Class uDP_Class, string IP, int x, int y, int width, int height, int pen_width, Color color)
@@ -5696,7 +5768,7 @@ namespace H_Pannel_lib
                         {
                             temp_BW <<= 1;
                             temp_RW <<= 1;
-                            if (ePD_Type == EPD_Type.EPD583 || ePD_Type == EPD_Type.EPD266_B || ePD_Type == EPD_Type.EPD1020 )
+                            if (ePD_Type == EPD_Type.EPD583 || ePD_Type == EPD_Type.EPD266_B || ePD_Type == EPD_Type.EPD1020)
                             {
                                 if (R[i] > 0 && G[i] <= 128 && B[i] <= 128)
                                 {
@@ -5736,21 +5808,22 @@ namespace H_Pannel_lib
                             }
                             else if (ePD_Type == EPD_Type.EPD290_V2)
                             {
-                                if (R[i] > 0 && G[i] <= 128 && B[i] <= 128)
+                                if (R[i] <= 128 && G[i] <= 128 && B[i] <= 128)
                                 {
                                     temp_BW |= (byte)(0x00);
                                     temp_RW |= (byte)(0x00);
                                 }
-                                else if (R[i] > 0 && G[i] > 0 && B[i] >= 0)
+                                else if (R[i] >= 128 && G[i] <= 128 && B[i] <= 128)
                                 {
                                     temp_BW |= (byte)(0x00);
                                     temp_RW |= (byte)(0x01);
                                 }
-                                else if (R[i] == 0 && G[i] == 0 && B[i] == 0)
+                                else if (R[i] > 0 && G[i] > 0 && B[i] >= 0)
                                 {
                                     temp_BW |= (byte)(0x01);
-                                    temp_RW |= (byte)(0x01);
+                                    temp_RW |= (byte)(0x00);
                                 }
+                               
 
                             }
                             else if (ePD_Type == EPD_Type.EPD290_V3)
@@ -5969,6 +6042,43 @@ namespace H_Pannel_lib
                 byte.TryParse(str[3], out bytes[3]);
             }
             return bytes;
+        }
+        public static Bitmap ScaleImage(Bitmap SrcBitmap, int dstWidth, int dstHeight)
+        {
+            Graphics g = null;
+            try
+            {
+                Bitmap DstBitmap = new Bitmap(dstWidth, dstHeight);
+                //按比例缩放           
+                int width = (int)(SrcBitmap.Width * ((float)dstWidth / (float)SrcBitmap.Width));
+                int height = (int)(SrcBitmap.Height * ((float)dstHeight / (float)SrcBitmap.Height));
+
+
+                g = Graphics.FromImage(DstBitmap);
+                g.Clear(Color.Transparent);
+
+                //设置画布的描绘质量         
+                g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g.DrawImage(SrcBitmap, new Rectangle((width - width) / 2, (height - height) / 2, width, height), 0, 0, SrcBitmap.Width, SrcBitmap.Height, GraphicsUnit.Pixel);
+
+
+                return DstBitmap;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                if (g != null)
+                {
+                    g.Dispose();
+                }
+
+            }
+            return null;
         }
     }
 }

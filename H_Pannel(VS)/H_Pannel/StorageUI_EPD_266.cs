@@ -90,6 +90,10 @@ namespace H_Pannel_lib
 
             return LED_Bytes;
         }
+        static public bool Set_Stroage_TOF(UDP_Class uDP_Class, string IP, bool value)
+        {
+            return Communication.Set_TOF(uDP_Class, IP, value);
+        }
         static public bool Set_Stroage_LED_UDP(UDP_Class uDP_Class, string IP, Color color)
         {
             byte[] LED_Bytes = Get_Pannel_LEDBytes(color);
@@ -114,6 +118,10 @@ namespace H_Pannel_lib
         {
             if (uDP_Class != null)
             {
+                if(bitmap.Height == 128)
+                {
+                    return Communication.EPD_290_DrawImage(uDP_Class, IP, bitmap);
+                }
                 return Communication.EPD_266_DrawImage(uDP_Class, IP, bitmap);
             }
             return false;
@@ -157,8 +165,8 @@ namespace H_Pannel_lib
             //storage.BarCode = "862755";
             //storage.新增效期("2022/12/12", "1520");
             //storage.IsWarning = false;
-
-            Bitmap bitmap = new Bitmap(Pannel_Width, Pannel_Height);
+            Bitmap bitmap = new Bitmap(296, 152);
+          
             using (Graphics g = Graphics.FromImage(bitmap))
             {
                 g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
@@ -281,7 +289,18 @@ namespace H_Pannel_lib
                 }
             
             }
-            return bitmap;
+            Bitmap bitmap_buf = null;
+            if (storage.DeviceType == DeviceType.EPD266 || storage.DeviceType == DeviceType.EPD266_lock)
+            {
+                bitmap_buf = Communication.ScaleImage(bitmap, 296, 152);
+            }
+            if (storage.DeviceType == DeviceType.EPD290 || storage.DeviceType == DeviceType.EPD290_lock)
+            {
+                bitmap_buf = Communication.ScaleImage(bitmap, 296, 128);
+            }
+            bitmap.Dispose();
+            bitmap = null;
+            return bitmap_buf;
         }
         static private void DrawStorageString(Graphics g, Storage storage, Device.ValueName valueName, float x, float y)
         {
@@ -311,13 +330,14 @@ namespace H_Pannel_lib
         }
         #endregion
 
-
         private enum ContextMenuStrip_Main
         {
             畫面設置,
             IO設定,
-            設為有鎖控,
-            設為無鎖控,
+            設為EPD266有鎖控,
+            設為EPD266無鎖控,
+            設為EPD290有鎖控,
+            設為EPD290無鎖控,
         }
         private enum ContextMenuStrip_DeviceTable_畫面設置
         {
@@ -328,6 +348,8 @@ namespace H_Pannel_lib
         {
             面板亮燈,
             IO測試,
+            雷射開啟,
+            雷射關閉,
         }
         private enum ContextMenuStrip_UDP_DataReceive_畫面設置
         {
@@ -338,6 +360,8 @@ namespace H_Pannel_lib
         {
             面板亮燈,
             IO測試,
+            雷射開啟,
+            雷射關閉,
         }
         public StorageUI_EPD_266()
         {
@@ -360,9 +384,14 @@ namespace H_Pannel_lib
                 if (storage != null)
                 {
                     Color color = Color.White;
-                    if (storage.DeviceType == DeviceType.EPD266_lock)
+                    if (storage.DeviceType == DeviceType.EPD266_lock || storage.DeviceType == DeviceType.EPD266)
                     {
                         this.sqL_DataGridView_DeviceTable.dataGridView.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
+                        this.sqL_DataGridView_DeviceTable.dataGridView.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                    if (storage.DeviceType == DeviceType.EPD290_lock || storage.DeviceType == DeviceType.EPD290)
+                    {
+                        this.sqL_DataGridView_DeviceTable.dataGridView.Rows[i].DefaultCellStyle.BackColor = Color.HotPink;
                         this.sqL_DataGridView_DeviceTable.dataGridView.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
                     }
                 }
@@ -408,6 +437,12 @@ namespace H_Pannel_lib
         {
             byte[] LED_Bytes = Get_Pannel_LEDBytes(color);
             return this.Set_Stroage_LED_UDP(IP, Port , LED_Bytes);
+        }
+        public bool Set_TOF(string IP, int Port, bool statu)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+            if (uDP_Class == null) return false;
+            return Set_Stroage_TOF(uDP_Class, IP, statu);
         }
         public bool Set_Stroage_LED_UDP(string IP, int Port, byte[] LED_Bytes)
         {
@@ -500,7 +535,13 @@ namespace H_Pannel_lib
                         List<Task> taskList = new List<Task>();
                         for (int i = 0; i < iPEndPoints.Count; i++)
                         {
-                            Bitmap bmp = new Bitmap(Pannel_Width, Pannel_Height);
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Storage storage = this.SQL_GetStorage(IP);
+                            if (storage == null) continue;
+                            Bitmap bmp = null;
+                            if (storage.DeviceType == DeviceType.EPD266 || storage.DeviceType == DeviceType.EPD266_lock) bmp = new Bitmap(Pannel_Width, 152);
+                            if (storage.DeviceType == DeviceType.EPD290 || storage.DeviceType == DeviceType.EPD290_lock) bmp = new Bitmap(Pannel_Width, 128);
                             Graphics g = Graphics.FromImage(bmp);
                             Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
                             g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
@@ -509,8 +550,7 @@ namespace H_Pannel_lib
                             g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
                             g.FillRectangle(new SolidBrush(Color.Red), rect);
                             g.Dispose();
-                            string IP = iPEndPoints[i].Address.ToString();
-                            int Port = iPEndPoints[i].Port;
+                   
                             taskList.Add(Task.Run(() =>
                             {
                                 DrawToEpd_UDP(IP, Port, bmp);
@@ -526,7 +566,7 @@ namespace H_Pannel_lib
                         {
                             string IP = iPEndPoints[i].Address.ToString();
                             int Port = iPEndPoints[i].Port;
-                            Storage storage = new Storage(IP, Port);
+                            Storage storage = this.SQL_GetStorage(IP);
                             if (storage != null)
                             {
                                 Bitmap bmp = Get_Storage_bmp(storage);
@@ -576,11 +616,38 @@ namespace H_Pannel_lib
                         Dialog_IO測試 Dialog_IO測試 = new Dialog_IO測試(uDP_Class, IP, list_UDP_Rx);
                         Dialog_IO測試.ShowDialog();
                     }
-
+                    if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_IO設定.雷射開啟.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            taskList.Add(Task.Run(() =>
+                            {
+                                Set_TOF(IP, Port, true);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                    }
+                    if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_IO設定.雷射關閉.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            taskList.Add(Task.Run(() =>
+                            {
+                                Set_TOF(IP, Port, false);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                    }
                 }
 
             }
-            else if (selectedText == ContextMenuStrip_Main.設為有鎖控.GetEnumName())
+            else if (selectedText == ContextMenuStrip_Main.設為EPD266有鎖控.GetEnumName())
             {
                 List<Task> taskList = new List<Task>();
                 for (int i = 0; i < iPEndPoints.Count; i++)
@@ -598,7 +665,7 @@ namespace H_Pannel_lib
                 Task allTask = Task.WhenAll(taskList);
                 this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
             }
-            else if (selectedText == ContextMenuStrip_Main.設為無鎖控.GetEnumName())
+            else if (selectedText == ContextMenuStrip_Main.設為EPD266無鎖控.GetEnumName())
             {
                 List<Task> taskList = new List<Task>();
                 for (int i = 0; i < iPEndPoints.Count; i++)
@@ -608,6 +675,42 @@ namespace H_Pannel_lib
                     Storage storage = this.SQL_GetStorage(IP);
                     if (storage == null) continue;
                     storage.SetDeviceType(DeviceType.EPD266);
+                    taskList.Add(Task.Run(() =>
+                    {
+                        this.SQL_ReplaceStorage(storage);
+                    }));
+                }
+                Task allTask = Task.WhenAll(taskList);
+                this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+            }
+            else if (selectedText == ContextMenuStrip_Main.設為EPD290有鎖控.GetEnumName())
+            {
+                List<Task> taskList = new List<Task>();
+                for (int i = 0; i < iPEndPoints.Count; i++)
+                {
+                    string IP = iPEndPoints[i].Address.ToString();
+                    int Port = iPEndPoints[i].Port;
+                    Storage storage = this.SQL_GetStorage(IP);
+                    if (storage == null) continue;
+                    storage.SetDeviceType(DeviceType.EPD290_lock);
+                    taskList.Add(Task.Run(() =>
+                    {
+                        this.SQL_ReplaceStorage(storage);
+                    }));
+                }
+                Task allTask = Task.WhenAll(taskList);
+                this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+            }
+            else if (selectedText == ContextMenuStrip_Main.設為EPD290無鎖控.GetEnumName())
+            {
+                List<Task> taskList = new List<Task>();
+                for (int i = 0; i < iPEndPoints.Count; i++)
+                {
+                    string IP = iPEndPoints[i].Address.ToString();
+                    int Port = iPEndPoints[i].Port;
+                    Storage storage = this.SQL_GetStorage(IP);
+                    if (storage == null) continue;
+                    storage.SetDeviceType(DeviceType.EPD290);
                     taskList.Add(Task.Run(() =>
                     {
                         this.SQL_ReplaceStorage(storage);
@@ -704,11 +807,38 @@ namespace H_Pannel_lib
                         Dialog_IO測試 Dialog_IO測試 = new Dialog_IO測試(uDP_Class, IP, list_UDP_Rx);
                         Dialog_IO測試.ShowDialog();
                     }
-
+                    if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_IO設定.雷射開啟.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            taskList.Add(Task.Run(() =>
+                            {
+                                Set_TOF(IP, Port, true);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                    }
+                    if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_IO設定.雷射關閉.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            taskList.Add(Task.Run(() =>
+                            {
+                                Set_TOF(IP, Port, false);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                    }
 
                 }
             }
-            else if (selectedText == ContextMenuStrip_Main.設為有鎖控.GetEnumName())
+            else if (selectedText == ContextMenuStrip_Main.設為EPD266有鎖控.GetEnumName())
             {
                 List<Task> taskList = new List<Task>();
                 for (int i = 0; i < iPEndPoints.Count; i++)
@@ -726,7 +856,7 @@ namespace H_Pannel_lib
                 Task allTask = Task.WhenAll(taskList);
                 this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
             }
-            else if (selectedText == ContextMenuStrip_Main.設為無鎖控.GetEnumName())
+            else if (selectedText == ContextMenuStrip_Main.設為EPD266無鎖控.GetEnumName())
             {
                 List<Task> taskList = new List<Task>();
                 for (int i = 0; i < iPEndPoints.Count; i++)
@@ -743,6 +873,46 @@ namespace H_Pannel_lib
                 }
                 Task allTask = Task.WhenAll(taskList);
                 this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+            }
+            else if (selectedText == ContextMenuStrip_Main.設為EPD290有鎖控.GetEnumName())
+            {
+                List<Task> taskList = new List<Task>();
+                for (int i = 0; i < iPEndPoints.Count; i++)
+                {
+                    string IP = iPEndPoints[i].Address.ToString();
+                    int Port = iPEndPoints[i].Port;
+                    Storage storage = this.SQL_GetStorage(IP);
+                    if (storage == null) continue;
+                    storage.SetDeviceType(DeviceType.EPD290_lock);
+                    taskList.Add(Task.Run(() =>
+                    {
+                        this.SQL_ReplaceStorage(storage);
+                    }));
+                }
+                Task allTask = Task.WhenAll(taskList);
+                this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+            }
+            else if (selectedText == ContextMenuStrip_Main.設為EPD290無鎖控.GetEnumName())
+            {
+                List<Task> taskList = new List<Task>();
+                for (int i = 0; i < iPEndPoints.Count; i++)
+                {
+                    string IP = iPEndPoints[i].Address.ToString();
+                    int Port = iPEndPoints[i].Port;
+                    Storage storage = this.SQL_GetStorage(IP);
+                    if (storage == null) continue;
+                    storage.SetDeviceType(DeviceType.EPD290);
+                    taskList.Add(Task.Run(() =>
+                    {
+                        this.SQL_ReplaceStorage(storage);
+                    }));
+                }
+                Task allTask = Task.WhenAll(taskList);
+                this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+            }
+            else if (selectedText == ContextMenuStrip_Main.IO設定.GetEnumName())
+            {
+
             }
         }
     }

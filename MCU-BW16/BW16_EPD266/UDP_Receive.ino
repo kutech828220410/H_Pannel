@@ -160,6 +160,8 @@ void onPacketCallBack()
             if(flag_udp_232back)printf("startpo : %d\n" ,startpo);
             Get_Checksum_UDP();
           }
+          
+          
           else if (*(UdpRead + 1) == 'L')
           {
             int len = UdpRead_len - 5;
@@ -213,6 +215,13 @@ void onPacketCallBack()
                 printf("[%s] Ready to reboot\n\r", __FUNCTION__); 
                 ota_platform_reset();
               }
+          }
+          else if(*(UdpRead + 1) == 'D')
+          {                  
+             int value = *(UdpRead + 2);
+             if(flag_udp_232back)printf("Set_TOF : [value]%d\n" , value);
+             wiFiConfig.Set_IsLocker((value == 1));
+             Get_Checksum_UDP();
           }
           else if(*(UdpRead + 1) == 'J')
           {    

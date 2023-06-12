@@ -222,6 +222,7 @@ namespace H_Pannel_lib
     [Serializable]
     public class DeviceBasic
     {
+        public bool flag_replace = false;
         public string GUID 
         {
             get
@@ -232,28 +233,158 @@ namespace H_Pannel_lib
             set => gUID = value;
         }
         private string gUID = "";
-        public DeviceType DeviceType { get => deviceType; set => deviceType = value; }
+        public DeviceType DeviceType
+        {
+            get => deviceType;
+            set
+            {
+                if (deviceType != value) flag_replace = true;
+                 deviceType = value;
+            }
+        }
         private DeviceType deviceType = DeviceType.None;
         private string _Code = "";
-        public string Code { get => _Code; set => _Code = value; }
+        public string Code
+        { 
+            get => _Code;
+            set
+            {
+                if (_Code != value) flag_replace = true;
+                _Code = value;
+            }
+        }
         private string _Name = "";
-        public string Name { get => _Name; set => _Name = value; }
+        public string Name
+        { 
+            get => _Name;
+            set
+            {
+                if (_Name != value) flag_replace = true;
+                _Name = value;
+            }
+        }
+        private string _ChineseName = "";
+        public string ChineseName
+        {
+            get => _ChineseName;
+            set
+            {
+                if (_ChineseName != value) flag_replace = true;
+                _ChineseName = value;
+            }
+        }
+        private string _SKDIACODE = "";
+        public string SKDIACODE
+        {
+            get => _SKDIACODE;
+            set
+            {
+                if (_SKDIACODE != value) flag_replace = true;
+                _SKDIACODE = value;
+            }
+        }
+        private string _BarCode = "";
+        public string BarCode
+        {
+            get => _BarCode;
+            set
+            {
+                if (_BarCode != value) flag_replace = true;
+                _BarCode = value;
+            }
+        }
+        private string _BarCode1 = "";
+        public string BarCode1
+        {
+            get => _BarCode1;
+            set
+            {
+                if (_BarCode1 != value) flag_replace = true;
+                _BarCode1 = value;
+            }
+        }
+        private string _BarCode2 = "";
+        public string BarCode2 
+        {
+            get => _BarCode2;
+            set
+            {
+                if (_BarCode2 != value) flag_replace = true;
+                _BarCode2 = value;
+            }
+        }
         private string _Package = "";
-        public string Package { get => _Package; set => _Package = value; }
+        public string Package
+        {
+            get => _Package;
+            set
+            {
+                if (_Package != value) flag_replace = true;
+                _Package = value;
+            }
+        }
 
 
         private int max_shipping = 1;
-        public int Max_shipping { get => max_shipping; set => max_shipping = value; }
+        public int Max_shipping
+        {
+            get => max_shipping;
+            set
+            {
+                if (max_shipping != value) flag_replace = true;
+                max_shipping = value;
+            }
+        }
         private int max_Inventory = 0;
-        public int Max_Inventory { get => max_Inventory; set => max_Inventory = value; }
+        public int Max_Inventory
+        { 
+            get => max_Inventory;
+            set
+            {
+                if (max_Inventory != value) flag_replace = true;
+                max_Inventory = value;
+            }
+        }
         private string _StorageName = "";
-        public string StorageName { get => _StorageName; set => _StorageName = value; }
+        public string StorageName
+        {
+            get => _StorageName;
+            set
+            {
+                if (_StorageName != value) flag_replace = true;
+                _StorageName = value;
+            }
+        }
         private string _IP = "";
-        public string IP { get => _IP; set => _IP = value; }
-        private bool isWarning = false;
-        public bool IsWarning { get => isWarning; set => isWarning = value; }
+        public string IP
+        {
+            get => _IP;
+            set
+            {
+                if (_IP != value) flag_replace = true;
+                _IP = value;
+            }
+        }
+        private bool _isWarning = false;
+        public bool IsWarning
+        {
+            get => _isWarning;
+            set
+            {
+                if (_isWarning != value) flag_replace = true;
+                _isWarning = value;
+            }
+        }
         private string _Min_Package_Num = "";
-        public string Min_Package_Num { get => _Min_Package_Num; set => _Min_Package_Num = value; }
+        public string Min_Package_Num
+        {
+            get => _Min_Package_Num;
+            set
+            {
+                if (_Min_Package_Num != value) flag_replace = true;
+                _Min_Package_Num = value;
+            }
+        }
 
         public string Inventory
         {
@@ -2349,8 +2480,7 @@ namespace H_Pannel_lib
         #region ChineseName
         private string _ChineseName_Title = "";
         public string ChineseName_Title { get => _ChineseName_Title; set => _ChineseName_Title = value; }
-        private string _ChineseName = "";
-        public string ChineseName { get => _ChineseName; set => _ChineseName = value; }
+     
         [JsonIgnore]
         public Font ChineseName_font = new Font("微軟正黑體", 12, FontStyle.Bold);
         [Browsable(false)]
@@ -2796,8 +2926,7 @@ namespace H_Pannel_lib
         #region BarCode
         private string _BarCode_Title = "";
         public string BarCode_Title { get => _BarCode_Title; set => _BarCode_Title = value; }
-        private string _BarCode = "";
-        public string BarCode { get => _BarCode; set => _BarCode = value; }
+
         [JsonIgnore]
         public Font BarCode_font = new Font("微軟正黑體", 12, FontStyle.Bold);
         [Browsable(false)]
