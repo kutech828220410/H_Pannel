@@ -109,7 +109,7 @@ namespace H_Pannel_lib
             }
         }
         private double WriteByteStartTime = 0;
-        public double WriteByteTime = 2.5;
+        public double WriteByteTime = 4;
         public UDP_Class(string IP, int port)
         {
             this.Port = port;
@@ -280,7 +280,17 @@ namespace H_Pannel_lib
         public string Get_ReadLineByIP(string IP)
         {
             string _readline = "";
-            List<object[]> list_UDP_Rx = this.List_UDP_Rx.DeepClone();
+            List<object[]> list_UDP_Rx = new List<object[]>();
+            for (int i = 0; i < List_UDP_Rx.Count; i++)
+            {
+                object[] value = new object[List_UDP_Rx[i].Length];
+                for(int k = 0; k < value.Length; k++)
+                {
+                    value[k] = List_UDP_Rx[i][k];
+                }
+                list_UDP_Rx.Add(value);
+            }
+
             List<object[]> List_UDP_Rx_buf = new List<object[]>();
             List_UDP_Rx_buf = (from value in list_UDP_Rx
                                where value[(int)UDP_Rx.IP].ObjectToString() == IP
@@ -295,7 +305,16 @@ namespace H_Pannel_lib
         public string Get_ReadLineByGUID(string GUID)
         {
             string _readline = "";
-            List<object[]> list_UDP_Rx = this.List_UDP_Rx.DeepClone();
+            List<object[]> list_UDP_Rx = new List<object[]>();
+            for (int i = 0; i < List_UDP_Rx.Count; i++)
+            {
+                object[] value = new object[List_UDP_Rx[i].Length];
+                for (int k = 0; k < value.Length; k++)
+                {
+                    value[k] = List_UDP_Rx[i][k];
+                }
+                list_UDP_Rx.Add(value);
+            }
             List<object[]> List_UDP_Rx_buf = new List<object[]>();
             List_UDP_Rx_buf = (from value in list_UDP_Rx
                                where value[(int)UDP_Rx.GUID].ObjectToString() == GUID
