@@ -56,6 +56,10 @@ SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
 String Version = "Ver 1.3.5";
 
+//#define EPD
+#define RowLED
+
+
 void setup() 
 {
     MyTimer_BoardInit.StartTickTime(1000);          
@@ -71,8 +75,14 @@ void loop()
       wiFiConfig.mySerial = &mySerial;
       epd.mySerial = &mySerial;
       wiFiConfig.Init(Version);
+      
+      #ifdef EPD
       wiFiConfig.Set_Localport(29000);
       wiFiConfig.Set_Serverport(30000);
+      #elif defined(RowLED)
+      wiFiConfig.Set_Localport(29001);
+      wiFiConfig.Set_Serverport(30001);
+      #endif
       
       Localport = wiFiConfig.Get_Localport();
       Serverport = wiFiConfig.Get_Serverport();

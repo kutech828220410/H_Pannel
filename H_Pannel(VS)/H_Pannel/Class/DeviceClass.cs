@@ -286,7 +286,11 @@ namespace H_Pannel_lib
         private string _BarCode = "";
         public string BarCode
         {
-            get => _BarCode;
+            get
+            {
+                if (_BarCode.StringIsEmpty()) return Code;
+                return _BarCode;
+            }
             set
             {
                 if (_BarCode != value) flag_replace = true;

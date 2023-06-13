@@ -204,7 +204,14 @@ namespace H_Pannel_lib
             }
             return null;
         }
-
+        static public RowsLED SQL_GetDevice(SQLUI.SQLControl sQLControl, string IP)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetRowsByDefult(sQLControl.TableName, "IP", IP);
+            if (deviceBasicTables.Count == 0) return null;
+            string jsonString = deviceBasicTables[0][(int)enum_DeviceTable.Value].ObjectToString();
+            RowsLED device = jsonString.JsonDeserializet<RowsLED>();
+            return device;
+        }
 
         static public void ReplaceIP(this RowsLED rowsLED, string IP)
         {

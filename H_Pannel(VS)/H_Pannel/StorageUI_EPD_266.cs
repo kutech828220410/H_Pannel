@@ -261,12 +261,7 @@ namespace H_Pannel_lib
                 //g.DrawString(storage.Package, storage.Package_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.包裝單位, Storage.ValueType.ForeColor)), 0, Pannel_Height - size_Code_font.Height - size_Package_font.Height);
                 //g.DrawRectangle(new Pen(new SolidBrush((Color)storage.GetValue(Storage.ValueName.包裝單位, Storage.ValueType.ForeColor)), 1), 0, Pannel_Height - size_Code_font.Height - size_Package_font.Height, size_Package_font.Width, size_Package_font.Height);
 
-                if (storage.BarCode_Visable)
-                {
-                    Bitmap bitmap_barcode = Communication.CreateBarCode(storage.BarCode, storage.BarCode_Width, storage.BarCode_Height);
-                    g.DrawImage(bitmap_barcode, (Pannel_Width - storage.BarCode_Width) / 2, Pannel_Height - storage.BarCode_Height);
-                    bitmap_barcode.Dispose();
-                }
+         
           
 
                 string[] ip_array = storage.IP.Split('.');
@@ -293,10 +288,29 @@ namespace H_Pannel_lib
             if (storage.DeviceType == DeviceType.EPD266 || storage.DeviceType == DeviceType.EPD266_lock)
             {
                 bitmap_buf = Communication.ScaleImage(bitmap, 296, 152);
+                using(Graphics g_buf = Graphics.FromImage(bitmap_buf))
+                {
+                    if (storage.BarCode_Visable)
+                    {
+                        Bitmap bitmap_barcode = Communication.CreateBarCode(storage.BarCode, storage.BarCode_Width, storage.BarCode_Height);
+                        g_buf.DrawImage(bitmap_barcode, (Pannel_Width - storage.BarCode_Width) / 2, 152 - storage.BarCode_Height);
+                        bitmap_barcode.Dispose();
+                    }
+                }
+                
             }
             if (storage.DeviceType == DeviceType.EPD290 || storage.DeviceType == DeviceType.EPD290_lock)
             {
                 bitmap_buf = Communication.ScaleImage(bitmap, 296, 128);
+                using (Graphics g_buf = Graphics.FromImage(bitmap_buf))
+                {
+                    if (storage.BarCode_Visable)
+                    {
+                        Bitmap bitmap_barcode = Communication.CreateBarCode(storage.BarCode, storage.BarCode_Width, storage.BarCode_Height);
+                        g_buf.DrawImage(bitmap_barcode, (Pannel_Width - storage.BarCode_Width) / 2, 128 - storage.BarCode_Height);
+                        bitmap_barcode.Dispose();
+                    }
+                }
             }
             bitmap.Dispose();
             bitmap = null;

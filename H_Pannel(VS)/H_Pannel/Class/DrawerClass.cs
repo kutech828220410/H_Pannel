@@ -56,6 +56,14 @@ namespace H_Pannel_lib
                             select value).ToList();
             return deviceBasics;
         }
+        static public Drawer SQL_GetDevice(SQLUI.SQLControl sQLControl, string IP)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetRowsByDefult(sQLControl.TableName, "IP", IP);
+            if (deviceBasicTables.Count == 0) return null;
+            string jsonString = deviceBasicTables[0][(int)enum_DeviceTable.Value].ObjectToString();
+            Drawer device = jsonString.JsonDeserializet<Drawer>();
+            return device;
+        }
 
         static public List<Drawer> Add_NewDrawer(this List<Drawer> Drawers, string IP, int Port)
         {
@@ -299,7 +307,15 @@ namespace H_Pannel_lib
             }
             return boxes_buf;
         }
-
+        static public Box GetBox(this Drawer drawer, string GUID)
+        {
+            List<Box> boxes = drawer.GetAllBoxes();
+            for (int i = 0; i < boxes.Count; i++)
+            {
+                if (boxes[i].GUID == GUID) return boxes[i];
+            }
+            return null;
+        }
         static public void ReplaceIP(this Drawer drawer, string IP)
         {
             drawer.ReplaceIP(IP, drawer.Port);
@@ -606,10 +622,12 @@ namespace H_Pannel_lib
 
         public Box(int station)
         {
+            this.GUID = Guid.NewGuid().ToString();
             this.station = station;
         }
         public Box(string IP, int Port, int column, int row)
         {
+            this.GUID = Guid.NewGuid().ToString();
             this.IP = IP;
             this.Port = Port;
             this.column = column;
@@ -617,7 +635,7 @@ namespace H_Pannel_lib
         }
         public Box()
         {
-
+            this.GUID = Guid.NewGuid().ToString();
 
         }
 

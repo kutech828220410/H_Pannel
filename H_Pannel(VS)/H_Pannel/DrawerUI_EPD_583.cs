@@ -181,7 +181,7 @@ namespace H_Pannel_lib
         {
             for (int i = NumOfLED_Drawer ; i < NumOfLED ; i++)
             {
-                if (i * 3> LED_Bytes.Length) return LED_Bytes;
+                if (i * 3 > LED_Bytes.Length) return LED_Bytes;
                 LED_Bytes[i * 3 + 0] = color.R;
                 LED_Bytes[i * 3 + 1] = color.G;
                 LED_Bytes[i * 3 + 2] = color.B;         

@@ -5975,7 +5975,6 @@ namespace H_Pannel_lib
                     Height = Height,
                     Width = Width,
                     PureBarcode = true,
-                    //CharacterCommand = "UTF-8",
                     Margin = 0
                 }
             };
