@@ -18,7 +18,7 @@
 #include <SPIFFS.h>
 #include "ESP32Ping.h"
 
-String Version = "Ver 1.5.5";
+String Version = "Ver 1.5.6";
 
 #define SYSTEM_LED_PIN 2
 #define NUM_WS2812B_CRGB 450             // LED灯珠数量
