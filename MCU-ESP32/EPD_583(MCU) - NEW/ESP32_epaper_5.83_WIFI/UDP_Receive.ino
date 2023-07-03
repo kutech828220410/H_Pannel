@@ -3,14 +3,19 @@
 #define UDP_RX_BUFFER_SIZE 4096
 char* UdpRead;
 char* UdpRead_buf;
+int remotePort = 0;
+IPAddress remoteIP;
 bool UDP_ISConnented = false;
 int UdpRead_len = 0;
 int UdpRead_len_buf = 0;
 long UDPcheck_len = 0;
 WiFiUDP Udp; 
+WiFiUDP Udp1; 
 bool flag_UDP_RX_BUFFER_Init = false;
 bool flag_UDP_RX_OK = false;
 bool flag_UDP_header = true;
+bool flag_UDP0_packet = true;
+bool flag_UDP1_packet = true;
 MyTimer MyTimer_UDP;
 MyTimer MyTimer_UDP_RX_TimeOut;
 
@@ -19,88 +24,118 @@ IPAddress packet_IP;
 void onPacketCallBack()
 {
   if(!flag_UDP_RX_BUFFER_Init)
-    {
-       UdpRead = (char*) malloc(UDP_BUFFER_SIZE);
-       UdpRead_buf = (char*) malloc(UDP_RX_BUFFER_SIZE);
-       flag_UDP_RX_BUFFER_Init = true;
-    }
-    flag_UDP_RX_OK = false;
-    flag_UDP_header = true;
-    UdpRead_len = 0;
-    UDPcheck_len = 0;
-    MyTimer_UDP.TickStop();
-    MyTimer_UDP.StartTickTime(0);
-    while(true)
-    {
-       int flag_packet = Udp.parsePacket();
-       if(flag_packet > 0)
-       {
-          int len = Udp.read(UdpRead_buf, UDP_RX_BUFFER_SIZE - 1);
-          if(flag_UDP_header)
+  {
+     UdpRead = (char*) malloc(UDP_BUFFER_SIZE);
+     UdpRead_buf = (char*) malloc(UDP_RX_BUFFER_SIZE);
+     flag_UDP_RX_BUFFER_Init = true;
+  }
+  flag_UDP_RX_OK = false;
+  flag_UDP_header = true;
+  flag_UDP0_packet = false;
+  flag_UDP1_packet = false;
+  UdpRead_len = 0;
+  UDPcheck_len = 0;
+  MyTimer_UDP.TickStop();
+  MyTimer_UDP.StartTickTime(0);
+  while(true)
+  {
+     int packet_UDP0 = 0;
+     int packet_UDP1 = 0;
+     if(flag_UDP1_packet ==false)
+     {
+        packet_UDP0 = Udp.parsePacket();
+        if(packet_UDP0 > 0) flag_UDP0_packet = true;
+     }
+     if(flag_UDP0_packet ==false)
+     {
+        packet_UDP1 = Udp1.parsePacket();
+        if(packet_UDP1 > 0) flag_UDP1_packet = true;
+     }
+  
+     
+     if(packet_UDP0 > 0 || packet_UDP1 > 0)
+     {
+        int len = 0;
+        if(packet_UDP0 > 0)
+        {
+            remoteIP = Udp.remoteIP();
+            remotePort = Udp.remotePort();       
+            len = Udp.read(UdpRead_buf, UDP_RX_BUFFER_SIZE - 1);
+            Serial.println("UDP <0> have packet");
+        }
+        if(packet_UDP1 > 0)
+        {
+            remoteIP = Udp1.remoteIP();
+            remotePort = Udp1.remotePort();
+            len = Udp1.read(UdpRead_buf, UDP_RX_BUFFER_SIZE - 1);
+            Serial.println("UDP <1> have packet");
+        }
+        if(flag_UDP_header)
+        {
+            if(len != 4)
+            {
+               Serial.println("Received header length error!!");
+               break;
+            }
+            int len_LL = *(UdpRead_buf + 0);
+            int len_LH = *(UdpRead_buf + 1);
+            int len_L = len_LL | (len_LH << 8);
+            int len_HL = *(UdpRead_buf + 2);
+            int len_HH = *(UdpRead_buf + 3);
+            int len_H = len_HL | (len_HH << 8);
+            UDPcheck_len = len_L | (len_H << 16); 
+            flag_UDP_header = false;
+            Serial.print("Received header length : ");
+            Serial.println(UDPcheck_len);
+        }
+        else
+        {
+          for(int i = 0 ; i < len ; i++)
           {
-              if(len != 4)
-              {
-                 Serial.println("Received header length error!!");
-                 break;
-              }
-              int len_LL = *(UdpRead_buf + 0);
-              int len_LH = *(UdpRead_buf + 1);
-              int len_L = len_LL | (len_LH << 8);
-              int len_HL = *(UdpRead_buf + 2);
-              int len_HH = *(UdpRead_buf + 3);
-              int len_H = len_HL | (len_HH << 8);
-              UDPcheck_len = len_L | (len_H << 16); 
-              flag_UDP_header = false;
-              Serial.print("Received header length : ");
-              Serial.println(UDPcheck_len);
+             *(UdpRead + UdpRead_len + i) = *(UdpRead_buf + i);
           }
-          else
+          UdpRead_len += len;
+          Serial.print("Received len sumary :");
+          Serial.println(UdpRead_len);
+          if(UDPcheck_len == UdpRead_len)
           {
-            for(int i = 0 ; i < len ; i++)
-            {
-               *(UdpRead + UdpRead_len + i) = *(UdpRead_buf + i);
-            }
-            UdpRead_len += len;
-            if(UDPcheck_len == UdpRead_len)
-            {
-               if(*(UdpRead + UdpRead_len - 1) == 3)
-               {
-                  flag_UDP_RX_OK = true;
-                  Serial.println("Received End code!!");
-                  break;
-               }              
-            }
-            
-           
-          }        
-          MyTimer_UDP.TickStop();
-          MyTimer_UDP.StartTickTime(100);
-       }
-       else
-       {
-          if(MyTimer_UDP.IsTimeOut())
+             if(*(UdpRead + UdpRead_len - 1) == 3)
+             {
+                flag_UDP_RX_OK = true;
+                Serial.println("Received End code!!");
+                break;
+             }              
+          }    
+        }        
+        MyTimer_UDP.TickStop();
+        MyTimer_UDP.StartTickTime(200);
+     }
+     else
+     {
+        if(MyTimer_UDP.IsTimeOut())
+        {
+          if(UdpRead_len > 0)
           {
-            if(UdpRead_len > 0)
-            {
-               Serial.println("-----RETRY!!-----");
-               Send_StringTo("RETRY" ,wiFiConfig.server_IPAdress, wiFiConfig.localport);
-            }
-            break;
-          }        
-       }
-    }
+             Serial.println("-----RETRY!!-----");
+             Send_StringTo("RETRY" ,remoteIP, remotePort);
+          }
+          break;
+        }        
+     }
+  }
   
   if (flag_UDP_RX_OK)                     //如果有資料可用
   {
      Serial.print("UdpRead_len : ");
      Serial.println(String(UdpRead_len));
-     Udp.read(UdpRead, UdpRead_len);
-     packet_IP = Udp.remoteIP();  
+ 
      if(flag_udp_232back)Serial.print("UdpRead_len : ");
      if(flag_udp_232back)Serial.println(String(UdpRead_len));
-     if(flag_udp_232back)Serial.printf("remoteIP: %d \n",Udp.remoteIP());
-     if(flag_udp_232back)Serial.printf("remotePort: %d \n",Udp.remotePort());
-      
+     if(flag_udp_232back)Serial.printf("remoteIP:");
+     if(flag_udp_232back)Serial.println(remoteIP);
+     if(flag_udp_232back)Serial.printf("remotePort:");
+     if(flag_udp_232back)Serial.println(remotePort);
+
      if(*(UdpRead) == 2)
      {
         if(flag_udp_232back)Serial.println("接收到起始碼[2]");
@@ -112,6 +147,7 @@ void onPacketCallBack()
             epd.Sleep();
             Get_Checksum_UDP();          
           }
+          
           else if(*(UdpRead + 1) == 'b' && UdpRead_len == 3)
           {
             if(flag_udp_232back)Serial.printf("EPD Wakeup\n");
@@ -174,7 +210,7 @@ void onPacketCallBack()
             Get_Checksum_UDP();
           }
           else if (*(UdpRead + 1) == 'O')
-          { 
+          {           
             int num_L = *(UdpRead + 2);
             int num_H = *(UdpRead + 3);
             int num= num_L | (num_H << 8);
@@ -188,14 +224,14 @@ void onPacketCallBack()
 //                  Serial.printf("i : %d\n", WS2812B_CRGB_BUF[i]);
 //                }
 //            }
-            Send_Bytes(WS2812B_CRGB_BUF, num ,wiFiConfig.server_IPAdress, wiFiConfig.localport);                        
+            Send_Bytes(WS2812B_CRGB_BUF, num ,remoteIP, remotePort);                    
           }
           else if(*(UdpRead + 1) == 'B')
           {                  
               if(flag_udp_232back)Serial.println("OTAUpdate");                               
               Get_Checksum_UDP();
-              String IP = IpAddress2String(wiFiConfig.Get_Server_IPAdressClass());
-              OTAUpdate(IP , 8080);
+              OTAUpdate_IP = IpAddress2String(wiFiConfig.Get_Server_IPAdressClass());
+              flag_OTAUpdate = true;
           }
           else if(*(UdpRead + 1) == '9')
           {               
@@ -226,7 +262,8 @@ void onPacketCallBack()
               int IPB = *(UdpRead + 3);
               int IPC = *(UdpRead + 4);
               int IPD = *(UdpRead + 5);
-               
+ 
+              
               if(flag_udp_232back)Serial.printf("Geteway : %d.%d.%d.%d\n", (byte)IPA,(byte)IPB,(byte)IPC,(byte)IPD);
 
               wiFiConfig.Set_Gateway((byte)IPA,(byte)IPB,(byte)IPC,(byte)IPD);
@@ -237,7 +274,8 @@ void onPacketCallBack()
               int port_L = *(UdpRead + 2);
               int port_H = *(UdpRead + 3);
               int port= port_L | (port_H << 8);
-               
+ 
+              
               if(flag_udp_232back)Serial.printf("LocalPort : %d\n", port);
 
               wiFiConfig.Set_Localport(port);
@@ -255,6 +293,7 @@ void onPacketCallBack()
               int ms_H = *(UdpRead + 3);  
               
               int ms= ms_L | (ms_H << 8);
+
               if(flag_udp_232back)Serial.println("Set_UDP_SendTime");
               if(flag_udp_232back)Serial.print("ms[");
               if(flag_udp_232back)Serial.print(ms);
@@ -318,8 +357,7 @@ void onPacketCallBack()
              if(flag_udp_232back)Serial.printf("Get_Output_dir : [value]%d\n" , temp);
              wiFiConfig.Set_Output_dir(temp);
              Get_Checksum_UDP();
-          }         
-          
+          }
           Udp.flush();
           if(flag_udp_232back)Serial.println("接收到結束碼[3]");
            
@@ -346,11 +384,12 @@ void Get_Checksum_UDP()
    if(str.length() < 3) str = "0" + str;
    if(flag_udp_232back)Serial.println("Checksum String : " + str);
    if(flag_udp_232back)Serial.printf("Checksum Byte : %d \n" , checksum);
-   Send_StringTo(str ,Udp.remoteIP() ,wiFiConfig.localport);
+   Send_StringTo(str ,remoteIP ,remotePort);
 }
 void Connect_UDP(int localport)
 {
     Udp.begin(localport);
+    Udp1.begin(29500);
     //Serial.printf("UDP lisen : %D \n" ,localport);
 }
 void Send_Bytes(uint8_t *value ,int Size ,IPAddress RemoteIP ,int RemotePort)
@@ -363,18 +402,14 @@ void Send_Bytes(uint8_t *value ,int Size ,IPAddress RemoteIP ,int RemotePort)
 }
 void Send_String(String str ,int remoteUdpPort)
 {  
-   Udp.beginPacket(Udp.remoteIP(), remoteUdpPort); //準備傳送資料
+   Udp.beginPacket(remoteIP, remotePort); //準備傳送資料
    Udp.print(str); //複製資料到傳送快取
    Udp.endPacket();            //傳送資料
   //udp.broadcastTo(buffer  ,remoteUdpPort);
 }
 void Send_StringTo(String str ,IPAddress RemoteIP ,int RemotePort)
 {  
-//
-//   if(flag_udp_232back)Serial.print("remoteIP: "+ IpAddress2String(RemoteIP) +" \n");
-//   if(flag_udp_232back)Serial.printf("remotePort: %d \n",RemotePort);
    Udp.beginPacket(RemoteIP, RemotePort); //準備傳送資料
-   //Udp.print(str + "$" + wiFiConfig.Get_IPAdress_Str()); //複製資料到傳送快取
    Udp.print(str); //複製資料到傳送快取
    Udp.endPacket();            //傳送資料
   //udp.broadcastTo(buffer  ,remoteUdpPort);
@@ -393,6 +428,7 @@ void OTAUpdate(String IP, int Port)
     int retry = 0;
     while(true)
     {
+      if(!flag_OTAUpdate)break;
       esp_task_wdt_reset();
       if(retry >= 3) break;
       WiFiClient client;

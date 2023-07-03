@@ -109,7 +109,7 @@ namespace H_Pannel_lib
             }
         }
         private double WriteByteStartTime = 0;
-        public double WriteByteTime = 10;
+        static public double WriteByteTime = 10;
         public UDP_Class(string IP, int port)
         {
             this.Port = port;
@@ -161,7 +161,7 @@ namespace H_Pannel_lib
             {
                 while(true)
                 {
-                    if ((stopwatch.Elapsed.TotalMilliseconds - WriteByteStartTime) >= this.WriteByteTime) break;
+                    if ((stopwatch.Elapsed.TotalMilliseconds - WriteByteStartTime) >= WriteByteTime) break;
                 }
                 this.remoteIP = new IPEndPoint(IPAddress.Parse(IP), Port); //定義一個位址 (伺服器位址)
                 List<byte[]> list_bytes = separateByte(value);
@@ -169,7 +169,7 @@ namespace H_Pannel_lib
                 {
                     while (true)
                     {
-                        if ((stopwatch.Elapsed.TotalMilliseconds - WriteByteStartTime) >= this.WriteByteTime) break;
+                        if ((stopwatch.Elapsed.TotalMilliseconds - WriteByteStartTime) >= WriteByteTime) break;
                     }
                     int recv = this.udpClient.Send(list_bytes[i], list_bytes[i].Length, remoteIP); //送出的資料跟目的 
                     //Console.WriteLine("{0}:{1}發送消息：{2}", IP, port, list_bytes[i].Length);

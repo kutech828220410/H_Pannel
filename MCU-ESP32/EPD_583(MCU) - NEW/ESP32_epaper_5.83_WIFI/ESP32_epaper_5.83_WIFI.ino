@@ -18,7 +18,7 @@
 #include <SPIFFS.h>
 #include "ESP32Ping.h"
 
-String Version = "Ver 1.5.1";
+String Version = "Ver 1.5.5";
 
 #define SYSTEM_LED_PIN 2
 #define NUM_WS2812B_CRGB 450             // LED灯珠数量
@@ -26,7 +26,7 @@ String Version = "Ver 1.5.1";
 #define LED_TYPE WS2812B         // LED灯带型号
 #define COLOR_ORDER GRB         // RGB灯珠中红色、绿色、蓝色LED的排列顺序
 MyLED MyLED_WS2812;
-uint8_t max_bright = 255;       // LED亮度控制变量，可使用数值为 0 ～ 255， 数值越大则光带亮度越高
+uint8_t max_bright = 70;       // LED亮度控制变量，可使用数值为 0 ～ 255， 数值越大则光带亮度越高
 CRGB WS2812B_CRGB[NUM_WS2812B_CRGB];    
 byte WS2812B_CRGB_BUF[NUM_WS2812B_CRGB * 3];
 
@@ -56,6 +56,7 @@ bool Core_2_feedwdt = true;
 
 TaskHandle_t Core1Task1Handle;
 TaskHandle_t Core1Task2Handle;
+TaskHandle_t Core1Task3Handle;
 
 void setup()
 {
@@ -89,6 +90,7 @@ void setup()
     
     xTaskCreatePinnedToCore(Core1Task1,"Core1Task1", 10000,NULL,1,&Core1Task1Handle,1); 
     xTaskCreatePinnedToCore(Core1Task2,"Core1Task2", 10000,NULL,1,&Core1Task2Handle,1);  
+    xTaskCreatePinnedToCore(Core1Task3,"Core1Task3", 10000,NULL,1,&Core1Task3Handle,1);  
 //    esp_task_wdt_init(WDT_TIMEOUT , true);
 //    esp_task_wdt_add(NULL);
 
@@ -172,6 +174,28 @@ void Core1Task2( void * pvParameters )
         esp_task_wdt_reset();
         delay(1);
     }  
+}
+bool flag_OTAUpdate = false;
+String OTAUpdate_IP = "";
+void Core1Task3( void * pvParameters )
+{
+  for(;;)
+  {
+     if(flag_boradInit)
+     {
+        if(WiFi.status() == WL_CONNECTED)
+        {
+           if(flag_OTAUpdate)
+           {
+              OTAUpdate(OTAUpdate_IP , 8080);  
+              flag_OTAUpdate = false;
+           }
+        }             
+     }
+     esp_task_wdt_reset(); 
+     delay(1);  
+  }
+
 }
 void WS2812_LED_ON()
 {

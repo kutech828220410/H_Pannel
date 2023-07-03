@@ -17,7 +17,7 @@
 #include <HTTPClient.h>
 #include <HTTPUpdate.h>
 
-String Version = "Ver 1.5.3";
+String Version = "Ver 1.5.4";
 
 #define SYSTEM_LED_PIN 2
 #define NUM_WS2812B_CRGB 100             // LED灯珠数量
@@ -25,7 +25,7 @@ String Version = "Ver 1.5.3";
 #define LED_TYPE WS2812B         // LED灯带型号
 #define COLOR_ORDER GRB         // RGB灯珠中红色、绿色、蓝色LED的排列顺序
 MyLED MyLED_WS2812;
-uint8_t max_bright = 255;       // LED亮度控制变量，可使用数值为 0 ～ 255， 数值越大则光带亮度越高
+uint8_t max_bright = 70;       // LED亮度控制变量，可使用数值为 0 ～ 255， 数值越大则光带亮度越高
 CRGB WS2812B_CRGB[NUM_WS2812B_CRGB];    
 byte WS2812B_CRGB_BUF[NUM_WS2812B_CRGB * 3];
 

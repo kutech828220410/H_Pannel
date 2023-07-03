@@ -425,8 +425,10 @@ namespace H_Pannel_lib
             set => list_Lot_number = value;
         }
 
-  
+      
 
+        private string speaker = "";
+        public string Speaker { get => speaker; set => speaker = value; }
         protected List<string> list_Validity_period = new List<string>();
         protected List<string> list_Lot_number = new List<string>();
         protected List<string> list_Inventory = new List<string>();
@@ -3156,7 +3158,7 @@ namespace H_Pannel_lib
         private int index = 0;
 
 
-        public void PasteFormat(Device device)
+        virtual public void PasteFormat(Device device)
         {
             this.BackColor = device.BackColor;
             this.ForeColor = device.ForeColor;
@@ -3171,8 +3173,9 @@ namespace H_Pannel_lib
                     this.SetValue((ValueName)i, (ValueType)k, value);
                 }
             }
+            this.Speaker = device.Speaker;
         }
-        public void Paste(Device device)
+        virtual public void Paste(Device device)
         {
             this.BackColor = device.BackColor;
             this.ForeColor = device.ForeColor;
@@ -3184,6 +3187,7 @@ namespace H_Pannel_lib
                     this.SetValue((ValueName)i, (ValueType)k, value);
                 }
             }
+            this.Speaker = device.Speaker;
         }
         public void Clear()
         {

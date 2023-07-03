@@ -50,6 +50,7 @@ namespace H_Pannel_lib
         {
             this.DeviceType = deviceType;
         }
+
     }
     static public class StorageMethod
     {

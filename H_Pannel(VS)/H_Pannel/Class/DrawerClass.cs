@@ -457,6 +457,7 @@ namespace H_Pannel_lib
         private DateTime unlock_end_dateTime;
         private bool unlockTimeEnable = false;
         private bool isAllLight = true;
+        private string speaker = "";
 
         public List<Box[]> Boxes { get => boxes; set => boxes = value; }
         public int Station { get => station; set => station = value; }
@@ -501,6 +502,7 @@ namespace H_Pannel_lib
         public DateTime Unlock_end_dateTime { get => unlock_end_dateTime; set => unlock_end_dateTime = value; }
         public bool UnlockTimeEnable { get => unlockTimeEnable; set => unlockTimeEnable = value; }
         public bool IsAllLight { get => isAllLight; set => isAllLight = value; }
+        public string Speaker { get => speaker; set => speaker = value; }
 
         public Enum_DrawerType DrawerType 
         { 
@@ -511,7 +513,7 @@ namespace H_Pannel_lib
             }
         }
 
-     
+
 
         public void SetDeviceType(DeviceType deviceType)
         {

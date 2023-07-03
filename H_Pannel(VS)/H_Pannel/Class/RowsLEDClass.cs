@@ -263,6 +263,7 @@ namespace H_Pannel_lib
         private string name = "";
         private int maximum = 0;
         private List<RowsDevice> rowsDevices = new List<RowsDevice>();
+        private string speaker = "";
 
         public bool UpToSQL = false;
         public string IP { get => iP; set => iP = value; }
@@ -270,6 +271,7 @@ namespace H_Pannel_lib
         public string Name { get => name; set => name = value; }
         public List<RowsDevice> RowsDevices { get => rowsDevices; set => rowsDevices = value; }
         public int Maximum { get => maximum; set => maximum = value; }
+        public string Speaker { get => speaker; set => speaker = value; }
 
         public void Add(int startLED, int endLED)
         {

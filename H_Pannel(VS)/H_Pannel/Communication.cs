@@ -5981,6 +5981,23 @@ namespace H_Pannel_lib
             var barCode = barcodeWriter.Write(content);
             return barCode;
         }
+        static public Bitmap CreateQRCode(string content, int Width, int Height)
+        {
+            if (content.StringIsEmpty()) content = "None";
+            ZXing.BarcodeWriter barcodeWriter = new ZXing.BarcodeWriter
+            {
+                Format = ZXing.BarcodeFormat.QR_CODE,
+                Options = new ZXing.Common.EncodingOptions
+                {
+                    Height = Height,
+                    Width = Width,
+                    PureBarcode = true,
+                    Margin = 0
+                }
+            };
+            var barCode = barcodeWriter.Write(content);
+            return barCode;
+        }
         static public void DrawPath(Graphics g ,int width , int height ,int borderRadius , int borderSize, Color borderColor ,Color backcolor)
         {
             RectangleF rectSurface = new RectangleF(0, 0, width, height);
