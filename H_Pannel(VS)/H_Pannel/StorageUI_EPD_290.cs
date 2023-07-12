@@ -241,9 +241,14 @@ namespace H_Pannel_lib
 
                 if (storage.BarCode_Visable)
                 {
-                    Bitmap bitmap_barcode = Communication.CreateBarCode(storage.BarCode, storage.BarCode_Width, storage.BarCode_Height);
-                    g.DrawImage(bitmap_barcode, (Pannel_Width - storage.BarCode_Width) / 2, Pannel_Height - storage.BarCode_Height);
-                    bitmap_barcode.Dispose();
+                    string[] IP_Array = storage.IP.Split('.');
+                    if (IP_Array.Length == 4)
+                    {
+                        Bitmap bitmap_barcode = Communication.CreateBarCode($"{storage.Code}", storage.BarCode_Width, storage.BarCode_Height);
+                        //Bitmap bitmap_barcode = Communication.CreateBarCode($"{IP_Array[2]}.{IP_Array[3]}", storage.BarCode_Width, storage.BarCode_Height);
+                        g.DrawImage(bitmap_barcode, (Pannel_Width - storage.BarCode_Width) / 2, 152 - storage.BarCode_Height);
+                        bitmap_barcode.Dispose();
+                    }
                 }
           
 
@@ -297,7 +302,6 @@ namespace H_Pannel_lib
         }
         #endregion
 
-
         private enum ContextMenuStrip_Main
         {
             畫面設置,
@@ -325,6 +329,7 @@ namespace H_Pannel_lib
             面板亮燈,
             IO測試,
         }
+
         public StorageUI_EPD_290()
         {
             this.TableName = "EPD290_Jsonstring";

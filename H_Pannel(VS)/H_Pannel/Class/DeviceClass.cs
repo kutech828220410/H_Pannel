@@ -233,6 +233,9 @@ namespace H_Pannel_lib
             set => gUID = value;
         }
         private string gUID = "";
+        public string Master_GUID { get => master_GUID; set => master_GUID = value; }
+        private string master_GUID = "";
+
         public DeviceType DeviceType
         {
             get => deviceType;
@@ -328,7 +331,7 @@ namespace H_Pannel_lib
             }
         }
 
-
+  
         private int max_shipping = 1;
         public int Max_shipping
         {
@@ -857,8 +860,6 @@ namespace H_Pannel_lib
                         select value).ToList();
             return devices;
         }
-
-
 
         static public List<Device> Add_NewDevice(this List<Device> Devices, string IP, int Port)
         {

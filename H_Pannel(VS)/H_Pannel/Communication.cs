@@ -41,7 +41,7 @@ namespace H_Pannel_lib
         static public bool ConsoleWrite = false;
         static public int UDP_TimeOut = 1000;
         static public int UDP_RetryNum = 5;
-        static public readonly int Image_Buffer_SIZE = 1200;
+        static public readonly int Image_Buffer_SIZE = 800;
         static public ChipType Chip_Type = ChipType.BW16;
         //static public int EPD583_frameDIV = 10;
         public enum enum_LED_Type : int
@@ -476,7 +476,6 @@ namespace H_Pannel_lib
             return Command_EPD_SendSPI(uDP_Class, IP, start_ptr, value);
         }
 
-
         static public bool EPD_583_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
             int EPD583_frameDIV = 0;
@@ -512,7 +511,7 @@ namespace H_Pannel_lib
                 }
                 if (Chip_Type == ChipType.BW16)
                 {
-                    EPD266_frameDIV = 1;
+                    EPD266_frameDIV = 4;
                 }
 
                 bool flag_OK;
@@ -543,7 +542,7 @@ namespace H_Pannel_lib
                 }
                 if (Chip_Type == ChipType.BW16)
                 {
-                    EPD290_frameDIV = 1;
+                    EPD290_frameDIV = 4;
                 }
 
                 bool flag_OK;
@@ -2117,7 +2116,6 @@ namespace H_Pannel_lib
             return flag_OK;
         }
   
-
         static private bool Command_Set_ServerConfig(UDP_Class uDP_Class, string IP, string ServerIP ,int ServerPort)
         {
             bool flag_OK = true;
@@ -2588,7 +2586,7 @@ namespace H_Pannel_lib
                 }
                 System.Threading.Thread.Sleep(1);
             }
-            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Set_WS2812_Buffer {string.Format(flag_OK ? "sucess" : "failed")}!");
+            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Set_WS2812_Buffer {string.Format(flag_OK ? "sucess" : "failed")} {DateTime.Now.ToDateTimeString()}!");
             return flag_OK;
         }
         static private byte[] Command_Get_WS2812_Buffer(UDP_Class uDP_Class, string IP , int lenth)
@@ -2651,7 +2649,7 @@ namespace H_Pannel_lib
                 }
                 System.Threading.Thread.Sleep(1);
             }
-            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Get WS2812_Buffer {string.Format(flag_OK ? "sucess" : "failed")}!");
+            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Get WS2812_Buffer {string.Format(flag_OK ? "sucess" : "failed")} {DateTime.Now.ToDateTimeString()}!");
             return Dbyte;
         }
         static private bool Command_Set_GetewayConfig(UDP_Class uDP_Class, string IP, string Geteway)
@@ -5517,7 +5515,171 @@ namespace H_Pannel_lib
 
         #endregion
 
+        static public Bitmap EPD266_GetBitmap(Storage storage)
+        {
+            Bitmap bitmap = new Bitmap(296, 152);
+            int Pannel_Width = bitmap.Width;
+            int Pannel_Height = bitmap.Height;
+            using (Graphics g = Graphics.FromImage(bitmap))
+            {
+                g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+                storage.BackColor = storage.IsWarning ? Color.Red : Color.White;
 
+                Rectangle rect = new Rectangle(0, 0, Pannel_Width, Pannel_Height);
+                int Line_Height = (Pannel_Height / 3) * 2;
+                g.FillRectangle(new SolidBrush(storage.BackColor), rect);
+
+                //this.Graphics_Draw_Bitmap.DrawLine(new Pen(storage.ForeColor, 2), new Point(0, Line_Height), new Point(Pannel_Width, Line_Height));
+
+                if (storage.BarCode_Height > 40) storage.BarCode_Height = 40;
+                if (storage.BarCode_Width > 120) storage.BarCode_Width = 120;
+
+                storage.SetValue(Device.ValueName.藥品碼, Device.ValueType.ForeColor, storage.IsWarning ? Color.White : Color.Black);
+                storage.SetValue(Device.ValueName.藥品碼, Device.ValueType.BackColor, storage.BackColor);
+
+                storage.SetValue(Device.ValueName.藥品名稱, Device.ValueType.ForeColor, storage.IsWarning ? Color.White : Color.Black);
+                storage.SetValue(Device.ValueName.藥品名稱, Device.ValueType.BackColor, storage.BackColor);
+
+                storage.SetValue(Device.ValueName.藥品學名, Device.ValueType.ForeColor, storage.IsWarning ? Color.White : Color.Black);
+                storage.SetValue(Device.ValueName.藥品學名, Device.ValueType.BackColor, storage.BackColor);
+
+                storage.SetValue(Device.ValueName.藥品中文名稱, Device.ValueType.ForeColor, storage.IsWarning ? Color.White : Color.Black);
+                storage.SetValue(Device.ValueName.藥品中文名稱, Device.ValueType.BackColor, storage.BackColor);
+
+                storage.SetValue(Device.ValueName.包裝單位, Device.ValueType.ForeColor, storage.IsWarning ? Color.White : Color.Black);
+                storage.SetValue(Device.ValueName.包裝單位, Device.ValueType.BackColor, storage.BackColor);
+
+                storage.SetValue(Device.ValueName.效期, Device.ValueType.ForeColor, storage.IsWarning ? Color.White : Color.Black);
+                storage.SetValue(Device.ValueName.效期, Device.ValueType.BackColor, storage.BackColor);
+
+                storage.SetValue(Device.ValueName.庫存, Device.ValueType.ForeColor, storage.IsWarning ? Color.White : Color.Black);
+                storage.SetValue(Device.ValueName.庫存, Device.ValueType.BackColor, storage.BackColor);
+
+                float posy = 0;
+                if (storage.Name_Visable)
+                {
+                    SizeF size_name = g.MeasureString(storage.Name, storage.Name_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
+                    size_name = new SizeF((int)size_name.Width, (int)size_name.Height);
+                    //SizeF size_name = TextRenderer.MeasureText(g, storage.Name, storage.Name_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+                    g.DrawString(storage.Name, storage.Name_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品名稱, Storage.ValueType.ForeColor)), new RectangleF(0, posy, Pannel_Width, Pannel_Height), StringFormat.GenericDefault);
+                    posy += size_name.Height;
+                    DrawingClass.Draw.線段繪製(new PointF(0, posy), new PointF(rect.Width, posy), Color.Black, 1.5F, g, 1, 1);
+                }
+
+                if (storage.Scientific_Name_Visable)
+                {
+                    SizeF size_Scientific_Name = g.MeasureString(storage.Scientific_Name, storage.Scientific_Name_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
+                    size_Scientific_Name = new SizeF((int)size_Scientific_Name.Width, (int)size_Scientific_Name.Height);
+                    // SizeF size_Scientific_Name_font = TextRenderer.MeasureText(storage.Scientific_Name, storage.Scientific_Name_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+                    g.DrawString(storage.Scientific_Name, storage.Scientific_Name_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品學名, Storage.ValueType.ForeColor)), new RectangleF(0, posy, Pannel_Width, Pannel_Height), StringFormat.GenericDefault);
+                    posy += size_Scientific_Name.Height;
+                    DrawingClass.Draw.線段繪製(new PointF(0, posy), new PointF(rect.Width, posy), Color.Black, 1.5F, g, 1, 1);
+                }
+                if (storage.ChineseName_Visable)
+                {
+                    SizeF size_ChineseName = g.MeasureString(storage.ChineseName, storage.ChineseName_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
+                    size_ChineseName = new SizeF((int)size_ChineseName.Width, (int)size_ChineseName.Height);
+                    // SizeF size_ChineseName = TextRenderer.MeasureText(storage.ChineseName, storage.ChineseName_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+                    g.DrawString(storage.ChineseName, storage.ChineseName_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品中文名稱, Storage.ValueType.ForeColor)), new RectangleF(0, posy, Pannel_Width, Pannel_Height), StringFormat.GenericDefault);
+                    posy += size_ChineseName.Height;
+                    // DrawingClass.Draw.線段繪製(new PointF(0, posy), new PointF(rect.Width, posy), Color.Black, 1.5F, g, 1, 1);
+                }
+                posy += 3;
+                if (storage.Validity_period_Visable)
+                {
+                    for (int i = 0; i < storage.List_Validity_period.Count; i++)
+                    {
+                        if (storage.List_Inventory[i] == "00") continue;
+                        string str = $"{i + 1}.效期 : {storage.List_Validity_period[i]}   庫存 : {storage.List_Inventory[i]}";
+                        storage.Validity_period_font = new Font(storage.Validity_period_font, FontStyle.Bold);
+                        SizeF size_Validity_period = TextRenderer.MeasureText(str, storage.Validity_period_font);
+                        g.DrawString(str, storage.Validity_period_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.效期, Storage.ValueType.ForeColor)), 5, 0 + posy);
+                        Color color_pen = storage.IsWarning ? Color.Black : Color.Red;
+                        g.DrawRectangle(new Pen(new SolidBrush(color_pen), 1), 5, 0 + posy, size_Validity_period.Width, size_Validity_period.Height);
+                        posy += size_Validity_period.Height;
+                    }
+                }
+
+
+
+                SizeF size_Code_font = TextRenderer.MeasureText(storage.Code, storage.Code_font);
+                g.DrawString(storage.Code, storage.Code_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品碼, Storage.ValueType.ForeColor)), 0, Pannel_Height - size_Code_font.Height);
+
+                SizeF size_Package_font = TextRenderer.MeasureText(storage.Package, storage.Package_font);
+                DrawStorageString(g, storage, Device.ValueName.包裝單位, 0, Pannel_Height - size_Code_font.Height - size_Package_font.Height);
+
+                //g.DrawString(storage.Package, storage.Package_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.包裝單位, Storage.ValueType.ForeColor)), 0, Pannel_Height - size_Code_font.Height - size_Package_font.Height);
+                //g.DrawRectangle(new Pen(new SolidBrush((Color)storage.GetValue(Storage.ValueName.包裝單位, Storage.ValueType.ForeColor)), 1), 0, Pannel_Height - size_Code_font.Height - size_Package_font.Height, size_Package_font.Width, size_Package_font.Height);
+
+
+
+
+                string[] ip_array = storage.IP.Split('.');
+                SizeF size_IP = new SizeF();
+                if (ip_array.Length == 4)
+                {
+                    string ip = ip_array[2] + "." + ip_array[3];
+                    size_IP = TextRenderer.MeasureText(ip, new Font("微軟正黑體", 8, FontStyle.Bold));
+                    g.DrawString(ip, new Font("微軟正黑體", 8, FontStyle.Bold), new SolidBrush((Color)storage.GetValue(Storage.ValueName.IP, Storage.ValueType.ForeColor)), (Pannel_Width - size_IP.Width), (Pannel_Height - size_IP.Height));
+                }
+                if (storage.Inventory_Visable)
+                {
+
+                    SizeF size_Inventory = TextRenderer.MeasureText($"[{storage.Inventory}]", storage.Inventory_font);
+                    PointF pointF = new PointF((Pannel_Width - size_Inventory.Width - 10), (Pannel_Height - size_IP.Height - size_Inventory.Height));
+                    DrawingClass.Draw.方框繪製(pointF, new Size((int)size_Inventory.Width, (int)size_Inventory.Height), Color.Black, 1, false, g, 1, 1);
+                    g.DrawString($"[{storage.Inventory}]", storage.Inventory_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.庫存, Storage.ValueType.ForeColor)), pointF.X, pointF.Y);
+
+
+                }
+
+            }
+            Bitmap bitmap_buf = null;
+            if (storage.DeviceType == DeviceType.EPD266 || storage.DeviceType == DeviceType.EPD266_lock)
+            {
+                bitmap_buf = Communication.ScaleImage(bitmap, 296, 152);
+                using (Graphics g_buf = Graphics.FromImage(bitmap_buf))
+                {
+                    if (storage.BarCode_Visable)
+                    {
+                        string[] IP_Array = storage.IP.Split('.');
+                        if (IP_Array.Length == 4)
+                        {
+                            Bitmap bitmap_barcode = Communication.CreateBarCode($"{storage.Code}", storage.BarCode_Width, storage.BarCode_Height);
+
+                            //Bitmap bitmap_barcode = Communication.CreateBarCode($"{IP_Array[2]}.{IP_Array[3]}", storage.BarCode_Width, storage.BarCode_Height);
+                            g_buf.DrawImage(bitmap_barcode, (Pannel_Width - storage.BarCode_Width) / 2, 152 - storage.BarCode_Height);
+                            bitmap_barcode.Dispose();
+                        }
+                    }
+                }
+
+            }
+            if (storage.DeviceType == DeviceType.EPD290 || storage.DeviceType == DeviceType.EPD290_lock)
+            {
+                bitmap_buf = Communication.ScaleImage(bitmap, 296, 128);
+                using (Graphics g_buf = Graphics.FromImage(bitmap_buf))
+                {
+                    if (storage.BarCode_Visable)
+                    {
+                        string[] IP_Array = storage.IP.Split('.');
+                        if (IP_Array.Length == 4)
+                        {
+                            Bitmap bitmap_barcode = Communication.CreateBarCode($"{storage.Code}", storage.BarCode_Width, storage.BarCode_Height);
+                            //Bitmap bitmap_barcode = Communication.CreateBarCode($"{IP_Array[2]}.{IP_Array[3]}", storage.BarCode_Width, storage.BarCode_Height);
+                            g_buf.DrawImage(bitmap_barcode, (Pannel_Width - storage.BarCode_Width) / 2, 152 - storage.BarCode_Height);
+                            bitmap_barcode.Dispose();
+                        }
+                    }
+                }
+            }
+            bitmap.Dispose();
+            bitmap = null;
+            return bitmap_buf;
+        }
 
         static public List<byte[]> SplitImage(List<byte> image, int Size)
         {
@@ -6095,6 +6257,34 @@ namespace H_Pannel_lib
 
             }
             return null;
+        }
+
+
+        static private void DrawStorageString(Graphics g, Storage storage, Device.ValueName valueName, float x, float y)
+        {
+            string str = (string)storage.GetValue(valueName, Device.ValueType.Value);
+            Font font = (Font)storage.GetValue(valueName, Device.ValueType.Font);
+            Color foreColor = (Color)storage.GetValue(valueName, Device.ValueType.ForeColor);
+            int borderSize = (int)storage.GetValue(valueName, Device.ValueType.BorderSize);
+            Color borderColor = (Color)storage.GetValue(valueName, Device.ValueType.BorderColor);
+
+            DrawStorageString(g, str, font, foreColor, borderSize, borderColor, x, y);
+        }
+        static private void DrawStorageString(Graphics g, string str, Font font, Color ForeColor, int BorderSize, Color BorderColor, float x, float y)
+        {
+            SizeF size_font = TextRenderer.MeasureText(str, font);
+
+            g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+
+            g.DrawString(str, font, new SolidBrush(ForeColor), x, y);
+            if (BorderSize > 0)
+            {
+                Pen pen = new Pen(new SolidBrush(BorderColor), 1);
+                g.DrawRectangle(pen, x, y, size_font.Width, size_font.Height);
+            }
         }
     }
 }

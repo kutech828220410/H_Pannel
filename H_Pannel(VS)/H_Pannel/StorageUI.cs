@@ -162,9 +162,9 @@ namespace H_Pannel_lib
         }
         public Storage SQL_GetStorage(string IP)
         {
-            List<object[]> list_value = this.SQL_GetAllDeviceTableRows();
-            List<object[]> list_value_buf = new List<object[]>();
-            list_value_buf = list_value.GetRows((int)enum_DeviceTable.IP, IP);
+            //List<object[]> list_value = this.SQL_GetAllDeviceTableRows();
+            List<object[]> list_value_buf = new List<object[]>();       
+            list_value_buf = this.sqL_DataGridView_DeviceTable.SQL_GetRows((int)enum_DeviceTable.IP, IP, false);
             if (list_value_buf.Count == 0) return null;
 
             string jsonString = list_value_buf[0][(int)enum_DeviceTable.Value].ObjectToString();
