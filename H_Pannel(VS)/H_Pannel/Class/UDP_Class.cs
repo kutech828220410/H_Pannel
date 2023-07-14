@@ -109,7 +109,7 @@ namespace H_Pannel_lib
             }
         }
         private double WriteByteStartTime = 0;
-        static public double WriteByteTime = 10;
+        static public double WriteByteTime = 25;
         public UDP_Class(string IP, int port)
         {
             this.Port = port;

@@ -123,10 +123,16 @@ void EPD::Sleep_Check()
 }
 void EPD::BW_Command()
 {
+   this -> MyTimer_SleepWaitTime.TickStop();  
+   this -> MyTimer_SleepWaitTime.StartTickTime(30000);
+   this -> SetToSleep = false;
    SendCommand(0x24);
 } 
 void EPD::RW_Command()
 {
+   this -> MyTimer_SleepWaitTime.TickStop();  
+   this -> MyTimer_SleepWaitTime.StartTickTime(30000);
+   this -> SetToSleep = false;
    SendCommand(0x26);
 } 
 void EPD::SendCommand(unsigned char command)
@@ -164,7 +170,7 @@ void EPD::HardwareReset()
 void EPD::Wakeup()
 {
     this -> MyTimer_SleepWaitTime.TickStop();  
-    this -> MyTimer_SleepWaitTime.StartTickTime(10000);
+    this -> MyTimer_SleepWaitTime.StartTickTime(30000);
 //    mySerial -> println("Wake up!");
     this -> SetToSleep = false;
     this -> HardwareReset();

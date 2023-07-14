@@ -95,7 +95,7 @@ void EPD::Sleep_Check()
 {
    if(this -> SetToSleep)
    {     
-       this -> MyTimer_SleepWaitTime.StartTickTime(120000);
+       this -> MyTimer_SleepWaitTime.StartTickTime(90000);
        if(this -> MyTimer_SleepWaitTime.IsTimeOut())
        {
          if(this -> SetToSleep)
@@ -109,12 +109,18 @@ void EPD::Sleep_Check()
 }
 void EPD::BW_Command()
 {
+   this -> SetToSleep = false;
+   this -> MyTimer_SleepWaitTime.TickStop();  
+   this -> MyTimer_SleepWaitTime.StartTickTime(90000);
    SPI_Begin();
    SendCommand(0x10);
    SPI_End();
 } 
 void EPD::RW_Command()
 {
+   this -> SetToSleep = false;
+   this -> MyTimer_SleepWaitTime.TickStop();  
+   this -> MyTimer_SleepWaitTime.StartTickTime(90000);
    SPI_Begin();
    SendCommand(0x13);
    SPI_End();
@@ -154,7 +160,7 @@ void EPD::HardwareReset()
 void EPD::Wakeup()
 {
     this -> MyTimer_SleepWaitTime.TickStop();  
-    this -> MyTimer_SleepWaitTime.StartTickTime(40000);
+    this -> MyTimer_SleepWaitTime.StartTickTime(90000);
 //    mySerial -> println("Wake up!");
     this -> SetToSleep = false;
     this -> HardwareReset();

@@ -54,15 +54,21 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.3.5";
+String Version = "Ver 1.3.6";
 
-//#define EPD
-#define RowLED
+#define EPD
+//#define RowLED
 
+
+#ifdef EPD
+int MCU_TYPE = 1;
+#elif defined(RowLED)
+int MCU_TYPE = 2;
+#endif
 
 void setup() 
 {
-    MyTimer_BoardInit.StartTickTime(1000);          
+    MyTimer_BoardInit.StartTickTime(3000);          
 }
 bool flag_pb2 = true;
 void loop() 
@@ -76,13 +82,17 @@ void loop()
       epd.mySerial = &mySerial;
       wiFiConfig.Init(Version);
       
-      #ifdef EPD
-      wiFiConfig.Set_Localport(29000);
-      wiFiConfig.Set_Serverport(30000);
-      #elif defined(RowLED)
-      wiFiConfig.Set_Localport(29001);
-      wiFiConfig.Set_Serverport(30001);
-      #endif
+      if(MCU_TYPE == 1)
+      {
+        wiFiConfig.Set_Localport(29000);
+        wiFiConfig.Set_Serverport(30000);
+      }
+      if(MCU_TYPE == 2)
+      {
+        wiFiConfig.Set_Localport(29001);
+        wiFiConfig.Set_Serverport(30001);
+      }
+
       
       Localport = wiFiConfig.Get_Localport();
       Serverport = wiFiConfig.Get_Serverport();
@@ -94,7 +104,8 @@ void loop()
       myWS2812.Init(NUM_WS2812B_CRGB);
       epd.Init(); 
       xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle);
-      xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
+      
+      if(MCU_TYPE == 2)xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
       flag_boradInit = true;
    }
    if(flag_boradInit)

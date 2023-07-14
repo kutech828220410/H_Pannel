@@ -10,7 +10,7 @@ int UdpRead_len = 0;
 int UdpRead_len_buf = 0;
 long UDPcheck_len = 0;
 WiFiUDP Udp; 
-WiFiUDP Udp1; 
+//WiFiUDP Udp1; 
 bool flag_UDP_RX_BUFFER_Init = false;
 bool flag_UDP_RX_OK = false;
 bool flag_UDP_header = true;
@@ -45,11 +45,11 @@ void onPacketCallBack()
         packet_UDP0 = Udp.parsePacket();
         if(packet_UDP0 > 0) flag_UDP0_packet = true;
      }
-     if(flag_UDP0_packet ==false)
-     {
-        packet_UDP1 = Udp1.parsePacket();
-        if(packet_UDP1 > 0) flag_UDP1_packet = true;
-     }
+//     if(flag_UDP0_packet ==false)
+//     {
+//        packet_UDP1 = Udp1.parsePacket();
+//        if(packet_UDP1 > 0) flag_UDP1_packet = true;
+//     }
   
      
      if(packet_UDP0 > 0 || packet_UDP1 > 0)
@@ -57,18 +57,17 @@ void onPacketCallBack()
         int len = 0;
         if(packet_UDP0 > 0)
         {
-            remoteIP = Udp.remoteIP();
-            remotePort = Udp.remotePort();       
+           
             len = Udp.read(UdpRead_buf, UDP_RX_BUFFER_SIZE - 1);
-            mySerial.println("UDP <0> have packet");
+//            mySerial.println("UDP <0> have packet");
         }
-        if(packet_UDP1 > 0)
-        {
-            remoteIP = Udp1.remoteIP();
-            remotePort = Udp1.remotePort();
-            len = Udp1.read(UdpRead_buf, UDP_RX_BUFFER_SIZE - 1);
-            mySerial.println("UDP <1> have packet");
-        }
+//        if(packet_UDP1 > 0)
+//        {
+//            remoteIP = Udp1.remoteIP();
+//            remotePort = Udp1.remotePort();
+//            len = Udp1.read(UdpRead_buf, UDP_RX_BUFFER_SIZE - 1);
+//            mySerial.println("UDP <1> have packet");
+//        }
         if(flag_UDP_header)
         {
             if(len != 4)
@@ -100,6 +99,8 @@ void onPacketCallBack()
           {
              if(*(UdpRead + UdpRead_len - 1) == 3)
              {
+                remoteIP = Udp.remoteIP();
+                remotePort = Udp.remotePort();     
                 flag_UDP_RX_OK = true;
                 mySerial.println("Received End code!!");
                 break;
@@ -107,7 +108,7 @@ void onPacketCallBack()
           }    
         }        
         MyTimer_UDP.TickStop();
-        MyTimer_UDP.StartTickTime(200);
+        MyTimer_UDP.StartTickTime(100);
      }
      else
      {
@@ -273,6 +274,21 @@ void onPacketCallBack()
                 ota_platform_reset();
               }
           }
+          else if(*(UdpRead + 1) == 'F')
+          {                  
+              int ms_L = *(UdpRead + 2);
+              int ms_H = *(UdpRead + 3);  
+              
+              int ms= ms_L | (ms_H << 8);
+
+              if(flag_udp_232back)mySerial.println("Set_UDP_SendTime");
+              if(flag_udp_232back)mySerial.print("ms[");
+              if(flag_udp_232back)mySerial.print(ms);
+              if(flag_udp_232back)mySerial.println("]");
+
+              wiFiConfig.Set_UDP_SemdTime(ms);                                           
+              Get_Checksum_UDP();
+          }
           else if(*(UdpRead + 1) == 'H')
           {                  
               int IPA = *(UdpRead + 2);
@@ -381,7 +397,7 @@ void Get_Checksum_UDP()
 void Connect_UDP(int localport)
 {
     Udp.begin(localport);
-    Udp1.begin(29500);
+//    Udp1.begin(29500);
 
     //Serial.printf("UDP lisen : %D \n" ,localport);
 }

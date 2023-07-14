@@ -51,21 +51,14 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 //SoftwareSerial mySerial(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.2.7";
+String Version = "Ver 1.3.0";
 
 void setup() 
 {
-
-    
-
 //    mySerial.print("Dynamic memory size: ");
 //    mySerial.println(os_get_free_heap_size_arduino());
-//    mySerial.println();
-    
-    
-    MyLED_IS_Connented.Init(SYSTEM_LED_PIN);
-
-    
+//    mySerial.println();        
+    MyLED_IS_Connented.Init(SYSTEM_LED_PIN);   
     MyTimer_BoardInit.StartTickTime(3000);
         
     xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle);
@@ -119,10 +112,6 @@ void loop()
           onPacketCallBack();
       }
    }
-   
-   
-      
-    
 }
 
 void Core0Task1( void * pvParameters )

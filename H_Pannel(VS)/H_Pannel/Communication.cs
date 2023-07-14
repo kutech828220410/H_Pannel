@@ -41,7 +41,7 @@ namespace H_Pannel_lib
         static public bool ConsoleWrite = false;
         static public int UDP_TimeOut = 1000;
         static public int UDP_RetryNum = 5;
-        static public readonly int Image_Buffer_SIZE = 800;
+        static public readonly int Image_Buffer_SIZE = 1200;
         static public ChipType Chip_Type = ChipType.BW16;
         //static public int EPD583_frameDIV = 10;
         public enum enum_LED_Type : int
@@ -485,7 +485,7 @@ namespace H_Pannel_lib
             }
             if (Chip_Type == ChipType.BW16)
             {
-                EPD583_frameDIV = 1;
+                EPD583_frameDIV = 4;
             }
             bool flag_OK;
             int width = bmp.Width;
@@ -511,7 +511,7 @@ namespace H_Pannel_lib
                 }
                 if (Chip_Type == ChipType.BW16)
                 {
-                    EPD266_frameDIV = 4;
+                    EPD266_frameDIV = 1;
                 }
 
                 bool flag_OK;
