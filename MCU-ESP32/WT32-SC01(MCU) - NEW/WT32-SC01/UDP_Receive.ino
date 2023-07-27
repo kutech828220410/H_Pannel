@@ -86,7 +86,7 @@ void onPacketCallBack()
            
           }        
           MyTimer_UDP.TickStop();
-          MyTimer_UDP.StartTickTime(100);
+          MyTimer_UDP.StartTickTime(200);
        }
        else
        {

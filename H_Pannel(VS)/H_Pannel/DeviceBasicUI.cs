@@ -439,62 +439,58 @@ namespace H_Pannel_lib
         }
         public void Init()
         {
+            Communication.ConsoleWrite = ConsoleWrite;
             this.stopwatch.Start();
             SQLUI.SQL_DataGridView.SQL_Set_Properties(this.sqL_DataGridView_DeviceTable, this.TableName, DataBaseName, UserName, Password, IP, Port, mySqlSslMode);
-
-            this.sqL_DataGridView_UDP_DataReceive.Init();
-            this.sqL_DataGridView_UDP_DataReceive.DataGridRowsChangeEvent += SqL_DataGridView_UDP_DataReceive_DataGridRowsChangeEvent;
-            this.sqL_DataGridView_UDP_DataReceive.DataGridRefreshEvent += SqL_DataGridView_UDP_DataReceive_DataGridRefreshEvent;
-            this.sqL_DataGridView_UDP_DataReceive.DataGridRowsChangeRefEvent += SqL_DataGridView_UDP_DataReceive_DataGridRowsChangeRefEvent;
-            this.sqL_DataGridView_UDP_DataReceive.MouseDown += SqL_DataGridView_UDP_DataReceive_MouseDown;
-            this.sqL_DataGridView_DeviceTable.Init();
-            if (!this.sqL_DataGridView_DeviceTable.SQL_IsTableCreat()) this.sqL_DataGridView_DeviceTable.SQL_CreateTable();
-            this.sqL_DataGridView_DeviceTable.DataGridRowsChangeEvent += SqL_DataGridView_DeviceTable_DataGridRowsChangeEvent;
-            this.sqL_DataGridView_DeviceTable.DataGridRowsChangeRefEvent += SqL_DataGridView_DeviceTable_DataGridRowsChangeRefEvent;
-            this.sqL_DataGridView_DeviceTable.MouseDown += SqL_DataGridView_DeviceTable_MouseDown;
-            this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
-
-            this.UDP_Class_Init();
-
-            Communication.ConsoleWrite = ConsoleWrite;
-
-            this.Init_Offline();
-
-            this.MyThread_SqlDataRefrsh = new MyThread();
-            this.MyThread_SqlDataRefrsh.AutoRun(true);
-            this.MyThread_SqlDataRefrsh.Add_Method(this.sub_SqlDataRefrsh);
-            this.MyThread_SqlDataRefrsh.SetSleepTime(50);
-            this.MyThread_SqlDataRefrsh.Trigger();
-
-            this.sqL_DataGridView_PING.Init();
-            this.MyThread_PING = new MyThread();
-            this.MyThread_PING = new MyThread();
-            this.MyThread_PING.AutoRun(true);
-            this.MyThread_PING.Add_Method(this.sub_PING);
-            this.MyThread_PING.SetSleepTime(100);
+            if (flag_UDP_Class_Init == false)
+            {
+                this.sqL_DataGridView_UDP_DataReceive.Init();
+                this.sqL_DataGridView_UDP_DataReceive.DataGridRowsChangeEvent += SqL_DataGridView_UDP_DataReceive_DataGridRowsChangeEvent;
+                this.sqL_DataGridView_UDP_DataReceive.DataGridRefreshEvent += SqL_DataGridView_UDP_DataReceive_DataGridRefreshEvent;
+                this.sqL_DataGridView_UDP_DataReceive.DataGridRowsChangeRefEvent += SqL_DataGridView_UDP_DataReceive_DataGridRowsChangeRefEvent;
+                this.sqL_DataGridView_UDP_DataReceive.MouseDown += SqL_DataGridView_UDP_DataReceive_MouseDown;
+                this.sqL_DataGridView_DeviceTable.Init();
+                if (!this.sqL_DataGridView_DeviceTable.SQL_IsTableCreat()) this.sqL_DataGridView_DeviceTable.SQL_CreateTable();
+                this.sqL_DataGridView_DeviceTable.DataGridRowsChangeEvent += SqL_DataGridView_DeviceTable_DataGridRowsChangeEvent;
+                this.sqL_DataGridView_DeviceTable.DataGridRowsChangeRefEvent += SqL_DataGridView_DeviceTable_DataGridRowsChangeRefEvent;
+                this.sqL_DataGridView_DeviceTable.MouseDown += SqL_DataGridView_DeviceTable_MouseDown;
+                this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
 
 
+                this.UDP_Class_Init();
+                this.Init_Offline();
+
+                this.MyThread_SqlDataRefrsh = new MyThread();
+                this.MyThread_SqlDataRefrsh.AutoRun(true);
+                this.MyThread_SqlDataRefrsh.Add_Method(this.sub_SqlDataRefrsh);
+                this.MyThread_SqlDataRefrsh.SetSleepTime(50);
+                this.MyThread_SqlDataRefrsh.Trigger();
+
+                this.sqL_DataGridView_PING.Init();
+                this.MyThread_PING = new MyThread();
+                this.MyThread_PING = new MyThread();
+                this.MyThread_PING.AutoRun(true);
+                this.MyThread_PING.Add_Method(this.sub_PING);
+                this.MyThread_PING.SetSleepTime(100);
+
+            }
+            flag_UDP_Class_Init = true;
 
         }
         public void UDP_Class_Init()
         {
-            if(flag_UDP_Class_Init == false)
+            for (int i = 0; i < this.UDP_ServerPorts.Count; i++)
             {
-                for (int i = 0; i < this.UDP_ServerPorts.Count; i++)
-                {
-                    UDP_Class uDP_Class = new UDP_Class("0.0.0.0", this.UDP_ServerPorts[i].StringToInt32());
-                    uDP_Class.ConsoleWrite = false;
-                    List_UDP_Server.Add(uDP_Class);
-                }
-                for (int i = 0; i < this.UDP_LocalPorts.Count; i++)
-                {
-                    UDP_Class uDP_Class = new UDP_Class("0.0.0.0", this.UDP_LocalPorts[i].StringToInt32());
-                    uDP_Class.ConsoleWrite = false;
-                    List_UDP_Local.Add(uDP_Class);
-                }
-                flag_UDP_Class_Init = true;
+                UDP_Class uDP_Class = new UDP_Class("0.0.0.0", this.UDP_ServerPorts[i].StringToInt32());
+                uDP_Class.ConsoleWrite = false;
+                List_UDP_Server.Add(uDP_Class);
             }
-        
+            for (int i = 0; i < this.UDP_LocalPorts.Count; i++)
+            {
+                UDP_Class uDP_Class = new UDP_Class("0.0.0.0", this.UDP_LocalPorts[i].StringToInt32());
+                uDP_Class.ConsoleWrite = false;
+                List_UDP_Local.Add(uDP_Class);
+            }
         }
      
 

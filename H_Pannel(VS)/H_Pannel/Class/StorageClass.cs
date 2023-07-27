@@ -20,16 +20,15 @@ namespace H_Pannel_lib
     {
         private string outputAdress = "";
         private string inputAdress = "";
-      
-
+        private bool alarmEnable = false;
         private bool tOFON = false;
 
         public byte[] LED_Bytes = new byte[450 * 3];
 
         public string OutputAdress { get => outputAdress; set => outputAdress = value; }
-        public string InputAdress { get => inputAdress; set => inputAdress = value; }
-       
+        public string InputAdress { get => inputAdress; set => inputAdress = value; }      
         public bool TOFON { get => tOFON; set => tOFON = value; }
+        public bool AlarmEnable { get => alarmEnable; set => alarmEnable = value; }
 
         public Storage(int station)
         {

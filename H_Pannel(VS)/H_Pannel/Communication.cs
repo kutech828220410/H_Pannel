@@ -983,7 +983,7 @@ namespace H_Pannel_lib
                     uDP_Class.WriteByte(list_byte.ToArray(), IP);
 
                     MyTimer_UART_TimeOut.TickStop();
-                    MyTimer_UART_TimeOut.StartTickTime(UDP_TimeOut);
+                    MyTimer_UART_TimeOut.StartTickTime(3000);
                     cnt++;
                 }
                 else if (cnt == 1)

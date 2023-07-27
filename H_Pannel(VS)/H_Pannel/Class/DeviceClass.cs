@@ -171,6 +171,7 @@ namespace H_Pannel_lib
     [Serializable]
     public class DeviceBasicClass
     {
+        private bool flag_UDP_Class_Init = false;
         private string tableName = "";
         private SQLUI.SQLControl sQLControl;
         public void Init(SQLUI.SQL_DataGridView.ConnentionClass connentionClass,string tableName)
@@ -185,7 +186,11 @@ namespace H_Pannel_lib
         {
             this.tableName = TableName;
             sQLControl = new SQLUI.SQLControl(IP, DataBaseName, TableName, UserName, Password, Port, mySqlSslMode);
-            DeviceBasicMethod.SQL_Init(sQLControl);
+            if(flag_UDP_Class_Init == false)
+            {
+                DeviceBasicMethod.SQL_Init(sQLControl);
+            }
+            flag_UDP_Class_Init = true;
         }
         public List<DeviceBasic> SQL_GetAllDeviceBasic()
         {
