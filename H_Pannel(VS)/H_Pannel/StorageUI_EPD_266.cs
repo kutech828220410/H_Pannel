@@ -103,7 +103,9 @@ namespace H_Pannel_lib
         {
             if (uDP_Class != null)
             {
-                return Communication.Set_WS2812_Buffer(uDP_Class, IP, 0, LED_Bytes);
+                bool flag = Communication.Set_WS2812_Buffer(uDP_Class, IP, 0, LED_Bytes);
+                System.Threading.Thread.Sleep(50);
+                return flag;
             }
             return false;
         }
