@@ -29,6 +29,7 @@ namespace TestForm
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            MyMessageBox.音效 = false;
             H_Pannel_lib.Communication.ConsoleWrite = true;
 
             this.storageUI_EPD_290.Init_Offline();
