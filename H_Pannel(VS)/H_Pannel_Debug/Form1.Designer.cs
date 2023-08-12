@@ -80,6 +80,11 @@
             this.EPD290 = new System.Windows.Forms.TabPage();
             this.rJ_Button_EPD_290_TEST = new MyUI.RJ_Button();
             this.rJ_Button_EPD_290_初始化 = new MyUI.RJ_Button();
+            this.EPD420 = new System.Windows.Forms.TabPage();
+            this.tabControl7 = new System.Windows.Forms.TabControl();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.rJ_Button_EPD_420_填入測試畫面 = new MyUI.RJ_Button();
             this.EPD583 = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -98,6 +103,7 @@
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.rJ_Button_EPD1020_初始化 = new MyUI.RJ_Button();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.rJ_Button_EPD_1020_門片畫面測試 = new MyUI.RJ_Button();
             this.rJ_Button_EPD_1020_填入測試畫面 = new MyUI.RJ_Button();
             this.RowsLED = new System.Windows.Forms.TabPage();
             this.tabControl5 = new System.Windows.Forms.TabControl();
@@ -116,6 +122,8 @@
             this.storageUI_EPD_266 = new H_Pannel_lib.StorageUI_EPD_266();
             this.epD_290_Pannel = new H_Pannel_lib.EPD_290_Pannel();
             this.storageUI_EPD_290 = new H_Pannel_lib.StorageUI_EPD_290();
+            this.drawerUI_EPD_420 = new H_Pannel_lib.DrawerUI_EPD_420();
+            this.epD_420_Pannel = new H_Pannel_lib.EPD_420_Pannel();
             this.epD_583_Pannel = new H_Pannel_lib.EPD_583_Pannel();
             this.drawerUI_EPD_583 = new H_Pannel_lib.DrawerUI_EPD_583();
             this.drawerUI_EPD_1020 = new H_Pannel_lib.DrawerUI_EPD_1020();
@@ -123,13 +131,6 @@
             this.rowsLEDUI = new H_Pannel_lib.RowsLEDUI();
             this.rfiD_UI = new H_Pannel_lib.RFID_UI();
             this.h_RFID_UI = new H_Pannel_lib.H_RFID_UI();
-            this.EPD420 = new System.Windows.Forms.TabPage();
-            this.tabControl7 = new System.Windows.Forms.TabControl();
-            this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.tabPage12 = new System.Windows.Forms.TabPage();
-            this.rJ_Button_EPD_420_填入測試畫面 = new MyUI.RJ_Button();
-            this.drawerUI_EPD_420 = new H_Pannel_lib.DrawerUI_EPD_420();
-            this.epD_420_Pannel = new H_Pannel_lib.EPD_420_Pannel();
             this.tabControl1.SuspendLayout();
             this.WT32.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -151,6 +152,10 @@
             this.tabControl3.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.EPD290.SuspendLayout();
+            this.EPD420.SuspendLayout();
+            this.tabControl7.SuspendLayout();
+            this.tabPage11.SuspendLayout();
+            this.tabPage12.SuspendLayout();
             this.EPD583.SuspendLayout();
             this.tabControl4.SuspendLayout();
             this.tabPage5.SuspendLayout();
@@ -163,10 +168,6 @@
             this.tabPage7.SuspendLayout();
             this.RFID.SuspendLayout();
             this.H_RFID.SuspendLayout();
-            this.EPD420.SuspendLayout();
-            this.tabControl7.SuspendLayout();
-            this.tabPage11.SuspendLayout();
-            this.tabPage12.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1066,6 +1067,71 @@
             this.rJ_Button_EPD_290_初始化.TextColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_290_初始化.UseVisualStyleBackColor = false;
             // 
+            // EPD420
+            // 
+            this.EPD420.Controls.Add(this.tabControl7);
+            this.EPD420.Location = new System.Drawing.Point(4, 22);
+            this.EPD420.Name = "EPD420";
+            this.EPD420.Size = new System.Drawing.Size(1896, 1015);
+            this.EPD420.TabIndex = 8;
+            this.EPD420.Text = "EPD420";
+            this.EPD420.UseVisualStyleBackColor = true;
+            // 
+            // tabControl7
+            // 
+            this.tabControl7.Controls.Add(this.tabPage11);
+            this.tabControl7.Controls.Add(this.tabPage12);
+            this.tabControl7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl7.Location = new System.Drawing.Point(0, 0);
+            this.tabControl7.Name = "tabControl7";
+            this.tabControl7.SelectedIndex = 0;
+            this.tabControl7.Size = new System.Drawing.Size(1896, 1015);
+            this.tabControl7.TabIndex = 2;
+            // 
+            // tabPage11
+            // 
+            this.tabPage11.Controls.Add(this.drawerUI_EPD_420);
+            this.tabPage11.Location = new System.Drawing.Point(4, 22);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Size = new System.Drawing.Size(1888, 989);
+            this.tabPage11.TabIndex = 0;
+            this.tabPage11.Text = "資料設定";
+            this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // tabPage12
+            // 
+            this.tabPage12.Controls.Add(this.epD_420_Pannel);
+            this.tabPage12.Controls.Add(this.rJ_Button_EPD_420_填入測試畫面);
+            this.tabPage12.Location = new System.Drawing.Point(4, 22);
+            this.tabPage12.Name = "tabPage12";
+            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage12.Size = new System.Drawing.Size(1888, 989);
+            this.tabPage12.TabIndex = 1;
+            this.tabPage12.Text = "面板設定";
+            this.tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // rJ_Button_EPD_420_填入測試畫面
+            // 
+            this.rJ_Button_EPD_420_填入測試畫面.AutoResetState = false;
+            this.rJ_Button_EPD_420_填入測試畫面.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_EPD_420_填入測試畫面.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_EPD_420_填入測試畫面.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_EPD_420_填入測試畫面.BorderRadius = 5;
+            this.rJ_Button_EPD_420_填入測試畫面.BorderSize = 0;
+            this.rJ_Button_EPD_420_填入測試畫面.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_EPD_420_填入測試畫面.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_EPD_420_填入測試畫面.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_EPD_420_填入測試畫面.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_EPD_420_填入測試畫面.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_420_填入測試畫面.Location = new System.Drawing.Point(430, 21);
+            this.rJ_Button_EPD_420_填入測試畫面.Name = "rJ_Button_EPD_420_填入測試畫面";
+            this.rJ_Button_EPD_420_填入測試畫面.Size = new System.Drawing.Size(126, 67);
+            this.rJ_Button_EPD_420_填入測試畫面.State = false;
+            this.rJ_Button_EPD_420_填入測試畫面.TabIndex = 40;
+            this.rJ_Button_EPD_420_填入測試畫面.Text = "填入測試畫面";
+            this.rJ_Button_EPD_420_填入測試畫面.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_420_填入測試畫面.UseVisualStyleBackColor = false;
+            // 
             // EPD583
             // 
             this.EPD583.Controls.Add(this.tabControl4);
@@ -1377,6 +1443,7 @@
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.rJ_Button_EPD_1020_門片畫面測試);
             this.tabPage10.Controls.Add(this.rJ_Button_EPD_1020_填入測試畫面);
             this.tabPage10.Controls.Add(this.epD_1020_Pannel);
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
@@ -1386,6 +1453,28 @@
             this.tabPage10.TabIndex = 1;
             this.tabPage10.Text = "面板設定";
             this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // rJ_Button_EPD_1020_門片畫面測試
+            // 
+            this.rJ_Button_EPD_1020_門片畫面測試.AutoResetState = false;
+            this.rJ_Button_EPD_1020_門片畫面測試.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_EPD_1020_門片畫面測試.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_EPD_1020_門片畫面測試.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_EPD_1020_門片畫面測試.BorderRadius = 5;
+            this.rJ_Button_EPD_1020_門片畫面測試.BorderSize = 0;
+            this.rJ_Button_EPD_1020_門片畫面測試.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_EPD_1020_門片畫面測試.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_EPD_1020_門片畫面測試.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_EPD_1020_門片畫面測試.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_EPD_1020_門片畫面測試.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_1020_門片畫面測試.Location = new System.Drawing.Point(673, 130);
+            this.rJ_Button_EPD_1020_門片畫面測試.Name = "rJ_Button_EPD_1020_門片畫面測試";
+            this.rJ_Button_EPD_1020_門片畫面測試.Size = new System.Drawing.Size(126, 67);
+            this.rJ_Button_EPD_1020_門片畫面測試.State = false;
+            this.rJ_Button_EPD_1020_門片畫面測試.TabIndex = 41;
+            this.rJ_Button_EPD_1020_門片畫面測試.Text = "門片畫面測試";
+            this.rJ_Button_EPD_1020_門片畫面測試.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_1020_門片畫面測試.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_EPD_1020_填入測試畫面
             // 
@@ -1400,7 +1489,7 @@
             this.rJ_Button_EPD_1020_填入測試畫面.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_1020_填入測試畫面.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_1020_填入測試畫面.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_EPD_1020_填入測試畫面.Location = new System.Drawing.Point(994, 21);
+            this.rJ_Button_EPD_1020_填入測試畫面.Location = new System.Drawing.Point(673, 6);
             this.rJ_Button_EPD_1020_填入測試畫面.Name = "rJ_Button_EPD_1020_填入測試畫面";
             this.rJ_Button_EPD_1020_填入測試畫面.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_EPD_1020_填入測試畫面.State = false;
@@ -1715,6 +1804,42 @@
             this.storageUI_EPD_290.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_ServerPorts")));
             this.storageUI_EPD_290.UserName = "root";
             // 
+            // drawerUI_EPD_420
+            // 
+            this.drawerUI_EPD_420._Password = "";
+            this.drawerUI_EPD_420.DataBaseName = "TEST";
+            this.drawerUI_EPD_420.DNS = "0.0.0.0";
+            this.drawerUI_EPD_420.Dock = System.Windows.Forms.DockStyle.Left;
+            this.drawerUI_EPD_420.Gateway = "0.0.0.0";
+            this.drawerUI_EPD_420.IP = "localhost";
+            this.drawerUI_EPD_420.IP_Adress = "0.0.0.0";
+            this.drawerUI_EPD_420.Local_Port = "0";
+            this.drawerUI_EPD_420.Location = new System.Drawing.Point(0, 0);
+            this.drawerUI_EPD_420.Name = "drawerUI_EPD_420";
+            this.drawerUI_EPD_420.Password = "user82822040";
+            this.drawerUI_EPD_420.Port = ((uint)(3306u));
+            this.drawerUI_EPD_420.Server_IP_Adress = "0.0.0.0";
+            this.drawerUI_EPD_420.Server_Port = "0";
+            this.drawerUI_EPD_420.Size = new System.Drawing.Size(1393, 989);
+            this.drawerUI_EPD_420.SSID = "";
+            this.drawerUI_EPD_420.Station = "0";
+            this.drawerUI_EPD_420.Subnet = "0.0.0.0";
+            this.drawerUI_EPD_420.TabIndex = 40;
+            this.drawerUI_EPD_420.TableName = "EPD420_Jsonstring";
+            this.drawerUI_EPD_420.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_420.UDP_LocalPorts")));
+            this.drawerUI_EPD_420.UDP_SendTime = "0";
+            this.drawerUI_EPD_420.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_420.UDP_ServerPorts")));
+            this.drawerUI_EPD_420.UserName = "root";
+            // 
+            // epD_420_Pannel
+            // 
+            this.epD_420_Pannel.CurrentDrawer = null;
+            this.epD_420_Pannel.Location = new System.Drawing.Point(16, 21);
+            this.epD_420_Pannel.Margin = new System.Windows.Forms.Padding(0);
+            this.epD_420_Pannel.Name = "epD_420_Pannel";
+            this.epD_420_Pannel.Size = new System.Drawing.Size(400, 300);
+            this.epD_420_Pannel.TabIndex = 41;
+            // 
             // epD_583_Pannel
             // 
             this.epD_583_Pannel.CurrentDrawer = null;
@@ -1781,11 +1906,12 @@
             // epD_1020_Pannel
             // 
             this.epD_1020_Pannel.CurrentDrawer = null;
-            this.epD_1020_Pannel.Location = new System.Drawing.Point(16, 21);
+            this.epD_1020_Pannel.Location = new System.Drawing.Point(27, 21);
             this.epD_1020_Pannel.Margin = new System.Windows.Forms.Padding(0);
             this.epD_1020_Pannel.Name = "epD_1020_Pannel";
-            this.epD_1020_Pannel.Size = new System.Drawing.Size(960, 640);
+            this.epD_1020_Pannel.Size = new System.Drawing.Size(448, 672);
             this.epD_1020_Pannel.TabIndex = 0;
+            this.epD_1020_Pannel.Tx_Panel_Type = H_Pannel_lib.DrawerUI_EPD_1020.Tx_Panel_Type.門櫃;
             // 
             // rowsLEDUI
             // 
@@ -1869,107 +1995,6 @@
             this.h_RFID_UI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("h_RFID_UI.UDP_ServerPorts")));
             this.h_RFID_UI.UserName = "root";
             // 
-            // EPD420
-            // 
-            this.EPD420.Controls.Add(this.tabControl7);
-            this.EPD420.Location = new System.Drawing.Point(4, 22);
-            this.EPD420.Name = "EPD420";
-            this.EPD420.Size = new System.Drawing.Size(1896, 1015);
-            this.EPD420.TabIndex = 8;
-            this.EPD420.Text = "EPD420";
-            this.EPD420.UseVisualStyleBackColor = true;
-            // 
-            // tabControl7
-            // 
-            this.tabControl7.Controls.Add(this.tabPage11);
-            this.tabControl7.Controls.Add(this.tabPage12);
-            this.tabControl7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl7.Location = new System.Drawing.Point(0, 0);
-            this.tabControl7.Name = "tabControl7";
-            this.tabControl7.SelectedIndex = 0;
-            this.tabControl7.Size = new System.Drawing.Size(1896, 1015);
-            this.tabControl7.TabIndex = 2;
-            // 
-            // tabPage11
-            // 
-            this.tabPage11.Controls.Add(this.drawerUI_EPD_420);
-            this.tabPage11.Location = new System.Drawing.Point(4, 22);
-            this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(1888, 989);
-            this.tabPage11.TabIndex = 0;
-            this.tabPage11.Text = "資料設定";
-            this.tabPage11.UseVisualStyleBackColor = true;
-            // 
-            // tabPage12
-            // 
-            this.tabPage12.Controls.Add(this.epD_420_Pannel);
-            this.tabPage12.Controls.Add(this.rJ_Button_EPD_420_填入測試畫面);
-            this.tabPage12.Location = new System.Drawing.Point(4, 22);
-            this.tabPage12.Name = "tabPage12";
-            this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(1888, 989);
-            this.tabPage12.TabIndex = 1;
-            this.tabPage12.Text = "面板設定";
-            this.tabPage12.UseVisualStyleBackColor = true;
-            // 
-            // rJ_Button_EPD_420_填入測試畫面
-            // 
-            this.rJ_Button_EPD_420_填入測試畫面.AutoResetState = false;
-            this.rJ_Button_EPD_420_填入測試畫面.BackColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_EPD_420_填入測試畫面.BackgroundColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_EPD_420_填入測試畫面.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_EPD_420_填入測試畫面.BorderRadius = 5;
-            this.rJ_Button_EPD_420_填入測試畫面.BorderSize = 0;
-            this.rJ_Button_EPD_420_填入測試畫面.buttonType = MyUI.RJ_Button.ButtonType.Push;
-            this.rJ_Button_EPD_420_填入測試畫面.FlatAppearance.BorderSize = 0;
-            this.rJ_Button_EPD_420_填入測試畫面.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Button_EPD_420_填入測試畫面.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Button_EPD_420_填入測試畫面.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_EPD_420_填入測試畫面.Location = new System.Drawing.Point(430, 21);
-            this.rJ_Button_EPD_420_填入測試畫面.Name = "rJ_Button_EPD_420_填入測試畫面";
-            this.rJ_Button_EPD_420_填入測試畫面.Size = new System.Drawing.Size(126, 67);
-            this.rJ_Button_EPD_420_填入測試畫面.State = false;
-            this.rJ_Button_EPD_420_填入測試畫面.TabIndex = 40;
-            this.rJ_Button_EPD_420_填入測試畫面.Text = "填入測試畫面";
-            this.rJ_Button_EPD_420_填入測試畫面.TextColor = System.Drawing.Color.White;
-            this.rJ_Button_EPD_420_填入測試畫面.UseVisualStyleBackColor = false;
-            // 
-            // drawerUI_EPD_420
-            // 
-            this.drawerUI_EPD_420._Password = "";
-            this.drawerUI_EPD_420.DataBaseName = "TEST";
-            this.drawerUI_EPD_420.DNS = "0.0.0.0";
-            this.drawerUI_EPD_420.Dock = System.Windows.Forms.DockStyle.Left;
-            this.drawerUI_EPD_420.Gateway = "0.0.0.0";
-            this.drawerUI_EPD_420.IP = "localhost";
-            this.drawerUI_EPD_420.IP_Adress = "0.0.0.0";
-            this.drawerUI_EPD_420.Local_Port = "0";
-            this.drawerUI_EPD_420.Location = new System.Drawing.Point(0, 0);
-            this.drawerUI_EPD_420.Name = "drawerUI_EPD_420";
-            this.drawerUI_EPD_420.Password = "user82822040";
-            this.drawerUI_EPD_420.Port = ((uint)(3306u));
-            this.drawerUI_EPD_420.Server_IP_Adress = "0.0.0.0";
-            this.drawerUI_EPD_420.Server_Port = "0";
-            this.drawerUI_EPD_420.Size = new System.Drawing.Size(1393, 989);
-            this.drawerUI_EPD_420.SSID = "";
-            this.drawerUI_EPD_420.Station = "0";
-            this.drawerUI_EPD_420.Subnet = "0.0.0.0";
-            this.drawerUI_EPD_420.TabIndex = 40;
-            this.drawerUI_EPD_420.TableName = "EPD420_Jsonstring";
-            this.drawerUI_EPD_420.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_420.UDP_LocalPorts")));
-            this.drawerUI_EPD_420.UDP_SendTime = "0";
-            this.drawerUI_EPD_420.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_420.UDP_ServerPorts")));
-            this.drawerUI_EPD_420.UserName = "root";
-            // 
-            // epD_420_Pannel
-            // 
-            this.epD_420_Pannel.CurrentDrawer = null;
-            this.epD_420_Pannel.Location = new System.Drawing.Point(16, 21);
-            this.epD_420_Pannel.Margin = new System.Windows.Forms.Padding(0);
-            this.epD_420_Pannel.Name = "epD_420_Pannel";
-            this.epD_420_Pannel.Size = new System.Drawing.Size(400, 300);
-            this.epD_420_Pannel.TabIndex = 41;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2002,6 +2027,10 @@
             this.tabControl3.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.EPD290.ResumeLayout(false);
+            this.EPD420.ResumeLayout(false);
+            this.tabControl7.ResumeLayout(false);
+            this.tabPage11.ResumeLayout(false);
+            this.tabPage12.ResumeLayout(false);
             this.EPD583.ResumeLayout(false);
             this.tabControl4.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
@@ -2014,10 +2043,6 @@
             this.tabPage7.ResumeLayout(false);
             this.RFID.ResumeLayout(false);
             this.H_RFID.ResumeLayout(false);
-            this.EPD420.ResumeLayout(false);
-            this.tabControl7.ResumeLayout(false);
-            this.tabPage11.ResumeLayout(false);
-            this.tabPage12.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2124,6 +2149,7 @@
         private System.Windows.Forms.TabPage tabPage12;
         private H_Pannel_lib.EPD_420_Pannel epD_420_Pannel;
         private MyUI.RJ_Button rJ_Button_EPD_420_填入測試畫面;
+        private MyUI.RJ_Button rJ_Button_EPD_1020_門片畫面測試;
     }
 }
 

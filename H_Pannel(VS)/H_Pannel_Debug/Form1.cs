@@ -110,15 +110,12 @@ namespace WT32_SC01
             this.epD_1020_Pannel.Init(this.drawerUI_EPD_1020.List_UDP_Local);
             this.rJ_Button_EPD_1020_填入測試畫面.MouseDownEvent += RJ_Button_EPD_1020_填入測試畫面_MouseDownEvent;
             this.rJ_Button_EPD1020_初始化.MouseDownEvent += RJ_Button_EPD1020_初始化_MouseDownEvent;
+            this.rJ_Button_EPD_1020_門片畫面測試.MouseDownEvent += RJ_Button_EPD_1020_門片畫面測試_MouseDownEvent;
 
             MyUI.數字鍵盤.音效 = false;
         }
 
-    
-
-
-
-
+ 
 
 
 
@@ -426,8 +423,6 @@ namespace WT32_SC01
         {
             Drawer drawer = new Drawer("192.168.43.230", 29012, 960, 640);
             Bitmap bitmap = new Bitmap(DrawerUI_EPD_1020.Pannel_Width, DrawerUI_EPD_1020.Pannel_Height);
-           // this.Invoke(new Action(delegate { panel_TEST.DrawToBitmap(bitmap, new Rectangle(0, 0, bitmap.Width, bitmap.Height)); }));
-
 
             Graphics g = Graphics.FromImage(bitmap);
 
@@ -539,6 +534,18 @@ namespace WT32_SC01
             g.Dispose();
             
 
+        }
+        private void RJ_Button_EPD_1020_門片畫面測試_MouseDownEvent(MouseEventArgs mevent)
+        {
+            Drawer drawer = new Drawer();
+            for (int i = 0; i < 15; i++)
+            {
+                Box box0 = new Box();
+                box0.Code = $"0001A-{i}";
+                box0.Name = $"測試{i}";
+                drawer.Add_NewBox(box0);
+            }
+            this.epD_1020_Pannel.DrawToPictureBox(drawer);
         }
         #endregion
         private void sub_H_RFID()

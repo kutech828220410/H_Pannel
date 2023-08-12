@@ -116,6 +116,12 @@ namespace H_Pannel_lib
             return Drawers;
 
         }
+        static public Drawer Add_NewBox(this Drawer drawer, Box box)
+        {
+            box.IP = drawer.IP;
+            drawer.Boxes.Add(new Box[] { box });
+            return drawer;
+        }
         static public List<Drawer> ReplaceByIP(this List<Drawer> Drawers, Drawer drawer)
         {
             for (int i = 0; i < Drawers.Count; i++)
@@ -235,6 +241,7 @@ namespace H_Pannel_lib
 
             return null;
         }
+    
         static public Drawer SortByName(this List<Drawer> Drawers, string Name)
         {
             for (int i = 0; i < Drawers.Count; i++)
@@ -315,6 +322,56 @@ namespace H_Pannel_lib
                 if (boxes[i].GUID == GUID) return boxes[i];
             }
             return null;
+        }
+        static public Box GetByGUID(this Drawer drawer, string GUID)
+        {
+            List<Box> boxes = drawer.GetAllBoxes();
+            for (int i = 0; i < boxes.Count; i++)
+            {
+                if (boxes[i].GUID == GUID) return boxes[i];
+            }
+            return null;
+        }
+        static public Drawer ReplaceByGUID(this List<Drawer> Drawers, Box box)
+        {
+            Drawer drawer = Drawers.SortByIP(box.IP);
+            if (drawer == null) return null;
+            return drawer.ReplaceByGUID(box);
+        }
+        static public Drawer ReplaceByGUID(this Drawer drawer, Box box)
+        {
+            for (int i = 0; i < drawer.Boxes.Count; i++)
+            {
+                for (int k = 0; k < drawer.Boxes[i].Length; k++)
+                {
+                    if (drawer.Boxes[i][k].GUID == box.GUID)
+                    {
+                        drawer.Boxes[i][k] = box;
+                    }
+                }
+            }
+            return drawer;
+        }
+        static public void RemoveByGUID(this Drawer drawer, string GUID)
+        {
+            List<Box[]> boxes_buf = new List<Box[]>();
+            for (int i = 0; i < drawer.Boxes.Count; i++)
+            {
+                List<Box> boxe_ary = new List<Box>();
+                for (int k = 0; k < drawer.Boxes[i].Length; k++)
+                {
+                    if (drawer.Boxes[i][k].GUID != GUID)
+                    {
+                        boxe_ary.Add(drawer.Boxes[i][k]);
+                    }              
+                }
+                if (boxe_ary.Count > 0)
+                {
+                    boxes_buf.Add(boxe_ary.ToArray());
+                }
+    
+            }
+            drawer.Boxes = boxes_buf;
         }
         static public void ReplaceIP(this Drawer drawer, string IP)
         {

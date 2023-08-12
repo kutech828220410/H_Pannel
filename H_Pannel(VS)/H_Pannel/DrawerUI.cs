@@ -109,7 +109,7 @@ namespace H_Pannel_lib
             }
             return Drawer;
         }
-        public Box SQL_GetBox(Box box)
+        virtual public Box SQL_GetBox(Box box)
         {
             return SQL_GetBox(box.IP, box.Column, box.Row);
         }

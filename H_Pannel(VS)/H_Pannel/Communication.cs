@@ -570,7 +570,9 @@ namespace H_Pannel_lib
                 int height = bmp.Height;
                 byte[] bytes_BW = new byte[(width / 8) * height];
                 byte[] bytes_RW = new byte[(width / 8) * height];
-                _bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
+                if (width == 960 && height == 640) _bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
+                if (width == 640 && height == 960) _bmp.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                if (width == 640 && height == 960) _bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
                 BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD1020);
                 MyTimer myTimer = new MyTimer();
                 myTimer.StartTickTime(50000);

@@ -17,6 +17,17 @@ void MyWS2812::SetRGB(int lednum ,byte R, byte G, byte B)
     *(rgbBuffer + lednum * 3 + 1) = G;
     *(rgbBuffer + lednum * 3 + 2) = B;
 }
+bool MyWS2812::IsON(int lednum)
+{ 
+    for(int i = 0 ; i < lednum ;i++)
+    {
+        if(*(rgbBuffer + (i + offset)* 3 + 0) > 0) return true;
+        if(*(rgbBuffer + (i + offset)* 3 + 1) > 0) return true;
+        if(*(rgbBuffer + (i + offset)* 3 + 2) > 0) return true;
+    }
+    return false;     
+}
+
 byte* MyWS2812::GetRGB()
 { 
     return rgbBuffer;

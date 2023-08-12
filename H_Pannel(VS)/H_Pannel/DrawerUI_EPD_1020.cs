@@ -14,6 +14,12 @@ namespace H_Pannel_lib
 {
     public class DrawerUI_EPD_1020 : DrawerUI
     {
+        static Tx_Panel_Type enum_Panel_Type = DrawerUI_EPD_1020.Tx_Panel_Type.門櫃;
+        public enum Tx_Panel_Type
+        {
+            門櫃,
+            吊牌,
+        }
         [Serializable]
         public class UDP_READ
         {
@@ -68,6 +74,7 @@ namespace H_Pannel_lib
         {
             get
             {
+                if (enum_Panel_Type == Tx_Panel_Type.門櫃) return 640;
                 return 960;
             }
         }
@@ -75,6 +82,7 @@ namespace H_Pannel_lib
         {
             get
             {
+                if (enum_Panel_Type == Tx_Panel_Type.門櫃) return 960;
                 return 640;
             }
         }
@@ -456,83 +464,145 @@ namespace H_Pannel_lib
         static public Bitmap Get_Drawer_bmp(Drawer drawer)
         {
             Bitmap bitmap = new Bitmap(DrawerUI_EPD_1020.Pannel_Width, DrawerUI_EPD_1020.Pannel_Height);
-            Graphics g = Graphics.FromImage(bitmap);
-            List<Box[]> Boxes = drawer.Boxes;
-            for (int i = 0; i < Boxes.Count; i++)
+            if(enum_Panel_Type == Tx_Panel_Type.門櫃)
             {
-                for (int k = 0; k < Boxes[i].Length; k++)
+                using (Graphics g = Graphics.FromImage(bitmap))
                 {
-                    Rectangle rect = Get_Box_Combine(drawer, Boxes[i][k]);
-                    Box _box = Boxes[i][k];
-                    if (Boxes[i][k].Slave == false)
+                    g.FillRectangle(new SolidBrush(Color.White), new RectangleF(0, 0, DrawerUI_EPD_1020.Pannel_Width, DrawerUI_EPD_1020.Pannel_Height));
+
+                    int height = 40;
+                    int width_num = 40;
+                    int width_code = 100;
+                    int width_name = 500;
+                    int height_temp = height;
+                    List<Box> boxes = drawer.GetAllBoxes();
+
+                    Rectangle rectangle_title_Num = new Rectangle(0, 0, width_num, height);
+                    g.FillRectangle(new SolidBrush(Color.White), new RectangleF(rectangle_title_Num.X, rectangle_title_Num.Y, rectangle_title_Num.Width, rectangle_title_Num.Height));
+                    g.DrawRectangle(new Pen(Color.Black, 1), rectangle_title_Num);
+                    DrawingClass.Draw.文字中心繪製("No.", new Rectangle(rectangle_title_Num.X, rectangle_title_Num.Y, rectangle_title_Num.Width, rectangle_title_Num.Height), rectangle_title_Num.Width - 2, new Font("微軟正黑體", 14, FontStyle.Bold), Color.Black, g);
+
+                    Rectangle rectangle_title_Code = new Rectangle(rectangle_title_Num.Width, 0, width_code, height);
+                    g.FillRectangle(new SolidBrush(Color.White), new RectangleF(rectangle_title_Code.X, rectangle_title_Code.Y, rectangle_title_Code.Width, rectangle_title_Code.Height));
+                    g.DrawRectangle(new Pen(Color.Black, 1), rectangle_title_Code);
+                    DrawingClass.Draw.文字中心繪製("藥碼", new Rectangle(rectangle_title_Code.X, rectangle_title_Code.Y, rectangle_title_Code.Width, rectangle_title_Code.Height), rectangle_title_Code.Width - 10, new Font("微軟正黑體", 14, FontStyle.Bold), Color.Black, g);
+
+                    Rectangle rectangle_title_Name = new Rectangle(rectangle_title_Num.Width + rectangle_title_Code.Width, 0, width_name - 1, height);
+                    g.FillRectangle(new SolidBrush(Color.White), new RectangleF(rectangle_title_Name.X, rectangle_title_Name.Y, rectangle_title_Name.Width, rectangle_title_Name.Height));
+                    g.DrawRectangle(new Pen(Color.Black, 1), rectangle_title_Name);
+                    DrawingClass.Draw.文字中心繪製("藥名", new Rectangle(rectangle_title_Name.X, rectangle_title_Name.Y, rectangle_title_Name.Width, rectangle_title_Name.Height), rectangle_title_Name.Width - 200, new Font("微軟正黑體", 14, FontStyle.Bold), Color.Black, g);
+
+                    for (int i = 0; i < drawer.Boxes.Count; i++)
                     {
-                        float posy = 0;
+                        string Code = drawer.Boxes[i][0].Code;
+                        string Name = drawer.Boxes[i][0].Name;
 
-                        g.FillRectangle(new SolidBrush(_box.BackColor), rect);
-                        g.DrawRectangle(new Pen(Color.Black, _box.Pen_Width), rect);
+                        Rectangle rectangle_Num = new Rectangle(0, height_temp, width_num, height);
+                        Rectangle rectangle_Code = new Rectangle(rectangle_title_Num.Width, height_temp, width_code, height);
+                        Rectangle rectangle_Name = new Rectangle(rectangle_title_Num.Width + rectangle_title_Code.Width, height_temp, width_name - 1, height);
 
-                        g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
-                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                        g.CompositingQuality = CompositingQuality.HighQuality;
-                        g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+                        g.FillRectangle(new SolidBrush(Color.White), new RectangleF(rectangle_Num.X, rectangle_Num.Y, rectangle_Num.Width, rectangle_Num.Height));
+                        g.DrawRectangle(new Pen(Color.Black, 1), rectangle_Num);
+                        DrawingClass.Draw.文字中心繪製($"{i + 1}", new Rectangle(rectangle_Num.X, rectangle_Num.Y, rectangle_Num.Width, rectangle_Num.Height), rectangle_Num.Width - 2, new Font("微軟正黑體", 14, FontStyle.Bold), Color.Black, g);
 
-                        _box.SetValue(Device.ValueName.藥品碼, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
-                        _box.SetValue(Device.ValueName.藥品碼, Device.ValueType.BackColor, _box.BackColor);
+                        g.FillRectangle(new SolidBrush(Color.White), new RectangleF(rectangle_Code.X, rectangle_Code.Y, rectangle_Code.Width, rectangle_Code.Height));
+                        g.DrawRectangle(new Pen(Color.Black, 1), rectangle_Code);
+                        DrawingClass.Draw.文字中心繪製($"{Code}", new Rectangle(rectangle_Code.X, rectangle_Code.Y, rectangle_Code.Width, rectangle_Code.Height), new Font("微軟正黑體", 14, FontStyle.Bold), Color.Black, g);
 
-                        _box.SetValue(Device.ValueName.藥品名稱, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
-                        _box.SetValue(Device.ValueName.藥品名稱, Device.ValueType.BackColor, _box.BackColor);
-
-                        _box.SetValue(Device.ValueName.藥品學名, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
-                        _box.SetValue(Device.ValueName.藥品學名, Device.ValueType.BackColor, _box.BackColor);
-
-                        _box.SetValue(Device.ValueName.藥品中文名稱, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
-                        _box.SetValue(Device.ValueName.藥品中文名稱, Device.ValueType.BackColor, _box.BackColor);
-
-                        _box.SetValue(Device.ValueName.包裝單位, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
-                        _box.SetValue(Device.ValueName.包裝單位, Device.ValueType.BackColor, _box.BackColor);
-
-                        _box.SetValue(Device.ValueName.效期, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
-                        _box.SetValue(Device.ValueName.效期, Device.ValueType.BackColor, _box.BackColor);
-
-                        _box.SetValue(Device.ValueName.庫存, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
-                        _box.SetValue(Device.ValueName.庫存, Device.ValueType.BackColor, _box.BackColor);
-
-                        SizeF size_Name = g.MeasureString(_box.Name, _box.Name_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
+                        g.FillRectangle(new SolidBrush(Color.White), new RectangleF(rectangle_Name.X, rectangle_Name.Y, rectangle_Name.Width, rectangle_Name.Height));
+                        g.DrawRectangle(new Pen(Color.Black, 1), rectangle_Name);
+                        SizeF size_Name = g.MeasureString(Name, new Font("微軟正黑體", 12.5F, FontStyle.Bold), new Size(rectangle_Name.Width, rectangle_Name.Height), StringFormat.GenericDefault);
                         size_Name = new SizeF((int)size_Name.Width, (int)size_Name.Height);
-                        g.DrawString(_box.Name, _box.Name_font, new SolidBrush(_box.ForeColor), rect, StringFormat.GenericDefault);
-                        posy += size_Name.Height;
-                        posy += 3;
+                        rectangle_Name = new Rectangle(rectangle_Name.X + 5, (int)((rectangle_Name.Height - size_Name.Height) / 2) + height_temp, rectangle_Name.Width, rectangle_Name.Height);
+                        g.DrawString(Name, new Font("微軟正黑體", 14, FontStyle.Bold), new SolidBrush(Color.Black), rectangle_Name, StringFormat.GenericDefault);
 
-                        if (_box.Validity_period_Visable)
-                        {
-                            for (int m = 0; m < _box.List_Validity_period.Count; m++)
-                            {
-                                if (_box.List_Inventory[m] == "00") continue;
-                                string str = $"{_box.List_Validity_period[m]} [{_box.List_Inventory[m]}]";
-                                _box.Validity_period_font = new Font(_box.Validity_period_font, FontStyle.Bold);
-                                SizeF size_Validity_period = TextRenderer.MeasureText(str, _box.Validity_period_font);
-                                g.DrawString(str, _box.Validity_period_font, new SolidBrush((Color)_box.GetValue(Box.ValueName.效期, Box.ValueType.ForeColor)), rect.X + 5, rect.Y + posy);
-                                Color color_pen = _box.IsWarning ? Color.White : Color.Red;
-                                g.DrawRectangle(new Pen(new SolidBrush(color_pen), 1), rect.X + 5, rect.Y + posy, size_Validity_period.Width, size_Validity_period.Height);
-                                posy += size_Validity_period.Height;
-                            }
-                        }
-
-                        SizeF size_Code = TextRenderer.MeasureText($"{_box.Code}[{_box.Inventory}]", _box.Code_font);
-                        if (_box.Code.StringIsEmpty() == false) g.DrawString($"{_box.Code}[{_box.Inventory}]", _box.Code_font, new SolidBrush(Color.Black), rect.X, ((rect.Y + rect.Height) - size_Code.Height));
+                        height_temp += height;
                     }
+                }
+
+            }
+            else
+            {
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    List<Box[]> Boxes = drawer.Boxes;
+                    for (int i = 0; i < Boxes.Count; i++)
+                    {
+                        for (int k = 0; k < Boxes[i].Length; k++)
+                        {
+                            Rectangle rect = Get_Box_Combine(drawer, Boxes[i][k]);
+                            Box _box = Boxes[i][k];
+                            if (Boxes[i][k].Slave == false)
+                            {
+                                float posy = 0;
+
+                                g.FillRectangle(new SolidBrush(_box.BackColor), rect);
+                                g.DrawRectangle(new Pen(Color.Black, _box.Pen_Width), rect);
+
+                                g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+                                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                                g.CompositingQuality = CompositingQuality.HighQuality;
+                                g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+
+                                _box.SetValue(Device.ValueName.藥品碼, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                                _box.SetValue(Device.ValueName.藥品碼, Device.ValueType.BackColor, _box.BackColor);
+
+                                _box.SetValue(Device.ValueName.藥品名稱, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                                _box.SetValue(Device.ValueName.藥品名稱, Device.ValueType.BackColor, _box.BackColor);
+
+                                _box.SetValue(Device.ValueName.藥品學名, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                                _box.SetValue(Device.ValueName.藥品學名, Device.ValueType.BackColor, _box.BackColor);
+
+                                _box.SetValue(Device.ValueName.藥品中文名稱, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                                _box.SetValue(Device.ValueName.藥品中文名稱, Device.ValueType.BackColor, _box.BackColor);
+
+                                _box.SetValue(Device.ValueName.包裝單位, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                                _box.SetValue(Device.ValueName.包裝單位, Device.ValueType.BackColor, _box.BackColor);
+
+                                _box.SetValue(Device.ValueName.效期, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                                _box.SetValue(Device.ValueName.效期, Device.ValueType.BackColor, _box.BackColor);
+
+                                _box.SetValue(Device.ValueName.庫存, Device.ValueType.ForeColor, _box.IsWarning ? Color.White : Color.Black);
+                                _box.SetValue(Device.ValueName.庫存, Device.ValueType.BackColor, _box.BackColor);
+
+                                SizeF size_Name = g.MeasureString(_box.Name, _box.Name_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
+                                size_Name = new SizeF((int)size_Name.Width, (int)size_Name.Height);
+                                g.DrawString(_box.Name, _box.Name_font, new SolidBrush(_box.ForeColor), rect, StringFormat.GenericDefault);
+                                posy += size_Name.Height;
+                                posy += 3;
+
+                                if (_box.Validity_period_Visable)
+                                {
+                                    for (int m = 0; m < _box.List_Validity_period.Count; m++)
+                                    {
+                                        if (_box.List_Inventory[m] == "00") continue;
+                                        string str = $"{_box.List_Validity_period[m]} [{_box.List_Inventory[m]}]";
+                                        _box.Validity_period_font = new Font(_box.Validity_period_font, FontStyle.Bold);
+                                        SizeF size_Validity_period = TextRenderer.MeasureText(str, _box.Validity_period_font);
+                                        g.DrawString(str, _box.Validity_period_font, new SolidBrush((Color)_box.GetValue(Box.ValueName.效期, Box.ValueType.ForeColor)), rect.X + 5, rect.Y + posy);
+                                        Color color_pen = _box.IsWarning ? Color.White : Color.Red;
+                                        g.DrawRectangle(new Pen(new SolidBrush(color_pen), 1), rect.X + 5, rect.Y + posy, size_Validity_period.Width, size_Validity_period.Height);
+                                        posy += size_Validity_period.Height;
+                                    }
+                                }
+
+                                SizeF size_Code = TextRenderer.MeasureText($"{_box.Code}[{_box.Inventory}]", _box.Code_font);
+                                if (_box.Code.StringIsEmpty() == false) g.DrawString($"{_box.Code}[{_box.Inventory}]", _box.Code_font, new SolidBrush(Color.Black), rect.X, ((rect.Y + rect.Height) - size_Code.Height));
+                            }
 
 
+                        }
+                    }
+                    string[] ip_array = drawer.IP.Split('.');
+                    if (ip_array.Length == 4)
+                    {
+                        string ip = ip_array[2] + "." + ip_array[3];
+                        SizeF size_IP = TextRenderer.MeasureText(ip, new Font("微軟正黑體", 10, FontStyle.Bold));
+                        g.DrawString(ip, new Font("微軟正黑體", 8, FontStyle.Bold), new SolidBrush(Color.Black), (DrawerUI_EPD_1020.Pannel_Width - size_IP.Width), (DrawerUI_EPD_1020.Pannel_Height - size_IP.Height));
+                    }
                 }
             }
-            string[] ip_array = drawer.IP.Split('.');
-            if (ip_array.Length == 4)
-            {
-                string ip = ip_array[2] + "." + ip_array[3];
-                SizeF size_IP = TextRenderer.MeasureText(ip, new Font("微軟正黑體", 10, FontStyle.Bold));
-                g.DrawString(ip, new Font("微軟正黑體", 8, FontStyle.Bold), new SolidBrush(Color.Black), (DrawerUI_EPD_1020.Pannel_Width - size_IP.Width), (DrawerUI_EPD_1020.Pannel_Height - size_IP.Height));
-            }
-            g.Dispose();
+          
             return bitmap;
 
         }
@@ -750,12 +820,10 @@ namespace H_Pannel_lib
         }
         private enum ContextMenuStrip_DeviceTable_參數設定
         {
-            設為大抽屜4X8,
-            設為小抽屜3X8,
             設為有鎖控,
             設為無鎖控,
             設為隔板亮燈,
-            設為把手亮燈,
+            設為面板亮燈,
         }
         private enum ContextMenuStrip_UDP_DataReceive_畫面設置
         {
@@ -801,11 +869,7 @@ namespace H_Pannel_lib
                 if(drawer != null)
                 {
                     Color color = Color.White;
-                    if(drawer.Boxes[0][0].DeviceType == DeviceType.EPD1020_lock)
-                    {
-                        this.sqL_DataGridView_DeviceTable.dataGridView.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
-                        this.sqL_DataGridView_DeviceTable.dataGridView.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
-                    }          
+               
                 }
             }
         }
@@ -1066,6 +1130,45 @@ namespace H_Pannel_lib
 
             g.Dispose();
             return bitmap;
+        }
+
+        public override Box SQL_GetBox(Box box)
+        {
+            string GUID = box.GUID;
+            string jsonString = this.SQL_GetDrawerJsonString(IP);
+            if (jsonString.StringIsEmpty()) return null;
+            Drawer Drawer = jsonString.JsonDeserializet<Drawer>();
+            return Drawer.GetByGUID(GUID);
+
+        }
+        protected override void SQL_AddDevice(string IP, int Port)
+        {
+            List<object[]> list_SQL_Value = this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(false);
+            List<object[]> list_SQL_Value_buf = new List<object[]>();
+            list_SQL_Value_buf = list_SQL_Value.GetRows((int)enum_DeviceTable.IP, IP);
+            if (list_SQL_Value_buf.Count == 0)
+            {
+                object[] value = new object[new enum_DeviceTable().GetEnumNames().Length];
+                value[(int)enum_DeviceTable.GUID] = Guid.NewGuid().ToString();
+                value[(int)enum_DeviceTable.IP] = IP;
+                value[(int)enum_DeviceTable.Port] = Port;
+                Drawer drawer = new Drawer(IP, Port);
+                drawer.Boxes.Clear();
+                value[(int)enum_DeviceTable.Value] = drawer.JsonSerializationt<Drawer>();
+                this.sqL_DataGridView_DeviceTable.SQL_AddRow(value, true);
+            }
+            else
+            {
+                string GUID = list_SQL_Value_buf[0][(int)enum_DeviceTable.GUID].ObjectToString();
+                list_SQL_Value_buf[0][(int)enum_DeviceTable.Port] = Port;
+                string jsonString = list_SQL_Value_buf[0][(int)enum_DeviceTable.Value].ObjectToString();
+                if (jsonString.StringIsEmpty()) return;
+                Drawer Drawer = jsonString.JsonDeserializet<Drawer>();
+                if (Drawer == null) return;
+                Drawer.Port = Port;
+                list_SQL_Value_buf[0][(int)enum_DeviceTable.Value] = Drawer.JsonSerializationt();
+                this.sqL_DataGridView_DeviceTable.SQL_Replace(enum_DeviceTable.GUID.GetEnumName(), GUID, list_SQL_Value_buf[0], true);
+            }
         }
 
         private void DrawerUI_EPD_1020_UDP_DataReceiveMouseDownRightEvent(string selectedText, List<System.Net.IPEndPoint> iPEndPoints)
@@ -1424,47 +1527,7 @@ namespace H_Pannel_lib
                 Dialog_ContextMenuStrip dialog_ContextMenuStrip = new Dialog_ContextMenuStrip(new ContextMenuStrip_DeviceTable_參數設定().GetEnumNames());
                 if (dialog_ContextMenuStrip.ShowDialog() == DialogResult.Yes)
                 {
-                    if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為大抽屜4X8.GetEnumName())
-                    {
-                        if (MyMessageBox.ShowDialog("確認將設為大抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
-                        {
-                            List<Task> taskList = new List<Task>();
-                            for (int i = 0; i < iPEndPoints.Count; i++)
-                            {
-                                string IP = iPEndPoints[i].Address.ToString();
-                                int Port = iPEndPoints[i].Port;
-                                Drawer drawer = this.SQL_GetDrawer(IP);
-                                if (drawer == null) continue;
-                                drawer.SetDrawerType(Drawer.Enum_DrawerType._4X8);
-                                taskList.Add(Task.Run(() =>
-                                {
-                                    SQL_ReplaceDrawer(drawer);
-                                }));
-                            }
-                            Task allTask = Task.WhenAll(taskList);
-                        }
-                    }
-                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為小抽屜3X8.GetEnumName())
-                    {
-                        if (MyMessageBox.ShowDialog("確認將設為小抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
-                        {
-                            List<Task> taskList = new List<Task>();
-                            for (int i = 0; i < iPEndPoints.Count; i++)
-                            {
-                                string IP = iPEndPoints[i].Address.ToString();
-                                int Port = iPEndPoints[i].Port;
-                                Drawer drawer = this.SQL_GetDrawer(IP);
-                                if (drawer == null) continue;
-                                drawer.SetDrawerType(Drawer.Enum_DrawerType._3X8);
-                                taskList.Add(Task.Run(() =>
-                                {
-                                    SQL_ReplaceDrawer(drawer);
-                                }));
-                            }
-                            Task allTask = Task.WhenAll(taskList);
-                        }
-                    }
-                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為有鎖控.GetEnumName())
+                    if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為有鎖控.GetEnumName())
                     {
                         List<Task> taskList = new List<Task>();
                         for (int i = 0; i < iPEndPoints.Count; i++)
@@ -1518,7 +1581,7 @@ namespace H_Pannel_lib
                         Task allTask = Task.WhenAll(taskList);
                         this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
                     }
-                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為把手亮燈.GetEnumName())
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為面板亮燈.GetEnumName())
                     {
                         List<Task> taskList = new List<Task>();
                         for (int i = 0; i < iPEndPoints.Count; i++)

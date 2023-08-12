@@ -22,7 +22,29 @@ namespace H_Pannel_lib
         public delegate void DrawerChangeEventHandler(Drawer drawer);
         public event DrawerChangeEventHandler DrawerChangeEvent;
 
-
+        private DrawerUI_EPD_1020.Tx_Panel_Type _Tx_Panel_Type = DrawerUI_EPD_1020.Tx_Panel_Type.吊牌;
+        [ReadOnly(false), Browsable(true), Category("自訂屬性"), Description(""), DefaultValue("")]
+        public DrawerUI_EPD_1020.Tx_Panel_Type Tx_Panel_Type
+        {
+            get
+            {
+                return _Tx_Panel_Type;
+            }
+            set
+            {
+                _Tx_Panel_Type = value;
+                if(value == DrawerUI_EPD_1020.Tx_Panel_Type.門櫃)
+                {
+                    this.Width = (int)(640 * Scale);
+                    this.Height = (int)(960 * Scale);
+                }
+                else if(value == DrawerUI_EPD_1020.Tx_Panel_Type.吊牌)
+                {
+                    this.Width = (int)(960 * Scale);
+                    this.Height = (int)(640 * Scale);
+                }
+            }
+        }
         private enum ContextMenuStrip_Main
         {
             SaveToBMP,
@@ -58,7 +80,7 @@ namespace H_Pannel_lib
         private int pictureBox_MouseDown_X = 0;
         private int pictureBox_MouseDown_Y = 0;
         private List<UDP_Class> List_UDP_Local;
-
+        private double Scale = 0.5;
         public EPD_1020_Pannel()
         {
             InitializeComponent();
@@ -81,8 +103,6 @@ namespace H_Pannel_lib
             this.pictureBox.MouseDoubleClick += PictureBox_MouseDoubleClick;
             this.pictureBox.Paint += PictureBox_Paint;
         }
-
-
 
         public void CombineBoxes()
         {
@@ -366,7 +386,11 @@ namespace H_Pannel_lib
             {
                 using (Graphics g = pictureBox.CreateGraphics())
                 {
-                    g.DrawImage(bitmap, new PointF());
+                    using (Bitmap scale_bmp = ScaleImage(bitmap, (int)(this.Width), (int)(this.Height)))
+                    {
+                        g.DrawImage(scale_bmp, new PointF());
+                    }
+
                 }
             }
 
