@@ -891,7 +891,7 @@ namespace H_Pannel_lib
         public bool Set_Pannel_LED_UDP(string IP, int Port, byte[] LED_Bytes, Color color)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return Set_Pannel_LED_UDP(uDP_Class, IP, LED_Bytes, color);
+            return Set_LED_UDP(uDP_Class, IP, color);
         }
 
 
@@ -1135,6 +1135,7 @@ namespace H_Pannel_lib
         public override Box SQL_GetBox(Box box)
         {
             string GUID = box.GUID;
+            string IP = box.IP;
             string jsonString = this.SQL_GetDrawerJsonString(IP);
             if (jsonString.StringIsEmpty()) return null;
             Drawer Drawer = jsonString.JsonDeserializet<Drawer>();
@@ -1262,7 +1263,6 @@ namespace H_Pannel_lib
                             Color color = colorDialog.Color;
                             taskList.Add(Task.Run(() =>
                             {
-                                byte[] led_bytes = Get_Drawer_LED_UDP(IP, Port);
                                 this.Set_LED_UDP(IP, Port, color);
                             }));
                         }
