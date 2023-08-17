@@ -471,16 +471,16 @@ namespace H_Pannel_lib
                     g.FillRectangle(new SolidBrush(Color.White), new RectangleF(0, 0, DrawerUI_EPD_1020.Pannel_Width, DrawerUI_EPD_1020.Pannel_Height));
 
                     int height = 40;
-                    int width_num = 40;
+                    int width_num = 80;
                     int width_code = 100;
-                    int width_name = 500;
+                    int width_name = 460;
                     int height_temp = height;
                     List<Box> boxes = drawer.GetAllBoxes();
 
                     Rectangle rectangle_title_Num = new Rectangle(0, 0, width_num, height);
                     g.FillRectangle(new SolidBrush(Color.White), new RectangleF(rectangle_title_Num.X, rectangle_title_Num.Y, rectangle_title_Num.Width, rectangle_title_Num.Height));
                     g.DrawRectangle(new Pen(Color.Black, 1), rectangle_title_Num);
-                    DrawingClass.Draw.文字中心繪製("No.", new Rectangle(rectangle_title_Num.X, rectangle_title_Num.Y, rectangle_title_Num.Width, rectangle_title_Num.Height), rectangle_title_Num.Width - 2, new Font("微軟正黑體", 14, FontStyle.Bold), Color.Black, g);
+                    DrawingClass.Draw.文字中心繪製("Name", new Rectangle(rectangle_title_Num.X, rectangle_title_Num.Y, rectangle_title_Num.Width, rectangle_title_Num.Height), rectangle_title_Num.Width - 2, new Font("微軟正黑體", 14, FontStyle.Bold), Color.Black, g);
 
                     Rectangle rectangle_title_Code = new Rectangle(rectangle_title_Num.Width, 0, width_code, height);
                     g.FillRectangle(new SolidBrush(Color.White), new RectangleF(rectangle_title_Code.X, rectangle_title_Code.Y, rectangle_title_Code.Width, rectangle_title_Code.Height));
@@ -496,6 +496,7 @@ namespace H_Pannel_lib
                     {
                         string Code = drawer.Boxes[i][0].Code;
                         string Name = drawer.Boxes[i][0].Name;
+                        string StorageName = drawer.Boxes[i][0].StorageName;
 
                         Rectangle rectangle_Num = new Rectangle(0, height_temp, width_num, height);
                         Rectangle rectangle_Code = new Rectangle(rectangle_title_Num.Width, height_temp, width_code, height);
@@ -503,7 +504,7 @@ namespace H_Pannel_lib
 
                         g.FillRectangle(new SolidBrush(Color.White), new RectangleF(rectangle_Num.X, rectangle_Num.Y, rectangle_Num.Width, rectangle_Num.Height));
                         g.DrawRectangle(new Pen(Color.Black, 1), rectangle_Num);
-                        DrawingClass.Draw.文字中心繪製($"{i + 1}", new Rectangle(rectangle_Num.X, rectangle_Num.Y, rectangle_Num.Width, rectangle_Num.Height), rectangle_Num.Width - 2, new Font("微軟正黑體", 14, FontStyle.Bold), Color.Black, g);
+                        DrawingClass.Draw.文字中心繪製($"{StorageName}", new Rectangle(rectangle_Num.X, rectangle_Num.Y, rectangle_Num.Width, rectangle_Num.Height), rectangle_Num.Width - 2, new Font("微軟正黑體", 14, FontStyle.Bold), Color.Black, g);
 
                         g.FillRectangle(new SolidBrush(Color.White), new RectangleF(rectangle_Code.X, rectangle_Code.Y, rectangle_Code.Width, rectangle_Code.Height));
                         g.DrawRectangle(new Pen(Color.Black, 1), rectangle_Code);
