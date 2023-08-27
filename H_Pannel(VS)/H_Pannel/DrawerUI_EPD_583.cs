@@ -295,7 +295,7 @@ namespace H_Pannel_lib
             int cnt = 0;
             while(true)
             {
-                if (cnt >= 1) break;
+                if (cnt >= 2) break;
                 if (!Set_LED_UDP(uDP_Class, IP, LED_Bytes))
                 {
                     return false;

@@ -143,16 +143,16 @@ void sub_IO_Program()
 
 void Output_Blink()
 {
-    MyOutput_PIN01.Blink(20000);
-    MyOutput_PIN02.Blink(20000);
-    MyOutput_PIN03.Blink(20000);
-    MyOutput_PIN04.Blink(20000);
-    MyOutput_PIN05.Blink(20000);
-    MyOutput_PIN06.Blink(20000);
-    MyOutput_PIN07.Blink(20000);
-    MyOutput_PIN08.Blink(20000);
-    MyOutput_PIN09.Blink(20000);
-    MyOutput_PIN10.Blink(20000);
+    MyOutput_PIN01.Blink(2000);
+    MyOutput_PIN02.Blink(2000);
+    MyOutput_PIN03.Blink(2000);
+    MyOutput_PIN04.Blink(2000);
+    MyOutput_PIN05.Blink(2000);
+    MyOutput_PIN06.Blink(2000);
+    MyOutput_PIN07.Blink(2000);
+    MyOutput_PIN08.Blink(2000);
+    MyOutput_PIN09.Blink(2000);
+    MyOutput_PIN10.Blink(2000);
 }
 void Set_Input_dir(byte pin_num , bool value)
 {

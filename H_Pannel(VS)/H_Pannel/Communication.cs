@@ -2549,7 +2549,7 @@ namespace H_Pannel_lib
             {
                 if (cnt == 0)
                 {
-                    if (retry >= UDP_RetryNum)
+                    if (retry >= 3)
                     {
                         flag_OK = false;
                         break;
@@ -2557,12 +2557,12 @@ namespace H_Pannel_lib
                     uDP_Class.Set_ReadLineClearByIP(IP);
                     uDP_Class.WriteByte(list_byte.ToArray(), IP);
                     MyTimer_UART_TimeOut.TickStop();
-                    MyTimer_UART_TimeOut.StartTickTime(UDP_TimeOut);
+                    MyTimer_UART_TimeOut.StartTickTime(250);
                     cnt++;
                 }
                 else if (cnt == 1)
                 {
-                    if (retry >= UDP_RetryNum)
+                    if (retry >= 3)
                     {
                         flag_OK = false;
                         break;
@@ -2613,7 +2613,7 @@ namespace H_Pannel_lib
             {
                 if (cnt == 0)
                 {
-                    if (retry >= UDP_RetryNum)
+                    if (retry >= 3)
                     {
                         flag_OK = false;
                         break;
@@ -2621,12 +2621,12 @@ namespace H_Pannel_lib
                     uDP_Class.Set_ReadLineClearByIP(IP);
                     uDP_Class.WriteByte(list_byte.ToArray(), IP);
                     MyTimer_UART_TimeOut.TickStop();
-                    MyTimer_UART_TimeOut.StartTickTime(UDP_TimeOut);
+                    MyTimer_UART_TimeOut.StartTickTime(250);
                     cnt++;
                 }
                 else if (cnt == 1)
                 {
-                    if (retry >= UDP_RetryNum)
+                    if (retry >= 3)
                     {
                         flag_OK = false;
                         break;

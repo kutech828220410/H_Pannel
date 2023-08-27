@@ -647,13 +647,24 @@ namespace H_Pannel_lib
                 }
             }
         }
+
+        public int 庫存異動(int 總異動量, out List<string> 效期, out List<string> 批號, out List<string> 異動量)
+        {
+            return 庫存異動(總異動量.ToString(), out 效期, out 批號, out 異動量, true);
+        }
         public int 庫存異動(int 總異動量, out List<string> 效期, out List<string> 異動量)
         {
             return this.庫存異動(總異動量.ToString(), out 效期, out 異動量, true);
         }
         public int 庫存異動(string 總異動量, out List<string> 效期, out List<string> 異動量, bool 要寫入)
         {
+            List<string> 批號 = new List<string>();
+            return 庫存異動(總異動量, out 效期, out 批號, out 異動量, 要寫入);
+        }
+        public int 庫存異動(string 總異動量, out List<string> 效期, out List<string> 批號, out List<string> 異動量, bool 要寫入)
+        {
             效期 = new List<string>();
+            批號 = new List<string>();
             異動量 = new List<string>();
             if (總異動量.StringIsEmpty()) return -1;
             if (總異動量.StringToInt32() == 0) return -1;
@@ -673,12 +684,14 @@ namespace H_Pannel_lib
                     if (剩餘庫存數量 >= 0)
                     {
                         效期.Add(this.List_Validity_period[i]);
+                        批號.Add(this.List_Lot_number[i]);
                         異動量.Add(int_總異動量.ToString());
                         break;
                     }
                     else
                     {
                         效期.Add(this.List_Validity_period[i]);
+                        批號.Add(this.List_Lot_number[i]);
                         異動量.Add((效期庫存 * -1).ToString());
 
                         int_總異動量 = int_總異動量 + (效期庫存);
