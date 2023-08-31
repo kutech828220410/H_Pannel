@@ -104,7 +104,7 @@ namespace H_Pannel_lib
             if (uDP_Class != null)
             {
                 bool flag = Communication.Set_WS2812_Buffer(uDP_Class, IP, 0, LED_Bytes);
-                System.Threading.Thread.Sleep(50);
+                //System.Threading.Thread.Sleep(50);
                 return flag;
             }
             return false;
@@ -306,7 +306,6 @@ namespace H_Pannel_lib
         public bool Set_Stroage_LED_UDP(string IP, int Port, byte[] LED_Bytes)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            byte[] temp = Get_Stroage_LED_UDP(IP, Port);
             return Set_Stroage_LED_UDP(uDP_Class,IP, LED_Bytes);
         }
         public byte[] Get_Stroage_LED_UDP(string IP, int Port)

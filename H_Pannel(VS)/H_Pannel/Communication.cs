@@ -360,6 +360,11 @@ namespace H_Pannel_lib
         }
         static public bool Set_WS2812_Buffer(UDP_Class uDP_Class, string IP, int start_ptr, byte[] bytes_RGB)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"{DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
+                return false;
+            }
             return Command_Set_WS2812_Buffer(uDP_Class, IP, start_ptr, bytes_RGB);
         }
         static public byte[] Get_WS2812_Buffer(UDP_Class uDP_Class, string IP , int lenth)
@@ -478,6 +483,11 @@ namespace H_Pannel_lib
 
         static public bool EPD_583_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"EPD583 DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
+                return false;
+            }
             int EPD583_frameDIV = 0;
             if (Chip_Type == ChipType.ESP32)
             {
@@ -501,7 +511,12 @@ namespace H_Pannel_lib
         }
         static public bool EPD_266_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
-            Console.WriteLine($"EPD290 DrawImage start {DateTime.Now.ToDateTimeString()} ");
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"EPD266 DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
+            Console.WriteLine($"EPD266 DrawImage start {DateTime.Now.ToDateTimeString()} ");
             using (Bitmap _bmp = bmp.DeepClone())
             {
                 int EPD266_frameDIV = 0;
@@ -532,6 +547,11 @@ namespace H_Pannel_lib
         }
         static public bool EPD_290_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"EPD290 DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
             Console.WriteLine($"EPD290 DrawImage start {DateTime.Now.ToDateTimeString()} ");
             using (Bitmap _bmp = bmp.DeepClone())
             {
@@ -561,6 +581,11 @@ namespace H_Pannel_lib
         }
         static public bool EPD_1020_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"EPD1020 DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
             using (Bitmap _bmp = bmp.DeepClone())
             {
                 int frameDIV = 10;
