@@ -225,7 +225,11 @@ void onPacketCallBack()
             int len = UdpRead_len - 5;
             int startpo = (*(UdpRead + 2)) | (*(UdpRead + 3) << 8);
             int numofLED = len / 3 ;
-            int startLED = startpo / 3;         
+            int startLED = startpo / 3;    
+            if( numofLED > 450)
+            {
+               if(flag_udp_232back)printf("numofLED is overload\n");
+            }
             if(flag_udp_232back)printf("Set WS2812 Buffer\n");
             if(flag_udp_232back)printf("len : %d\n", len);
             if(flag_udp_232back)printf("startpo : %d\n", startpo);
@@ -238,7 +242,8 @@ void onPacketCallBack()
                myWS2812.rgbBuffer[i * 3 + startLED + 1] = *(UdpRead + 4 + i * 3 + 1);   // 将光带上第1个LED灯珠的RGB数值中G数值设置为255
                myWS2812.rgbBuffer[i * 3 + startLED + 2] = *(UdpRead + 4 + i * 3 + 2);      // 将光带上第1个LED灯珠的RGB数值中B数值设置为0      
             }     
-            flag_WS2812B_Refresh = true;
+//            flag_WS2812B_Refresh = true;
+            myWS2812.Show();
             Get_Checksum_UDP();
           }
           else if (*(UdpRead + 1) == 'O')
