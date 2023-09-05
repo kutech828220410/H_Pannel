@@ -481,6 +481,7 @@ namespace H_Pannel_lib
             {
                 if (this.List_Validity_period[i].ToDateString("/") == 效期.ToDateString("/"))
                 {
+                    if (批號.StringIsEmpty() == false) this.List_Lot_number[i] = 批號;
                     int 現有庫存 = this.List_Inventory[i].StringToInt32();
                     int 異動庫存 = 異動量.StringToInt32();
                     this.List_Inventory[i] = (現有庫存 + 異動庫存).ToString();

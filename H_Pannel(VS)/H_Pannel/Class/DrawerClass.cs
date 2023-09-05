@@ -429,6 +429,7 @@ namespace H_Pannel_lib
     [Serializable]
     public class Drawer
     {
+        public bool ActionDone = false;
         public bool UpToSQL = false;
         public static int NumOfLED = 450;
         [JsonIgnore]

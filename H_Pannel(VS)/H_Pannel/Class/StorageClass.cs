@@ -30,6 +30,7 @@ namespace H_Pannel_lib
         public bool TOFON { get => tOFON; set => tOFON = value; }
         public bool AlarmEnable { get => alarmEnable; set => alarmEnable = value; }
 
+        public bool ActionDone = false;
         public Storage(int station)
         {
             this.station = station;

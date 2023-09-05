@@ -398,6 +398,7 @@ namespace H_Pannel_lib
         private string gUID = "";
         private DeviceClass[] deviceClasses = new DeviceClass[5];
 
+        public bool ActionDone = false;
         public bool UpToSQL = false;
         public string IP
         { 

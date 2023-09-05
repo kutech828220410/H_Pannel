@@ -369,6 +369,11 @@ namespace H_Pannel_lib
         }
         static public byte[] Get_WS2812_Buffer(UDP_Class uDP_Class, string IP , int lenth)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"{DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
+                return new byte[450];
+            }
             return Command_Get_WS2812_Buffer(uDP_Class, IP, lenth);
         }
         static public bool Set_GatewayConfig(UDP_Class uDP_Class, string IP, string Geteway)
