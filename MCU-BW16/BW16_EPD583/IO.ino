@@ -113,7 +113,7 @@ void sub_IO_Program()
     {
        if(flag_WL_DISCONNECTED)
        {
-          Set_Output_dir(0);
+//          Set_Output_dir(0);
           flag_WL_DISCONNECTED = false;
        }
        flag_WL_CONNECTED = true;
