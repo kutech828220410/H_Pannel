@@ -387,6 +387,16 @@ namespace H_Pannel_lib
                 _isWarning = value;
             }
         }
+        private string dRUGKIND = "";
+        public string DRUGKIND { get => dRUGKIND; set => dRUGKIND = value; }
+        private bool isAnesthetic = false;
+        public bool IsAnesthetic { get => isAnesthetic; set => isAnesthetic = value; }
+        private bool isShapeSimilar = false;
+        public bool IsShapeSimilar { get => isShapeSimilar; set => isShapeSimilar = value; }
+        private bool isSoundSimilar = false;
+        public bool IsSoundSimilar { get => isSoundSimilar; set => isSoundSimilar = value; }
+
+
         private string _Min_Package_Num = "";
         public string Min_Package_Num
         {
@@ -437,6 +447,7 @@ namespace H_Pannel_lib
 
         private string speaker = "";
         public string Speaker { get => speaker; set => speaker = value; }
+
         protected List<string> list_Validity_period = new List<string>();
         protected List<string> list_Lot_number = new List<string>();
         protected List<string> list_Inventory = new List<string>();
