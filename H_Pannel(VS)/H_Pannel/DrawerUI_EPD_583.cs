@@ -137,6 +137,18 @@ namespace H_Pannel_lib
             }
             return led_bytes;
         }
+        static public byte[] Set_LEDBytes(Drawer drawer, List<Box> boxes, Color color, ref byte[] LEDBytes)
+        {
+            for (int i = 0; i < boxes.Count; i++)
+            {
+                if (boxes[i].IP == drawer.IP)
+                {
+                    LEDBytes = Set_LEDBytes(drawer, boxes[i].Column, boxes[i].Row, ref LEDBytes, color);
+                }
+
+            }
+            return LEDBytes;
+        }
         static public byte[] Set_LEDBytes(Drawer drawer, Box box, Color color)
         {
             return Set_LEDBytes(drawer, box.Column, box.Row, color);
@@ -152,6 +164,19 @@ namespace H_Pannel_lib
             int width = rect.Width / (Pannel_Width / Drawer_NumOf_H_Line);
             int height = rect.Height / (Pannel_Height / Drawer_NumOf_V_Line);
             return Set_LEDBytes(col, row, width, height, ref drawer.LED_Bytes, color);
+        }
+        static public byte[] Set_LEDBytes(Drawer drawer, int col_x, int row_y, ref byte[] LEDBytes, Color color)
+        {
+            if (col_x >= drawer.Boxes.Count) return LEDBytes;
+            for (int i = 0; i < drawer.Boxes.Count; i++)
+            {
+                if (row_y >= drawer.Boxes[i].Length) return LEDBytes;
+            }
+
+            Rectangle rect = Get_Box_Combine(drawer, col_x, row_y);
+            int width = rect.Width / (Pannel_Width / Drawer_NumOf_H_Line);
+            int height = rect.Height / (Pannel_Height / Drawer_NumOf_V_Line);
+            return Set_LEDBytes(col_x, row_y, width, height, ref LEDBytes, color);
         }
         static public byte[] Set_LEDBytes(int col_x, int row_y, int width, int height, ref byte[] LEDBytes, Color color)
         {
@@ -349,6 +374,7 @@ namespace H_Pannel_lib
         {
             for (int i = 0; i < List_Drawer_H_Line_Leds[col].Length; i++)
             {
+
                 LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 0] = color.R;
                 LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 1] = color.G;
                 LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 2] = color.B;
@@ -358,6 +384,7 @@ namespace H_Pannel_lib
         {
             for (int i = 0; i < List_Drawer_V_Line_Leds[row].Length; i++)
             {
+
                 LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 0] = color.R;
                 LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 1] = color.G;
                 LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 2] = color.B;

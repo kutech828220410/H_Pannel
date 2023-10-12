@@ -20,6 +20,7 @@ namespace WT32_SC01
 {
     public partial class Form1 : Form
     {
+       
         Basic.MyThread MyThread_Program;
         public Form1()
         {

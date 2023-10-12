@@ -61,7 +61,7 @@ void IO_Init()
     Set_Output_dir(Output_dir);
 
     
-    MyOutput_PIN01.Init(OUTPUT_PIN01);
+    MyOutput_PIN01.Init(INPUT_PIN01,OUTPUT_PIN01);
     MyOutput_PIN02.Init(OUTPUT_PIN02);
     MyOutput_PIN03.Init(OUTPUT_PIN03);
     MyOutput_PIN04.Init(OUTPUT_PIN04);
@@ -121,25 +121,21 @@ void sub_IO_Program()
     Output_Blink();
     if(Input_buf != Input)
     {       
-       if(flag_udp_232back)Serial.printf("Input : %d\n" , Input);
        Input_buf = Input;
        flag_JsonSend = true;
     }
     if(Output_buf != Output)
     {       
-       if(flag_udp_232back)Serial.printf("Output : %d\n" , Output);
        Output_buf = Output;
        flag_JsonSend = true;
     }
     if(Input_dir_buf != Input_dir)
     {       
-       if(flag_udp_232back)Serial.printf("Input_dir : %d\n" , Input_dir);
        Input_dir_buf = Input_dir;
        flag_JsonSend = true;
     }
     if(Output_dir_buf != Output_dir)
     {       
-       if(flag_udp_232back)Serial.printf("Output_dir : %d\n" , Output_dir);
        Output_dir_buf = Output_dir;
        flag_JsonSend = true;
     }

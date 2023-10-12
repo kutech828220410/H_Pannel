@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Drawing;
@@ -14,7 +14,7 @@ using System.Diagnostics;
 using System.Net.Sockets;
 using System.Net;
 using System.Drawing.Drawing2D;
-
+using System.Text;
 namespace H_Pannel_lib
 {
     public enum Hex_Type
@@ -362,7 +362,7 @@ namespace H_Pannel_lib
         {
             if (!Basic.Net.Ping(IP, 2, 150))
             {
-                Console.WriteLine($"{DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
+                Console.WriteLine($"Set_WS2812_Buffer {DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
                 return false;
             }
             return Command_Set_WS2812_Buffer(uDP_Class, IP, start_ptr, bytes_RGB);
@@ -371,7 +371,7 @@ namespace H_Pannel_lib
         {
             if (!Basic.Net.Ping(IP, 2, 150))
             {
-                Console.WriteLine($"{DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
+                Console.WriteLine($"Get_WS2812_Buffer {DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
                 return new byte[450];
             }
             return Command_Get_WS2812_Buffer(uDP_Class, IP, lenth);
@@ -394,10 +394,20 @@ namespace H_Pannel_lib
         }
         static public bool Set_OutputTrigger(UDP_Class uDP_Class, string IP, int value)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"Set_OutputTrigger {DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
+                return false;
+            }
             return Command_Set_OutputTrigger(uDP_Class, IP, value);
         }
         static public bool Set_OutputPINTrigger(UDP_Class uDP_Class, string IP, int PIN_Num, bool value)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"Set_OutputPINTrigger {DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
+                return false;
+            }
             return Command_Set_OutputPINTrigger(uDP_Class, IP, PIN_Num, value);
         }
         static public bool Set_Input_dir(UDP_Class uDP_Class, string IP, int PIN_Num, bool value)

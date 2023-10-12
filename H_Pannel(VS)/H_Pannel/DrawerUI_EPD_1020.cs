@@ -468,6 +468,7 @@ namespace H_Pannel_lib
             {
                 using (Graphics g = Graphics.FromImage(bitmap))
                 {
+            
                     g.FillRectangle(new SolidBrush(Color.White), new RectangleF(0, 0, DrawerUI_EPD_1020.Pannel_Width, DrawerUI_EPD_1020.Pannel_Height));
 
                     int height = 40;
@@ -497,25 +498,27 @@ namespace H_Pannel_lib
                         string Code = drawer.Boxes[i][0].Code;
                         string Name = drawer.Boxes[i][0].Name;
                         string StorageName = drawer.Boxes[i][0].StorageName;
+                        Color fore_color = drawer.Boxes[i][0].IsWarning ? Color.White : Color.Black;
+                        Color back_color = drawer.Boxes[i][0].IsWarning ? Color.Red : Color.White;
 
                         Rectangle rectangle_Num = new Rectangle(0, height_temp, width_num, height);
                         Rectangle rectangle_Code = new Rectangle(rectangle_title_Num.Width, height_temp, width_code, height);
                         Rectangle rectangle_Name = new Rectangle(rectangle_title_Num.Width + rectangle_title_Code.Width, height_temp, width_name - 1, height);
 
-                        g.FillRectangle(new SolidBrush(Color.White), new RectangleF(rectangle_Num.X, rectangle_Num.Y, rectangle_Num.Width, rectangle_Num.Height));
+                        g.FillRectangle(new SolidBrush(back_color), new RectangleF(rectangle_Num.X, rectangle_Num.Y, rectangle_Num.Width, rectangle_Num.Height));
                         g.DrawRectangle(new Pen(Color.Black, 1), rectangle_Num);
-                        DrawingClass.Draw.文字中心繪製($"{StorageName}", new Rectangle(rectangle_Num.X, rectangle_Num.Y, rectangle_Num.Width, rectangle_Num.Height), rectangle_Num.Width - 2, new Font("微軟正黑體", 14, FontStyle.Bold), Color.Black, g);
+                        DrawingClass.Draw.文字中心繪製($"{StorageName}", new Rectangle(rectangle_Num.X, rectangle_Num.Y, rectangle_Num.Width, rectangle_Num.Height), rectangle_Num.Width - 2, new Font("微軟正黑體", 14, FontStyle.Bold), fore_color, g);
 
-                        g.FillRectangle(new SolidBrush(Color.White), new RectangleF(rectangle_Code.X, rectangle_Code.Y, rectangle_Code.Width, rectangle_Code.Height));
+                        g.FillRectangle(new SolidBrush(back_color), new RectangleF(rectangle_Code.X, rectangle_Code.Y, rectangle_Code.Width, rectangle_Code.Height));
                         g.DrawRectangle(new Pen(Color.Black, 1), rectangle_Code);
-                        DrawingClass.Draw.文字中心繪製($"{Code}", new Rectangle(rectangle_Code.X, rectangle_Code.Y, rectangle_Code.Width, rectangle_Code.Height), new Font("微軟正黑體", 14, FontStyle.Bold), Color.Black, g);
+                        DrawingClass.Draw.文字中心繪製($"{Code}", new Rectangle(rectangle_Code.X, rectangle_Code.Y, rectangle_Code.Width, rectangle_Code.Height), new Font("微軟正黑體", 14, FontStyle.Bold), fore_color, g);
 
-                        g.FillRectangle(new SolidBrush(Color.White), new RectangleF(rectangle_Name.X, rectangle_Name.Y, rectangle_Name.Width, rectangle_Name.Height));
+                        g.FillRectangle(new SolidBrush(back_color), new RectangleF(rectangle_Name.X, rectangle_Name.Y, rectangle_Name.Width, rectangle_Name.Height));
                         g.DrawRectangle(new Pen(Color.Black, 1), rectangle_Name);
                         SizeF size_Name = g.MeasureString(Name, new Font("微軟正黑體", 12.5F, FontStyle.Bold), new Size(rectangle_Name.Width, rectangle_Name.Height), StringFormat.GenericDefault);
                         size_Name = new SizeF((int)size_Name.Width, (int)size_Name.Height);
                         rectangle_Name = new Rectangle(rectangle_Name.X + 5, (int)((rectangle_Name.Height - size_Name.Height) / 2) + height_temp, rectangle_Name.Width, rectangle_Name.Height);
-                        g.DrawString(Name, new Font("微軟正黑體", 14, FontStyle.Bold), new SolidBrush(Color.Black), rectangle_Name, StringFormat.GenericDefault);
+                        g.DrawString(Name, new Font("微軟正黑體", 14, FontStyle.Bold), new SolidBrush(fore_color), rectangle_Name, StringFormat.GenericDefault);
 
                         height_temp += height;
                     }

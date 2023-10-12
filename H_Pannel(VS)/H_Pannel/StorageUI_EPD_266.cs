@@ -9,7 +9,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using Basic;
 using MyUI;
-
+using System.Reflection;
 namespace H_Pannel_lib
 {
     public partial class StorageUI_EPD_266 : StorageUI
@@ -58,6 +58,9 @@ namespace H_Pannel_lib
         }
 
         #region 靜態參數
+        public delegate Bitmap Get_Storage_bmpEventHandler(Storage storage);
+        static public event Get_Storage_bmpEventHandler Get_Storage_bmpChangeEvent;
+
         static public int Pannel_Width
         {
             get
@@ -159,7 +162,9 @@ namespace H_Pannel_lib
         }
         static public Bitmap Get_Storage_bmp(Storage storage)
         {
+            if (Get_Storage_bmpChangeEvent != null) return Get_Storage_bmpChangeEvent(storage);
             return Communication.EPD266_GetBitmap(storage);
+
         }
         static private void DrawStorageString(Graphics g, Storage storage, Device.ValueName valueName, float x, float y)
         {
