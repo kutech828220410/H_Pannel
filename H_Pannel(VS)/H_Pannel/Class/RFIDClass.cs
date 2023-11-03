@@ -287,6 +287,7 @@ namespace H_Pannel_lib
             private int port = 0;
             private List<RFIDDevice> rFIDDevices = new List<RFIDDevice>();
             private string name = "";
+            private string wardName = "";
             private string gUID = "";
             private int index = -1;
             private bool enable = true;
@@ -310,6 +311,7 @@ namespace H_Pannel_lib
             public int Port { get => port; set => port = value; }
             public List<RFIDDevice> RFIDDevices { get => rFIDDevices; set => rFIDDevices = value; }
             public string Name { get => name; set => name = value; }
+            public string WardName { get => wardName; set => wardName = value; }
             public string GUID { get => gUID; set => gUID = value; }
             public bool Enable { get => enable; set => enable = value; }
             public int Index { get => index; set => index = value; }
@@ -326,8 +328,8 @@ namespace H_Pannel_lib
 
             public DateTime Unlock_start_dateTime { get => unlock_start_dateTime; set => unlock_start_dateTime = value; }
             public DateTime Unlock_end_dateTime { get => unlock_end_dateTime; set => unlock_end_dateTime = value; }
-            public bool UnlockTimeEnable { get => unlockTimeEnable; set => unlockTimeEnable = value; }         
-
+            public bool UnlockTimeEnable { get => unlockTimeEnable; set => unlockTimeEnable = value; }
+   
 
             public void Add()
             {

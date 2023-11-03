@@ -1,5 +1,5 @@
 #include "Timer.h"
-#define UART0_RX_SIZE 256
+#define UART0_RX_SIZE 512
 static byte UART0_RX[UART0_RX_SIZE];
 int UART0_len = 0;
 MyTimer MyTimer_UART0;
@@ -134,6 +134,40 @@ void serialEvent()
       {
         epd.Wakeup();
         epd.Clear();
+        Get_Checksum();
+      }
+      else if (UART0_RX[1] == 'b')
+      {
+        epd.Wakeup();
+        Get_Checksum();
+      }
+      else if (UART0_RX[1] == 'c')
+      {
+        epd.DrawFrame_RW();
+        delay(10);
+        Get_Checksum();
+      }
+      else if (UART0_RX[1] == 'd')
+      {
+        epd.DrawFrame_BW();
+        delay(10);
+        Get_Checksum();
+      }
+      else if (UART0_RX[1] == 'f')
+      {
+        epd.RefreshCanvas();
+        Get_Checksum();
+      }
+      else if (UART0_RX[1] == 'e')
+      {
+        int len = UART0_len - 7;
+        int startpo_L = (*(UART0_RX + 2)) | (*(UART0_RX + 3) << 8);
+        int startpo_H = (*(UART0_RX + 4)) | (*(UART0_RX + 5) << 8);
+        long startpo = startpo_L | (startpo_H << 16);
+        for(int i = 0 ; i < len ; i ++)
+        {
+           *(epd.framebuffer +startpo + i) = *(UART0_RX + 6 + i);
+        }
         Get_Checksum();
       }
       else if (UART0_RX[1] == '1' && UART0_len == 5)

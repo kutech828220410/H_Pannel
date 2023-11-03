@@ -207,6 +207,7 @@ namespace H_Pannel_lib
         {
             清除畫布,
             測試資訊,
+            
         }
         private enum ContextMenuStrip_DeviceTable_IO設定
         {
@@ -219,6 +220,7 @@ namespace H_Pannel_lib
         {
             清除畫布,
             測試資訊,
+            測試資訊_UART,
         }
         private enum ContextMenuStrip_UDP_DataReceive_IO設定
         {
@@ -327,6 +329,15 @@ namespace H_Pannel_lib
             mySerialPort.PortName = PortName;
             return Communication.UART_Command_Set_ClearCanvas(mySerialPort);
         }
+        public bool EPD_290_DrawImages_UART(Bitmap bitmap)
+        {
+            return EPD_290_DrawImages_UART(mySerialPort.PortName, bitmap);
+        }
+        public bool EPD_290_DrawImages_UART(string PortName , Bitmap bitmap)
+        {
+            mySerialPort.PortName = PortName;
+            return Communication.UART_EPD_290_DrawImage(mySerialPort, bitmap);
+        }
         public bool Set_Stroage_LED_UART(Color color)
         {
             return this.Set_Stroage_LED_UART(mySerialPort.PortName, color);
@@ -365,7 +376,27 @@ namespace H_Pannel_lib
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
             return Set_LockOpen(uDP_Class, IP);
         }
-
+        public bool Set_OutputPIN(Storage storage, bool state)
+        {
+            return Set_OutputPIN(storage.IP, storage.Port, state);
+        }
+        public bool Set_OutputPIN(string IP, int Port, bool state)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+            return Communication.Set_OutputPIN(uDP_Class, IP, 1, state);
+        }
+        public bool Get_OutputPIN(Storage storage)
+        {
+            return Get_OutputPIN(storage.IP);
+        }
+        public bool Get_OutputPIN(string IP)
+        {
+            string jsonString = GetUDPJsonString(IP);
+            if (jsonString.StringIsEmpty()) return false;
+            UDP_READ uDP_READ = jsonString.JsonDeserializet<UDP_READ>();
+            if (uDP_READ == null) return false;
+            return ((uDP_READ.Output % 2) == 1);
+        }
         public bool GetInput(string IP)
         {
             string jsonString = GetUDPJsonString(IP);
@@ -635,7 +666,27 @@ namespace H_Pannel_lib
                         }
                         Task allTask = Task.WhenAll(taskList);
                     }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_畫面設置.測試資訊_UART.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Storage storage = this.SQL_GetStorage(IP);
+                            if (storage != null)
+                            {
+                                Bitmap bmp = Get_Storage_bmp(storage);
+                                taskList.Add(Task.Run(() =>
+                                {
+                                    EPD_290_DrawImages_UART(bmp);
+                                    bmp.Dispose();
+                                }));
+                            }
 
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                    }
                 }
             }
             else if (selectedText == ContextMenuStrip_Main.IO設定.GetEnumName())

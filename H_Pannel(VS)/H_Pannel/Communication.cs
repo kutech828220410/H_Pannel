@@ -4089,7 +4089,12 @@ namespace H_Pannel_lib
             Sset_RFID_Enable = (byte)'Z',
             Get_Version = (byte)'v',
             Set_Locker = (byte)'L',
-            
+
+            EPD_Set_WakeUp = (byte)'b',
+            EPD_DrawFrame_RW = (byte)'c',
+            EPD_DrawFrame_BW = (byte)'d',
+            EPD_Send_Framebuffer = (byte)'e',
+            EPD_RefreshCanvas = (byte)'f',
 
 
         }
@@ -5495,6 +5500,363 @@ namespace H_Pannel_lib
             MySerialPort.SerialPortClose();
             return flag_OK;
         }
+        static public bool UART_Command_EPD_Set_WakeUp(MySerialPort MySerialPort)
+        {
+            bool flag_OK = false;
+
+            if (MySerialPort.SerialPortOpen())
+            {
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+                int retry = 0;
+                int cnt = 0;
+                byte checksum = 0;
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(UART_Command.EPD_Set_WakeUp));
+                list_byte.Add(3);
+
+                for (int i = 0; i < list_byte.Count; i++)
+                {
+                    checksum += list_byte[i];
+                }
+
+
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            if (ConsoleWrite) Console.Write($"UART Set WakeUp error! {DateTime.Now.ToDateTimeString()}\n");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByte();
+                        if (UART_RX != null)
+                        {
+                            if (UART_CheckSum(UART_RX, checksum))
+                            {
+                                if (ConsoleWrite) Console.Write($"UART Set WakeUp sucessed! {DateTime.Now.ToDateTimeString()}\n");
+                                flag_OK = true;
+                                break;
+
+                            }
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(1);
+                }
+            }
+            MySerialPort.SerialPortClose();
+            return flag_OK;
+        }
+        static public bool UART_Command_EPD_Send_Framebuffer(MySerialPort MySerialPort, long start_ptr, byte[] value)
+        {
+            bool flag_OK = false;
+            if (MySerialPort.SerialPortOpen())
+            {
+                MyTimer myTimer_Timeout = new MyTimer();
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)UART_Command.EPD_Send_Framebuffer);
+                list_byte.Add((byte)start_ptr);
+                list_byte.Add((byte)(start_ptr >> 8));
+                list_byte.Add((byte)(start_ptr >> 16));
+                list_byte.Add((byte)(start_ptr >> 24));
+                for (int i = 0; i < value.Length; i++)
+                {
+                    list_byte.Add(value[i]);
+                }
+                list_byte.Add(3);
+           
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+                int retry = 0;
+                int cnt = 0;
+                byte checksum = 0;
+                for (int i = 0; i < list_byte.Count; i++)
+                {
+                    checksum += list_byte[i];
+                }
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            if (ConsoleWrite) Console.Write($"Send famebuffer receive data error!\n");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByte();
+                        if (UART_RX != null)
+                        {
+                            if (UART_CheckSum(UART_RX, checksum))
+                            {
+                                //if (ConsoleWrite) Console.Write($"Send famebuffer sucessed!  {DateTime.Now.ToDateTimeString()}\n");
+                                flag_OK = true;
+                                break;
+                            }
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(1);
+                }
+            }
+            MySerialPort.SerialPortClose();
+            return flag_OK;
+        }
+        static public bool UART_Command_EPD_DrawFrame_BW(MySerialPort MySerialPort)
+        {
+            bool flag_OK = false;
+
+            if (MySerialPort.SerialPortOpen())
+            {
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+                int retry = 0;
+                int cnt = 0;
+                byte checksum = 0;
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(UART_Command.EPD_DrawFrame_BW));
+                list_byte.Add(3);
+
+                for (int i = 0; i < list_byte.Count; i++)
+                {
+                    checksum += list_byte[i];
+                }
+
+
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            if (ConsoleWrite) Console.Write($"UART drafram BW error! {DateTime.Now.ToDateTimeString()}\n");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByte();
+                        if (UART_RX != null)
+                        {
+                            if (UART_CheckSum(UART_RX, checksum))
+                            {
+                                if (ConsoleWrite) Console.Write($"UART drafram BW sucessed! {DateTime.Now.ToDateTimeString()}\n");
+                                flag_OK = true;
+                                break;
+
+                            }
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(1);
+                }
+            }
+            MySerialPort.SerialPortClose();
+            return flag_OK;
+        }
+        static public bool UART_Command_EPD_DrawFrame_RW(MySerialPort MySerialPort)
+        {
+            bool flag_OK = false;
+
+            if (MySerialPort.SerialPortOpen())
+            {
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+                int retry = 0;
+                int cnt = 0;
+                byte checksum = 0;
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(UART_Command.EPD_DrawFrame_RW));
+                list_byte.Add(3);
+
+                for (int i = 0; i < list_byte.Count; i++)
+                {
+                    checksum += list_byte[i];
+                }
+
+
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            if (ConsoleWrite) Console.Write($"UART drafram RW error! {DateTime.Now.ToDateTimeString()}\n");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByte();
+                        if (UART_RX != null)
+                        {
+                            if (UART_CheckSum(UART_RX, checksum))
+                            {
+                                if (ConsoleWrite) Console.Write($"UART drafram RW sucessed! {DateTime.Now.ToDateTimeString()}\n");
+                                flag_OK = true;
+                                break;
+
+                            }
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(1);
+                }
+            }
+            MySerialPort.SerialPortClose();
+            return flag_OK;
+        }
+        static public bool UART_Command_EPD_RefreshCanvas(MySerialPort MySerialPort)
+        {
+            bool flag_OK = false;
+
+            if (MySerialPort.SerialPortOpen())
+            {
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+                int retry = 0;
+                int cnt = 0;
+                byte checksum = 0;
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(UART_Command.EPD_RefreshCanvas));
+                list_byte.Add(3);
+
+                for (int i = 0; i < list_byte.Count; i++)
+                {
+                    checksum += list_byte[i];
+                }
+
+
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            if (ConsoleWrite) Console.Write($"UART RefreshCanvas error! {DateTime.Now.ToDateTimeString()}\n");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByte();
+                        if (UART_RX != null)
+                        {
+                            if (UART_CheckSum(UART_RX, checksum))
+                            {
+                                if (ConsoleWrite) Console.Write($"UART RefreshCanvas sucessed! {DateTime.Now.ToDateTimeString()}\n");
+                                flag_OK = true;
+                                break;
+
+                            }
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(1);
+                }
+            }
+            MySerialPort.SerialPortClose();
+            return flag_OK;
+        }
+
+
         static private bool UART_CheckSum(byte[] UART_RX, byte checksum)
         {
             if (UART_RX.Length == 3)
@@ -5555,6 +5917,92 @@ namespace H_Pannel_lib
             return "";
         }
 
+ 
+        static public bool UART_EPD_DrawImage(MySerialPort MySerialPort, byte[] BW_data, byte[] RW_data, int Split_DataSize)
+        {
+            int Width_Size = Split_DataSize;
+            int NumOfArray = BW_data.Length / (Split_DataSize);
+            List<byte[]> list_BW_data = new List<byte[]>();
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                byte[] Array_temp = new byte[Width_Size];
+                for (int k = 0; k < Width_Size; k++)
+                {
+                    Array_temp[k] = BW_data[i * Width_Size + k];
+                }
+                list_BW_data.Add(Array_temp);
+            }
+            List<byte[]> list_RW_data = new List<byte[]>();
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                byte[] Array_temp = new byte[Width_Size];
+                for (int k = 0; k < Width_Size; k++)
+                {
+                    Array_temp[k] = RW_data[i * Width_Size + k];
+                }
+                list_RW_data.Add(Array_temp);
+            }
+
+            if (!UART_Command_EPD_Set_WakeUp(MySerialPort))
+            {
+                return false;
+            }
+
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                Console.WriteLine($"Write BW frame {i}/{NumOfArray}");
+                if (!UART_Command_EPD_Send_Framebuffer(MySerialPort, i * Width_Size, list_BW_data[i]))
+                {
+                    return false;
+                }
+            }
+            if (!UART_Command_EPD_DrawFrame_BW(MySerialPort))
+            {
+                return false;
+            }
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                Console.WriteLine($"Write RW frame {i}/{NumOfArray}");
+                if (!UART_Command_EPD_Send_Framebuffer(MySerialPort, i * Width_Size, list_RW_data[i]))
+                {
+                    return false;
+                }
+            }
+            if (!UART_Command_EPD_DrawFrame_RW(MySerialPort))
+            {
+                return false;
+            }
+
+            if (!UART_Command_EPD_RefreshCanvas(MySerialPort))
+            {
+                return false;
+            }
+
+            return true;
+
+        }
+        static public bool UART_EPD_290_DrawImage(MySerialPort MySerialPort, Bitmap bmp)
+        {
+      
+            using (Bitmap _bmp = bmp.DeepClone())
+            {
+                int EPD290_frameDIV = 80;
+
+
+                bool flag_OK;
+                int width = bmp.Width;
+                int height = bmp.Height;
+                _bmp.RotateFlip(RotateFlipType.Rotate90FlipXY);
+                byte[] bytes_BW = new byte[(height / 8) * width];
+                byte[] bytes_RW = new byte[(height / 8) * width];
+                BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD290_V2);
+                MyTimer myTimer = new MyTimer();
+                myTimer.StartTickTime(50000);
+                flag_OK = UART_EPD_DrawImage(MySerialPort, bytes_BW, bytes_RW, (height / 8) * width / EPD290_frameDIV);
+                if (ConsoleWrite) Console.WriteLine($"EPD 290 DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+                return flag_OK;
+            }
+        }
         #endregion
 
         static public Bitmap EPD266_GetBitmap(Storage storage)
