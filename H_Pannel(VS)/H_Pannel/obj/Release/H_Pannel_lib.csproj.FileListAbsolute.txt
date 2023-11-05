@@ -1546,3 +1546,5 @@ C:\Users\HS\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib
 C:\Users\HS\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.csproj.CopyComplete
 C:\Users\HS\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.dll
 C:\Users\HS\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.pdb
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\Interop.SpeechLib.dll
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\MeasureSystemFunction.dll

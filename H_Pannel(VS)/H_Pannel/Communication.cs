@@ -38,6 +38,9 @@ namespace H_Pannel_lib
     }
     public class Communication
     {
+        public delegate void ProcessBarEventHandler(int value, int max, string info);
+        static public event ProcessBarEventHandler ProcessBarEvent;
+
         static public bool ConsoleWrite = false;
         static public int UDP_TimeOut = 1000;
         static public int UDP_RetryNum = 5;
@@ -5642,7 +5645,6 @@ namespace H_Pannel_lib
                     System.Threading.Thread.Sleep(1);
                 }
             }
-            MySerialPort.SerialPortClose();
             return flag_OK;
         }
         static public bool UART_Command_EPD_DrawFrame_BW(MySerialPort MySerialPort)
@@ -5712,7 +5714,7 @@ namespace H_Pannel_lib
                     System.Threading.Thread.Sleep(1);
                 }
             }
-            MySerialPort.SerialPortClose();
+            //MySerialPort.SerialPortClose();
             return flag_OK;
         }
         static public bool UART_Command_EPD_DrawFrame_RW(MySerialPort MySerialPort)
@@ -5782,7 +5784,7 @@ namespace H_Pannel_lib
                     System.Threading.Thread.Sleep(1);
                 }
             }
-            MySerialPort.SerialPortClose();
+            //MySerialPort.SerialPortClose();
             return flag_OK;
         }
         static public bool UART_Command_EPD_RefreshCanvas(MySerialPort MySerialPort)
@@ -5920,65 +5922,92 @@ namespace H_Pannel_lib
  
         static public bool UART_EPD_DrawImage(MySerialPort MySerialPort, byte[] BW_data, byte[] RW_data, int Split_DataSize)
         {
-            int Width_Size = Split_DataSize;
-            int NumOfArray = BW_data.Length / (Split_DataSize);
-            List<byte[]> list_BW_data = new List<byte[]>();
-            for (int i = 0; i < NumOfArray; i++)
+            try
             {
-                byte[] Array_temp = new byte[Width_Size];
-                for (int k = 0; k < Width_Size; k++)
+                int Width_Size = Split_DataSize;
+                int NumOfArray = BW_data.Length / (Split_DataSize);
+                List<byte[]> list_BW_data = new List<byte[]>();
+                for (int i = 0; i < NumOfArray; i++)
                 {
-                    Array_temp[k] = BW_data[i * Width_Size + k];
+                    byte[] Array_temp = new byte[Width_Size];
+                    for (int k = 0; k < Width_Size; k++)
+                    {
+                        Array_temp[k] = BW_data[i * Width_Size + k];
+                    }
+                    list_BW_data.Add(Array_temp);
                 }
-                list_BW_data.Add(Array_temp);
-            }
-            List<byte[]> list_RW_data = new List<byte[]>();
-            for (int i = 0; i < NumOfArray; i++)
-            {
-                byte[] Array_temp = new byte[Width_Size];
-                for (int k = 0; k < Width_Size; k++)
+                List<byte[]> list_RW_data = new List<byte[]>();
+                for (int i = 0; i < NumOfArray; i++)
                 {
-                    Array_temp[k] = RW_data[i * Width_Size + k];
+                    byte[] Array_temp = new byte[Width_Size];
+                    for (int k = 0; k < Width_Size; k++)
+                    {
+                        Array_temp[k] = RW_data[i * Width_Size + k];
+                    }
+                    list_RW_data.Add(Array_temp);
                 }
-                list_RW_data.Add(Array_temp);
-            }
-
-            if (!UART_Command_EPD_Set_WakeUp(MySerialPort))
-            {
-                return false;
-            }
-
-            for (int i = 0; i < NumOfArray; i++)
-            {
-                Console.WriteLine($"Write BW frame {i}/{NumOfArray}");
-                if (!UART_Command_EPD_Send_Framebuffer(MySerialPort, i * Width_Size, list_BW_data[i]))
+                if (ProcessBarEvent != null)
+                {
+                    ProcessBarEvent(0, 0, "建立通訊中...");
+                }
+                if (!UART_Command_EPD_Set_WakeUp(MySerialPort))
                 {
                     return false;
                 }
-            }
-            if (!UART_Command_EPD_DrawFrame_BW(MySerialPort))
-            {
-                return false;
-            }
-            for (int i = 0; i < NumOfArray; i++)
-            {
-                Console.WriteLine($"Write RW frame {i}/{NumOfArray}");
-                if (!UART_Command_EPD_Send_Framebuffer(MySerialPort, i * Width_Size, list_RW_data[i]))
+                if (ProcessBarEvent != null)
+                {
+                    ProcessBarEvent(0, 0, "建立通訊完成...");
+                }
+                for (int i = 0; i < NumOfArray; i++)
+                {
+                    Console.WriteLine($"Write BW frame {i}/{NumOfArray}");
+                    if (!UART_Command_EPD_Send_Framebuffer(MySerialPort, i * Width_Size, list_BW_data[i]))
+                    {
+                        return false;
+                    }
+                    if (ProcessBarEvent != null)
+                    {
+                        ProcessBarEvent(i, NumOfArray * 2, "上傳資料...");
+                    }
+                }
+                if (!UART_Command_EPD_DrawFrame_BW(MySerialPort))
                 {
                     return false;
                 }
+                for (int i = 0; i < NumOfArray; i++)
+                {
+                    Console.WriteLine($"Write RW frame {i}/{NumOfArray}");
+                    if (!UART_Command_EPD_Send_Framebuffer(MySerialPort, i * Width_Size, list_RW_data[i]))
+                    {
+                        return false;
+                    }
+                    if (ProcessBarEvent != null)
+                    {
+                        ProcessBarEvent(i + NumOfArray, NumOfArray * 2, "上傳資料...");
+                    }
+                }
+                if (!UART_Command_EPD_DrawFrame_RW(MySerialPort))
+                {
+                    return false;
+                }
+
+                if (!UART_Command_EPD_RefreshCanvas(MySerialPort))
+                {
+                    return false;
+                }
+
+                return true;
             }
-            if (!UART_Command_EPD_DrawFrame_RW(MySerialPort))
+            catch
             {
                 return false;
             }
-
-            if (!UART_Command_EPD_RefreshCanvas(MySerialPort))
+            finally
             {
-                return false;
-            }
+                MySerialPort.SerialPortClose();
 
-            return true;
+            }
+           
 
         }
         static public bool UART_EPD_290_DrawImage(MySerialPort MySerialPort, Bitmap bmp)
@@ -6910,7 +6939,7 @@ namespace H_Pannel_lib
         }
 
 
-        static private void DrawStorageString(Graphics g, Storage storage, Device.ValueName valueName, float x, float y)
+        public static void DrawStorageString(Graphics g, Device storage, Device.ValueName valueName, float x, float y)
         {
             string str = (string)storage.GetValue(valueName, Device.ValueType.Value);
             Font font = (Font)storage.GetValue(valueName, Device.ValueType.Font);
@@ -6920,7 +6949,7 @@ namespace H_Pannel_lib
 
             DrawStorageString(g, str, font, foreColor, borderSize, borderColor, x, y);
         }
-        static private void DrawStorageString(Graphics g, string str, Font font, Color ForeColor, int BorderSize, Color BorderColor, float x, float y)
+        public static void DrawStorageString(Graphics g, string str, Font font, Color ForeColor, int BorderSize, Color BorderColor, float x, float y)
         {
             SizeF size_font = TextRenderer.MeasureText(str, font);
 

@@ -44,6 +44,7 @@ namespace H_Pannel_lib
             this.rJ_Lable1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Lable1.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable1.GUID = "";
             this.rJ_Lable1.Location = new System.Drawing.Point(12, 16);
             this.rJ_Lable1.Name = "rJ_Lable1";
             this.rJ_Lable1.Size = new System.Drawing.Size(105, 48);
@@ -65,6 +66,7 @@ namespace H_Pannel_lib
             this.rJ_Button_退出.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_退出.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_退出.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_退出.GUID = "";
             this.rJ_Button_退出.Location = new System.Drawing.Point(239, 14);
             this.rJ_Button_退出.Name = "rJ_Button_退出";
             this.rJ_Button_退出.Size = new System.Drawing.Size(136, 51);

@@ -84,3 +84,5 @@ C:\Users\HS\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.csp
 C:\Users\HS\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.csproj.CopyComplete
 C:\Users\HS\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.exe
 C:\Users\HS\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.pdb
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\Interop.SpeechLib.dll
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\MeasureSystemFunction.dll
