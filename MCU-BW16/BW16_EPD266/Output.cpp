@@ -48,7 +48,91 @@ bool MyOutput::GetLogic(bool value)
     return !value;
   }
 }
+void MyOutput::ADC_Trigger(int time_ms)
+{
+   ADC_Mode = true;
+   ADC_OnDelayTime = time_ms;
+   cnt = 1 ;   
+   Trigger = true;
+}
 void MyOutput::Blink()
+{
+  if(ADC_Mode)
+  {
+     ADC_Blink();
+  }
+  else
+  {
+     Normal_Blink();
+  }
+  
+}
+void MyOutput::ADC_Blink()
+{
+   int PIN = this -> PIN_NUM;
+   if(cnt == 254) 
+   {
+     Trigger = false;
+     State = false;
+     cnt = 255;
+   }
+   if(cnt == 255)
+   {
+     cnt == 1;
+   }
+   if(cnt > 1)
+   {
+     if(!Trigger) cnt = 254;
+   }
+   if(cnt == 1)
+   {
+     if(Trigger) cnt++;
+   }
+   if(cnt == 2)
+   {
+     if(PIN == -1) 
+     {
+       cnt = 254;
+       return;
+     }
+     State = true;
+     digitalWrite(PIN, this -> GetLogic(true));
+     cnt++;
+   }
+   if(cnt == 3)
+   {
+     if(!digitalRead(PIN_NUM_INPUT))
+     {
+       cnt++;
+     }
+   }
+   if(cnt == 4)
+   {
+     if(digitalRead(PIN_NUM_INPUT))
+     {
+       myTimer.StartTickTime(this -> ADC_OnDelayTime);
+       cnt++;
+     }
+   }
+   if(cnt == 5)
+   {
+     if(myTimer.IsTimeOut())
+     {
+       if(PIN == -1) 
+       {
+         cnt = 254;
+         return;
+       }
+       digitalWrite(PIN, this -> GetLogic(false));
+       cnt++;
+     }
+   }
+   if(cnt == 6)
+   {
+     cnt = 254;
+   }
+}
+void MyOutput::Normal_Blink()
 {
   int PIN = this -> PIN_NUM;
 

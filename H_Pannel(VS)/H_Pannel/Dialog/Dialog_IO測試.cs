@@ -74,6 +74,7 @@ namespace H_Pannel_lib
             this.rJ_Button_退出.MouseDownEvent += RJ_Button_退出_MouseDownEvent;
 
             this.rJ_Button_鎖控輸出.MouseDownEvent += RJ_Button_鎖控輸出_MouseDownEvent;
+            this.rJ_Button_ADC輸出.MouseDownEvent += RJ_Button_ADC輸出_MouseDownEvent;
             this.checkBox_輸入反向.Click += CheckBox_輸入反向_Click;
             this.checkBox_輸出反向.Click += CheckBox_輸出反向_Click;
             this.checkBox_輸出狀態.Click += CheckBox_輸出狀態_Click;
@@ -84,7 +85,7 @@ namespace H_Pannel_lib
             this.myThread_program.Trigger();
         }
 
-
+      
 
         private void sub_program()
         {
@@ -151,6 +152,11 @@ namespace H_Pannel_lib
         private void RJ_Button_鎖控輸出_MouseDownEvent(MouseEventArgs mevent)
         {
             Communication.Set_OutputPINTrigger(udP_Class, IP, 1, true);
+        }
+        private void RJ_Button_ADC輸出_MouseDownEvent(MouseEventArgs mevent)
+        {
+            int time_ms = (int)numericUpDown_ADC_DelayTime.Value;
+            Communication.Command_Set_ADCMotorTrigger(udP_Class, IP, 0, time_ms);
         }
         private void RJ_Button_退出_MouseDownEvent(MouseEventArgs mevent)
         {

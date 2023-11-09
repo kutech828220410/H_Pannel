@@ -295,7 +295,7 @@ void onPacketCallBack()
           {    
               int value_L = *(UdpRead + 2);
               int value_H = *(UdpRead + 3);             
-              int value= value_L | (value_H << 8);              
+              int value = value_L | (value_H << 8);              
               if(flag_udp_232back)printf("Set_OutputTrigger : %d\n" , value);
               SetOutputTrigger(value);
               Get_Checksum_UDP();
@@ -305,7 +305,19 @@ void onPacketCallBack()
              int pin_num = *(UdpRead + 2);
              int value = *(UdpRead + 3);
              if(flag_udp_232back)printf("Set_OutputPINTrigger : [PIN Num]%d [value]%d\n" , pin_num , value);
+             MyOutput_PIN01.ADC_Mode = false;
              SetOutputPINTrigger(pin_num , (value == 1));
+             Get_Checksum_UDP();
+          }
+          else if(*(UdpRead + 1) == '!')
+          {                  
+             int pin_num = *(UdpRead + 2);
+             int time_ms_L = *(UdpRead + 3);
+             int time_ms_H = *(UdpRead + 4);
+             int time_ms = time_ms_L | (time_ms_H << 8);           
+             MyOutput_PIN01.ADC_Trigger(time_ms);
+
+             if(flag_udp_232back)printf("Set_ADCMotorTrigger : [PIN Num]%d [time_ms]%d\n" , pin_num , time_ms);
              Get_Checksum_UDP();
           }
           else if(*(UdpRead + 1) == 'R')

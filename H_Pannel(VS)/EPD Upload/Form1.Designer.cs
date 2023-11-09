@@ -37,54 +37,60 @@ namespace EPD_Upload
             this.panel_EPD290 = new System.Windows.Forms.Panel();
             this.rJ_Button_存檔 = new MyUI.RJ_Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rJ_ProgressBar_上傳狀態 = new MyUI.RJ_ProgressBar();
+            this.button_面板內容_字體_廠牌 = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.comboBox_面板內容_字體顏色_廠牌 = new System.Windows.Forms.ComboBox();
+            this.textBox_面板內容_廠牌 = new System.Windows.Forms.TextBox();
+            this.rJ_Lable7 = new MyUI.RJ_Lable();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.comboBox_面板內容_背景顏色 = new System.Windows.Forms.ComboBox();
+            this.rJ_Button_重繪 = new MyUI.RJ_Button();
+            this.textBox_面板內容_GUID = new System.Windows.Forms.TextBox();
             this.label_上傳狀態 = new System.Windows.Forms.Label();
-            this.rJ_Lable1 = new MyUI.RJ_Lable();
-            this.rJ_Lable2 = new MyUI.RJ_Lable();
-            this.rJ_Lable3 = new MyUI.RJ_Lable();
-            this.rJ_Lable4 = new MyUI.RJ_Lable();
-            this.rJ_Lable5 = new MyUI.RJ_Lable();
-            this.rJ_Lable6 = new MyUI.RJ_Lable();
-            this.textBox_面板內容_藥碼 = new System.Windows.Forms.TextBox();
-            this.textBox_面板內容_料號 = new System.Windows.Forms.TextBox();
-            this.textBox_面板內容_包裝單位 = new System.Windows.Forms.TextBox();
-            this.textBox_面板內容_藥名 = new System.Windows.Forms.TextBox();
-            this.textBox_面板內容_商品名 = new System.Windows.Forms.TextBox();
-            this.textBox_面板內容_中文名 = new System.Windows.Forms.TextBox();
-            this.comboBox_面板內容_字體顏色_藥碼 = new System.Windows.Forms.ComboBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button_面板內容_字體_藥碼 = new System.Windows.Forms.Button();
-            this.button_面板內容_字體_料號 = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.comboBox_面板內容_字體顏色_料號 = new System.Windows.Forms.ComboBox();
-            this.button_面板內容_字體_包裝單位 = new System.Windows.Forms.Button();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.comboBox_面板內容_字體顏色_包裝單位 = new System.Windows.Forms.ComboBox();
+            this.button_面板內容_字體_製造日期 = new System.Windows.Forms.Button();
+            this.rJ_ProgressBar_上傳狀態 = new MyUI.RJ_ProgressBar();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.comboBox_面板內容_字體顏色_製造日期 = new System.Windows.Forms.ComboBox();
+            this.button_面板內容_字體_批號 = new System.Windows.Forms.Button();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.comboBox_面板內容_字體顏色_批號 = new System.Windows.Forms.ComboBox();
             this.button_面板內容_字體_藥名 = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.comboBox_面板內容_字體顏色_藥名 = new System.Windows.Forms.ComboBox();
-            this.button_面板內容_字體_商品名 = new System.Windows.Forms.Button();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.comboBox_面板內容_字體顏色_商品名 = new System.Windows.Forms.ComboBox();
-            this.button_面板內容_字體_中文名 = new System.Windows.Forms.Button();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.comboBox_面板內容_字體顏色_中文名 = new System.Windows.Forms.ComboBox();
+            this.button_面板內容_字體_包裝單位 = new System.Windows.Forms.Button();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.comboBox_面板內容_字體顏色_包裝單位 = new System.Windows.Forms.ComboBox();
+            this.button_面板內容_字體_效期 = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.comboBox_面板內容_字體顏色_效期 = new System.Windows.Forms.ComboBox();
+            this.button_面板內容_字體_藥碼 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBox_面板內容_字體顏色_藥碼 = new System.Windows.Forms.ComboBox();
+            this.textBox_面板內容_製造日期 = new System.Windows.Forms.TextBox();
+            this.textBox_面板內容_批號 = new System.Windows.Forms.TextBox();
+            this.textBox_面板內容_藥名 = new System.Windows.Forms.TextBox();
+            this.textBox_面板內容_包裝單位 = new System.Windows.Forms.TextBox();
+            this.textBox_面板內容_效期 = new System.Windows.Forms.TextBox();
+            this.textBox_面板內容_藥碼 = new System.Windows.Forms.TextBox();
+            this.rJ_Lable6 = new MyUI.RJ_Lable();
+            this.rJ_Lable5 = new MyUI.RJ_Lable();
+            this.rJ_Lable4 = new MyUI.RJ_Lable();
+            this.rJ_Lable3 = new MyUI.RJ_Lable();
+            this.rJ_Lable2 = new MyUI.RJ_Lable();
+            this.rJ_Lable1 = new MyUI.RJ_Lable();
             this.sqL_DataGridView_面板列表 = new SQLUI.SQL_DataGridView();
             this.rJ_Button_面板列表_新增 = new MyUI.RJ_Button();
             this.rJ_Button_面板列表_刪除 = new MyUI.RJ_Button();
-            this.textBox_面板內容_GUID = new System.Windows.Forms.TextBox();
-            this.rJ_Button_重繪 = new MyUI.RJ_Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.comboBox_面板內容_背景顏色 = new System.Windows.Forms.ComboBox();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox9.SuspendLayout();
-            this.groupBox11.SuspendLayout();
-            this.groupBox13.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            this.groupBox11.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBox_PortName
@@ -200,30 +206,34 @@ namespace EPD_Upload
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.button_面板內容_字體_廠牌);
+            this.groupBox1.Controls.Add(this.groupBox4);
+            this.groupBox1.Controls.Add(this.textBox_面板內容_廠牌);
+            this.groupBox1.Controls.Add(this.rJ_Lable7);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.rJ_Button_重繪);
             this.groupBox1.Controls.Add(this.textBox_面板內容_GUID);
             this.groupBox1.Controls.Add(this.label_上傳狀態);
-            this.groupBox1.Controls.Add(this.button_面板內容_字體_中文名);
+            this.groupBox1.Controls.Add(this.button_面板內容_字體_製造日期);
             this.groupBox1.Controls.Add(this.rJ_ProgressBar_上傳狀態);
             this.groupBox1.Controls.Add(this.groupBox13);
             this.groupBox1.Controls.Add(this.rJ_Button_上傳);
             this.groupBox1.Controls.Add(this.rJ_Button_存檔);
-            this.groupBox1.Controls.Add(this.button_面板內容_字體_商品名);
+            this.groupBox1.Controls.Add(this.button_面板內容_字體_批號);
             this.groupBox1.Controls.Add(this.groupBox11);
             this.groupBox1.Controls.Add(this.button_面板內容_字體_藥名);
             this.groupBox1.Controls.Add(this.groupBox9);
             this.groupBox1.Controls.Add(this.button_面板內容_字體_包裝單位);
             this.groupBox1.Controls.Add(this.groupBox7);
-            this.groupBox1.Controls.Add(this.button_面板內容_字體_料號);
+            this.groupBox1.Controls.Add(this.button_面板內容_字體_效期);
             this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Controls.Add(this.button_面板內容_字體_藥碼);
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.textBox_面板內容_中文名);
-            this.groupBox1.Controls.Add(this.textBox_面板內容_商品名);
+            this.groupBox1.Controls.Add(this.textBox_面板內容_製造日期);
+            this.groupBox1.Controls.Add(this.textBox_面板內容_批號);
             this.groupBox1.Controls.Add(this.textBox_面板內容_藥名);
             this.groupBox1.Controls.Add(this.textBox_面板內容_包裝單位);
-            this.groupBox1.Controls.Add(this.textBox_面板內容_料號);
+            this.groupBox1.Controls.Add(this.textBox_面板內容_效期);
             this.groupBox1.Controls.Add(this.textBox_面板內容_藥碼);
             this.groupBox1.Controls.Add(this.rJ_Lable6);
             this.groupBox1.Controls.Add(this.rJ_Lable5);
@@ -234,10 +244,148 @@ namespace EPD_Upload
             this.groupBox1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.groupBox1.Location = new System.Drawing.Point(31, 386);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(906, 457);
+            this.groupBox1.Size = new System.Drawing.Size(906, 543);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "面板內容";
+            // 
+            // button_面板內容_字體_廠牌
+            // 
+            this.button_面板內容_字體_廠牌.Location = new System.Drawing.Point(665, 446);
+            this.button_面板內容_字體_廠牌.Name = "button_面板內容_字體_廠牌";
+            this.button_面板內容_字體_廠牌.Size = new System.Drawing.Size(69, 35);
+            this.button_面板內容_字體_廠牌.TabIndex = 37;
+            this.button_面板內容_字體_廠牌.Text = "字體";
+            this.button_面板內容_字體_廠牌.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.comboBox_面板內容_字體顏色_廠牌);
+            this.groupBox4.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox4.Location = new System.Drawing.Point(566, 435);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(93, 56);
+            this.groupBox4.TabIndex = 36;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "字體顏色";
+            // 
+            // comboBox_面板內容_字體顏色_廠牌
+            // 
+            this.comboBox_面板內容_字體顏色_廠牌.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_面板內容_字體顏色_廠牌.FormattingEnabled = true;
+            this.comboBox_面板內容_字體顏色_廠牌.Items.AddRange(new object[] {
+            "紅",
+            "白",
+            "黑"});
+            this.comboBox_面板內容_字體顏色_廠牌.Location = new System.Drawing.Point(6, 21);
+            this.comboBox_面板內容_字體顏色_廠牌.Name = "comboBox_面板內容_字體顏色_廠牌";
+            this.comboBox_面板內容_字體顏色_廠牌.Size = new System.Drawing.Size(80, 25);
+            this.comboBox_面板內容_字體顏色_廠牌.TabIndex = 12;
+            // 
+            // textBox_面板內容_廠牌
+            // 
+            this.textBox_面板內容_廠牌.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_面板內容_廠牌.Location = new System.Drawing.Point(146, 446);
+            this.textBox_面板內容_廠牌.Name = "textBox_面板內容_廠牌";
+            this.textBox_面板內容_廠牌.Size = new System.Drawing.Size(414, 35);
+            this.textBox_面板內容_廠牌.TabIndex = 35;
+            // 
+            // rJ_Lable7
+            // 
+            this.rJ_Lable7.BackColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable7.BackgroundColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable7.BorderColor = System.Drawing.Color.MediumBlue;
+            this.rJ_Lable7.BorderRadius = 3;
+            this.rJ_Lable7.BorderSize = 2;
+            this.rJ_Lable7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Lable7.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Lable7.ForeColor = System.Drawing.Color.Black;
+            this.rJ_Lable7.GUID = "";
+            this.rJ_Lable7.Location = new System.Drawing.Point(31, 441);
+            this.rJ_Lable7.Name = "rJ_Lable7";
+            this.rJ_Lable7.Size = new System.Drawing.Size(109, 45);
+            this.rJ_Lable7.TabIndex = 34;
+            this.rJ_Lable7.Text = "廠牌";
+            this.rJ_Lable7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_Lable7.TextColor = System.Drawing.Color.Black;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.comboBox_面板內容_背景顏色);
+            this.groupBox3.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox3.Location = new System.Drawing.Point(508, 73);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(129, 75);
+            this.groupBox3.TabIndex = 33;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "背景顏色";
+            // 
+            // comboBox_面板內容_背景顏色
+            // 
+            this.comboBox_面板內容_背景顏色.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_面板內容_背景顏色.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.comboBox_面板內容_背景顏色.FormattingEnabled = true;
+            this.comboBox_面板內容_背景顏色.Items.AddRange(new object[] {
+            "紅",
+            "白",
+            "黑"});
+            this.comboBox_面板內容_背景顏色.Location = new System.Drawing.Point(24, 30);
+            this.comboBox_面板內容_背景顏色.Name = "comboBox_面板內容_背景顏色";
+            this.comboBox_面板內容_背景顏色.Size = new System.Drawing.Size(80, 34);
+            this.comboBox_面板內容_背景顏色.TabIndex = 12;
+            // 
+            // rJ_Button_重繪
+            // 
+            this.rJ_Button_重繪.AutoResetState = false;
+            this.rJ_Button_重繪.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Button_重繪.BackgroundColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Button_重繪.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_重繪.BorderRadius = 5;
+            this.rJ_Button_重繪.BorderSize = 0;
+            this.rJ_Button_重繪.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_重繪.Enabled = false;
+            this.rJ_Button_重繪.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_重繪.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_重繪.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_重繪.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_重繪.GUID = "";
+            this.rJ_Button_重繪.Location = new System.Drawing.Point(791, 389);
+            this.rJ_Button_重繪.Name = "rJ_Button_重繪";
+            this.rJ_Button_重繪.Size = new System.Drawing.Size(109, 54);
+            this.rJ_Button_重繪.State = false;
+            this.rJ_Button_重繪.TabIndex = 32;
+            this.rJ_Button_重繪.Text = "重繪";
+            this.rJ_Button_重繪.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_重繪.UseVisualStyleBackColor = false;
+            // 
+            // textBox_面板內容_GUID
+            // 
+            this.textBox_面板內容_GUID.Enabled = false;
+            this.textBox_面板內容_GUID.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_面板內容_GUID.Location = new System.Drawing.Point(665, 83);
+            this.textBox_面板內容_GUID.Name = "textBox_面板內容_GUID";
+            this.textBox_面板內容_GUID.Size = new System.Drawing.Size(304, 35);
+            this.textBox_面板內容_GUID.TabIndex = 31;
+            this.textBox_面板內容_GUID.Visible = false;
+            // 
+            // label_上傳狀態
+            // 
+            this.label_上傳狀態.AutoSize = true;
+            this.label_上傳狀態.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_上傳狀態.Location = new System.Drawing.Point(35, 28);
+            this.label_上傳狀態.Name = "label_上傳狀態";
+            this.label_上傳狀態.Size = new System.Drawing.Size(80, 21);
+            this.label_上傳狀態.TabIndex = 14;
+            this.label_上傳狀態.Text = "----------";
+            // 
+            // button_面板內容_字體_製造日期
+            // 
+            this.button_面板內容_字體_製造日期.Location = new System.Drawing.Point(665, 325);
+            this.button_面板內容_字體_製造日期.Name = "button_面板內容_字體_製造日期";
+            this.button_面板內容_字體_製造日期.Size = new System.Drawing.Size(69, 35);
+            this.button_面板內容_字體_製造日期.TabIndex = 30;
+            this.button_面板內容_字體_製造日期.Text = "字體";
+            this.button_面板內容_字體_製造日期.UseVisualStyleBackColor = true;
             // 
             // rJ_ProgressBar_上傳狀態
             // 
@@ -257,15 +405,338 @@ namespace EPD_Upload
             this.rJ_ProgressBar_上傳狀態.SymbolBefore = "";
             this.rJ_ProgressBar_上傳狀態.TabIndex = 13;
             // 
-            // label_上傳狀態
+            // groupBox13
             // 
-            this.label_上傳狀態.AutoSize = true;
-            this.label_上傳狀態.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label_上傳狀態.Location = new System.Drawing.Point(35, 28);
-            this.label_上傳狀態.Name = "label_上傳狀態";
-            this.label_上傳狀態.Size = new System.Drawing.Size(80, 21);
-            this.label_上傳狀態.TabIndex = 14;
-            this.label_上傳狀態.Text = "----------";
+            this.groupBox13.Controls.Add(this.comboBox_面板內容_字體顏色_製造日期);
+            this.groupBox13.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox13.Location = new System.Drawing.Point(566, 311);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(93, 56);
+            this.groupBox13.TabIndex = 28;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "字體顏色";
+            // 
+            // comboBox_面板內容_字體顏色_製造日期
+            // 
+            this.comboBox_面板內容_字體顏色_製造日期.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_面板內容_字體顏色_製造日期.FormattingEnabled = true;
+            this.comboBox_面板內容_字體顏色_製造日期.Items.AddRange(new object[] {
+            "紅",
+            "白",
+            "黑"});
+            this.comboBox_面板內容_字體顏色_製造日期.Location = new System.Drawing.Point(6, 21);
+            this.comboBox_面板內容_字體顏色_製造日期.Name = "comboBox_面板內容_字體顏色_製造日期";
+            this.comboBox_面板內容_字體顏色_製造日期.Size = new System.Drawing.Size(80, 25);
+            this.comboBox_面板內容_字體顏色_製造日期.TabIndex = 12;
+            // 
+            // button_面板內容_字體_批號
+            // 
+            this.button_面板內容_字體_批號.Location = new System.Drawing.Point(665, 260);
+            this.button_面板內容_字體_批號.Name = "button_面板內容_字體_批號";
+            this.button_面板內容_字體_批號.Size = new System.Drawing.Size(69, 35);
+            this.button_面板內容_字體_批號.TabIndex = 27;
+            this.button_面板內容_字體_批號.Text = "字體";
+            this.button_面板內容_字體_批號.UseVisualStyleBackColor = true;
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.comboBox_面板內容_字體顏色_批號);
+            this.groupBox11.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox11.Location = new System.Drawing.Point(566, 249);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(93, 56);
+            this.groupBox11.TabIndex = 25;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "字體顏色";
+            // 
+            // comboBox_面板內容_字體顏色_批號
+            // 
+            this.comboBox_面板內容_字體顏色_批號.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_面板內容_字體顏色_批號.FormattingEnabled = true;
+            this.comboBox_面板內容_字體顏色_批號.Items.AddRange(new object[] {
+            "紅",
+            "白",
+            "黑"});
+            this.comboBox_面板內容_字體顏色_批號.Location = new System.Drawing.Point(6, 21);
+            this.comboBox_面板內容_字體顏色_批號.Name = "comboBox_面板內容_字體顏色_批號";
+            this.comboBox_面板內容_字體顏色_批號.Size = new System.Drawing.Size(80, 25);
+            this.comboBox_面板內容_字體顏色_批號.TabIndex = 12;
+            // 
+            // button_面板內容_字體_藥名
+            // 
+            this.button_面板內容_字體_藥名.Location = new System.Drawing.Point(665, 201);
+            this.button_面板內容_字體_藥名.Name = "button_面板內容_字體_藥名";
+            this.button_面板內容_字體_藥名.Size = new System.Drawing.Size(69, 35);
+            this.button_面板內容_字體_藥名.TabIndex = 24;
+            this.button_面板內容_字體_藥名.Text = "字體";
+            this.button_面板內容_字體_藥名.UseVisualStyleBackColor = true;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.comboBox_面板內容_字體顏色_藥名);
+            this.groupBox9.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox9.Location = new System.Drawing.Point(566, 192);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(93, 56);
+            this.groupBox9.TabIndex = 22;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "字體顏色";
+            // 
+            // comboBox_面板內容_字體顏色_藥名
+            // 
+            this.comboBox_面板內容_字體顏色_藥名.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_面板內容_字體顏色_藥名.FormattingEnabled = true;
+            this.comboBox_面板內容_字體顏色_藥名.Items.AddRange(new object[] {
+            "紅",
+            "白",
+            "黑"});
+            this.comboBox_面板內容_字體顏色_藥名.Location = new System.Drawing.Point(6, 21);
+            this.comboBox_面板內容_字體顏色_藥名.Name = "comboBox_面板內容_字體顏色_藥名";
+            this.comboBox_面板內容_字體顏色_藥名.Size = new System.Drawing.Size(80, 25);
+            this.comboBox_面板內容_字體顏色_藥名.TabIndex = 12;
+            // 
+            // button_面板內容_字體_包裝單位
+            // 
+            this.button_面板內容_字體_包裝單位.Location = new System.Drawing.Point(414, 139);
+            this.button_面板內容_字體_包裝單位.Name = "button_面板內容_字體_包裝單位";
+            this.button_面板內容_字體_包裝單位.Size = new System.Drawing.Size(69, 35);
+            this.button_面板內容_字體_包裝單位.TabIndex = 21;
+            this.button_面板內容_字體_包裝單位.Text = "字體";
+            this.button_面板內容_字體_包裝單位.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.comboBox_面板內容_字體顏色_包裝單位);
+            this.groupBox7.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox7.Location = new System.Drawing.Point(315, 128);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(93, 56);
+            this.groupBox7.TabIndex = 19;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "字體顏色";
+            // 
+            // comboBox_面板內容_字體顏色_包裝單位
+            // 
+            this.comboBox_面板內容_字體顏色_包裝單位.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_面板內容_字體顏色_包裝單位.FormattingEnabled = true;
+            this.comboBox_面板內容_字體顏色_包裝單位.Items.AddRange(new object[] {
+            "紅",
+            "白",
+            "黑"});
+            this.comboBox_面板內容_字體顏色_包裝單位.Location = new System.Drawing.Point(6, 21);
+            this.comboBox_面板內容_字體顏色_包裝單位.Name = "comboBox_面板內容_字體顏色_包裝單位";
+            this.comboBox_面板內容_字體顏色_包裝單位.Size = new System.Drawing.Size(80, 25);
+            this.comboBox_面板內容_字體顏色_包裝單位.TabIndex = 12;
+            // 
+            // button_面板內容_字體_效期
+            // 
+            this.button_面板內容_字體_效期.Location = new System.Drawing.Point(665, 384);
+            this.button_面板內容_字體_效期.Name = "button_面板內容_字體_效期";
+            this.button_面板內容_字體_效期.Size = new System.Drawing.Size(69, 35);
+            this.button_面板內容_字體_效期.TabIndex = 18;
+            this.button_面板內容_字體_效期.Text = "字體";
+            this.button_面板內容_字體_效期.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.comboBox_面板內容_字體顏色_效期);
+            this.groupBox5.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox5.Location = new System.Drawing.Point(566, 373);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(93, 56);
+            this.groupBox5.TabIndex = 16;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "字體顏色";
+            // 
+            // comboBox_面板內容_字體顏色_效期
+            // 
+            this.comboBox_面板內容_字體顏色_效期.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_面板內容_字體顏色_效期.FormattingEnabled = true;
+            this.comboBox_面板內容_字體顏色_效期.Items.AddRange(new object[] {
+            "紅",
+            "白",
+            "黑"});
+            this.comboBox_面板內容_字體顏色_效期.Location = new System.Drawing.Point(6, 21);
+            this.comboBox_面板內容_字體顏色_效期.Name = "comboBox_面板內容_字體顏色_效期";
+            this.comboBox_面板內容_字體顏色_效期.Size = new System.Drawing.Size(80, 25);
+            this.comboBox_面板內容_字體顏色_效期.TabIndex = 12;
+            // 
+            // button_面板內容_字體_藥碼
+            // 
+            this.button_面板內容_字體_藥碼.Location = new System.Drawing.Point(414, 79);
+            this.button_面板內容_字體_藥碼.Name = "button_面板內容_字體_藥碼";
+            this.button_面板內容_字體_藥碼.Size = new System.Drawing.Size(69, 35);
+            this.button_面板內容_字體_藥碼.TabIndex = 15;
+            this.button_面板內容_字體_藥碼.Text = "字體";
+            this.button_面板內容_字體_藥碼.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.comboBox_面板內容_字體顏色_藥碼);
+            this.groupBox2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox2.Location = new System.Drawing.Point(315, 65);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(93, 56);
+            this.groupBox2.TabIndex = 13;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "字體顏色";
+            // 
+            // comboBox_面板內容_字體顏色_藥碼
+            // 
+            this.comboBox_面板內容_字體顏色_藥碼.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_面板內容_字體顏色_藥碼.FormattingEnabled = true;
+            this.comboBox_面板內容_字體顏色_藥碼.Items.AddRange(new object[] {
+            "紅",
+            "白",
+            "黑"});
+            this.comboBox_面板內容_字體顏色_藥碼.Location = new System.Drawing.Point(6, 21);
+            this.comboBox_面板內容_字體顏色_藥碼.Name = "comboBox_面板內容_字體顏色_藥碼";
+            this.comboBox_面板內容_字體顏色_藥碼.Size = new System.Drawing.Size(80, 25);
+            this.comboBox_面板內容_字體顏色_藥碼.TabIndex = 12;
+            // 
+            // textBox_面板內容_製造日期
+            // 
+            this.textBox_面板內容_製造日期.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_面板內容_製造日期.Location = new System.Drawing.Point(146, 322);
+            this.textBox_面板內容_製造日期.Name = "textBox_面板內容_製造日期";
+            this.textBox_面板內容_製造日期.Size = new System.Drawing.Size(414, 35);
+            this.textBox_面板內容_製造日期.TabIndex = 11;
+            // 
+            // textBox_面板內容_批號
+            // 
+            this.textBox_面板內容_批號.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_面板內容_批號.Location = new System.Drawing.Point(146, 260);
+            this.textBox_面板內容_批號.Name = "textBox_面板內容_批號";
+            this.textBox_面板內容_批號.Size = new System.Drawing.Size(414, 35);
+            this.textBox_面板內容_批號.TabIndex = 10;
+            // 
+            // textBox_面板內容_藥名
+            // 
+            this.textBox_面板內容_藥名.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_面板內容_藥名.Location = new System.Drawing.Point(146, 203);
+            this.textBox_面板內容_藥名.Name = "textBox_面板內容_藥名";
+            this.textBox_面板內容_藥名.Size = new System.Drawing.Size(414, 35);
+            this.textBox_面板內容_藥名.TabIndex = 9;
+            // 
+            // textBox_面板內容_包裝單位
+            // 
+            this.textBox_面板內容_包裝單位.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_面板內容_包裝單位.Location = new System.Drawing.Point(146, 139);
+            this.textBox_面板內容_包裝單位.Name = "textBox_面板內容_包裝單位";
+            this.textBox_面板內容_包裝單位.Size = new System.Drawing.Size(163, 35);
+            this.textBox_面板內容_包裝單位.TabIndex = 8;
+            // 
+            // textBox_面板內容_效期
+            // 
+            this.textBox_面板內容_效期.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_面板內容_效期.Location = new System.Drawing.Point(146, 384);
+            this.textBox_面板內容_效期.Name = "textBox_面板內容_效期";
+            this.textBox_面板內容_效期.Size = new System.Drawing.Size(414, 35);
+            this.textBox_面板內容_效期.TabIndex = 7;
+            // 
+            // textBox_面板內容_藥碼
+            // 
+            this.textBox_面板內容_藥碼.Enabled = false;
+            this.textBox_面板內容_藥碼.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_面板內容_藥碼.Location = new System.Drawing.Point(146, 78);
+            this.textBox_面板內容_藥碼.Name = "textBox_面板內容_藥碼";
+            this.textBox_面板內容_藥碼.Size = new System.Drawing.Size(163, 35);
+            this.textBox_面板內容_藥碼.TabIndex = 6;
+            // 
+            // rJ_Lable6
+            // 
+            this.rJ_Lable6.BackColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable6.BackgroundColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable6.BorderColor = System.Drawing.Color.MediumBlue;
+            this.rJ_Lable6.BorderRadius = 3;
+            this.rJ_Lable6.BorderSize = 2;
+            this.rJ_Lable6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Lable6.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Lable6.ForeColor = System.Drawing.Color.Black;
+            this.rJ_Lable6.GUID = "";
+            this.rJ_Lable6.Location = new System.Drawing.Point(31, 134);
+            this.rJ_Lable6.Name = "rJ_Lable6";
+            this.rJ_Lable6.Size = new System.Drawing.Size(109, 45);
+            this.rJ_Lable6.TabIndex = 5;
+            this.rJ_Lable6.Text = "包裝單位";
+            this.rJ_Lable6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_Lable6.TextColor = System.Drawing.Color.Black;
+            // 
+            // rJ_Lable5
+            // 
+            this.rJ_Lable5.BackColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable5.BackgroundColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable5.BorderColor = System.Drawing.Color.MediumBlue;
+            this.rJ_Lable5.BorderRadius = 3;
+            this.rJ_Lable5.BorderSize = 2;
+            this.rJ_Lable5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Lable5.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Lable5.ForeColor = System.Drawing.Color.Black;
+            this.rJ_Lable5.GUID = "";
+            this.rJ_Lable5.Location = new System.Drawing.Point(31, 255);
+            this.rJ_Lable5.Name = "rJ_Lable5";
+            this.rJ_Lable5.Size = new System.Drawing.Size(109, 45);
+            this.rJ_Lable5.TabIndex = 4;
+            this.rJ_Lable5.Text = "批號";
+            this.rJ_Lable5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_Lable5.TextColor = System.Drawing.Color.Black;
+            // 
+            // rJ_Lable4
+            // 
+            this.rJ_Lable4.BackColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable4.BackgroundColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable4.BorderColor = System.Drawing.Color.MediumBlue;
+            this.rJ_Lable4.BorderRadius = 3;
+            this.rJ_Lable4.BorderSize = 2;
+            this.rJ_Lable4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Lable4.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Lable4.ForeColor = System.Drawing.Color.Black;
+            this.rJ_Lable4.GUID = "";
+            this.rJ_Lable4.Location = new System.Drawing.Point(31, 379);
+            this.rJ_Lable4.Name = "rJ_Lable4";
+            this.rJ_Lable4.Size = new System.Drawing.Size(109, 45);
+            this.rJ_Lable4.TabIndex = 3;
+            this.rJ_Lable4.Text = "效期";
+            this.rJ_Lable4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_Lable4.TextColor = System.Drawing.Color.Black;
+            // 
+            // rJ_Lable3
+            // 
+            this.rJ_Lable3.BackColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable3.BackgroundColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable3.BorderColor = System.Drawing.Color.MediumBlue;
+            this.rJ_Lable3.BorderRadius = 3;
+            this.rJ_Lable3.BorderSize = 2;
+            this.rJ_Lable3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Lable3.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Lable3.ForeColor = System.Drawing.Color.Black;
+            this.rJ_Lable3.GUID = "";
+            this.rJ_Lable3.Location = new System.Drawing.Point(31, 317);
+            this.rJ_Lable3.Name = "rJ_Lable3";
+            this.rJ_Lable3.Size = new System.Drawing.Size(109, 45);
+            this.rJ_Lable3.TabIndex = 2;
+            this.rJ_Lable3.Text = "製造日期";
+            this.rJ_Lable3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_Lable3.TextColor = System.Drawing.Color.Black;
+            // 
+            // rJ_Lable2
+            // 
+            this.rJ_Lable2.BackColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable2.BackgroundColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable2.BorderColor = System.Drawing.Color.MediumBlue;
+            this.rJ_Lable2.BorderRadius = 3;
+            this.rJ_Lable2.BorderSize = 2;
+            this.rJ_Lable2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Lable2.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Lable2.ForeColor = System.Drawing.Color.Black;
+            this.rJ_Lable2.GUID = "";
+            this.rJ_Lable2.Location = new System.Drawing.Point(31, 198);
+            this.rJ_Lable2.Name = "rJ_Lable2";
+            this.rJ_Lable2.Size = new System.Drawing.Size(109, 45);
+            this.rJ_Lable2.TabIndex = 1;
+            this.rJ_Lable2.Text = "藥名";
+            this.rJ_Lable2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_Lable2.TextColor = System.Drawing.Color.Black;
             // 
             // rJ_Lable1
             // 
@@ -286,352 +757,6 @@ namespace EPD_Upload
             this.rJ_Lable1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.rJ_Lable1.TextColor = System.Drawing.Color.Black;
             // 
-            // rJ_Lable2
-            // 
-            this.rJ_Lable2.BackColor = System.Drawing.Color.Transparent;
-            this.rJ_Lable2.BackgroundColor = System.Drawing.Color.Transparent;
-            this.rJ_Lable2.BorderColor = System.Drawing.Color.MediumBlue;
-            this.rJ_Lable2.BorderRadius = 3;
-            this.rJ_Lable2.BorderSize = 2;
-            this.rJ_Lable2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Lable2.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Lable2.ForeColor = System.Drawing.Color.Black;
-            this.rJ_Lable2.GUID = "";
-            this.rJ_Lable2.Location = new System.Drawing.Point(31, 262);
-            this.rJ_Lable2.Name = "rJ_Lable2";
-            this.rJ_Lable2.Size = new System.Drawing.Size(109, 45);
-            this.rJ_Lable2.TabIndex = 1;
-            this.rJ_Lable2.Text = "藥名";
-            this.rJ_Lable2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_Lable2.TextColor = System.Drawing.Color.Black;
-            // 
-            // rJ_Lable3
-            // 
-            this.rJ_Lable3.BackColor = System.Drawing.Color.Transparent;
-            this.rJ_Lable3.BackgroundColor = System.Drawing.Color.Transparent;
-            this.rJ_Lable3.BorderColor = System.Drawing.Color.MediumBlue;
-            this.rJ_Lable3.BorderRadius = 3;
-            this.rJ_Lable3.BorderSize = 2;
-            this.rJ_Lable3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Lable3.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Lable3.ForeColor = System.Drawing.Color.Black;
-            this.rJ_Lable3.GUID = "";
-            this.rJ_Lable3.Location = new System.Drawing.Point(31, 381);
-            this.rJ_Lable3.Name = "rJ_Lable3";
-            this.rJ_Lable3.Size = new System.Drawing.Size(109, 45);
-            this.rJ_Lable3.TabIndex = 2;
-            this.rJ_Lable3.Text = "中文名";
-            this.rJ_Lable3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_Lable3.TextColor = System.Drawing.Color.Black;
-            // 
-            // rJ_Lable4
-            // 
-            this.rJ_Lable4.BackColor = System.Drawing.Color.Transparent;
-            this.rJ_Lable4.BackgroundColor = System.Drawing.Color.Transparent;
-            this.rJ_Lable4.BorderColor = System.Drawing.Color.MediumBlue;
-            this.rJ_Lable4.BorderRadius = 3;
-            this.rJ_Lable4.BorderSize = 2;
-            this.rJ_Lable4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Lable4.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Lable4.ForeColor = System.Drawing.Color.Black;
-            this.rJ_Lable4.GUID = "";
-            this.rJ_Lable4.Location = new System.Drawing.Point(31, 136);
-            this.rJ_Lable4.Name = "rJ_Lable4";
-            this.rJ_Lable4.Size = new System.Drawing.Size(109, 45);
-            this.rJ_Lable4.TabIndex = 3;
-            this.rJ_Lable4.Text = "料號";
-            this.rJ_Lable4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_Lable4.TextColor = System.Drawing.Color.Black;
-            this.rJ_Lable4.Visible = false;
-            // 
-            // rJ_Lable5
-            // 
-            this.rJ_Lable5.BackColor = System.Drawing.Color.Transparent;
-            this.rJ_Lable5.BackgroundColor = System.Drawing.Color.Transparent;
-            this.rJ_Lable5.BorderColor = System.Drawing.Color.MediumBlue;
-            this.rJ_Lable5.BorderRadius = 3;
-            this.rJ_Lable5.BorderSize = 2;
-            this.rJ_Lable5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Lable5.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Lable5.ForeColor = System.Drawing.Color.Black;
-            this.rJ_Lable5.GUID = "";
-            this.rJ_Lable5.Location = new System.Drawing.Point(31, 319);
-            this.rJ_Lable5.Name = "rJ_Lable5";
-            this.rJ_Lable5.Size = new System.Drawing.Size(109, 45);
-            this.rJ_Lable5.TabIndex = 4;
-            this.rJ_Lable5.Text = "商品名";
-            this.rJ_Lable5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_Lable5.TextColor = System.Drawing.Color.Black;
-            // 
-            // rJ_Lable6
-            // 
-            this.rJ_Lable6.BackColor = System.Drawing.Color.Transparent;
-            this.rJ_Lable6.BackgroundColor = System.Drawing.Color.Transparent;
-            this.rJ_Lable6.BorderColor = System.Drawing.Color.MediumBlue;
-            this.rJ_Lable6.BorderRadius = 3;
-            this.rJ_Lable6.BorderSize = 2;
-            this.rJ_Lable6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Lable6.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Lable6.ForeColor = System.Drawing.Color.Black;
-            this.rJ_Lable6.GUID = "";
-            this.rJ_Lable6.Location = new System.Drawing.Point(31, 198);
-            this.rJ_Lable6.Name = "rJ_Lable6";
-            this.rJ_Lable6.Size = new System.Drawing.Size(109, 45);
-            this.rJ_Lable6.TabIndex = 5;
-            this.rJ_Lable6.Text = "包裝單位";
-            this.rJ_Lable6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_Lable6.TextColor = System.Drawing.Color.Black;
-            // 
-            // textBox_面板內容_藥碼
-            // 
-            this.textBox_面板內容_藥碼.Enabled = false;
-            this.textBox_面板內容_藥碼.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox_面板內容_藥碼.Location = new System.Drawing.Point(146, 78);
-            this.textBox_面板內容_藥碼.Name = "textBox_面板內容_藥碼";
-            this.textBox_面板內容_藥碼.Size = new System.Drawing.Size(163, 35);
-            this.textBox_面板內容_藥碼.TabIndex = 6;
-            // 
-            // textBox_面板內容_料號
-            // 
-            this.textBox_面板內容_料號.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox_面板內容_料號.Location = new System.Drawing.Point(146, 141);
-            this.textBox_面板內容_料號.Name = "textBox_面板內容_料號";
-            this.textBox_面板內容_料號.Size = new System.Drawing.Size(163, 35);
-            this.textBox_面板內容_料號.TabIndex = 7;
-            this.textBox_面板內容_料號.Visible = false;
-            // 
-            // textBox_面板內容_包裝單位
-            // 
-            this.textBox_面板內容_包裝單位.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox_面板內容_包裝單位.Location = new System.Drawing.Point(146, 203);
-            this.textBox_面板內容_包裝單位.Name = "textBox_面板內容_包裝單位";
-            this.textBox_面板內容_包裝單位.Size = new System.Drawing.Size(163, 35);
-            this.textBox_面板內容_包裝單位.TabIndex = 8;
-            // 
-            // textBox_面板內容_藥名
-            // 
-            this.textBox_面板內容_藥名.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox_面板內容_藥名.Location = new System.Drawing.Point(146, 267);
-            this.textBox_面板內容_藥名.Name = "textBox_面板內容_藥名";
-            this.textBox_面板內容_藥名.Size = new System.Drawing.Size(414, 35);
-            this.textBox_面板內容_藥名.TabIndex = 9;
-            // 
-            // textBox_面板內容_商品名
-            // 
-            this.textBox_面板內容_商品名.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox_面板內容_商品名.Location = new System.Drawing.Point(146, 324);
-            this.textBox_面板內容_商品名.Name = "textBox_面板內容_商品名";
-            this.textBox_面板內容_商品名.Size = new System.Drawing.Size(414, 35);
-            this.textBox_面板內容_商品名.TabIndex = 10;
-            // 
-            // textBox_面板內容_中文名
-            // 
-            this.textBox_面板內容_中文名.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox_面板內容_中文名.Location = new System.Drawing.Point(146, 386);
-            this.textBox_面板內容_中文名.Name = "textBox_面板內容_中文名";
-            this.textBox_面板內容_中文名.Size = new System.Drawing.Size(414, 35);
-            this.textBox_面板內容_中文名.TabIndex = 11;
-            // 
-            // comboBox_面板內容_字體顏色_藥碼
-            // 
-            this.comboBox_面板內容_字體顏色_藥碼.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_面板內容_字體顏色_藥碼.FormattingEnabled = true;
-            this.comboBox_面板內容_字體顏色_藥碼.Items.AddRange(new object[] {
-            "紅",
-            "白",
-            "黑"});
-            this.comboBox_面板內容_字體顏色_藥碼.Location = new System.Drawing.Point(6, 21);
-            this.comboBox_面板內容_字體顏色_藥碼.Name = "comboBox_面板內容_字體顏色_藥碼";
-            this.comboBox_面板內容_字體顏色_藥碼.Size = new System.Drawing.Size(80, 25);
-            this.comboBox_面板內容_字體顏色_藥碼.TabIndex = 12;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.comboBox_面板內容_字體顏色_藥碼);
-            this.groupBox2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox2.Location = new System.Drawing.Point(315, 65);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(93, 56);
-            this.groupBox2.TabIndex = 13;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "字體顏色";
-            // 
-            // button_面板內容_字體_藥碼
-            // 
-            this.button_面板內容_字體_藥碼.Location = new System.Drawing.Point(414, 79);
-            this.button_面板內容_字體_藥碼.Name = "button_面板內容_字體_藥碼";
-            this.button_面板內容_字體_藥碼.Size = new System.Drawing.Size(69, 35);
-            this.button_面板內容_字體_藥碼.TabIndex = 15;
-            this.button_面板內容_字體_藥碼.Text = "字體";
-            this.button_面板內容_字體_藥碼.UseVisualStyleBackColor = true;
-            // 
-            // button_面板內容_字體_料號
-            // 
-            this.button_面板內容_字體_料號.Location = new System.Drawing.Point(414, 141);
-            this.button_面板內容_字體_料號.Name = "button_面板內容_字體_料號";
-            this.button_面板內容_字體_料號.Size = new System.Drawing.Size(69, 35);
-            this.button_面板內容_字體_料號.TabIndex = 18;
-            this.button_面板內容_字體_料號.Text = "字體";
-            this.button_面板內容_字體_料號.UseVisualStyleBackColor = true;
-            this.button_面板內容_字體_料號.Visible = false;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.comboBox_面板內容_字體顏色_料號);
-            this.groupBox5.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox5.Location = new System.Drawing.Point(315, 130);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(93, 56);
-            this.groupBox5.TabIndex = 16;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "字體顏色";
-            this.groupBox5.Visible = false;
-            // 
-            // comboBox_面板內容_字體顏色_料號
-            // 
-            this.comboBox_面板內容_字體顏色_料號.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_面板內容_字體顏色_料號.FormattingEnabled = true;
-            this.comboBox_面板內容_字體顏色_料號.Items.AddRange(new object[] {
-            "紅",
-            "白",
-            "黑"});
-            this.comboBox_面板內容_字體顏色_料號.Location = new System.Drawing.Point(6, 21);
-            this.comboBox_面板內容_字體顏色_料號.Name = "comboBox_面板內容_字體顏色_料號";
-            this.comboBox_面板內容_字體顏色_料號.Size = new System.Drawing.Size(80, 25);
-            this.comboBox_面板內容_字體顏色_料號.TabIndex = 12;
-            // 
-            // button_面板內容_字體_包裝單位
-            // 
-            this.button_面板內容_字體_包裝單位.Location = new System.Drawing.Point(414, 203);
-            this.button_面板內容_字體_包裝單位.Name = "button_面板內容_字體_包裝單位";
-            this.button_面板內容_字體_包裝單位.Size = new System.Drawing.Size(69, 35);
-            this.button_面板內容_字體_包裝單位.TabIndex = 21;
-            this.button_面板內容_字體_包裝單位.Text = "字體";
-            this.button_面板內容_字體_包裝單位.UseVisualStyleBackColor = true;
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.comboBox_面板內容_字體顏色_包裝單位);
-            this.groupBox7.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox7.Location = new System.Drawing.Point(315, 192);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(93, 56);
-            this.groupBox7.TabIndex = 19;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "字體顏色";
-            // 
-            // comboBox_面板內容_字體顏色_包裝單位
-            // 
-            this.comboBox_面板內容_字體顏色_包裝單位.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_面板內容_字體顏色_包裝單位.FormattingEnabled = true;
-            this.comboBox_面板內容_字體顏色_包裝單位.Items.AddRange(new object[] {
-            "紅",
-            "白",
-            "黑"});
-            this.comboBox_面板內容_字體顏色_包裝單位.Location = new System.Drawing.Point(6, 21);
-            this.comboBox_面板內容_字體顏色_包裝單位.Name = "comboBox_面板內容_字體顏色_包裝單位";
-            this.comboBox_面板內容_字體顏色_包裝單位.Size = new System.Drawing.Size(80, 25);
-            this.comboBox_面板內容_字體顏色_包裝單位.TabIndex = 12;
-            // 
-            // button_面板內容_字體_藥名
-            // 
-            this.button_面板內容_字體_藥名.Location = new System.Drawing.Point(665, 265);
-            this.button_面板內容_字體_藥名.Name = "button_面板內容_字體_藥名";
-            this.button_面板內容_字體_藥名.Size = new System.Drawing.Size(69, 35);
-            this.button_面板內容_字體_藥名.TabIndex = 24;
-            this.button_面板內容_字體_藥名.Text = "字體";
-            this.button_面板內容_字體_藥名.UseVisualStyleBackColor = true;
-            // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.comboBox_面板內容_字體顏色_藥名);
-            this.groupBox9.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox9.Location = new System.Drawing.Point(566, 251);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(93, 56);
-            this.groupBox9.TabIndex = 22;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "字體顏色";
-            // 
-            // comboBox_面板內容_字體顏色_藥名
-            // 
-            this.comboBox_面板內容_字體顏色_藥名.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_面板內容_字體顏色_藥名.FormattingEnabled = true;
-            this.comboBox_面板內容_字體顏色_藥名.Items.AddRange(new object[] {
-            "紅",
-            "白",
-            "黑"});
-            this.comboBox_面板內容_字體顏色_藥名.Location = new System.Drawing.Point(6, 21);
-            this.comboBox_面板內容_字體顏色_藥名.Name = "comboBox_面板內容_字體顏色_藥名";
-            this.comboBox_面板內容_字體顏色_藥名.Size = new System.Drawing.Size(80, 25);
-            this.comboBox_面板內容_字體顏色_藥名.TabIndex = 12;
-            // 
-            // button_面板內容_字體_商品名
-            // 
-            this.button_面板內容_字體_商品名.Location = new System.Drawing.Point(665, 327);
-            this.button_面板內容_字體_商品名.Name = "button_面板內容_字體_商品名";
-            this.button_面板內容_字體_商品名.Size = new System.Drawing.Size(69, 35);
-            this.button_面板內容_字體_商品名.TabIndex = 27;
-            this.button_面板內容_字體_商品名.Text = "字體";
-            this.button_面板內容_字體_商品名.UseVisualStyleBackColor = true;
-            // 
-            // groupBox11
-            // 
-            this.groupBox11.Controls.Add(this.comboBox_面板內容_字體顏色_商品名);
-            this.groupBox11.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox11.Location = new System.Drawing.Point(566, 313);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(93, 56);
-            this.groupBox11.TabIndex = 25;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "字體顏色";
-            // 
-            // comboBox_面板內容_字體顏色_商品名
-            // 
-            this.comboBox_面板內容_字體顏色_商品名.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_面板內容_字體顏色_商品名.FormattingEnabled = true;
-            this.comboBox_面板內容_字體顏色_商品名.Items.AddRange(new object[] {
-            "紅",
-            "白",
-            "黑"});
-            this.comboBox_面板內容_字體顏色_商品名.Location = new System.Drawing.Point(6, 21);
-            this.comboBox_面板內容_字體顏色_商品名.Name = "comboBox_面板內容_字體顏色_商品名";
-            this.comboBox_面板內容_字體顏色_商品名.Size = new System.Drawing.Size(80, 25);
-            this.comboBox_面板內容_字體顏色_商品名.TabIndex = 12;
-            // 
-            // button_面板內容_字體_中文名
-            // 
-            this.button_面板內容_字體_中文名.Location = new System.Drawing.Point(665, 389);
-            this.button_面板內容_字體_中文名.Name = "button_面板內容_字體_中文名";
-            this.button_面板內容_字體_中文名.Size = new System.Drawing.Size(69, 35);
-            this.button_面板內容_字體_中文名.TabIndex = 30;
-            this.button_面板內容_字體_中文名.Text = "字體";
-            this.button_面板內容_字體_中文名.UseVisualStyleBackColor = true;
-            // 
-            // groupBox13
-            // 
-            this.groupBox13.Controls.Add(this.comboBox_面板內容_字體顏色_中文名);
-            this.groupBox13.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox13.Location = new System.Drawing.Point(566, 375);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(93, 56);
-            this.groupBox13.TabIndex = 28;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "字體顏色";
-            // 
-            // comboBox_面板內容_字體顏色_中文名
-            // 
-            this.comboBox_面板內容_字體顏色_中文名.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_面板內容_字體顏色_中文名.FormattingEnabled = true;
-            this.comboBox_面板內容_字體顏色_中文名.Items.AddRange(new object[] {
-            "紅",
-            "白",
-            "黑"});
-            this.comboBox_面板內容_字體顏色_中文名.Location = new System.Drawing.Point(6, 21);
-            this.comboBox_面板內容_字體顏色_中文名.Name = "comboBox_面板內容_字體顏色_中文名";
-            this.comboBox_面板內容_字體顏色_中文名.Size = new System.Drawing.Size(80, 25);
-            this.comboBox_面板內容_字體顏色_中文名.TabIndex = 12;
-            // 
             // sqL_DataGridView_面板列表
             // 
             this.sqL_DataGridView_面板列表.AutoSelectToDeep = true;
@@ -648,6 +773,7 @@ namespace EPD_Upload
             this.sqL_DataGridView_面板列表.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
             this.sqL_DataGridView_面板列表.columnHeadersHeight = 18;
             this.sqL_DataGridView_面板列表.columnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.sqL_DataGridView_面板列表.Font = new System.Drawing.Font("新細明體", 9F);
             this.sqL_DataGridView_面板列表.ImageBox = false;
             this.sqL_DataGridView_面板列表.Location = new System.Drawing.Point(943, 26);
             this.sqL_DataGridView_面板列表.Name = "sqL_DataGridView_面板列表";
@@ -722,70 +848,11 @@ namespace EPD_Upload
             this.rJ_Button_面板列表_刪除.TextColor = System.Drawing.Color.White;
             this.rJ_Button_面板列表_刪除.UseVisualStyleBackColor = false;
             // 
-            // textBox_面板內容_GUID
-            // 
-            this.textBox_面板內容_GUID.Enabled = false;
-            this.textBox_面板內容_GUID.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox_面板內容_GUID.Location = new System.Drawing.Point(596, 213);
-            this.textBox_面板內容_GUID.Name = "textBox_面板內容_GUID";
-            this.textBox_面板內容_GUID.Size = new System.Drawing.Size(304, 35);
-            this.textBox_面板內容_GUID.TabIndex = 31;
-            this.textBox_面板內容_GUID.Visible = false;
-            // 
-            // rJ_Button_重繪
-            // 
-            this.rJ_Button_重繪.AutoResetState = false;
-            this.rJ_Button_重繪.BackColor = System.Drawing.Color.RoyalBlue;
-            this.rJ_Button_重繪.BackgroundColor = System.Drawing.Color.RoyalBlue;
-            this.rJ_Button_重繪.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_重繪.BorderRadius = 5;
-            this.rJ_Button_重繪.BorderSize = 0;
-            this.rJ_Button_重繪.buttonType = MyUI.RJ_Button.ButtonType.Push;
-            this.rJ_Button_重繪.Enabled = false;
-            this.rJ_Button_重繪.FlatAppearance.BorderSize = 0;
-            this.rJ_Button_重繪.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Button_重繪.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Button_重繪.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_重繪.GUID = "";
-            this.rJ_Button_重繪.Location = new System.Drawing.Point(791, 389);
-            this.rJ_Button_重繪.Name = "rJ_Button_重繪";
-            this.rJ_Button_重繪.Size = new System.Drawing.Size(109, 54);
-            this.rJ_Button_重繪.State = false;
-            this.rJ_Button_重繪.TabIndex = 32;
-            this.rJ_Button_重繪.Text = "重繪";
-            this.rJ_Button_重繪.TextColor = System.Drawing.Color.White;
-            this.rJ_Button_重繪.UseVisualStyleBackColor = false;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.comboBox_面板內容_背景顏色);
-            this.groupBox3.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox3.Location = new System.Drawing.Point(508, 73);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(129, 75);
-            this.groupBox3.TabIndex = 33;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "背景顏色";
-            // 
-            // comboBox_面板內容_背景顏色
-            // 
-            this.comboBox_面板內容_背景顏色.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_面板內容_背景顏色.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.comboBox_面板內容_背景顏色.FormattingEnabled = true;
-            this.comboBox_面板內容_背景顏色.Items.AddRange(new object[] {
-            "紅",
-            "白",
-            "黑"});
-            this.comboBox_面板內容_背景顏色.Location = new System.Drawing.Point(24, 30);
-            this.comboBox_面板內容_背景顏色.Name = "comboBox_面板內容_背景顏色";
-            this.comboBox_面板內容_背景顏色.Size = new System.Drawing.Size(80, 34);
-            this.comboBox_面板內容_背景顏色.TabIndex = 12;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1479, 861);
+            this.ClientSize = new System.Drawing.Size(1479, 941);
             this.Controls.Add(this.rJ_Button_面板列表_刪除);
             this.Controls.Add(this.rJ_Button_面板列表_新增);
             this.Controls.Add(this.sqL_DataGridView_面板列表);
@@ -800,13 +867,14 @@ namespace EPD_Upload
             this.Text = "EPD 編譯器";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox13.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -824,29 +892,29 @@ namespace EPD_Upload
         private System.Windows.Forms.GroupBox groupBox1;
         private MyUI.RJ_ProgressBar rJ_ProgressBar_上傳狀態;
         private System.Windows.Forms.Label label_上傳狀態;
-        private System.Windows.Forms.Button button_面板內容_字體_中文名;
+        private System.Windows.Forms.Button button_面板內容_字體_製造日期;
         private System.Windows.Forms.GroupBox groupBox13;
-        private System.Windows.Forms.ComboBox comboBox_面板內容_字體顏色_中文名;
-        private System.Windows.Forms.Button button_面板內容_字體_商品名;
+        private System.Windows.Forms.ComboBox comboBox_面板內容_字體顏色_製造日期;
+        private System.Windows.Forms.Button button_面板內容_字體_批號;
         private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.ComboBox comboBox_面板內容_字體顏色_商品名;
+        private System.Windows.Forms.ComboBox comboBox_面板內容_字體顏色_批號;
         private System.Windows.Forms.Button button_面板內容_字體_藥名;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.ComboBox comboBox_面板內容_字體顏色_藥名;
         private System.Windows.Forms.Button button_面板內容_字體_包裝單位;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.ComboBox comboBox_面板內容_字體顏色_包裝單位;
-        private System.Windows.Forms.Button button_面板內容_字體_料號;
+        private System.Windows.Forms.Button button_面板內容_字體_效期;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ComboBox comboBox_面板內容_字體顏色_料號;
+        private System.Windows.Forms.ComboBox comboBox_面板內容_字體顏色_效期;
         private System.Windows.Forms.Button button_面板內容_字體_藥碼;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox comboBox_面板內容_字體顏色_藥碼;
-        private System.Windows.Forms.TextBox textBox_面板內容_中文名;
-        private System.Windows.Forms.TextBox textBox_面板內容_商品名;
+        private System.Windows.Forms.TextBox textBox_面板內容_製造日期;
+        private System.Windows.Forms.TextBox textBox_面板內容_批號;
         private System.Windows.Forms.TextBox textBox_面板內容_藥名;
         private System.Windows.Forms.TextBox textBox_面板內容_包裝單位;
-        private System.Windows.Forms.TextBox textBox_面板內容_料號;
+        private System.Windows.Forms.TextBox textBox_面板內容_效期;
         private System.Windows.Forms.TextBox textBox_面板內容_藥碼;
         private MyUI.RJ_Lable rJ_Lable6;
         private MyUI.RJ_Lable rJ_Lable5;
@@ -862,6 +930,11 @@ namespace EPD_Upload
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ComboBox comboBox_面板內容_背景顏色;
         private System.Windows.Forms.FontDialog fontDialog;
+        private System.Windows.Forms.Button button_面板內容_字體_廠牌;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ComboBox comboBox_面板內容_字體顏色_廠牌;
+        private System.Windows.Forms.TextBox textBox_面板內容_廠牌;
+        private MyUI.RJ_Lable rJ_Lable7;
     }
 }
 

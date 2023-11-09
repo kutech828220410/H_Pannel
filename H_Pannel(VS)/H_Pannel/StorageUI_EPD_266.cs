@@ -385,6 +385,15 @@ namespace H_Pannel_lib
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
             return Communication.Set_OutputPIN(uDP_Class, IP, 1, state);
         }
+        public bool Set_ADCMotorTrigger(Storage storage, int time_ms)
+        {
+            return Set_ADCMotorTrigger(storage.IP, storage.Port, time_ms);
+        }
+        public bool Set_ADCMotorTrigger(string IP, int Port, int time_ms)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+            return Communication.Command_Set_ADCMotorTrigger(uDP_Class, IP, 0, time_ms);
+        }
         public bool Get_OutputPIN(Storage storage)
         {
             return Get_OutputPIN(storage.IP);

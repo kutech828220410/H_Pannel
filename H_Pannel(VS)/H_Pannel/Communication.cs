@@ -86,6 +86,7 @@ namespace H_Pannel_lib
             Get_WS2812_Buffer = (byte)'O',
             Set_OutputTrigger = (byte)'P',
             Set_OutputPINTrigger = (byte)'Q',
+            Set_ADCMotorTrigger = (byte)'!',
             Set_Input_dir = (byte)'R',
             Set_Output_dir = (byte)'S',
             Set_RFID_Enable = (byte)'T',
@@ -412,6 +413,15 @@ namespace H_Pannel_lib
                 return false;
             }
             return Command_Set_OutputPINTrigger(uDP_Class, IP, PIN_Num, value);
+        }
+        static public bool Set_ADCMotorTrigger(UDP_Class uDP_Class, string IP, int PIN_Num, int time_ms)
+        {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"Set_ADCMotorTrigger {DateTime.Now.ToDateTimeString()} : Ping Failed {IP} {DateTime.Now.ToDateTimeString()}");
+                return false;
+            }
+            return Command_Set_ADCMotorTrigger(uDP_Class, IP, PIN_Num, time_ms);
         }
         static public bool Set_Input_dir(UDP_Class uDP_Class, string IP, int PIN_Num, bool value)
         {
@@ -2550,6 +2560,69 @@ namespace H_Pannel_lib
                 System.Threading.Thread.Sleep(1);
             }
             if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Set OutputPINTrigger {string.Format(flag_OK ? "sucess" : "failed")}!");
+            return flag_OK;
+        }
+        static public bool Command_Set_ADCMotorTrigger(UDP_Class uDP_Class, string IP, int PIN_Num, int time_ms)
+        {
+            bool flag_OK = true;
+            byte checksum = 0;
+            List<byte> list_byte = new List<byte>();
+            list_byte.Add(2);
+            list_byte.Add((byte)(UDP_Command.Set_ADCMotorTrigger));
+            list_byte.Add((byte)(PIN_Num));
+            list_byte.Add((byte)(time_ms));
+            list_byte.Add((byte)((time_ms >> 8))); list_byte.Add(3);
+            for (int i = 0; i < list_byte.Count; i++)
+            {
+                checksum += list_byte[i];
+            }
+            MyTimer MyTimer_UART_TimeOut = new MyTimer();
+            int retry = 0;
+            int cnt = 0;
+            while (true)
+            {
+                if (cnt == 0)
+                {
+                    if (retry >= UDP_RetryNum)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    uDP_Class.Set_ReadLineClearByIP(IP);
+                    uDP_Class.WriteByte(list_byte.ToArray(), IP);
+                    MyTimer_UART_TimeOut.TickStop();
+                    MyTimer_UART_TimeOut.StartTickTime(UDP_TimeOut);
+                    cnt++;
+                }
+                else if (cnt == 1)
+                {
+                    if (retry >= UDP_RetryNum)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    if (MyTimer_UART_TimeOut.IsTimeOut())
+                    {
+                        retry++;
+                        cnt = 0;
+                    }
+                    string UDP_RX = uDP_Class.Get_ReadLineByIP(IP);
+                    if (UDP_RX != "")
+                    {
+                        if (UDP_RX == checksum.ToString("000"))
+                        {
+                            flag_OK = true;
+                            break;
+                        }
+                        else
+                        {
+                            cnt = 0;
+                        }
+                    }
+                }
+                System.Threading.Thread.Sleep(1);
+            }
+            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Set ADCMotorTrigger {string.Format(flag_OK ? "sucess" : "failed")}! {DateTime.Now.ToDateTimeString()}");
             return flag_OK;
         }
         static private bool Command_SendTestData(UDP_Class uDP_Class, string IP ,int port)

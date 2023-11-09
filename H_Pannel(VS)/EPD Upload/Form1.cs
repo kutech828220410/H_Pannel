@@ -116,8 +116,9 @@ namespace EPD_Upload
             this.button_面板內容_字體_藥碼.Click += Button_面板內容_字體_藥碼_Click;
             this.button_面板內容_字體_包裝單位.Click += Button_面板內容_字體_包裝單位_Click;
             this.button_面板內容_字體_藥名.Click += Button_面板內容_字體_藥名_Click;
-            this.button_面板內容_字體_商品名.Click += Button_面板內容_字體_商品名_Click;
-            this.button_面板內容_字體_中文名.Click += Button_面板內容_字體_中文名_Click;
+            this.button_面板內容_字體_批號.Click += Button_面板內容_字體_批號_Click;
+            this.button_面板內容_字體_製造日期.Click += Button_面板內容_字體_製造日期_Click;
+            this.button_面板內容_字體_廠牌.Click += Button_面板內容_字體_廠牌_Click;
 
             SQLUI.Table table = new SQLUI.Table("");
             table.AddColumnList("GUID", SQLUI.Table.StringType.CHAR, SQLUI.Table.IndexType.None);
@@ -136,7 +137,7 @@ namespace EPD_Upload
             MyThread_program.Trigger();
         }
 
-
+  
 
         private void sub_program()
         {
@@ -189,7 +190,7 @@ namespace EPD_Upload
                 //storage.SetValue(Storage.ValueName.藥品學名, Storage.ValueType.ForeColor, storage.IsWarning ? Color.White : Color.Black);
                 storage.SetValue(Storage.ValueName.藥品學名, Storage.ValueType.BackColor, storage.BackColor);
 
-                //storage.SetValue(Storage.ValueName.藥品中文名稱, Storage.ValueType.ForeColor, storage.IsWarning ? Color.White : Color.Black);
+                //storage.SetValue(Storage.ValueName.藥品製造日期稱, Storage.ValueType.ForeColor, storage.IsWarning ? Color.White : Color.Black);
                 storage.SetValue(Storage.ValueName.藥品中文名稱, Storage.ValueType.BackColor, storage.BackColor);
 
                 //storage.SetValue(Storage.ValueName.包裝單位, Storage.ValueType.ForeColor, storage.IsWarning ? Color.White : Color.Black);
@@ -236,8 +237,7 @@ namespace EPD_Upload
                 {
                     SizeF size_name = g.MeasureString(storage.Name, storage.Name_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
                     size_name = new SizeF((int)size_name.Width, (int)size_name.Height);
-                    //SizeF size_name = TextRenderer.MeasureText(g, storage.Name, storage.Name_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
-                    g.DrawString(storage.Name, storage.Name_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品名稱, Storage.ValueType.ForeColor)), new RectangleF(0, posy, Pannel_Width, Pannel_Height), StringFormat.GenericDefault);
+                    DrawingClass.Draw.文字中心繪製(storage.Name, new Rectangle(0, (int)posy, Pannel_Width, (int)size_name.Height), Pannel_Width - 50, storage.Name_font, storage.Name_ForeColor, g);                 
                     posy += size_name.Height;
                     DrawingClass.Draw.線段繪製(new PointF(0, posy), new PointF(rect.Width, posy), Color.Black, 1.5F, g, 1, 1);
                 }
@@ -247,40 +247,58 @@ namespace EPD_Upload
                     SizeF size_Scientific_Name = g.MeasureString(storage.Scientific_Name, storage.Scientific_Name_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
                     size_Scientific_Name = new SizeF((int)size_Scientific_Name.Width, (int)size_Scientific_Name.Height);
                     // SizeF size_Scientific_Name_font = TextRenderer.MeasureText(storage.Scientific_Name, storage.Scientific_Name_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
-                    g.DrawString(storage.Scientific_Name, storage.Scientific_Name_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品學名, Storage.ValueType.ForeColor)), new RectangleF(0, posy, Pannel_Width, Pannel_Height), StringFormat.GenericDefault);
+                    g.DrawString($"批號: {storage.Scientific_Name}", storage.Scientific_Name_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品學名, Storage.ValueType.ForeColor)), new RectangleF(0, posy, Pannel_Width, Pannel_Height), StringFormat.GenericDefault);
                     posy += size_Scientific_Name.Height;
-                    DrawingClass.Draw.線段繪製(new PointF(0, posy), new PointF(rect.Width, posy), Color.Black, 1.5F, g, 1, 1);
+                    //DrawingClass.Draw.線段繪製(new PointF(0, posy), new PointF(rect.Width, posy), Color.Black, 1.5F, g, 1, 1);
                 }
                 if (storage.ChineseName_Visable)
                 {
                     SizeF size_ChineseName = g.MeasureString(storage.ChineseName, storage.ChineseName_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
                     size_ChineseName = new SizeF((int)size_ChineseName.Width, (int)size_ChineseName.Height);
                     // SizeF size_ChineseName = TextRenderer.MeasureText(storage.ChineseName, storage.ChineseName_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
-                    g.DrawString(storage.ChineseName, storage.ChineseName_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品中文名稱, Storage.ValueType.ForeColor)), new RectangleF(0, posy, Pannel_Width, Pannel_Height), StringFormat.GenericDefault);
+                    g.DrawString($"製造日期: {storage.ChineseName}", storage.ChineseName_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品中文名稱, Storage.ValueType.ForeColor)), new RectangleF(0, posy, Pannel_Width, Pannel_Height), StringFormat.GenericDefault);
                     posy += size_ChineseName.Height;
                     // DrawingClass.Draw.線段繪製(new PointF(0, posy), new PointF(rect.Width, posy), Color.Black, 1.5F, g, 1, 1);
                 }
-                posy += 3;
-                if (storage.Validity_period_Visable)
+                if (storage.MinPackage_Visable)
                 {
-                    for (int i = 0; i < storage.List_Validity_period.Count; i++)
-                    {
-                        if (storage.List_Inventory[i] == "00") continue;
-                        string str = $"{i + 1}.效期 : {storage.List_Validity_period[i]}   庫存 : {storage.List_Inventory[i]}";
-                        storage.Validity_period_font = new Font(storage.Validity_period_font, FontStyle.Bold);
-                        SizeF size_Validity_period = TextRenderer.MeasureText(str, storage.Validity_period_font);
-                        g.DrawString(str, storage.Validity_period_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.效期, Storage.ValueType.ForeColor)), 5, 0 + posy);
-                        Color color_pen = storage.IsWarning ? Color.Black : Color.Red;
-                        g.DrawRectangle(new Pen(new SolidBrush(color_pen), 1), 5, 0 + posy, size_Validity_period.Width, size_Validity_period.Height);
-                        posy += size_Validity_period.Height;
-                    }
+                    SizeF size_MinPackage = g.MeasureString(storage.MinPackage, storage.MinPackage_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
+                    size_MinPackage = new SizeF((int)size_MinPackage.Width, (int)size_MinPackage.Height);
+                    // SizeF size_MinPackage = TextRenderer.MeasureText(storage.MinPackage, storage.MinPackage_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+                    g.DrawString($"效期: {storage.MinPackage}", storage.MinPackage_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.廠牌, Storage.ValueType.ForeColor)), new RectangleF(0, posy, Pannel_Width, Pannel_Height), StringFormat.GenericDefault);
+                    posy += size_MinPackage.Height;
+                    // DrawingClass.Draw.線段繪製(new PointF(0, posy), new PointF(rect.Width, posy), Color.Black, 1.5F, g, 1, 1);
                 }
+                if (storage.Label_Visable)
+                {
+                    SizeF size_Label = g.MeasureString(storage.Label, storage.Label_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
+                    size_Label = new SizeF((int)size_Label.Width, (int)size_Label.Height);
+                    // SizeF size_Label = TextRenderer.MeasureText(storage.Label, storage.Label_font, new Size(rect.Width, rect.Height), TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+                    g.DrawString($"廠牌: {storage.Label}", storage.Label_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.廠牌, Storage.ValueType.ForeColor)), new RectangleF(0, posy, Pannel_Width, Pannel_Height), StringFormat.GenericDefault);
+                    posy += size_Label.Height;
+                    // DrawingClass.Draw.線段繪製(new PointF(0, posy), new PointF(rect.Width, posy), Color.Black, 1.5F, g, 1, 1);
+                }
+                posy += 3;
+                //if (storage.Validity_period_Visable)
+                //{
+                //    for (int i = 0; i < storage.List_Validity_period.Count; i++)
+                //    {
+                //        if (storage.List_Inventory[i] == "00") continue;
+                //        string str = $"{i + 1}.效期 : {storage.List_Validity_period[i]}   庫存 : {storage.List_Inventory[i]}";
+                //        storage.Validity_period_font = new Font(storage.Validity_period_font, FontStyle.Bold);
+                //        SizeF size_Validity_period = TextRenderer.MeasureText(str, storage.Validity_period_font);
+                //        g.DrawString(str, storage.Validity_period_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.效期, Storage.ValueType.ForeColor)), 5, 0 + posy);
+                //        Color color_pen = storage.IsWarning ? Color.Black : Color.Red;
+                //        g.DrawRectangle(new Pen(new SolidBrush(color_pen), 1), 5, 0 + posy, size_Validity_period.Width, size_Validity_period.Height);
+                //        posy += size_Validity_period.Height;
+                //    }
+                //}
 
                 SizeF size_Code_font = TextRenderer.MeasureText(storage.Code, storage.Code_font);
-                if (storage.Code_Visable)
-                {
-                    g.DrawString(storage.Code, storage.Code_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品碼, Storage.ValueType.ForeColor)), 0, Pannel_Height - size_Code_font.Height);
-                }
+                //if (storage.Code_Visable)
+                //{
+                //    g.DrawString(storage.Code, storage.Code_font, new SolidBrush((Color)storage.GetValue(Storage.ValueName.藥品碼, Storage.ValueType.ForeColor)), 0, Pannel_Height - size_Code_font.Height);
+                //}
 
 
                 SizeF size_Package_font = TextRenderer.MeasureText(storage.Package, storage.Package_font);
@@ -299,14 +317,18 @@ namespace EPD_Upload
             textBox_面板內容_藥碼.Text = device.Code;
             textBox_面板內容_藥名.Text = device.Name;
             textBox_面板內容_包裝單位.Text = device.Package;
-            textBox_面板內容_商品名.Text = device.Scientific_Name;
-            textBox_面板內容_中文名.Text = device.ChineseName;
+            textBox_面板內容_批號.Text = device.Scientific_Name;
+            textBox_面板內容_製造日期.Text = device.ChineseName;
+            textBox_面板內容_效期.Text = device.MinPackage;
+            textBox_面板內容_廠牌.Text = device.Label;
 
             comboBox_面板內容_字體顏色_藥碼.Text = GetForeColorStr(device.Code_ForeColor);
             comboBox_面板內容_字體顏色_包裝單位.Text = GetForeColorStr(device.Package_ForeColor);
             comboBox_面板內容_字體顏色_藥名.Text = GetForeColorStr(device.Name_ForeColor);
-            comboBox_面板內容_字體顏色_商品名.Text = GetForeColorStr(device.Scientific_Name_ForeColor);
-            comboBox_面板內容_字體顏色_中文名.Text = GetForeColorStr(device.ChineseName_ForeColor);
+            comboBox_面板內容_字體顏色_批號.Text = GetForeColorStr(device.Scientific_Name_ForeColor);
+            comboBox_面板內容_字體顏色_製造日期.Text = GetForeColorStr(device.ChineseName_ForeColor);
+            comboBox_面板內容_字體顏色_效期.Text = GetForeColorStr(device.MinPackage_ForeColor);
+            comboBox_面板內容_字體顏色_廠牌.Text = GetForeColorStr(device.Label_ForeColor);
             comboBox_面板內容_背景顏色.Text = GetForeColorStr(device.BackColor);
 
         }
@@ -484,15 +506,19 @@ namespace EPD_Upload
             {
                 device.Name = textBox_面板內容_藥名.Text;
                 device.Package = textBox_面板內容_包裝單位.Text;
-                device.Scientific_Name = textBox_面板內容_商品名.Text;
-                device.ChineseName = textBox_面板內容_中文名.Text;
+                device.Scientific_Name = textBox_面板內容_批號.Text;
+                device.ChineseName = textBox_面板內容_製造日期.Text;
+                device.MinPackage = textBox_面板內容_效期.Text;
+                device.Label = textBox_面板內容_廠牌.Text;
                 this.Invoke(new Action(delegate 
                 {
                     device.Code_ForeColor = GetForeColor(comboBox_面板內容_字體顏色_藥碼.Text);
                     device.Package_ForeColor = GetForeColor(comboBox_面板內容_字體顏色_包裝單位.Text);
                     device.Name_ForeColor = GetForeColor(comboBox_面板內容_字體顏色_藥名.Text);
-                    device.Scientific_Name_ForeColor = GetForeColor(comboBox_面板內容_字體顏色_商品名.Text);
-                    device.ChineseName_ForeColor = GetForeColor(comboBox_面板內容_字體顏色_中文名.Text);
+                    device.Scientific_Name_ForeColor = GetForeColor(comboBox_面板內容_字體顏色_批號.Text);
+                    device.ChineseName_ForeColor = GetForeColor(comboBox_面板內容_字體顏色_製造日期.Text);
+                    device.MinPackage_ForeColor = GetForeColor(comboBox_面板內容_字體顏色_效期.Text);
+                    device.Label_ForeColor = GetForeColor(comboBox_面板內容_字體顏色_廠牌.Text);
 
                     device.BackColor = GetForeColor(comboBox_面板內容_背景顏色.Text);
                 }));
@@ -538,7 +564,7 @@ namespace EPD_Upload
             }));
 
         }
-        private void Button_面板內容_字體_中文名_Click(object sender, EventArgs e)
+        private void Button_面板內容_字體_製造日期_Click(object sender, EventArgs e)
         {
             string GUID = textBox_面板內容_GUID.Text;
             if (GUID.StringIsEmpty())
@@ -554,7 +580,7 @@ namespace EPD_Upload
                 device.Code_font = fontDialog.Font;
             }
         }
-        private void Button_面板內容_字體_商品名_Click(object sender, EventArgs e)
+        private void Button_面板內容_字體_批號_Click(object sender, EventArgs e)
         {
             string GUID = textBox_面板內容_GUID.Text;
             if (GUID.StringIsEmpty())
@@ -617,6 +643,22 @@ namespace EPD_Upload
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
                 device.Code_font = fontDialog.Font;
+            }
+        }
+        private void Button_面板內容_字體_廠牌_Click(object sender, EventArgs e)
+        {
+            string GUID = textBox_面板內容_GUID.Text;
+            if (GUID.StringIsEmpty())
+            {
+                MyMessageBox.ShowDialog("未選取資料!");
+                return;
+            }
+            Storage device = myConfigClass.Devices.SortByIP(GUID);
+            if (device == null) return;
+            fontDialog.Font = device.Code_font;
+            if (fontDialog.ShowDialog() == DialogResult.OK)
+            {
+                device.Label_font = fontDialog.Font;
             }
         }
         #endregion
