@@ -41,11 +41,8 @@ void serialEvent()
     }
     if (UART0_RX[0] == 'w')
     {
-      mySerial.println("WS2812 TEST Start");
-  
-      mySerial.println("WS2812 TEST Begin");
-
-      mySerial.println("WS2812 TEST End");
+      mySerial.println("flag_WS2812B_breathing");
+      flag_WS2812B_breathing = !flag_WS2812B_breathing;
     }
     if (UART0_RX[0] == 'b')
     {

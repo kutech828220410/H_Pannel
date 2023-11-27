@@ -119,6 +119,7 @@ namespace EPD_Upload
             this.button_面板內容_字體_批號.Click += Button_面板內容_字體_批號_Click;
             this.button_面板內容_字體_製造日期.Click += Button_面板內容_字體_製造日期_Click;
             this.button_面板內容_字體_廠牌.Click += Button_面板內容_字體_廠牌_Click;
+            this.button_面板內容_字體_效期.Click += Button_面板內容_字體_效期_Click;
 
             SQLUI.Table table = new SQLUI.Table("");
             table.AddColumnList("GUID", SQLUI.Table.StringType.CHAR, SQLUI.Table.IndexType.None);
@@ -137,7 +138,7 @@ namespace EPD_Upload
             MyThread_program.Trigger();
         }
 
-  
+     
 
         private void sub_program()
         {
@@ -304,7 +305,7 @@ namespace EPD_Upload
                 SizeF size_Package_font = TextRenderer.MeasureText(storage.Package, storage.Package_font);
                 if (storage.Package_Visable)
                 {
-                    Communication.DrawStorageString(g, storage, Storage.ValueName.包裝單位, 0, Pannel_Height - size_Code_font.Height - size_Package_font.Height);
+                    Communication.DrawStorageString(g, storage, Storage.ValueName.包裝單位, Pannel_Width - size_Package_font.Width - 1, Pannel_Height - size_Package_font.Height - 1);
                 }
 
             }
@@ -659,6 +660,22 @@ namespace EPD_Upload
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
                 device.Label_font = fontDialog.Font;
+            }
+        }
+        private void Button_面板內容_字體_效期_Click(object sender, EventArgs e)
+        {
+            string GUID = textBox_面板內容_GUID.Text;
+            if (GUID.StringIsEmpty())
+            {
+                MyMessageBox.ShowDialog("未選取資料!");
+                return;
+            }
+            Storage device = myConfigClass.Devices.SortByIP(GUID);
+            if (device == null) return;
+            fontDialog.Font = device.MinPackage_font;
+            if (fontDialog.ShowDialog() == DialogResult.OK)
+            {
+                device.MinPackage_font = fontDialog.Font;
             }
         }
         #endregion

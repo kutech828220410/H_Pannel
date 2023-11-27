@@ -195,7 +195,40 @@ void onPacketCallBack()
             if(flag_udp_232back)printf("startpo : %d\n" ,startpo);
             Get_Checksum_UDP();
           }
-          
+          else if (*(UdpRead + 1) == '@')
+          {
+            WS2812B_breathing_onAddVal = *(UdpRead + 2);
+            WS2812B_breathing_offSubVal = *(UdpRead + 3);
+            WS2812B_breathing_R = *(UdpRead + 4);
+            WS2812B_breathing_G = *(UdpRead + 5);
+            WS2812B_breathing_B = *(UdpRead + 6);
+            
+            if(WS2812B_breathing_onAddVal == 0 || WS2812B_breathing_offSubVal == 0 || (WS2812B_breathing_R == 0 && WS2812B_breathing_G == 0 && WS2812B_breathing_B == 0))
+            {
+                flag_WS2812B_breathing = false;
+                int numofLED = 450;
+                for(int i = 0 ; i < numofLED ; i++)
+                {             
+                   myWS2812.rgbBuffer[i * 3 + 0 + 0] = (int)(0);     // 将光带上第1个LED灯珠的RGB数值中R数值设置为255
+                   myWS2812.rgbBuffer[i * 3 + 0 + 1] = (int)(0);   // 将光带上第1个LED灯珠的RGB数值中G数值设置为255
+                   myWS2812.rgbBuffer[i * 3 + 0 + 2] = (int)(0);      // 将光带上第1个LED灯珠的RGB数值中B数值设置为0      
+                }
+                flag_WS2812B_Refresh = true;    
+            }
+            else
+            {
+                flag_WS2812B_breathing = true;
+            }
+            
+            
+            if(flag_udp_232back)printf("WS2812B_breathing_onAddVal : %d\n",WS2812B_breathing_onAddVal);
+            if(flag_udp_232back)printf("WS2812B_breathing_offSubVal : %d\n",WS2812B_breathing_offSubVal);
+            if(flag_udp_232back)printf("WS2812B_breathing_R : %d\n",WS2812B_breathing_R);
+            if(flag_udp_232back)printf("WS2812B_breathing_G : %d\n",WS2812B_breathing_G);
+            if(flag_udp_232back)printf("WS2812B_breathing_B : %d\n",WS2812B_breathing_B);
+    
+            Get_Checksum_UDP();
+          }
           
           else if (*(UdpRead + 1) == 'L')
           {

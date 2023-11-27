@@ -37,6 +37,7 @@ namespace H_Pannel_lib
             // 
             // rJ_Button_OK
             // 
+            this.rJ_Button_OK.AutoResetState = false;
             this.rJ_Button_OK.BackColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Button_OK.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Button_OK.BorderColor = System.Drawing.Color.PaleVioletRed;
@@ -46,6 +47,7 @@ namespace H_Pannel_lib
             this.rJ_Button_OK.FlatAppearance.BorderSize = 0;
             this.rJ_Button_OK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_OK.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_OK.GUID = "";
             this.rJ_Button_OK.Location = new System.Drawing.Point(548, 35);
             this.rJ_Button_OK.Name = "rJ_Button_OK";
             this.rJ_Button_OK.Size = new System.Drawing.Size(76, 40);
@@ -59,6 +61,8 @@ namespace H_Pannel_lib
             // rJ_TrackBar
             // 
             this.rJ_TrackBar.BarColor = System.Drawing.Color.LightGray;
+            this.rJ_TrackBar.BarFont = new System.Drawing.Font("微軟正黑體", 9F);
+            this.rJ_TrackBar.BarForeColor = System.Drawing.Color.DarkGray;
             this.rJ_TrackBar.BarSize = 50;
             this.rJ_TrackBar.BottomSliderColor = System.Drawing.Color.Red;
             this.rJ_TrackBar.Location = new System.Drawing.Point(40, 19);
@@ -67,7 +71,7 @@ namespace H_Pannel_lib
             this.rJ_TrackBar.Minimum = 0;
             this.rJ_TrackBar.MinValue = 0;
             this.rJ_TrackBar.Name = "rJ_TrackBar";
-            this.rJ_TrackBar.Size = new System.Drawing.Size(493, 70);
+            this.rJ_TrackBar.Size = new System.Drawing.Size(513, 70);
             this.rJ_TrackBar.SliderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.rJ_TrackBar.SliderSize = 10;
             this.rJ_TrackBar.TabIndex = 16;

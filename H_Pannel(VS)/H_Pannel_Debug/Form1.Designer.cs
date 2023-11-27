@@ -34,6 +34,7 @@
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.rJ_Button_WT32_初始化 = new MyUI.RJ_Button();
+            this.storageUI_WT32 = new H_Pannel_lib.StorageUI_WT32();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.rJ_Button_WT32_測試 = new MyUI.RJ_Button();
             this.rJ_Button_WT32_上傳畫面 = new MyUI.RJ_Button();
@@ -71,19 +72,27 @@
             this.rJ_TextBox_WT32_藥品碼 = new MyUI.RJ_TextBox();
             this.rJ_Button_WT32_上傳選擇儲位 = new MyUI.RJ_Button();
             this.rJ_Button_WT32_讀取選擇儲位 = new MyUI.RJ_Button();
+            this.pannel35_Pannel = new H_Pannel_lib.Pannel35_Pannel();
+            this.wT32_GPADC = new H_Pannel_lib.WT32_GPADC();
             this.EPD266 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.rJ_Button_EPD266_TEST = new MyUI.RJ_Button();
+            this.epD_266_Pannel = new H_Pannel_lib.EPD_266_Pannel();
             this.rJ_Button_EPD_266_初始化 = new MyUI.RJ_Button();
+            this.storageUI_EPD_266 = new H_Pannel_lib.StorageUI_EPD_266();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.EPD290 = new System.Windows.Forms.TabPage();
             this.rJ_Button_EPD_290_TEST = new MyUI.RJ_Button();
             this.rJ_Button_EPD_290_初始化 = new MyUI.RJ_Button();
+            this.epD_290_Pannel = new H_Pannel_lib.EPD_290_Pannel();
+            this.storageUI_EPD_290 = new H_Pannel_lib.StorageUI_EPD_290();
             this.EPD420 = new System.Windows.Forms.TabPage();
             this.tabControl7 = new System.Windows.Forms.TabControl();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.drawerUI_EPD_420 = new H_Pannel_lib.DrawerUI_EPD_420();
             this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.epD_420_Pannel = new H_Pannel_lib.EPD_420_Pannel();
             this.rJ_Button_EPD_420_填入測試畫面 = new MyUI.RJ_Button();
             this.EPD583 = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
@@ -96,40 +105,31 @@
             this.rJ_Button_epD_583_Pannel_儲位滅燈 = new MyUI.RJ_Button();
             this.rJ_Button_epD_583_Pannel_儲位亮燈 = new MyUI.RJ_Button();
             this.rJ_Button_epD_583_Pannel_上傳 = new MyUI.RJ_Button();
+            this.epD_583_Pannel = new H_Pannel_lib.EPD_583_Pannel();
             this.rJ_Button_EPD_583_初始化 = new MyUI.RJ_Button();
+            this.drawerUI_EPD_583 = new H_Pannel_lib.DrawerUI_EPD_583();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.EPD1020 = new System.Windows.Forms.TabPage();
             this.tabControl6 = new System.Windows.Forms.TabControl();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.drawerUI_EPD_1020 = new H_Pannel_lib.DrawerUI_EPD_1020();
             this.rJ_Button_EPD1020_初始化 = new MyUI.RJ_Button();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.rJ_Button_EPD_1020_門片畫面測試 = new MyUI.RJ_Button();
             this.rJ_Button_EPD_1020_填入測試畫面 = new MyUI.RJ_Button();
+            this.epD_1020_Pannel = new H_Pannel_lib.EPD_1020_Pannel();
             this.RowsLED = new System.Windows.Forms.TabPage();
             this.tabControl5 = new System.Windows.Forms.TabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.rJ_Button_RowsLED_初始化 = new MyUI.RJ_Button();
+            this.rowsLEDUI = new H_Pannel_lib.RowsLEDUI();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.RFID = new System.Windows.Forms.TabPage();
             this.rJ_Button_RFID_初始化 = new MyUI.RJ_Button();
+            this.rfiD_UI = new H_Pannel_lib.RFID_UI();
             this.H_RFID = new System.Windows.Forms.TabPage();
             this.sqL_DataGridView_h_RFID_Datas = new SQLUI.SQL_DataGridView();
             this.rJ_Button_H_RFID_初始化 = new MyUI.RJ_Button();
-            this.storageUI_WT32 = new H_Pannel_lib.StorageUI_WT32();
-            this.pannel35_Pannel = new H_Pannel_lib.Pannel35_Pannel();
-            this.wT32_GPADC = new H_Pannel_lib.WT32_GPADC();
-            this.epD_266_Pannel = new H_Pannel_lib.EPD_266_Pannel();
-            this.storageUI_EPD_266 = new H_Pannel_lib.StorageUI_EPD_266();
-            this.epD_290_Pannel = new H_Pannel_lib.EPD_290_Pannel();
-            this.storageUI_EPD_290 = new H_Pannel_lib.StorageUI_EPD_290();
-            this.drawerUI_EPD_420 = new H_Pannel_lib.DrawerUI_EPD_420();
-            this.epD_420_Pannel = new H_Pannel_lib.EPD_420_Pannel();
-            this.epD_583_Pannel = new H_Pannel_lib.EPD_583_Pannel();
-            this.drawerUI_EPD_583 = new H_Pannel_lib.DrawerUI_EPD_583();
-            this.drawerUI_EPD_1020 = new H_Pannel_lib.DrawerUI_EPD_1020();
-            this.epD_1020_Pannel = new H_Pannel_lib.EPD_1020_Pannel();
-            this.rowsLEDUI = new H_Pannel_lib.RowsLEDUI();
-            this.rfiD_UI = new H_Pannel_lib.RFID_UI();
             this.h_RFID_UI = new H_Pannel_lib.H_RFID_UI();
             this.tabControl1.SuspendLayout();
             this.WT32.SuspendLayout();
@@ -235,6 +235,7 @@
             this.rJ_Button_WT32_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_WT32_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_初始化.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_初始化.GUID = "";
             this.rJ_Button_WT32_初始化.Location = new System.Drawing.Point(1384, 13);
             this.rJ_Button_WT32_初始化.Name = "rJ_Button_WT32_初始化";
             this.rJ_Button_WT32_初始化.Size = new System.Drawing.Size(126, 67);
@@ -244,6 +245,35 @@
             this.rJ_Button_WT32_初始化.TextColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_初始化.UseVisualStyleBackColor = false;
             this.rJ_Button_WT32_初始化.Click += new System.EventHandler(this.rJ_Button_WT32_初始化_Click);
+            // 
+            // storageUI_WT32
+            // 
+            this.storageUI_WT32._Password = "";
+            this.storageUI_WT32.BackColor = System.Drawing.SystemColors.Window;
+            this.storageUI_WT32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storageUI_WT32.DataBaseName = "test";
+            this.storageUI_WT32.DNS = "0.0.0.0";
+            this.storageUI_WT32.Dock = System.Windows.Forms.DockStyle.Left;
+            this.storageUI_WT32.Gateway = "0.0.0.0";
+            this.storageUI_WT32.IP = "localhost";
+            this.storageUI_WT32.IP_Adress = "0.0.0.0";
+            this.storageUI_WT32.Local_Port = "0";
+            this.storageUI_WT32.Location = new System.Drawing.Point(0, 0);
+            this.storageUI_WT32.Name = "storageUI_WT32";
+            this.storageUI_WT32.Password = "user82822040";
+            this.storageUI_WT32.Port = ((uint)(3306u));
+            this.storageUI_WT32.Server_IP_Adress = "0.0.0.0";
+            this.storageUI_WT32.Server_Port = "0";
+            this.storageUI_WT32.Size = new System.Drawing.Size(1378, 989);
+            this.storageUI_WT32.SSID = "";
+            this.storageUI_WT32.Station = "0";
+            this.storageUI_WT32.Subnet = "0.0.0.0";
+            this.storageUI_WT32.TabIndex = 0;
+            this.storageUI_WT32.TableName = "WT32_Jsonstring";
+            this.storageUI_WT32.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_WT32.UDP_LocalPorts")));
+            this.storageUI_WT32.UDP_SendTime = "0";
+            this.storageUI_WT32.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_WT32.UDP_ServerPorts")));
+            this.storageUI_WT32.UserName = "root";
             // 
             // tabPage4
             // 
@@ -276,6 +306,7 @@
             this.rJ_Button_WT32_測試.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_WT32_測試.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_測試.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_測試.GUID = "";
             this.rJ_Button_WT32_測試.Location = new System.Drawing.Point(1608, 812);
             this.rJ_Button_WT32_測試.Name = "rJ_Button_WT32_測試";
             this.rJ_Button_WT32_測試.Size = new System.Drawing.Size(150, 55);
@@ -298,6 +329,7 @@
             this.rJ_Button_WT32_上傳畫面.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_WT32_上傳畫面.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_上傳畫面.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_上傳畫面.GUID = "";
             this.rJ_Button_WT32_上傳畫面.Location = new System.Drawing.Point(1608, 627);
             this.rJ_Button_WT32_上傳畫面.Name = "rJ_Button_WT32_上傳畫面";
             this.rJ_Button_WT32_上傳畫面.Size = new System.Drawing.Size(150, 55);
@@ -334,6 +366,7 @@
             this.rJ_GroupBox1.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox1.ContentsPanel.Size = new System.Drawing.Size(429, 567);
             this.rJ_GroupBox1.ContentsPanel.TabIndex = 2;
+            this.rJ_GroupBox1.GUID = "";
             this.rJ_GroupBox1.Location = new System.Drawing.Point(1083, 6);
             this.rJ_GroupBox1.Name = "rJ_GroupBox1";
             this.rJ_GroupBox1.PannelBackColor = System.Drawing.Color.White;
@@ -365,6 +398,7 @@
             this.rJ_Button_WT32_資料寫入.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_WT32_資料寫入.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_資料寫入.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_資料寫入.GUID = "";
             this.rJ_Button_WT32_資料寫入.Location = new System.Drawing.Point(262, 494);
             this.rJ_Button_WT32_資料寫入.Name = "rJ_Button_WT32_資料寫入";
             this.rJ_Button_WT32_資料寫入.Size = new System.Drawing.Size(150, 55);
@@ -394,6 +428,7 @@
             this.rJ_Lable10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable10.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Lable10.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable10.GUID = "";
             this.rJ_Lable10.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable10.Name = "rJ_Lable10";
             this.rJ_Lable10.Size = new System.Drawing.Size(146, 40);
@@ -411,6 +446,7 @@
             this.rJ_TextBox_WT32_庫存.BorderSize = 2;
             this.rJ_TextBox_WT32_庫存.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_WT32_庫存.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_WT32_庫存.GUID = "";
             this.rJ_TextBox_WT32_庫存.Location = new System.Drawing.Point(155, 6);
             this.rJ_TextBox_WT32_庫存.Multiline = false;
             this.rJ_TextBox_WT32_庫存.Name = "rJ_TextBox_WT32_庫存";
@@ -444,6 +480,7 @@
             this.rJ_Lable7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable7.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Lable7.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable7.GUID = "";
             this.rJ_Lable7.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable7.Name = "rJ_Lable7";
             this.rJ_Lable7.Size = new System.Drawing.Size(146, 40);
@@ -461,6 +498,7 @@
             this.rJ_TextBox_WT32_一維碼.BorderSize = 2;
             this.rJ_TextBox_WT32_一維碼.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_WT32_一維碼.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_WT32_一維碼.GUID = "";
             this.rJ_TextBox_WT32_一維碼.Location = new System.Drawing.Point(155, 6);
             this.rJ_TextBox_WT32_一維碼.Multiline = false;
             this.rJ_TextBox_WT32_一維碼.Name = "rJ_TextBox_WT32_一維碼";
@@ -494,6 +532,7 @@
             this.rJ_Lable8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable8.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Lable8.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable8.GUID = "";
             this.rJ_Lable8.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable8.Name = "rJ_Lable8";
             this.rJ_Lable8.Size = new System.Drawing.Size(146, 40);
@@ -511,6 +550,7 @@
             this.rJ_TextBox_WT32_最小包裝數量.BorderSize = 2;
             this.rJ_TextBox_WT32_最小包裝數量.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_WT32_最小包裝數量.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_WT32_最小包裝數量.GUID = "";
             this.rJ_TextBox_WT32_最小包裝數量.Location = new System.Drawing.Point(155, 6);
             this.rJ_TextBox_WT32_最小包裝數量.Multiline = false;
             this.rJ_TextBox_WT32_最小包裝數量.Name = "rJ_TextBox_WT32_最小包裝數量";
@@ -544,6 +584,7 @@
             this.rJ_Lable9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable9.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Lable9.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable9.GUID = "";
             this.rJ_Lable9.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable9.Name = "rJ_Lable9";
             this.rJ_Lable9.Size = new System.Drawing.Size(146, 40);
@@ -561,6 +602,7 @@
             this.rJ_TextBox_WT32_最小包裝單位.BorderSize = 2;
             this.rJ_TextBox_WT32_最小包裝單位.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_WT32_最小包裝單位.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_WT32_最小包裝單位.GUID = "";
             this.rJ_TextBox_WT32_最小包裝單位.Location = new System.Drawing.Point(155, 6);
             this.rJ_TextBox_WT32_最小包裝單位.Multiline = false;
             this.rJ_TextBox_WT32_最小包裝單位.Name = "rJ_TextBox_WT32_最小包裝單位";
@@ -594,6 +636,7 @@
             this.rJ_Lable4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable4.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Lable4.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable4.GUID = "";
             this.rJ_Lable4.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable4.Name = "rJ_Lable4";
             this.rJ_Lable4.Size = new System.Drawing.Size(146, 40);
@@ -611,6 +654,7 @@
             this.rJ_TextBox_WT32_包裝單位.BorderSize = 2;
             this.rJ_TextBox_WT32_包裝單位.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_WT32_包裝單位.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_WT32_包裝單位.GUID = "";
             this.rJ_TextBox_WT32_包裝單位.Location = new System.Drawing.Point(155, 6);
             this.rJ_TextBox_WT32_包裝單位.Multiline = false;
             this.rJ_TextBox_WT32_包裝單位.Name = "rJ_TextBox_WT32_包裝單位";
@@ -644,6 +688,7 @@
             this.rJ_Lable5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable5.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Lable5.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable5.GUID = "";
             this.rJ_Lable5.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable5.Name = "rJ_Lable5";
             this.rJ_Lable5.Size = new System.Drawing.Size(146, 40);
@@ -661,6 +706,7 @@
             this.rJ_TextBox_WT32_廠牌.BorderSize = 2;
             this.rJ_TextBox_WT32_廠牌.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_WT32_廠牌.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_WT32_廠牌.GUID = "";
             this.rJ_TextBox_WT32_廠牌.Location = new System.Drawing.Point(155, 6);
             this.rJ_TextBox_WT32_廠牌.Multiline = false;
             this.rJ_TextBox_WT32_廠牌.Name = "rJ_TextBox_WT32_廠牌";
@@ -694,6 +740,7 @@
             this.rJ_Lable6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable6.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Lable6.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable6.GUID = "";
             this.rJ_Lable6.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable6.Name = "rJ_Lable6";
             this.rJ_Lable6.Size = new System.Drawing.Size(146, 40);
@@ -711,6 +758,7 @@
             this.rJ_TextBox_WT32_藥品學名.BorderSize = 2;
             this.rJ_TextBox_WT32_藥品學名.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_WT32_藥品學名.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_WT32_藥品學名.GUID = "";
             this.rJ_TextBox_WT32_藥品學名.Location = new System.Drawing.Point(155, 6);
             this.rJ_TextBox_WT32_藥品學名.Multiline = false;
             this.rJ_TextBox_WT32_藥品學名.Name = "rJ_TextBox_WT32_藥品學名";
@@ -744,6 +792,7 @@
             this.rJ_Lable3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable3.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Lable3.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable3.GUID = "";
             this.rJ_Lable3.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable3.Name = "rJ_Lable3";
             this.rJ_Lable3.Size = new System.Drawing.Size(146, 40);
@@ -761,6 +810,7 @@
             this.rJ_TextBox_WT32_中文名稱.BorderSize = 2;
             this.rJ_TextBox_WT32_中文名稱.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_WT32_中文名稱.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_WT32_中文名稱.GUID = "";
             this.rJ_TextBox_WT32_中文名稱.Location = new System.Drawing.Point(155, 6);
             this.rJ_TextBox_WT32_中文名稱.Multiline = false;
             this.rJ_TextBox_WT32_中文名稱.Name = "rJ_TextBox_WT32_中文名稱";
@@ -794,6 +844,7 @@
             this.rJ_Lable1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Lable1.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable1.GUID = "";
             this.rJ_Lable1.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable1.Name = "rJ_Lable1";
             this.rJ_Lable1.Size = new System.Drawing.Size(146, 40);
@@ -811,6 +862,7 @@
             this.rJ_TextBox_WT32_藥品名稱.BorderSize = 2;
             this.rJ_TextBox_WT32_藥品名稱.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_WT32_藥品名稱.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_WT32_藥品名稱.GUID = "";
             this.rJ_TextBox_WT32_藥品名稱.Location = new System.Drawing.Point(155, 6);
             this.rJ_TextBox_WT32_藥品名稱.Multiline = false;
             this.rJ_TextBox_WT32_藥品名稱.Name = "rJ_TextBox_WT32_藥品名稱";
@@ -844,6 +896,7 @@
             this.rJ_Lable2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Lable2.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable2.GUID = "";
             this.rJ_Lable2.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable2.Name = "rJ_Lable2";
             this.rJ_Lable2.Size = new System.Drawing.Size(146, 40);
@@ -861,6 +914,7 @@
             this.rJ_TextBox_WT32_藥品碼.BorderSize = 2;
             this.rJ_TextBox_WT32_藥品碼.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_WT32_藥品碼.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_WT32_藥品碼.GUID = "";
             this.rJ_TextBox_WT32_藥品碼.Location = new System.Drawing.Point(155, 6);
             this.rJ_TextBox_WT32_藥品碼.Multiline = false;
             this.rJ_TextBox_WT32_藥品碼.Name = "rJ_TextBox_WT32_藥品碼";
@@ -888,6 +942,7 @@
             this.rJ_Button_WT32_上傳選擇儲位.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_WT32_上傳選擇儲位.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_上傳選擇儲位.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_上傳選擇儲位.GUID = "";
             this.rJ_Button_WT32_上傳選擇儲位.Location = new System.Drawing.Point(1083, 927);
             this.rJ_Button_WT32_上傳選擇儲位.Name = "rJ_Button_WT32_上傳選擇儲位";
             this.rJ_Button_WT32_上傳選擇儲位.Size = new System.Drawing.Size(150, 55);
@@ -911,6 +966,7 @@
             this.rJ_Button_WT32_讀取選擇儲位.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_WT32_讀取選擇儲位.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_讀取選擇儲位.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_讀取選擇儲位.GUID = "";
             this.rJ_Button_WT32_讀取選擇儲位.Location = new System.Drawing.Point(1083, 866);
             this.rJ_Button_WT32_讀取選擇儲位.Name = "rJ_Button_WT32_讀取選擇儲位";
             this.rJ_Button_WT32_讀取選擇儲位.Size = new System.Drawing.Size(150, 55);
@@ -920,6 +976,29 @@
             this.rJ_Button_WT32_讀取選擇儲位.TextColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_讀取選擇儲位.UseVisualStyleBackColor = false;
             this.rJ_Button_WT32_讀取選擇儲位.Click += new System.EventHandler(this.rJ_Button_WT32_讀取選擇儲位_Click);
+            // 
+            // pannel35_Pannel
+            // 
+            this.pannel35_Pannel.Location = new System.Drawing.Point(1236, 627);
+            this.pannel35_Pannel.Margin = new System.Windows.Forms.Padding(0);
+            this.pannel35_Pannel.Name = "pannel35_Pannel";
+            this.pannel35_Pannel.Size = new System.Drawing.Size(360, 240);
+            this.pannel35_Pannel.TabIndex = 31;
+            // 
+            // wT32_GPADC
+            // 
+            this.wT32_GPADC.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.wT32_GPADC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.wT32_GPADC.Cursor = System.Windows.Forms.Cursors.Default;
+            this.wT32_GPADC.Dock = System.Windows.Forms.DockStyle.Left;
+            this.wT32_GPADC.Location = new System.Drawing.Point(3, 3);
+            this.wT32_GPADC.MouseDownType = H_Pannel_lib.WT32_GPADC.TxMouseDownType.NONE;
+            this.wT32_GPADC.Name = "wT32_GPADC";
+            this.wT32_GPADC.Pannel_Green_Visible = false;
+            this.wT32_GPADC.Pannel_Lock_Visible = true;
+            this.wT32_GPADC.Pannel_Red_Visible = false;
+            this.wT32_GPADC.Size = new System.Drawing.Size(1074, 983);
+            this.wT32_GPADC.TabIndex = 25;
             // 
             // EPD266
             // 
@@ -968,6 +1047,7 @@
             this.rJ_Button_EPD266_TEST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD266_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD266_TEST.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD266_TEST.GUID = "";
             this.rJ_Button_EPD266_TEST.Location = new System.Drawing.Point(1516, 161);
             this.rJ_Button_EPD266_TEST.Name = "rJ_Button_EPD266_TEST";
             this.rJ_Button_EPD266_TEST.Size = new System.Drawing.Size(126, 67);
@@ -976,6 +1056,14 @@
             this.rJ_Button_EPD266_TEST.Text = "TEST";
             this.rJ_Button_EPD266_TEST.TextColor = System.Drawing.Color.White;
             this.rJ_Button_EPD266_TEST.UseVisualStyleBackColor = false;
+            // 
+            // epD_266_Pannel
+            // 
+            this.epD_266_Pannel.CurrentStorage = null;
+            this.epD_266_Pannel.Location = new System.Drawing.Point(1384, 0);
+            this.epD_266_Pannel.Name = "epD_266_Pannel";
+            this.epD_266_Pannel.Size = new System.Drawing.Size(296, 152);
+            this.epD_266_Pannel.TabIndex = 36;
             // 
             // rJ_Button_EPD_266_初始化
             // 
@@ -990,6 +1078,7 @@
             this.rJ_Button_EPD_266_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_266_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_266_初始化.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_266_初始化.GUID = "";
             this.rJ_Button_EPD_266_初始化.Location = new System.Drawing.Point(1384, 161);
             this.rJ_Button_EPD_266_初始化.Name = "rJ_Button_EPD_266_初始化";
             this.rJ_Button_EPD_266_初始化.Size = new System.Drawing.Size(126, 67);
@@ -999,6 +1088,35 @@
             this.rJ_Button_EPD_266_初始化.TextColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_266_初始化.UseVisualStyleBackColor = false;
             this.rJ_Button_EPD_266_初始化.Click += new System.EventHandler(this.rJ_Button_EPD_266_初始化_Click);
+            // 
+            // storageUI_EPD_266
+            // 
+            this.storageUI_EPD_266._Password = "";
+            this.storageUI_EPD_266.BackColor = System.Drawing.SystemColors.Window;
+            this.storageUI_EPD_266.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storageUI_EPD_266.DataBaseName = "dps01";
+            this.storageUI_EPD_266.DNS = "0.0.0.0";
+            this.storageUI_EPD_266.Dock = System.Windows.Forms.DockStyle.Left;
+            this.storageUI_EPD_266.Gateway = "0.0.0.0";
+            this.storageUI_EPD_266.IP = "localhost";
+            this.storageUI_EPD_266.IP_Adress = "0.0.0.0";
+            this.storageUI_EPD_266.Local_Port = "0";
+            this.storageUI_EPD_266.Location = new System.Drawing.Point(0, 0);
+            this.storageUI_EPD_266.Name = "storageUI_EPD_266";
+            this.storageUI_EPD_266.Password = "user82822040";
+            this.storageUI_EPD_266.Port = ((uint)(3306u));
+            this.storageUI_EPD_266.Server_IP_Adress = "0.0.0.0";
+            this.storageUI_EPD_266.Server_Port = "0";
+            this.storageUI_EPD_266.Size = new System.Drawing.Size(1378, 989);
+            this.storageUI_EPD_266.SSID = "";
+            this.storageUI_EPD_266.Station = "0";
+            this.storageUI_EPD_266.Subnet = "0.0.0.0";
+            this.storageUI_EPD_266.TabIndex = 0;
+            this.storageUI_EPD_266.TableName = "EPD266_Jsonstring";
+            this.storageUI_EPD_266.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_LocalPorts")));
+            this.storageUI_EPD_266.UDP_SendTime = "0";
+            this.storageUI_EPD_266.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_ServerPorts")));
+            this.storageUI_EPD_266.UserName = "root";
             // 
             // tabPage2
             // 
@@ -1036,6 +1154,7 @@
             this.rJ_Button_EPD_290_TEST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_290_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_290_TEST.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_290_TEST.GUID = "";
             this.rJ_Button_EPD_290_TEST.Location = new System.Drawing.Point(1531, 137);
             this.rJ_Button_EPD_290_TEST.Name = "rJ_Button_EPD_290_TEST";
             this.rJ_Button_EPD_290_TEST.Size = new System.Drawing.Size(126, 67);
@@ -1058,6 +1177,7 @@
             this.rJ_Button_EPD_290_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_290_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_290_初始化.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_290_初始化.GUID = "";
             this.rJ_Button_EPD_290_初始化.Location = new System.Drawing.Point(1399, 137);
             this.rJ_Button_EPD_290_初始化.Name = "rJ_Button_EPD_290_初始化";
             this.rJ_Button_EPD_290_初始化.Size = new System.Drawing.Size(126, 67);
@@ -1066,6 +1186,41 @@
             this.rJ_Button_EPD_290_初始化.Text = "初始化";
             this.rJ_Button_EPD_290_初始化.TextColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_290_初始化.UseVisualStyleBackColor = false;
+            // 
+            // epD_290_Pannel
+            // 
+            this.epD_290_Pannel.CurrentStorage = null;
+            this.epD_290_Pannel.Location = new System.Drawing.Point(1399, 3);
+            this.epD_290_Pannel.Name = "epD_290_Pannel";
+            this.epD_290_Pannel.Size = new System.Drawing.Size(296, 128);
+            this.epD_290_Pannel.TabIndex = 1;
+            // 
+            // storageUI_EPD_290
+            // 
+            this.storageUI_EPD_290._Password = "";
+            this.storageUI_EPD_290.DataBaseName = "dps01";
+            this.storageUI_EPD_290.DNS = "0.0.0.0";
+            this.storageUI_EPD_290.Dock = System.Windows.Forms.DockStyle.Left;
+            this.storageUI_EPD_290.Gateway = "0.0.0.0";
+            this.storageUI_EPD_290.IP = "localhost";
+            this.storageUI_EPD_290.IP_Adress = "0.0.0.0";
+            this.storageUI_EPD_290.Local_Port = "0";
+            this.storageUI_EPD_290.Location = new System.Drawing.Point(0, 0);
+            this.storageUI_EPD_290.Name = "storageUI_EPD_290";
+            this.storageUI_EPD_290.Password = "user82822040";
+            this.storageUI_EPD_290.Port = ((uint)(3306u));
+            this.storageUI_EPD_290.Server_IP_Adress = "0.0.0.0";
+            this.storageUI_EPD_290.Server_Port = "0";
+            this.storageUI_EPD_290.Size = new System.Drawing.Size(1393, 1015);
+            this.storageUI_EPD_290.SSID = "";
+            this.storageUI_EPD_290.Station = "0";
+            this.storageUI_EPD_290.Subnet = "0.0.0.0";
+            this.storageUI_EPD_290.TabIndex = 0;
+            this.storageUI_EPD_290.TableName = "EPD290_Jsonstring";
+            this.storageUI_EPD_290.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_LocalPorts")));
+            this.storageUI_EPD_290.UDP_SendTime = "0";
+            this.storageUI_EPD_290.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_ServerPorts")));
+            this.storageUI_EPD_290.UserName = "root";
             // 
             // EPD420
             // 
@@ -1098,6 +1253,33 @@
             this.tabPage11.Text = "資料設定";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
+            // drawerUI_EPD_420
+            // 
+            this.drawerUI_EPD_420._Password = "";
+            this.drawerUI_EPD_420.DataBaseName = "TEST";
+            this.drawerUI_EPD_420.DNS = "0.0.0.0";
+            this.drawerUI_EPD_420.Dock = System.Windows.Forms.DockStyle.Left;
+            this.drawerUI_EPD_420.Gateway = "0.0.0.0";
+            this.drawerUI_EPD_420.IP = "localhost";
+            this.drawerUI_EPD_420.IP_Adress = "0.0.0.0";
+            this.drawerUI_EPD_420.Local_Port = "0";
+            this.drawerUI_EPD_420.Location = new System.Drawing.Point(0, 0);
+            this.drawerUI_EPD_420.Name = "drawerUI_EPD_420";
+            this.drawerUI_EPD_420.Password = "user82822040";
+            this.drawerUI_EPD_420.Port = ((uint)(3306u));
+            this.drawerUI_EPD_420.Server_IP_Adress = "0.0.0.0";
+            this.drawerUI_EPD_420.Server_Port = "0";
+            this.drawerUI_EPD_420.Size = new System.Drawing.Size(1393, 989);
+            this.drawerUI_EPD_420.SSID = "";
+            this.drawerUI_EPD_420.Station = "0";
+            this.drawerUI_EPD_420.Subnet = "0.0.0.0";
+            this.drawerUI_EPD_420.TabIndex = 40;
+            this.drawerUI_EPD_420.TableName = "EPD420_Jsonstring";
+            this.drawerUI_EPD_420.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_420.UDP_LocalPorts")));
+            this.drawerUI_EPD_420.UDP_SendTime = "0";
+            this.drawerUI_EPD_420.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_420.UDP_ServerPorts")));
+            this.drawerUI_EPD_420.UserName = "root";
+            // 
             // tabPage12
             // 
             this.tabPage12.Controls.Add(this.epD_420_Pannel);
@@ -1109,6 +1291,15 @@
             this.tabPage12.TabIndex = 1;
             this.tabPage12.Text = "面板設定";
             this.tabPage12.UseVisualStyleBackColor = true;
+            // 
+            // epD_420_Pannel
+            // 
+            this.epD_420_Pannel.CurrentDrawer = null;
+            this.epD_420_Pannel.Location = new System.Drawing.Point(16, 21);
+            this.epD_420_Pannel.Margin = new System.Windows.Forms.Padding(0);
+            this.epD_420_Pannel.Name = "epD_420_Pannel";
+            this.epD_420_Pannel.Size = new System.Drawing.Size(400, 300);
+            this.epD_420_Pannel.TabIndex = 41;
             // 
             // rJ_Button_EPD_420_填入測試畫面
             // 
@@ -1123,6 +1314,7 @@
             this.rJ_Button_EPD_420_填入測試畫面.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_420_填入測試畫面.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_420_填入測試畫面.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_420_填入測試畫面.GUID = "";
             this.rJ_Button_EPD_420_填入測試畫面.Location = new System.Drawing.Point(430, 21);
             this.rJ_Button_EPD_420_填入測試畫面.Name = "rJ_Button_EPD_420_填入測試畫面";
             this.rJ_Button_EPD_420_填入測試畫面.Size = new System.Drawing.Size(126, 67);
@@ -1186,6 +1378,7 @@
             this.rJ_Button_epD_583_Pannel_TEST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_TEST.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_TEST.GUID = "";
             this.rJ_Button_epD_583_Pannel_TEST.Location = new System.Drawing.Point(1520, 3);
             this.rJ_Button_epD_583_Pannel_TEST.Name = "rJ_Button_epD_583_Pannel_TEST";
             this.rJ_Button_epD_583_Pannel_TEST.Size = new System.Drawing.Size(126, 67);
@@ -1208,6 +1401,7 @@
             this.rJ_Button_epD_583_Pannel_全部滅燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_全部滅燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_全部滅燈.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_全部滅燈.GUID = "";
             this.rJ_Button_epD_583_Pannel_全部滅燈.Location = new System.Drawing.Point(1374, 641);
             this.rJ_Button_epD_583_Pannel_全部滅燈.Name = "rJ_Button_epD_583_Pannel_全部滅燈";
             this.rJ_Button_epD_583_Pannel_全部滅燈.Size = new System.Drawing.Size(140, 67);
@@ -1230,6 +1424,7 @@
             this.rJ_Button_epD_583_Pannel_全部亮燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_全部亮燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_全部亮燈.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_全部亮燈.GUID = "";
             this.rJ_Button_epD_583_Pannel_全部亮燈.Location = new System.Drawing.Point(1228, 641);
             this.rJ_Button_epD_583_Pannel_全部亮燈.Name = "rJ_Button_epD_583_Pannel_全部亮燈";
             this.rJ_Button_epD_583_Pannel_全部亮燈.Size = new System.Drawing.Size(140, 67);
@@ -1253,6 +1448,7 @@
             this.rJ_Button_epD_583_Pannel_面板滅燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_面板滅燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_面板滅燈.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_面板滅燈.GUID = "";
             this.rJ_Button_epD_583_Pannel_面板滅燈.Location = new System.Drawing.Point(1666, 568);
             this.rJ_Button_epD_583_Pannel_面板滅燈.Name = "rJ_Button_epD_583_Pannel_面板滅燈";
             this.rJ_Button_epD_583_Pannel_面板滅燈.Size = new System.Drawing.Size(140, 67);
@@ -1276,6 +1472,7 @@
             this.rJ_Button_epD_583_Pannel_面板亮燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_面板亮燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_面板亮燈.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_面板亮燈.GUID = "";
             this.rJ_Button_epD_583_Pannel_面板亮燈.Location = new System.Drawing.Point(1520, 568);
             this.rJ_Button_epD_583_Pannel_面板亮燈.Name = "rJ_Button_epD_583_Pannel_面板亮燈";
             this.rJ_Button_epD_583_Pannel_面板亮燈.Size = new System.Drawing.Size(140, 67);
@@ -1299,6 +1496,7 @@
             this.rJ_Button_epD_583_Pannel_儲位滅燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_儲位滅燈.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_儲位滅燈.GUID = "";
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Location = new System.Drawing.Point(1374, 568);
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Name = "rJ_Button_epD_583_Pannel_儲位滅燈";
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Size = new System.Drawing.Size(140, 67);
@@ -1322,6 +1520,7 @@
             this.rJ_Button_epD_583_Pannel_儲位亮燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_儲位亮燈.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_儲位亮燈.GUID = "";
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Location = new System.Drawing.Point(1228, 568);
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Name = "rJ_Button_epD_583_Pannel_儲位亮燈";
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Size = new System.Drawing.Size(140, 67);
@@ -1344,6 +1543,7 @@
             this.rJ_Button_epD_583_Pannel_上傳.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_上傳.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_上傳.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_上傳.GUID = "";
             this.rJ_Button_epD_583_Pannel_上傳.Location = new System.Drawing.Point(1374, 3);
             this.rJ_Button_epD_583_Pannel_上傳.Name = "rJ_Button_epD_583_Pannel_上傳";
             this.rJ_Button_epD_583_Pannel_上傳.Size = new System.Drawing.Size(140, 67);
@@ -1353,6 +1553,15 @@
             this.rJ_Button_epD_583_Pannel_上傳.TextColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_上傳.UseVisualStyleBackColor = false;
             this.rJ_Button_epD_583_Pannel_上傳.Click += new System.EventHandler(this.rJ_Button_epD_583_Pannel_上傳_Click);
+            // 
+            // epD_583_Pannel
+            // 
+            this.epD_583_Pannel.CurrentDrawer = null;
+            this.epD_583_Pannel.Location = new System.Drawing.Point(1228, 73);
+            this.epD_583_Pannel.Margin = new System.Windows.Forms.Padding(0);
+            this.epD_583_Pannel.Name = "epD_583_Pannel";
+            this.epD_583_Pannel.Size = new System.Drawing.Size(648, 480);
+            this.epD_583_Pannel.TabIndex = 44;
             // 
             // rJ_Button_EPD_583_初始化
             // 
@@ -1367,6 +1576,7 @@
             this.rJ_Button_EPD_583_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_583_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_583_初始化.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_583_初始化.GUID = "";
             this.rJ_Button_EPD_583_初始化.Location = new System.Drawing.Point(1228, 3);
             this.rJ_Button_EPD_583_初始化.Name = "rJ_Button_EPD_583_初始化";
             this.rJ_Button_EPD_583_初始化.Size = new System.Drawing.Size(140, 67);
@@ -1376,6 +1586,33 @@
             this.rJ_Button_EPD_583_初始化.TextColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_583_初始化.UseVisualStyleBackColor = false;
             this.rJ_Button_EPD_583_初始化.Click += new System.EventHandler(this.rJ_Button_EPD_583_初始化_Click);
+            // 
+            // drawerUI_EPD_583
+            // 
+            this.drawerUI_EPD_583._Password = "";
+            this.drawerUI_EPD_583.DataBaseName = "dps01";
+            this.drawerUI_EPD_583.DNS = "0.0.0.0";
+            this.drawerUI_EPD_583.Dock = System.Windows.Forms.DockStyle.Left;
+            this.drawerUI_EPD_583.Gateway = "0.0.0.0";
+            this.drawerUI_EPD_583.IP = "127.0.0.1";
+            this.drawerUI_EPD_583.IP_Adress = "0.0.0.0";
+            this.drawerUI_EPD_583.Local_Port = "0";
+            this.drawerUI_EPD_583.Location = new System.Drawing.Point(0, 0);
+            this.drawerUI_EPD_583.Name = "drawerUI_EPD_583";
+            this.drawerUI_EPD_583.Password = "user82822040";
+            this.drawerUI_EPD_583.Port = ((uint)(3306u));
+            this.drawerUI_EPD_583.Server_IP_Adress = "0.0.0.0";
+            this.drawerUI_EPD_583.Server_Port = "0";
+            this.drawerUI_EPD_583.Size = new System.Drawing.Size(1206, 989);
+            this.drawerUI_EPD_583.SSID = "";
+            this.drawerUI_EPD_583.Station = "0";
+            this.drawerUI_EPD_583.Subnet = "0.0.0.0";
+            this.drawerUI_EPD_583.TabIndex = 37;
+            this.drawerUI_EPD_583.TableName = "EPD583_Jsonstring";
+            this.drawerUI_EPD_583.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_583.UDP_LocalPorts")));
+            this.drawerUI_EPD_583.UDP_SendTime = "0";
+            this.drawerUI_EPD_583.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_583.UDP_ServerPorts")));
+            this.drawerUI_EPD_583.UserName = "root";
             // 
             // tabPage6
             // 
@@ -1419,6 +1656,33 @@
             this.tabPage9.Text = "資料設定";
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
+            // drawerUI_EPD_1020
+            // 
+            this.drawerUI_EPD_1020._Password = "";
+            this.drawerUI_EPD_1020.DataBaseName = "TEST";
+            this.drawerUI_EPD_1020.DNS = "0.0.0.0";
+            this.drawerUI_EPD_1020.Dock = System.Windows.Forms.DockStyle.Left;
+            this.drawerUI_EPD_1020.Gateway = "0.0.0.0";
+            this.drawerUI_EPD_1020.IP = "localhost";
+            this.drawerUI_EPD_1020.IP_Adress = "0.0.0.0";
+            this.drawerUI_EPD_1020.Local_Port = "0";
+            this.drawerUI_EPD_1020.Location = new System.Drawing.Point(0, 0);
+            this.drawerUI_EPD_1020.Name = "drawerUI_EPD_1020";
+            this.drawerUI_EPD_1020.Password = "user82822040";
+            this.drawerUI_EPD_1020.Port = ((uint)(3306u));
+            this.drawerUI_EPD_1020.Server_IP_Adress = "0.0.0.0";
+            this.drawerUI_EPD_1020.Server_Port = "0";
+            this.drawerUI_EPD_1020.Size = new System.Drawing.Size(1393, 989);
+            this.drawerUI_EPD_1020.SSID = "";
+            this.drawerUI_EPD_1020.Station = "0";
+            this.drawerUI_EPD_1020.Subnet = "0.0.0.0";
+            this.drawerUI_EPD_1020.TabIndex = 40;
+            this.drawerUI_EPD_1020.TableName = "EPD1020_Jsonstring";
+            this.drawerUI_EPD_1020.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_1020.UDP_LocalPorts")));
+            this.drawerUI_EPD_1020.UDP_SendTime = "0";
+            this.drawerUI_EPD_1020.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_1020.UDP_ServerPorts")));
+            this.drawerUI_EPD_1020.UserName = "root";
+            // 
             // rJ_Button_EPD1020_初始化
             // 
             this.rJ_Button_EPD1020_初始化.AutoResetState = false;
@@ -1432,6 +1696,7 @@
             this.rJ_Button_EPD1020_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD1020_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD1020_初始化.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD1020_初始化.GUID = "";
             this.rJ_Button_EPD1020_初始化.Location = new System.Drawing.Point(1402, 3);
             this.rJ_Button_EPD1020_初始化.Name = "rJ_Button_EPD1020_初始化";
             this.rJ_Button_EPD1020_初始化.Size = new System.Drawing.Size(126, 67);
@@ -1467,6 +1732,7 @@
             this.rJ_Button_EPD_1020_門片畫面測試.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_1020_門片畫面測試.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_1020_門片畫面測試.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_1020_門片畫面測試.GUID = "";
             this.rJ_Button_EPD_1020_門片畫面測試.Location = new System.Drawing.Point(673, 130);
             this.rJ_Button_EPD_1020_門片畫面測試.Name = "rJ_Button_EPD_1020_門片畫面測試";
             this.rJ_Button_EPD_1020_門片畫面測試.Size = new System.Drawing.Size(126, 67);
@@ -1489,6 +1755,7 @@
             this.rJ_Button_EPD_1020_填入測試畫面.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_1020_填入測試畫面.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_1020_填入測試畫面.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_1020_填入測試畫面.GUID = "";
             this.rJ_Button_EPD_1020_填入測試畫面.Location = new System.Drawing.Point(673, 6);
             this.rJ_Button_EPD_1020_填入測試畫面.Name = "rJ_Button_EPD_1020_填入測試畫面";
             this.rJ_Button_EPD_1020_填入測試畫面.Size = new System.Drawing.Size(126, 67);
@@ -1497,6 +1764,16 @@
             this.rJ_Button_EPD_1020_填入測試畫面.Text = "填入測試畫面";
             this.rJ_Button_EPD_1020_填入測試畫面.TextColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_1020_填入測試畫面.UseVisualStyleBackColor = false;
+            // 
+            // epD_1020_Pannel
+            // 
+            this.epD_1020_Pannel.CurrentDrawer = null;
+            this.epD_1020_Pannel.Location = new System.Drawing.Point(27, 21);
+            this.epD_1020_Pannel.Margin = new System.Windows.Forms.Padding(0);
+            this.epD_1020_Pannel.Name = "epD_1020_Pannel";
+            this.epD_1020_Pannel.Size = new System.Drawing.Size(320, 480);
+            this.epD_1020_Pannel.TabIndex = 0;
+            this.epD_1020_Pannel.Tx_Panel_Type = H_Pannel_lib.DrawerUI_EPD_1020.Tx_Panel_Type.門櫃;
             // 
             // RowsLED
             // 
@@ -1543,6 +1820,7 @@
             this.rJ_Button_RowsLED_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_RowsLED_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_RowsLED_初始化.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_RowsLED_初始化.GUID = "";
             this.rJ_Button_RowsLED_初始化.Location = new System.Drawing.Point(1402, 3);
             this.rJ_Button_RowsLED_初始化.Name = "rJ_Button_RowsLED_初始化";
             this.rJ_Button_RowsLED_初始化.Size = new System.Drawing.Size(126, 67);
@@ -1552,6 +1830,33 @@
             this.rJ_Button_RowsLED_初始化.TextColor = System.Drawing.Color.White;
             this.rJ_Button_RowsLED_初始化.UseVisualStyleBackColor = false;
             this.rJ_Button_RowsLED_初始化.Click += new System.EventHandler(this.rJ_Button_RowsLED_初始化_Click);
+            // 
+            // rowsLEDUI
+            // 
+            this.rowsLEDUI._Password = "";
+            this.rowsLEDUI.DataBaseName = "TEST";
+            this.rowsLEDUI.DNS = "0.0.0.0";
+            this.rowsLEDUI.Dock = System.Windows.Forms.DockStyle.Left;
+            this.rowsLEDUI.Gateway = "0.0.0.0";
+            this.rowsLEDUI.IP = "localhost";
+            this.rowsLEDUI.IP_Adress = "0.0.0.0";
+            this.rowsLEDUI.Local_Port = "0";
+            this.rowsLEDUI.Location = new System.Drawing.Point(0, 0);
+            this.rowsLEDUI.Name = "rowsLEDUI";
+            this.rowsLEDUI.Password = "user82822040";
+            this.rowsLEDUI.Port = ((uint)(3306u));
+            this.rowsLEDUI.Server_IP_Adress = "0.0.0.0";
+            this.rowsLEDUI.Server_Port = "0";
+            this.rowsLEDUI.Size = new System.Drawing.Size(1393, 989);
+            this.rowsLEDUI.SSID = "";
+            this.rowsLEDUI.Station = "0";
+            this.rowsLEDUI.Subnet = "0.0.0.0";
+            this.rowsLEDUI.TabIndex = 0;
+            this.rowsLEDUI.TableName = "RowsLED_Jsonstring";
+            this.rowsLEDUI.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("rowsLEDUI.UDP_LocalPorts")));
+            this.rowsLEDUI.UDP_SendTime = "0";
+            this.rowsLEDUI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("rowsLEDUI.UDP_ServerPorts")));
+            this.rowsLEDUI.UserName = "root";
             // 
             // tabPage8
             // 
@@ -1587,6 +1892,7 @@
             this.rJ_Button_RFID_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_RFID_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_RFID_初始化.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_RFID_初始化.GUID = "";
             this.rJ_Button_RFID_初始化.Location = new System.Drawing.Point(1399, 3);
             this.rJ_Button_RFID_初始化.Name = "rJ_Button_RFID_初始化";
             this.rJ_Button_RFID_初始化.Size = new System.Drawing.Size(126, 67);
@@ -1595,6 +1901,34 @@
             this.rJ_Button_RFID_初始化.Text = "初始化";
             this.rJ_Button_RFID_初始化.TextColor = System.Drawing.Color.White;
             this.rJ_Button_RFID_初始化.UseVisualStyleBackColor = false;
+            // 
+            // rfiD_UI
+            // 
+            this.rfiD_UI._Password = "";
+            this.rfiD_UI.BackColor = System.Drawing.SystemColors.Window;
+            this.rfiD_UI.DataBaseName = "TEST";
+            this.rfiD_UI.DNS = "0.0.0.0";
+            this.rfiD_UI.Dock = System.Windows.Forms.DockStyle.Left;
+            this.rfiD_UI.Gateway = "0.0.0.0";
+            this.rfiD_UI.IP = "localhost";
+            this.rfiD_UI.IP_Adress = "0.0.0.0";
+            this.rfiD_UI.Local_Port = "0";
+            this.rfiD_UI.Location = new System.Drawing.Point(0, 0);
+            this.rfiD_UI.Name = "rfiD_UI";
+            this.rfiD_UI.Password = "user82822040";
+            this.rfiD_UI.Port = ((uint)(3306u));
+            this.rfiD_UI.RFID_Enable = "0";
+            this.rfiD_UI.Server_IP_Adress = "0.0.0.0";
+            this.rfiD_UI.Server_Port = "0";
+            this.rfiD_UI.Size = new System.Drawing.Size(1393, 1015);
+            this.rfiD_UI.SSID = "";
+            this.rfiD_UI.Station = "0";
+            this.rfiD_UI.Subnet = "0.0.0.0";
+            this.rfiD_UI.TabIndex = 0;
+            this.rfiD_UI.TableName = "RFID_Device_Jsonstring";
+            this.rfiD_UI.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("rfiD_UI.UDP_LocalPorts")));
+            this.rfiD_UI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("rfiD_UI.UDP_ServerPorts")));
+            this.rfiD_UI.UserName = "root";
             // 
             // H_RFID
             // 
@@ -1671,6 +2005,7 @@
             this.rJ_Button_H_RFID_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_H_RFID_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_H_RFID_初始化.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_H_RFID_初始化.GUID = "";
             this.rJ_Button_H_RFID_初始化.Location = new System.Drawing.Point(1422, 566);
             this.rJ_Button_H_RFID_初始化.Name = "rJ_Button_H_RFID_初始化";
             this.rJ_Button_H_RFID_初始化.Size = new System.Drawing.Size(126, 67);
@@ -1679,294 +2014,6 @@
             this.rJ_Button_H_RFID_初始化.Text = "初始化";
             this.rJ_Button_H_RFID_初始化.TextColor = System.Drawing.Color.White;
             this.rJ_Button_H_RFID_初始化.UseVisualStyleBackColor = false;
-            // 
-            // storageUI_WT32
-            // 
-            this.storageUI_WT32._Password = "";
-            this.storageUI_WT32.BackColor = System.Drawing.SystemColors.Window;
-            this.storageUI_WT32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.storageUI_WT32.DataBaseName = "test";
-            this.storageUI_WT32.DNS = "0.0.0.0";
-            this.storageUI_WT32.Dock = System.Windows.Forms.DockStyle.Left;
-            this.storageUI_WT32.Gateway = "0.0.0.0";
-            this.storageUI_WT32.IP = "localhost";
-            this.storageUI_WT32.IP_Adress = "0.0.0.0";
-            this.storageUI_WT32.Local_Port = "0";
-            this.storageUI_WT32.Location = new System.Drawing.Point(0, 0);
-            this.storageUI_WT32.Name = "storageUI_WT32";
-            this.storageUI_WT32.Password = "user82822040";
-            this.storageUI_WT32.Port = ((uint)(3306u));
-            this.storageUI_WT32.Server_IP_Adress = "0.0.0.0";
-            this.storageUI_WT32.Server_Port = "0";
-            this.storageUI_WT32.Size = new System.Drawing.Size(1378, 989);
-            this.storageUI_WT32.SSID = "";
-            this.storageUI_WT32.Station = "0";
-            this.storageUI_WT32.Subnet = "0.0.0.0";
-            this.storageUI_WT32.TabIndex = 0;
-            this.storageUI_WT32.TableName = "WT32_Jsonstring";
-            this.storageUI_WT32.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_WT32.UDP_LocalPorts")));
-            this.storageUI_WT32.UDP_SendTime = "0";
-            this.storageUI_WT32.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_WT32.UDP_ServerPorts")));
-            this.storageUI_WT32.UserName = "root";
-            // 
-            // pannel35_Pannel
-            // 
-            this.pannel35_Pannel.Location = new System.Drawing.Point(1236, 627);
-            this.pannel35_Pannel.Margin = new System.Windows.Forms.Padding(0);
-            this.pannel35_Pannel.Name = "pannel35_Pannel";
-            this.pannel35_Pannel.Size = new System.Drawing.Size(360, 240);
-            this.pannel35_Pannel.TabIndex = 31;
-            // 
-            // wT32_GPADC
-            // 
-            this.wT32_GPADC.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.wT32_GPADC.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.wT32_GPADC.Cursor = System.Windows.Forms.Cursors.Default;
-            this.wT32_GPADC.Dock = System.Windows.Forms.DockStyle.Left;
-            this.wT32_GPADC.Location = new System.Drawing.Point(3, 3);
-            this.wT32_GPADC.MouseDownType = H_Pannel_lib.WT32_GPADC.TxMouseDownType.NONE;
-            this.wT32_GPADC.Name = "wT32_GPADC";
-            this.wT32_GPADC.Pannel_Green_Visible = false;
-            this.wT32_GPADC.Pannel_Lock_Visible = true;
-            this.wT32_GPADC.Pannel_Red_Visible = false;
-            this.wT32_GPADC.Size = new System.Drawing.Size(1074, 983);
-            this.wT32_GPADC.TabIndex = 25;
-            // 
-            // epD_266_Pannel
-            // 
-            this.epD_266_Pannel.CurrentStorage = null;
-            this.epD_266_Pannel.Location = new System.Drawing.Point(1384, 0);
-            this.epD_266_Pannel.Name = "epD_266_Pannel";
-            this.epD_266_Pannel.Size = new System.Drawing.Size(296, 152);
-            this.epD_266_Pannel.TabIndex = 36;
-            // 
-            // storageUI_EPD_266
-            // 
-            this.storageUI_EPD_266._Password = "";
-            this.storageUI_EPD_266.BackColor = System.Drawing.SystemColors.Window;
-            this.storageUI_EPD_266.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.storageUI_EPD_266.DataBaseName = "dps01";
-            this.storageUI_EPD_266.DNS = "0.0.0.0";
-            this.storageUI_EPD_266.Dock = System.Windows.Forms.DockStyle.Left;
-            this.storageUI_EPD_266.Gateway = "0.0.0.0";
-            this.storageUI_EPD_266.IP = "localhost";
-            this.storageUI_EPD_266.IP_Adress = "0.0.0.0";
-            this.storageUI_EPD_266.Local_Port = "0";
-            this.storageUI_EPD_266.Location = new System.Drawing.Point(0, 0);
-            this.storageUI_EPD_266.Name = "storageUI_EPD_266";
-            this.storageUI_EPD_266.Password = "user82822040";
-            this.storageUI_EPD_266.Port = ((uint)(3306u));
-            this.storageUI_EPD_266.Server_IP_Adress = "0.0.0.0";
-            this.storageUI_EPD_266.Server_Port = "0";
-            this.storageUI_EPD_266.Size = new System.Drawing.Size(1378, 989);
-            this.storageUI_EPD_266.SSID = "";
-            this.storageUI_EPD_266.Station = "0";
-            this.storageUI_EPD_266.Subnet = "0.0.0.0";
-            this.storageUI_EPD_266.TabIndex = 0;
-            this.storageUI_EPD_266.TableName = "EPD266_Jsonstring";
-            this.storageUI_EPD_266.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_LocalPorts")));
-            this.storageUI_EPD_266.UDP_SendTime = "0";
-            this.storageUI_EPD_266.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_ServerPorts")));
-            this.storageUI_EPD_266.UserName = "root";
-            // 
-            // epD_290_Pannel
-            // 
-            this.epD_290_Pannel.CurrentStorage = null;
-            this.epD_290_Pannel.Location = new System.Drawing.Point(1399, 3);
-            this.epD_290_Pannel.Name = "epD_290_Pannel";
-            this.epD_290_Pannel.Size = new System.Drawing.Size(296, 128);
-            this.epD_290_Pannel.TabIndex = 1;
-            // 
-            // storageUI_EPD_290
-            // 
-            this.storageUI_EPD_290._Password = "";
-            this.storageUI_EPD_290.DataBaseName = "dps01";
-            this.storageUI_EPD_290.DNS = "0.0.0.0";
-            this.storageUI_EPD_290.Dock = System.Windows.Forms.DockStyle.Left;
-            this.storageUI_EPD_290.Gateway = "0.0.0.0";
-            this.storageUI_EPD_290.IP = "localhost";
-            this.storageUI_EPD_290.IP_Adress = "0.0.0.0";
-            this.storageUI_EPD_290.Local_Port = "0";
-            this.storageUI_EPD_290.Location = new System.Drawing.Point(0, 0);
-            this.storageUI_EPD_290.Name = "storageUI_EPD_290";
-            this.storageUI_EPD_290.Password = "user82822040";
-            this.storageUI_EPD_290.Port = ((uint)(3306u));
-            this.storageUI_EPD_290.Server_IP_Adress = "0.0.0.0";
-            this.storageUI_EPD_290.Server_Port = "0";
-            this.storageUI_EPD_290.Size = new System.Drawing.Size(1393, 1015);
-            this.storageUI_EPD_290.SSID = "";
-            this.storageUI_EPD_290.Station = "0";
-            this.storageUI_EPD_290.Subnet = "0.0.0.0";
-            this.storageUI_EPD_290.TabIndex = 0;
-            this.storageUI_EPD_290.TableName = "EPD290_Jsonstring";
-            this.storageUI_EPD_290.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_LocalPorts")));
-            this.storageUI_EPD_290.UDP_SendTime = "0";
-            this.storageUI_EPD_290.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_ServerPorts")));
-            this.storageUI_EPD_290.UserName = "root";
-            // 
-            // drawerUI_EPD_420
-            // 
-            this.drawerUI_EPD_420._Password = "";
-            this.drawerUI_EPD_420.DataBaseName = "TEST";
-            this.drawerUI_EPD_420.DNS = "0.0.0.0";
-            this.drawerUI_EPD_420.Dock = System.Windows.Forms.DockStyle.Left;
-            this.drawerUI_EPD_420.Gateway = "0.0.0.0";
-            this.drawerUI_EPD_420.IP = "localhost";
-            this.drawerUI_EPD_420.IP_Adress = "0.0.0.0";
-            this.drawerUI_EPD_420.Local_Port = "0";
-            this.drawerUI_EPD_420.Location = new System.Drawing.Point(0, 0);
-            this.drawerUI_EPD_420.Name = "drawerUI_EPD_420";
-            this.drawerUI_EPD_420.Password = "user82822040";
-            this.drawerUI_EPD_420.Port = ((uint)(3306u));
-            this.drawerUI_EPD_420.Server_IP_Adress = "0.0.0.0";
-            this.drawerUI_EPD_420.Server_Port = "0";
-            this.drawerUI_EPD_420.Size = new System.Drawing.Size(1393, 989);
-            this.drawerUI_EPD_420.SSID = "";
-            this.drawerUI_EPD_420.Station = "0";
-            this.drawerUI_EPD_420.Subnet = "0.0.0.0";
-            this.drawerUI_EPD_420.TabIndex = 40;
-            this.drawerUI_EPD_420.TableName = "EPD420_Jsonstring";
-            this.drawerUI_EPD_420.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_420.UDP_LocalPorts")));
-            this.drawerUI_EPD_420.UDP_SendTime = "0";
-            this.drawerUI_EPD_420.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_420.UDP_ServerPorts")));
-            this.drawerUI_EPD_420.UserName = "root";
-            // 
-            // epD_420_Pannel
-            // 
-            this.epD_420_Pannel.CurrentDrawer = null;
-            this.epD_420_Pannel.Location = new System.Drawing.Point(16, 21);
-            this.epD_420_Pannel.Margin = new System.Windows.Forms.Padding(0);
-            this.epD_420_Pannel.Name = "epD_420_Pannel";
-            this.epD_420_Pannel.Size = new System.Drawing.Size(400, 300);
-            this.epD_420_Pannel.TabIndex = 41;
-            // 
-            // epD_583_Pannel
-            // 
-            this.epD_583_Pannel.CurrentDrawer = null;
-            this.epD_583_Pannel.Location = new System.Drawing.Point(1228, 73);
-            this.epD_583_Pannel.Margin = new System.Windows.Forms.Padding(0);
-            this.epD_583_Pannel.Name = "epD_583_Pannel";
-            this.epD_583_Pannel.Size = new System.Drawing.Size(648, 480);
-            this.epD_583_Pannel.TabIndex = 44;
-            // 
-            // drawerUI_EPD_583
-            // 
-            this.drawerUI_EPD_583._Password = "";
-            this.drawerUI_EPD_583.DataBaseName = "dps01";
-            this.drawerUI_EPD_583.DNS = "0.0.0.0";
-            this.drawerUI_EPD_583.Dock = System.Windows.Forms.DockStyle.Left;
-            this.drawerUI_EPD_583.Gateway = "0.0.0.0";
-            this.drawerUI_EPD_583.IP = "127.0.0.1";
-            this.drawerUI_EPD_583.IP_Adress = "0.0.0.0";
-            this.drawerUI_EPD_583.Local_Port = "0";
-            this.drawerUI_EPD_583.Location = new System.Drawing.Point(0, 0);
-            this.drawerUI_EPD_583.Name = "drawerUI_EPD_583";
-            this.drawerUI_EPD_583.Password = "user82822040";
-            this.drawerUI_EPD_583.Port = ((uint)(3306u));
-            this.drawerUI_EPD_583.Server_IP_Adress = "0.0.0.0";
-            this.drawerUI_EPD_583.Server_Port = "0";
-            this.drawerUI_EPD_583.Size = new System.Drawing.Size(1206, 989);
-            this.drawerUI_EPD_583.SSID = "";
-            this.drawerUI_EPD_583.Station = "0";
-            this.drawerUI_EPD_583.Subnet = "0.0.0.0";
-            this.drawerUI_EPD_583.TabIndex = 37;
-            this.drawerUI_EPD_583.TableName = "EPD583_Jsonstring";
-            this.drawerUI_EPD_583.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_583.UDP_LocalPorts")));
-            this.drawerUI_EPD_583.UDP_SendTime = "0";
-            this.drawerUI_EPD_583.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_583.UDP_ServerPorts")));
-            this.drawerUI_EPD_583.UserName = "root";
-            // 
-            // drawerUI_EPD_1020
-            // 
-            this.drawerUI_EPD_1020._Password = "";
-            this.drawerUI_EPD_1020.DataBaseName = "TEST";
-            this.drawerUI_EPD_1020.DNS = "0.0.0.0";
-            this.drawerUI_EPD_1020.Dock = System.Windows.Forms.DockStyle.Left;
-            this.drawerUI_EPD_1020.Gateway = "0.0.0.0";
-            this.drawerUI_EPD_1020.IP = "localhost";
-            this.drawerUI_EPD_1020.IP_Adress = "0.0.0.0";
-            this.drawerUI_EPD_1020.Local_Port = "0";
-            this.drawerUI_EPD_1020.Location = new System.Drawing.Point(0, 0);
-            this.drawerUI_EPD_1020.Name = "drawerUI_EPD_1020";
-            this.drawerUI_EPD_1020.Password = "user82822040";
-            this.drawerUI_EPD_1020.Port = ((uint)(3306u));
-            this.drawerUI_EPD_1020.Server_IP_Adress = "0.0.0.0";
-            this.drawerUI_EPD_1020.Server_Port = "0";
-            this.drawerUI_EPD_1020.Size = new System.Drawing.Size(1393, 989);
-            this.drawerUI_EPD_1020.SSID = "";
-            this.drawerUI_EPD_1020.Station = "0";
-            this.drawerUI_EPD_1020.Subnet = "0.0.0.0";
-            this.drawerUI_EPD_1020.TabIndex = 40;
-            this.drawerUI_EPD_1020.TableName = "EPD1020_Jsonstring";
-            this.drawerUI_EPD_1020.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_1020.UDP_LocalPorts")));
-            this.drawerUI_EPD_1020.UDP_SendTime = "0";
-            this.drawerUI_EPD_1020.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("drawerUI_EPD_1020.UDP_ServerPorts")));
-            this.drawerUI_EPD_1020.UserName = "root";
-            // 
-            // epD_1020_Pannel
-            // 
-            this.epD_1020_Pannel.CurrentDrawer = null;
-            this.epD_1020_Pannel.Location = new System.Drawing.Point(27, 21);
-            this.epD_1020_Pannel.Margin = new System.Windows.Forms.Padding(0);
-            this.epD_1020_Pannel.Name = "epD_1020_Pannel";
-            this.epD_1020_Pannel.Size = new System.Drawing.Size(448, 672);
-            this.epD_1020_Pannel.TabIndex = 0;
-            this.epD_1020_Pannel.Tx_Panel_Type = H_Pannel_lib.DrawerUI_EPD_1020.Tx_Panel_Type.門櫃;
-            // 
-            // rowsLEDUI
-            // 
-            this.rowsLEDUI._Password = "";
-            this.rowsLEDUI.DataBaseName = "TEST";
-            this.rowsLEDUI.DNS = "0.0.0.0";
-            this.rowsLEDUI.Dock = System.Windows.Forms.DockStyle.Left;
-            this.rowsLEDUI.Gateway = "0.0.0.0";
-            this.rowsLEDUI.IP = "localhost";
-            this.rowsLEDUI.IP_Adress = "0.0.0.0";
-            this.rowsLEDUI.Local_Port = "0";
-            this.rowsLEDUI.Location = new System.Drawing.Point(0, 0);
-            this.rowsLEDUI.Name = "rowsLEDUI";
-            this.rowsLEDUI.Password = "user82822040";
-            this.rowsLEDUI.Port = ((uint)(3306u));
-            this.rowsLEDUI.Server_IP_Adress = "0.0.0.0";
-            this.rowsLEDUI.Server_Port = "0";
-            this.rowsLEDUI.Size = new System.Drawing.Size(1393, 989);
-            this.rowsLEDUI.SSID = "";
-            this.rowsLEDUI.Station = "0";
-            this.rowsLEDUI.Subnet = "0.0.0.0";
-            this.rowsLEDUI.TabIndex = 0;
-            this.rowsLEDUI.TableName = "RowsLED_Jsonstring";
-            this.rowsLEDUI.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("rowsLEDUI.UDP_LocalPorts")));
-            this.rowsLEDUI.UDP_SendTime = "0";
-            this.rowsLEDUI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("rowsLEDUI.UDP_ServerPorts")));
-            this.rowsLEDUI.UserName = "root";
-            // 
-            // rfiD_UI
-            // 
-            this.rfiD_UI._Password = "";
-            this.rfiD_UI.BackColor = System.Drawing.SystemColors.Window;
-            this.rfiD_UI.DataBaseName = "TEST";
-            this.rfiD_UI.DNS = "0.0.0.0";
-            this.rfiD_UI.Dock = System.Windows.Forms.DockStyle.Left;
-            this.rfiD_UI.Gateway = "0.0.0.0";
-            this.rfiD_UI.IP = "localhost";
-            this.rfiD_UI.IP_Adress = "0.0.0.0";
-            this.rfiD_UI.Local_Port = "0";
-            this.rfiD_UI.Location = new System.Drawing.Point(0, 0);
-            this.rfiD_UI.Name = "rfiD_UI";
-            this.rfiD_UI.Password = "user82822040";
-            this.rfiD_UI.Port = ((uint)(3306u));
-            this.rfiD_UI.RFID_Enable = "0";
-            this.rfiD_UI.Server_IP_Adress = "0.0.0.0";
-            this.rfiD_UI.Server_Port = "0";
-            this.rfiD_UI.Size = new System.Drawing.Size(1393, 1015);
-            this.rfiD_UI.SSID = "";
-            this.rfiD_UI.Station = "0";
-            this.rfiD_UI.Subnet = "0.0.0.0";
-            this.rfiD_UI.TabIndex = 0;
-            this.rfiD_UI.TableName = "RFID_Device_Jsonstring";
-            this.rfiD_UI.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("rfiD_UI.UDP_LocalPorts")));
-            this.rfiD_UI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("rfiD_UI.UDP_ServerPorts")));
-            this.rfiD_UI.UserName = "root";
             // 
             // h_RFID_UI
             // 

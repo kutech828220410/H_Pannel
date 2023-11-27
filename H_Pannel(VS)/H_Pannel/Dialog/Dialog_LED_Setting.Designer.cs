@@ -62,6 +62,7 @@ namespace H_Pannel_lib
             this.rJ_TextBox_Input01.BorderSize = 2;
             this.rJ_TextBox_Input01.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_Input01.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_Input01.GUID = "";
             this.rJ_TextBox_Input01.Location = new System.Drawing.Point(83, 12);
             this.rJ_TextBox_Input01.Multiline = false;
             this.rJ_TextBox_Input01.Name = "rJ_TextBox_Input01";
@@ -85,6 +86,7 @@ namespace H_Pannel_lib
             this.rJ_Lable_inputLED01.BorderSize = 0;
             this.rJ_Lable_inputLED01.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable_inputLED01.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable_inputLED01.GUID = "";
             this.rJ_Lable_inputLED01.Location = new System.Drawing.Point(12, 9);
             this.rJ_Lable_inputLED01.Name = "rJ_Lable_inputLED01";
             this.rJ_Lable_inputLED01.Size = new System.Drawing.Size(65, 37);
@@ -102,6 +104,7 @@ namespace H_Pannel_lib
             this.rJ_TextBox_Output01.BorderSize = 2;
             this.rJ_TextBox_Output01.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_Output01.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_Output01.GUID = "";
             this.rJ_TextBox_Output01.Location = new System.Drawing.Point(223, 12);
             this.rJ_TextBox_Output01.Multiline = false;
             this.rJ_TextBox_Output01.Name = "rJ_TextBox_Output01";
@@ -125,6 +128,7 @@ namespace H_Pannel_lib
             this.rJ_Lable1.BorderSize = 0;
             this.rJ_Lable1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable1.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable1.GUID = "";
             this.rJ_Lable1.Location = new System.Drawing.Point(152, 9);
             this.rJ_Lable1.Name = "rJ_Lable1";
             this.rJ_Lable1.Size = new System.Drawing.Size(65, 37);
@@ -142,6 +146,7 @@ namespace H_Pannel_lib
             this.rJ_TextBox_Output02.BorderSize = 2;
             this.rJ_TextBox_Output02.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_Output02.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_Output02.GUID = "";
             this.rJ_TextBox_Output02.Location = new System.Drawing.Point(223, 58);
             this.rJ_TextBox_Output02.Multiline = false;
             this.rJ_TextBox_Output02.Name = "rJ_TextBox_Output02";
@@ -165,6 +170,7 @@ namespace H_Pannel_lib
             this.rJ_Lable2.BorderSize = 0;
             this.rJ_Lable2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable2.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable2.GUID = "";
             this.rJ_Lable2.Location = new System.Drawing.Point(152, 55);
             this.rJ_Lable2.Name = "rJ_Lable2";
             this.rJ_Lable2.Size = new System.Drawing.Size(65, 37);
@@ -182,6 +188,7 @@ namespace H_Pannel_lib
             this.rJ_TextBox_Input02.BorderSize = 2;
             this.rJ_TextBox_Input02.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_Input02.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_Input02.GUID = "";
             this.rJ_TextBox_Input02.Location = new System.Drawing.Point(83, 58);
             this.rJ_TextBox_Input02.Multiline = false;
             this.rJ_TextBox_Input02.Name = "rJ_TextBox_Input02";
@@ -205,6 +212,7 @@ namespace H_Pannel_lib
             this.rJ_Lable3.BorderSize = 0;
             this.rJ_Lable3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable3.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable3.GUID = "";
             this.rJ_Lable3.Location = new System.Drawing.Point(12, 55);
             this.rJ_Lable3.Name = "rJ_Lable3";
             this.rJ_Lable3.Size = new System.Drawing.Size(65, 37);
@@ -222,6 +230,7 @@ namespace H_Pannel_lib
             this.rJ_TextBox_Output03.BorderSize = 2;
             this.rJ_TextBox_Output03.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_Output03.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_Output03.GUID = "";
             this.rJ_TextBox_Output03.Location = new System.Drawing.Point(223, 104);
             this.rJ_TextBox_Output03.Multiline = false;
             this.rJ_TextBox_Output03.Name = "rJ_TextBox_Output03";
@@ -245,6 +254,7 @@ namespace H_Pannel_lib
             this.rJ_Lable4.BorderSize = 0;
             this.rJ_Lable4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable4.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable4.GUID = "";
             this.rJ_Lable4.Location = new System.Drawing.Point(152, 101);
             this.rJ_Lable4.Name = "rJ_Lable4";
             this.rJ_Lable4.Size = new System.Drawing.Size(65, 37);
@@ -262,6 +272,7 @@ namespace H_Pannel_lib
             this.rJ_TextBox_Input03.BorderSize = 2;
             this.rJ_TextBox_Input03.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_Input03.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_Input03.GUID = "";
             this.rJ_TextBox_Input03.Location = new System.Drawing.Point(83, 104);
             this.rJ_TextBox_Input03.Multiline = false;
             this.rJ_TextBox_Input03.Name = "rJ_TextBox_Input03";
@@ -285,6 +296,7 @@ namespace H_Pannel_lib
             this.rJ_Lable5.BorderSize = 0;
             this.rJ_Lable5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable5.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable5.GUID = "";
             this.rJ_Lable5.Location = new System.Drawing.Point(12, 101);
             this.rJ_Lable5.Name = "rJ_Lable5";
             this.rJ_Lable5.Size = new System.Drawing.Size(65, 37);
@@ -302,6 +314,7 @@ namespace H_Pannel_lib
             this.rJ_TextBox_Output04.BorderSize = 2;
             this.rJ_TextBox_Output04.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_Output04.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_Output04.GUID = "";
             this.rJ_TextBox_Output04.Location = new System.Drawing.Point(223, 150);
             this.rJ_TextBox_Output04.Multiline = false;
             this.rJ_TextBox_Output04.Name = "rJ_TextBox_Output04";
@@ -325,6 +338,7 @@ namespace H_Pannel_lib
             this.rJ_Lable6.BorderSize = 0;
             this.rJ_Lable6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable6.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable6.GUID = "";
             this.rJ_Lable6.Location = new System.Drawing.Point(152, 147);
             this.rJ_Lable6.Name = "rJ_Lable6";
             this.rJ_Lable6.Size = new System.Drawing.Size(65, 37);
@@ -342,6 +356,7 @@ namespace H_Pannel_lib
             this.rJ_TextBox_Input04.BorderSize = 2;
             this.rJ_TextBox_Input04.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_Input04.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_Input04.GUID = "";
             this.rJ_TextBox_Input04.Location = new System.Drawing.Point(83, 150);
             this.rJ_TextBox_Input04.Multiline = false;
             this.rJ_TextBox_Input04.Name = "rJ_TextBox_Input04";
@@ -365,6 +380,7 @@ namespace H_Pannel_lib
             this.rJ_Lable7.BorderSize = 0;
             this.rJ_Lable7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable7.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable7.GUID = "";
             this.rJ_Lable7.Location = new System.Drawing.Point(12, 147);
             this.rJ_Lable7.Name = "rJ_Lable7";
             this.rJ_Lable7.Size = new System.Drawing.Size(65, 37);
@@ -382,6 +398,7 @@ namespace H_Pannel_lib
             this.rJ_TextBox_Output05.BorderSize = 2;
             this.rJ_TextBox_Output05.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_Output05.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_Output05.GUID = "";
             this.rJ_TextBox_Output05.Location = new System.Drawing.Point(223, 197);
             this.rJ_TextBox_Output05.Multiline = false;
             this.rJ_TextBox_Output05.Name = "rJ_TextBox_Output05";
@@ -405,6 +422,7 @@ namespace H_Pannel_lib
             this.rJ_Lable8.BorderSize = 0;
             this.rJ_Lable8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable8.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable8.GUID = "";
             this.rJ_Lable8.Location = new System.Drawing.Point(152, 194);
             this.rJ_Lable8.Name = "rJ_Lable8";
             this.rJ_Lable8.Size = new System.Drawing.Size(65, 37);
@@ -422,6 +440,7 @@ namespace H_Pannel_lib
             this.rJ_TextBox_Input05.BorderSize = 2;
             this.rJ_TextBox_Input05.Font = new System.Drawing.Font("新細明體", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_Input05.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_Input05.GUID = "";
             this.rJ_TextBox_Input05.Location = new System.Drawing.Point(83, 197);
             this.rJ_TextBox_Input05.Multiline = false;
             this.rJ_TextBox_Input05.Name = "rJ_TextBox_Input05";
@@ -445,6 +464,7 @@ namespace H_Pannel_lib
             this.rJ_Lable9.BorderSize = 0;
             this.rJ_Lable9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable9.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable9.GUID = "";
             this.rJ_Lable9.Location = new System.Drawing.Point(12, 194);
             this.rJ_Lable9.Name = "rJ_Lable9";
             this.rJ_Lable9.Size = new System.Drawing.Size(65, 37);
@@ -455,6 +475,7 @@ namespace H_Pannel_lib
             // 
             // rJ_Button_退出
             // 
+            this.rJ_Button_退出.AutoResetState = false;
             this.rJ_Button_退出.BackColor = System.Drawing.Color.Gray;
             this.rJ_Button_退出.BackgroundColor = System.Drawing.Color.Gray;
             this.rJ_Button_退出.BorderColor = System.Drawing.Color.PaleVioletRed;
@@ -465,6 +486,7 @@ namespace H_Pannel_lib
             this.rJ_Button_退出.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_退出.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_退出.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_退出.GUID = "";
             this.rJ_Button_退出.Location = new System.Drawing.Point(333, 176);
             this.rJ_Button_退出.Name = "rJ_Button_退出";
             this.rJ_Button_退出.Size = new System.Drawing.Size(108, 51);
@@ -476,6 +498,7 @@ namespace H_Pannel_lib
             // 
             // rJ_Button_設定
             // 
+            this.rJ_Button_設定.AutoResetState = false;
             this.rJ_Button_設定.BackColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Button_設定.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Button_設定.BorderColor = System.Drawing.Color.PaleVioletRed;
@@ -486,6 +509,7 @@ namespace H_Pannel_lib
             this.rJ_Button_設定.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_設定.Font = new System.Drawing.Font("微軟正黑體", 14.25F);
             this.rJ_Button_設定.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_設定.GUID = "";
             this.rJ_Button_設定.Location = new System.Drawing.Point(333, 119);
             this.rJ_Button_設定.Name = "rJ_Button_設定";
             this.rJ_Button_設定.Size = new System.Drawing.Size(108, 51);

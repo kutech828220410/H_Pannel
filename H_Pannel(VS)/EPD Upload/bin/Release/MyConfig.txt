@@ -509,7 +509,7 @@
       "ChineseName_BorderColor_Serialize": "255:0:0:0",
       "ChineseName_HorizontalAlignment": 0,
       "Package_Title": "",
-      "Package": "",
+      "Package": "BOT",
       "Package_font_Serialize": "微軟正黑體:12:Bold:Point:1:False",
       "Package_BackColor_Serialize": "255:255:255:255",
       "Package_ForeColor_Serialize": "255:0:0:0",
@@ -598,7 +598,7 @@
       "StorageName_HorizontalAlignment": 0,
       "MinPackage_Title": "",
       "MinPackage": "113/03/31",
-      "MinPackage_font_Serialize": "微軟正黑體:12:Bold:Point:1:False",
+      "MinPackage_font_Serialize": "微軟正黑體:12:Bold:Point:136:False",
       "MinPackage_BackColor_Serialize": "255:255:255:255",
       "MinPackage_ForeColor_Serialize": "255:0:0:0",
       "MinPackage_Position": {

@@ -104,11 +104,20 @@ namespace H_Pannel_lib
             }
             return false;
         }
+        static public bool Set_WS2812B_breathing(UDP_Class uDP_Class, string IP, byte WS2812B_breathing_onAddVal, byte WS2812B_breathing_offSubVal, Color color)
+        {
+            if (uDP_Class != null)
+            {
+                return Communication.Set_WS2812B_breathing(uDP_Class, IP, WS2812B_breathing_onAddVal, WS2812B_breathing_offSubVal, color);
+            }
+            return false;
+        }
         #endregion
 
         private enum ContextMenuStrip_Main
         {
             設定亮燈,
+            設定呼吸燈,
             設定燈數,
         }
 
@@ -427,6 +436,33 @@ namespace H_Pannel_lib
 
                 Dialog_RowsLED dialog_RowsLED = new Dialog_RowsLED(list_UDP_Class, list_IP, colorDialog.Color);
                 dialog_RowsLED.ShowDialog();
+            }
+            if (selectedText == ContextMenuStrip_Main.設定呼吸燈.GetEnumName())
+            {
+                List<string> list_IP = new List<string>();
+                List<UDP_Class> list_UDP_Class = new List<UDP_Class>();
+                for (int i = 0; i < iPEndPoints.Count; i++)
+                {
+                    string IP = iPEndPoints[i].Address.ToString();
+                    UDP_Class uDP_Class = List_UDP_Local.SortByPort(iPEndPoints[i].Port);
+                    if (uDP_Class != null)
+                    {
+                        list_IP.Add(IP);
+                        list_UDP_Class.Add(uDP_Class);
+                    }
+                }
+                if (list_IP.Count == 0) return;
+                ColorDialog colorDialog = new ColorDialog();
+                colorDialog.Color = Color.Red;
+                if (colorDialog.ShowDialog() != DialogResult.OK) return;
+                Dialog_NumPannel dialog_NumPannel = new Dialog_NumPannel("亮燈亮度增量大小");
+                if (dialog_NumPannel.ShowDialog() != DialogResult.Yes) return;
+                int Add_val = dialog_NumPannel.Value;
+
+                dialog_NumPannel = new Dialog_NumPannel("亮燈亮度減量大小");
+                if (dialog_NumPannel.ShowDialog() != DialogResult.Yes) return;
+                int Sub_val = dialog_NumPannel.Value;
+                Set_WS2812B_breathing(list_UDP_Class[0], iPEndPoints[0].Address.ToString(), (byte)Add_val, (byte)Sub_val, colorDialog.Color);
             }
         }
         private void RowsLEDUI_DeviceTableMouseDownRightEvent(string selectedText, List<IPEndPoint> iPEndPoints)

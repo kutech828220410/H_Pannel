@@ -50,8 +50,8 @@ void MyWS2812::Show()
     SPI.transfer(rgbBytesBuffer , numOfLed * 24 + offset * 24);
     SPI.endTransaction();
     
-    digitalWrite(this -> PIN_CS , LOW);
-    delay(100);
+//    digitalWrite(this -> PIN_CS , LOW);
+    delay(10);
 }
 
 

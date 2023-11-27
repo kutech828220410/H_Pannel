@@ -37,6 +37,15 @@ int Serverport;
 String GetwayStr;
 
 bool flag_WS2812B_Refresh = true;
+bool flag_WS2812B_breathing  = false;
+int WS2812B_breathing_cnt = 0;
+int WS2812B_breathing_onAddVal  = 3;
+int WS2812B_breathing_offSubVal  = 3;
+float WS2812B_breathing_val = 0.1F;
+byte WS2812B_breathing_R = 255;
+byte WS2812B_breathing_G = 0;
+byte WS2812B_breathing_B = 0;
+
 MyWS2812 myWS2812;
 
 byte* framebuffer;
@@ -56,8 +65,8 @@ SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
 String Version = "Ver 1.4.2";
 
-#define EPD
-//#define RowLED
+//#define EPD
+#define RowLED
 
 
 #ifdef EPD
@@ -125,13 +134,8 @@ void loop()
           onPacketCallBack();
       } 
       MyTimer_CheckWS2812.StartTickTime(30000);
+
       
-      if(flag_WS2812B_Refresh)
-      {
-           myWS2812.Show();
-           flag_JsonSend = true;
-           flag_WS2812B_Refresh = false;
-      }  
    }    
 }
 
@@ -157,6 +161,58 @@ void Core0Task1( void * pvParameters )
           }
           
           epd.Sleep_Check();
+          if(flag_WS2812B_breathing)
+          {
+               if(WS2812B_breathing_cnt == 0)
+               {
+                   int numofLED = 450;
+                   int R = (int)(WS2812B_breathing_R * WS2812B_breathing_val);
+                   int G = (int)(WS2812B_breathing_G * WS2812B_breathing_val);
+                   int B = (int)(WS2812B_breathing_B * WS2812B_breathing_val);
+                   WS2812B_breathing_val += ((float)WS2812B_breathing_onAddVal * 0.01);
+                   if(WS2812B_breathing_val >= 0.9) 
+                   {
+                       WS2812B_breathing_cnt++;
+                   }
+                   for(int i = 0 ; i < numofLED ; i++)
+                   {             
+                       myWS2812.rgbBuffer[i * 3 + 0 + 0] = (int)(R);     // 将光带上第1个LED灯珠的RGB数值中R数值设置为255
+                       myWS2812.rgbBuffer[i * 3 + 0 + 1] = (int)(G);   // 将光带上第1个LED灯珠的RGB数值中G数值设置为255
+                       myWS2812.rgbBuffer[i * 3 + 0 + 2] = (int)(B);      // 将光带上第1个LED灯珠的RGB数值中B数值设置为0      
+                   }                                                     
+                   myWS2812.Show();
+               }
+               if(WS2812B_breathing_cnt == 1)
+               {
+                   int numofLED = 450;
+                   int R = (int)(WS2812B_breathing_R * WS2812B_breathing_val);
+                   int G = (int)(WS2812B_breathing_G * WS2812B_breathing_val);
+                   int B = (int)(WS2812B_breathing_B * WS2812B_breathing_val);
+                   WS2812B_breathing_val -= ((float)WS2812B_breathing_offSubVal * 0.01);
+                   if(WS2812B_breathing_val <= 0.1) 
+                   {
+                       WS2812B_breathing_cnt++;
+                   }
+                   for(int i = 0 ; i < numofLED ; i++)
+                   {             
+                       myWS2812.rgbBuffer[i * 3 + 0 + 0] = (int)(R);     // 将光带上第1个LED灯珠的RGB数值中R数值设置为255
+                       myWS2812.rgbBuffer[i * 3 + 0 + 1] = (int)(G);   // 将光带上第1个LED灯珠的RGB数值中G数值设置为255
+                       myWS2812.rgbBuffer[i * 3 + 0 + 2] = (int)(B);      // 将光带上第1个LED灯珠的RGB数值中B数值设置为0      
+                   }                                                
+                   myWS2812.Show();
+               }
+               if(WS2812B_breathing_cnt == 2)
+               {
+                  WS2812B_breathing_cnt = 0;
+               }
+               
+          }
+          else if(flag_WS2812B_Refresh)
+          {
+               myWS2812.Show();
+               flag_JsonSend = true;
+               flag_WS2812B_Refresh = false;
+          }  
        }
           
        delay(1);
