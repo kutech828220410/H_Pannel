@@ -148,17 +148,19 @@ void EPD::SendData(unsigned char data)
 void EPD::SPI_Begin()
 {
    digitalWrite(this -> PIN_CS , LOW); 
-   SPI.beginTransaction(SPISettings(2000000 / 20, MSBFIRST, SPI_MODE0));
+   SPI.beginTransaction(SPISettings(20000000, MSBFIRST, SPI_MODE0));
 }
 void EPD::SPI_End()
 {
-   SPI.endTransaction();
-   digitalWrite(this -> PIN_CS , HIGH);
+//   SPI.endTransaction();
+   digitalWrite(this -> PIN_CS , LOW); 
+//   digitalWrite(this -> PIN_CS , HIGH);
 }
 void EPD::SpiTransfer(unsigned char value)
 {  
    SPI.transfer(value);
-   digitalWrite(this -> PIN_CS , HIGH);
+   digitalWrite(this -> PIN_CS , LOW); 
+//   digitalWrite(this -> PIN_CS , HIGH);
 }
 void EPD::HardwareReset()
 {
