@@ -104,51 +104,58 @@ void sub_IO_Program()
        IO_Init();
        flag_Init = true;
     }
-    Input = GetInput();
-    OutputLED_Blink();
-    Output = GetOutput();
-    Input_dir = Get_Input_dir();
-    Output_dir = Get_Output_dir();
-    if(WiFi.status() == WL_CONNECTED)
+    
+    if(MCU_TYPE == 1)
     {
-       if(flag_WL_CONNECTED)
-       {
-          Set_Output_dir(wiFiConfig.Get_Output_dir());
-          flag_WL_CONNECTED = false;
-       }
-       
-       flag_WL_DISCONNECTED = true;
+      Input = GetInput();
+      OutputLED_Blink();
+      Output = GetOutput();
+      Input_dir = Get_Input_dir();
+      Output_dir = Get_Output_dir();
+      if(WiFi.status() == WL_CONNECTED)
+      {
+         if(flag_WL_CONNECTED)
+         {
+            Set_Output_dir(wiFiConfig.Get_Output_dir());
+            flag_WL_CONNECTED = false;
+         }
+         
+         flag_WL_DISCONNECTED = true;
+      }
+      else
+      {
+         if(flag_WL_DISCONNECTED)
+         {
+            Set_Output_dir(0);
+            flag_WL_DISCONNECTED = false;
+         }
+         flag_WL_CONNECTED = true;
+      }
+      Output_Blink();
+      if(Input_buf != Input)
+      {       
+         Input_buf = Input;
+         flag_JsonSend = true;
+      }
+      if(Output_buf != Output)
+      {       
+         Output_buf = Output;
+         flag_JsonSend = true;
+      }
+      if(Input_dir_buf != Input_dir)
+      {       
+         Input_dir_buf = Input_dir;
+         flag_JsonSend = true;
+      }
+      if(Output_dir_buf != Output_dir)
+      {       
+         Output_dir_buf = Output_dir;
+         flag_JsonSend = true;
+      }
     }
-    else
-    {
-       if(flag_WL_DISCONNECTED)
-       {
-          Set_Output_dir(0);
-          flag_WL_DISCONNECTED = false;
-       }
-       flag_WL_CONNECTED = true;
-    }
-    Output_Blink();
-    if(Input_buf != Input)
-    {       
-       Input_buf = Input;
-       flag_JsonSend = true;
-    }
-    if(Output_buf != Output)
-    {       
-       Output_buf = Output;
-       flag_JsonSend = true;
-    }
-    if(Input_dir_buf != Input_dir)
-    {       
-       Input_dir_buf = Input_dir;
-       flag_JsonSend = true;
-    }
-    if(Output_dir_buf != Output_dir)
-    {       
-       Output_dir_buf = Output_dir;
-       flag_JsonSend = true;
-    }
+    
+    
+    
 }
 void OutputLED_Blink()
 {
@@ -388,6 +395,29 @@ void SetOutput(int value)
     if(((value >> 9) % 2 ) ==  0) MyOutput_PIN10.Set_State(true);
     else MyOutput_PIN10.Set_State(false);   
 }
+void SetOutputEx(int value)
+{
+    if(((value >> 0) % 2 ) ==  0) MyOutput_PIN01.Set_StateEx(true);
+    else MyOutput_PIN01.Set_StateEx(false);
+    if(((value >> 1) % 2 ) ==  0) MyOutput_PIN02.Set_StateEx(true);
+    else MyOutput_PIN02.Set_StateEx(false);
+    if(((value >> 2) % 2 ) ==  0) MyOutput_PIN03.Set_StateEx(true);
+    else MyOutput_PIN03.Set_StateEx(false);
+    if(((value >> 3) % 2 ) ==  0) MyOutput_PIN04.Set_StateEx(true);
+    else MyOutput_PIN04.Set_StateEx(false);
+    if(((value >> 4) % 2 ) ==  0) MyOutput_PIN05.Set_StateEx(true);
+    else MyOutput_PIN05.Set_StateEx(false);
+    if(((value >> 5) % 2 ) ==  0) MyOutput_PIN06.Set_StateEx(true);
+    else MyOutput_PIN06.Set_StateEx(false);
+    if(((value >> 6) % 2 ) ==  0) MyOutput_PIN07.Set_StateEx(true);
+    else MyOutput_PIN07.Set_StateEx(false);
+    if(((value >> 7) % 2 ) ==  0) MyOutput_PIN08.Set_StateEx(true);
+    else MyOutput_PIN08.Set_StateEx(false);
+    if(((value >> 8) % 2 ) ==  0) MyOutput_PIN09.Set_StateEx(true);
+    else MyOutput_PIN09.Set_StateEx(false);
+    if(((value >> 9) % 2 ) ==  0) MyOutput_PIN10.Set_StateEx(true);
+    else MyOutput_PIN10.Set_StateEx(false);   
+}
 void SetOutputPIN(byte pin_num , bool value)
 {
     if(pin_num == 0) MyOutput_PIN01.Set_State(value);
@@ -400,4 +430,17 @@ void SetOutputPIN(byte pin_num , bool value)
     else if(pin_num == 7) MyOutput_PIN08.Set_State(value);
     else if(pin_num == 8) MyOutput_PIN09.Set_State(value);
     else if(pin_num == 9) MyOutput_PIN10.Set_State(value);
+}
+void SetOutputPIN_Ex(byte pin_num , bool value)
+{
+    if(pin_num == 0) MyOutput_PIN01.Set_StateEx(value);
+    else if(pin_num == 1) MyOutput_PIN02.Set_StateEx(value);
+    else if(pin_num == 2) MyOutput_PIN03.Set_StateEx(value);
+    else if(pin_num == 3) MyOutput_PIN04.Set_StateEx(value);
+    else if(pin_num == 4) MyOutput_PIN05.Set_StateEx(value);
+    else if(pin_num == 5) MyOutput_PIN06.Set_StateEx(value);
+    else if(pin_num == 6) MyOutput_PIN07.Set_StateEx(value);
+    else if(pin_num == 7) MyOutput_PIN08.Set_StateEx(value);
+    else if(pin_num == 8) MyOutput_PIN09.Set_StateEx(value);
+    else if(pin_num == 9) MyOutput_PIN10.Set_StateEx(value);
 }

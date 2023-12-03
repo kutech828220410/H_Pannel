@@ -500,9 +500,9 @@ namespace H_Pannel_lib
         {
             this.FindForm().FormClosing += FormClosing;
             this.LoadConfig();
-            this.rJ_Button_Station_Write.Click += RJ_Button_Station_Write_Click;
-            this.rJ_Button_Read.Click += RJ_Button_Read_Click;
-            this.rJ_Button_Write.Click += RJ_Button_Write_Click;
+            this.rJ_Button_Station_Write.MouseDownEvent += RJ_Button_Station_Write_MouseDownEvent;
+            this.rJ_Button_Read.MouseDownEvent += RJ_Button_Read_MouseDownEvent;
+            this.rJ_Button_Write.MouseDownEvent += RJ_Button_Write_MouseDownEvent;
             this.rJ_Button_Lock_On.MouseDownEvent += RJ_Button_Lock_On_MouseDownEvent;
             this.rJ_Button_Lock_Off.MouseDownEvent += RJ_Button_Lock_Off_MouseDownEvent;
             this.rJ_Button_Save.MouseDownEvent += RJ_Button_Save_MouseDownEvent;
@@ -510,6 +510,9 @@ namespace H_Pannel_lib
 
             mySerialPort.Init(this.textBox_COM.Text, 115200, 8, Parity.None, StopBits.One, false);
         }
+
+     
+
         public void SerialPortOpen(string PortName)
         {
             mySerialPort.SerialPortClose();
@@ -796,15 +799,14 @@ namespace H_Pannel_lib
             this.SaveConfig();
             MyMessageBox.ShowDialog("儲存成功!");
 
-        }
-        private void RJ_Button_Write_Click(object sender, EventArgs e)
+        }  
+        private void RJ_Button_Write_MouseDownEvent(MouseEventArgs mevent)
         {
-
             string Version = "";
             mySerialPort.PortName = this.textBox_COM.Text;
             if (Communication.UART_Command_Get_Version(mySerialPort, out Version))
             {
-             
+
             }
             else
             {
@@ -813,7 +815,7 @@ namespace H_Pannel_lib
             }
 
             bool flag_OK = this.WriteConfig(mySerialPort.PortName);
-         
+
             if (flag_OK)
             {
                 MyMessageBox.ShowDialog($"Write data sucessed! {Version}");
@@ -823,7 +825,7 @@ namespace H_Pannel_lib
                 MyMessageBox.ShowDialog($"Write data failed! {Version}");
             }
         }
-        private void RJ_Button_Read_Click(object sender, EventArgs e)
+        private void RJ_Button_Read_MouseDownEvent(MouseEventArgs mevent)
         {
             mySerialPort.PortName = this.textBox_COM.Text;
             string IP_Adress = "";
@@ -839,17 +841,22 @@ namespace H_Pannel_lib
             string UDP_SendTime = "";
             if (Communication.UART_Command_Get_Setting(mySerialPort, out IP_Adress, out Subnet, out Gateway, out DNS, out Server_IP_Adress, out Local_Port, out Server_Port, out SSID, out Password, out Station, out UDP_SendTime))
             {
-                this.IP_Adress = IP_Adress;
-                this.Subnet = Subnet;
-                this.Gateway = Gateway;
-                this.DNS = DNS;
-                this.Server_IP_Adress = Server_IP_Adress;
-                this.Local_Port = Local_Port;
-                this.Server_Port = Server_Port;
-                this.SSID = SSID;
-                this._Password = Password;
-                this.Station = Station;
-                this.UDP_SendTime = UDP_SendTime;
+                this.Invoke(new Action(delegate
+                {
+                    this.IP_Adress = IP_Adress;
+                    this.Subnet = Subnet;
+                    this.Gateway = Gateway;
+                    this.DNS = DNS;
+                    this.Server_IP_Adress = Server_IP_Adress;
+                    this.Local_Port = Local_Port;
+                    this.Server_Port = Server_Port;
+                    this.SSID = SSID;
+                    this._Password = Password;
+                    this.Station = Station;
+                    this.UDP_SendTime = UDP_SendTime;
+                }));
+
+        
                 MyMessageBox.ShowDialog("Receive data sucessed!");
             }
             else
@@ -857,8 +864,7 @@ namespace H_Pannel_lib
                 MyMessageBox.ShowDialog("Receive data failed!");
             }
         }
-     
-        private void RJ_Button_Station_Write_Click(object sender, EventArgs e)
+        private void RJ_Button_Station_Write_MouseDownEvent(MouseEventArgs mevent)
         {
             int station = this.textBox_Station.Text.StringToInt32();
             if (station < 0)
@@ -875,7 +881,6 @@ namespace H_Pannel_lib
                 MyMessageBox.ShowDialog("站號修改失敗!");
             }
         }
-
         private void RJ_Button_Lock_On_MouseDownEvent(MouseEventArgs mevent)
         {
             string result = "";

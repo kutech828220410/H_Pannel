@@ -129,6 +129,56 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_DeviceTable = new SQLUI.SQL_DataGridView();
             this.openFileDialog_LoadExcel = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog_SaveExcel = new System.Windows.Forms.SaveFileDialog();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox_輸入方向_08 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入方向_07 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入方向_06 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入方向_05 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入方向_04 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入方向_03 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入方向_02 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入方向_01 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入方向_09 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入方向_10 = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkBox_輸出方向_10 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出方向_09 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出方向_08 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出方向_07 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出方向_06 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出方向_05 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出方向_04 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出方向_03 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出方向_02 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出方向_01 = new System.Windows.Forms.CheckBox();
+            this.rJ_Button_輸入方向_讀取 = new MyUI.RJ_Button();
+            this.rJ_Button_輸入方向_寫入 = new MyUI.RJ_Button();
+            this.rJ_Button_輸出方向_寫入 = new MyUI.RJ_Button();
+            this.rJ_Button_輸出方向_讀取 = new MyUI.RJ_Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.rJ_Button_輸入_讀取 = new MyUI.RJ_Button();
+            this.checkBox_輸入10 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入09 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入08 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入07 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入06 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入05 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入04 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入03 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入02 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸入01 = new System.Windows.Forms.CheckBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.rJ_Button_輸出_寫入 = new MyUI.RJ_Button();
+            this.checkBox_輸出10 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出09 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出08 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出07 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出06 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出05 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出04 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出03 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出02 = new System.Windows.Forms.CheckBox();
+            this.checkBox_輸出01 = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.rJ_GroupBox1.ContentsPanel.SuspendLayout();
             this.rJ_GroupBox1.SuspendLayout();
@@ -161,6 +211,10 @@ namespace H_Pannel_lib
             this.rJ_GroupBox4.SuspendLayout();
             this.rJ_GroupBox3.ContentsPanel.SuspendLayout();
             this.rJ_GroupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -170,7 +224,7 @@ namespace H_Pannel_lib
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1393, 541);
+            this.panel1.Size = new System.Drawing.Size(1393, 754);
             this.panel1.TabIndex = 0;
             // 
             // rJ_GroupBox1
@@ -178,28 +232,33 @@ namespace H_Pannel_lib
             // 
             // rJ_GroupBox1.ContentsPanel
             // 
-            this.rJ_GroupBox1.ContentsPanel.BackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox1.ContentsPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.rJ_GroupBox1.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
             this.rJ_GroupBox1.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox1.ContentsPanel.BorderRadius = 2;
             this.rJ_GroupBox1.ContentsPanel.BorderSize = 2;
             this.rJ_GroupBox1.ContentsPanel.Controls.Add(this.sqL_DataGridView_UDP_DataReceive);
             this.rJ_GroupBox1.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rJ_GroupBox1.ContentsPanel.ForeColor = System.Drawing.Color.White;
+            this.rJ_GroupBox1.ContentsPanel.IsSelected = false;
             this.rJ_GroupBox1.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox1.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox1.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.rJ_GroupBox1.ContentsPanel.Size = new System.Drawing.Size(1006, 504);
+            this.rJ_GroupBox1.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_GroupBox1.ContentsPanel.ShadowSize = 0;
+            this.rJ_GroupBox1.ContentsPanel.Size = new System.Drawing.Size(867, 717);
             this.rJ_GroupBox1.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rJ_GroupBox1.Location = new System.Drawing.Point(387, 0);
+            this.rJ_GroupBox1.GUID = "";
+            this.rJ_GroupBox1.Location = new System.Drawing.Point(526, 0);
             this.rJ_GroupBox1.Name = "rJ_GroupBox1";
-            this.rJ_GroupBox1.PannelBackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox1.PannelBackColor = System.Drawing.SystemColors.Window;
             this.rJ_GroupBox1.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox1.PannelBorderRadius = 2;
             this.rJ_GroupBox1.PannelBorderSize = 2;
-            this.rJ_GroupBox1.Size = new System.Drawing.Size(1006, 541);
+            this.rJ_GroupBox1.Size = new System.Drawing.Size(867, 754);
             this.rJ_GroupBox1.TabIndex = 43;
-            this.rJ_GroupBox1.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.rJ_GroupBox1.TitleBackColor = System.Drawing.SystemColors.Window;
             this.rJ_GroupBox1.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_GroupBox1.TitleBorderRadius = 5;
             this.rJ_GroupBox1.TitleBorderSize = 0;
@@ -247,7 +306,7 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_UDP_DataReceive.RowsHeight = 40;
             this.sqL_DataGridView_UDP_DataReceive.SaveFileName = "SQL_DataGridView";
             this.sqL_DataGridView_UDP_DataReceive.Server = "127.0.0.0";
-            this.sqL_DataGridView_UDP_DataReceive.Size = new System.Drawing.Size(996, 494);
+            this.sqL_DataGridView_UDP_DataReceive.Size = new System.Drawing.Size(857, 707);
             this.sqL_DataGridView_UDP_DataReceive.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
             this.sqL_DataGridView_UDP_DataReceive.TabIndex = 1;
             this.sqL_DataGridView_UDP_DataReceive.UserName = "root";
@@ -268,10 +327,15 @@ namespace H_Pannel_lib
             // 
             // rJ_GroupBox2.ContentsPanel
             // 
-            this.rJ_GroupBox2.ContentsPanel.BackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox2.ContentsPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.rJ_GroupBox2.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
             this.rJ_GroupBox2.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox2.ContentsPanel.BorderRadius = 5;
             this.rJ_GroupBox2.ContentsPanel.BorderSize = 2;
+            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.groupBox6);
+            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.groupBox5);
+            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.groupBox3);
+            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.groupBox2);
             this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.groupBox4);
             this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Button_Write);
             this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Button_Read);
@@ -279,21 +343,25 @@ namespace H_Pannel_lib
             this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.panel2);
             this.rJ_GroupBox2.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rJ_GroupBox2.ContentsPanel.ForeColor = System.Drawing.Color.Black;
+            this.rJ_GroupBox2.ContentsPanel.IsSelected = false;
             this.rJ_GroupBox2.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox2.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox2.ContentsPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.rJ_GroupBox2.ContentsPanel.Size = new System.Drawing.Size(387, 504);
+            this.rJ_GroupBox2.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_GroupBox2.ContentsPanel.ShadowSize = 0;
+            this.rJ_GroupBox2.ContentsPanel.Size = new System.Drawing.Size(526, 717);
             this.rJ_GroupBox2.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.rJ_GroupBox2.GUID = "";
             this.rJ_GroupBox2.Location = new System.Drawing.Point(0, 0);
             this.rJ_GroupBox2.Name = "rJ_GroupBox2";
-            this.rJ_GroupBox2.PannelBackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox2.PannelBackColor = System.Drawing.SystemColors.Window;
             this.rJ_GroupBox2.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox2.PannelBorderRadius = 5;
             this.rJ_GroupBox2.PannelBorderSize = 2;
-            this.rJ_GroupBox2.Size = new System.Drawing.Size(387, 541);
+            this.rJ_GroupBox2.Size = new System.Drawing.Size(526, 754);
             this.rJ_GroupBox2.TabIndex = 42;
-            this.rJ_GroupBox2.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.rJ_GroupBox2.TitleBackColor = System.Drawing.SystemColors.Window;
             this.rJ_GroupBox2.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_GroupBox2.TitleBorderRadius = 5;
             this.rJ_GroupBox2.TitleBorderSize = 0;
@@ -316,7 +384,7 @@ namespace H_Pannel_lib
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox4.Location = new System.Drawing.Point(3, 391);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(381, 54);
+            this.groupBox4.Size = new System.Drawing.Size(520, 54);
             this.groupBox4.TabIndex = 34;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "RFID致能";
@@ -414,8 +482,12 @@ namespace H_Pannel_lib
             this.rJ_Button_Write.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Write.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Write.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_Write.Location = new System.Drawing.Point(96, 451);
+            this.rJ_Button_Write.GUID = "";
+            this.rJ_Button_Write.Location = new System.Drawing.Point(96, 669);
             this.rJ_Button_Write.Name = "rJ_Button_Write";
+            this.rJ_Button_Write.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_Write.ShadowSize = 0;
+            this.rJ_Button_Write.ShowLoadingForm = false;
             this.rJ_Button_Write.Size = new System.Drawing.Size(80, 42);
             this.rJ_Button_Write.State = false;
             this.rJ_Button_Write.TabIndex = 33;
@@ -436,8 +508,12 @@ namespace H_Pannel_lib
             this.rJ_Button_Read.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Read.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Read.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_Read.Location = new System.Drawing.Point(10, 451);
+            this.rJ_Button_Read.GUID = "";
+            this.rJ_Button_Read.Location = new System.Drawing.Point(10, 669);
             this.rJ_Button_Read.Name = "rJ_Button_Read";
+            this.rJ_Button_Read.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_Read.ShadowSize = 0;
+            this.rJ_Button_Read.ShowLoadingForm = false;
             this.rJ_Button_Read.Size = new System.Drawing.Size(80, 42);
             this.rJ_Button_Read.State = false;
             this.rJ_Button_Read.TabIndex = 32;
@@ -461,7 +537,7 @@ namespace H_Pannel_lib
             this.groupBox1.Location = new System.Drawing.Point(3, 46);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(381, 345);
+            this.groupBox1.Size = new System.Drawing.Size(520, 345);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "參數";
@@ -474,7 +550,7 @@ namespace H_Pannel_lib
             this.panel21.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel21.Location = new System.Drawing.Point(10, 295);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(361, 30);
+            this.panel21.Size = new System.Drawing.Size(500, 30);
             this.panel21.TabIndex = 10;
             // 
             // label28
@@ -519,7 +595,7 @@ namespace H_Pannel_lib
             this.panel19.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel19.Location = new System.Drawing.Point(10, 265);
             this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(361, 30);
+            this.panel19.Size = new System.Drawing.Size(500, 30);
             this.panel19.TabIndex = 9;
             // 
             // textBox_Password
@@ -555,7 +631,7 @@ namespace H_Pannel_lib
             this.panel17.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel17.Location = new System.Drawing.Point(10, 235);
             this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(361, 30);
+            this.panel17.Size = new System.Drawing.Size(500, 30);
             this.panel17.TabIndex = 8;
             // 
             // textBox_SSID
@@ -591,7 +667,7 @@ namespace H_Pannel_lib
             this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel15.Location = new System.Drawing.Point(10, 205);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(361, 30);
+            this.panel15.Size = new System.Drawing.Size(500, 30);
             this.panel15.TabIndex = 7;
             // 
             // textBox_Server_Port
@@ -627,7 +703,7 @@ namespace H_Pannel_lib
             this.panel13.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel13.Location = new System.Drawing.Point(10, 175);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(361, 30);
+            this.panel13.Size = new System.Drawing.Size(500, 30);
             this.panel13.TabIndex = 6;
             // 
             // textBox_Local_Port
@@ -669,7 +745,7 @@ namespace H_Pannel_lib
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(10, 145);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(361, 30);
+            this.panel11.Size = new System.Drawing.Size(500, 30);
             this.panel11.TabIndex = 5;
             // 
             // textBox_Server_IP_Adress_D
@@ -759,7 +835,7 @@ namespace H_Pannel_lib
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(10, 115);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(361, 30);
+            this.panel9.Size = new System.Drawing.Size(500, 30);
             this.panel9.TabIndex = 4;
             // 
             // textBox_DNS_D
@@ -849,7 +925,7 @@ namespace H_Pannel_lib
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(10, 85);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(361, 30);
+            this.panel7.Size = new System.Drawing.Size(500, 30);
             this.panel7.TabIndex = 3;
             // 
             // textBox_Gateway_D
@@ -939,7 +1015,7 @@ namespace H_Pannel_lib
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(10, 55);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(361, 30);
+            this.panel5.Size = new System.Drawing.Size(500, 30);
             this.panel5.TabIndex = 2;
             // 
             // textBox_Subnet_D
@@ -1029,7 +1105,7 @@ namespace H_Pannel_lib
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(10, 25);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(361, 30);
+            this.panel3.Size = new System.Drawing.Size(500, 30);
             this.panel3.TabIndex = 1;
             // 
             // textBox_IP_Adress_D
@@ -1116,7 +1192,7 @@ namespace H_Pannel_lib
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(381, 43);
+            this.panel2.Size = new System.Drawing.Size(520, 43);
             this.panel2.TabIndex = 10;
             // 
             // rJ_Button_Station_Write
@@ -1132,8 +1208,12 @@ namespace H_Pannel_lib
             this.rJ_Button_Station_Write.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Station_Write.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Station_Write.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Station_Write.GUID = "";
             this.rJ_Button_Station_Write.Location = new System.Drawing.Point(281, 4);
             this.rJ_Button_Station_Write.Name = "rJ_Button_Station_Write";
+            this.rJ_Button_Station_Write.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_Station_Write.ShadowSize = 0;
+            this.rJ_Button_Station_Write.ShowLoadingForm = false;
             this.rJ_Button_Station_Write.Size = new System.Drawing.Size(80, 34);
             this.rJ_Button_Station_Write.State = false;
             this.rJ_Button_Station_Write.TabIndex = 41;
@@ -1181,25 +1261,30 @@ namespace H_Pannel_lib
             // rJ_GroupBox4.ContentsPanel
             // 
             this.rJ_GroupBox4.ContentsPanel.BackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox4.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
             this.rJ_GroupBox4.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox4.ContentsPanel.BorderRadius = 2;
             this.rJ_GroupBox4.ContentsPanel.BorderSize = 2;
             this.rJ_GroupBox4.ContentsPanel.Controls.Add(this.sqL_DataGridView_PING);
             this.rJ_GroupBox4.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rJ_GroupBox4.ContentsPanel.ForeColor = System.Drawing.Color.White;
+            this.rJ_GroupBox4.ContentsPanel.IsSelected = false;
             this.rJ_GroupBox4.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox4.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox4.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.rJ_GroupBox4.ContentsPanel.Size = new System.Drawing.Size(163, 391);
+            this.rJ_GroupBox4.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_GroupBox4.ContentsPanel.ShadowSize = 0;
+            this.rJ_GroupBox4.ContentsPanel.Size = new System.Drawing.Size(163, 178);
             this.rJ_GroupBox4.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rJ_GroupBox4.Location = new System.Drawing.Point(1230, 541);
+            this.rJ_GroupBox4.GUID = "";
+            this.rJ_GroupBox4.Location = new System.Drawing.Point(1230, 754);
             this.rJ_GroupBox4.Name = "rJ_GroupBox4";
             this.rJ_GroupBox4.PannelBackColor = System.Drawing.Color.White;
             this.rJ_GroupBox4.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox4.PannelBorderRadius = 2;
             this.rJ_GroupBox4.PannelBorderSize = 2;
-            this.rJ_GroupBox4.Size = new System.Drawing.Size(163, 428);
+            this.rJ_GroupBox4.Size = new System.Drawing.Size(163, 215);
             this.rJ_GroupBox4.TabIndex = 40;
             this.rJ_GroupBox4.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
             this.rJ_GroupBox4.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
@@ -1244,7 +1329,7 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_PING.RowsHeight = 10;
             this.sqL_DataGridView_PING.SaveFileName = "SQL_DataGridView";
             this.sqL_DataGridView_PING.Server = "127.0.0.0";
-            this.sqL_DataGridView_PING.Size = new System.Drawing.Size(153, 381);
+            this.sqL_DataGridView_PING.Size = new System.Drawing.Size(153, 168);
             this.sqL_DataGridView_PING.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
             this.sqL_DataGridView_PING.TabIndex = 34;
             this.sqL_DataGridView_PING.UserName = "root";
@@ -1265,28 +1350,33 @@ namespace H_Pannel_lib
             // 
             // rJ_GroupBox3.ContentsPanel
             // 
-            this.rJ_GroupBox3.ContentsPanel.BackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox3.ContentsPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.rJ_GroupBox3.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
             this.rJ_GroupBox3.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox3.ContentsPanel.BorderRadius = 2;
             this.rJ_GroupBox3.ContentsPanel.BorderSize = 2;
             this.rJ_GroupBox3.ContentsPanel.Controls.Add(this.sqL_DataGridView_DeviceTable);
             this.rJ_GroupBox3.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rJ_GroupBox3.ContentsPanel.ForeColor = System.Drawing.Color.White;
+            this.rJ_GroupBox3.ContentsPanel.IsSelected = false;
             this.rJ_GroupBox3.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox3.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox3.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.rJ_GroupBox3.ContentsPanel.Size = new System.Drawing.Size(1230, 391);
+            this.rJ_GroupBox3.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_GroupBox3.ContentsPanel.ShadowSize = 0;
+            this.rJ_GroupBox3.ContentsPanel.Size = new System.Drawing.Size(1230, 178);
             this.rJ_GroupBox3.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rJ_GroupBox3.Location = new System.Drawing.Point(0, 541);
+            this.rJ_GroupBox3.GUID = "";
+            this.rJ_GroupBox3.Location = new System.Drawing.Point(0, 754);
             this.rJ_GroupBox3.Name = "rJ_GroupBox3";
-            this.rJ_GroupBox3.PannelBackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox3.PannelBackColor = System.Drawing.SystemColors.Window;
             this.rJ_GroupBox3.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox3.PannelBorderRadius = 2;
             this.rJ_GroupBox3.PannelBorderSize = 2;
-            this.rJ_GroupBox3.Size = new System.Drawing.Size(1230, 428);
+            this.rJ_GroupBox3.Size = new System.Drawing.Size(1230, 215);
             this.rJ_GroupBox3.TabIndex = 41;
-            this.rJ_GroupBox3.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.rJ_GroupBox3.TitleBackColor = System.Drawing.SystemColors.Window;
             this.rJ_GroupBox3.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_GroupBox3.TitleBorderRadius = 5;
             this.rJ_GroupBox3.TitleBorderSize = 0;
@@ -1332,7 +1422,7 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_DeviceTable.RowsHeight = 40;
             this.sqL_DataGridView_DeviceTable.SaveFileName = "SQL_DataGridView";
             this.sqL_DataGridView_DeviceTable.Server = "127.0.0.0";
-            this.sqL_DataGridView_DeviceTable.Size = new System.Drawing.Size(1220, 381);
+            this.sqL_DataGridView_DeviceTable.Size = new System.Drawing.Size(1220, 168);
             this.sqL_DataGridView_DeviceTable.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
             this.sqL_DataGridView_DeviceTable.TabIndex = 1;
             this.sqL_DataGridView_DeviceTable.UserName = "root";
@@ -1357,6 +1447,658 @@ namespace H_Pannel_lib
             // 
             this.saveFileDialog_SaveExcel.DefaultExt = "txt";
             this.saveFileDialog_SaveExcel.Filter = "txt File (*.txt)|*.txt;";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rJ_Button_輸入方向_寫入);
+            this.groupBox2.Controls.Add(this.rJ_Button_輸入方向_讀取);
+            this.groupBox2.Controls.Add(this.checkBox_輸入方向_10);
+            this.groupBox2.Controls.Add(this.checkBox_輸入方向_09);
+            this.groupBox2.Controls.Add(this.checkBox_輸入方向_08);
+            this.groupBox2.Controls.Add(this.checkBox_輸入方向_07);
+            this.groupBox2.Controls.Add(this.checkBox_輸入方向_06);
+            this.groupBox2.Controls.Add(this.checkBox_輸入方向_05);
+            this.groupBox2.Controls.Add(this.checkBox_輸入方向_04);
+            this.groupBox2.Controls.Add(this.checkBox_輸入方向_03);
+            this.groupBox2.Controls.Add(this.checkBox_輸入方向_02);
+            this.groupBox2.Controls.Add(this.checkBox_輸入方向_01);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox2.Location = new System.Drawing.Point(3, 445);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(520, 54);
+            this.groupBox2.TabIndex = 37;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "輸入方向";
+            // 
+            // checkBox_輸入方向_08
+            // 
+            this.checkBox_輸入方向_08.AutoSize = true;
+            this.checkBox_輸入方向_08.Location = new System.Drawing.Point(311, 22);
+            this.checkBox_輸入方向_08.Name = "checkBox_輸入方向_08";
+            this.checkBox_輸入方向_08.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入方向_08.TabIndex = 7;
+            this.checkBox_輸入方向_08.Text = "08";
+            this.checkBox_輸入方向_08.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入方向_07
+            // 
+            this.checkBox_輸入方向_07.AutoSize = true;
+            this.checkBox_輸入方向_07.Location = new System.Drawing.Point(269, 22);
+            this.checkBox_輸入方向_07.Name = "checkBox_輸入方向_07";
+            this.checkBox_輸入方向_07.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入方向_07.TabIndex = 6;
+            this.checkBox_輸入方向_07.Text = "07";
+            this.checkBox_輸入方向_07.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入方向_06
+            // 
+            this.checkBox_輸入方向_06.AutoSize = true;
+            this.checkBox_輸入方向_06.Location = new System.Drawing.Point(227, 22);
+            this.checkBox_輸入方向_06.Name = "checkBox_輸入方向_06";
+            this.checkBox_輸入方向_06.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入方向_06.TabIndex = 5;
+            this.checkBox_輸入方向_06.Text = "06";
+            this.checkBox_輸入方向_06.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入方向_05
+            // 
+            this.checkBox_輸入方向_05.AutoSize = true;
+            this.checkBox_輸入方向_05.Location = new System.Drawing.Point(189, 22);
+            this.checkBox_輸入方向_05.Name = "checkBox_輸入方向_05";
+            this.checkBox_輸入方向_05.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入方向_05.TabIndex = 4;
+            this.checkBox_輸入方向_05.Text = "05";
+            this.checkBox_輸入方向_05.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入方向_04
+            // 
+            this.checkBox_輸入方向_04.AutoSize = true;
+            this.checkBox_輸入方向_04.Location = new System.Drawing.Point(147, 22);
+            this.checkBox_輸入方向_04.Name = "checkBox_輸入方向_04";
+            this.checkBox_輸入方向_04.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入方向_04.TabIndex = 3;
+            this.checkBox_輸入方向_04.Text = "04";
+            this.checkBox_輸入方向_04.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入方向_03
+            // 
+            this.checkBox_輸入方向_03.AutoSize = true;
+            this.checkBox_輸入方向_03.Location = new System.Drawing.Point(105, 22);
+            this.checkBox_輸入方向_03.Name = "checkBox_輸入方向_03";
+            this.checkBox_輸入方向_03.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入方向_03.TabIndex = 2;
+            this.checkBox_輸入方向_03.Text = "03";
+            this.checkBox_輸入方向_03.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入方向_02
+            // 
+            this.checkBox_輸入方向_02.AutoSize = true;
+            this.checkBox_輸入方向_02.Location = new System.Drawing.Point(63, 22);
+            this.checkBox_輸入方向_02.Name = "checkBox_輸入方向_02";
+            this.checkBox_輸入方向_02.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入方向_02.TabIndex = 1;
+            this.checkBox_輸入方向_02.Text = "02";
+            this.checkBox_輸入方向_02.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入方向_01
+            // 
+            this.checkBox_輸入方向_01.AutoSize = true;
+            this.checkBox_輸入方向_01.Location = new System.Drawing.Point(22, 22);
+            this.checkBox_輸入方向_01.Name = "checkBox_輸入方向_01";
+            this.checkBox_輸入方向_01.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入方向_01.TabIndex = 0;
+            this.checkBox_輸入方向_01.Text = "01";
+            this.checkBox_輸入方向_01.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入方向_09
+            // 
+            this.checkBox_輸入方向_09.AutoSize = true;
+            this.checkBox_輸入方向_09.Location = new System.Drawing.Point(353, 22);
+            this.checkBox_輸入方向_09.Name = "checkBox_輸入方向_09";
+            this.checkBox_輸入方向_09.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入方向_09.TabIndex = 8;
+            this.checkBox_輸入方向_09.Text = "09";
+            this.checkBox_輸入方向_09.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入方向_10
+            // 
+            this.checkBox_輸入方向_10.AutoSize = true;
+            this.checkBox_輸入方向_10.Location = new System.Drawing.Point(395, 22);
+            this.checkBox_輸入方向_10.Name = "checkBox_輸入方向_10";
+            this.checkBox_輸入方向_10.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入方向_10.TabIndex = 9;
+            this.checkBox_輸入方向_10.Text = "10";
+            this.checkBox_輸入方向_10.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.rJ_Button_輸出方向_寫入);
+            this.groupBox3.Controls.Add(this.rJ_Button_輸出方向_讀取);
+            this.groupBox3.Controls.Add(this.checkBox_輸出方向_10);
+            this.groupBox3.Controls.Add(this.checkBox_輸出方向_09);
+            this.groupBox3.Controls.Add(this.checkBox_輸出方向_08);
+            this.groupBox3.Controls.Add(this.checkBox_輸出方向_07);
+            this.groupBox3.Controls.Add(this.checkBox_輸出方向_06);
+            this.groupBox3.Controls.Add(this.checkBox_輸出方向_05);
+            this.groupBox3.Controls.Add(this.checkBox_輸出方向_04);
+            this.groupBox3.Controls.Add(this.checkBox_輸出方向_03);
+            this.groupBox3.Controls.Add(this.checkBox_輸出方向_02);
+            this.groupBox3.Controls.Add(this.checkBox_輸出方向_01);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Location = new System.Drawing.Point(3, 499);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(520, 54);
+            this.groupBox3.TabIndex = 38;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "輸出方向";
+            // 
+            // checkBox_輸出方向_10
+            // 
+            this.checkBox_輸出方向_10.AutoSize = true;
+            this.checkBox_輸出方向_10.Location = new System.Drawing.Point(395, 22);
+            this.checkBox_輸出方向_10.Name = "checkBox_輸出方向_10";
+            this.checkBox_輸出方向_10.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出方向_10.TabIndex = 9;
+            this.checkBox_輸出方向_10.Text = "10";
+            this.checkBox_輸出方向_10.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出方向_09
+            // 
+            this.checkBox_輸出方向_09.AutoSize = true;
+            this.checkBox_輸出方向_09.Location = new System.Drawing.Point(353, 22);
+            this.checkBox_輸出方向_09.Name = "checkBox_輸出方向_09";
+            this.checkBox_輸出方向_09.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出方向_09.TabIndex = 8;
+            this.checkBox_輸出方向_09.Text = "09";
+            this.checkBox_輸出方向_09.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出方向_08
+            // 
+            this.checkBox_輸出方向_08.AutoSize = true;
+            this.checkBox_輸出方向_08.Location = new System.Drawing.Point(311, 22);
+            this.checkBox_輸出方向_08.Name = "checkBox_輸出方向_08";
+            this.checkBox_輸出方向_08.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出方向_08.TabIndex = 7;
+            this.checkBox_輸出方向_08.Text = "08";
+            this.checkBox_輸出方向_08.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出方向_07
+            // 
+            this.checkBox_輸出方向_07.AutoSize = true;
+            this.checkBox_輸出方向_07.Location = new System.Drawing.Point(269, 22);
+            this.checkBox_輸出方向_07.Name = "checkBox_輸出方向_07";
+            this.checkBox_輸出方向_07.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出方向_07.TabIndex = 6;
+            this.checkBox_輸出方向_07.Text = "07";
+            this.checkBox_輸出方向_07.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出方向_06
+            // 
+            this.checkBox_輸出方向_06.AutoSize = true;
+            this.checkBox_輸出方向_06.Location = new System.Drawing.Point(227, 22);
+            this.checkBox_輸出方向_06.Name = "checkBox_輸出方向_06";
+            this.checkBox_輸出方向_06.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出方向_06.TabIndex = 5;
+            this.checkBox_輸出方向_06.Text = "06";
+            this.checkBox_輸出方向_06.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出方向_05
+            // 
+            this.checkBox_輸出方向_05.AutoSize = true;
+            this.checkBox_輸出方向_05.Location = new System.Drawing.Point(189, 22);
+            this.checkBox_輸出方向_05.Name = "checkBox_輸出方向_05";
+            this.checkBox_輸出方向_05.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出方向_05.TabIndex = 4;
+            this.checkBox_輸出方向_05.Text = "05";
+            this.checkBox_輸出方向_05.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出方向_04
+            // 
+            this.checkBox_輸出方向_04.AutoSize = true;
+            this.checkBox_輸出方向_04.Location = new System.Drawing.Point(147, 22);
+            this.checkBox_輸出方向_04.Name = "checkBox_輸出方向_04";
+            this.checkBox_輸出方向_04.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出方向_04.TabIndex = 3;
+            this.checkBox_輸出方向_04.Text = "04";
+            this.checkBox_輸出方向_04.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出方向_03
+            // 
+            this.checkBox_輸出方向_03.AutoSize = true;
+            this.checkBox_輸出方向_03.Location = new System.Drawing.Point(105, 22);
+            this.checkBox_輸出方向_03.Name = "checkBox_輸出方向_03";
+            this.checkBox_輸出方向_03.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出方向_03.TabIndex = 2;
+            this.checkBox_輸出方向_03.Text = "03";
+            this.checkBox_輸出方向_03.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出方向_02
+            // 
+            this.checkBox_輸出方向_02.AutoSize = true;
+            this.checkBox_輸出方向_02.Location = new System.Drawing.Point(63, 22);
+            this.checkBox_輸出方向_02.Name = "checkBox_輸出方向_02";
+            this.checkBox_輸出方向_02.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出方向_02.TabIndex = 1;
+            this.checkBox_輸出方向_02.Text = "02";
+            this.checkBox_輸出方向_02.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出方向_01
+            // 
+            this.checkBox_輸出方向_01.AutoSize = true;
+            this.checkBox_輸出方向_01.Location = new System.Drawing.Point(22, 22);
+            this.checkBox_輸出方向_01.Name = "checkBox_輸出方向_01";
+            this.checkBox_輸出方向_01.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出方向_01.TabIndex = 0;
+            this.checkBox_輸出方向_01.Text = "01";
+            this.checkBox_輸出方向_01.UseVisualStyleBackColor = true;
+            // 
+            // rJ_Button_輸入方向_讀取
+            // 
+            this.rJ_Button_輸入方向_讀取.AutoResetState = false;
+            this.rJ_Button_輸入方向_讀取.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_輸入方向_讀取.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_輸入方向_讀取.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_輸入方向_讀取.BorderRadius = 5;
+            this.rJ_Button_輸入方向_讀取.BorderSize = 0;
+            this.rJ_Button_輸入方向_讀取.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_輸入方向_讀取.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_輸入方向_讀取.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_輸入方向_讀取.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_輸入方向_讀取.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_輸入方向_讀取.GUID = "";
+            this.rJ_Button_輸入方向_讀取.Location = new System.Drawing.Point(430, 12);
+            this.rJ_Button_輸入方向_讀取.Name = "rJ_Button_輸入方向_讀取";
+            this.rJ_Button_輸入方向_讀取.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_輸入方向_讀取.ShadowSize = 0;
+            this.rJ_Button_輸入方向_讀取.ShowLoadingForm = false;
+            this.rJ_Button_輸入方向_讀取.Size = new System.Drawing.Size(41, 36);
+            this.rJ_Button_輸入方向_讀取.State = false;
+            this.rJ_Button_輸入方向_讀取.TabIndex = 36;
+            this.rJ_Button_輸入方向_讀取.Text = "讀取";
+            this.rJ_Button_輸入方向_讀取.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_輸入方向_讀取.UseVisualStyleBackColor = false;
+            // 
+            // rJ_Button_輸入方向_寫入
+            // 
+            this.rJ_Button_輸入方向_寫入.AutoResetState = false;
+            this.rJ_Button_輸入方向_寫入.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_輸入方向_寫入.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_輸入方向_寫入.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_輸入方向_寫入.BorderRadius = 5;
+            this.rJ_Button_輸入方向_寫入.BorderSize = 0;
+            this.rJ_Button_輸入方向_寫入.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_輸入方向_寫入.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_輸入方向_寫入.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_輸入方向_寫入.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_輸入方向_寫入.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_輸入方向_寫入.GUID = "";
+            this.rJ_Button_輸入方向_寫入.Location = new System.Drawing.Point(476, 12);
+            this.rJ_Button_輸入方向_寫入.Name = "rJ_Button_輸入方向_寫入";
+            this.rJ_Button_輸入方向_寫入.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_輸入方向_寫入.ShadowSize = 0;
+            this.rJ_Button_輸入方向_寫入.ShowLoadingForm = false;
+            this.rJ_Button_輸入方向_寫入.Size = new System.Drawing.Size(41, 36);
+            this.rJ_Button_輸入方向_寫入.State = false;
+            this.rJ_Button_輸入方向_寫入.TabIndex = 39;
+            this.rJ_Button_輸入方向_寫入.Text = "寫入";
+            this.rJ_Button_輸入方向_寫入.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_輸入方向_寫入.UseVisualStyleBackColor = false;
+            // 
+            // rJ_Button_輸出方向_寫入
+            // 
+            this.rJ_Button_輸出方向_寫入.AutoResetState = false;
+            this.rJ_Button_輸出方向_寫入.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_輸出方向_寫入.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_輸出方向_寫入.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_輸出方向_寫入.BorderRadius = 5;
+            this.rJ_Button_輸出方向_寫入.BorderSize = 0;
+            this.rJ_Button_輸出方向_寫入.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_輸出方向_寫入.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_輸出方向_寫入.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_輸出方向_寫入.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_輸出方向_寫入.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_輸出方向_寫入.GUID = "";
+            this.rJ_Button_輸出方向_寫入.Location = new System.Drawing.Point(476, 11);
+            this.rJ_Button_輸出方向_寫入.Name = "rJ_Button_輸出方向_寫入";
+            this.rJ_Button_輸出方向_寫入.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_輸出方向_寫入.ShadowSize = 0;
+            this.rJ_Button_輸出方向_寫入.ShowLoadingForm = false;
+            this.rJ_Button_輸出方向_寫入.Size = new System.Drawing.Size(41, 36);
+            this.rJ_Button_輸出方向_寫入.State = false;
+            this.rJ_Button_輸出方向_寫入.TabIndex = 41;
+            this.rJ_Button_輸出方向_寫入.Text = "寫入";
+            this.rJ_Button_輸出方向_寫入.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_輸出方向_寫入.UseVisualStyleBackColor = false;
+            // 
+            // rJ_Button_輸出方向_讀取
+            // 
+            this.rJ_Button_輸出方向_讀取.AutoResetState = false;
+            this.rJ_Button_輸出方向_讀取.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_輸出方向_讀取.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_輸出方向_讀取.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_輸出方向_讀取.BorderRadius = 5;
+            this.rJ_Button_輸出方向_讀取.BorderSize = 0;
+            this.rJ_Button_輸出方向_讀取.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_輸出方向_讀取.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_輸出方向_讀取.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_輸出方向_讀取.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_輸出方向_讀取.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_輸出方向_讀取.GUID = "";
+            this.rJ_Button_輸出方向_讀取.Location = new System.Drawing.Point(430, 11);
+            this.rJ_Button_輸出方向_讀取.Name = "rJ_Button_輸出方向_讀取";
+            this.rJ_Button_輸出方向_讀取.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_輸出方向_讀取.ShadowSize = 0;
+            this.rJ_Button_輸出方向_讀取.ShowLoadingForm = false;
+            this.rJ_Button_輸出方向_讀取.Size = new System.Drawing.Size(41, 36);
+            this.rJ_Button_輸出方向_讀取.State = false;
+            this.rJ_Button_輸出方向_讀取.TabIndex = 40;
+            this.rJ_Button_輸出方向_讀取.Text = "讀取";
+            this.rJ_Button_輸出方向_讀取.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_輸出方向_讀取.UseVisualStyleBackColor = false;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.rJ_Button_輸入_讀取);
+            this.groupBox5.Controls.Add(this.checkBox_輸入10);
+            this.groupBox5.Controls.Add(this.checkBox_輸入09);
+            this.groupBox5.Controls.Add(this.checkBox_輸入08);
+            this.groupBox5.Controls.Add(this.checkBox_輸入07);
+            this.groupBox5.Controls.Add(this.checkBox_輸入06);
+            this.groupBox5.Controls.Add(this.checkBox_輸入05);
+            this.groupBox5.Controls.Add(this.checkBox_輸入04);
+            this.groupBox5.Controls.Add(this.checkBox_輸入03);
+            this.groupBox5.Controls.Add(this.checkBox_輸入02);
+            this.groupBox5.Controls.Add(this.checkBox_輸入01);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox5.Location = new System.Drawing.Point(3, 553);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(520, 54);
+            this.groupBox5.TabIndex = 39;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "輸入";
+            // 
+            // rJ_Button_輸入_讀取
+            // 
+            this.rJ_Button_輸入_讀取.AutoResetState = false;
+            this.rJ_Button_輸入_讀取.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_輸入_讀取.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_輸入_讀取.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_輸入_讀取.BorderRadius = 5;
+            this.rJ_Button_輸入_讀取.BorderSize = 0;
+            this.rJ_Button_輸入_讀取.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_輸入_讀取.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_輸入_讀取.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_輸入_讀取.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_輸入_讀取.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_輸入_讀取.GUID = "";
+            this.rJ_Button_輸入_讀取.Location = new System.Drawing.Point(430, 12);
+            this.rJ_Button_輸入_讀取.Name = "rJ_Button_輸入_讀取";
+            this.rJ_Button_輸入_讀取.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_輸入_讀取.ShadowSize = 0;
+            this.rJ_Button_輸入_讀取.ShowLoadingForm = false;
+            this.rJ_Button_輸入_讀取.Size = new System.Drawing.Size(41, 36);
+            this.rJ_Button_輸入_讀取.State = false;
+            this.rJ_Button_輸入_讀取.TabIndex = 36;
+            this.rJ_Button_輸入_讀取.Text = "讀取";
+            this.rJ_Button_輸入_讀取.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_輸入_讀取.UseVisualStyleBackColor = false;
+            // 
+            // checkBox_輸入10
+            // 
+            this.checkBox_輸入10.AutoSize = true;
+            this.checkBox_輸入10.Enabled = false;
+            this.checkBox_輸入10.Location = new System.Drawing.Point(395, 22);
+            this.checkBox_輸入10.Name = "checkBox_輸入10";
+            this.checkBox_輸入10.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入10.TabIndex = 9;
+            this.checkBox_輸入10.Text = "10";
+            this.checkBox_輸入10.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入09
+            // 
+            this.checkBox_輸入09.AutoSize = true;
+            this.checkBox_輸入09.Enabled = false;
+            this.checkBox_輸入09.Location = new System.Drawing.Point(353, 22);
+            this.checkBox_輸入09.Name = "checkBox_輸入09";
+            this.checkBox_輸入09.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入09.TabIndex = 8;
+            this.checkBox_輸入09.Text = "09";
+            this.checkBox_輸入09.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入08
+            // 
+            this.checkBox_輸入08.AutoSize = true;
+            this.checkBox_輸入08.Enabled = false;
+            this.checkBox_輸入08.Location = new System.Drawing.Point(311, 22);
+            this.checkBox_輸入08.Name = "checkBox_輸入08";
+            this.checkBox_輸入08.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入08.TabIndex = 7;
+            this.checkBox_輸入08.Text = "08";
+            this.checkBox_輸入08.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入07
+            // 
+            this.checkBox_輸入07.AutoSize = true;
+            this.checkBox_輸入07.Enabled = false;
+            this.checkBox_輸入07.Location = new System.Drawing.Point(269, 22);
+            this.checkBox_輸入07.Name = "checkBox_輸入07";
+            this.checkBox_輸入07.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入07.TabIndex = 6;
+            this.checkBox_輸入07.Text = "07";
+            this.checkBox_輸入07.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入06
+            // 
+            this.checkBox_輸入06.AutoSize = true;
+            this.checkBox_輸入06.Enabled = false;
+            this.checkBox_輸入06.Location = new System.Drawing.Point(227, 22);
+            this.checkBox_輸入06.Name = "checkBox_輸入06";
+            this.checkBox_輸入06.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入06.TabIndex = 5;
+            this.checkBox_輸入06.Text = "06";
+            this.checkBox_輸入06.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入05
+            // 
+            this.checkBox_輸入05.AutoSize = true;
+            this.checkBox_輸入05.Enabled = false;
+            this.checkBox_輸入05.Location = new System.Drawing.Point(189, 22);
+            this.checkBox_輸入05.Name = "checkBox_輸入05";
+            this.checkBox_輸入05.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入05.TabIndex = 4;
+            this.checkBox_輸入05.Text = "05";
+            this.checkBox_輸入05.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入04
+            // 
+            this.checkBox_輸入04.AutoSize = true;
+            this.checkBox_輸入04.Enabled = false;
+            this.checkBox_輸入04.Location = new System.Drawing.Point(147, 22);
+            this.checkBox_輸入04.Name = "checkBox_輸入04";
+            this.checkBox_輸入04.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入04.TabIndex = 3;
+            this.checkBox_輸入04.Text = "04";
+            this.checkBox_輸入04.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入03
+            // 
+            this.checkBox_輸入03.AutoSize = true;
+            this.checkBox_輸入03.Enabled = false;
+            this.checkBox_輸入03.Location = new System.Drawing.Point(105, 22);
+            this.checkBox_輸入03.Name = "checkBox_輸入03";
+            this.checkBox_輸入03.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入03.TabIndex = 2;
+            this.checkBox_輸入03.Text = "03";
+            this.checkBox_輸入03.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入02
+            // 
+            this.checkBox_輸入02.AutoSize = true;
+            this.checkBox_輸入02.Enabled = false;
+            this.checkBox_輸入02.Location = new System.Drawing.Point(63, 22);
+            this.checkBox_輸入02.Name = "checkBox_輸入02";
+            this.checkBox_輸入02.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入02.TabIndex = 1;
+            this.checkBox_輸入02.Text = "02";
+            this.checkBox_輸入02.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸入01
+            // 
+            this.checkBox_輸入01.AutoSize = true;
+            this.checkBox_輸入01.Enabled = false;
+            this.checkBox_輸入01.Location = new System.Drawing.Point(22, 22);
+            this.checkBox_輸入01.Name = "checkBox_輸入01";
+            this.checkBox_輸入01.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸入01.TabIndex = 0;
+            this.checkBox_輸入01.Text = "01";
+            this.checkBox_輸入01.UseVisualStyleBackColor = true;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.rJ_Button_輸出_寫入);
+            this.groupBox6.Controls.Add(this.checkBox_輸出10);
+            this.groupBox6.Controls.Add(this.checkBox_輸出09);
+            this.groupBox6.Controls.Add(this.checkBox_輸出08);
+            this.groupBox6.Controls.Add(this.checkBox_輸出07);
+            this.groupBox6.Controls.Add(this.checkBox_輸出06);
+            this.groupBox6.Controls.Add(this.checkBox_輸出05);
+            this.groupBox6.Controls.Add(this.checkBox_輸出04);
+            this.groupBox6.Controls.Add(this.checkBox_輸出03);
+            this.groupBox6.Controls.Add(this.checkBox_輸出02);
+            this.groupBox6.Controls.Add(this.checkBox_輸出01);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox6.Location = new System.Drawing.Point(3, 607);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(520, 54);
+            this.groupBox6.TabIndex = 40;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "輸出";
+            // 
+            // rJ_Button_輸出_寫入
+            // 
+            this.rJ_Button_輸出_寫入.AutoResetState = false;
+            this.rJ_Button_輸出_寫入.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_輸出_寫入.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_輸出_寫入.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_輸出_寫入.BorderRadius = 5;
+            this.rJ_Button_輸出_寫入.BorderSize = 0;
+            this.rJ_Button_輸出_寫入.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_輸出_寫入.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_輸出_寫入.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_輸出_寫入.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_輸出_寫入.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_輸出_寫入.GUID = "";
+            this.rJ_Button_輸出_寫入.Location = new System.Drawing.Point(430, 12);
+            this.rJ_Button_輸出_寫入.Name = "rJ_Button_輸出_寫入";
+            this.rJ_Button_輸出_寫入.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_輸出_寫入.ShadowSize = 0;
+            this.rJ_Button_輸出_寫入.ShowLoadingForm = false;
+            this.rJ_Button_輸出_寫入.Size = new System.Drawing.Size(41, 36);
+            this.rJ_Button_輸出_寫入.State = false;
+            this.rJ_Button_輸出_寫入.TabIndex = 36;
+            this.rJ_Button_輸出_寫入.Text = "寫入";
+            this.rJ_Button_輸出_寫入.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_輸出_寫入.UseVisualStyleBackColor = false;
+            // 
+            // checkBox_輸出10
+            // 
+            this.checkBox_輸出10.AutoSize = true;
+            this.checkBox_輸出10.Location = new System.Drawing.Point(395, 22);
+            this.checkBox_輸出10.Name = "checkBox_輸出10";
+            this.checkBox_輸出10.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出10.TabIndex = 9;
+            this.checkBox_輸出10.Text = "10";
+            this.checkBox_輸出10.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出09
+            // 
+            this.checkBox_輸出09.AutoSize = true;
+            this.checkBox_輸出09.Location = new System.Drawing.Point(353, 22);
+            this.checkBox_輸出09.Name = "checkBox_輸出09";
+            this.checkBox_輸出09.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出09.TabIndex = 8;
+            this.checkBox_輸出09.Text = "09";
+            this.checkBox_輸出09.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出08
+            // 
+            this.checkBox_輸出08.AutoSize = true;
+            this.checkBox_輸出08.Location = new System.Drawing.Point(311, 22);
+            this.checkBox_輸出08.Name = "checkBox_輸出08";
+            this.checkBox_輸出08.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出08.TabIndex = 7;
+            this.checkBox_輸出08.Text = "08";
+            this.checkBox_輸出08.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出07
+            // 
+            this.checkBox_輸出07.AutoSize = true;
+            this.checkBox_輸出07.Location = new System.Drawing.Point(269, 22);
+            this.checkBox_輸出07.Name = "checkBox_輸出07";
+            this.checkBox_輸出07.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出07.TabIndex = 6;
+            this.checkBox_輸出07.Text = "07";
+            this.checkBox_輸出07.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出06
+            // 
+            this.checkBox_輸出06.AutoSize = true;
+            this.checkBox_輸出06.Location = new System.Drawing.Point(227, 22);
+            this.checkBox_輸出06.Name = "checkBox_輸出06";
+            this.checkBox_輸出06.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出06.TabIndex = 5;
+            this.checkBox_輸出06.Text = "06";
+            this.checkBox_輸出06.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出05
+            // 
+            this.checkBox_輸出05.AutoSize = true;
+            this.checkBox_輸出05.Location = new System.Drawing.Point(189, 22);
+            this.checkBox_輸出05.Name = "checkBox_輸出05";
+            this.checkBox_輸出05.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出05.TabIndex = 4;
+            this.checkBox_輸出05.Text = "05";
+            this.checkBox_輸出05.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出04
+            // 
+            this.checkBox_輸出04.AutoSize = true;
+            this.checkBox_輸出04.Location = new System.Drawing.Point(147, 22);
+            this.checkBox_輸出04.Name = "checkBox_輸出04";
+            this.checkBox_輸出04.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出04.TabIndex = 3;
+            this.checkBox_輸出04.Text = "04";
+            this.checkBox_輸出04.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出03
+            // 
+            this.checkBox_輸出03.AutoSize = true;
+            this.checkBox_輸出03.Location = new System.Drawing.Point(105, 22);
+            this.checkBox_輸出03.Name = "checkBox_輸出03";
+            this.checkBox_輸出03.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出03.TabIndex = 2;
+            this.checkBox_輸出03.Text = "03";
+            this.checkBox_輸出03.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出02
+            // 
+            this.checkBox_輸出02.AutoSize = true;
+            this.checkBox_輸出02.Location = new System.Drawing.Point(63, 22);
+            this.checkBox_輸出02.Name = "checkBox_輸出02";
+            this.checkBox_輸出02.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出02.TabIndex = 1;
+            this.checkBox_輸出02.Text = "02";
+            this.checkBox_輸出02.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_輸出01
+            // 
+            this.checkBox_輸出01.AutoSize = true;
+            this.checkBox_輸出01.Location = new System.Drawing.Point(22, 22);
+            this.checkBox_輸出01.Name = "checkBox_輸出01";
+            this.checkBox_輸出01.Size = new System.Drawing.Size(36, 16);
+            this.checkBox_輸出01.TabIndex = 0;
+            this.checkBox_輸出01.Text = "01";
+            this.checkBox_輸出01.UseVisualStyleBackColor = true;
             // 
             // RFID_UI
             // 
@@ -1414,6 +2156,14 @@ namespace H_Pannel_lib
             this.rJ_GroupBox3.ContentsPanel.ResumeLayout(false);
             this.rJ_GroupBox3.ContentsPanel.PerformLayout();
             this.rJ_GroupBox3.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1519,5 +2269,55 @@ namespace H_Pannel_lib
         public SQLUI.SQL_DataGridView sqL_DataGridView_DeviceTable;
         protected System.Windows.Forms.OpenFileDialog openFileDialog_LoadExcel;
         protected System.Windows.Forms.SaveFileDialog saveFileDialog_SaveExcel;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private MyUI.RJ_Button rJ_Button_輸出方向_寫入;
+        private MyUI.RJ_Button rJ_Button_輸出方向_讀取;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_10;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_09;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_08;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_07;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_06;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_05;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_04;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_03;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_02;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_01;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private MyUI.RJ_Button rJ_Button_輸入方向_寫入;
+        private MyUI.RJ_Button rJ_Button_輸入方向_讀取;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_10;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_09;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_08;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_07;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_06;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_05;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_04;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_03;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_02;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_01;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private MyUI.RJ_Button rJ_Button_輸出_寫入;
+        private System.Windows.Forms.CheckBox checkBox_輸出10;
+        private System.Windows.Forms.CheckBox checkBox_輸出09;
+        private System.Windows.Forms.CheckBox checkBox_輸出08;
+        private System.Windows.Forms.CheckBox checkBox_輸出07;
+        private System.Windows.Forms.CheckBox checkBox_輸出06;
+        private System.Windows.Forms.CheckBox checkBox_輸出05;
+        private System.Windows.Forms.CheckBox checkBox_輸出04;
+        private System.Windows.Forms.CheckBox checkBox_輸出03;
+        private System.Windows.Forms.CheckBox checkBox_輸出02;
+        private System.Windows.Forms.CheckBox checkBox_輸出01;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private MyUI.RJ_Button rJ_Button_輸入_讀取;
+        private System.Windows.Forms.CheckBox checkBox_輸入10;
+        private System.Windows.Forms.CheckBox checkBox_輸入09;
+        private System.Windows.Forms.CheckBox checkBox_輸入08;
+        private System.Windows.Forms.CheckBox checkBox_輸入07;
+        private System.Windows.Forms.CheckBox checkBox_輸入06;
+        private System.Windows.Forms.CheckBox checkBox_輸入05;
+        private System.Windows.Forms.CheckBox checkBox_輸入04;
+        private System.Windows.Forms.CheckBox checkBox_輸入03;
+        private System.Windows.Forms.CheckBox checkBox_輸入02;
+        private System.Windows.Forms.CheckBox checkBox_輸入01;
     }
 }

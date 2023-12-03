@@ -38,6 +38,7 @@ class MyOutput
    void Init(int PIN_Num , bool flag_toogle);
    void Set_toggle(bool value);
    void Set_State(bool ON_OFF);
+   void Set_StateEx(bool ON_OFF);
    void Blink(int Time);
    void Blink();
    int OnDelayTime = -1;

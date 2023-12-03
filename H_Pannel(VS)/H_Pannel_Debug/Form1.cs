@@ -20,7 +20,8 @@ namespace WT32_SC01
 {
     public partial class Form1 : Form
     {
-       
+        Driver_IO_Board driver_IO_Board = new Driver_IO_Board();
+        MySerialPort mySerialPort_IO_Board = new MySerialPort();
         Basic.MyThread MyThread_Program;
         public Form1()
         {
@@ -113,12 +114,42 @@ namespace WT32_SC01
             this.rJ_Button_EPD1020_初始化.MouseDownEvent += RJ_Button_EPD1020_初始化_MouseDownEvent;
             this.rJ_Button_EPD_1020_門片畫面測試.MouseDownEvent += RJ_Button_EPD_1020_門片畫面測試_MouseDownEvent;
 
+            this.rJ_Button_RFID_RS485_TEST.MouseDownEvent += RJ_Button_RFID_RS485_TEST_MouseDownEvent;
+            this.rJ_Button1.MouseDownEvent += RJ_Button1_MouseDownEvent;
             MyUI.數字鍵盤.音效 = false;
+            H_Pannel_lib.Communication.UART_ConsoletWrite = false;
+        }
+        int index = 0;
+        private void RJ_Button1_MouseDownEvent(MouseEventArgs mevent)
+        {
+            driver_IO_Board.ProgramEvent += Driver_IO_Board_ProgramEvent;
+
+
+        }
+        private void Driver_IO_Board_ProgramEvent(Driver_IO_Board driver_IO_Board)
+        {
+            for (int k = 0; k < 16; k++)
+            {
+                if (k == index)
+                {
+                    driver_IO_Board[1].Output[k] = true;
+                }
+                else
+                {
+                    driver_IO_Board[1].Output[k] = false;
+                }
+            }
+            index++;
+            if (index >= 10) index = 0;
         }
 
- 
 
+        private void RJ_Button_RFID_RS485_TEST_MouseDownEvent(MouseEventArgs mevent)
+        {
+            mySerialPort_IO_Board.Init("COM7", 115200, 8, System.IO.Ports.Parity.None, System.IO.Ports.StopBits.One);
 
+            driver_IO_Board.Init(mySerialPort_IO_Board, new byte[] {1,  2 });
+        }
 
         #region WT32
         private void rJ_Button_WT32_初始化_Click(object sender, EventArgs e)

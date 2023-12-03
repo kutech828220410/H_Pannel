@@ -186,6 +186,7 @@ namespace H_Pannel_lib
             this.rJ_GroupBox1.ContentsPanel.Size = new System.Drawing.Size(1006, 480);
             this.rJ_GroupBox1.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rJ_GroupBox1.GUID = "";
             this.rJ_GroupBox1.Location = new System.Drawing.Point(387, 0);
             this.rJ_GroupBox1.Name = "rJ_GroupBox1";
             this.rJ_GroupBox1.PannelBackColor = System.Drawing.Color.White;
@@ -284,6 +285,7 @@ namespace H_Pannel_lib
             this.rJ_GroupBox2.ContentsPanel.Size = new System.Drawing.Size(387, 480);
             this.rJ_GroupBox2.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.rJ_GroupBox2.GUID = "";
             this.rJ_GroupBox2.Location = new System.Drawing.Point(0, 0);
             this.rJ_GroupBox2.Name = "rJ_GroupBox2";
             this.rJ_GroupBox2.PannelBackColor = System.Drawing.Color.White;
@@ -315,6 +317,7 @@ namespace H_Pannel_lib
             this.rJ_Button_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Save.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Save.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Save.GUID = "";
             this.rJ_Button_Save.Location = new System.Drawing.Point(186, 385);
             this.rJ_Button_Save.Name = "rJ_Button_Save";
             this.rJ_Button_Save.Size = new System.Drawing.Size(90, 42);
@@ -337,6 +340,7 @@ namespace H_Pannel_lib
             this.rJ_Button_Load.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Load.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Load.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Load.GUID = "";
             this.rJ_Button_Load.Location = new System.Drawing.Point(282, 385);
             this.rJ_Button_Load.Name = "rJ_Button_Load";
             this.rJ_Button_Load.Size = new System.Drawing.Size(90, 42);
@@ -359,6 +363,7 @@ namespace H_Pannel_lib
             this.rJ_Button_Lock_Off.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Lock_Off.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Lock_Off.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Lock_Off.GUID = "";
             this.rJ_Button_Lock_Off.Location = new System.Drawing.Point(186, 432);
             this.rJ_Button_Lock_Off.Name = "rJ_Button_Lock_Off";
             this.rJ_Button_Lock_Off.Size = new System.Drawing.Size(90, 42);
@@ -381,6 +386,7 @@ namespace H_Pannel_lib
             this.rJ_Button_Lock_On.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Lock_On.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Lock_On.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Lock_On.GUID = "";
             this.rJ_Button_Lock_On.Location = new System.Drawing.Point(282, 432);
             this.rJ_Button_Lock_On.Name = "rJ_Button_Lock_On";
             this.rJ_Button_Lock_On.Size = new System.Drawing.Size(90, 42);
@@ -403,6 +409,7 @@ namespace H_Pannel_lib
             this.rJ_Button_Write.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Write.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Write.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Write.GUID = "";
             this.rJ_Button_Write.Location = new System.Drawing.Point(94, 432);
             this.rJ_Button_Write.Name = "rJ_Button_Write";
             this.rJ_Button_Write.Size = new System.Drawing.Size(80, 42);
@@ -425,6 +432,7 @@ namespace H_Pannel_lib
             this.rJ_Button_Read.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Read.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Read.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Read.GUID = "";
             this.rJ_Button_Read.Location = new System.Drawing.Point(8, 432);
             this.rJ_Button_Read.Name = "rJ_Button_Read";
             this.rJ_Button_Read.Size = new System.Drawing.Size(80, 42);
@@ -1121,6 +1129,7 @@ namespace H_Pannel_lib
             this.rJ_Button_Station_Write.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Station_Write.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Station_Write.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Station_Write.GUID = "";
             this.rJ_Button_Station_Write.Location = new System.Drawing.Point(281, 4);
             this.rJ_Button_Station_Write.Name = "rJ_Button_Station_Write";
             this.rJ_Button_Station_Write.Size = new System.Drawing.Size(80, 34);
@@ -1183,6 +1192,7 @@ namespace H_Pannel_lib
             this.rJ_GroupBox4.ContentsPanel.Size = new System.Drawing.Size(163, 415);
             this.rJ_GroupBox4.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.rJ_GroupBox4.GUID = "";
             this.rJ_GroupBox4.Location = new System.Drawing.Point(1230, 517);
             this.rJ_GroupBox4.Name = "rJ_GroupBox4";
             this.rJ_GroupBox4.PannelBackColor = System.Drawing.Color.White;
@@ -1269,6 +1279,7 @@ namespace H_Pannel_lib
             this.rJ_GroupBox3.ContentsPanel.Size = new System.Drawing.Size(1230, 415);
             this.rJ_GroupBox3.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rJ_GroupBox3.GUID = "";
             this.rJ_GroupBox3.Location = new System.Drawing.Point(0, 517);
             this.rJ_GroupBox3.Name = "rJ_GroupBox3";
             this.rJ_GroupBox3.PannelBackColor = System.Drawing.Color.White;

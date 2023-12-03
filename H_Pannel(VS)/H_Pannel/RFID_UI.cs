@@ -592,9 +592,28 @@ namespace H_Pannel_lib
                 }
                 Communication.ConsoleWrite = ConsoleWrite;
                 this.FindForm().FormClosing += RFID_UI_FormClosing;
-                this.rJ_Button_Station_Write.Click += RJ_Button_Station_Write_Click;
-                this.rJ_Button_Read.Click += RJ_Button_Read_Click; ;
-                this.rJ_Button_Write.Click += RJ_Button_Write_Click; ;
+             
+
+                this.rJ_Button_Station_Write.MouseDownEvent += RJ_Button_Station_Write_MouseDownEvent;
+                this.rJ_Button_Read.MouseDownEvent += RJ_Button_Read_MouseDownEvent;
+                this.rJ_Button_Write.MouseDownEvent += RJ_Button_Write_MouseDownEvent;
+ 
+                this.rJ_Button_輸出方向_讀取.MouseDownEvent += RJ_Button_輸出方向_讀取_MouseDownEvent;
+                this.rJ_Button_輸出方向_寫入.MouseDownEvent += RJ_Button_輸出方向_寫入_MouseDownEvent;
+                this.rJ_Button_輸入方向_讀取.MouseDownEvent += RJ_Button_輸入方向_讀取_MouseDownEvent;
+                this.rJ_Button_輸入方向_寫入.MouseDownEvent += RJ_Button_輸入方向_寫入_MouseDownEvent;
+                this.rJ_Button_輸入_讀取.MouseDownEvent += RJ_Button_輸入_讀取_MouseDownEvent;
+                this.rJ_Button_輸出_寫入.MouseDownEvent += RJ_Button_輸出_寫入_MouseDownEvent;
+                this.checkBox_輸出01.Click += CheckBox_輸出01_Click;
+                this.checkBox_輸出02.Click += CheckBox_輸出02_Click;
+                this.checkBox_輸出03.Click += CheckBox_輸出03_Click;
+                this.checkBox_輸出04.Click += CheckBox_輸出04_Click;
+                this.checkBox_輸出05.Click += CheckBox_輸出05_Click;
+                this.checkBox_輸出06.Click += CheckBox_輸出06_Click;
+                this.checkBox_輸出07.Click += CheckBox_輸出07_Click;
+                this.checkBox_輸出08.Click += CheckBox_輸出08_Click;
+                this.checkBox_輸出09.Click += CheckBox_輸出09_Click;
+                this.checkBox_輸出10.Click += CheckBox_輸出10_Click;
 
                 mySerialPort.Init(this.textBox_COM.Text, 115200, 8, Parity.None, StopBits.One, false);
 
@@ -616,6 +635,8 @@ namespace H_Pannel_lib
             flag_UDP_Class_Init = true;
 
         }
+
+       
 
         virtual public bool Set_ESP32_Restart(string IP, int Port)
         {
@@ -1180,7 +1201,7 @@ namespace H_Pannel_lib
         }
 
         #region Event
-        private void RJ_Button_Write_Click(object sender, EventArgs e)
+        private void RJ_Button_Write_MouseDownEvent(MouseEventArgs mevent)
         {
             bool flag_OK = true;
             int localport = this.Local_Port.StringToInt32();
@@ -1233,7 +1254,7 @@ namespace H_Pannel_lib
                 MyMessageBox.ShowDialog("Write data failed!");
             }
         }
-        private void RJ_Button_Read_Click(object sender, EventArgs e)
+        private void RJ_Button_Read_MouseDownEvent(MouseEventArgs mevent)
         {
             mySerialPort.PortName = this.textBox_COM.Text;
             string IP_Adress = "";
@@ -1250,18 +1271,22 @@ namespace H_Pannel_lib
             string RFID_Enable = "";
             if (Communication.UART_Command_Get_Setting(mySerialPort, out IP_Adress, out Subnet, out Gateway, out DNS, out Server_IP_Adress, out Local_Port, out Server_Port, out SSID, out Password, out Station, out UDP_SendTime, out RFID_Enable))
             {
-                this.IP_Adress = IP_Adress;
-                this.Subnet = Subnet;
-                this.Gateway = Gateway;
-                this.DNS = DNS;
-                this.Server_IP_Adress = Server_IP_Adress;
-                this.Local_Port = Local_Port;
-                this.Server_Port = Server_Port;
-                this.SSID = SSID;
-                this._Password = Password;
-                this.Station = Station;
-                this.UDP_SendTime = UDP_SendTime;
-                this.RFID_Enable = RFID_Enable;
+                this.Invoke(new Action(delegate
+                {
+                    this.IP_Adress = IP_Adress;
+                    this.Subnet = Subnet;
+                    this.Gateway = Gateway;
+                    this.DNS = DNS;
+                    this.Server_IP_Adress = Server_IP_Adress;
+                    this.Local_Port = Local_Port;
+                    this.Server_Port = Server_Port;
+                    this.SSID = SSID;
+                    this._Password = Password;
+                    this.Station = Station;
+                    this.UDP_SendTime = UDP_SendTime;
+                    this.RFID_Enable = RFID_Enable;
+                }));
+          
                 MyMessageBox.ShowDialog("Receive data sucessed!");
             }
             else
@@ -1269,10 +1294,304 @@ namespace H_Pannel_lib
                 MyMessageBox.ShowDialog("Receive data failed!");
             }
         }
-        private void RJ_Button_Station_Write_Click(object sender, EventArgs e)
+        private void RJ_Button_Station_Write_MouseDownEvent(MouseEventArgs mevent)
         {
-
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            if (Communication.UART_Command_Set_Station(mySerialPort, station))
+            {
+                MyMessageBox.ShowDialog("站號修改成功!");
+            }
+            else
+            {
+                MyMessageBox.ShowDialog("站號修改失敗!");
+            }
         }
+        private void CheckBox_輸出01_Click(object sender, EventArgs e)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            Communication.UART_Command_RS485_SetOutputPIN(mySerialPort, station, 0, ((CheckBox)sender).Checked);
+        }
+        private void CheckBox_輸出02_Click(object sender, EventArgs e)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            Communication.UART_Command_RS485_SetOutputPIN(mySerialPort, station, 1, ((CheckBox)sender).Checked);
+        }
+        private void CheckBox_輸出03_Click(object sender, EventArgs e)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            Communication.UART_Command_RS485_SetOutputPIN(mySerialPort, station, 2, ((CheckBox)sender).Checked);
+        }
+        private void CheckBox_輸出04_Click(object sender, EventArgs e)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            Communication.UART_Command_RS485_SetOutputPIN(mySerialPort, station, 3, ((CheckBox)sender).Checked);
+        }
+        private void CheckBox_輸出05_Click(object sender, EventArgs e)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            Communication.UART_Command_RS485_SetOutputPIN(mySerialPort, station, 4, ((CheckBox)sender).Checked);
+        }
+        private void CheckBox_輸出06_Click(object sender, EventArgs e)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            Communication.UART_Command_RS485_SetOutputPIN(mySerialPort, station, 5, ((CheckBox)sender).Checked);
+        }
+        private void CheckBox_輸出07_Click(object sender, EventArgs e)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            Communication.UART_Command_RS485_SetOutputPIN(mySerialPort, station, 6, ((CheckBox)sender).Checked);
+        }
+        private void CheckBox_輸出08_Click(object sender, EventArgs e)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            Communication.UART_Command_RS485_SetOutputPIN(mySerialPort, station, 7, ((CheckBox)sender).Checked);
+        }
+        private void CheckBox_輸出09_Click(object sender, EventArgs e)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            Communication.UART_Command_RS485_SetOutputPIN(mySerialPort, station, 8, ((CheckBox)sender).Checked);
+        }
+        private void CheckBox_輸出10_Click(object sender, EventArgs e)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            Communication.UART_Command_RS485_SetOutputPIN(mySerialPort, station, 9, ((CheckBox)sender).Checked);
+        }
+
+        private void RJ_Button_輸出方向_寫入_MouseDownEvent(MouseEventArgs mevent)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            int output_dir = 0;
+            if (checkBox_輸出方向_01.Checked) output_dir = output_dir.SetBit(0, true);
+            if (checkBox_輸出方向_02.Checked) output_dir = output_dir.SetBit(1, true);
+            if (checkBox_輸出方向_03.Checked) output_dir = output_dir.SetBit(2, true);
+            if (checkBox_輸出方向_04.Checked) output_dir = output_dir.SetBit(3, true);
+            if (checkBox_輸出方向_05.Checked) output_dir = output_dir.SetBit(4, true);
+            if (checkBox_輸出方向_06.Checked) output_dir = output_dir.SetBit(5, true);
+            if (checkBox_輸出方向_07.Checked) output_dir = output_dir.SetBit(6, true);
+            if (checkBox_輸出方向_08.Checked) output_dir = output_dir.SetBit(7, true);
+            if (checkBox_輸出方向_09.Checked) output_dir = output_dir.SetBit(8, true);
+            if (checkBox_輸出方向_10.Checked) output_dir = output_dir.SetBit(9, true);
+
+            if (!Communication.UART_Command_RS485_SetOutputDir(mySerialPort, station, output_dir))
+            {
+                MyMessageBox.ShowDialog("寫入失敗!");
+                return;
+            }
+            MyMessageBox.ShowDialog("寫入成功!");
+        }
+        private void RJ_Button_輸出方向_讀取_MouseDownEvent(MouseEventArgs mevent)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            int output_dir = 0;
+            if (!Communication.UART_Command_RS485_GetOutputDir(mySerialPort, station, ref output_dir))
+            {
+                MyMessageBox.ShowDialog("讀取失敗!");
+                return;
+            }
+            this.Invoke(new Action(delegate 
+            {
+                checkBox_輸出方向_01.Checked = output_dir.GetBit(0);
+                checkBox_輸出方向_02.Checked = output_dir.GetBit(1);
+                checkBox_輸出方向_03.Checked = output_dir.GetBit(2);
+                checkBox_輸出方向_04.Checked = output_dir.GetBit(3);
+                checkBox_輸出方向_05.Checked = output_dir.GetBit(4);
+                checkBox_輸出方向_06.Checked = output_dir.GetBit(5);
+                checkBox_輸出方向_07.Checked = output_dir.GetBit(6);
+                checkBox_輸出方向_08.Checked = output_dir.GetBit(7);
+                checkBox_輸出方向_09.Checked = output_dir.GetBit(8);
+                checkBox_輸出方向_10.Checked = output_dir.GetBit(9);
+            }));
+            MyMessageBox.ShowDialog("讀取成功!");
+        }
+        private void RJ_Button_輸入方向_寫入_MouseDownEvent(MouseEventArgs mevent)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            int input_dir = 0;
+            if (checkBox_輸入方向_01.Checked) input_dir = input_dir.SetBit(0, true);
+            if (checkBox_輸入方向_02.Checked) input_dir = input_dir.SetBit(1, true);
+            if (checkBox_輸入方向_03.Checked) input_dir = input_dir.SetBit(2, true);
+            if (checkBox_輸入方向_04.Checked) input_dir = input_dir.SetBit(3, true);
+            if (checkBox_輸入方向_05.Checked) input_dir = input_dir.SetBit(4, true);
+            if (checkBox_輸入方向_06.Checked) input_dir = input_dir.SetBit(5, true);
+            if (checkBox_輸入方向_07.Checked) input_dir = input_dir.SetBit(6, true);
+            if (checkBox_輸入方向_08.Checked) input_dir = input_dir.SetBit(7, true);
+            if (checkBox_輸入方向_09.Checked) input_dir = input_dir.SetBit(8, true);
+            if (checkBox_輸入方向_10.Checked) input_dir = input_dir.SetBit(9, true);
+
+            if (!Communication.UART_Command_RS485_SetInputDir(mySerialPort, station, input_dir))
+            {
+                MyMessageBox.ShowDialog("寫入失敗!");
+                return;
+            }
+            MyMessageBox.ShowDialog("寫入成功!");
+        }
+        private void RJ_Button_輸入方向_讀取_MouseDownEvent(MouseEventArgs mevent)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            int input_dir = 0;
+            if (!Communication.UART_Command_RS485_GetInputDir(mySerialPort, station, ref input_dir))
+            {
+                MyMessageBox.ShowDialog("讀取失敗!");
+                return;
+            }
+            this.Invoke(new Action(delegate
+            {
+                checkBox_輸入方向_01.Checked = input_dir.GetBit(0);
+                checkBox_輸入方向_02.Checked = input_dir.GetBit(1);
+                checkBox_輸入方向_03.Checked = input_dir.GetBit(2);
+                checkBox_輸入方向_04.Checked = input_dir.GetBit(3);
+                checkBox_輸入方向_05.Checked = input_dir.GetBit(4);
+                checkBox_輸入方向_06.Checked = input_dir.GetBit(5);
+                checkBox_輸入方向_07.Checked = input_dir.GetBit(6);
+                checkBox_輸入方向_08.Checked = input_dir.GetBit(7);
+                checkBox_輸入方向_09.Checked = input_dir.GetBit(8);
+                checkBox_輸入方向_10.Checked = input_dir.GetBit(9);
+            }));
+            MyMessageBox.ShowDialog("讀取成功!");
+        }
+        private void RJ_Button_輸入_讀取_MouseDownEvent(MouseEventArgs mevent)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            int input = 0;
+            int output = 0;
+            if(!Communication.UART_Command_RS485_GetIO(mySerialPort, station, ref input, ref output))
+            {
+                MyMessageBox.ShowDialog("讀取失敗!");
+                return;
+            }
+            this.Invoke(new Action(delegate 
+            {
+                checkBox_輸入01.Checked = input.GetBit(0);
+                checkBox_輸入02.Checked = input.GetBit(1);
+                checkBox_輸入03.Checked = input.GetBit(2);
+                checkBox_輸入04.Checked = input.GetBit(3);
+                checkBox_輸入05.Checked = input.GetBit(4);
+                checkBox_輸入06.Checked = input.GetBit(5);
+                checkBox_輸入07.Checked = input.GetBit(6);
+                checkBox_輸入08.Checked = input.GetBit(7);
+                checkBox_輸入09.Checked = input.GetBit(8);
+                checkBox_輸入10.Checked = input.GetBit(9);
+
+                checkBox_輸出01.Checked = output.GetBit(0);
+                checkBox_輸出02.Checked = output.GetBit(1);
+                checkBox_輸出03.Checked = output.GetBit(2);
+                checkBox_輸出04.Checked = output.GetBit(3);
+                checkBox_輸出05.Checked = output.GetBit(4);
+                checkBox_輸出06.Checked = output.GetBit(5);
+                checkBox_輸出07.Checked = output.GetBit(6);
+                checkBox_輸出08.Checked = output.GetBit(7);
+                checkBox_輸出09.Checked = output.GetBit(8);
+                checkBox_輸出10.Checked = output.GetBit(9);
+            }));
+            MyMessageBox.ShowDialog("讀取成功!");
+        }
+        private void RJ_Button_輸出_寫入_MouseDownEvent(MouseEventArgs mevent)
+        {
+            int station = this.textBox_Station.Text.StringToInt32();
+            if (station < 0)
+            {
+                MyMessageBox.ShowDialog("非法的字元!");
+                return;
+            }
+            int output = 0;
+            output = output.SetBit(0, checkBox_輸出01.Checked);
+            output = output.SetBit(1, checkBox_輸出02.Checked);
+            output = output.SetBit(2, checkBox_輸出03.Checked);
+            output = output.SetBit(3, checkBox_輸出04.Checked);
+            output = output.SetBit(4, checkBox_輸出05.Checked);
+            output = output.SetBit(5, checkBox_輸出06.Checked);
+            output = output.SetBit(6, checkBox_輸出07.Checked);
+            output = output.SetBit(7, checkBox_輸出08.Checked);
+            output = output.SetBit(8, checkBox_輸出09.Checked);
+            output = output.SetBit(9, checkBox_輸出10.Checked);
+
+            if(!Communication.UART_Command_RS485_SetOutput(mySerialPort, station, output))
+            {
+                MyMessageBox.ShowDialog("寫入失敗!");
+                return;
+            }
+        }
+
         private void RFID_UI_FormClosing(object sender, FormClosingEventArgs e)
         {
             for (int i = 0; i < List_UDP_Server.Count; i++)

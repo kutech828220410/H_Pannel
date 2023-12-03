@@ -131,6 +131,8 @@
             this.sqL_DataGridView_h_RFID_Datas = new SQLUI.SQL_DataGridView();
             this.rJ_Button_H_RFID_初始化 = new MyUI.RJ_Button();
             this.h_RFID_UI = new H_Pannel_lib.H_RFID_UI();
+            this.rJ_Button_RFID_RS485_TEST = new MyUI.RJ_Button();
+            this.rJ_Button1 = new MyUI.RJ_Button();
             this.tabControl1.SuspendLayout();
             this.WT32.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -238,6 +240,9 @@
             this.rJ_Button_WT32_初始化.GUID = "";
             this.rJ_Button_WT32_初始化.Location = new System.Drawing.Point(1384, 13);
             this.rJ_Button_WT32_初始化.Name = "rJ_Button_WT32_初始化";
+            this.rJ_Button_WT32_初始化.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_WT32_初始化.ShadowSize = 0;
+            this.rJ_Button_WT32_初始化.ShowLoadingForm = false;
             this.rJ_Button_WT32_初始化.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_WT32_初始化.State = false;
             this.rJ_Button_WT32_初始化.TabIndex = 34;
@@ -309,6 +314,9 @@
             this.rJ_Button_WT32_測試.GUID = "";
             this.rJ_Button_WT32_測試.Location = new System.Drawing.Point(1608, 812);
             this.rJ_Button_WT32_測試.Name = "rJ_Button_WT32_測試";
+            this.rJ_Button_WT32_測試.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_WT32_測試.ShadowSize = 0;
+            this.rJ_Button_WT32_測試.ShowLoadingForm = false;
             this.rJ_Button_WT32_測試.Size = new System.Drawing.Size(150, 55);
             this.rJ_Button_WT32_測試.State = false;
             this.rJ_Button_WT32_測試.TabIndex = 33;
@@ -332,6 +340,9 @@
             this.rJ_Button_WT32_上傳畫面.GUID = "";
             this.rJ_Button_WT32_上傳畫面.Location = new System.Drawing.Point(1608, 627);
             this.rJ_Button_WT32_上傳畫面.Name = "rJ_Button_WT32_上傳畫面";
+            this.rJ_Button_WT32_上傳畫面.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_WT32_上傳畫面.ShadowSize = 0;
+            this.rJ_Button_WT32_上傳畫面.ShowLoadingForm = false;
             this.rJ_Button_WT32_上傳畫面.Size = new System.Drawing.Size(150, 55);
             this.rJ_Button_WT32_上傳畫面.State = false;
             this.rJ_Button_WT32_上傳畫面.TabIndex = 32;
@@ -345,6 +356,7 @@
             // rJ_GroupBox1.ContentsPanel
             // 
             this.rJ_GroupBox1.ContentsPanel.BackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox1.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
             this.rJ_GroupBox1.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox1.ContentsPanel.BorderRadius = 2;
             this.rJ_GroupBox1.ContentsPanel.BorderSize = 2;
@@ -364,6 +376,8 @@
             this.rJ_GroupBox1.ContentsPanel.IsSelected = false;
             this.rJ_GroupBox1.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox1.ContentsPanel.Name = "ContentsPanel";
+            this.rJ_GroupBox1.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_GroupBox1.ContentsPanel.ShadowSize = 0;
             this.rJ_GroupBox1.ContentsPanel.Size = new System.Drawing.Size(429, 567);
             this.rJ_GroupBox1.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox1.GUID = "";
@@ -401,6 +415,9 @@
             this.rJ_Button_WT32_資料寫入.GUID = "";
             this.rJ_Button_WT32_資料寫入.Location = new System.Drawing.Point(262, 494);
             this.rJ_Button_WT32_資料寫入.Name = "rJ_Button_WT32_資料寫入";
+            this.rJ_Button_WT32_資料寫入.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_WT32_資料寫入.ShadowSize = 0;
+            this.rJ_Button_WT32_資料寫入.ShowLoadingForm = false;
             this.rJ_Button_WT32_資料寫入.Size = new System.Drawing.Size(150, 55);
             this.rJ_Button_WT32_資料寫入.State = false;
             this.rJ_Button_WT32_資料寫入.TabIndex = 133;
@@ -431,6 +448,8 @@
             this.rJ_Lable10.GUID = "";
             this.rJ_Lable10.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable10.Name = "rJ_Lable10";
+            this.rJ_Lable10.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable10.ShadowSize = 0;
             this.rJ_Lable10.Size = new System.Drawing.Size(146, 40);
             this.rJ_Lable10.TabIndex = 122;
             this.rJ_Lable10.Text = "庫存";
@@ -483,6 +502,8 @@
             this.rJ_Lable7.GUID = "";
             this.rJ_Lable7.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable7.Name = "rJ_Lable7";
+            this.rJ_Lable7.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable7.ShadowSize = 0;
             this.rJ_Lable7.Size = new System.Drawing.Size(146, 40);
             this.rJ_Lable7.TabIndex = 122;
             this.rJ_Lable7.Text = "一維碼";
@@ -535,6 +556,8 @@
             this.rJ_Lable8.GUID = "";
             this.rJ_Lable8.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable8.Name = "rJ_Lable8";
+            this.rJ_Lable8.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable8.ShadowSize = 0;
             this.rJ_Lable8.Size = new System.Drawing.Size(146, 40);
             this.rJ_Lable8.TabIndex = 122;
             this.rJ_Lable8.Text = "最小包裝數量";
@@ -587,6 +610,8 @@
             this.rJ_Lable9.GUID = "";
             this.rJ_Lable9.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable9.Name = "rJ_Lable9";
+            this.rJ_Lable9.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable9.ShadowSize = 0;
             this.rJ_Lable9.Size = new System.Drawing.Size(146, 40);
             this.rJ_Lable9.TabIndex = 122;
             this.rJ_Lable9.Text = "最小包裝單位";
@@ -639,6 +664,8 @@
             this.rJ_Lable4.GUID = "";
             this.rJ_Lable4.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable4.Name = "rJ_Lable4";
+            this.rJ_Lable4.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable4.ShadowSize = 0;
             this.rJ_Lable4.Size = new System.Drawing.Size(146, 40);
             this.rJ_Lable4.TabIndex = 122;
             this.rJ_Lable4.Text = "包裝單位";
@@ -691,6 +718,8 @@
             this.rJ_Lable5.GUID = "";
             this.rJ_Lable5.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable5.Name = "rJ_Lable5";
+            this.rJ_Lable5.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable5.ShadowSize = 0;
             this.rJ_Lable5.Size = new System.Drawing.Size(146, 40);
             this.rJ_Lable5.TabIndex = 122;
             this.rJ_Lable5.Text = "廠牌";
@@ -743,6 +772,8 @@
             this.rJ_Lable6.GUID = "";
             this.rJ_Lable6.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable6.Name = "rJ_Lable6";
+            this.rJ_Lable6.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable6.ShadowSize = 0;
             this.rJ_Lable6.Size = new System.Drawing.Size(146, 40);
             this.rJ_Lable6.TabIndex = 122;
             this.rJ_Lable6.Text = "藥品學名";
@@ -795,6 +826,8 @@
             this.rJ_Lable3.GUID = "";
             this.rJ_Lable3.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable3.Name = "rJ_Lable3";
+            this.rJ_Lable3.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable3.ShadowSize = 0;
             this.rJ_Lable3.Size = new System.Drawing.Size(146, 40);
             this.rJ_Lable3.TabIndex = 122;
             this.rJ_Lable3.Text = "中文名稱";
@@ -847,6 +880,8 @@
             this.rJ_Lable1.GUID = "";
             this.rJ_Lable1.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable1.Name = "rJ_Lable1";
+            this.rJ_Lable1.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable1.ShadowSize = 0;
             this.rJ_Lable1.Size = new System.Drawing.Size(146, 40);
             this.rJ_Lable1.TabIndex = 122;
             this.rJ_Lable1.Text = "藥品名稱";
@@ -899,6 +934,8 @@
             this.rJ_Lable2.GUID = "";
             this.rJ_Lable2.Location = new System.Drawing.Point(3, 0);
             this.rJ_Lable2.Name = "rJ_Lable2";
+            this.rJ_Lable2.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable2.ShadowSize = 0;
             this.rJ_Lable2.Size = new System.Drawing.Size(146, 40);
             this.rJ_Lable2.TabIndex = 122;
             this.rJ_Lable2.Text = "藥品碼";
@@ -945,6 +982,9 @@
             this.rJ_Button_WT32_上傳選擇儲位.GUID = "";
             this.rJ_Button_WT32_上傳選擇儲位.Location = new System.Drawing.Point(1083, 927);
             this.rJ_Button_WT32_上傳選擇儲位.Name = "rJ_Button_WT32_上傳選擇儲位";
+            this.rJ_Button_WT32_上傳選擇儲位.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_WT32_上傳選擇儲位.ShadowSize = 0;
+            this.rJ_Button_WT32_上傳選擇儲位.ShowLoadingForm = false;
             this.rJ_Button_WT32_上傳選擇儲位.Size = new System.Drawing.Size(150, 55);
             this.rJ_Button_WT32_上傳選擇儲位.State = false;
             this.rJ_Button_WT32_上傳選擇儲位.TabIndex = 29;
@@ -969,6 +1009,9 @@
             this.rJ_Button_WT32_讀取選擇儲位.GUID = "";
             this.rJ_Button_WT32_讀取選擇儲位.Location = new System.Drawing.Point(1083, 866);
             this.rJ_Button_WT32_讀取選擇儲位.Name = "rJ_Button_WT32_讀取選擇儲位";
+            this.rJ_Button_WT32_讀取選擇儲位.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_WT32_讀取選擇儲位.ShadowSize = 0;
+            this.rJ_Button_WT32_讀取選擇儲位.ShowLoadingForm = false;
             this.rJ_Button_WT32_讀取選擇儲位.Size = new System.Drawing.Size(150, 55);
             this.rJ_Button_WT32_讀取選擇儲位.State = false;
             this.rJ_Button_WT32_讀取選擇儲位.TabIndex = 28;
@@ -1050,6 +1093,9 @@
             this.rJ_Button_EPD266_TEST.GUID = "";
             this.rJ_Button_EPD266_TEST.Location = new System.Drawing.Point(1516, 161);
             this.rJ_Button_EPD266_TEST.Name = "rJ_Button_EPD266_TEST";
+            this.rJ_Button_EPD266_TEST.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_EPD266_TEST.ShadowSize = 0;
+            this.rJ_Button_EPD266_TEST.ShowLoadingForm = false;
             this.rJ_Button_EPD266_TEST.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_EPD266_TEST.State = false;
             this.rJ_Button_EPD266_TEST.TabIndex = 37;
@@ -1081,6 +1127,9 @@
             this.rJ_Button_EPD_266_初始化.GUID = "";
             this.rJ_Button_EPD_266_初始化.Location = new System.Drawing.Point(1384, 161);
             this.rJ_Button_EPD_266_初始化.Name = "rJ_Button_EPD_266_初始化";
+            this.rJ_Button_EPD_266_初始化.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_EPD_266_初始化.ShadowSize = 0;
+            this.rJ_Button_EPD_266_初始化.ShowLoadingForm = false;
             this.rJ_Button_EPD_266_初始化.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_EPD_266_初始化.State = false;
             this.rJ_Button_EPD_266_初始化.TabIndex = 35;
@@ -1157,6 +1206,9 @@
             this.rJ_Button_EPD_290_TEST.GUID = "";
             this.rJ_Button_EPD_290_TEST.Location = new System.Drawing.Point(1531, 137);
             this.rJ_Button_EPD_290_TEST.Name = "rJ_Button_EPD_290_TEST";
+            this.rJ_Button_EPD_290_TEST.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_EPD_290_TEST.ShadowSize = 0;
+            this.rJ_Button_EPD_290_TEST.ShowLoadingForm = false;
             this.rJ_Button_EPD_290_TEST.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_EPD_290_TEST.State = false;
             this.rJ_Button_EPD_290_TEST.TabIndex = 39;
@@ -1180,6 +1232,9 @@
             this.rJ_Button_EPD_290_初始化.GUID = "";
             this.rJ_Button_EPD_290_初始化.Location = new System.Drawing.Point(1399, 137);
             this.rJ_Button_EPD_290_初始化.Name = "rJ_Button_EPD_290_初始化";
+            this.rJ_Button_EPD_290_初始化.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_EPD_290_初始化.ShadowSize = 0;
+            this.rJ_Button_EPD_290_初始化.ShowLoadingForm = false;
             this.rJ_Button_EPD_290_初始化.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_EPD_290_初始化.State = false;
             this.rJ_Button_EPD_290_初始化.TabIndex = 38;
@@ -1317,6 +1372,9 @@
             this.rJ_Button_EPD_420_填入測試畫面.GUID = "";
             this.rJ_Button_EPD_420_填入測試畫面.Location = new System.Drawing.Point(430, 21);
             this.rJ_Button_EPD_420_填入測試畫面.Name = "rJ_Button_EPD_420_填入測試畫面";
+            this.rJ_Button_EPD_420_填入測試畫面.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_EPD_420_填入測試畫面.ShadowSize = 0;
+            this.rJ_Button_EPD_420_填入測試畫面.ShowLoadingForm = false;
             this.rJ_Button_EPD_420_填入測試畫面.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_EPD_420_填入測試畫面.State = false;
             this.rJ_Button_EPD_420_填入測試畫面.TabIndex = 40;
@@ -1381,6 +1439,9 @@
             this.rJ_Button_epD_583_Pannel_TEST.GUID = "";
             this.rJ_Button_epD_583_Pannel_TEST.Location = new System.Drawing.Point(1520, 3);
             this.rJ_Button_epD_583_Pannel_TEST.Name = "rJ_Button_epD_583_Pannel_TEST";
+            this.rJ_Button_epD_583_Pannel_TEST.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_epD_583_Pannel_TEST.ShadowSize = 0;
+            this.rJ_Button_epD_583_Pannel_TEST.ShowLoadingForm = false;
             this.rJ_Button_epD_583_Pannel_TEST.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_epD_583_Pannel_TEST.State = false;
             this.rJ_Button_epD_583_Pannel_TEST.TabIndex = 53;
@@ -1404,6 +1465,9 @@
             this.rJ_Button_epD_583_Pannel_全部滅燈.GUID = "";
             this.rJ_Button_epD_583_Pannel_全部滅燈.Location = new System.Drawing.Point(1374, 641);
             this.rJ_Button_epD_583_Pannel_全部滅燈.Name = "rJ_Button_epD_583_Pannel_全部滅燈";
+            this.rJ_Button_epD_583_Pannel_全部滅燈.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_epD_583_Pannel_全部滅燈.ShadowSize = 0;
+            this.rJ_Button_epD_583_Pannel_全部滅燈.ShowLoadingForm = false;
             this.rJ_Button_epD_583_Pannel_全部滅燈.Size = new System.Drawing.Size(140, 67);
             this.rJ_Button_epD_583_Pannel_全部滅燈.State = false;
             this.rJ_Button_epD_583_Pannel_全部滅燈.TabIndex = 52;
@@ -1427,6 +1491,9 @@
             this.rJ_Button_epD_583_Pannel_全部亮燈.GUID = "";
             this.rJ_Button_epD_583_Pannel_全部亮燈.Location = new System.Drawing.Point(1228, 641);
             this.rJ_Button_epD_583_Pannel_全部亮燈.Name = "rJ_Button_epD_583_Pannel_全部亮燈";
+            this.rJ_Button_epD_583_Pannel_全部亮燈.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_epD_583_Pannel_全部亮燈.ShadowSize = 0;
+            this.rJ_Button_epD_583_Pannel_全部亮燈.ShowLoadingForm = false;
             this.rJ_Button_epD_583_Pannel_全部亮燈.Size = new System.Drawing.Size(140, 67);
             this.rJ_Button_epD_583_Pannel_全部亮燈.State = false;
             this.rJ_Button_epD_583_Pannel_全部亮燈.TabIndex = 51;
@@ -1451,6 +1518,9 @@
             this.rJ_Button_epD_583_Pannel_面板滅燈.GUID = "";
             this.rJ_Button_epD_583_Pannel_面板滅燈.Location = new System.Drawing.Point(1666, 568);
             this.rJ_Button_epD_583_Pannel_面板滅燈.Name = "rJ_Button_epD_583_Pannel_面板滅燈";
+            this.rJ_Button_epD_583_Pannel_面板滅燈.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_epD_583_Pannel_面板滅燈.ShadowSize = 0;
+            this.rJ_Button_epD_583_Pannel_面板滅燈.ShowLoadingForm = false;
             this.rJ_Button_epD_583_Pannel_面板滅燈.Size = new System.Drawing.Size(140, 67);
             this.rJ_Button_epD_583_Pannel_面板滅燈.State = false;
             this.rJ_Button_epD_583_Pannel_面板滅燈.TabIndex = 50;
@@ -1475,6 +1545,9 @@
             this.rJ_Button_epD_583_Pannel_面板亮燈.GUID = "";
             this.rJ_Button_epD_583_Pannel_面板亮燈.Location = new System.Drawing.Point(1520, 568);
             this.rJ_Button_epD_583_Pannel_面板亮燈.Name = "rJ_Button_epD_583_Pannel_面板亮燈";
+            this.rJ_Button_epD_583_Pannel_面板亮燈.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_epD_583_Pannel_面板亮燈.ShadowSize = 0;
+            this.rJ_Button_epD_583_Pannel_面板亮燈.ShowLoadingForm = false;
             this.rJ_Button_epD_583_Pannel_面板亮燈.Size = new System.Drawing.Size(140, 67);
             this.rJ_Button_epD_583_Pannel_面板亮燈.State = false;
             this.rJ_Button_epD_583_Pannel_面板亮燈.TabIndex = 49;
@@ -1499,6 +1572,9 @@
             this.rJ_Button_epD_583_Pannel_儲位滅燈.GUID = "";
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Location = new System.Drawing.Point(1374, 568);
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Name = "rJ_Button_epD_583_Pannel_儲位滅燈";
+            this.rJ_Button_epD_583_Pannel_儲位滅燈.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_epD_583_Pannel_儲位滅燈.ShadowSize = 0;
+            this.rJ_Button_epD_583_Pannel_儲位滅燈.ShowLoadingForm = false;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Size = new System.Drawing.Size(140, 67);
             this.rJ_Button_epD_583_Pannel_儲位滅燈.State = false;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.TabIndex = 48;
@@ -1523,6 +1599,9 @@
             this.rJ_Button_epD_583_Pannel_儲位亮燈.GUID = "";
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Location = new System.Drawing.Point(1228, 568);
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Name = "rJ_Button_epD_583_Pannel_儲位亮燈";
+            this.rJ_Button_epD_583_Pannel_儲位亮燈.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_epD_583_Pannel_儲位亮燈.ShadowSize = 0;
+            this.rJ_Button_epD_583_Pannel_儲位亮燈.ShowLoadingForm = false;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Size = new System.Drawing.Size(140, 67);
             this.rJ_Button_epD_583_Pannel_儲位亮燈.State = false;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.TabIndex = 47;
@@ -1546,6 +1625,9 @@
             this.rJ_Button_epD_583_Pannel_上傳.GUID = "";
             this.rJ_Button_epD_583_Pannel_上傳.Location = new System.Drawing.Point(1374, 3);
             this.rJ_Button_epD_583_Pannel_上傳.Name = "rJ_Button_epD_583_Pannel_上傳";
+            this.rJ_Button_epD_583_Pannel_上傳.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_epD_583_Pannel_上傳.ShadowSize = 0;
+            this.rJ_Button_epD_583_Pannel_上傳.ShowLoadingForm = false;
             this.rJ_Button_epD_583_Pannel_上傳.Size = new System.Drawing.Size(140, 67);
             this.rJ_Button_epD_583_Pannel_上傳.State = false;
             this.rJ_Button_epD_583_Pannel_上傳.TabIndex = 46;
@@ -1579,6 +1661,9 @@
             this.rJ_Button_EPD_583_初始化.GUID = "";
             this.rJ_Button_EPD_583_初始化.Location = new System.Drawing.Point(1228, 3);
             this.rJ_Button_EPD_583_初始化.Name = "rJ_Button_EPD_583_初始化";
+            this.rJ_Button_EPD_583_初始化.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_EPD_583_初始化.ShadowSize = 0;
+            this.rJ_Button_EPD_583_初始化.ShowLoadingForm = false;
             this.rJ_Button_EPD_583_初始化.Size = new System.Drawing.Size(140, 67);
             this.rJ_Button_EPD_583_初始化.State = false;
             this.rJ_Button_EPD_583_初始化.TabIndex = 38;
@@ -1699,6 +1784,9 @@
             this.rJ_Button_EPD1020_初始化.GUID = "";
             this.rJ_Button_EPD1020_初始化.Location = new System.Drawing.Point(1402, 3);
             this.rJ_Button_EPD1020_初始化.Name = "rJ_Button_EPD1020_初始化";
+            this.rJ_Button_EPD1020_初始化.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_EPD1020_初始化.ShadowSize = 0;
+            this.rJ_Button_EPD1020_初始化.ShowLoadingForm = false;
             this.rJ_Button_EPD1020_初始化.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_EPD1020_初始化.State = false;
             this.rJ_Button_EPD1020_初始化.TabIndex = 39;
@@ -1735,6 +1823,9 @@
             this.rJ_Button_EPD_1020_門片畫面測試.GUID = "";
             this.rJ_Button_EPD_1020_門片畫面測試.Location = new System.Drawing.Point(673, 130);
             this.rJ_Button_EPD_1020_門片畫面測試.Name = "rJ_Button_EPD_1020_門片畫面測試";
+            this.rJ_Button_EPD_1020_門片畫面測試.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_EPD_1020_門片畫面測試.ShadowSize = 0;
+            this.rJ_Button_EPD_1020_門片畫面測試.ShowLoadingForm = false;
             this.rJ_Button_EPD_1020_門片畫面測試.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_EPD_1020_門片畫面測試.State = false;
             this.rJ_Button_EPD_1020_門片畫面測試.TabIndex = 41;
@@ -1758,6 +1849,9 @@
             this.rJ_Button_EPD_1020_填入測試畫面.GUID = "";
             this.rJ_Button_EPD_1020_填入測試畫面.Location = new System.Drawing.Point(673, 6);
             this.rJ_Button_EPD_1020_填入測試畫面.Name = "rJ_Button_EPD_1020_填入測試畫面";
+            this.rJ_Button_EPD_1020_填入測試畫面.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_EPD_1020_填入測試畫面.ShadowSize = 0;
+            this.rJ_Button_EPD_1020_填入測試畫面.ShowLoadingForm = false;
             this.rJ_Button_EPD_1020_填入測試畫面.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_EPD_1020_填入測試畫面.State = false;
             this.rJ_Button_EPD_1020_填入測試畫面.TabIndex = 40;
@@ -1823,6 +1917,9 @@
             this.rJ_Button_RowsLED_初始化.GUID = "";
             this.rJ_Button_RowsLED_初始化.Location = new System.Drawing.Point(1402, 3);
             this.rJ_Button_RowsLED_初始化.Name = "rJ_Button_RowsLED_初始化";
+            this.rJ_Button_RowsLED_初始化.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_RowsLED_初始化.ShadowSize = 0;
+            this.rJ_Button_RowsLED_初始化.ShowLoadingForm = false;
             this.rJ_Button_RowsLED_初始化.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_RowsLED_初始化.State = false;
             this.rJ_Button_RowsLED_初始化.TabIndex = 39;
@@ -1870,6 +1967,8 @@
             // 
             // RFID
             // 
+            this.RFID.Controls.Add(this.rJ_Button1);
+            this.RFID.Controls.Add(this.rJ_Button_RFID_RS485_TEST);
             this.RFID.Controls.Add(this.rJ_Button_RFID_初始化);
             this.RFID.Controls.Add(this.rfiD_UI);
             this.RFID.Location = new System.Drawing.Point(4, 22);
@@ -1895,6 +1994,9 @@
             this.rJ_Button_RFID_初始化.GUID = "";
             this.rJ_Button_RFID_初始化.Location = new System.Drawing.Point(1399, 3);
             this.rJ_Button_RFID_初始化.Name = "rJ_Button_RFID_初始化";
+            this.rJ_Button_RFID_初始化.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_RFID_初始化.ShadowSize = 0;
+            this.rJ_Button_RFID_初始化.ShowLoadingForm = false;
             this.rJ_Button_RFID_初始化.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_RFID_初始化.State = false;
             this.rJ_Button_RFID_初始化.TabIndex = 40;
@@ -2008,6 +2110,9 @@
             this.rJ_Button_H_RFID_初始化.GUID = "";
             this.rJ_Button_H_RFID_初始化.Location = new System.Drawing.Point(1422, 566);
             this.rJ_Button_H_RFID_初始化.Name = "rJ_Button_H_RFID_初始化";
+            this.rJ_Button_H_RFID_初始化.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_H_RFID_初始化.ShadowSize = 0;
+            this.rJ_Button_H_RFID_初始化.ShowLoadingForm = false;
             this.rJ_Button_H_RFID_初始化.Size = new System.Drawing.Size(126, 67);
             this.rJ_Button_H_RFID_初始化.State = false;
             this.rJ_Button_H_RFID_初始化.TabIndex = 41;
@@ -2041,6 +2146,58 @@
             this.h_RFID_UI.UDP_SendTime = "0";
             this.h_RFID_UI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("h_RFID_UI.UDP_ServerPorts")));
             this.h_RFID_UI.UserName = "root";
+            // 
+            // rJ_Button_RFID_RS485_TEST
+            // 
+            this.rJ_Button_RFID_RS485_TEST.AutoResetState = false;
+            this.rJ_Button_RFID_RS485_TEST.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_RFID_RS485_TEST.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_RFID_RS485_TEST.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_RFID_RS485_TEST.BorderRadius = 5;
+            this.rJ_Button_RFID_RS485_TEST.BorderSize = 0;
+            this.rJ_Button_RFID_RS485_TEST.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_RFID_RS485_TEST.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_RFID_RS485_TEST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_RFID_RS485_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_RFID_RS485_TEST.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_RFID_RS485_TEST.GUID = "";
+            this.rJ_Button_RFID_RS485_TEST.Location = new System.Drawing.Point(1399, 86);
+            this.rJ_Button_RFID_RS485_TEST.Name = "rJ_Button_RFID_RS485_TEST";
+            this.rJ_Button_RFID_RS485_TEST.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_RFID_RS485_TEST.ShadowSize = 0;
+            this.rJ_Button_RFID_RS485_TEST.ShowLoadingForm = false;
+            this.rJ_Button_RFID_RS485_TEST.Size = new System.Drawing.Size(126, 67);
+            this.rJ_Button_RFID_RS485_TEST.State = false;
+            this.rJ_Button_RFID_RS485_TEST.TabIndex = 41;
+            this.rJ_Button_RFID_RS485_TEST.Text = "RS485_TEST";
+            this.rJ_Button_RFID_RS485_TEST.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_RFID_RS485_TEST.UseVisualStyleBackColor = false;
+            // 
+            // rJ_Button1
+            // 
+            this.rJ_Button1.AutoResetState = false;
+            this.rJ_Button1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button1.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button1.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button1.BorderRadius = 5;
+            this.rJ_Button1.BorderSize = 0;
+            this.rJ_Button1.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button1.FlatAppearance.BorderSize = 0;
+            this.rJ_Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button1.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button1.GUID = "";
+            this.rJ_Button1.Location = new System.Drawing.Point(1399, 159);
+            this.rJ_Button1.Name = "rJ_Button1";
+            this.rJ_Button1.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button1.ShadowSize = 0;
+            this.rJ_Button1.ShowLoadingForm = false;
+            this.rJ_Button1.Size = new System.Drawing.Size(126, 67);
+            this.rJ_Button1.State = false;
+            this.rJ_Button1.TabIndex = 42;
+            this.rJ_Button1.Text = "RS485_TEST";
+            this.rJ_Button1.TextColor = System.Drawing.Color.White;
+            this.rJ_Button1.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -2197,6 +2354,8 @@
         private H_Pannel_lib.EPD_420_Pannel epD_420_Pannel;
         private MyUI.RJ_Button rJ_Button_EPD_420_填入測試畫面;
         private MyUI.RJ_Button rJ_Button_EPD_1020_門片畫面測試;
+        private MyUI.RJ_Button rJ_Button_RFID_RS485_TEST;
+        private MyUI.RJ_Button rJ_Button1;
     }
 }
 

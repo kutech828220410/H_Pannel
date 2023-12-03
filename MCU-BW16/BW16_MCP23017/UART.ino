@@ -39,15 +39,189 @@ void serialEvent()
         ota_platform_reset();
       }
     }
-    if (UART0_RX[0] == 'w')
+    if (UART0_RX[0] == 'T')
     {
-      mySerial.println("WS2812 TEST Start");
-  
-      mySerial.println("WS2812 TEST Begin");
-
-      mySerial.println("WS2812 TEST End");
+       mySerial.println("UART0 TEST OK!");
     }
-    if (UART0_RX[0] == 2 && UART0_RX[UART0_len - 1] == 3)
+    if ((UART0_RX[0] == 2) && (UART0_RX[UART0_len - 3] == 3) && ((byte)wiFiConfig.station == UART0_RX[1]))
+    {
+       uint16_t CRC16 = 0;
+       byte read_CRC16_L =  UART0_RX[UART0_len - 2];
+       byte read_CRC16_H =  UART0_RX[UART0_len - 1];
+       byte caculate_CRC16_L = 0;
+       byte caculate_CRC16_H = 0;
+       CRC16 = Get_CRC16(UART0_RX , UART0_len);
+       caculate_CRC16_L = CRC16;
+       caculate_CRC16_H = CRC16 >> 8;
+       byte command = UART0_RX[2];
+       if(CRC16 == 0)
+       {
+           if(command == 'E')
+           {
+               int input = GetInput();
+               int output = GetOutput();
+               byte input_L = input; 
+               byte input_H = input >> 8; 
+               byte output_L = output; 
+               byte output_H = output >> 8;
+               byte len = 10;
+               byte tx[len];
+               tx[0] = 2;
+               tx[1] = (byte)wiFiConfig.station;
+               tx[2] = command;
+               tx[3] = input_L;
+               tx[4] = input_H;
+               tx[5] = output_L;
+               tx[6] = output_H;
+               tx[7] = 3;
+               CRC16 = Get_CRC16(tx , len - 2);
+               caculate_CRC16_L = CRC16;
+               caculate_CRC16_H = CRC16 >> 8;
+               tx[len - 2] = caculate_CRC16_L;
+               tx[len - 1] = caculate_CRC16_H;
+               mySerial.write(tx , len);
+               mySerial.flush();
+           }
+           else if(command == 'F')
+           {
+               int output_L = UART0_RX[3]; 
+               int output_H = UART0_RX[4];
+               int output = output_L | (output_H << 8);
+               output = ~output;
+               byte len = 8;
+               byte tx[len];
+               tx[0] = 2;
+               tx[1] = (byte)wiFiConfig.station;
+               tx[2] = command;
+               tx[3] = output_L;
+               tx[4] = output_H;
+               tx[5] = 3;
+               CRC16 = Get_CRC16(tx , len - 2);
+               caculate_CRC16_L = CRC16;
+               caculate_CRC16_H = CRC16 >> 8;
+               tx[len - 2] = caculate_CRC16_L;
+               tx[len - 1] = caculate_CRC16_H;
+               SetOutputEx(output);
+               mySerial.write(tx , len);
+               mySerial.flush();
+           }
+           else if(command == 'G')
+           {
+               int PIN = UART0_RX[3]; 
+               int state = UART0_RX[4];
+               byte len = 8;
+               byte tx[len];
+               tx[0] = 2;
+               tx[1] = (byte)wiFiConfig.station;
+               tx[2] = command;
+               tx[3] = PIN;
+               tx[4] = state;
+               tx[5] = 3;
+               CRC16 = Get_CRC16(tx , len - 2);
+               caculate_CRC16_L = CRC16;
+               caculate_CRC16_H = CRC16 >> 8;
+               tx[len - 2] = caculate_CRC16_L;
+               tx[len - 1] = caculate_CRC16_H;
+               SetOutputPIN_Ex(PIN ,(state == 1));
+               mySerial.write(tx , len);
+               mySerial.flush();
+           }
+           else if(command == 'M')
+           {
+               int input_dir_L = UART0_RX[3]; 
+               int input_dir_H = UART0_RX[4];
+               int input_dir = input_dir_L | (input_dir_H << 8);
+               byte len = 8;
+               byte tx[len];
+               tx[0] = 2;
+               tx[1] = (byte)wiFiConfig.station;
+               tx[2] = command;
+               tx[3] = input_dir_L;
+               tx[4] = input_dir_H;
+               tx[5] = 3;
+               CRC16 = Get_CRC16(tx , len - 2);
+               caculate_CRC16_L = CRC16;
+               caculate_CRC16_H = CRC16 >> 8;
+               tx[len - 2] = caculate_CRC16_L;
+               tx[len - 1] = caculate_CRC16_H;
+               
+               mySerial.write(tx , len);
+               mySerial.flush();
+               Set_Input_dir(input_dir);
+               wiFiConfig.Set_Input_dir(input_dir);
+           }
+           else if(command == 'I')
+           {              
+               int input_dir = Get_Input_dir();
+               byte input_dir_L = (byte)(input_dir >> 0); 
+               byte input_dir_H = (byte)(input_dir >> 8); 
+               byte len = 8;
+               byte tx[len];
+               tx[0] = 2;
+               tx[1] = (byte)wiFiConfig.station;
+               tx[2] = command;
+               tx[3] = input_dir_L;
+               tx[4] = input_dir_H;
+               tx[5] = 3;
+               CRC16 = Get_CRC16(tx , len - 2);
+               caculate_CRC16_L = CRC16;
+               caculate_CRC16_H = CRC16 >> 8;
+               tx[len - 2] = caculate_CRC16_L;
+               tx[len - 1] = caculate_CRC16_H;
+               mySerial.write(tx , len);
+               mySerial.flush();
+           }
+           else if(command == 'H')
+           {
+               int output_dir_L = UART0_RX[3]; 
+               int output_dir_H = UART0_RX[4];
+               int output_dir = output_dir_L | (output_dir_H << 8);
+               byte len = 8;
+               byte tx[len];
+               tx[0] = 2;
+               tx[1] = (byte)wiFiConfig.station;
+               tx[2] = command;
+               tx[3] = output_dir_L;
+               tx[4] = output_dir_H;
+               tx[5] = 3;
+               CRC16 = Get_CRC16(tx , len - 2);
+               caculate_CRC16_L = CRC16;
+               caculate_CRC16_H = CRC16 >> 8;
+               tx[len - 2] = caculate_CRC16_L;
+               tx[len - 1] = caculate_CRC16_H;
+               Set_Output_dir(output_dir);
+               wiFiConfig.Set_Output_dir(output_dir);
+               mySerial.write(tx , len);
+               mySerial.flush();
+           }
+           else if(command == 'J')
+           {              
+               int output_dir = Get_Output_dir();
+               byte output_dir_L = (byte)(output_dir >> 0); 
+               byte output_dir_H = (byte)(output_dir >> 8); 
+               byte len = 8;
+               byte tx[len];
+               tx[0] = 2;
+               tx[1] = (byte)wiFiConfig.station;
+               tx[2] = command;
+               tx[3] = output_dir_L;
+               tx[4] = output_dir_H;
+               tx[5] = 3;
+               CRC16 = Get_CRC16(tx , len - 2);
+               caculate_CRC16_L = CRC16;
+               caculate_CRC16_H = CRC16 >> 8;
+               tx[len - 2] = caculate_CRC16_L;
+               tx[len - 1] = caculate_CRC16_H;
+               mySerial.write(tx , len);
+               mySerial.flush();
+           }
+       }
+       else
+       {
+           mySerial.print("CRC check error!");
+       }
+    }
+    else if (UART0_RX[0] == 2 && UART0_RX[UART0_len - 1] == 3)
     {
       if (UART0_RX[1] == '0' && UART0_len == 3)
       {
@@ -179,7 +353,7 @@ void serialEvent()
     UART0_len = 0;
     for (int i = 0 ; i < UART0_RX_SIZE ; i++)
     {
-      UART0_RX[i] = 0;
+       UART0_RX[i] = 0;
     }
   }
 
@@ -198,4 +372,27 @@ void Get_Checksum()
   mySerial.write(str_checksum , 3);
   mySerial.flush();
 
+}
+
+uint16_t Get_CRC16(byte* pDataBytes , int len)
+{
+    uint16_t crc = 0xffff;
+    uint16_t polynom = 0xA001;
+    for (int i = 0; i < len; i++)
+    {
+        crc ^= *(pDataBytes + i);
+        for (int j = 0; j < 8; j++)
+        {
+            if ((crc & 0x01) == 0x01)
+            {
+                crc >>= 1;
+                crc ^= polynom;
+            }
+            else
+            {
+                crc >>= 1;
+            }
+        }
+    }
+    return crc;
 }

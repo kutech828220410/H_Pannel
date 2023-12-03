@@ -262,35 +262,13 @@ bool Set_Beep(byte station)
 }
 void Set_RS485_Rx_Enable()
 {
-    delay(2);
+    delay(0);
     digitalWrite(PIN_485_Tx_Eanble, LOW);
-    delay(2);
+    delay(0);
 }
 void Set_RS485_Tx_Enable()
 {
-    delay(2);
+    delay(0);
     digitalWrite(PIN_485_Tx_Eanble, HIGH);
-    delay(2);
-}
-uint16_t Get_CRC16(byte* pDataBytes , int len)
-{
-    uint16_t crc = 0xffff;
-    uint16_t polynom = 0xA001;
-    for (int i = 0; i < len; i++)
-    {
-        crc ^= *(pDataBytes + i);
-        for (int j = 0; j < 8; j++)
-        {
-            if ((crc & 0x01) == 0x01)
-            {
-                crc >>= 1;
-                crc ^= polynom;
-            }
-            else
-            {
-                crc >>= 1;
-            }
-        }
-    }
-    return crc;
+    delay(0);
 }

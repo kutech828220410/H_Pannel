@@ -30,6 +30,14 @@ bool flag_CardID_IsChanged = false;
 String CardID[5];
 String CardID_buf[5];
 
+//#define RFID
+#define IO
+
+#ifdef RFID
+int MCU_TYPE = 1;
+#elif defined(IO)
+int MCU_TYPE = 2;
+#endif
 DFRobot_MCP23017 mcp(Wire, /*addr =*/0x20);//constructor, change the Level of A2, A1, A0 via DIP switch to revise the I2C address within 0x20~0x27.
 
 WiFiConfig wiFiConfig;
@@ -56,11 +64,13 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial_485(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.0.3";
+String Version = "Ver 1.0.4";
 
 void setup() 
 {
-    mySerial_485.begin(9600);
+    if(MCU_TYPE == 1)mySerial_485.begin(9600);
+    else if(MCU_TYPE == 2)mySerial_485.begin(115200);
+    
     pinMode(PIN_485_Tx_Eanble, OUTPUT);
     
     mySerial.begin(115200);   
@@ -78,7 +88,7 @@ void setup()
     ServerIp = wiFiConfig.Get_Server_IPAdressClass();
     UDP_SemdTime = wiFiConfig.Get_UDP_SemdTime();
     GetwayStr = wiFiConfig.Get_Gateway_Str();
-
+    int station = wiFiConfig.Get_Station();
     SPI.begin(); //SCLK, MISO, MOSI, SS
     myWS2812.Init(NUM_WS2812B_CRGB);
 
@@ -92,7 +102,7 @@ void setup()
     MyTimer_BoardInit.StartTickTime(3000);
         
     xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle);
-    xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
+    if(MCU_TYPE == 1)xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
 
 }
 bool flag_pb2 = true;
@@ -101,24 +111,35 @@ void loop()
    
    if(MyTimer_BoardInit.IsTimeOut() && !flag_boradInit)
    {     
+       mySerial.print("Board Init OK!");
+       mySerial.flush();
+       mySerial_485.print("Board Init OK!");
+       mySerial_485.flush();
        flag_boradInit = true;
    }
    if(flag_boradInit)
    {
-      
-      if(WiFi.status() != WL_CONNECTED)
+      if(MCU_TYPE == 1)
       {
-         wiFiConfig.WIFI_Connenct();
-         Connect_UDP(Localport);
-         
-      }   
- 
+        if(WiFi.status() != WL_CONNECTED && wiFiConfig.uDP_SemdTime != 0)
+        {
+           wiFiConfig.WIFI_Connenct();
+           Connect_UDP(Localport);        
+        }  
+        if(WiFi.status() == WL_CONNECTED)
+        {
+          sub_UDP_Send();
+          onPacketCallBack();
+        }
+      }     
    }
-   
-   if(WiFi.status() == WL_CONNECTED)
+
+   if(MCU_TYPE == 2)
    {
-      sub_UDP_Send();
-      onPacketCallBack();
+      if(flag_boradInit)
+      {
+          serialEvent1();        
+      }
    }
       
     
@@ -157,7 +178,8 @@ void Core0Task1( void * pvParameters )
           }
        }
           
-       delay(10);
+       if(MCU_TYPE == 1)delay(10);
+       else if(MCU_TYPE == 2)delay(10);
     }
     
 }
@@ -165,11 +187,14 @@ void Core0Task2( void * pvParameters )
 {
     for(;;)
     {      
-       
-       if(flag_boradInit)
+       if(MCU_TYPE == 1)
        {
-          sub_RFID_program();
+         if(flag_boradInit)
+         {
+            sub_RFID_program();
+         }
        }
+       
        delay(1);
     }
     

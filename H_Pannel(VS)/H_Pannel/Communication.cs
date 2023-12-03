@@ -15,6 +15,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Drawing.Drawing2D;
 using System.Text;
+using System.Reflection;
 namespace H_Pannel_lib
 {
     public enum Hex_Type
@@ -35,6 +36,145 @@ namespace H_Pannel_lib
         EPD290_V3,
         EPD420,
         EPD1020,
+    }
+    public class Driver_IO_Board
+    {
+        public delegate void ProgramEventHandler(Driver_IO_Board driver_IO_Board);
+        public event ProgramEventHandler ProgramEvent;
+
+        public StationClass this[byte station]
+        {
+            get
+            {
+                for (int i = 0; i < stationClasses.Count; i++)
+                {
+                    if (stationClasses[i].station == station) return stationClasses[i];
+                }
+                return null;
+            }
+        }
+        public class StationClass
+        {
+            public StationClass(int station)
+            {
+                this.station = station;
+            }
+            public class InputClass
+            {
+                public int Port { get; set; }
+                public bool this[int index]
+                {
+                    get
+                    {
+                        return Port.GetBit(index);
+                    }
+                }
+            }
+            public class OutputClass
+            {
+                public int Port { get; set; }
+                private int port_Refresh = 0;
+                public int Port_Refresh
+                {
+                    get
+                    {
+                        return port_Refresh;
+                    }
+                    set
+                    {
+                        port_Refresh = value;
+                    }
+                }
+                private int port_Refresh_state = 0;
+                public int Port_Refresh_state
+                {
+                    get
+                    {
+                        return port_Refresh_state;
+                    }
+                    set
+                    {
+                        port_Refresh_state = value;
+                    }
+                }
+
+                public bool this[int index]
+                {
+                    get
+                    {
+                        return Port.GetBit(index);
+                    }
+                    set
+                    {
+                        port_Refresh_state = port_Refresh_state.SetBit(index, value);
+                        port_Refresh = port_Refresh.SetBit(index, true);
+                    }
+                }
+
+            }
+            public InputClass Input = new InputClass();
+            public OutputClass Output = new OutputClass();
+            public int station { get; set; }
+            public bool flag_Setoutput = false;
+            public int Setoutput_Value = 0;
+            public void SetOutput(int index, bool state)
+            {
+                int Port_Refresh_state_temp = Output.Port_Refresh_state;
+                Output.Port_Refresh_state = Port_Refresh_state_temp.SetBit(index, state);
+
+                int Port_Refresh_temp = Output.Port_Refresh;
+                Output.Port_Refresh = Port_Refresh_temp.SetBit(index, state);
+            }
+        }
+        public List<StationClass> stationClasses = new List<StationClass>();
+        private MyThread myThread;
+        private MySerialPort mySerialPort;
+        public void Init(MySerialPort MySerialPort, params byte[] stations)
+        {
+            mySerialPort = MySerialPort;
+            for (int i = 0; i < stations.Length; i++)
+            {
+                this.stationClasses.Add(new StationClass(stations[i]));
+            }
+            myThread = new MyThread();
+            myThread.Add_Method(sub_program);
+            myThread.AutoRun(true);
+            myThread.SetSleepTime(1);
+            myThread.Trigger();
+        }
+        private void sub_program()
+        {
+            for (int i = 0; i < stationClasses.Count; i++)
+            {
+                StationClass stationClass = stationClasses[i];
+                int station = stationClass.station;
+                int input = 0;
+                int output = 0;
+                Communication.UART_Command_RS485_GetIO(mySerialPort, station, ref input, ref output);
+                stationClass.Input.Port = input;
+                stationClass.Output.Port = output;
+              
+            }
+            if (ProgramEvent != null) ProgramEvent(this);
+            for (int i = 0; i < stationClasses.Count; i++)
+            {
+                StationClass stationClass = stationClasses[i];
+                int station = stationClass.station;
+                int output = stationClass.Output.Port;
+                if (stationClass.Output.Port_Refresh > 0)
+                {
+                    for (int k = 0; k < 16; k++)
+                    {
+                        if (stationClass.Output.Port_Refresh.GetBit(k))
+                        {
+                            output.SetBit(k, stationClass.Output.Port_Refresh_state.GetBit(k));
+                        }
+                    }
+                    Communication.UART_Command_RS485_SetOutput(mySerialPort, station, output);
+                    stationClass.Output.Port_Refresh = 0;
+                }
+            }
+        }
     }
     public class Communication
     {
@@ -4215,8 +4355,10 @@ namespace H_Pannel_lib
         }
 
         #region UART
-        static private int UART_TimeOut = 1000;
+        static private int UART_TimeOut = 150;
+        static private int UART_Delay = 10;
         static private int UART_RetryNum = 3;
+        static public bool UART_ConsoletWrite = false;
         private enum UART_Command
         {
             Get_Setting = (byte)'0',
@@ -4238,6 +4380,15 @@ namespace H_Pannel_lib
             Get_Version = (byte)'v',
             Set_Locker = (byte)'L',
 
+            RS485_GetIO = (byte)'E',
+            RS485_SetOutput = (byte)'F',
+            RS485_SetOutputPIN = (byte)'G',
+
+            RS485_SetInputDir = (byte)'M',
+            RS485_SetOutputDir = (byte)'H',
+            RS485_GetInputDir = (byte)'I',
+            RS485_GetOutputDir = (byte)'J',
+
             EPD_Set_WakeUp = (byte)'b',
             EPD_DrawFrame_RW = (byte)'c',
             EPD_DrawFrame_BW = (byte)'d',
@@ -4246,6 +4397,598 @@ namespace H_Pannel_lib
 
 
         }
+        static public bool UART_Command_RS485_GetIO(MySerialPort MySerialPort, int station, ref int input, ref int output)
+        {
+            try
+            {
+                bool flag_OK = false;
+                MyTimerBasic myTimerBasic = new MyTimerBasic();
+                if (MySerialPort.IsConnected == false) MySerialPort.SerialPortOpen();
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+
+                int retry = 0;
+                int cnt = 0;
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(station));
+                list_byte.Add((byte)(UART_Command.RS485_GetIO));
+                list_byte.Add(3);
+                ushort CRC = Basic.MyConvert.Get_CRC16(list_byte.ToArray());
+                list_byte.Add((byte)(CRC >> 0));
+                list_byte.Add((byte)(CRC >> 8));
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
+                        if (UART_RX != null)
+                        {
+                            CRC = Basic.MyConvert.Get_CRC16(UART_RX);
+                            if (CRC == 0)
+                            {
+                                if (UART_RX[1] == (byte)(station) && UART_RX[2] == (byte)(UART_Command.RS485_GetIO))
+                                {
+                                    byte input_L = UART_RX[3];
+                                    byte input_H = UART_RX[4];
+                                    byte output_L = UART_RX[5];
+                                    byte output_H = UART_RX[6];
+                                    input = input_L | (input_H << 8);
+                                    output = output_L | (output_H << 8);
+                                    if (UART_ConsoletWrite) Console.Write($"{DateTime.Now.ToDateString()} : [{MethodBase.GetCurrentMethod().Name}] Set data  sucessed! station : {station} , {myTimerBasic.ToString()}\n {UART_RX.ByteToStringHex()} \n");
+                                    flag_OK = true;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                retry++;
+                                cnt = 0;
+                            }
+
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(0);
+                }
+                //MySerialPort.SerialPortClose();
+                return flag_OK;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                System.Threading.Thread.Sleep(UART_Delay);
+            }
+            
+        }
+        static public bool UART_Command_RS485_SetOutput(MySerialPort MySerialPort, int station, int output)
+        {
+            try
+            {
+                bool flag_OK = false;
+                MyTimerBasic myTimerBasic = new MyTimerBasic();
+                if (MySerialPort.IsConnected == false) MySerialPort.SerialPortOpen();
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+
+                int retry = 0;
+                int cnt = 0;
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(station));
+                list_byte.Add((byte)(UART_Command.RS485_SetOutput));
+                list_byte.Add((byte)(output >> 0));
+                list_byte.Add((byte)(output >> 8));
+                list_byte.Add(3);
+                ushort CRC = Basic.MyConvert.Get_CRC16(list_byte.ToArray());
+                list_byte.Add((byte)(CRC >> 0));
+                list_byte.Add((byte)(CRC >> 8));
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                             Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
+                        if (UART_RX != null)
+                        {
+                            CRC = Basic.MyConvert.Get_CRC16(UART_RX);
+                            if (CRC == 0)
+                            {
+                                if (UART_RX[1] == (byte)(station) && UART_RX[2] == (byte)(UART_Command.RS485_SetOutput))
+                                {
+                                    if (UART_ConsoletWrite) Console.Write($"{DateTime.Now.ToDateString()} : [{MethodBase.GetCurrentMethod().Name}] Set data  sucessed! station : {station} , {myTimerBasic.ToString()}\n {UART_RX.ByteToStringHex()} \n");
+                                    flag_OK = true;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                retry++;
+                                cnt = 0;
+                            }
+
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(0);
+                }
+                //MySerialPort.SerialPortClose();
+                return flag_OK;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                System.Threading.Thread.Sleep(UART_Delay);
+            }
+           
+        }
+        static public bool UART_Command_RS485_SetOutputPIN(MySerialPort MySerialPort, int station, int PIN , bool state)
+        {
+            try
+            {
+                bool flag_OK = false;
+                MyTimerBasic myTimerBasic = new MyTimerBasic();
+                if (MySerialPort.IsConnected == false) MySerialPort.SerialPortOpen();
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+
+                int retry = 0;
+                int cnt = 0;
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(station));
+                list_byte.Add((byte)(UART_Command.RS485_SetOutputPIN));
+                list_byte.Add((byte)(PIN >> 0));
+                list_byte.Add((byte)(state ? 1 : 0));
+                list_byte.Add(3);
+                ushort CRC = Basic.MyConvert.Get_CRC16(list_byte.ToArray());
+                list_byte.Add((byte)(CRC >> 0));
+                list_byte.Add((byte)(CRC >> 8));
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
+                        if (UART_RX != null)
+                        {
+                            CRC = Basic.MyConvert.Get_CRC16(UART_RX);
+                            if (CRC == 0)
+                            {
+                                if (UART_RX[1] == (byte)(station) && UART_RX[2] == (byte)(UART_Command.RS485_SetOutputPIN))
+                                {
+                                    if (UART_ConsoletWrite) Console.Write($"{DateTime.Now.ToDateString()} : [{MethodBase.GetCurrentMethod().Name}] Set data  sucessed! station : {station} , {myTimerBasic.ToString()}\n {UART_RX.ByteToStringHex()} \n");
+                                    flag_OK = true;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                retry++;
+                                cnt = 0;
+                            }
+
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(0);
+                }
+                // MySerialPort.SerialPortClose();
+                return flag_OK;
+            }
+            catch
+            {
+
+                return false;
+            }
+            finally
+            {
+                System.Threading.Thread.Sleep(UART_Delay);
+            }
+          
+        }
+
+        static public bool UART_Command_RS485_GetOutputDir(MySerialPort MySerialPort, int station, ref int output_dir)
+        {
+            bool flag_OK = false;
+            MyTimerBasic myTimerBasic = new MyTimerBasic();
+            if (MySerialPort.SerialPortOpen())
+            {
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+
+                int retry = 0;
+                int cnt = 0;
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(station));
+                list_byte.Add((byte)(UART_Command.RS485_GetOutputDir));
+                list_byte.Add(3);
+                ushort CRC = Basic.MyConvert.Get_CRC16(list_byte.ToArray());
+                list_byte.Add((byte)(CRC >> 0));
+                list_byte.Add((byte)(CRC >> 8));
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            if (UART_ConsoletWrite) Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
+                        if (UART_RX != null)
+                        {
+                            CRC = Basic.MyConvert.Get_CRC16(UART_RX);
+                            if (CRC == 0)
+                            {
+                                if (UART_RX[1] == (byte)(station) && UART_RX[2] == (byte)(UART_Command.RS485_GetOutputDir))
+                                {
+                                    byte output_dir_L = UART_RX[3];
+                                    byte output_dir_H = UART_RX[4];
+                                    output_dir = output_dir_L | (output_dir_H << 8);
+                                    if (UART_ConsoletWrite) Console.Write($"{DateTime.Now.ToDateString()} : [{MethodBase.GetCurrentMethod().Name}] Set data  sucessed! station : {station} , {myTimerBasic.ToString()}\n {UART_RX.ByteToStringHex()} \n");
+                                    flag_OK = true;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                retry++;
+                                cnt = 0;
+                            }
+
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(1);
+                }
+            }
+            MySerialPort.SerialPortClose();
+            return flag_OK;
+        }
+        static public bool UART_Command_RS485_SetOutputDir(MySerialPort MySerialPort, int station, int output_dir)
+        {
+            bool flag_OK = false;
+            MyTimerBasic myTimerBasic = new MyTimerBasic();
+            if (MySerialPort.SerialPortOpen())
+            {
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+
+                int retry = 0;
+                int cnt = 0;
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(station));
+                list_byte.Add((byte)(UART_Command.RS485_SetOutputDir));
+                list_byte.Add((byte)(output_dir >> 0));
+                list_byte.Add((byte)(output_dir >> 8));
+                list_byte.Add(3);
+                ushort CRC = Basic.MyConvert.Get_CRC16(list_byte.ToArray());
+                list_byte.Add((byte)(CRC >> 0));
+                list_byte.Add((byte)(CRC >> 8));
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            if (UART_ConsoletWrite) Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
+                        if (UART_RX != null)
+                        {
+                            CRC = Basic.MyConvert.Get_CRC16(UART_RX);
+                            if (CRC == 0)
+                            {
+                                if (UART_RX[1] == (byte)(station) && UART_RX[2] == (byte)(UART_Command.RS485_SetOutputDir))
+                                {
+                
+                                    if (UART_ConsoletWrite) Console.Write($"{DateTime.Now.ToDateString()} : [{MethodBase.GetCurrentMethod().Name}] Set data  sucessed! station : {station} , {myTimerBasic.ToString()}\n {UART_RX.ByteToStringHex()} \n");
+                                    flag_OK = true;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                retry++;
+                                cnt = 0;
+                            }
+
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(1);
+                }
+            }
+            MySerialPort.SerialPortClose();
+            return flag_OK;
+        }
+        static public bool UART_Command_RS485_GetInputDir(MySerialPort MySerialPort, int station, ref int Input_dir)
+        {
+            bool flag_OK = false;
+            MyTimerBasic myTimerBasic = new MyTimerBasic();
+            if (MySerialPort.SerialPortOpen())
+            {
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+
+                int retry = 0;
+                int cnt = 0;
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(station));
+                list_byte.Add((byte)(UART_Command.RS485_GetInputDir));
+                list_byte.Add(3);
+                ushort CRC = Basic.MyConvert.Get_CRC16(list_byte.ToArray());
+                list_byte.Add((byte)(CRC >> 0));
+                list_byte.Add((byte)(CRC >> 8));
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            if (UART_ConsoletWrite) Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
+                        if (UART_RX != null)
+                        {
+                            CRC = Basic.MyConvert.Get_CRC16(UART_RX);
+                            if (CRC == 0)
+                            {
+                                if (UART_RX[1] == (byte)(station) && UART_RX[2] == (byte)(UART_Command.RS485_GetInputDir))
+                                {
+                                    byte Input_dir_L = UART_RX[3];
+                                    byte Input_dir_H = UART_RX[4];
+                                    Input_dir = Input_dir_L | (Input_dir_H << 8);
+                                    if (UART_ConsoletWrite) Console.Write($"{DateTime.Now.ToDateString()} : [{MethodBase.GetCurrentMethod().Name}] Set data  sucessed! station : {station} , {myTimerBasic.ToString()}\n {UART_RX.ByteToStringHex()} \n");
+                                    flag_OK = true;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                retry++;
+                                cnt = 0;
+                            }
+
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(1);
+                }
+            }
+            MySerialPort.SerialPortClose();
+            return flag_OK;
+        }
+        static public bool UART_Command_RS485_SetInputDir(MySerialPort MySerialPort, int station, int Input_dir)
+        {
+            bool flag_OK = false;
+            MyTimerBasic myTimerBasic = new MyTimerBasic();
+            if (MySerialPort.SerialPortOpen())
+            {
+                MyTimer MyTimer_UART_TimeOut = new MyTimer();
+
+                int retry = 0;
+                int cnt = 0;
+                MySerialPort.ClearReadByte();
+                List<byte> list_byte = new List<byte>();
+                list_byte.Add(2);
+                list_byte.Add((byte)(station));
+                list_byte.Add((byte)(UART_Command.RS485_SetInputDir));
+                list_byte.Add((byte)(Input_dir >> 0));
+                list_byte.Add((byte)(Input_dir >> 8));
+                list_byte.Add(3);
+                ushort CRC = Basic.MyConvert.Get_CRC16(list_byte.ToArray());
+                list_byte.Add((byte)(CRC >> 0));
+                list_byte.Add((byte)(CRC >> 8));
+                while (true)
+                {
+                    if (cnt == 0)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            if (UART_ConsoletWrite) Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                            flag_OK = false;
+                            break;
+                        }
+                        MySerialPort.ClearReadByte();
+                        MySerialPort.WriteByte(list_byte.ToArray());
+                        MyTimer_UART_TimeOut.TickStop();
+                        MyTimer_UART_TimeOut.StartTickTime(UART_TimeOut);
+                        cnt++;
+                    }
+                    if (cnt == 1)
+                    {
+                        if (retry >= UART_RetryNum)
+                        {
+                            flag_OK = false;
+                            break;
+                        }
+                        if (MyTimer_UART_TimeOut.IsTimeOut())
+                        {
+                            retry++;
+                            cnt = 0;
+                        }
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
+                        if (UART_RX != null && UART_RX.Length >=8)
+                        {
+                            List<byte> temp = new List<byte>();
+                            for (int i = 0; i < 8; i++)
+                            {
+                                temp.Add(UART_RX[i]);
+                            }
+                            CRC = Basic.MyConvert.Get_CRC16(temp.ToArray());
+                            if (CRC == 0)
+                            {
+                                if (UART_RX[1] == (byte)(station) && UART_RX[2] == (byte)(UART_Command.RS485_SetInputDir))
+                                {
+
+                                    if (UART_ConsoletWrite) Console.Write($"{DateTime.Now.ToDateString()} : [{MethodBase.GetCurrentMethod().Name}] Set data  sucessed! station : {station} , {myTimerBasic.ToString()}\n {UART_RX.ByteToStringHex()} \n");
+                                    flag_OK = true;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                retry++;
+                                cnt = 0;
+                            }
+
+                        }
+
+                    }
+
+                    System.Threading.Thread.Sleep(1);
+                }
+            }
+            MySerialPort.SerialPortClose();
+            return flag_OK;
+        }
+
         static public bool UART_Command_Get_Setting(MySerialPort MySerialPort, out string IP_Adress, out string Subnet, out string Gateway, out string DNS, out string Server_IP_Adress, out string Local_Port, out string Server_Port, out string SSID, out string Password, out string Station, out string UDP_SendTime ,out string RFID_Enable)
         {
             bool flag_OK = false;
@@ -4300,7 +5043,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             string str = UART_GetString(UART_RX);
@@ -4519,7 +5262,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -4598,7 +5341,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -4677,7 +5420,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -4756,7 +5499,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -4835,7 +5578,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -4914,7 +5657,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -4987,7 +5730,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -5060,7 +5803,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -5135,7 +5878,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -5210,7 +5953,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -5283,7 +6026,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -5355,7 +6098,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -5418,7 +6161,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             string str = "";
@@ -5484,7 +6227,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             string str = "";
@@ -5559,7 +6302,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -5628,7 +6371,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -5698,7 +6441,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -5774,7 +6517,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -5842,7 +6585,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -5912,7 +6655,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
@@ -5982,7 +6725,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                         }
-                        byte[] UART_RX = MySerialPort.ReadByte();
+                        byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null)
                         {
                             if (UART_CheckSum(UART_RX, checksum))
