@@ -119,9 +119,9 @@ namespace WT32_SC01
             MyUI.數字鍵盤.音效 = false;
             H_Pannel_lib.Communication.UART_ConsoletWrite = true;
 
-            mySerialPort_IO_Board.Init("COM1", 115200, 8, System.IO.Ports.Parity.None, System.IO.Ports.StopBits.One);
-            driver_IO_Board.Init(mySerialPort_IO_Board, new byte[] { 0, 1, 2, 3 });
-            driver_IO_Board.ProgramEvent += Driver_IO_Board_ProgramEvent;
+            //mySerialPort_IO_Board.Init("COM1", 115200, 8, System.IO.Ports.Parity.None, System.IO.Ports.StopBits.One);
+            //driver_IO_Board.Init(mySerialPort_IO_Board, new byte[] { 0, 1, 2, 3 });
+            //driver_IO_Board.ProgramEvent += Driver_IO_Board_ProgramEvent;
         }
         int index = 0;
         private void RJ_Button1_MouseDownEvent(MouseEventArgs mevent)

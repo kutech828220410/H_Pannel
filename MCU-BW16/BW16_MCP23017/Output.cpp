@@ -61,6 +61,7 @@ void MyOutput::Set_State(bool ON_OFF)
 }
 void MyOutput::Set_StateEx(bool ON_OFF)
 {
+    State = ON_OFF;
     if(this -> PIN_NUM == -1) return;
     if(this -> flag_mcp) 
     {

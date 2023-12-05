@@ -21,7 +21,8 @@
 #define NUM_OF_LEDS NUM_WS2812B_CRGB
 #define SYSTEM_LED_PIN PA30
 #define PIN_485_Tx_Eanble PB3
-
+MyTimer MyTimer_UART1_IsConnected;
+bool UART1_IsConnected = false;
 bool flag_udp_232back = false;
 bool flag_JsonSend = false;
 bool flag_writeMode = false;
@@ -155,13 +156,27 @@ void Core0Task1( void * pvParameters )
           serialEvent();
           sub_IO_Program();
           MyLED_IS_Connented.Blink();
-          if( WiFi.status() == WL_CONNECTED  )
+          if(MCU_TYPE == 1)
           {
-              MyLED_IS_Connented.BlinkTime = 100;      
+            if( WiFi.status() == WL_CONNECTED  )
+            {
+                MyLED_IS_Connented.BlinkTime = 100;      
+            }
+            else
+            {
+                MyLED_IS_Connented.BlinkTime = 500;
+            }
           }
-          else
+          else if(MCU_TYPE == 2)
           {
-              MyLED_IS_Connented.BlinkTime = 500;
+            if( UART1_IsConnected)
+            {
+                MyLED_IS_Connented.BlinkTime = 50;      
+            }
+            else
+            {
+                MyLED_IS_Connented.BlinkTime = 1000;
+            }
           }
           flag_CardID_IsChanged = false;
           for(int i = 0 ; i < 5 ; i++)

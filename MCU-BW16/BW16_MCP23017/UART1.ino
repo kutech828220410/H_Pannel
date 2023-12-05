@@ -13,16 +13,23 @@ void serialEvent1()
     UART1_len++;
     MyTimer_UART1.TickStop();
     MyTimer_UART1.StartTickTime(2);
+    
+  }
+  if (MyTimer_UART1_IsConnected.IsTimeOut())
+  {
+    UART1_IsConnected = false;
   }
   if (MyTimer_UART1.IsTimeOut())
   {
     MyTimer_UART1.TickStop();
     MyTimer_UART1.StartTickTime(1000);
     
-    if (UART1_RX[0] == 'T')
+    if (UART1_RX[0] == 'T'&& ((byte)wiFiConfig.station == UART1_RX[1]))
     {
        Set_RS485_Tx_Enable();
-       mySerial_485.println("UART1 TEST OK!");
+       mySerial_485.print("Station:");
+       mySerial_485.print(wiFiConfig.station);
+       mySerial_485.println(" UART1 TEST OK!");
        Set_RS485_Rx_Enable();
     }
     if ((UART1_RX[0] == 2) && (UART1_RX[UART1_len - 3] == 3) && ((byte)wiFiConfig.station == UART1_RX[1]))
@@ -65,6 +72,9 @@ void serialEvent1()
                mySerial_485.write(tx , len);
                mySerial_485.flush();
                Set_RS485_Rx_Enable();
+               UART1_IsConnected = true;
+               MyTimer_UART1_IsConnected.TickStop();
+               MyTimer_UART1_IsConnected.StartTickTime(1000);
            }
            else if(command == 'F')
            {
