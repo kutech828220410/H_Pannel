@@ -4459,7 +4459,7 @@ namespace H_Pannel_lib
                                     byte output_H = UART_RX[6];
                                     input = input_L | (input_H << 8);
                                     output = output_L | (output_H << 8);
-                                    if (UART_ConsoletWrite) Console.Write($"{DateTime.Now.ToDateString()} : [{MethodBase.GetCurrentMethod().Name}] Set data  sucessed! station : {station} , {myTimerBasic.ToString()}\n {UART_RX.ByteToStringHex()} \n");
+                                    if (UART_ConsoletWrite) Console.Write($"{DateTime.Now.ToDateString()} : [{MethodBase.GetCurrentMethod().Name}] Set data  sucessed! station : {station} ,input : {input} ,output : {output}  {myTimerBasic.ToString()}\n {UART_RX.ByteToStringHex()} \n");
                                     flag_OK = true;
                                     break;
                                 }
