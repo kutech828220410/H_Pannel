@@ -41,7 +41,7 @@ namespace H_Pannel_lib
     {
         public delegate void ProgramEventHandler(Driver_IO_Board driver_IO_Board);
         public event ProgramEventHandler ProgramEvent;
-
+        public int SleepTime = 0;
         public StationClass this[byte station]
         {
             get
@@ -139,7 +139,7 @@ namespace H_Pannel_lib
             myThread = new MyThread();
             myThread.Add_Method(sub_program);
             myThread.AutoRun(true);
-            myThread.SetSleepTime(1);
+            myThread.SetSleepTime(SleepTime);
             myThread.Trigger();
         }
         private void sub_program()
@@ -150,9 +150,12 @@ namespace H_Pannel_lib
                 int station = stationClass.station;
                 int input = 0;
                 int output = 0;
-                Communication.UART_Command_RS485_GetIO(mySerialPort, station, ref input, ref output);
-                stationClass.Input.Port = input;
-                stationClass.Output.Port = output;
+                if(Communication.UART_Command_RS485_GetIO(mySerialPort, station, ref input, ref output))
+                {
+                    stationClass.Input.Port = input;
+                    stationClass.Output.Port = output;
+                }
+         
               
             }
             if (ProgramEvent != null) ProgramEvent(this);
@@ -4355,7 +4358,7 @@ namespace H_Pannel_lib
         }
 
         #region UART
-        static private int UART_TimeOut = 150;
+        static private int UART_TimeOut = 100;
         static private int UART_Delay = 10;
         static private int UART_RetryNum = 3;
         static public bool UART_ConsoletWrite = false;
@@ -4423,7 +4426,7 @@ namespace H_Pannel_lib
                     {
                         if (retry >= UART_RetryNum)
                         {
-                            Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                            Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}  HEX : {list_byte.ToArray().ByteToStringHex()}\n");
                             flag_OK = false;
                             break;
                         }
@@ -4446,7 +4449,7 @@ namespace H_Pannel_lib
                             cnt = 0;
                         }
                         byte[] UART_RX = MySerialPort.ReadByteEx();
-                        if (UART_RX != null)
+                        if (UART_RX != null && UART_RX.Length == 10)
                         {
                             CRC = Basic.MyConvert.Get_CRC16(UART_RX);
                             if (CRC == 0)
@@ -4474,7 +4477,7 @@ namespace H_Pannel_lib
 
                     }
 
-                    System.Threading.Thread.Sleep(0);
+                    //System.Threading.Thread.Sleep(0);
                 }
                 //MySerialPort.SerialPortClose();
                 return flag_OK;
@@ -4517,7 +4520,7 @@ namespace H_Pannel_lib
                     {
                         if (retry >= UART_RetryNum)
                         {
-                             Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                             Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}  HEX : {list_byte.ToArray().ByteToStringHex()}");
                             flag_OK = false;
                             break;
                         }
@@ -4540,7 +4543,7 @@ namespace H_Pannel_lib
                             cnt = 0;
                         }
                         byte[] UART_RX = MySerialPort.ReadByteEx();
-                        if (UART_RX != null)
+                        if (UART_RX != null && UART_RX.Length == 8)
                         {
                             CRC = Basic.MyConvert.Get_CRC16(UART_RX);
                             if (CRC == 0)
@@ -4562,7 +4565,7 @@ namespace H_Pannel_lib
 
                     }
 
-                    System.Threading.Thread.Sleep(0);
+                    //System.Threading.Thread.Sleep(0);
                 }
                 //MySerialPort.SerialPortClose();
                 return flag_OK;
@@ -4605,7 +4608,7 @@ namespace H_Pannel_lib
                     {
                         if (retry >= UART_RetryNum)
                         {
-                            Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                            Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}  HEX : {list_byte.ToArray().ByteToStringHex()}");
                             flag_OK = false;
                             break;
                         }
@@ -4628,7 +4631,7 @@ namespace H_Pannel_lib
                             cnt = 0;
                         }
                         byte[] UART_RX = MySerialPort.ReadByteEx();
-                        if (UART_RX != null)
+                        if (UART_RX != null && UART_RX.Length == 8)
                         {
                             CRC = Basic.MyConvert.Get_CRC16(UART_RX);
                             if (CRC == 0)
@@ -4650,7 +4653,7 @@ namespace H_Pannel_lib
 
                     }
 
-                    System.Threading.Thread.Sleep(0);
+                    //System.Threading.Thread.Sleep(0);
                 }
                 // MySerialPort.SerialPortClose();
                 return flag_OK;
@@ -4692,7 +4695,7 @@ namespace H_Pannel_lib
                     {
                         if (retry >= UART_RetryNum)
                         {
-                            if (UART_ConsoletWrite) Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                            if (UART_ConsoletWrite) Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}  HEX:{list_byte.ToArray().ByteToStringHex()}\n");
                             flag_OK = false;
                             break;
                         }
@@ -4773,7 +4776,7 @@ namespace H_Pannel_lib
                     {
                         if (retry >= UART_RetryNum)
                         {
-                            if (UART_ConsoletWrite) Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                            if (UART_ConsoletWrite) Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}  HEX:{list_byte.ToArray().ByteToStringHex()}\n");
                             flag_OK = false;
                             break;
                         }
@@ -4850,7 +4853,7 @@ namespace H_Pannel_lib
                     {
                         if (retry >= UART_RetryNum)
                         {
-                            if (UART_ConsoletWrite) Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                            if (UART_ConsoletWrite) Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}  HEX:{list_byte.ToArray().ByteToStringHex()}\n");
                             flag_OK = false;
                             break;
                         }
@@ -4931,7 +4934,7 @@ namespace H_Pannel_lib
                     {
                         if (retry >= UART_RetryNum)
                         {
-                            if (UART_ConsoletWrite) Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}\n {list_byte.ToArray().ByteToStringHex()}");
+                            if (UART_ConsoletWrite) Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}  HEX:{list_byte.ToArray().ByteToStringHex()}\n");
                             flag_OK = false;
                             break;
                         }
