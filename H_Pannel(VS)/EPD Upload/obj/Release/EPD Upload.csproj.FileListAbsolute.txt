@@ -96,4 +96,4 @@ C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.csproj.CopyComplete
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.exe
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.pdb
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\H_Pannel_lib.pdb
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\H_Pannel_lib.pdb

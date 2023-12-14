@@ -57,6 +57,7 @@ namespace H_Pannel_lib
         }
 
         #region 靜態參數
+        static public double Lightness = 1.0D;
         static public int NumOfLED = 450;
         static private int Drawer_NumOf_H_Line = 4;
         static private int Drawer_NumOf_V_Line = 8;
@@ -118,9 +119,9 @@ namespace H_Pannel_lib
         {
             for (int i = 0; i < NumOfLED; i++)
             {
-                drawer.LED_Bytes[i * 3 + 0] = color.R;
-                drawer.LED_Bytes[i * 3 + 1] = color.G;
-                drawer.LED_Bytes[i * 3 + 2] = color.B;
+                drawer.LED_Bytes[i * 3 + 0] = (byte)(color.R * Lightness);
+                drawer.LED_Bytes[i * 3 + 1] = (byte)(color.G * Lightness);
+                drawer.LED_Bytes[i * 3 + 2] = (byte)(color.B * Lightness);
             }
             return drawer.LED_Bytes;
         }
@@ -207,9 +208,9 @@ namespace H_Pannel_lib
             for (int i = NumOfLED_Drawer ; i < NumOfLED ; i++)
             {
                 if (i * 3 > LED_Bytes.Length) return LED_Bytes;
-                LED_Bytes[i * 3 + 0] = color.R;
-                LED_Bytes[i * 3 + 1] = color.G;
-                LED_Bytes[i * 3 + 2] = color.B;         
+                LED_Bytes[i * 3 + 0] = (byte)(color.R * Lightness);
+                LED_Bytes[i * 3 + 1] = (byte)(color.G * Lightness);
+                LED_Bytes[i * 3 + 2] = (byte)(color.B * Lightness);
             }
             return LED_Bytes;
         }
@@ -303,9 +304,9 @@ namespace H_Pannel_lib
             byte[] LED_Bytes = Get_Empty_LEDBytes();
             for (int i = 0; i < NumOfLED; i++)
             {
-                LED_Bytes[i * 3 + 0] = color.R;
-                LED_Bytes[i * 3 + 1] = color.G;
-                LED_Bytes[i * 3 + 2] = color.B;
+                LED_Bytes[i * 3 + 0] = (byte)(color.R * Lightness);
+                LED_Bytes[i * 3 + 1] = (byte)(color.G * Lightness);
+                LED_Bytes[i * 3 + 2] = (byte)(color.B * Lightness);
             }
             return Set_LED_UDP(uDP_Class, IP, LED_Bytes);
         }
@@ -375,9 +376,9 @@ namespace H_Pannel_lib
             for (int i = 0; i < List_Drawer_H_Line_Leds[col].Length; i++)
             {
 
-                LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 0] = color.R;
-                LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 1] = color.G;
-                LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 2] = color.B;
+                LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 0] = (byte)(color.R * Lightness);
+                LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 1] = (byte)(color.G * Lightness);
+                LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 2] = (byte)(color.B * Lightness);
             }
         }
         static public void Set_Drawer_V_Leds(int row, ref byte[] LEDBytes, Color color)
@@ -385,9 +386,9 @@ namespace H_Pannel_lib
             for (int i = 0; i < List_Drawer_V_Line_Leds[row].Length; i++)
             {
 
-                LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 0] = color.R;
-                LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 1] = color.G;
-                LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 2] = color.B;
+                LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 0] = (byte)(color.R * Lightness);
+                LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 1] = (byte)(color.G * Lightness);
+                LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 2] = (byte)(color.B * Lightness);
             }
         }
         static public Rectangle Get_Box_Combine(Drawer drawer, int col , int row)

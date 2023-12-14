@@ -27,6 +27,8 @@ namespace H_Pannel_lib
     public partial class RowsLEDUI : DeviceBasicUI
     {
         #region 靜態參數
+        static public double Lightness = 1.0D;
+
         static public int NumOfLED = 250;
         static public byte[] Get_Empty_LEDBytes()
         {
@@ -45,9 +47,9 @@ namespace H_Pannel_lib
             for (int i = startNum; i < EndNum; i++)
             {
                 if (i > LED_Bytes.Length) break;
-                LED_Bytes[i * 3 + 0] = color.R;
-                LED_Bytes[i * 3 + 1] = color.G;
-                LED_Bytes[i * 3 + 2] = color.B;
+                LED_Bytes[i * 3 + 0] = (byte)(color.R * Lightness);
+                LED_Bytes[i * 3 + 1] = (byte)(color.G * Lightness);
+                LED_Bytes[i * 3 + 2] = (byte)(color.B * Lightness);
             }
             return LED_Bytes;
         }
