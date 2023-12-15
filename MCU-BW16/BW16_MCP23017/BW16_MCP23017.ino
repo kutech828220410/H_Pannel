@@ -30,7 +30,7 @@ bool flag_writeMode = false;
 bool flag_CardID_IsChanged = false;
 String CardID[5];
 String CardID_buf[5];
-
+byte station = 0;
 //#define RFID
 #define IO
 
@@ -65,7 +65,7 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial_485(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.0.4";
+String Version = "Ver 1.0.5";
 
 void setup() 
 {
@@ -89,7 +89,7 @@ void setup()
     ServerIp = wiFiConfig.Get_Server_IPAdressClass();
     UDP_SemdTime = wiFiConfig.Get_UDP_SemdTime();
     GetwayStr = wiFiConfig.Get_Gateway_Str();
-    int station = wiFiConfig.Get_Station();
+    station = wiFiConfig.Get_Station();
     SPI.begin(); //SCLK, MISO, MOSI, SS
     myWS2812.Init(NUM_WS2812B_CRGB);
 

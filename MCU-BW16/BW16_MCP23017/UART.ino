@@ -373,26 +373,46 @@ void Get_Checksum()
   mySerial.flush();
 
 }
-
-uint16_t Get_CRC16(byte* pDataBytes , int len)
-{
-    uint16_t crc = 0xffff;
-    uint16_t polynom = 0xA001;
-    for (int i = 0; i < len; i++)
-    {
-        crc ^= *(pDataBytes + i);
-        for (int j = 0; j < 8; j++)
-        {
-            if ((crc & 0x01) == 0x01)
-            {
-                crc >>= 1;
-                crc ^= polynom;
-            }
-            else
-            {
-                crc >>= 1;
-            }
-        }
+uint16_t crc16_update(uint16_t crc, uint8_t a) {
+  int i;
+  crc ^= a;
+  for (i = 0; i < 8; ++i) {
+    if (crc & 1) {
+      crc = (crc >> 1) ^ 0xA001;
+    } else {
+      crc = (crc >> 1);
     }
-    return crc;
+  }
+  return crc;
 }
+
+uint16_t Get_CRC16(uint8_t* data, int length) {
+  uint16_t crc = 0xFFFF; // 初始值
+  for (int i = 0; i < length; ++i) {
+    crc = crc16_update(crc, data[i]);
+  }
+  return crc;
+}
+
+//uint16_t Get_CRC16(byte* pDataBytes , int len)
+//{
+//    uint16_t crc = 0xffff;
+//    uint16_t polynom = 0xA001;
+//    for (int i = 0; i < len; i++)
+//    {
+//        crc ^= *(pDataBytes + i);
+//        for (int j = 0; j < 8; j++)
+//        {
+//            if ((crc & 0x01) == 0x01)
+//            {
+//                crc >>= 1;
+//                crc ^= polynom;
+//            }
+//            else
+//            {
+//                crc >>= 1;
+//            }
+//        }
+//    }
+//    return crc;
+//}

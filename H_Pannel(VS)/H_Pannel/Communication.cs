@@ -4358,9 +4358,9 @@ namespace H_Pannel_lib
         }
 
         #region UART
-        static private int UART_TimeOut = 100;
-        static private int UART_Delay = 10;
-        static private int UART_RetryNum = 3;
+        static public int UART_TimeOut = 100;
+        static public int UART_Delay = 10;
+        static public int UART_RetryNum = 3;
         static public bool UART_ConsoletWrite = false;
         private enum UART_Command
         {
@@ -4426,7 +4426,7 @@ namespace H_Pannel_lib
                     {
                         if (retry >= UART_RetryNum)
                         {
-                            Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}  HEX : {list_byte.ToArray().ByteToStringHex()}\n");
+                            Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}  TX_HEX : {list_byte.ToArray().ByteToStringHex()}\n");
                             flag_OK = false;
                             break;
                         }
@@ -4445,12 +4445,15 @@ namespace H_Pannel_lib
                         }
                         if (MyTimer_UART_TimeOut.IsTimeOut())
                         {
+                            //Console.Write($"station: {station} [{MethodBase.GetCurrentMethod().Name}] 等待逾時! \n");
+
                             retry++;
                             cnt = 0;
                         }
                         byte[] UART_RX = MySerialPort.ReadByteEx();
                         if (UART_RX != null && UART_RX.Length == 10)
                         {
+
                             CRC = Basic.MyConvert.Get_CRC16(UART_RX);
                             if (CRC == 0)
                             {
@@ -4469,6 +4472,8 @@ namespace H_Pannel_lib
                             }
                             else
                             {
+                                //Console.Write($"station: {station} [{MethodBase.GetCurrentMethod().Name}] CRC 錯誤, HEX:{UART_RX.ByteToStringHex()} \n");
+
                                 retry++;
                                 cnt = 0;
                             }
@@ -4477,7 +4482,7 @@ namespace H_Pannel_lib
 
                     }
 
-                    //System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(0);
                 }
                 //MySerialPort.SerialPortClose();
                 return flag_OK;
@@ -4520,7 +4525,7 @@ namespace H_Pannel_lib
                     {
                         if (retry >= UART_RetryNum)
                         {
-                             Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}  HEX : {list_byte.ToArray().ByteToStringHex()}");
+                             Console.WriteLine($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}  HEX : {list_byte.ToArray().ByteToStringHex()}");
                             flag_OK = false;
                             break;
                         }
@@ -4543,11 +4548,13 @@ namespace H_Pannel_lib
                             cnt = 0;
                         }
                         byte[] UART_RX = MySerialPort.ReadByteEx();
+
                         if (UART_RX != null && UART_RX.Length == 8)
                         {
                             CRC = Basic.MyConvert.Get_CRC16(UART_RX);
                             if (CRC == 0)
                             {
+
                                 if (UART_RX[1] == (byte)(station) && UART_RX[2] == (byte)(UART_Command.RS485_SetOutput))
                                 {
                                     if (UART_ConsoletWrite) Console.Write($"{DateTime.Now.ToDateString()} : [{MethodBase.GetCurrentMethod().Name}] Set data  sucessed! station : {station} , {myTimerBasic.ToString()}\n {UART_RX.ByteToStringHex()} \n");
@@ -4557,6 +4564,8 @@ namespace H_Pannel_lib
                             }
                             else
                             {
+                                Console.WriteLine($"[{MethodBase.GetCurrentMethod().Name}] station: {station} ,CRC Error");
+
                                 retry++;
                                 cnt = 0;
                             }
@@ -4565,7 +4574,7 @@ namespace H_Pannel_lib
 
                     }
 
-                    //System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(0);
                 }
                 //MySerialPort.SerialPortClose();
                 return flag_OK;
@@ -4608,7 +4617,7 @@ namespace H_Pannel_lib
                     {
                         if (retry >= UART_RetryNum)
                         {
-                            Console.Write($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}  HEX : {list_byte.ToArray().ByteToStringHex()}");
+                            Console.WriteLine($"[{MethodBase.GetCurrentMethod().Name}] Set data  error! station: {station}  HEX : {list_byte.ToArray().ByteToStringHex()}");
                             flag_OK = false;
                             break;
                         }
@@ -4653,7 +4662,7 @@ namespace H_Pannel_lib
 
                     }
 
-                    //System.Threading.Thread.Sleep(0);
+                    System.Threading.Thread.Sleep(0);
                 }
                 // MySerialPort.SerialPortClose();
                 return flag_OK;
