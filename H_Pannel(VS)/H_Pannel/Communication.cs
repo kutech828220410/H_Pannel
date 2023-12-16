@@ -4358,7 +4358,7 @@ namespace H_Pannel_lib
         }
 
         #region UART
-        static public int UART_TimeOut = 100;
+        static public int UART_TimeOut = 500;
         static public int UART_Delay = 10;
         static public int UART_RetryNum = 3;
         static public bool UART_ConsoletWrite = false;
@@ -4451,9 +4451,13 @@ namespace H_Pannel_lib
                             cnt = 0;
                         }
                         byte[] UART_RX = MySerialPort.ReadByteEx();
-                        if (UART_RX != null && UART_RX.Length == 10)
+                        if (UART_RX != null && UART_RX.Length >= 10)
                         {
-
+                            List<byte> temp = new List<byte>();
+                            for (int i = 0; i < 10; i++)
+                            {
+                                temp.Add(UART_RX[i]);
+                            }
                             CRC = Basic.MyConvert.Get_CRC16(UART_RX);
                             if (CRC == 0)
                             {
@@ -4472,7 +4476,7 @@ namespace H_Pannel_lib
                             }
                             else
                             {
-                                //Console.Write($"station: {station} [{MethodBase.GetCurrentMethod().Name}] CRC 錯誤, HEX:{UART_RX.ByteToStringHex()} \n");
+                                Console.Write($"station: {station} [{MethodBase.GetCurrentMethod().Name}] CRC 錯誤, HEX:{UART_RX.ByteToStringHex()} \n");
 
                                 retry++;
                                 cnt = 0;

@@ -65,12 +65,12 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial_485(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.0.5";
+String Version = "Ver 1.0.6";
 
 void setup() 
 {
     if(MCU_TYPE == 1)mySerial_485.begin(9600);
-    else if(MCU_TYPE == 2)mySerial_485.begin(115200);
+    else if(MCU_TYPE == 2)mySerial_485.begin(115200,8,0,2);
     
     pinMode(PIN_485_Tx_Eanble, OUTPUT);
     
@@ -102,8 +102,8 @@ void setup()
     
     MyTimer_BoardInit.StartTickTime(3000);
         
-    xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle);
-    if(MCU_TYPE == 1)xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
+    xTaskCreate(Core0Task1,"Core0Task1", 1024, NULL, 1,&Core0Task1Handle);
+    if(MCU_TYPE == 1 || MCU_TYPE == 2)xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
 
 }
 bool flag_pb2 = true;
@@ -114,13 +114,12 @@ void loop()
    {     
        mySerial.print("Board Init OK!");
        mySerial.flush();
-       mySerial_485.print("Board Init OK!");
-       mySerial_485.flush();
+       Set_RS485_Rx_Enable();
        flag_boradInit = true;
    }
    if(flag_boradInit)
    {
-      if(MCU_TYPE == 1)
+      if(MCU_TYPE == 1 || MCU_TYPE == 2)
       {
         if(WiFi.status() != WL_CONNECTED && wiFiConfig.uDP_SemdTime != 0)
         {
@@ -133,16 +132,17 @@ void loop()
           onPacketCallBack();
         }
       }     
+      if(MCU_TYPE == 2)delay(10);
    }
-
-   if(MCU_TYPE == 2)
-   {
-      if(flag_boradInit)
-      {
-          serialEvent1();        
-      }
-   }
-      
+//
+//   if(MCU_TYPE == 2)
+//   {
+//      if(flag_boradInit)
+//      {
+//          serialEvent1();        
+//      }
+//   }
+//      
     
 }
 
@@ -209,8 +209,14 @@ void Core0Task2( void * pvParameters )
             sub_RFID_program();
          }
        }
-       
-       delay(1);
+       if(MCU_TYPE == 2)
+       {
+          if(flag_boradInit)
+          {
+              serialEvent1();        
+          }
+       }
+       delay(0);
     }
     
 }

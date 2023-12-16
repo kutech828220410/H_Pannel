@@ -9,45 +9,45 @@ byte UART1_read_start1 = 0;
 bool flag_UART1_IsMsgGet = false;
 void serialEvent1()
 {
-  Set_RS485_Rx_Enable();
+  
   if (mySerial_485.available())
   {
     UART1_RX[UART1_len] = mySerial_485.read();
-    if(UART1_RX[0] == 2)
-    {
-//       mySerial.print("UART1_len : 0 ,Get strat tx byte!\n");
-       if(UART1_len >= 0 && UART1_len < 1)
-       {
-          UART1_len++;
-       }
-       else if(UART1_len >= 1 && UART1_len < 2)
-       {
-          if(UART1_RX[1] == (byte)station)
-          {
-//             mySerial.print("UART1_len : 1 , station : ");
-//             mySerial.print((byte)station);
-//             mySerial.print("station check ok! \n");
-             UART1_len++;
-          }
-          else
-          {
-             UART1_len = 0;
-          }        
-       }
-       else if(UART1_len >= 2)
-       {          
-          UART1_len++;
-          if(UART1_len > UART1_RX_SIZE) UART1_len = 0;
-       }
-       
-    }
-    else
-    {
-       UART1_len = 0;
-    }
-   
+//    if(UART1_RX[0] == 2)
+//    {
+////       mySerial.print("UART1_len : 0 ,Get strat tx byte!\n");
+//       if(UART1_len >= 0 && UART1_len < 1)
+//       {
+//          UART1_len++;
+//       }
+//       else if(UART1_len >= 1 && UART1_len < 2)
+//       {
+//          if(UART1_RX[1] == (byte)station)
+//          {
+////             mySerial.print("UART1_len : 1 , station : ");
+////             mySerial.print((byte)station);
+////             mySerial.print("station check ok! \n");
+//             UART1_len++;
+//          }
+//          else
+//          {
+//             UART1_len = 0;
+//          }        
+//       }
+//       else if(UART1_len >= 2)
+//       {          
+//          UART1_len++;
+//          if(UART1_len > UART1_RX_SIZE) UART1_len = 0;
+//       }
+//       
+//    }
+//    else
+//    {
+//       UART1_len = 0;
+//    }
+    UART1_len++;
     MyTimer_UART1.TickStop();
-    MyTimer_UART1.StartTickTime(10);
+    MyTimer_UART1.StartTickTime(2);
     
   }
   if (MyTimer_UART1_IsConnected.IsTimeOut())
@@ -106,7 +106,6 @@ void serialEvent1()
                Set_RS485_Tx_Enable();
                mySerial_485.write(tx , len);
                mySerial_485.flush();
-               delay(1);
                Set_RS485_Rx_Enable();
                UART1_IsConnected = true;
                MyTimer_UART1_IsConnected.TickStop();
@@ -136,7 +135,6 @@ void serialEvent1()
                
                mySerial_485.write(tx , len);
                mySerial_485.flush();             
-               delay(1);
                Set_RS485_Rx_Enable();
            }
            else if(command == 'G')
@@ -261,9 +259,9 @@ void serialEvent1()
        }
        else
        {
-           Set_RS485_Tx_Enable();
-           mySerial_485.print("CRC check error!");
-           Set_RS485_Rx_Enable();
+//           Set_RS485_Tx_Enable();
+//           mySerial_485.print("CRC check error!");
+//           Set_RS485_Rx_Enable();
        }
        
     }

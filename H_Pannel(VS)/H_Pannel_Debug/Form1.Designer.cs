@@ -125,14 +125,14 @@
             this.rowsLEDUI = new H_Pannel_lib.RowsLEDUI();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.RFID = new System.Windows.Forms.TabPage();
+            this.rJ_Button1 = new MyUI.RJ_Button();
+            this.rJ_Button_RFID_RS485_TEST = new MyUI.RJ_Button();
             this.rJ_Button_RFID_初始化 = new MyUI.RJ_Button();
             this.rfiD_UI = new H_Pannel_lib.RFID_UI();
             this.H_RFID = new System.Windows.Forms.TabPage();
             this.sqL_DataGridView_h_RFID_Datas = new SQLUI.SQL_DataGridView();
             this.rJ_Button_H_RFID_初始化 = new MyUI.RJ_Button();
             this.h_RFID_UI = new H_Pannel_lib.H_RFID_UI();
-            this.rJ_Button_RFID_RS485_TEST = new MyUI.RJ_Button();
-            this.rJ_Button1 = new MyUI.RJ_Button();
             this.tabControl1.SuspendLayout();
             this.WT32.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -187,7 +187,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1904, 1041);
+            this.tabControl1.Size = new System.Drawing.Size(1084, 1041);
             this.tabControl1.TabIndex = 1;
             // 
             // WT32
@@ -195,7 +195,7 @@
             this.WT32.Controls.Add(this.tabControl2);
             this.WT32.Location = new System.Drawing.Point(4, 22);
             this.WT32.Name = "WT32";
-            this.WT32.Size = new System.Drawing.Size(1896, 1015);
+            this.WT32.Size = new System.Drawing.Size(1076, 1015);
             this.WT32.TabIndex = 0;
             this.WT32.Text = "WT32";
             this.WT32.UseVisualStyleBackColor = true;
@@ -209,7 +209,7 @@
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1896, 1015);
+            this.tabControl2.Size = new System.Drawing.Size(1076, 1015);
             this.tabControl2.TabIndex = 29;
             // 
             // tabPage3
@@ -219,7 +219,7 @@
             this.tabPage3.Controls.Add(this.storageUI_WT32);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1888, 989);
+            this.tabPage3.Size = new System.Drawing.Size(1068, 989);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "資料設定";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1973,10 +1973,62 @@
             this.RFID.Controls.Add(this.rfiD_UI);
             this.RFID.Location = new System.Drawing.Point(4, 22);
             this.RFID.Name = "RFID";
-            this.RFID.Size = new System.Drawing.Size(1896, 1015);
+            this.RFID.Size = new System.Drawing.Size(1076, 1015);
             this.RFID.TabIndex = 4;
             this.RFID.Text = "RFID";
             this.RFID.UseVisualStyleBackColor = true;
+            // 
+            // rJ_Button1
+            // 
+            this.rJ_Button1.AutoResetState = false;
+            this.rJ_Button1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button1.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button1.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button1.BorderRadius = 5;
+            this.rJ_Button1.BorderSize = 0;
+            this.rJ_Button1.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button1.FlatAppearance.BorderSize = 0;
+            this.rJ_Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button1.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button1.GUID = "";
+            this.rJ_Button1.Location = new System.Drawing.Point(1399, 159);
+            this.rJ_Button1.Name = "rJ_Button1";
+            this.rJ_Button1.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button1.ShadowSize = 0;
+            this.rJ_Button1.ShowLoadingForm = false;
+            this.rJ_Button1.Size = new System.Drawing.Size(126, 67);
+            this.rJ_Button1.State = false;
+            this.rJ_Button1.TabIndex = 42;
+            this.rJ_Button1.Text = "RS485_TEST";
+            this.rJ_Button1.TextColor = System.Drawing.Color.White;
+            this.rJ_Button1.UseVisualStyleBackColor = false;
+            // 
+            // rJ_Button_RFID_RS485_TEST
+            // 
+            this.rJ_Button_RFID_RS485_TEST.AutoResetState = false;
+            this.rJ_Button_RFID_RS485_TEST.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_RFID_RS485_TEST.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_RFID_RS485_TEST.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_RFID_RS485_TEST.BorderRadius = 5;
+            this.rJ_Button_RFID_RS485_TEST.BorderSize = 0;
+            this.rJ_Button_RFID_RS485_TEST.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_RFID_RS485_TEST.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_RFID_RS485_TEST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_RFID_RS485_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_RFID_RS485_TEST.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_RFID_RS485_TEST.GUID = "";
+            this.rJ_Button_RFID_RS485_TEST.Location = new System.Drawing.Point(1399, 86);
+            this.rJ_Button_RFID_RS485_TEST.Name = "rJ_Button_RFID_RS485_TEST";
+            this.rJ_Button_RFID_RS485_TEST.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_RFID_RS485_TEST.ShadowSize = 0;
+            this.rJ_Button_RFID_RS485_TEST.ShowLoadingForm = false;
+            this.rJ_Button_RFID_RS485_TEST.Size = new System.Drawing.Size(126, 67);
+            this.rJ_Button_RFID_RS485_TEST.State = false;
+            this.rJ_Button_RFID_RS485_TEST.TabIndex = 41;
+            this.rJ_Button_RFID_RS485_TEST.Text = "RS485_TEST";
+            this.rJ_Button_RFID_RS485_TEST.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_RFID_RS485_TEST.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_RFID_初始化
             // 
@@ -2147,63 +2199,11 @@
             this.h_RFID_UI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("h_RFID_UI.UDP_ServerPorts")));
             this.h_RFID_UI.UserName = "root";
             // 
-            // rJ_Button_RFID_RS485_TEST
-            // 
-            this.rJ_Button_RFID_RS485_TEST.AutoResetState = false;
-            this.rJ_Button_RFID_RS485_TEST.BackColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_RFID_RS485_TEST.BackgroundColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_RFID_RS485_TEST.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_RFID_RS485_TEST.BorderRadius = 5;
-            this.rJ_Button_RFID_RS485_TEST.BorderSize = 0;
-            this.rJ_Button_RFID_RS485_TEST.buttonType = MyUI.RJ_Button.ButtonType.Push;
-            this.rJ_Button_RFID_RS485_TEST.FlatAppearance.BorderSize = 0;
-            this.rJ_Button_RFID_RS485_TEST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Button_RFID_RS485_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Button_RFID_RS485_TEST.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_RFID_RS485_TEST.GUID = "";
-            this.rJ_Button_RFID_RS485_TEST.Location = new System.Drawing.Point(1399, 86);
-            this.rJ_Button_RFID_RS485_TEST.Name = "rJ_Button_RFID_RS485_TEST";
-            this.rJ_Button_RFID_RS485_TEST.ShadowColor = System.Drawing.Color.DimGray;
-            this.rJ_Button_RFID_RS485_TEST.ShadowSize = 0;
-            this.rJ_Button_RFID_RS485_TEST.ShowLoadingForm = false;
-            this.rJ_Button_RFID_RS485_TEST.Size = new System.Drawing.Size(126, 67);
-            this.rJ_Button_RFID_RS485_TEST.State = false;
-            this.rJ_Button_RFID_RS485_TEST.TabIndex = 41;
-            this.rJ_Button_RFID_RS485_TEST.Text = "RS485_TEST";
-            this.rJ_Button_RFID_RS485_TEST.TextColor = System.Drawing.Color.White;
-            this.rJ_Button_RFID_RS485_TEST.UseVisualStyleBackColor = false;
-            // 
-            // rJ_Button1
-            // 
-            this.rJ_Button1.AutoResetState = false;
-            this.rJ_Button1.BackColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button1.BackgroundColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button1.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button1.BorderRadius = 5;
-            this.rJ_Button1.BorderSize = 0;
-            this.rJ_Button1.buttonType = MyUI.RJ_Button.ButtonType.Push;
-            this.rJ_Button1.FlatAppearance.BorderSize = 0;
-            this.rJ_Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Button1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Button1.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button1.GUID = "";
-            this.rJ_Button1.Location = new System.Drawing.Point(1399, 159);
-            this.rJ_Button1.Name = "rJ_Button1";
-            this.rJ_Button1.ShadowColor = System.Drawing.Color.DimGray;
-            this.rJ_Button1.ShadowSize = 0;
-            this.rJ_Button1.ShowLoadingForm = false;
-            this.rJ_Button1.Size = new System.Drawing.Size(126, 67);
-            this.rJ_Button1.State = false;
-            this.rJ_Button1.TabIndex = 42;
-            this.rJ_Button1.Text = "RS485_TEST";
-            this.rJ_Button1.TextColor = System.Drawing.Color.White;
-            this.rJ_Button1.UseVisualStyleBackColor = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1084, 1041);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -262,13 +262,10 @@ bool Set_Beep(byte station)
 }
 void Set_RS485_Rx_Enable()
 {
-    delay(0);
+    delay(2);
     digitalWrite(PIN_485_Tx_Eanble, LOW);
-    delay(0);
 }
 void Set_RS485_Tx_Enable()
 {
-    delay(0);
     digitalWrite(PIN_485_Tx_Eanble, HIGH);
-    delay(0);
 }

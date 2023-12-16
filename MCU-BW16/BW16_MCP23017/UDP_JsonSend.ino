@@ -3,7 +3,7 @@ int cnt_UDP_Send = 65534;
 MyTimer UDP_Send_Timer;
 DynamicJsonDocument doc(1024);
 String JsonOutput = "";
-
+bool flag_udp_send_init = false;
 int RSSI;
 void sub_UDP_Send()
 {
@@ -18,6 +18,7 @@ void sub_UDP_Send()
   }
   if(cnt_UDP_Send == 1)
   {  
+      if(MCU_TYPE == 2) wiFiConfig.uDP_SemdTime = 30000;
       if(wiFiConfig.uDP_SemdTime == 0)
       {
           cnt_UDP_Send = 1;
@@ -32,7 +33,7 @@ void sub_UDP_Send()
   }
   if(cnt_UDP_Send == 2)
   {      
-      if(UDP_Send_Timer.IsTimeOut() || flag_JsonSend)
+      if(UDP_Send_Timer.IsTimeOut() || flag_JsonSend || !flag_udp_send_init)
       {
          doc["IP"] = wiFiConfig.Get_IPAdress_Str();
          if((wiFiConfig.rFID_Enable >> 0) % 2 == 1)doc["CardID_01"] = CardID[0];
@@ -52,6 +53,7 @@ void sub_UDP_Send()
          serializeJson(doc, JsonOutput);
          Send_StringTo(JsonOutput, wiFiConfig.server_IPAdress, wiFiConfig.serverport);
          flag_JsonSend = false;
+         flag_udp_send_init = true;
          cnt_UDP_Send++;
       }
   }
