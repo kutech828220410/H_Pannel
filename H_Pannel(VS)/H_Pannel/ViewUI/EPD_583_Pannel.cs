@@ -379,7 +379,7 @@ namespace H_Pannel_lib
         public void AllLightOn(Color color)
         {
             List<Task> taskList = new List<Task>();
-
+            if (CurrentDrawer == null) return;
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(CurrentDrawer.Port);
             taskList.Add(Task.Run(() =>
             {

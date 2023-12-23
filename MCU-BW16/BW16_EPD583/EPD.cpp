@@ -218,7 +218,7 @@ void EPD::Sleep()
     SPI_Begin();
     SendCommand(0x02); 
     SPI_End();  
-    this -> WaitUntilIdle();
+    //this -> WaitUntilIdle();
     SPI_Begin();
     SendCommand(0x07); 
     SendData(0xA5);
