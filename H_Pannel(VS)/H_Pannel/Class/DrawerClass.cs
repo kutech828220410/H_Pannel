@@ -434,6 +434,21 @@ namespace H_Pannel_lib
         public static int NumOfLED = 450;
         [JsonIgnore]
         public byte[] LED_Bytes = new byte[NumOfLED * 3];
+        public Color[] LED_Colors
+        {
+            get
+            {
+                Color[] colors = new Color[NumOfLED];
+                for(int i = 0; i < colors.Length; i++)
+                {
+                    Color color = new Color();
+                    color = Color.FromArgb(LED_Bytes[i * 3 + 0], LED_Bytes[i * 3 + 1], LED_Bytes[i * 3 + 2]);
+                    if (color.R == 0 && color.G == 0 && color.B == 0) color = Color.Black;
+                    colors[i] = color;
+                }
+                return colors;
+            }
+        }
         private Enum_DrawerType drawerType = Enum_DrawerType._4X8;
         public enum Enum_DrawerType
         {

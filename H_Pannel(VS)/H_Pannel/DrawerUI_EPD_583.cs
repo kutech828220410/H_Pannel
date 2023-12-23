@@ -119,9 +119,9 @@ namespace H_Pannel_lib
         {
             for (int i = 0; i < NumOfLED; i++)
             {
-                drawer.LED_Bytes[i * 3 + 0] = (byte)(color.R * Lightness);
-                drawer.LED_Bytes[i * 3 + 1] = (byte)(color.G * Lightness);
-                drawer.LED_Bytes[i * 3 + 2] = (byte)(color.B * Lightness);
+                drawer.LED_Bytes[i * 3 + 0] = (byte)(color.R );
+                drawer.LED_Bytes[i * 3 + 1] = (byte)(color.G );
+                drawer.LED_Bytes[i * 3 + 2] = (byte)(color.B );
             }
             return drawer.LED_Bytes;
         }
@@ -208,9 +208,9 @@ namespace H_Pannel_lib
             for (int i = NumOfLED_Drawer ; i < NumOfLED ; i++)
             {
                 if (i * 3 > LED_Bytes.Length) return LED_Bytes;
-                LED_Bytes[i * 3 + 0] = (byte)(color.R * Lightness);
-                LED_Bytes[i * 3 + 1] = (byte)(color.G * Lightness);
-                LED_Bytes[i * 3 + 2] = (byte)(color.B * Lightness);
+                LED_Bytes[i * 3 + 0] = (byte)(color.R );
+                LED_Bytes[i * 3 + 1] = (byte)(color.G );
+                LED_Bytes[i * 3 + 2] = (byte)(color.B );
             }
             return LED_Bytes;
         }
@@ -291,7 +291,15 @@ namespace H_Pannel_lib
         {
             if (uDP_Class != null)
             {
-                return Communication.Set_WS2812_Buffer(uDP_Class, IP, 0, LED_Bytes);
+                byte[] LED_Bytes_buf = new byte[LED_Bytes.Length];
+                for (int i = 0; i < (LED_Bytes_buf.Length / 3); i++)
+                {
+                    LED_Bytes_buf[i * 3 + 0] = (byte)(LED_Bytes[i * 3 + 0] * Lightness);
+                    LED_Bytes_buf[i * 3 + 1] = (byte)(LED_Bytes[i * 3 + 1] * Lightness);
+                    LED_Bytes_buf[i * 3 + 2] = (byte)(LED_Bytes[i * 3 + 2] * Lightness);
+                }
+
+                return Communication.Set_WS2812_Buffer(uDP_Class, IP, 0, LED_Bytes_buf);
             }
             return false;
         }
@@ -304,9 +312,9 @@ namespace H_Pannel_lib
             byte[] LED_Bytes = Get_Empty_LEDBytes();
             for (int i = 0; i < NumOfLED; i++)
             {
-                LED_Bytes[i * 3 + 0] = (byte)(color.R * Lightness);
-                LED_Bytes[i * 3 + 1] = (byte)(color.G * Lightness);
-                LED_Bytes[i * 3 + 2] = (byte)(color.B * Lightness);
+                LED_Bytes[i * 3 + 0] = (byte)(color.R );
+                LED_Bytes[i * 3 + 1] = (byte)(color.G );
+                LED_Bytes[i * 3 + 2] = (byte)(color.B );
             }
             return Set_LED_UDP(uDP_Class, IP, LED_Bytes);
         }
@@ -376,9 +384,9 @@ namespace H_Pannel_lib
             for (int i = 0; i < List_Drawer_H_Line_Leds[col].Length; i++)
             {
 
-                LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 0] = (byte)(color.R * Lightness);
-                LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 1] = (byte)(color.G * Lightness);
-                LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 2] = (byte)(color.B * Lightness);
+                LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 0] = (byte)(color.R );
+                LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 1] = (byte)(color.G );
+                LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 2] = (byte)(color.B );
             }
         }
         static public void Set_Drawer_V_Leds(int row, ref byte[] LEDBytes, Color color)
@@ -386,9 +394,9 @@ namespace H_Pannel_lib
             for (int i = 0; i < List_Drawer_V_Line_Leds[row].Length; i++)
             {
 
-                LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 0] = (byte)(color.R * Lightness);
-                LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 1] = (byte)(color.G * Lightness);
-                LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 2] = (byte)(color.B * Lightness);
+                LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 0] = (byte)(color.R );
+                LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 1] = (byte)(color.G );
+                LEDBytes[List_Drawer_V_Line_Leds[row][i] * 3 + 2] = (byte)(color.B );
             }
         }
         static public Rectangle Get_Box_Combine(Drawer drawer, int col , int row)
