@@ -288,10 +288,10 @@ void EPD::Wakeup()
 }
 void EPD::WaitUntilIdle()
 {
-   //delay(50);
-    while(digitalRead(PIN_BUSY) == HIGH) {      //LOW: idle, HIGH: busy
-      delay(10);
-    }
+   delay(50);
+//    while(digitalRead(PIN_BUSY) == HIGH) {      //LOW: idle, HIGH: busy
+//      delay(10);
+//    }
     //delay(50);
 }
 void EPD::Sleep()
