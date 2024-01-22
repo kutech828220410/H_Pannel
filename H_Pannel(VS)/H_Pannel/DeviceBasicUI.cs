@@ -494,7 +494,17 @@ namespace H_Pannel_lib
                 List_UDP_Local.Add(uDP_Class);
             }
         }
-     
+        public void Set_UDP_WriteTime(int ms)
+        {
+            for (int i = 0; i < this.List_UDP_Server.Count; i++)
+            {
+                List_UDP_Server[i].WriteByteTime = ms;
+            }
+            for (int i = 0; i < this.List_UDP_Local.Count; i++)
+            {
+                List_UDP_Local[i].WriteByteTime = ms;
+            }
+        }
 
         public void Init_Offline()
         {
