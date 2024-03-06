@@ -14,6 +14,21 @@ using System.Text.Json.Serialization;
 using Basic;
 namespace H_Pannel_lib
 {
+    public class StockClass
+    {
+
+        [JsonPropertyName("code")]
+        public string Code { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+        [JsonPropertyName("validity_period")]
+        public string Validity_period { get; set; }
+        [JsonPropertyName("lot_number")]
+        public string Lot_number { get; set; }
+        [JsonPropertyName("qty")]
+        public string Qty { get; set; }
+
+    }
     static public class DeviceBasicMethod
     {
         static public void SQL_Init(SQLUI.SQL_DataGridView.ConnentionClass connentionClass, string TableName)
@@ -452,6 +467,32 @@ namespace H_Pannel_lib
         protected List<string> list_Lot_number = new List<string>();
         protected List<string> list_Inventory = new List<string>();
 
+      
+           
+        public List<StockClass> stockClasses
+        {
+            get
+            {
+                List<StockClass> temp = new List<StockClass>();
+                for (int i = 0; i < list_Validity_period.Count; i++)
+                {
+                    StockClass stockClass = new StockClass();
+                    stockClass.Code = this.Code;
+                    stockClass.Validity_period = list_Validity_period[i];
+                    stockClass.Lot_number = list_Lot_number[i];
+                    stockClass.Qty = list_Inventory[i];
+                    temp.Add(stockClass);
+                }
+                return temp;
+            }
+            set
+            {
+
+            }
+        }
+
+        
+     
 
         public void 效期庫存異動(string 效期, int 異動量)
         {
