@@ -77,7 +77,25 @@ namespace H_Pannel_lib
                             select value).ToList();
             return deviceBasics;
         }
+        static public List<DeviceSimple> SQL_GetAllDeviceSimple(SQLUI.SQLControl sQLControl)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
+            List<DeviceSimple> deviceBasics = new List<DeviceSimple>();
+            Parallel.ForEach(deviceBasicTables, value =>
+            {
+                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+                DeviceSimple deviceBasic = jsonString.JsonDeserializet<DeviceSimple>();
+                if (deviceBasic != null)
+                {
+                    deviceBasics.LockAdd(deviceBasic);
+                }
 
+            });
+            deviceBasics = (from value in deviceBasics
+                            where value != null
+                            select value).ToList();
+            return deviceBasics;
+        }
         static public DeviceBasic SQL_GetDeviceBasic(SQLUI.SQL_DataGridView.ConnentionClass connentionClass, string TableName, DeviceBasic deviceBasic)
         {
             return SQL_GetDeviceBasic(connentionClass, TableName, deviceBasic.GUID);
@@ -240,10 +258,10 @@ namespace H_Pannel_lib
         }
     }
     [Serializable]
-    public class DeviceBasic
+    public class DeviceSimple
     {
         public bool flag_replace = false;
-        public string GUID 
+        public string GUID
         {
             get
             {
@@ -255,45 +273,24 @@ namespace H_Pannel_lib
         private string gUID = "";
         public string Master_GUID { get => master_GUID; set => master_GUID = value; }
         private string master_GUID = "";
-
-        public DeviceType DeviceType
+        private string _IP = "";
+        public string IP
         {
-            get => deviceType;
+            get => _IP;
             set
             {
-                if (deviceType != value) flag_replace = true;
-                 deviceType = value;
+                if (_IP != value) flag_replace = true;
+                _IP = value;
             }
         }
-        private DeviceType deviceType = DeviceType.None;
         private string _Code = "";
         public string Code
-        { 
+        {
             get => _Code;
             set
             {
                 if (_Code != value) flag_replace = true;
                 _Code = value;
-            }
-        }
-        private string _Name = "";
-        public string Name
-        { 
-            get => _Name;
-            set
-            {
-                if (_Name != value) flag_replace = true;
-                _Name = value;
-            }
-        }
-        private string _ChineseName = "";
-        public string ChineseName
-        {
-            get => _ChineseName;
-            set
-            {
-                if (_ChineseName != value) flag_replace = true;
-                _ChineseName = value;
             }
         }
         private string _SKDIACODE = "";
@@ -306,6 +303,177 @@ namespace H_Pannel_lib
                 _SKDIACODE = value;
             }
         }
+        private string _Name = "";
+        public string Name
+        {
+            get => _Name;
+            set
+            {
+                if (_Name != value) flag_replace = true;
+                _Name = value;
+            }
+        }
+        public string Inventory
+        {
+            get
+            {
+                return this.取得庫存().ToString();
+            }
+        }
+
+        public List<string> List_Validity_period
+        {
+            get
+            {
+                this.確認效期庫存();
+                return list_Validity_period;
+            }
+            set => list_Validity_period = value;
+        }
+        public List<string> List_Inventory
+        {
+            get
+            {
+                this.確認效期庫存();
+                return list_Inventory;
+            }
+            set => list_Inventory = value;
+        }
+        public List<string> List_Lot_number
+        {
+            get
+            {
+                this.確認效期庫存();
+                return list_Lot_number;
+            }
+            set => list_Lot_number = value;
+        }
+        protected List<string> list_Validity_period = new List<string>();
+        protected List<string> list_Lot_number = new List<string>();
+        protected List<string> list_Inventory = new List<string>();
+
+        public void 確認效期庫存()
+        {
+            this.確認效期庫存(false);
+        }
+        public void 確認效期庫存(bool ClearAll)
+        {
+            List<string> 效期_temp = new List<string>();
+            List<string> 庫存_temp = new List<string>();
+            List<string> 批號_temp = new List<string>();
+            if (this.list_Validity_period == null) this.list_Validity_period = new List<string>();
+            if (this.list_Inventory == null) this.list_Inventory = new List<string>();
+            if (this.list_Lot_number == null) this.list_Lot_number = new List<string>();
+
+            while (true)
+            {
+                bool flag_break = true;
+                if (this.list_Validity_period.Count > this.list_Inventory.Count)
+                {
+                    this.list_Inventory.Add("0");
+                    flag_break = false;
+                }
+                if (this.list_Validity_period.Count > this.list_Lot_number.Count)
+                {
+                    this.list_Lot_number.Add("None");
+                    flag_break = false;
+                }
+                if (flag_break) break;
+            }
+
+            int 庫存 = 0;
+            for (int i = 0; i < this.list_Validity_period.Count; i++)
+            {
+                庫存 = this.list_Inventory[i].StringToInt32();
+                if (庫存 > 0 || (this.list_Inventory[i] == "00" && !ClearAll))
+                {
+                    效期_temp.Add(this.list_Validity_period[i].ToDateString("/"));
+                    批號_temp.Add(this.list_Lot_number[i]);
+                    庫存_temp.Add(this.list_Inventory[i]);
+                }
+            }
+
+
+            this.list_Validity_period = 效期_temp;
+            this.list_Lot_number = 批號_temp;
+            this.list_Inventory = 庫存_temp;
+
+            List<object[]> list_value = new List<object[]>();
+            for (int i = 0; i < this.list_Validity_period.Count; i++)
+            {
+                list_value.Add(new object[] { list_Validity_period[i], list_Lot_number[i], list_Inventory[i] });
+            }
+            list_value.Sort(new DateComparerby());
+            效期_temp.Clear();
+            批號_temp.Clear();
+            庫存_temp.Clear();
+            for (int i = 0; i < list_value.Count; i++)
+            {
+                效期_temp.Add(list_value[i][0].ObjectToString());
+                批號_temp.Add(list_value[i][1].ObjectToString());
+                庫存_temp.Add(list_value[i][2].ObjectToString());
+            }
+            this.list_Validity_period = 效期_temp;
+            this.list_Lot_number = 批號_temp;
+            this.list_Inventory = 庫存_temp;
+
+        }
+        public int 取得庫存(string 效期)
+        {
+            if (!效期.Check_Date_String()) return -1;
+            if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
+            if (this.List_Inventory == null) this.List_Inventory = new List<string>();
+            if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
+            for (int i = 0; i < this.List_Validity_period.Count; i++)
+            {
+                if (this.List_Validity_period[i].ToDateString("/") == 效期.ToDateString("/"))
+                {
+                    return this.List_Inventory[i].StringToInt32();
+                }
+            }
+            return -1;
+        }
+        public int 取得庫存()
+        {
+            int 庫存 = 0;
+            int temp = 0;
+            if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
+            if (this.List_Inventory == null) this.List_Inventory = new List<string>();
+            if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
+            for (int i = 0; i < this.List_Validity_period.Count; i++)
+            {
+                temp = this.取得庫存(this.List_Validity_period[i]);
+                if (temp > 0) 庫存 += temp;
+            }
+            return 庫存;
+        }
+    }
+    [Serializable]
+    public class DeviceBasic : DeviceSimple
+    {
+
+        public DeviceType DeviceType
+        {
+            get => deviceType;
+            set
+            {
+                if (deviceType != value) flag_replace = true;
+                 deviceType = value;
+            }
+        }
+        private DeviceType deviceType = DeviceType.None;
+
+        private string _ChineseName = "";
+        public string ChineseName
+        {
+            get => _ChineseName;
+            set
+            {
+                if (_ChineseName != value) flag_replace = true;
+                _ChineseName = value;
+            }
+        }
+
         private string _BarCode = "";
         public string BarCode
         {
@@ -382,16 +550,7 @@ namespace H_Pannel_lib
                 _StorageName = value;
             }
         }
-        private string _IP = "";
-        public string IP
-        {
-            get => _IP;
-            set
-            {
-                if (_IP != value) flag_replace = true;
-                _IP = value;
-            }
-        }
+ 
         private bool _isWarning = false;
         public bool IsWarning
         {
@@ -423,52 +582,18 @@ namespace H_Pannel_lib
             }
         }
 
-        public string Inventory
-        {
-            get
-            {
-                return this.取得庫存().ToString();
-            }
-        }
-        public List<string> List_Validity_period
-        {
-            get
-            {
-                this.確認效期庫存();
-                return list_Validity_period;
-            }
-            set => list_Validity_period = value;
-        }
-        public List<string> List_Inventory
-        {
-            get
-            {
-                this.確認效期庫存();
-                return list_Inventory;
-            }
-            set => list_Inventory = value;
-        }
-        public List<string> List_Lot_number
-        {
-            get
-            {
-                this.確認效期庫存();
-                return list_Lot_number;
-            }
-            set => list_Lot_number = value;
-        }
+
+   
 
       
 
         private string speaker = "";
         public string Speaker { get => speaker; set => speaker = value; }
 
-        protected List<string> list_Validity_period = new List<string>();
-        protected List<string> list_Lot_number = new List<string>();
-        protected List<string> list_Inventory = new List<string>();
+
 
       
-           
+        [JsonIgnore]   
         public List<StockClass> stockClasses
         {
             get
@@ -592,72 +717,7 @@ namespace H_Pannel_lib
             this.list_Inventory.Add(異動量);
             this.確認效期庫存();
         }
-        public void 確認效期庫存()
-        {
-            this.確認效期庫存(false);
-        }
-        public void 確認效期庫存(bool ClearAll)
-        {
-            List<string> 效期_temp = new List<string>();
-            List<string> 庫存_temp = new List<string>();
-            List<string> 批號_temp = new List<string>();
-            if (this.list_Validity_period == null) this.list_Validity_period = new List<string>();
-            if (this.list_Inventory == null) this.list_Inventory = new List<string>();
-            if (this.list_Lot_number == null) this.list_Lot_number = new List<string>();
 
-            while (true)
-            {
-                bool flag_break = true;
-                if (this.list_Validity_period.Count > this.list_Inventory.Count)
-                {
-                    this.list_Inventory.Add("0");
-                    flag_break = false;
-                }
-                if (this.list_Validity_period.Count > this.list_Lot_number.Count)
-                {
-                    this.list_Lot_number.Add("None");
-                    flag_break = false;
-                }
-                if (flag_break) break;
-            }
-
-            int 庫存 = 0;
-            for (int i = 0; i < this.list_Validity_period.Count; i++)
-            {
-                庫存 = this.list_Inventory[i].StringToInt32();
-                if (庫存 > 0 || (this.list_Inventory[i] == "00" && !ClearAll))
-                {
-                    效期_temp.Add(this.list_Validity_period[i].ToDateString("/"));
-                    批號_temp.Add(this.list_Lot_number[i]);
-                    庫存_temp.Add(this.list_Inventory[i]);
-                }
-            }
-
-
-            this.list_Validity_period = 效期_temp;
-            this.list_Lot_number = 批號_temp;
-            this.list_Inventory = 庫存_temp;
-
-            List<object[]> list_value = new List<object[]>();
-            for (int i = 0; i < this.list_Validity_period.Count; i++)
-            {
-                list_value.Add(new object[] { list_Validity_period[i], list_Lot_number[i], list_Inventory[i] });
-            }
-            list_value.Sort(new DateComparerby());
-            效期_temp.Clear();
-            批號_temp.Clear();
-            庫存_temp.Clear();
-            for (int i = 0; i < list_value.Count; i++)
-            {
-                效期_temp.Add(list_value[i][0].ObjectToString());
-                批號_temp.Add(list_value[i][1].ObjectToString());
-                庫存_temp.Add(list_value[i][2].ObjectToString());
-            }
-            this.list_Validity_period = 效期_temp;
-            this.list_Lot_number = 批號_temp;
-            this.list_Inventory = 庫存_temp;
-
-        }
         public void 新增效期(string 效期, string 庫存)
         {
             this.新增效期(效期, 效期, 庫存);
@@ -768,21 +828,7 @@ namespace H_Pannel_lib
 
 
         }
-        public int 取得庫存(string 效期)
-        {
-            if (!效期.Check_Date_String()) return -1;
-            if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
-            if (this.List_Inventory == null) this.List_Inventory = new List<string>();
-            if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
-            for (int i = 0; i < this.List_Validity_period.Count; i++)
-            {
-                if (this.List_Validity_period[i].ToDateString("/") == 效期.ToDateString("/"))
-                {
-                    return this.List_Inventory[i].StringToInt32();
-                }
-            }
-            return -1;
-        }
+     
         public string 取得批號(string 效期)
         {
             if (!效期.Check_Date_String()) return "";
@@ -813,20 +859,7 @@ namespace H_Pannel_lib
             }
             return;
         }
-        public int 取得庫存()
-        {
-            int 庫存 = 0;
-            int temp = 0;
-            if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
-            if (this.List_Inventory == null) this.List_Inventory = new List<string>();
-            if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
-            for (int i = 0; i < this.List_Validity_period.Count; i++)
-            {
-                temp = this.取得庫存(this.List_Validity_period[i]);
-                if (temp > 0) 庫存 += temp;
-            }
-            return 庫存;
-        }
+  
         public void 清除所有庫存資料()
         {
             list_Validity_period.Clear();
