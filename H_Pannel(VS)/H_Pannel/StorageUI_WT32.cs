@@ -231,8 +231,12 @@ namespace H_Pannel_lib
             Enum_ContextMenuStrip_UDP_DataReceive = new ContextMenuStrip_Main();
         }
 
-     
 
+        public override void Init()
+        {
+            base.Init();
+            this.Set_UDP_WriteTime(10);
+        }
         protected override void SQL_AddDevice(string IP, int Port)
         {
             List<object[]> list_SQL_Value = this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(false);

@@ -437,7 +437,7 @@ namespace H_Pannel_lib
             this.mySqlSslMode = SSLMode;
             this.Init();
         }
-        public void Init()
+        virtual public void Init()
         {
             Communication.ConsoleWrite = ConsoleWrite;
             this.stopwatch.Start();

@@ -51,6 +51,7 @@
             this.rJ_Lable8 = new MyUI.RJ_Lable();
             this.panel_圖形編輯_面板背景顏色 = new System.Windows.Forms.Panel();
             this.rJ_Pannel1 = new MyUI.RJ_Pannel();
+            this.rJ_Button_SAVE = new MyUI.RJ_Button();
             this.comboBox_圖形編輯_邊框大小 = new System.Windows.Forms.ComboBox();
             this.rJ_Lable11 = new MyUI.RJ_Lable();
             this.rJ_Lable10 = new MyUI.RJ_Lable();
@@ -87,7 +88,6 @@
             this.rJ_Button_複製格式_高度 = new MyUI.RJ_Button();
             this.rJ_Button_複製格式_寬度 = new MyUI.RJ_Button();
             this.saveFileDialog_jpg = new System.Windows.Forms.SaveFileDialog();
-            this.rJ_Button_SAVE = new MyUI.RJ_Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.rJ_GroupBox2.ContentsPanel.SuspendLayout();
@@ -168,13 +168,17 @@
             // ContentsPanel
             // 
             this.ContentsPanel.BackColor = System.Drawing.Color.White;
+            this.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
             this.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.ContentsPanel.BorderRadius = 5;
             this.ContentsPanel.BorderSize = 0;
             this.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ContentsPanel.ForeColor = System.Drawing.Color.White;
+            this.ContentsPanel.IsSelected = false;
             this.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.ContentsPanel.Name = "ContentsPanel";
+            this.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.ContentsPanel.ShadowSize = 0;
             this.ContentsPanel.Size = new System.Drawing.Size(691, 283);
             this.ContentsPanel.TabIndex = 2;
             // 
@@ -190,15 +194,18 @@
             // 
             // rJ_Lable1
             // 
-            this.rJ_Lable1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_Lable1.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable1.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable1.BorderRadius = 5;
             this.rJ_Lable1.BorderSize = 0;
             this.rJ_Lable1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable1.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable1.GUID = "";
             this.rJ_Lable1.Location = new System.Drawing.Point(16, 17);
             this.rJ_Lable1.Name = "rJ_Lable1";
+            this.rJ_Lable1.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable1.ShadowSize = 0;
             this.rJ_Lable1.Size = new System.Drawing.Size(150, 40);
             this.rJ_Lable1.TabIndex = 1;
             this.rJ_Lable1.Text = "編輯內容名稱";
@@ -207,16 +214,19 @@
             // 
             // rJ_Lable2
             // 
-            this.rJ_Lable2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_Lable2.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable2.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable2.BorderRadius = 5;
             this.rJ_Lable2.BorderSize = 0;
             this.rJ_Lable2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable2.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable2.GUID = "";
             this.rJ_Lable2.Location = new System.Drawing.Point(18, 15);
             this.rJ_Lable2.Margin = new System.Windows.Forms.Padding(3);
             this.rJ_Lable2.Name = "rJ_Lable2";
+            this.rJ_Lable2.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable2.ShadowSize = 0;
             this.rJ_Lable2.Size = new System.Drawing.Size(90, 40);
             this.rJ_Lable2.TabIndex = 2;
             this.rJ_Lable2.Text = "內容";
@@ -233,6 +243,7 @@
             this.rJ_TextBox_圖形編輯_內容.Enabled = false;
             this.rJ_TextBox_圖形編輯_內容.Font = new System.Drawing.Font("微軟正黑體", 10F);
             this.rJ_TextBox_圖形編輯_內容.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_圖形編輯_內容.GUID = "";
             this.rJ_TextBox_圖形編輯_內容.Location = new System.Drawing.Point(114, 19);
             this.rJ_TextBox_圖形編輯_內容.Multiline = false;
             this.rJ_TextBox_圖形編輯_內容.Name = "rJ_TextBox_圖形編輯_內容";
@@ -249,16 +260,19 @@
             // 
             // rJ_Lable3
             // 
-            this.rJ_Lable3.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable3.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_Lable3.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable3.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable3.BorderRadius = 5;
             this.rJ_Lable3.BorderSize = 0;
             this.rJ_Lable3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable3.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable3.GUID = "";
             this.rJ_Lable3.Location = new System.Drawing.Point(18, 61);
             this.rJ_Lable3.Margin = new System.Windows.Forms.Padding(3);
             this.rJ_Lable3.Name = "rJ_Lable3";
+            this.rJ_Lable3.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable3.ShadowSize = 0;
             this.rJ_Lable3.Size = new System.Drawing.Size(90, 40);
             this.rJ_Lable3.TabIndex = 4;
             this.rJ_Lable3.Text = "字體顏色";
@@ -276,16 +290,19 @@
             // 
             // rJ_Lable4
             // 
-            this.rJ_Lable4.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable4.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_Lable4.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable4.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable4.BorderRadius = 5;
             this.rJ_Lable4.BorderSize = 0;
             this.rJ_Lable4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable4.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable4.GUID = "";
             this.rJ_Lable4.Location = new System.Drawing.Point(172, 61);
             this.rJ_Lable4.Margin = new System.Windows.Forms.Padding(3);
             this.rJ_Lable4.Name = "rJ_Lable4";
+            this.rJ_Lable4.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable4.ShadowSize = 0;
             this.rJ_Lable4.Size = new System.Drawing.Size(90, 40);
             this.rJ_Lable4.TabIndex = 6;
             this.rJ_Lable4.Text = "背景顏色";
@@ -303,16 +320,19 @@
             // 
             // rJ_Lable5
             // 
-            this.rJ_Lable5.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable5.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_Lable5.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable5.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable5.BorderRadius = 5;
             this.rJ_Lable5.BorderSize = 0;
             this.rJ_Lable5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable5.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable5.GUID = "";
             this.rJ_Lable5.Location = new System.Drawing.Point(18, 107);
             this.rJ_Lable5.Margin = new System.Windows.Forms.Padding(3);
             this.rJ_Lable5.Name = "rJ_Lable5";
+            this.rJ_Lable5.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable5.ShadowSize = 0;
             this.rJ_Lable5.Size = new System.Drawing.Size(90, 40);
             this.rJ_Lable5.TabIndex = 8;
             this.rJ_Lable5.Text = "字體";
@@ -329,6 +349,7 @@
             this.rJ_TextBox_圖形編輯_字體.Enabled = false;
             this.rJ_TextBox_圖形編輯_字體.Font = new System.Drawing.Font("微軟正黑體", 10F);
             this.rJ_TextBox_圖形編輯_字體.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_圖形編輯_字體.GUID = "";
             this.rJ_TextBox_圖形編輯_字體.Location = new System.Drawing.Point(116, 119);
             this.rJ_TextBox_圖形編輯_字體.Multiline = false;
             this.rJ_TextBox_圖形編輯_字體.Name = "rJ_TextBox_圖形編輯_字體";
@@ -360,7 +381,8 @@
             // 
             // rJ_GroupBox2.ContentsPanel
             // 
-            this.rJ_GroupBox2.ContentsPanel.BackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox2.ContentsPanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.rJ_GroupBox2.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
             this.rJ_GroupBox2.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox2.ContentsPanel.BorderRadius = 5;
             this.rJ_GroupBox2.ContentsPanel.BorderSize = 0;
@@ -372,21 +394,25 @@
             this.rJ_GroupBox2.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rJ_GroupBox2.ContentsPanel.Font = new System.Drawing.Font("Bell MT", 8.25F);
             this.rJ_GroupBox2.ContentsPanel.ForeColor = System.Drawing.Color.White;
+            this.rJ_GroupBox2.ContentsPanel.IsSelected = false;
             this.rJ_GroupBox2.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox2.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox2.ContentsPanel.Padding = new System.Windows.Forms.Padding(3);
+            this.rJ_GroupBox2.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_GroupBox2.ContentsPanel.ShadowSize = 0;
             this.rJ_GroupBox2.ContentsPanel.Size = new System.Drawing.Size(651, 281);
             this.rJ_GroupBox2.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rJ_GroupBox2.GUID = "";
             this.rJ_GroupBox2.Location = new System.Drawing.Point(397, 640);
             this.rJ_GroupBox2.Name = "rJ_GroupBox2";
-            this.rJ_GroupBox2.PannelBackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox2.PannelBackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_GroupBox2.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox2.PannelBorderRadius = 5;
             this.rJ_GroupBox2.PannelBorderSize = 0;
             this.rJ_GroupBox2.Size = new System.Drawing.Size(651, 318);
             this.rJ_GroupBox2.TabIndex = 32;
-            this.rJ_GroupBox2.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.rJ_GroupBox2.TitleBackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_GroupBox2.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_GroupBox2.TitleBorderRadius = 5;
             this.rJ_GroupBox2.TitleBorderSize = 0;
@@ -398,16 +424,19 @@
             // 
             // rJ_Lable8
             // 
-            this.rJ_Lable8.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable8.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_Lable8.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable8.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable8.BorderRadius = 5;
             this.rJ_Lable8.BorderSize = 0;
             this.rJ_Lable8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable8.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable8.GUID = "";
             this.rJ_Lable8.Location = new System.Drawing.Point(403, 17);
             this.rJ_Lable8.Margin = new System.Windows.Forms.Padding(3);
             this.rJ_Lable8.Name = "rJ_Lable8";
+            this.rJ_Lable8.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable8.ShadowSize = 0;
             this.rJ_Lable8.Size = new System.Drawing.Size(110, 40);
             this.rJ_Lable8.TabIndex = 14;
             this.rJ_Lable8.Text = "面板背景顏色";
@@ -425,7 +454,8 @@
             // 
             // rJ_Pannel1
             // 
-            this.rJ_Pannel1.BackColor = System.Drawing.Color.White;
+            this.rJ_Pannel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.rJ_Pannel1.BackgroundColor = System.Drawing.Color.Transparent;
             this.rJ_Pannel1.BorderColor = System.Drawing.Color.DeepSkyBlue;
             this.rJ_Pannel1.BorderRadius = 10;
             this.rJ_Pannel1.BorderSize = 2;
@@ -455,10 +485,41 @@
             this.rJ_Pannel1.Controls.Add(this.panel_圖形編輯_背景顏色);
             this.rJ_Pannel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.rJ_Pannel1.ForeColor = System.Drawing.Color.White;
+            this.rJ_Pannel1.IsSelected = false;
             this.rJ_Pannel1.Location = new System.Drawing.Point(3, 69);
             this.rJ_Pannel1.Name = "rJ_Pannel1";
+            this.rJ_Pannel1.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Pannel1.ShadowSize = 0;
             this.rJ_Pannel1.Size = new System.Drawing.Size(645, 209);
             this.rJ_Pannel1.TabIndex = 13;
+            // 
+            // rJ_Button_SAVE
+            // 
+            this.rJ_Button_SAVE.AutoResetState = false;
+            this.rJ_Button_SAVE.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.rJ_Button_SAVE.BackgroundColor = System.Drawing.Color.CornflowerBlue;
+            this.rJ_Button_SAVE.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_SAVE.BorderRadius = 5;
+            this.rJ_Button_SAVE.BorderSize = 0;
+            this.rJ_Button_SAVE.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_SAVE.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_SAVE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_SAVE.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_SAVE.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_SAVE.GUID = "";
+            this.rJ_Button_SAVE.Location = new System.Drawing.Point(556, 153);
+            this.rJ_Button_SAVE.Margin = new System.Windows.Forms.Padding(2);
+            this.rJ_Button_SAVE.Name = "rJ_Button_SAVE";
+            this.rJ_Button_SAVE.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_SAVE.ShadowSize = 0;
+            this.rJ_Button_SAVE.ShowLoadingForm = false;
+            this.rJ_Button_SAVE.Size = new System.Drawing.Size(77, 46);
+            this.rJ_Button_SAVE.State = false;
+            this.rJ_Button_SAVE.TabIndex = 34;
+            this.rJ_Button_SAVE.Text = "SAVE";
+            this.rJ_Button_SAVE.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_SAVE.UseVisualStyleBackColor = false;
+            this.rJ_Button_SAVE.Click += new System.EventHandler(this.rJ_Button_SAVE_Click);
             // 
             // comboBox_圖形編輯_邊框大小
             // 
@@ -487,16 +548,19 @@
             // 
             // rJ_Lable11
             // 
-            this.rJ_Lable11.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable11.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_Lable11.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable11.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable11.BorderRadius = 5;
             this.rJ_Lable11.BorderSize = 0;
             this.rJ_Lable11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable11.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable11.GUID = "";
             this.rJ_Lable11.Location = new System.Drawing.Point(480, 15);
             this.rJ_Lable11.Margin = new System.Windows.Forms.Padding(3);
             this.rJ_Lable11.Name = "rJ_Lable11";
+            this.rJ_Lable11.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable11.ShadowSize = 0;
             this.rJ_Lable11.Size = new System.Drawing.Size(90, 40);
             this.rJ_Lable11.TabIndex = 24;
             this.rJ_Lable11.Text = "邊框大小";
@@ -505,16 +569,19 @@
             // 
             // rJ_Lable10
             // 
-            this.rJ_Lable10.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable10.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_Lable10.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable10.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable10.BorderRadius = 5;
             this.rJ_Lable10.BorderSize = 0;
             this.rJ_Lable10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable10.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable10.GUID = "";
             this.rJ_Lable10.Location = new System.Drawing.Point(326, 15);
             this.rJ_Lable10.Margin = new System.Windows.Forms.Padding(3);
             this.rJ_Lable10.Name = "rJ_Lable10";
+            this.rJ_Lable10.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable10.ShadowSize = 0;
             this.rJ_Lable10.Size = new System.Drawing.Size(90, 40);
             this.rJ_Lable10.TabIndex = 22;
             this.rJ_Lable10.Text = "邊框顏色";
@@ -543,16 +610,19 @@
             // 
             // rJ_Lable9
             // 
-            this.rJ_Lable9.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable9.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_Lable9.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable9.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable9.BorderRadius = 5;
             this.rJ_Lable9.BorderSize = 0;
             this.rJ_Lable9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable9.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable9.GUID = "";
             this.rJ_Lable9.Location = new System.Drawing.Point(433, 61);
             this.rJ_Lable9.Margin = new System.Windows.Forms.Padding(3);
             this.rJ_Lable9.Name = "rJ_Lable9";
+            this.rJ_Lable9.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable9.ShadowSize = 0;
             this.rJ_Lable9.Size = new System.Drawing.Size(90, 40);
             this.rJ_Lable9.TabIndex = 20;
             this.rJ_Lable9.Text = "對齊方式";
@@ -592,6 +662,7 @@
             this.rJ_TextBox_圖形編輯_Y位置.Enabled = false;
             this.rJ_TextBox_圖形編輯_Y位置.Font = new System.Drawing.Font("微軟正黑體", 10F);
             this.rJ_TextBox_圖形編輯_Y位置.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_圖形編輯_Y位置.GUID = "";
             this.rJ_TextBox_圖形編輯_Y位置.Location = new System.Drawing.Point(394, 158);
             this.rJ_TextBox_圖形編輯_Y位置.Multiline = false;
             this.rJ_TextBox_圖形編輯_Y位置.Name = "rJ_TextBox_圖形編輯_Y位置";
@@ -627,6 +698,7 @@
             this.rJ_TextBox_圖形編輯_X位置.Enabled = false;
             this.rJ_TextBox_圖形編輯_X位置.Font = new System.Drawing.Font("微軟正黑體", 10F);
             this.rJ_TextBox_圖形編輯_X位置.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_圖形編輯_X位置.GUID = "";
             this.rJ_TextBox_圖形編輯_X位置.Location = new System.Drawing.Point(311, 158);
             this.rJ_TextBox_圖形編輯_X位置.Multiline = false;
             this.rJ_TextBox_圖形編輯_X位置.Name = "rJ_TextBox_圖形編輯_X位置";
@@ -643,16 +715,19 @@
             // 
             // rJ_Lable7
             // 
-            this.rJ_Lable7.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable7.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_Lable7.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable7.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable7.BorderRadius = 5;
             this.rJ_Lable7.BorderSize = 0;
             this.rJ_Lable7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable7.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable7.GUID = "";
             this.rJ_Lable7.Location = new System.Drawing.Point(186, 153);
             this.rJ_Lable7.Margin = new System.Windows.Forms.Padding(3);
             this.rJ_Lable7.Name = "rJ_Lable7";
+            this.rJ_Lable7.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable7.ShadowSize = 0;
             this.rJ_Lable7.Size = new System.Drawing.Size(90, 40);
             this.rJ_Lable7.TabIndex = 13;
             this.rJ_Lable7.Text = "位置";
@@ -661,6 +736,7 @@
             // 
             // rJ_TextBox_圖形編輯_顯示
             // 
+            this.rJ_TextBox_圖形編輯_顯示.GUID = "";
             this.rJ_TextBox_圖形編輯_顯示.Location = new System.Drawing.Point(116, 158);
             this.rJ_TextBox_圖形編輯_顯示.MinimumSize = new System.Drawing.Size(45, 22);
             this.rJ_TextBox_圖形編輯_顯示.Name = "rJ_TextBox_圖形編輯_顯示";
@@ -676,16 +752,19 @@
             // 
             // rJ_Lable6
             // 
-            this.rJ_Lable6.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable6.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_Lable6.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable6.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable6.BorderRadius = 5;
             this.rJ_Lable6.BorderSize = 0;
             this.rJ_Lable6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable6.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable6.GUID = "";
             this.rJ_Lable6.Location = new System.Drawing.Point(18, 153);
             this.rJ_Lable6.Margin = new System.Windows.Forms.Padding(3);
             this.rJ_Lable6.Name = "rJ_Lable6";
+            this.rJ_Lable6.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable6.ShadowSize = 0;
             this.rJ_Lable6.Size = new System.Drawing.Size(90, 40);
             this.rJ_Lable6.TabIndex = 11;
             this.rJ_Lable6.Text = "顯示";
@@ -706,7 +785,8 @@
             // 
             // rJ_GroupBox3.ContentsPanel
             // 
-            this.rJ_GroupBox3.ContentsPanel.BackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox3.ContentsPanel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.rJ_GroupBox3.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
             this.rJ_GroupBox3.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox3.ContentsPanel.BorderRadius = 5;
             this.rJ_GroupBox3.ContentsPanel.BorderSize = 0;
@@ -729,20 +809,24 @@
             this.rJ_GroupBox3.ContentsPanel.Controls.Add(this.rJ_Button_複製格式_寬度);
             this.rJ_GroupBox3.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rJ_GroupBox3.ContentsPanel.ForeColor = System.Drawing.Color.White;
+            this.rJ_GroupBox3.ContentsPanel.IsSelected = false;
             this.rJ_GroupBox3.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox3.ContentsPanel.Name = "ContentsPanel";
+            this.rJ_GroupBox3.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_GroupBox3.ContentsPanel.ShadowSize = 0;
             this.rJ_GroupBox3.ContentsPanel.Size = new System.Drawing.Size(397, 281);
             this.rJ_GroupBox3.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rJ_GroupBox3.GUID = "";
             this.rJ_GroupBox3.Location = new System.Drawing.Point(0, 0);
             this.rJ_GroupBox3.Name = "rJ_GroupBox3";
-            this.rJ_GroupBox3.PannelBackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox3.PannelBackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_GroupBox3.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox3.PannelBorderRadius = 5;
             this.rJ_GroupBox3.PannelBorderSize = 0;
             this.rJ_GroupBox3.Size = new System.Drawing.Size(397, 318);
             this.rJ_GroupBox3.TabIndex = 32;
-            this.rJ_GroupBox3.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.rJ_GroupBox3.TitleBackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.rJ_GroupBox3.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_GroupBox3.TitleBorderRadius = 5;
             this.rJ_GroupBox3.TitleBorderSize = 0;
@@ -765,13 +849,17 @@
             this.rJ_Button_複製格式_垂直間距等距分配.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_垂直間距等距分配.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_垂直間距等距分配.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_垂直間距等距分配.GUID = "";
             this.rJ_Button_複製格式_垂直間距等距分配.Location = new System.Drawing.Point(298, 202);
             this.rJ_Button_複製格式_垂直間距等距分配.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_垂直間距等距分配.Name = "rJ_Button_複製格式_垂直間距等距分配";
+            this.rJ_Button_複製格式_垂直間距等距分配.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_垂直間距等距分配.ShadowSize = 0;
+            this.rJ_Button_複製格式_垂直間距等距分配.ShowLoadingForm = false;
             this.rJ_Button_複製格式_垂直間距等距分配.Size = new System.Drawing.Size(94, 60);
             this.rJ_Button_複製格式_垂直間距等距分配.State = false;
             this.rJ_Button_複製格式_垂直間距等距分配.TabIndex = 33;
-            this.rJ_Button_複製格式_垂直間距等距分配.Text = "垂直間距等距分配";
+            this.rJ_Button_複製格式_垂直間距等距分配.Text = "垂直間距\r\n等距分配";
             this.rJ_Button_複製格式_垂直間距等距分配.TextColor = System.Drawing.Color.White;
             this.rJ_Button_複製格式_垂直間距等距分配.UseVisualStyleBackColor = false;
             // 
@@ -788,13 +876,17 @@
             this.rJ_Button_複製格式_水平間距等距分配.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_水平間距等距分配.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_水平間距等距分配.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_水平間距等距分配.GUID = "";
             this.rJ_Button_複製格式_水平間距等距分配.Location = new System.Drawing.Point(201, 202);
             this.rJ_Button_複製格式_水平間距等距分配.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_水平間距等距分配.Name = "rJ_Button_複製格式_水平間距等距分配";
+            this.rJ_Button_複製格式_水平間距等距分配.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_水平間距等距分配.ShadowSize = 0;
+            this.rJ_Button_複製格式_水平間距等距分配.ShowLoadingForm = false;
             this.rJ_Button_複製格式_水平間距等距分配.Size = new System.Drawing.Size(94, 60);
             this.rJ_Button_複製格式_水平間距等距分配.State = false;
             this.rJ_Button_複製格式_水平間距等距分配.TabIndex = 32;
-            this.rJ_Button_複製格式_水平間距等距分配.Text = "水平間距等距分配";
+            this.rJ_Button_複製格式_水平間距等距分配.Text = "水平間距\r\n等距分配";
             this.rJ_Button_複製格式_水平間距等距分配.TextColor = System.Drawing.Color.White;
             this.rJ_Button_複製格式_水平間距等距分配.UseVisualStyleBackColor = false;
             // 
@@ -811,13 +903,17 @@
             this.rJ_Button_複製格式_水平間距平均分配.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_水平間距平均分配.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_水平間距平均分配.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_水平間距平均分配.GUID = "";
             this.rJ_Button_複製格式_水平間距平均分配.Location = new System.Drawing.Point(103, 202);
             this.rJ_Button_複製格式_水平間距平均分配.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_水平間距平均分配.Name = "rJ_Button_複製格式_水平間距平均分配";
+            this.rJ_Button_複製格式_水平間距平均分配.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_水平間距平均分配.ShadowSize = 0;
+            this.rJ_Button_複製格式_水平間距平均分配.ShowLoadingForm = false;
             this.rJ_Button_複製格式_水平間距平均分配.Size = new System.Drawing.Size(94, 60);
             this.rJ_Button_複製格式_水平間距平均分配.State = false;
             this.rJ_Button_複製格式_水平間距平均分配.TabIndex = 31;
-            this.rJ_Button_複製格式_水平間距平均分配.Text = "水平間距平均分配";
+            this.rJ_Button_複製格式_水平間距平均分配.Text = "水平間距\r\n平均分配";
             this.rJ_Button_複製格式_水平間距平均分配.TextColor = System.Drawing.Color.White;
             this.rJ_Button_複製格式_水平間距平均分配.UseVisualStyleBackColor = false;
             // 
@@ -834,13 +930,17 @@
             this.rJ_Button_複製格式_垂直間距平均分配.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_垂直間距平均分配.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_垂直間距平均分配.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_垂直間距平均分配.GUID = "";
             this.rJ_Button_複製格式_垂直間距平均分配.Location = new System.Drawing.Point(5, 202);
             this.rJ_Button_複製格式_垂直間距平均分配.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_垂直間距平均分配.Name = "rJ_Button_複製格式_垂直間距平均分配";
+            this.rJ_Button_複製格式_垂直間距平均分配.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_垂直間距平均分配.ShadowSize = 0;
+            this.rJ_Button_複製格式_垂直間距平均分配.ShowLoadingForm = false;
             this.rJ_Button_複製格式_垂直間距平均分配.Size = new System.Drawing.Size(94, 60);
             this.rJ_Button_複製格式_垂直間距平均分配.State = false;
             this.rJ_Button_複製格式_垂直間距平均分配.TabIndex = 30;
-            this.rJ_Button_複製格式_垂直間距平均分配.Text = "垂直間距平均分配";
+            this.rJ_Button_複製格式_垂直間距平均分配.Text = "垂直間距\r\n平均分配";
             this.rJ_Button_複製格式_垂直間距平均分配.TextColor = System.Drawing.Color.White;
             this.rJ_Button_複製格式_垂直間距平均分配.UseVisualStyleBackColor = false;
             // 
@@ -857,9 +957,13 @@
             this.rJ_Button_複製格式_字體背景顏色.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_字體背景顏色.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_字體背景顏色.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_字體背景顏色.GUID = "";
             this.rJ_Button_複製格式_字體背景顏色.Location = new System.Drawing.Point(201, 145);
             this.rJ_Button_複製格式_字體背景顏色.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_字體背景顏色.Name = "rJ_Button_複製格式_字體背景顏色";
+            this.rJ_Button_複製格式_字體背景顏色.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_字體背景顏色.ShadowSize = 0;
+            this.rJ_Button_複製格式_字體背景顏色.ShowLoadingForm = false;
             this.rJ_Button_複製格式_字體背景顏色.Size = new System.Drawing.Size(121, 40);
             this.rJ_Button_複製格式_字體背景顏色.State = false;
             this.rJ_Button_複製格式_字體背景顏色.TabIndex = 29;
@@ -880,9 +984,13 @@
             this.rJ_Button_複製格式_字體顏色.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_字體顏色.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_字體顏色.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_字體顏色.GUID = "";
             this.rJ_Button_複製格式_字體顏色.Location = new System.Drawing.Point(103, 145);
             this.rJ_Button_複製格式_字體顏色.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_字體顏色.Name = "rJ_Button_複製格式_字體顏色";
+            this.rJ_Button_複製格式_字體顏色.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_字體顏色.ShadowSize = 0;
+            this.rJ_Button_複製格式_字體顏色.ShowLoadingForm = false;
             this.rJ_Button_複製格式_字體顏色.Size = new System.Drawing.Size(94, 40);
             this.rJ_Button_複製格式_字體顏色.State = false;
             this.rJ_Button_複製格式_字體顏色.TabIndex = 28;
@@ -903,9 +1011,13 @@
             this.rJ_Button_複製格式_字體.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_字體.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_字體.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_字體.GUID = "";
             this.rJ_Button_複製格式_字體.Location = new System.Drawing.Point(5, 145);
             this.rJ_Button_複製格式_字體.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_字體.Name = "rJ_Button_複製格式_字體";
+            this.rJ_Button_複製格式_字體.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_字體.ShadowSize = 0;
+            this.rJ_Button_複製格式_字體.ShowLoadingForm = false;
             this.rJ_Button_複製格式_字體.Size = new System.Drawing.Size(94, 40);
             this.rJ_Button_複製格式_字體.State = false;
             this.rJ_Button_複製格式_字體.TabIndex = 27;
@@ -926,9 +1038,13 @@
             this.rJ_Button_複製格式_文字對齊方式.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_文字對齊方式.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_文字對齊方式.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_文字對齊方式.GUID = "";
             this.rJ_Button_複製格式_文字對齊方式.Location = new System.Drawing.Point(201, 101);
             this.rJ_Button_複製格式_文字對齊方式.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_文字對齊方式.Name = "rJ_Button_複製格式_文字對齊方式";
+            this.rJ_Button_複製格式_文字對齊方式.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_文字對齊方式.ShadowSize = 0;
+            this.rJ_Button_複製格式_文字對齊方式.ShowLoadingForm = false;
             this.rJ_Button_複製格式_文字對齊方式.Size = new System.Drawing.Size(121, 40);
             this.rJ_Button_複製格式_文字對齊方式.State = false;
             this.rJ_Button_複製格式_文字對齊方式.TabIndex = 26;
@@ -949,9 +1065,13 @@
             this.rJ_Button_複製格式_邊框大小.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_邊框大小.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_邊框大小.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_邊框大小.GUID = "";
             this.rJ_Button_複製格式_邊框大小.Location = new System.Drawing.Point(103, 101);
             this.rJ_Button_複製格式_邊框大小.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_邊框大小.Name = "rJ_Button_複製格式_邊框大小";
+            this.rJ_Button_複製格式_邊框大小.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_邊框大小.ShadowSize = 0;
+            this.rJ_Button_複製格式_邊框大小.ShowLoadingForm = false;
             this.rJ_Button_複製格式_邊框大小.Size = new System.Drawing.Size(94, 40);
             this.rJ_Button_複製格式_邊框大小.State = false;
             this.rJ_Button_複製格式_邊框大小.TabIndex = 25;
@@ -972,9 +1092,13 @@
             this.rJ_Button_複製格式_邊框顏色.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_邊框顏色.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_邊框顏色.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_邊框顏色.GUID = "";
             this.rJ_Button_複製格式_邊框顏色.Location = new System.Drawing.Point(5, 101);
             this.rJ_Button_複製格式_邊框顏色.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_邊框顏色.Name = "rJ_Button_複製格式_邊框顏色";
+            this.rJ_Button_複製格式_邊框顏色.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_邊框顏色.ShadowSize = 0;
+            this.rJ_Button_複製格式_邊框顏色.ShowLoadingForm = false;
             this.rJ_Button_複製格式_邊框顏色.Size = new System.Drawing.Size(94, 40);
             this.rJ_Button_複製格式_邊框顏色.State = false;
             this.rJ_Button_複製格式_邊框顏色.TabIndex = 24;
@@ -995,9 +1119,13 @@
             this.rJ_Button_複製格式_靠下對齊.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_靠下對齊.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_靠下對齊.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_靠下對齊.GUID = "";
             this.rJ_Button_複製格式_靠下對齊.Location = new System.Drawing.Point(299, 57);
             this.rJ_Button_複製格式_靠下對齊.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_靠下對齊.Name = "rJ_Button_複製格式_靠下對齊";
+            this.rJ_Button_複製格式_靠下對齊.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_靠下對齊.ShadowSize = 0;
+            this.rJ_Button_複製格式_靠下對齊.ShowLoadingForm = false;
             this.rJ_Button_複製格式_靠下對齊.Size = new System.Drawing.Size(94, 40);
             this.rJ_Button_複製格式_靠下對齊.State = false;
             this.rJ_Button_複製格式_靠下對齊.TabIndex = 23;
@@ -1018,9 +1146,13 @@
             this.rJ_Button_複製格式_靠上對齊.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_靠上對齊.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_靠上對齊.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_靠上對齊.GUID = "";
             this.rJ_Button_複製格式_靠上對齊.Location = new System.Drawing.Point(201, 57);
             this.rJ_Button_複製格式_靠上對齊.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_靠上對齊.Name = "rJ_Button_複製格式_靠上對齊";
+            this.rJ_Button_複製格式_靠上對齊.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_靠上對齊.ShadowSize = 0;
+            this.rJ_Button_複製格式_靠上對齊.ShowLoadingForm = false;
             this.rJ_Button_複製格式_靠上對齊.Size = new System.Drawing.Size(94, 40);
             this.rJ_Button_複製格式_靠上對齊.State = false;
             this.rJ_Button_複製格式_靠上對齊.TabIndex = 22;
@@ -1041,9 +1173,13 @@
             this.rJ_Button_複製格式_靠右對齊.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_靠右對齊.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_靠右對齊.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_靠右對齊.GUID = "";
             this.rJ_Button_複製格式_靠右對齊.Location = new System.Drawing.Point(103, 57);
             this.rJ_Button_複製格式_靠右對齊.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_靠右對齊.Name = "rJ_Button_複製格式_靠右對齊";
+            this.rJ_Button_複製格式_靠右對齊.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_靠右對齊.ShadowSize = 0;
+            this.rJ_Button_複製格式_靠右對齊.ShowLoadingForm = false;
             this.rJ_Button_複製格式_靠右對齊.Size = new System.Drawing.Size(94, 40);
             this.rJ_Button_複製格式_靠右對齊.State = false;
             this.rJ_Button_複製格式_靠右對齊.TabIndex = 21;
@@ -1064,9 +1200,13 @@
             this.rJ_Button_複製格式_靠左對齊.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_靠左對齊.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_靠左對齊.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_靠左對齊.GUID = "";
             this.rJ_Button_複製格式_靠左對齊.Location = new System.Drawing.Point(5, 57);
             this.rJ_Button_複製格式_靠左對齊.Margin = new System.Windows.Forms.Padding(2);
             this.rJ_Button_複製格式_靠左對齊.Name = "rJ_Button_複製格式_靠左對齊";
+            this.rJ_Button_複製格式_靠左對齊.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_靠左對齊.ShadowSize = 0;
+            this.rJ_Button_複製格式_靠左對齊.ShowLoadingForm = false;
             this.rJ_Button_複製格式_靠左對齊.Size = new System.Drawing.Size(94, 40);
             this.rJ_Button_複製格式_靠左對齊.State = false;
             this.rJ_Button_複製格式_靠左對齊.TabIndex = 20;
@@ -1087,8 +1227,12 @@
             this.rJ_Button_複製格式_大小.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_大小.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_大小.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_大小.GUID = "";
             this.rJ_Button_複製格式_大小.Location = new System.Drawing.Point(201, 11);
             this.rJ_Button_複製格式_大小.Name = "rJ_Button_複製格式_大小";
+            this.rJ_Button_複製格式_大小.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_大小.ShadowSize = 0;
+            this.rJ_Button_複製格式_大小.ShowLoadingForm = false;
             this.rJ_Button_複製格式_大小.Size = new System.Drawing.Size(94, 40);
             this.rJ_Button_複製格式_大小.State = false;
             this.rJ_Button_複製格式_大小.TabIndex = 19;
@@ -1109,8 +1253,12 @@
             this.rJ_Button_複製格式_高度.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_高度.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_高度.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_高度.GUID = "";
             this.rJ_Button_複製格式_高度.Location = new System.Drawing.Point(103, 11);
             this.rJ_Button_複製格式_高度.Name = "rJ_Button_複製格式_高度";
+            this.rJ_Button_複製格式_高度.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_高度.ShadowSize = 0;
+            this.rJ_Button_複製格式_高度.ShowLoadingForm = false;
             this.rJ_Button_複製格式_高度.Size = new System.Drawing.Size(94, 40);
             this.rJ_Button_複製格式_高度.State = false;
             this.rJ_Button_複製格式_高度.TabIndex = 18;
@@ -1131,8 +1279,12 @@
             this.rJ_Button_複製格式_寬度.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_複製格式_寬度.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_複製格式_寬度.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_複製格式_寬度.GUID = "";
             this.rJ_Button_複製格式_寬度.Location = new System.Drawing.Point(5, 12);
             this.rJ_Button_複製格式_寬度.Name = "rJ_Button_複製格式_寬度";
+            this.rJ_Button_複製格式_寬度.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_複製格式_寬度.ShadowSize = 0;
+            this.rJ_Button_複製格式_寬度.ShowLoadingForm = false;
             this.rJ_Button_複製格式_寬度.Size = new System.Drawing.Size(94, 40);
             this.rJ_Button_複製格式_寬度.State = false;
             this.rJ_Button_複製格式_寬度.TabIndex = 17;
@@ -1144,30 +1296,6 @@
             // 
             this.saveFileDialog_jpg.DefaultExt = "jpg";
             this.saveFileDialog_jpg.Filter = "jpg File (*.jpg)|*.jpg;";
-            // 
-            // rJ_Button_SAVE
-            // 
-            this.rJ_Button_SAVE.AutoResetState = false;
-            this.rJ_Button_SAVE.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.rJ_Button_SAVE.BackgroundColor = System.Drawing.Color.CornflowerBlue;
-            this.rJ_Button_SAVE.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_SAVE.BorderRadius = 5;
-            this.rJ_Button_SAVE.BorderSize = 0;
-            this.rJ_Button_SAVE.buttonType = MyUI.RJ_Button.ButtonType.Push;
-            this.rJ_Button_SAVE.FlatAppearance.BorderSize = 0;
-            this.rJ_Button_SAVE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Button_SAVE.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Button_SAVE.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_SAVE.Location = new System.Drawing.Point(556, 153);
-            this.rJ_Button_SAVE.Margin = new System.Windows.Forms.Padding(2);
-            this.rJ_Button_SAVE.Name = "rJ_Button_SAVE";
-            this.rJ_Button_SAVE.Size = new System.Drawing.Size(77, 46);
-            this.rJ_Button_SAVE.State = false;
-            this.rJ_Button_SAVE.TabIndex = 34;
-            this.rJ_Button_SAVE.Text = "SAVE";
-            this.rJ_Button_SAVE.TextColor = System.Drawing.Color.White;
-            this.rJ_Button_SAVE.UseVisualStyleBackColor = false;
-            this.rJ_Button_SAVE.Click += new System.EventHandler(this.rJ_Button_SAVE_Click);
             // 
             // WT32_GPADC
             // 

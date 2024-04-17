@@ -198,9 +198,39 @@ namespace H_Pannel_lib
             return DeviceBasics_buf;
         }
 
-   
-    
+        static public System.Collections.Generic.Dictionary<string, List<DeviceBasic>> CoverToDictionaryByCode(this List<DeviceBasic> DeviceBasics)
+        {
+            Dictionary<string, List<DeviceBasic>> dictionary = new Dictionary<string, List<DeviceBasic>>();
+
+            foreach (var item in DeviceBasics)
+            {
+                string key = item.Code;
+
+                // 如果字典中已經存在該索引鍵，則將值添加到對應的列表中
+                if (dictionary.ContainsKey(key))
+                {
+                    dictionary[key].Add(item);
+                }
+                // 否則創建一個新的列表並添加值
+                else
+                {
+                    List<DeviceBasic> values = new List<DeviceBasic> { item };
+                    dictionary[key] = values;
+                }
+            }
+
+            return dictionary;
+        }
+        static public List<DeviceBasic> SortDictionaryByCode(this System.Collections.Generic.Dictionary<string, List<DeviceBasic>> dictionary, string code)
+        {
+            if (dictionary.ContainsKey(code))
+            {
+                return dictionary[code];
+            }
+            return new List<DeviceBasic>();
+        }
     }
+    
     [Serializable]
     public class DeviceBasicClass
     {
@@ -1216,6 +1246,7 @@ namespace H_Pannel_lib
             儲位名稱,
             IP,
             Port,
+            最大存量,
         }
         public enum ValueType
         {
@@ -1937,8 +1968,7 @@ namespace H_Pannel_lib
                     {
                         if (valueType == ValueType.Value)
                         {
-                            //if (Value.StringToInt32() < 0) return;
-                            //this.新增效期(Default_Validity_period.ToDateString(), (string)Value);
+                         
                         }
                         else if (valueType == ValueType.Title)
                         {
@@ -1986,7 +2016,63 @@ namespace H_Pannel_lib
                         }
                         break;
                     }
+                case ValueName.最大存量:
+                    {
+                        if (valueType == ValueType.Value)
+                        {
+                            if (Value is string)
+                            {
+                                if (Value.ObjectToString().StringIsEmpty()) Value = "0";
+                                this.Max_Inventory = Value.ObjectToString().StringToInt32();
 
+                            }
+                        }
+                        else if (valueType == ValueType.Title)
+                        {
+                            if (Value is string) this.Max_Inventory_Title = (string)Value;
+                        }
+                        else if (valueType == ValueType.Font)
+                        {
+                            if (Value is Font) this.Max_Inventory_font = (Font)Value;
+                        }
+                        else if (valueType == ValueType.ForeColor)
+                        {
+                            if (Value is Color) this.Max_Inventory_ForeColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.BackColor)
+                        {
+                            if (Value is Color) this.Max_Inventory_BackColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.Position)
+                        {
+                            if (Value is Point) this.Max_Inventory_Position = (Point)Value;
+                        }
+                        else if (valueType == ValueType.Width)
+                        {
+                            if (Value is int) this.Max_Inventory_Width = (int)Value;
+                        }
+                        else if (valueType == ValueType.Height)
+                        {
+                            if (Value is int) this.Max_Inventory_Height = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderSize)
+                        {
+                            if (Value is int) this.Max_Inventory_BorderSize = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderColor)
+                        {
+                            if (Value is Color) this.Max_Inventory_BorderColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.HorizontalAlignment)
+                        {
+                            if (Value is HorizontalAlignment) this.Max_Inventory_HorizontalAlignment = (HorizontalAlignment)Value;
+                        }
+                        else if (valueType == ValueType.Visable)
+                        {
+                            if (Value is bool) this.Max_Inventory_Visable = (bool)Value;
+                        }
+                        break;
+                    }
                 case ValueName.IP:
                     {
                         if (valueType == ValueType.Value)
@@ -2409,6 +2495,27 @@ namespace H_Pannel_lib
                         vlaueClass.BorderSize = this.Inventory_BorderSize;
                         vlaueClass.BorderColor = this.Inventory_BorderColor;
                         vlaueClass.Visable = this.Inventory_Visable;
+
+                        //Size size = TextRenderer.MeasureText(vlaueClass.StringValue, vlaueClass.Font);
+                        //if (vlaueClass.Width < size.Width) vlaueClass.Width = size.Width;
+                        //if (vlaueClass.Height < size.Height) vlaueClass.Height = size.Height;
+                        break;
+                    }
+                case ValueName.最大存量:
+                    {
+                        vlaueClass.valueName = valueName;
+                        vlaueClass.Title = this.Max_Inventory_Title;
+                        vlaueClass.Value = this.Max_Inventory.ToString();
+                        vlaueClass.Font = this.Max_Inventory_font;
+                        vlaueClass.ForeColor = this.Max_Inventory_ForeColor;
+                        vlaueClass.BackColor = this.Max_Inventory_BackColor;
+                        vlaueClass.Position = this.Max_Inventory_Position;
+                        vlaueClass.Width = this.Max_Inventory_Width;
+                        vlaueClass.Height = this.Max_Inventory_Height;
+                        vlaueClass.HorizontalAlignment = this.Max_Inventory_HorizontalAlignment;
+                        vlaueClass.BorderSize = this.Max_Inventory_BorderSize;
+                        vlaueClass.BorderColor = this.Max_Inventory_BorderColor;
+                        vlaueClass.Visable = this.Max_Inventory_Visable;
 
                         //Size size = TextRenderer.MeasureText(vlaueClass.StringValue, vlaueClass.Font);
                         //if (vlaueClass.Width < size.Width) vlaueClass.Width = size.Width;
@@ -3131,6 +3238,55 @@ namespace H_Pannel_lib
         }
         private HorizontalAlignment _Inventory_HorizontalAlignment = HorizontalAlignment.Left;
         public HorizontalAlignment Inventory_HorizontalAlignment { get => _Inventory_HorizontalAlignment; set => _Inventory_HorizontalAlignment = value; }
+        #endregion
+        #region Max_Inventory
+        private string _Max_Inventory_Title = "";
+        public string Max_Inventory_Title { get => _Max_Inventory_Title; set => _Max_Inventory_Title = value; }
+        private string _Max_Inventory = "";
+        [JsonIgnore]
+        public Font Max_Inventory_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        [Browsable(false)]
+        public string Max_Inventory_font_Serialize
+        {
+            get { return FontSerializationHelper.ToString(Max_Inventory_font); }
+            set { Max_Inventory_font = FontSerializationHelper.FromString(value); }
+        }
+        [JsonIgnore]
+        public Color Max_Inventory_BackColor = Color.White;
+        [Browsable(false)]
+        public string Max_Inventory_BackColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(Max_Inventory_BackColor); }
+            set { Max_Inventory_BackColor = ColorSerializationHelper.FromString(value); }
+        }
+        [JsonIgnore]
+        public Color Max_Inventory_ForeColor = Color.Black;
+        [Browsable(false)]
+        public string Max_Inventory_ForeColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(Max_Inventory_ForeColor); }
+            set { Max_Inventory_ForeColor = ColorSerializationHelper.FromString(value); }
+        }
+        private Point _Max_Inventory_Position = new Point();
+        public Point Max_Inventory_Position { get => _Max_Inventory_Position; set => _Max_Inventory_Position = value; }
+        private bool _Max_Inventory_Visable = true;
+        public bool Max_Inventory_Visable { get => _Max_Inventory_Visable; set => _Max_Inventory_Visable = value; }
+        private int _Max_Inventory_Width = 0;
+        public int Max_Inventory_Width { get => _Max_Inventory_Width; set => _Max_Inventory_Width = value; }
+        private int _Max_Inventory_Height = 0;
+        public int Max_Inventory_Height { get => _Max_Inventory_Height; set => _Max_Inventory_Height = value; }
+        private int _Max_Inventory_BorderSize = 2;
+        public int Max_Inventory_BorderSize { get => _Max_Inventory_BorderSize; set => _Max_Inventory_BorderSize = value; }
+        [JsonIgnore]
+        public Color Max_Inventory_BorderColor = Color.Black;
+        [Browsable(false)]
+        public string Max_Inventory_BorderColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(Max_Inventory_BorderColor); }
+            set { Max_Inventory_BorderColor = ColorSerializationHelper.FromString(value); }
+        }
+        private HorizontalAlignment _Max_Inventory_HorizontalAlignment = HorizontalAlignment.Left;
+        public HorizontalAlignment Max_Inventory_HorizontalAlignment { get => _Max_Inventory_HorizontalAlignment; set => _Max_Inventory_HorizontalAlignment = value; }
         #endregion
         #region IP
         private string _IP_Title = "";

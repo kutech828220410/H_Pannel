@@ -54,6 +54,38 @@ namespace H_Pannel_lib
     }
     static public class StorageMethod
     {
+        static public System.Collections.Generic.Dictionary<string, List<Storage>> CoverToDictionaryByCode(this List<Storage> DeviceBasics)
+        {
+            Dictionary<string, List<Storage>> dictionary = new Dictionary<string, List<Storage>>();
+
+            foreach (var item in DeviceBasics)
+            {
+                string key = item.Code;
+
+                // 如果字典中已經存在該索引鍵，則將值添加到對應的列表中
+                if (dictionary.ContainsKey(key))
+                {
+                    dictionary[key].Add(item);
+                }
+                // 否則創建一個新的列表並添加值
+                else
+                {
+                    List<Storage> values = new List<Storage> { item };
+                    dictionary[key] = values;
+                }
+            }
+
+            return dictionary;
+        }
+        static public List<Storage> SortDictionaryByCode(this System.Collections.Generic.Dictionary<string, List<Storage>> dictionary, string code)
+        {
+            if (dictionary.ContainsKey(code))
+            {
+                return dictionary[code];
+            }
+            return new List<Storage>();
+        }
+
         static public List<Storage> SQL_GetAllStorage(SQLUI.SQLControl sQLControl)
         {
             List<object[]> deviceTables = sQLControl.GetAllRows(null);
