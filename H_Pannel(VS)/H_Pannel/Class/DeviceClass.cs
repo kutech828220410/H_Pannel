@@ -61,21 +61,19 @@ namespace H_Pannel_lib
         static public List<DeviceBasic> SQL_GetAllDeviceBasic(SQLUI.SQLControl sQLControl)
         {
             List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
-            List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
+            System.Collections.Concurrent.ConcurrentBag<DeviceBasic> deviceBasics = new System.Collections.Concurrent.ConcurrentBag<DeviceBasic>();
+
             Parallel.ForEach(deviceBasicTables, value =>
             {
                 string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
                 DeviceBasic deviceBasic = jsonString.JsonDeserializet<DeviceBasic>();
                 if (deviceBasic != null)
                 {
-                    deviceBasics.LockAdd(deviceBasic);
+                    deviceBasics.Add(deviceBasic);
                 }
-
             });
-            deviceBasics = (from value in deviceBasics
-                            where value != null
-                            select value).ToList();
-            return deviceBasics;
+
+            return deviceBasics.ToList();
         }
         static public List<DeviceSimple> SQL_GetAllDeviceSimple(SQLUI.SQLControl sQLControl)
         {

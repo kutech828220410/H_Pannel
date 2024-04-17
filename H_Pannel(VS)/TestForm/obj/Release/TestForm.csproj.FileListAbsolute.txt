@@ -123,7 +123,6 @@ C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\H
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\H_Pannel_lib.dll.config
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\System.Text.Json.xml
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.csproj.AssemblyReference.cache
-C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.exe.config
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.Form1.resources
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.Properties.Resources.resources
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.csproj.GenerateResource.cache
@@ -131,3 +130,5 @@ C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\T
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.csproj.CopyComplete
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.exe
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.pdb
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\Newtonsoft.Json.dll
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\Newtonsoft.Json.xml

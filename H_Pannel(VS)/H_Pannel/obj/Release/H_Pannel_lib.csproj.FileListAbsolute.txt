@@ -1623,3 +1623,5 @@ C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.csproj.CopyComplete
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.dll
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.pdb
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\Newtonsoft.Json.dll
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\Newtonsoft.Json.xml
