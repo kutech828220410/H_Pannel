@@ -132,3 +132,9 @@ C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\T
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.pdb
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\Newtonsoft.Json.dll
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\Newtonsoft.Json.xml
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\PopupControl.dll
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\SunnyUI.dll
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\CSkin.dll
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\SunnyUI.Common.dll
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\Microsoft.mshtml.dll
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\Basic.xml

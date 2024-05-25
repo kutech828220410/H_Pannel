@@ -16,21 +16,38 @@ namespace H_Pannel_lib
 {
     public enum enum_UDP_DataReceive
     {
+        [Description("GUID,VARCHAR,50,PRIMARY")]
         GUID,
+        [Description("編號,VARCHAR,10,NONE")]
         編號,
+        [Description("IP,VARCHAR,50,NONE")]
         IP,
+        [Description("Port,VARCHAR,10,NONE")]
         Port,
+        [Description("Readline,VARCHAR,500,NONE")]
         Readline,
+        [Description("StartTime,DATETIME,20,INDEX")]
         StartTime,
+        [Description("Time,DATETIME,20,INDEX")]
         Time,
+        [Description("State,VARCHAR,10,NONE")]
         State,
     }
     public enum enum_DeviceTable
     {
+        [Description("GUID,VARCHAR,50,PRIMARY")]
         GUID,
+        [Description("IP,VARCHAR,50,NONE")]
         IP,
+        [Description("Port,VARCHAR,50,NONE")]
         Port,
+        [Description("Value,MEDIUMTEXT,50,NONE")]
         Value,
+    }
+    public enum enum_IP_PING
+    {
+        [Description("IP,VARCHAR,50,NONE")]
+        IP,
     }
     public partial class DeviceBasicUI : UserControl
     {
@@ -439,24 +456,49 @@ namespace H_Pannel_lib
         }
         virtual public void Init()
         {
+            this.Invoke(new Action(delegate
+            { 
+
+            }));
             Communication.ConsoleWrite = ConsoleWrite;
             this.stopwatch.Start();
             SQLUI.SQL_DataGridView.SQL_Set_Properties(this.sqL_DataGridView_DeviceTable, this.TableName, DataBaseName, UserName, Password, IP, Port, mySqlSslMode);
-            this.sqL_DataGridView_UDP_DataReceive.Init();
-            this.sqL_DataGridView_DeviceTable.Init();
+
+            SQLUI.Table table_UDP_DataReceive = new SQLUI.Table(new enum_UDP_DataReceive());
+            SQLUI.Table table_DeviceTable = new SQLUI.Table(new enum_DeviceTable());
+
+            this.sqL_DataGridView_UDP_DataReceive.Init(table_UDP_DataReceive, this.TableName);
+            this.sqL_DataGridView_DeviceTable.Init(table_DeviceTable, this.TableName);
+
+
             if (flag_UDP_Class_Init == false)
             {
-     
-                this.sqL_DataGridView_UDP_DataReceive.DataGridRowsChangeEvent += SqL_DataGridView_UDP_DataReceive_DataGridRowsChangeEvent;
-                this.sqL_DataGridView_UDP_DataReceive.DataGridRefreshEvent += SqL_DataGridView_UDP_DataReceive_DataGridRefreshEvent;
-                this.sqL_DataGridView_UDP_DataReceive.DataGridRowsChangeRefEvent += SqL_DataGridView_UDP_DataReceive_DataGridRowsChangeRefEvent;
-                this.sqL_DataGridView_UDP_DataReceive.MouseDown += SqL_DataGridView_UDP_DataReceive_MouseDown;
-  
-                if (!this.sqL_DataGridView_DeviceTable.SQL_IsTableCreat()) this.sqL_DataGridView_DeviceTable.SQL_CreateTable();
-                this.sqL_DataGridView_DeviceTable.DataGridRowsChangeEvent += SqL_DataGridView_DeviceTable_DataGridRowsChangeEvent;
-                this.sqL_DataGridView_DeviceTable.DataGridRowsChangeRefEvent += SqL_DataGridView_DeviceTable_DataGridRowsChangeRefEvent;
-                this.sqL_DataGridView_DeviceTable.MouseDown += SqL_DataGridView_DeviceTable_MouseDown;
-                this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                this.Invoke(new Action(delegate
+                {
+                    this.sqL_DataGridView_UDP_DataReceive.DataGridRowsChangeEvent += SqL_DataGridView_UDP_DataReceive_DataGridRowsChangeEvent;
+                    this.sqL_DataGridView_UDP_DataReceive.DataGridRefreshEvent += SqL_DataGridView_UDP_DataReceive_DataGridRefreshEvent;
+                    this.sqL_DataGridView_UDP_DataReceive.DataGridRowsChangeRefEvent += SqL_DataGridView_UDP_DataReceive_DataGridRowsChangeRefEvent;
+                    this.sqL_DataGridView_UDP_DataReceive.MouseDown += SqL_DataGridView_UDP_DataReceive_MouseDown;
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnVisible(false, new enum_UDP_DataReceive().GetEnumNames());
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(60, enum_UDP_DataReceive.編號);
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(150, enum_UDP_DataReceive.IP);
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(60, enum_UDP_DataReceive.Port);
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(400, enum_UDP_DataReceive.Readline);
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(100, enum_UDP_DataReceive.Time);
+
+                    if (!this.sqL_DataGridView_DeviceTable.SQL_IsTableCreat()) this.sqL_DataGridView_DeviceTable.SQL_CreateTable();
+                    this.sqL_DataGridView_DeviceTable.DataGridRowsChangeEvent += SqL_DataGridView_DeviceTable_DataGridRowsChangeEvent;
+                    this.sqL_DataGridView_DeviceTable.DataGridRowsChangeRefEvent += SqL_DataGridView_DeviceTable_DataGridRowsChangeRefEvent;
+                    this.sqL_DataGridView_DeviceTable.MouseDown += SqL_DataGridView_DeviceTable_MouseDown;
+                    this.sqL_DataGridView_DeviceTable.Set_ColumnVisible(false, new enum_DeviceTable().GetEnumNames());
+                    this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(100, enum_DeviceTable.GUID);
+                    this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(150, enum_DeviceTable.IP);
+                    this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(60, enum_DeviceTable.Port);
+                    this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(600, enum_DeviceTable.Value);
+                    this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                }));
+
+            
 
 
                 this.UDP_Class_Init();
@@ -468,7 +510,9 @@ namespace H_Pannel_lib
                 this.MyThread_SqlDataRefrsh.SetSleepTime(50);
                 this.MyThread_SqlDataRefrsh.Trigger();
 
-                this.sqL_DataGridView_PING.Init();
+                SQLUI.Table table_IP_PING = new SQLUI.Table(new enum_IP_PING());
+
+                this.sqL_DataGridView_PING.Init(table_IP_PING);
                 this.MyThread_PING = new MyThread();
                 this.MyThread_PING = new MyThread();
                 this.MyThread_PING.AutoRun(true);

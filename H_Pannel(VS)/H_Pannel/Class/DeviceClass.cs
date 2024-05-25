@@ -12,6 +12,7 @@ using System.Text.Json;
 using System.Text.Encodings.Web;
 using System.Text.Json.Serialization;
 using Basic;
+using System.Collections.Concurrent;
 namespace H_Pannel_lib
 {
     public class StockClass
@@ -29,6 +30,9 @@ namespace H_Pannel_lib
         public string Qty { get; set; }
 
     }
+  
+
+
     static public class DeviceBasicMethod
     {
         static public void SQL_Init(SQLUI.SQL_DataGridView.ConnentionClass connentionClass, string TableName)
@@ -61,38 +65,68 @@ namespace H_Pannel_lib
         static public List<DeviceBasic> SQL_GetAllDeviceBasic(SQLUI.SQLControl sQLControl)
         {
             List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
-            System.Collections.Concurrent.ConcurrentBag<DeviceBasic> deviceBasics = new System.Collections.Concurrent.ConcurrentBag<DeviceBasic>();
+            List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
 
-            Parallel.ForEach(deviceBasicTables, value =>
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < deviceBasicTables.Count; i++)
             {
-                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-                DeviceBasic deviceBasic = jsonString.JsonDeserializet<DeviceBasic>();
-                if (deviceBasic != null)
-                {
-                    deviceBasics.Add(deviceBasic);
-                }
-            });
+                string jsonString = deviceBasicTables[i][(int)enum_DeviceTable.Value].ObjectToString();
+                if (i == 0) sb.Append("[");
 
-            return deviceBasics.ToList();
+                sb.Append($"{jsonString}");
+
+                if (i != deviceBasicTables.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                if (i == deviceBasicTables.Count - 1) sb.Append("]");
+            }
+      
+            string json_result = sb.ToString();
+            if (json_result.StringIsEmpty()) json_result = "[]";
+            deviceBasics = json_result.JsonDeserializet<List<DeviceBasic>>();
+            return deviceBasics;
         }
         static public List<DeviceSimple> SQL_GetAllDeviceSimple(SQLUI.SQLControl sQLControl)
         {
             List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
             List<DeviceSimple> deviceBasics = new List<DeviceSimple>();
-            Parallel.ForEach(deviceBasicTables, value =>
-            {
-                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-                DeviceSimple deviceBasic = jsonString.JsonDeserializet<DeviceSimple>();
-                if (deviceBasic != null)
-                {
-                    deviceBasics.LockAdd(deviceBasic);
-                }
 
-            });
-            deviceBasics = (from value in deviceBasics
-                            where value != null
-                            select value).ToList();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < deviceBasicTables.Count; i++)
+            {
+                string jsonString = deviceBasicTables[i][(int)enum_DeviceTable.Value].ObjectToString();
+                if (i == 0) sb.Append("[");
+
+                sb.Append($"{jsonString}");
+
+                if (i != deviceBasicTables.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                if (i == deviceBasicTables.Count - 1) sb.Append("]");
+            }
+
+            string json_result = sb.ToString();
+            if (json_result.StringIsEmpty()) json_result = "[]";
+            deviceBasics = json_result.JsonDeserializet<List<DeviceSimple>>();
             return deviceBasics;
+            //List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
+            //List<DeviceSimple> deviceBasics = new List<DeviceSimple>();
+            //Parallel.ForEach(deviceBasicTables, value =>
+            //{
+            //    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+            //    DeviceSimple deviceBasic = jsonString.JsonDeserializet<DeviceSimple>();
+            //    if (deviceBasic != null)
+            //    {
+            //        deviceBasics.LockAdd(deviceBasic);
+            //    }
+
+            //});
+            //deviceBasics = (from value in deviceBasics
+            //                where value != null
+            //                select value).ToList();
+            //return deviceBasics;
         }
         static public DeviceBasic SQL_GetDeviceBasic(SQLUI.SQL_DataGridView.ConnentionClass connentionClass, string TableName, DeviceBasic deviceBasic)
         {
@@ -919,27 +953,20 @@ namespace H_Pannel_lib
             }
             sQLControl = null;
         }
+
         static public List<Device> SQL_GetAllDevice(SQLUI.SQL_DataGridView.ConnentionClass connentionClass, string TableName)
         {
             SQLUI.SQLControl sQLControl = new SQLUI.SQLControl(connentionClass.IP, connentionClass.DataBaseName, connentionClass.TableName, connentionClass.UserName, connentionClass.Password, connentionClass.Port, connentionClass.MySqlSslMode);
-            List<object[]> deviceTables = sQLControl.GetAllRows(null);
-            List<Device> devices = new List<Device>();
-            Parallel.ForEach(deviceTables, value =>
-            {
-                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-                Device device = jsonString.JsonDeserializet<Device>();
-                if (device != null)
-                {
-                    device.Port = value[(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
-                    devices.LockAdd(device);
-                }
 
-            });
-            devices = (from value in devices
-                       where value != null
-                       select value).ToList();
+            return SQL_GetAllDevice(sQLControl);
+        }
+        static public List<Device> SQL_GetAllDevice(SQLUI.SQLControl sQLControl)
+        {
+            List<object[]> deviceTables = sQLControl.GetAllRows(null);
+            List<Device> devices = SQL_GetAllDevice(deviceTables);
             return devices;
         }
+     
         static public void SQL_ReplaceDevice(SQLUI.SQL_DataGridView.ConnentionClass connentionClass, string TableName, List<Device> devices)
         {
             SQLUI.SQLControl sQLControl = new SQLUI.SQLControl(connentionClass.IP, connentionClass.DataBaseName, connentionClass.TableName, connentionClass.UserName, connentionClass.Password, connentionClass.Port, connentionClass.MySqlSslMode);
@@ -972,25 +999,31 @@ namespace H_Pannel_lib
             });
             sQLControl.AddRows(TableName, list_value);
         }
-
+    
         static public List<Device> SQL_GetAllDevice(List<object[]> deviceTables)
         {
             List<Device> devices = new List<Device>();
-            Parallel.ForEach(deviceTables, value =>
-            {
-                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-                Device device = jsonString.JsonDeserializet<Device>();
-                if (device != null)
-                {
-                    device.Port = value[(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
-                    devices.LockAdd(device);
-                }
 
-            });
-            devices = (from value in devices
-                        where value != null
-                        select value).ToList();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < deviceTables.Count; i++)
+            {
+                string jsonString = deviceTables[i][(int)enum_DeviceTable.Value].ObjectToString();
+                if (i == 0) sb.Append("[");
+
+                sb.Append($"{jsonString}");
+
+                if (i != deviceTables.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                if (i == deviceTables.Count - 1) sb.Append("]");
+            }
+
+            string json_result = sb.ToString();
+            if (json_result.StringIsEmpty()) json_result = "[]";
+            devices = json_result.JsonDeserializet<List<Device>>();
             return devices;
+         
         }
 
         static public List<Device> Add_NewDevice(this List<Device> Devices, string IP, int Port)

@@ -857,3 +857,9 @@ C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Rel
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\Newtonsoft.Json.dll
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\H_Pannel_lib.pdb
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\Newtonsoft.Json.xml
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\PopupControl.dll
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\SunnyUI.dll
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\CSkin.dll
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\SunnyUI.Common.dll
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\Microsoft.mshtml.dll
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\Basic.xml

@@ -38,6 +38,9 @@
     <Reference Include="Basic">
       <HintPath>..\..\DLL\Basic.dll</HintPath>
     </Reference>
+    <Reference Include="CSkin">
+      <HintPath>..\..\DLL\CSkin.dll</HintPath>
+    </Reference>
     <Reference Include="DrawingClass, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\DLL\DrawingClass.dll</HintPath>

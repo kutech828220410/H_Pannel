@@ -90,59 +90,124 @@ namespace H_Pannel_lib
         {
             List<object[]> deviceTables = sQLControl.GetAllRows(null);
             List<Storage> storages = new List<Storage>();
-            Parallel.ForEach(deviceTables, value =>
-            {
-                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-                Storage storage = jsonString.JsonDeserializet<Storage>();
-                if (storage != null)
-                {
-                    storage.Port = value[(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
-                    storages.LockAdd(storage);
-                }
 
-            });
-            storages = (from value in storages
-                        where value != null
-                        select value).ToList();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < deviceTables.Count; i++)
+            {
+                string jsonString = deviceTables[i][(int)enum_DeviceTable.Value].ObjectToString();
+                if (i == 0) sb.Append("[");
+
+                sb.Append($"{jsonString}");
+
+                if (i != deviceTables.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                if (i == deviceTables.Count - 1) sb.Append("]");
+            }
+
+            string json_result = sb.ToString();
+            if (json_result.StringIsEmpty()) json_result = "[]";
+            storages = json_result.JsonDeserializet<List<Storage>>();
+
+            //Parallel.ForEach(deviceTables, value =>
+            //{
+            //    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+            //    Storage storage = jsonString.JsonDeserializet<Storage>();
+            //    if (storage != null)
+            //    {
+            //        storage.Port = value[(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
+            //        storages.LockAdd(storage);
+            //    }
+
+            //});
+            //storages = (from value in storages
+            //            where value != null
+            //            select value).ToList();
             return storages;
         }
         static public List<Storage> SQL_GetAllStorage(List<object[]> deviceTables)
         {
             List<Storage> storages = new List<Storage>();
-            Parallel.ForEach(deviceTables, value =>
-            {
-                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-                Storage storage = jsonString.JsonDeserializet<Storage>();
-                if (storage != null)
-                {
-                    storage.Port = value[(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
-                    storages.LockAdd(storage);
-                }
 
-            });
-            storages = (from value in storages
-                        where value != null
-                        select value).ToList();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < deviceTables.Count; i++)
+            {
+                string jsonString = deviceTables[i][(int)enum_DeviceTable.Value].ObjectToString();
+                if (i == 0) sb.Append("[");
+
+                sb.Append($"{jsonString}");
+
+                if (i != deviceTables.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                if (i == deviceTables.Count - 1) sb.Append("]");
+            }
+
+            string json_result = sb.ToString();
+            if (json_result.StringIsEmpty()) json_result = "[]";
+            storages = json_result.JsonDeserializet<List<Storage>>();
+
+
+
+            //Parallel.ForEach(deviceTables, value =>
+            //{
+            //    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+            //    Storage storage = jsonString.JsonDeserializet<Storage>();
+            //    if (storage != null)
+            //    {
+            //        storage.Port = value[(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
+            //        storages.LockAdd(storage);
+            //    }
+
+            //});
+            //storages = (from value in storages
+            //            where value != null
+            //            select value).ToList();
             return storages;
         }
         public static List<DeviceBasic> GetAllDeviceBasic(List<object[]> deviceTables)
         {
             List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
             List<object[]> list_value = deviceTables;
-            Parallel.ForEach(list_value, value =>
-            {
-                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-                DeviceBasic deviceBasic = jsonString.JsonDeserializet<DeviceBasic>();
-                if (deviceBasic != null)
-                {
-                    deviceBasic.確認效期庫存(true);
-                    deviceBasics.LockAdd(deviceBasic);
-                }
 
-            });
-            deviceBasics = (from value in deviceBasics
-                            where value != null
-                        select value).ToList();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < deviceTables.Count; i++)
+            {
+                string jsonString = deviceTables[i][(int)enum_DeviceTable.Value].ObjectToString();
+                if (i == 0) sb.Append("[");
+
+                sb.Append($"{jsonString}");
+
+                if (i != deviceTables.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                if (i == deviceTables.Count - 1) sb.Append("]");
+            }
+
+            string json_result = sb.ToString();
+            if (json_result.StringIsEmpty()) json_result = "[]";
+            deviceBasics = json_result.JsonDeserializet<List<DeviceBasic>>();
+
+
+            //Parallel.ForEach(list_value, value =>
+            //{
+            //    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+            //    DeviceBasic deviceBasic = jsonString.JsonDeserializet<DeviceBasic>();
+            //    if (deviceBasic != null)
+            //    {
+            //        deviceBasic.確認效期庫存(true);
+            //        deviceBasics.LockAdd(deviceBasic);
+            //    }
+
+            //});
+            //deviceBasics = (from value in deviceBasics
+            //                where value != null
+            //            select value).ToList();
             return deviceBasics;
         }
 

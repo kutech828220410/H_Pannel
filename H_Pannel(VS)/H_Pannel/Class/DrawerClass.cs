@@ -22,38 +22,80 @@ namespace H_Pannel_lib
         {
             List<Drawer> drawers = new List<Drawer>();
             List<object[]> list_value = deviceTables;
-            Parallel.ForEach(list_value, value =>
-            {
-                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-                Drawer drawer = jsonString.JsonDeserializet<Drawer>();
-                if (drawer != null) drawers.LockAdd(drawer);
-            });
 
-            drawers = (from value in drawers
-                       where value != null
-                       select value).ToList();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < list_value.Count; i++)
+            {
+                string jsonString = list_value[i][(int)enum_DeviceTable.Value].ObjectToString();
+                if (i == 0) sb.Append("[");
+
+                sb.Append($"{jsonString}");
+
+                if (i != list_value.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                
+                if (i == list_value.Count - 1) sb.Append("]");
+            }
+
+            string json_result = sb.ToString();
+            if (json_result.StringIsEmpty()) json_result = "[]";
+            drawers = json_result.JsonDeserializet<List<Drawer>>();
+
+            //Parallel.ForEach(list_value, value =>
+            //{
+            //    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+            //    Drawer drawer = jsonString.JsonDeserializet<Drawer>();
+            //    if (drawer != null) drawers.LockAdd(drawer);
+            //});
+
+            //drawers = (from value in drawers
+            //           where value != null
+            //           select value).ToList();
             return drawers;
         }
         public static List<DeviceBasic> GetAllDeviceBasic(List<object[]> deviceTables)
         {
             List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
             List<object[]> list_value = deviceTables;
-            Parallel.ForEach(list_value, value =>
-            {
-                string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-                DrawerBasic drawer = jsonString.JsonDeserializet<DrawerBasic>();
-                for (int i = 0; i < drawer.Boxes.Count; i++)
-                {
-                    for (int k = 0; k < drawer.Boxes[i].Length; k++)
-                    {
-                        deviceBasics.LockAdd(drawer.Boxes[i][k]);
-                    }
-                }
-            });
 
-            deviceBasics = (from value in deviceBasics
-                            where value != null
-                            select value).ToList();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < list_value.Count; i++)
+            {
+                string jsonString = list_value[i][(int)enum_DeviceTable.Value].ObjectToString();
+                if (i == 0) sb.Append("[");
+
+                sb.Append($"{jsonString}");
+
+                if (i != list_value.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                if (i == list_value.Count - 1) sb.Append("]");
+            }
+
+            string json_result = sb.ToString();
+
+            deviceBasics = json_result.JsonDeserializet<List<DeviceBasic>>();
+
+            //Parallel.ForEach(list_value, value =>
+            //{
+            //    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+            //    DrawerBasic drawer = jsonString.JsonDeserializet<DrawerBasic>();
+            //    for (int i = 0; i < drawer.Boxes.Count; i++)
+            //    {
+            //        for (int k = 0; k < drawer.Boxes[i].Length; k++)
+            //        {
+            //            deviceBasics.LockAdd(drawer.Boxes[i][k]);
+            //        }
+            //    }
+            //});
+
+            //deviceBasics = (from value in deviceBasics
+            //                where value != null
+            //                select value).ToList();
             return deviceBasics;
         }
         static public Drawer SQL_GetDevice(SQLUI.SQLControl sQLControl, string IP)
@@ -234,6 +276,7 @@ namespace H_Pannel_lib
         }
         static public Drawer SortByIP(this List<Drawer> Drawers ,string IP)
         {
+            if (Drawers == null) return null;
             for (int i = 0; i < Drawers.Count; i++)
             {
                 if (Drawers[i].IP == IP) return Drawers[i];

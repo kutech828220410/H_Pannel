@@ -29,8 +29,13 @@ namespace H_Pannel_lib
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeviceBasicUI));
             this.panel23 = new System.Windows.Forms.Panel();
+            this.openFileDialog_LoadExcel = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog_SaveExcel = new System.Windows.Forms.SaveFileDialog();
+            this.rJ_GroupBox3 = new MyUI.RJ_GroupBox();
+            this.sqL_DataGridView_DeviceTable = new SQLUI.SQL_DataGridView();
+            this.rJ_GroupBox4 = new MyUI.RJ_GroupBox();
+            this.sqL_DataGridView_PING = new SQLUI.SQL_DataGridView();
             this.rJ_GroupBox1 = new MyUI.RJ_GroupBox();
             this.sqL_DataGridView_UDP_DataReceive = new SQLUI.SQL_DataGridView();
             this.rJ_GroupBox2 = new MyUI.RJ_GroupBox();
@@ -118,13 +123,11 @@ namespace H_Pannel_lib
             this.label26 = new System.Windows.Forms.Label();
             this.textBox_Station = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.rJ_GroupBox4 = new MyUI.RJ_GroupBox();
-            this.sqL_DataGridView_PING = new SQLUI.SQL_DataGridView();
-            this.rJ_GroupBox3 = new MyUI.RJ_GroupBox();
-            this.sqL_DataGridView_DeviceTable = new SQLUI.SQL_DataGridView();
-            this.openFileDialog_LoadExcel = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog_SaveExcel = new System.Windows.Forms.SaveFileDialog();
             this.panel23.SuspendLayout();
+            this.rJ_GroupBox3.ContentsPanel.SuspendLayout();
+            this.rJ_GroupBox3.SuspendLayout();
+            this.rJ_GroupBox4.ContentsPanel.SuspendLayout();
+            this.rJ_GroupBox4.SuspendLayout();
             this.rJ_GroupBox1.ContentsPanel.SuspendLayout();
             this.rJ_GroupBox1.SuspendLayout();
             this.rJ_GroupBox2.ContentsPanel.SuspendLayout();
@@ -151,10 +154,6 @@ namespace H_Pannel_lib
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.rJ_GroupBox4.ContentsPanel.SuspendLayout();
-            this.rJ_GroupBox4.SuspendLayout();
-            this.rJ_GroupBox3.ContentsPanel.SuspendLayout();
-            this.rJ_GroupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel23
@@ -167,12 +166,215 @@ namespace H_Pannel_lib
             this.panel23.Size = new System.Drawing.Size(1393, 517);
             this.panel23.TabIndex = 38;
             // 
+            // openFileDialog_LoadExcel
+            // 
+            this.openFileDialog_LoadExcel.DefaultExt = "txt";
+            this.openFileDialog_LoadExcel.Filter = "txt File (*.txt)|*.txt;";
+            // 
+            // saveFileDialog_SaveExcel
+            // 
+            this.saveFileDialog_SaveExcel.DefaultExt = "txt";
+            this.saveFileDialog_SaveExcel.Filter = "txt File (*.txt)|*.txt;";
+            // 
+            // rJ_GroupBox3
+            // 
+            // 
+            // rJ_GroupBox3.ContentsPanel
+            // 
+            this.rJ_GroupBox3.ContentsPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.rJ_GroupBox3.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
+            this.rJ_GroupBox3.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
+            this.rJ_GroupBox3.ContentsPanel.BorderRadius = 2;
+            this.rJ_GroupBox3.ContentsPanel.BorderSize = 2;
+            this.rJ_GroupBox3.ContentsPanel.Controls.Add(this.sqL_DataGridView_DeviceTable);
+            this.rJ_GroupBox3.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rJ_GroupBox3.ContentsPanel.ForeColor = System.Drawing.Color.White;
+            this.rJ_GroupBox3.ContentsPanel.IsSelected = false;
+            this.rJ_GroupBox3.ContentsPanel.Location = new System.Drawing.Point(0, 37);
+            this.rJ_GroupBox3.ContentsPanel.Name = "ContentsPanel";
+            this.rJ_GroupBox3.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.rJ_GroupBox3.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_GroupBox3.ContentsPanel.ShadowSize = 0;
+            this.rJ_GroupBox3.ContentsPanel.Size = new System.Drawing.Size(1230, 415);
+            this.rJ_GroupBox3.ContentsPanel.TabIndex = 2;
+            this.rJ_GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rJ_GroupBox3.GUID = "";
+            this.rJ_GroupBox3.Location = new System.Drawing.Point(0, 517);
+            this.rJ_GroupBox3.Name = "rJ_GroupBox3";
+            this.rJ_GroupBox3.PannelBackColor = System.Drawing.SystemColors.Control;
+            this.rJ_GroupBox3.PannelBorderColor = System.Drawing.Color.SkyBlue;
+            this.rJ_GroupBox3.PannelBorderRadius = 2;
+            this.rJ_GroupBox3.PannelBorderSize = 2;
+            this.rJ_GroupBox3.Size = new System.Drawing.Size(1230, 452);
+            this.rJ_GroupBox3.TabIndex = 40;
+            this.rJ_GroupBox3.TitleBackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.rJ_GroupBox3.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_GroupBox3.TitleBorderRadius = 5;
+            this.rJ_GroupBox3.TitleBorderSize = 0;
+            this.rJ_GroupBox3.TitleFont = new System.Drawing.Font("新細明體", 12F);
+            this.rJ_GroupBox3.TitleForeColor = System.Drawing.Color.White;
+            this.rJ_GroupBox3.TitleHeight = 37;
+            this.rJ_GroupBox3.TitleTextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_GroupBox3.TitleTexts = "DeviceTable";
+            // 
+            // sqL_DataGridView_DeviceTable
+            // 
+            this.sqL_DataGridView_DeviceTable.AutoSelectToDeep = true;
+            this.sqL_DataGridView_DeviceTable.AutoSize = true;
+            this.sqL_DataGridView_DeviceTable.backColor = System.Drawing.Color.LightBlue;
+            this.sqL_DataGridView_DeviceTable.BorderColor = System.Drawing.Color.LightBlue;
+            this.sqL_DataGridView_DeviceTable.BorderRadius = 0;
+            this.sqL_DataGridView_DeviceTable.BorderSize = 2;
+            this.sqL_DataGridView_DeviceTable.CellBorderColor = System.Drawing.Color.White;
+            this.sqL_DataGridView_DeviceTable.cellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.sqL_DataGridView_DeviceTable.cellStylBackColor = System.Drawing.Color.LightBlue;
+            this.sqL_DataGridView_DeviceTable.cellStyleFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.sqL_DataGridView_DeviceTable.cellStylForeColor = System.Drawing.Color.Black;
+            this.sqL_DataGridView_DeviceTable.columnHeaderBackColor = System.Drawing.Color.SkyBlue;
+            this.sqL_DataGridView_DeviceTable.columnHeaderBorderColor = System.Drawing.Color.DimGray;
+            this.sqL_DataGridView_DeviceTable.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
+            this.sqL_DataGridView_DeviceTable.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.sqL_DataGridView_DeviceTable.columnHeadersHeight = 18;
+            this.sqL_DataGridView_DeviceTable.columnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.sqL_DataGridView_DeviceTable.DataGridViewAutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.sqL_DataGridView_DeviceTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sqL_DataGridView_DeviceTable.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
+            this.sqL_DataGridView_DeviceTable.ImageBox = false;
+            this.sqL_DataGridView_DeviceTable.Location = new System.Drawing.Point(5, 5);
+            this.sqL_DataGridView_DeviceTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.sqL_DataGridView_DeviceTable.Name = "sqL_DataGridView_DeviceTable";
+            this.sqL_DataGridView_DeviceTable.OnlineState = SQLUI.SQL_DataGridView.OnlineEnum.Online;
+            this.sqL_DataGridView_DeviceTable.Password = "user82822040";
+            this.sqL_DataGridView_DeviceTable.Port = ((uint)(3306u));
+            this.sqL_DataGridView_DeviceTable.rowHeaderBackColor = System.Drawing.Color.CornflowerBlue;
+            this.sqL_DataGridView_DeviceTable.rowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.sqL_DataGridView_DeviceTable.RowsColor = System.Drawing.SystemColors.Control;
+            this.sqL_DataGridView_DeviceTable.RowsHeight = 40;
+            this.sqL_DataGridView_DeviceTable.SaveFileName = "SQL_DataGridView";
+            this.sqL_DataGridView_DeviceTable.selectedBorderSize = 0;
+            this.sqL_DataGridView_DeviceTable.selectedRowBackColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_DeviceTable.selectedRowBorderColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_DeviceTable.selectedRowForeColor = System.Drawing.Color.White;
+            this.sqL_DataGridView_DeviceTable.Server = "127.0.0.0";
+            this.sqL_DataGridView_DeviceTable.Size = new System.Drawing.Size(1220, 405);
+            this.sqL_DataGridView_DeviceTable.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
+            this.sqL_DataGridView_DeviceTable.TabIndex = 1;
+            this.sqL_DataGridView_DeviceTable.UserName = "root";
+            this.sqL_DataGridView_DeviceTable.可拖曳欄位寬度 = false;
+            this.sqL_DataGridView_DeviceTable.可選擇多列 = true;
+            this.sqL_DataGridView_DeviceTable.單格樣式 = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.sqL_DataGridView_DeviceTable.自動換行 = true;
+            this.sqL_DataGridView_DeviceTable.表單字體 = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
+            this.sqL_DataGridView_DeviceTable.邊框樣式 = System.Windows.Forms.BorderStyle.None;
+            this.sqL_DataGridView_DeviceTable.顯示CheckBox = false;
+            this.sqL_DataGridView_DeviceTable.顯示首列 = true;
+            this.sqL_DataGridView_DeviceTable.顯示首行 = true;
+            this.sqL_DataGridView_DeviceTable.首列樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.sqL_DataGridView_DeviceTable.首行樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            // 
+            // rJ_GroupBox4
+            // 
+            // 
+            // rJ_GroupBox4.ContentsPanel
+            // 
+            this.rJ_GroupBox4.ContentsPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.rJ_GroupBox4.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
+            this.rJ_GroupBox4.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
+            this.rJ_GroupBox4.ContentsPanel.BorderRadius = 2;
+            this.rJ_GroupBox4.ContentsPanel.BorderSize = 2;
+            this.rJ_GroupBox4.ContentsPanel.Controls.Add(this.sqL_DataGridView_PING);
+            this.rJ_GroupBox4.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rJ_GroupBox4.ContentsPanel.ForeColor = System.Drawing.Color.White;
+            this.rJ_GroupBox4.ContentsPanel.IsSelected = false;
+            this.rJ_GroupBox4.ContentsPanel.Location = new System.Drawing.Point(0, 37);
+            this.rJ_GroupBox4.ContentsPanel.Name = "ContentsPanel";
+            this.rJ_GroupBox4.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.rJ_GroupBox4.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_GroupBox4.ContentsPanel.ShadowSize = 0;
+            this.rJ_GroupBox4.ContentsPanel.Size = new System.Drawing.Size(163, 415);
+            this.rJ_GroupBox4.ContentsPanel.TabIndex = 2;
+            this.rJ_GroupBox4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.rJ_GroupBox4.GUID = "";
+            this.rJ_GroupBox4.Location = new System.Drawing.Point(1230, 517);
+            this.rJ_GroupBox4.Name = "rJ_GroupBox4";
+            this.rJ_GroupBox4.PannelBackColor = System.Drawing.SystemColors.Control;
+            this.rJ_GroupBox4.PannelBorderColor = System.Drawing.Color.SkyBlue;
+            this.rJ_GroupBox4.PannelBorderRadius = 2;
+            this.rJ_GroupBox4.PannelBorderSize = 2;
+            this.rJ_GroupBox4.Size = new System.Drawing.Size(163, 452);
+            this.rJ_GroupBox4.TabIndex = 39;
+            this.rJ_GroupBox4.TitleBackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.rJ_GroupBox4.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_GroupBox4.TitleBorderRadius = 5;
+            this.rJ_GroupBox4.TitleBorderSize = 0;
+            this.rJ_GroupBox4.TitleFont = new System.Drawing.Font("新細明體", 12F);
+            this.rJ_GroupBox4.TitleForeColor = System.Drawing.Color.White;
+            this.rJ_GroupBox4.TitleHeight = 37;
+            this.rJ_GroupBox4.TitleTextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_GroupBox4.TitleTexts = "未上線裝置";
+            // 
+            // sqL_DataGridView_PING
+            // 
+            this.sqL_DataGridView_PING.AutoSelectToDeep = true;
+            this.sqL_DataGridView_PING.AutoSize = true;
+            this.sqL_DataGridView_PING.backColor = System.Drawing.Color.LightBlue;
+            this.sqL_DataGridView_PING.BorderColor = System.Drawing.Color.LightBlue;
+            this.sqL_DataGridView_PING.BorderRadius = 0;
+            this.sqL_DataGridView_PING.BorderSize = 2;
+            this.sqL_DataGridView_PING.CellBorderColor = System.Drawing.Color.White;
+            this.sqL_DataGridView_PING.cellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.sqL_DataGridView_PING.cellStylBackColor = System.Drawing.Color.LightBlue;
+            this.sqL_DataGridView_PING.cellStyleFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.sqL_DataGridView_PING.cellStylForeColor = System.Drawing.Color.Black;
+            this.sqL_DataGridView_PING.columnHeaderBackColor = System.Drawing.Color.SkyBlue;
+            this.sqL_DataGridView_PING.columnHeaderBorderColor = System.Drawing.Color.DimGray;
+            this.sqL_DataGridView_PING.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
+            this.sqL_DataGridView_PING.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.sqL_DataGridView_PING.columnHeadersHeight = 18;
+            this.sqL_DataGridView_PING.columnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.sqL_DataGridView_PING.DataGridViewAutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.sqL_DataGridView_PING.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sqL_DataGridView_PING.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
+            this.sqL_DataGridView_PING.ImageBox = false;
+            this.sqL_DataGridView_PING.Location = new System.Drawing.Point(5, 5);
+            this.sqL_DataGridView_PING.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.sqL_DataGridView_PING.Name = "sqL_DataGridView_PING";
+            this.sqL_DataGridView_PING.OnlineState = SQLUI.SQL_DataGridView.OnlineEnum.Online;
+            this.sqL_DataGridView_PING.Password = "user82822040";
+            this.sqL_DataGridView_PING.Port = ((uint)(3306u));
+            this.sqL_DataGridView_PING.rowHeaderBackColor = System.Drawing.Color.CornflowerBlue;
+            this.sqL_DataGridView_PING.rowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.sqL_DataGridView_PING.RowsColor = System.Drawing.SystemColors.Control;
+            this.sqL_DataGridView_PING.RowsHeight = 25;
+            this.sqL_DataGridView_PING.SaveFileName = "SQL_DataGridView";
+            this.sqL_DataGridView_PING.selectedBorderSize = 0;
+            this.sqL_DataGridView_PING.selectedRowBackColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_PING.selectedRowBorderColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_PING.selectedRowForeColor = System.Drawing.Color.White;
+            this.sqL_DataGridView_PING.Server = "127.0.0.0";
+            this.sqL_DataGridView_PING.Size = new System.Drawing.Size(153, 405);
+            this.sqL_DataGridView_PING.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
+            this.sqL_DataGridView_PING.TabIndex = 34;
+            this.sqL_DataGridView_PING.UserName = "root";
+            this.sqL_DataGridView_PING.可拖曳欄位寬度 = false;
+            this.sqL_DataGridView_PING.可選擇多列 = true;
+            this.sqL_DataGridView_PING.單格樣式 = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.sqL_DataGridView_PING.自動換行 = true;
+            this.sqL_DataGridView_PING.表單字體 = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
+            this.sqL_DataGridView_PING.邊框樣式 = System.Windows.Forms.BorderStyle.None;
+            this.sqL_DataGridView_PING.顯示CheckBox = false;
+            this.sqL_DataGridView_PING.顯示首列 = false;
+            this.sqL_DataGridView_PING.顯示首行 = true;
+            this.sqL_DataGridView_PING.首列樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.sqL_DataGridView_PING.首行樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            // 
             // rJ_GroupBox1
             // 
             // 
             // rJ_GroupBox1.ContentsPanel
             // 
-            this.rJ_GroupBox1.ContentsPanel.BackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox1.ContentsPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.rJ_GroupBox1.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
             this.rJ_GroupBox1.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox1.ContentsPanel.BorderRadius = 2;
             this.rJ_GroupBox1.ContentsPanel.BorderSize = 2;
@@ -183,19 +385,21 @@ namespace H_Pannel_lib
             this.rJ_GroupBox1.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox1.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox1.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.rJ_GroupBox1.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_GroupBox1.ContentsPanel.ShadowSize = 0;
             this.rJ_GroupBox1.ContentsPanel.Size = new System.Drawing.Size(1006, 480);
             this.rJ_GroupBox1.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rJ_GroupBox1.GUID = "";
             this.rJ_GroupBox1.Location = new System.Drawing.Point(387, 0);
             this.rJ_GroupBox1.Name = "rJ_GroupBox1";
-            this.rJ_GroupBox1.PannelBackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox1.PannelBackColor = System.Drawing.SystemColors.Control;
             this.rJ_GroupBox1.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox1.PannelBorderRadius = 2;
             this.rJ_GroupBox1.PannelBorderSize = 2;
             this.rJ_GroupBox1.Size = new System.Drawing.Size(1006, 517);
             this.rJ_GroupBox1.TabIndex = 35;
-            this.rJ_GroupBox1.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.rJ_GroupBox1.TitleBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.rJ_GroupBox1.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_GroupBox1.TitleBorderRadius = 5;
             this.rJ_GroupBox1.TitleBorderSize = 0;
@@ -212,23 +416,18 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_UDP_DataReceive.BorderColor = System.Drawing.Color.LightBlue;
             this.sqL_DataGridView_UDP_DataReceive.BorderRadius = 0;
             this.sqL_DataGridView_UDP_DataReceive.BorderSize = 2;
+            this.sqL_DataGridView_UDP_DataReceive.CellBorderColor = System.Drawing.Color.White;
             this.sqL_DataGridView_UDP_DataReceive.cellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.sqL_DataGridView_UDP_DataReceive.cellStylBackColor = System.Drawing.Color.LightBlue;
             this.sqL_DataGridView_UDP_DataReceive.cellStyleFont = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Bold);
             this.sqL_DataGridView_UDP_DataReceive.cellStylForeColor = System.Drawing.Color.Black;
             this.sqL_DataGridView_UDP_DataReceive.columnHeaderBackColor = System.Drawing.Color.SkyBlue;
+            this.sqL_DataGridView_UDP_DataReceive.columnHeaderBorderColor = System.Drawing.Color.DimGray;
             this.sqL_DataGridView_UDP_DataReceive.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Bold);
             this.sqL_DataGridView_UDP_DataReceive.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.sqL_DataGridView_UDP_DataReceive.columnHeadersHeight = 18;
             this.sqL_DataGridView_UDP_DataReceive.columnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.sqL_DataGridView_UDP_DataReceive.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_UDP_DataReceive.Columns"))));
-            this.sqL_DataGridView_UDP_DataReceive.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_UDP_DataReceive.Columns1"))));
-            this.sqL_DataGridView_UDP_DataReceive.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_UDP_DataReceive.Columns2"))));
-            this.sqL_DataGridView_UDP_DataReceive.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_UDP_DataReceive.Columns3"))));
-            this.sqL_DataGridView_UDP_DataReceive.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_UDP_DataReceive.Columns4"))));
-            this.sqL_DataGridView_UDP_DataReceive.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_UDP_DataReceive.Columns5"))));
-            this.sqL_DataGridView_UDP_DataReceive.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_UDP_DataReceive.Columns6"))));
-            this.sqL_DataGridView_UDP_DataReceive.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_UDP_DataReceive.Columns7"))));
+            this.sqL_DataGridView_UDP_DataReceive.DataGridViewAutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.sqL_DataGridView_UDP_DataReceive.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sqL_DataGridView_UDP_DataReceive.Font = new System.Drawing.Font("新細明體", 9F);
             this.sqL_DataGridView_UDP_DataReceive.ImageBox = false;
@@ -242,6 +441,10 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_UDP_DataReceive.RowsColor = System.Drawing.SystemColors.Control;
             this.sqL_DataGridView_UDP_DataReceive.RowsHeight = 40;
             this.sqL_DataGridView_UDP_DataReceive.SaveFileName = "SQL_DataGridView";
+            this.sqL_DataGridView_UDP_DataReceive.selectedBorderSize = 0;
+            this.sqL_DataGridView_UDP_DataReceive.selectedRowBackColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_UDP_DataReceive.selectedRowBorderColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_UDP_DataReceive.selectedRowForeColor = System.Drawing.Color.White;
             this.sqL_DataGridView_UDP_DataReceive.Server = "127.0.0.0";
             this.sqL_DataGridView_UDP_DataReceive.Size = new System.Drawing.Size(996, 470);
             this.sqL_DataGridView_UDP_DataReceive.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
@@ -264,7 +467,8 @@ namespace H_Pannel_lib
             // 
             // rJ_GroupBox2.ContentsPanel
             // 
-            this.rJ_GroupBox2.ContentsPanel.BackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox2.ContentsPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.rJ_GroupBox2.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
             this.rJ_GroupBox2.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox2.ContentsPanel.BorderRadius = 5;
             this.rJ_GroupBox2.ContentsPanel.BorderSize = 2;
@@ -282,19 +486,21 @@ namespace H_Pannel_lib
             this.rJ_GroupBox2.ContentsPanel.Location = new System.Drawing.Point(0, 37);
             this.rJ_GroupBox2.ContentsPanel.Name = "ContentsPanel";
             this.rJ_GroupBox2.ContentsPanel.Padding = new System.Windows.Forms.Padding(3);
+            this.rJ_GroupBox2.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_GroupBox2.ContentsPanel.ShadowSize = 0;
             this.rJ_GroupBox2.ContentsPanel.Size = new System.Drawing.Size(387, 480);
             this.rJ_GroupBox2.ContentsPanel.TabIndex = 2;
             this.rJ_GroupBox2.Dock = System.Windows.Forms.DockStyle.Left;
             this.rJ_GroupBox2.GUID = "";
             this.rJ_GroupBox2.Location = new System.Drawing.Point(0, 0);
             this.rJ_GroupBox2.Name = "rJ_GroupBox2";
-            this.rJ_GroupBox2.PannelBackColor = System.Drawing.Color.White;
+            this.rJ_GroupBox2.PannelBackColor = System.Drawing.SystemColors.Control;
             this.rJ_GroupBox2.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.rJ_GroupBox2.PannelBorderRadius = 5;
             this.rJ_GroupBox2.PannelBorderSize = 2;
             this.rJ_GroupBox2.Size = new System.Drawing.Size(387, 517);
             this.rJ_GroupBox2.TabIndex = 36;
-            this.rJ_GroupBox2.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
+            this.rJ_GroupBox2.TitleBackColor = System.Drawing.SystemColors.ActiveCaption;
             this.rJ_GroupBox2.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_GroupBox2.TitleBorderRadius = 5;
             this.rJ_GroupBox2.TitleBorderSize = 0;
@@ -313,18 +519,27 @@ namespace H_Pannel_lib
             this.rJ_Button_Save.BorderRadius = 5;
             this.rJ_Button_Save.BorderSize = 0;
             this.rJ_Button_Save.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Save.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_Save.FlatAppearance.BorderSize = 0;
             this.rJ_Button_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Save.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Save.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_Save.GUID = "";
+            this.rJ_Button_Save.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_Save.Location = new System.Drawing.Point(186, 385);
             this.rJ_Button_Save.Name = "rJ_Button_Save";
+            this.rJ_Button_Save.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_Save.ProhibitionLineWidth = 4;
+            this.rJ_Button_Save.ProhibitionSymbolSize = 30;
+            this.rJ_Button_Save.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_Save.ShadowSize = 0;
+            this.rJ_Button_Save.ShowLoadingForm = false;
             this.rJ_Button_Save.Size = new System.Drawing.Size(90, 42);
             this.rJ_Button_Save.State = false;
             this.rJ_Button_Save.TabIndex = 37;
             this.rJ_Button_Save.Text = "Save";
             this.rJ_Button_Save.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Save.TextHeight = 0;
             this.rJ_Button_Save.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_Load
@@ -336,18 +551,27 @@ namespace H_Pannel_lib
             this.rJ_Button_Load.BorderRadius = 5;
             this.rJ_Button_Load.BorderSize = 0;
             this.rJ_Button_Load.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Load.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_Load.FlatAppearance.BorderSize = 0;
             this.rJ_Button_Load.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Load.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Load.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_Load.GUID = "";
+            this.rJ_Button_Load.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_Load.Location = new System.Drawing.Point(282, 385);
             this.rJ_Button_Load.Name = "rJ_Button_Load";
+            this.rJ_Button_Load.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_Load.ProhibitionLineWidth = 4;
+            this.rJ_Button_Load.ProhibitionSymbolSize = 30;
+            this.rJ_Button_Load.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_Load.ShadowSize = 0;
+            this.rJ_Button_Load.ShowLoadingForm = false;
             this.rJ_Button_Load.Size = new System.Drawing.Size(90, 42);
             this.rJ_Button_Load.State = false;
             this.rJ_Button_Load.TabIndex = 36;
             this.rJ_Button_Load.Text = "Load";
             this.rJ_Button_Load.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Load.TextHeight = 0;
             this.rJ_Button_Load.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_Lock_Off
@@ -359,18 +583,27 @@ namespace H_Pannel_lib
             this.rJ_Button_Lock_Off.BorderRadius = 5;
             this.rJ_Button_Lock_Off.BorderSize = 0;
             this.rJ_Button_Lock_Off.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Lock_Off.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_Lock_Off.FlatAppearance.BorderSize = 0;
             this.rJ_Button_Lock_Off.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Lock_Off.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Lock_Off.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_Lock_Off.GUID = "";
+            this.rJ_Button_Lock_Off.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_Lock_Off.Location = new System.Drawing.Point(186, 432);
             this.rJ_Button_Lock_Off.Name = "rJ_Button_Lock_Off";
+            this.rJ_Button_Lock_Off.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_Lock_Off.ProhibitionLineWidth = 4;
+            this.rJ_Button_Lock_Off.ProhibitionSymbolSize = 30;
+            this.rJ_Button_Lock_Off.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_Lock_Off.ShadowSize = 0;
+            this.rJ_Button_Lock_Off.ShowLoadingForm = false;
             this.rJ_Button_Lock_Off.Size = new System.Drawing.Size(90, 42);
             this.rJ_Button_Lock_Off.State = false;
             this.rJ_Button_Lock_Off.TabIndex = 35;
             this.rJ_Button_Lock_Off.Text = "Lock Off";
             this.rJ_Button_Lock_Off.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Lock_Off.TextHeight = 0;
             this.rJ_Button_Lock_Off.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_Lock_On
@@ -382,18 +615,27 @@ namespace H_Pannel_lib
             this.rJ_Button_Lock_On.BorderRadius = 5;
             this.rJ_Button_Lock_On.BorderSize = 0;
             this.rJ_Button_Lock_On.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Lock_On.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_Lock_On.FlatAppearance.BorderSize = 0;
             this.rJ_Button_Lock_On.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Lock_On.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Lock_On.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_Lock_On.GUID = "";
+            this.rJ_Button_Lock_On.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_Lock_On.Location = new System.Drawing.Point(282, 432);
             this.rJ_Button_Lock_On.Name = "rJ_Button_Lock_On";
+            this.rJ_Button_Lock_On.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_Lock_On.ProhibitionLineWidth = 4;
+            this.rJ_Button_Lock_On.ProhibitionSymbolSize = 30;
+            this.rJ_Button_Lock_On.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_Lock_On.ShadowSize = 0;
+            this.rJ_Button_Lock_On.ShowLoadingForm = false;
             this.rJ_Button_Lock_On.Size = new System.Drawing.Size(90, 42);
             this.rJ_Button_Lock_On.State = false;
             this.rJ_Button_Lock_On.TabIndex = 34;
             this.rJ_Button_Lock_On.Text = "Lock On";
             this.rJ_Button_Lock_On.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Lock_On.TextHeight = 0;
             this.rJ_Button_Lock_On.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_Write
@@ -405,18 +647,27 @@ namespace H_Pannel_lib
             this.rJ_Button_Write.BorderRadius = 5;
             this.rJ_Button_Write.BorderSize = 0;
             this.rJ_Button_Write.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Write.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_Write.FlatAppearance.BorderSize = 0;
             this.rJ_Button_Write.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Write.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Write.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_Write.GUID = "";
+            this.rJ_Button_Write.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_Write.Location = new System.Drawing.Point(94, 432);
             this.rJ_Button_Write.Name = "rJ_Button_Write";
+            this.rJ_Button_Write.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_Write.ProhibitionLineWidth = 4;
+            this.rJ_Button_Write.ProhibitionSymbolSize = 30;
+            this.rJ_Button_Write.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_Write.ShadowSize = 0;
+            this.rJ_Button_Write.ShowLoadingForm = false;
             this.rJ_Button_Write.Size = new System.Drawing.Size(80, 42);
             this.rJ_Button_Write.State = false;
             this.rJ_Button_Write.TabIndex = 33;
             this.rJ_Button_Write.Text = "Write";
             this.rJ_Button_Write.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Write.TextHeight = 0;
             this.rJ_Button_Write.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_Read
@@ -428,18 +679,27 @@ namespace H_Pannel_lib
             this.rJ_Button_Read.BorderRadius = 5;
             this.rJ_Button_Read.BorderSize = 0;
             this.rJ_Button_Read.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Read.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_Read.FlatAppearance.BorderSize = 0;
             this.rJ_Button_Read.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Read.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Read.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_Read.GUID = "";
+            this.rJ_Button_Read.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_Read.Location = new System.Drawing.Point(8, 432);
             this.rJ_Button_Read.Name = "rJ_Button_Read";
+            this.rJ_Button_Read.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_Read.ProhibitionLineWidth = 4;
+            this.rJ_Button_Read.ProhibitionSymbolSize = 30;
+            this.rJ_Button_Read.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_Read.ShadowSize = 0;
+            this.rJ_Button_Read.ShowLoadingForm = false;
             this.rJ_Button_Read.Size = new System.Drawing.Size(80, 42);
             this.rJ_Button_Read.State = false;
             this.rJ_Button_Read.TabIndex = 32;
             this.rJ_Button_Read.Text = "Read";
             this.rJ_Button_Read.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Read.TextHeight = 0;
             this.rJ_Button_Read.UseVisualStyleBackColor = false;
             // 
             // groupBox1
@@ -1125,18 +1385,27 @@ namespace H_Pannel_lib
             this.rJ_Button_Station_Write.BorderRadius = 5;
             this.rJ_Button_Station_Write.BorderSize = 0;
             this.rJ_Button_Station_Write.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Station_Write.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_Station_Write.FlatAppearance.BorderSize = 0;
             this.rJ_Button_Station_Write.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Station_Write.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Station_Write.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_Station_Write.GUID = "";
+            this.rJ_Button_Station_Write.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_Station_Write.Location = new System.Drawing.Point(281, 4);
             this.rJ_Button_Station_Write.Name = "rJ_Button_Station_Write";
+            this.rJ_Button_Station_Write.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_Station_Write.ProhibitionLineWidth = 4;
+            this.rJ_Button_Station_Write.ProhibitionSymbolSize = 30;
+            this.rJ_Button_Station_Write.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_Station_Write.ShadowSize = 0;
+            this.rJ_Button_Station_Write.ShowLoadingForm = false;
             this.rJ_Button_Station_Write.Size = new System.Drawing.Size(80, 34);
             this.rJ_Button_Station_Write.State = false;
             this.rJ_Button_Station_Write.TabIndex = 41;
             this.rJ_Button_Station_Write.Text = "Write";
             this.rJ_Button_Station_Write.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Station_Write.TextHeight = 0;
             this.rJ_Button_Station_Write.UseVisualStyleBackColor = false;
             // 
             // textBox_COM
@@ -1173,193 +1442,6 @@ namespace H_Pannel_lib
             this.label25.TabIndex = 1;
             this.label25.Text = "Station :";
             // 
-            // rJ_GroupBox4
-            // 
-            // 
-            // rJ_GroupBox4.ContentsPanel
-            // 
-            this.rJ_GroupBox4.ContentsPanel.BackColor = System.Drawing.Color.White;
-            this.rJ_GroupBox4.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
-            this.rJ_GroupBox4.ContentsPanel.BorderRadius = 2;
-            this.rJ_GroupBox4.ContentsPanel.BorderSize = 2;
-            this.rJ_GroupBox4.ContentsPanel.Controls.Add(this.sqL_DataGridView_PING);
-            this.rJ_GroupBox4.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rJ_GroupBox4.ContentsPanel.ForeColor = System.Drawing.Color.White;
-            this.rJ_GroupBox4.ContentsPanel.IsSelected = false;
-            this.rJ_GroupBox4.ContentsPanel.Location = new System.Drawing.Point(0, 37);
-            this.rJ_GroupBox4.ContentsPanel.Name = "ContentsPanel";
-            this.rJ_GroupBox4.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.rJ_GroupBox4.ContentsPanel.Size = new System.Drawing.Size(163, 415);
-            this.rJ_GroupBox4.ContentsPanel.TabIndex = 2;
-            this.rJ_GroupBox4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rJ_GroupBox4.GUID = "";
-            this.rJ_GroupBox4.Location = new System.Drawing.Point(1230, 517);
-            this.rJ_GroupBox4.Name = "rJ_GroupBox4";
-            this.rJ_GroupBox4.PannelBackColor = System.Drawing.Color.White;
-            this.rJ_GroupBox4.PannelBorderColor = System.Drawing.Color.SkyBlue;
-            this.rJ_GroupBox4.PannelBorderRadius = 2;
-            this.rJ_GroupBox4.PannelBorderSize = 2;
-            this.rJ_GroupBox4.Size = new System.Drawing.Size(163, 452);
-            this.rJ_GroupBox4.TabIndex = 39;
-            this.rJ_GroupBox4.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
-            this.rJ_GroupBox4.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_GroupBox4.TitleBorderRadius = 5;
-            this.rJ_GroupBox4.TitleBorderSize = 0;
-            this.rJ_GroupBox4.TitleFont = new System.Drawing.Font("新細明體", 12F);
-            this.rJ_GroupBox4.TitleForeColor = System.Drawing.Color.White;
-            this.rJ_GroupBox4.TitleHeight = 37;
-            this.rJ_GroupBox4.TitleTextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_GroupBox4.TitleTexts = "未上線裝置";
-            // 
-            // sqL_DataGridView_PING
-            // 
-            this.sqL_DataGridView_PING.AutoSelectToDeep = true;
-            this.sqL_DataGridView_PING.AutoSize = true;
-            this.sqL_DataGridView_PING.backColor = System.Drawing.Color.LightBlue;
-            this.sqL_DataGridView_PING.BorderColor = System.Drawing.Color.LightBlue;
-            this.sqL_DataGridView_PING.BorderRadius = 0;
-            this.sqL_DataGridView_PING.BorderSize = 2;
-            this.sqL_DataGridView_PING.cellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.sqL_DataGridView_PING.cellStylBackColor = System.Drawing.Color.LightBlue;
-            this.sqL_DataGridView_PING.cellStyleFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.sqL_DataGridView_PING.cellStylForeColor = System.Drawing.Color.Black;
-            this.sqL_DataGridView_PING.columnHeaderBackColor = System.Drawing.Color.SkyBlue;
-            this.sqL_DataGridView_PING.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
-            this.sqL_DataGridView_PING.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.sqL_DataGridView_PING.columnHeadersHeight = 19;
-            this.sqL_DataGridView_PING.columnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.sqL_DataGridView_PING.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_PING.Columns"))));
-            this.sqL_DataGridView_PING.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sqL_DataGridView_PING.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
-            this.sqL_DataGridView_PING.ImageBox = false;
-            this.sqL_DataGridView_PING.Location = new System.Drawing.Point(5, 5);
-            this.sqL_DataGridView_PING.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.sqL_DataGridView_PING.Name = "sqL_DataGridView_PING";
-            this.sqL_DataGridView_PING.OnlineState = SQLUI.SQL_DataGridView.OnlineEnum.Online;
-            this.sqL_DataGridView_PING.Password = "user82822040";
-            this.sqL_DataGridView_PING.Port = ((uint)(3306u));
-            this.sqL_DataGridView_PING.rowHeaderBackColor = System.Drawing.Color.CornflowerBlue;
-            this.sqL_DataGridView_PING.rowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.sqL_DataGridView_PING.RowsColor = System.Drawing.SystemColors.Control;
-            this.sqL_DataGridView_PING.RowsHeight = 25;
-            this.sqL_DataGridView_PING.SaveFileName = "SQL_DataGridView";
-            this.sqL_DataGridView_PING.Server = "127.0.0.0";
-            this.sqL_DataGridView_PING.Size = new System.Drawing.Size(153, 405);
-            this.sqL_DataGridView_PING.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
-            this.sqL_DataGridView_PING.TabIndex = 34;
-            this.sqL_DataGridView_PING.UserName = "root";
-            this.sqL_DataGridView_PING.可拖曳欄位寬度 = false;
-            this.sqL_DataGridView_PING.可選擇多列 = true;
-            this.sqL_DataGridView_PING.單格樣式 = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.sqL_DataGridView_PING.自動換行 = true;
-            this.sqL_DataGridView_PING.表單字體 = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
-            this.sqL_DataGridView_PING.邊框樣式 = System.Windows.Forms.BorderStyle.None;
-            this.sqL_DataGridView_PING.顯示CheckBox = false;
-            this.sqL_DataGridView_PING.顯示首列 = false;
-            this.sqL_DataGridView_PING.顯示首行 = true;
-            this.sqL_DataGridView_PING.首列樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.sqL_DataGridView_PING.首行樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            // 
-            // rJ_GroupBox3
-            // 
-            // 
-            // rJ_GroupBox3.ContentsPanel
-            // 
-            this.rJ_GroupBox3.ContentsPanel.BackColor = System.Drawing.Color.White;
-            this.rJ_GroupBox3.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
-            this.rJ_GroupBox3.ContentsPanel.BorderRadius = 2;
-            this.rJ_GroupBox3.ContentsPanel.BorderSize = 2;
-            this.rJ_GroupBox3.ContentsPanel.Controls.Add(this.sqL_DataGridView_DeviceTable);
-            this.rJ_GroupBox3.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rJ_GroupBox3.ContentsPanel.ForeColor = System.Drawing.Color.White;
-            this.rJ_GroupBox3.ContentsPanel.IsSelected = false;
-            this.rJ_GroupBox3.ContentsPanel.Location = new System.Drawing.Point(0, 37);
-            this.rJ_GroupBox3.ContentsPanel.Name = "ContentsPanel";
-            this.rJ_GroupBox3.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.rJ_GroupBox3.ContentsPanel.Size = new System.Drawing.Size(1230, 415);
-            this.rJ_GroupBox3.ContentsPanel.TabIndex = 2;
-            this.rJ_GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rJ_GroupBox3.GUID = "";
-            this.rJ_GroupBox3.Location = new System.Drawing.Point(0, 517);
-            this.rJ_GroupBox3.Name = "rJ_GroupBox3";
-            this.rJ_GroupBox3.PannelBackColor = System.Drawing.Color.White;
-            this.rJ_GroupBox3.PannelBorderColor = System.Drawing.Color.SkyBlue;
-            this.rJ_GroupBox3.PannelBorderRadius = 2;
-            this.rJ_GroupBox3.PannelBorderSize = 2;
-            this.rJ_GroupBox3.Size = new System.Drawing.Size(1230, 452);
-            this.rJ_GroupBox3.TabIndex = 40;
-            this.rJ_GroupBox3.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
-            this.rJ_GroupBox3.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_GroupBox3.TitleBorderRadius = 5;
-            this.rJ_GroupBox3.TitleBorderSize = 0;
-            this.rJ_GroupBox3.TitleFont = new System.Drawing.Font("新細明體", 12F);
-            this.rJ_GroupBox3.TitleForeColor = System.Drawing.Color.White;
-            this.rJ_GroupBox3.TitleHeight = 37;
-            this.rJ_GroupBox3.TitleTextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_GroupBox3.TitleTexts = "DeviceTable";
-            // 
-            // sqL_DataGridView_DeviceTable
-            // 
-            this.sqL_DataGridView_DeviceTable.AutoSelectToDeep = true;
-            this.sqL_DataGridView_DeviceTable.AutoSize = true;
-            this.sqL_DataGridView_DeviceTable.backColor = System.Drawing.Color.LightBlue;
-            this.sqL_DataGridView_DeviceTable.BorderColor = System.Drawing.Color.LightBlue;
-            this.sqL_DataGridView_DeviceTable.BorderRadius = 0;
-            this.sqL_DataGridView_DeviceTable.BorderSize = 2;
-            this.sqL_DataGridView_DeviceTable.cellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.sqL_DataGridView_DeviceTable.cellStylBackColor = System.Drawing.Color.LightBlue;
-            this.sqL_DataGridView_DeviceTable.cellStyleFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.sqL_DataGridView_DeviceTable.cellStylForeColor = System.Drawing.Color.Black;
-            this.sqL_DataGridView_DeviceTable.columnHeaderBackColor = System.Drawing.Color.SkyBlue;
-            this.sqL_DataGridView_DeviceTable.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
-            this.sqL_DataGridView_DeviceTable.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.sqL_DataGridView_DeviceTable.columnHeadersHeight = 19;
-            this.sqL_DataGridView_DeviceTable.columnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.sqL_DataGridView_DeviceTable.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_DeviceTable.Columns"))));
-            this.sqL_DataGridView_DeviceTable.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_DeviceTable.Columns1"))));
-            this.sqL_DataGridView_DeviceTable.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_DeviceTable.Columns2"))));
-            this.sqL_DataGridView_DeviceTable.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_DeviceTable.Columns3"))));
-            this.sqL_DataGridView_DeviceTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sqL_DataGridView_DeviceTable.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
-            this.sqL_DataGridView_DeviceTable.ImageBox = false;
-            this.sqL_DataGridView_DeviceTable.Location = new System.Drawing.Point(5, 5);
-            this.sqL_DataGridView_DeviceTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.sqL_DataGridView_DeviceTable.Name = "sqL_DataGridView_DeviceTable";
-            this.sqL_DataGridView_DeviceTable.OnlineState = SQLUI.SQL_DataGridView.OnlineEnum.Online;
-            this.sqL_DataGridView_DeviceTable.Password = "user82822040";
-            this.sqL_DataGridView_DeviceTable.Port = ((uint)(3306u));
-            this.sqL_DataGridView_DeviceTable.rowHeaderBackColor = System.Drawing.Color.CornflowerBlue;
-            this.sqL_DataGridView_DeviceTable.rowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.sqL_DataGridView_DeviceTable.RowsColor = System.Drawing.SystemColors.Control;
-            this.sqL_DataGridView_DeviceTable.RowsHeight = 40;
-            this.sqL_DataGridView_DeviceTable.SaveFileName = "SQL_DataGridView";
-            this.sqL_DataGridView_DeviceTable.Server = "127.0.0.0";
-            this.sqL_DataGridView_DeviceTable.Size = new System.Drawing.Size(1220, 405);
-            this.sqL_DataGridView_DeviceTable.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
-            this.sqL_DataGridView_DeviceTable.TabIndex = 1;
-            this.sqL_DataGridView_DeviceTable.UserName = "root";
-            this.sqL_DataGridView_DeviceTable.可拖曳欄位寬度 = false;
-            this.sqL_DataGridView_DeviceTable.可選擇多列 = true;
-            this.sqL_DataGridView_DeviceTable.單格樣式 = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.sqL_DataGridView_DeviceTable.自動換行 = true;
-            this.sqL_DataGridView_DeviceTable.表單字體 = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
-            this.sqL_DataGridView_DeviceTable.邊框樣式 = System.Windows.Forms.BorderStyle.None;
-            this.sqL_DataGridView_DeviceTable.顯示CheckBox = false;
-            this.sqL_DataGridView_DeviceTable.顯示首列 = true;
-            this.sqL_DataGridView_DeviceTable.顯示首行 = true;
-            this.sqL_DataGridView_DeviceTable.首列樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.sqL_DataGridView_DeviceTable.首行樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            // 
-            // openFileDialog_LoadExcel
-            // 
-            this.openFileDialog_LoadExcel.DefaultExt = "txt";
-            this.openFileDialog_LoadExcel.Filter = "txt File (*.txt)|*.txt;";
-            // 
-            // saveFileDialog_SaveExcel
-            // 
-            this.saveFileDialog_SaveExcel.DefaultExt = "txt";
-            this.saveFileDialog_SaveExcel.Filter = "txt File (*.txt)|*.txt;";
-            // 
             // DeviceBasicUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1370,6 +1452,12 @@ namespace H_Pannel_lib
             this.Name = "DeviceBasicUI";
             this.Size = new System.Drawing.Size(1393, 969);
             this.panel23.ResumeLayout(false);
+            this.rJ_GroupBox3.ContentsPanel.ResumeLayout(false);
+            this.rJ_GroupBox3.ContentsPanel.PerformLayout();
+            this.rJ_GroupBox3.ResumeLayout(false);
+            this.rJ_GroupBox4.ContentsPanel.ResumeLayout(false);
+            this.rJ_GroupBox4.ContentsPanel.PerformLayout();
+            this.rJ_GroupBox4.ResumeLayout(false);
             this.rJ_GroupBox1.ContentsPanel.ResumeLayout(false);
             this.rJ_GroupBox1.ResumeLayout(false);
             this.rJ_GroupBox2.ContentsPanel.ResumeLayout(false);
@@ -1407,12 +1495,6 @@ namespace H_Pannel_lib
             this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.rJ_GroupBox4.ContentsPanel.ResumeLayout(false);
-            this.rJ_GroupBox4.ContentsPanel.PerformLayout();
-            this.rJ_GroupBox4.ResumeLayout(false);
-            this.rJ_GroupBox3.ContentsPanel.ResumeLayout(false);
-            this.rJ_GroupBox3.ContentsPanel.PerformLayout();
-            this.rJ_GroupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
