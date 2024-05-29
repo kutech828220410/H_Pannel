@@ -2682,12 +2682,23 @@ namespace H_Pannel_lib
         private string _Name = "";
         public string Name { get => _Name; set => _Name = value; }
         [JsonIgnore]
-        public Font Name_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font Name_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_Name_font_Serialize);
+            }
+            set
+            {
+                _Name_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _Name_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
         [Browsable(false)]
         public string Name_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(Name_font); }
-            set { Name_font = FontSerializationHelper.FromString(value); }
+            get { return _Name_font_Serialize; }
+            set { _Name_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color Name_BackColor = Color.White;
@@ -2729,14 +2740,25 @@ namespace H_Pannel_lib
         #region ChineseName
         private string _ChineseName_Title = "";
         public string ChineseName_Title { get => _ChineseName_Title; set => _ChineseName_Title = value; }
-     
+
         [JsonIgnore]
-        public Font ChineseName_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font ChineseName_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_ChineseName_font_Serialize);
+            }
+            set
+            {
+                _ChineseName_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _ChineseName_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
         [Browsable(false)]
         public string ChineseName_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(ChineseName_font); }
-            set { ChineseName_font = FontSerializationHelper.FromString(value); }
+            get { return _ChineseName_font_Serialize; }
+            set { _ChineseName_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color ChineseName_BackColor = Color.White;
@@ -2781,12 +2803,23 @@ namespace H_Pannel_lib
         private string _Package = "";
         public string Package { get => _Package; set => _Package = value; }
         [JsonIgnore]
-        public Font Package_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font Package_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_Package_font_Serialize);
+            }
+            set
+            {
+                _Package_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _Package_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
         [Browsable(false)]
         public string Package_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(Package_font); }
-            set { Package_font = FontSerializationHelper.FromString(value); }
+            get { return _Package_font_Serialize; }
+            set { _Package_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color Package_BackColor = Color.White;
@@ -2831,12 +2864,23 @@ namespace H_Pannel_lib
         private string _Scientific_Name = "";
         public string Scientific_Name { get => _Scientific_Name; set => _Scientific_Name = value; }
         [JsonIgnore]
-        public Font Scientific_Name_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font Scientific_Name_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_Scientific_Name_font_Serialize);
+            }
+            set
+            {
+                _Scientific_Name_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _Scientific_Name_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
         [Browsable(false)]
         public string Scientific_Name_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(Scientific_Name_font); }
-            set { Scientific_Name_font = FontSerializationHelper.FromString(value); }
+            get { return _Scientific_Name_font_Serialize; }
+            set { _Scientific_Name_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color Scientific_Name_BackColor = Color.White;
@@ -2878,14 +2922,25 @@ namespace H_Pannel_lib
         #region Code
         private string _Code_Title = "";
         public string Code_Title { get => _Code_Title; set => _Code_Title = value; }
- 
+
         [JsonIgnore]
-        public Font Code_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font Code_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_Code_font_Serialize);
+            }
+            set
+            {
+                _Code_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _Code_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
         [Browsable(false)]
         public string Code_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(Code_font); }
-            set { Code_font = FontSerializationHelper.FromString(value); }
+            get { return _Code_font_Serialize; }
+            set { _Code_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color Code_BackColor = Color.White;
@@ -2930,12 +2985,23 @@ namespace H_Pannel_lib
         private string _Label = "";
         public string Label { get => _Label; set => _Label = value; }
         [JsonIgnore]
-        public Font Label_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font Label_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_Label_font_Serialize);
+            }
+            set
+            {
+                _Label_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _Label_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
         [Browsable(false)]
         public string Label_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(Label_font); }
-            set { Label_font = FontSerializationHelper.FromString(value); }
+            get { return _Label_font_Serialize; }
+            set { _Label_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color Label_BackColor = Color.White;
@@ -2980,12 +3046,23 @@ namespace H_Pannel_lib
         private string _Validity_period = "";
         public string Validity_period { get => _Validity_period; set => _Validity_period = value; }
         [JsonIgnore]
-        public Font Validity_period_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font Validity_period_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_Validity_period_font_Serialize);
+            }
+            set
+            {
+                _Validity_period_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _Validity_period_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
         [Browsable(false)]
         public string Validity_period_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(Validity_period_font); }
-            set { Validity_period_font = FontSerializationHelper.FromString(value); }
+            get { return _Validity_period_font_Serialize; }
+            set { _Validity_period_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color Validity_period_BackColor = Color.White;
@@ -3028,13 +3105,24 @@ namespace H_Pannel_lib
         private string _StorageName_Title = "";
         public string StorageName_Title { get => _StorageName_Title; set => _StorageName_Title = value; }
     
-        [JsonIgnore]
-        public Font StorageName_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+       [JsonIgnore]
+        public Font StorageName_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_StorageName_font_Serialize);
+            }
+            set
+            {
+                _StorageName_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _StorageName_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
         [Browsable(false)]
         public string StorageName_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(StorageName_font); }
-            set { StorageName_font = FontSerializationHelper.FromString(value); }
+            get { return _StorageName_font_Serialize; }
+            set { _StorageName_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color StorageName_BackColor = Color.White;
@@ -3079,12 +3167,23 @@ namespace H_Pannel_lib
         private string _MinPackage = "";
         public string MinPackage { get => _MinPackage; set => _MinPackage = value; }
         [JsonIgnore]
-        public Font MinPackage_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font MinPackage_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_MinPackage_font_Serialize);
+            }
+            set
+            {
+                _MinPackage_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _MinPackage_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
         [Browsable(false)]
         public string MinPackage_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(MinPackage_font); }
-            set { MinPackage_font = FontSerializationHelper.FromString(value); }
+            get { return _MinPackage_font_Serialize; }
+            set { _MinPackage_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color MinPackage_BackColor = Color.White;
@@ -3126,14 +3225,25 @@ namespace H_Pannel_lib
         #region Min_Package_Num
         private string _Min_Package_Num_Title = "";
         public string Min_Package_Num_Title { get => _Min_Package_Num_Title; set => _Min_Package_Num_Title = value; }
-    
+
         [JsonIgnore]
-        public Font Min_Package_Num_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font Min_Package_Num_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_Min_Package_Num_font_Serialize);
+            }
+            set
+            {
+                _Min_Package_Num_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _Min_Package_Num_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
         [Browsable(false)]
         public string Min_Package_Num_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(Min_Package_Num_font); }
-            set { Min_Package_Num_font = FontSerializationHelper.FromString(value); }
+            get { return _Min_Package_Num_font_Serialize; }
+            set { _Min_Package_Num_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color Min_Package_Num_BackColor = Color.White;
@@ -3177,12 +3287,23 @@ namespace H_Pannel_lib
         public string BarCode_Title { get => _BarCode_Title; set => _BarCode_Title = value; }
 
         [JsonIgnore]
-        public Font BarCode_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font BarCode_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_BarCode_font_Serialize);
+            }
+            set
+            {
+                _BarCode_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _BarCode_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
         [Browsable(false)]
         public string BarCode_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(BarCode_font); }
-            set { BarCode_font = FontSerializationHelper.FromString(value); }
+            get { return _BarCode_font_Serialize; }
+            set { _BarCode_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color BarCode_BackColor = Color.White;
@@ -3226,12 +3347,23 @@ namespace H_Pannel_lib
         public string Inventory_Title { get => _Inventory_Title; set => _Inventory_Title = value; }
         private string _Inventory = "";
         [JsonIgnore]
-        public Font Inventory_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font Inventory_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_Inventory_font_Serialize);
+            }
+            set
+            {
+                _Inventory_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _Inventory_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
         [Browsable(false)]
         public string Inventory_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(Inventory_font); }
-            set { Inventory_font = FontSerializationHelper.FromString(value); }
+            get { return _Inventory_font_Serialize; }
+            set { _Inventory_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color Inventory_BackColor = Color.White;
@@ -3275,12 +3407,23 @@ namespace H_Pannel_lib
         public string Max_Inventory_Title { get => _Max_Inventory_Title; set => _Max_Inventory_Title = value; }
         private string _Max_Inventory = "";
         [JsonIgnore]
-        public Font Max_Inventory_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font Max_Inventory_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_Max_Inventory_font_Serialize);
+            }
+            set
+            {
+                _Max_Inventory_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _Max_Inventory_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
         [Browsable(false)]
         public string Max_Inventory_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(Max_Inventory_font); }
-            set { Max_Inventory_font = FontSerializationHelper.FromString(value); }
+            get { return _Max_Inventory_font_Serialize; }
+            set { _Max_Inventory_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color Max_Inventory_BackColor = Color.White;
@@ -3324,12 +3467,23 @@ namespace H_Pannel_lib
         public string IP_Title { get => _IP_Title; set => _IP_Title = value; }
 
         [JsonIgnore]
-        public Font IP_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font IP_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_IP_font_Serialize);
+            }
+            set
+            {
+                _IP_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _IP_font_Serialize = "微軟正黑體:12:Bold:Point:1:False";
         [Browsable(false)]
         public string IP_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(IP_font); }
-            set { IP_font = FontSerializationHelper.FromString(value); }
+            get { return _IP_font_Serialize; }
+            set { _IP_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color IP_BackColor = Color.White;
@@ -3374,12 +3528,23 @@ namespace H_Pannel_lib
         private int _Port = 4000;
         public int Port { get => _Port; set => _Port = value; }
         [JsonIgnore]
-        public Font Port_font = new Font("微軟正黑體", 12, FontStyle.Bold);
+        public Font Port_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_Port_font_Serialize);
+            }
+            set
+            {
+                _Port_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _Port_font_Serialize = "微軟正黑體:12:Bold:Point:1:False";
         [Browsable(false)]
         public string Port_font_Serialize
         {
-            get { return FontSerializationHelper.ToString(Port_font); }
-            set { Port_font = FontSerializationHelper.FromString(value); }
+            get { return _Port_font_Serialize; }
+            set { _Port_font_Serialize = value; }
         }
         [JsonIgnore]
         public Color Port_BackColor = Color.White;

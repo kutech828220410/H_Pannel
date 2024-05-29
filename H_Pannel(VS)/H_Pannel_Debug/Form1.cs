@@ -70,6 +70,7 @@ namespace WT32_SC01
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string _Name_font_Serialize = FontSerializationHelper.ToString(new Font("微軟正黑體", 14, FontStyle.Bold));
             MyMessageBox.form = this.FindForm();
             MyMessageBox.音效 = false;
             this.MyThread_Program = new Basic.MyThread();

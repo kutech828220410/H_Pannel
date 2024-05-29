@@ -48,6 +48,20 @@ namespace H_Pannel_lib
 
             return json_result;
         }
+        static public string SQL_GetAllRowsLED_ByIP_JsonStr(SQLUI.SQLControl sQLControl , string IP)
+        {
+
+            List<object[]> deviceBasicTables = sQLControl.GetRowsByDefult(null, (int)enum_DeviceTable.IP, IP);
+            if (deviceBasicTables.Count == 0)
+            {
+                return null;
+            }
+            string json_result = deviceBasicTables[0][(int)enum_DeviceTable.Value].ObjectToString();
+
+            return json_result;
+        }
+
+
 
         static public List<RowsLED> SQL_GetAllRowsLED(SQLUI.SQLControl sQLControl)
         {
@@ -386,6 +400,61 @@ namespace H_Pannel_lib
             }
         }
 
+
+        public class ICP_SortByIP : IComparer<RowsLED>
+        {
+            public int Compare(RowsLED x, RowsLED y)
+            {
+                string IP_0 = x.IP;
+                string IP_1 = y.IP;
+                string[] IP_0_Array = IP_0.Split('.');
+                string[] IP_1_Array = IP_1.Split('.');
+                IP_0 = "";
+                IP_1 = "";
+                for (int i = 0; i < 4; i++)
+                {
+                    if (IP_0_Array[i].Length < 3) IP_0_Array[i] = "0" + IP_0_Array[i];
+                    if (IP_0_Array[i].Length < 3) IP_0_Array[i] = "0" + IP_0_Array[i];
+                    if (IP_0_Array[i].Length < 3) IP_0_Array[i] = "0" + IP_0_Array[i];
+
+                    if (IP_1_Array[i].Length < 3) IP_1_Array[i] = "0" + IP_1_Array[i];
+                    if (IP_1_Array[i].Length < 3) IP_1_Array[i] = "0" + IP_1_Array[i];
+                    if (IP_1_Array[i].Length < 3) IP_1_Array[i] = "0" + IP_1_Array[i];
+
+                    IP_0 += IP_0_Array[i];
+                    IP_1 += IP_1_Array[i];
+                }
+                int cmp = IP_0_Array[2].CompareTo(IP_1_Array[2]);
+                if (cmp > 0)
+                {
+                    return 1;
+                }
+                else if (cmp < 0)
+                {
+                    return -1;
+                }
+                else if (cmp == 0)
+                {
+                    cmp = IP_0_Array[3].CompareTo(IP_1_Array[3]);
+                    if (cmp > 0)
+                    {
+                        return 1;
+                    }
+                    else if (cmp < 0)
+                    {
+                        return -1;
+                    }
+                    else if (cmp == 0)
+                    {
+                        return 0;
+                    }
+                }
+
+                return 0;
+
+            }
+        }
+
     }
 
     [Serializable]
@@ -407,4 +476,6 @@ namespace H_Pannel_lib
             this.DeviceType = DeviceType.RowsLED;
         }
     }
+
+   
 }
