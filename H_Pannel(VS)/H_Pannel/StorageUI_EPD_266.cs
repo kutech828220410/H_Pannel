@@ -123,11 +123,13 @@ namespace H_Pannel_lib
         {
             if (uDP_Class != null)
             {
-                if(bitmap.Height == 128)
+                bool flag_ok = false;
+                if (bitmap.Height == 128)
                 {
-                    return Communication.EPD_290_DrawImage(uDP_Class, IP, bitmap);
+                    flag_ok = Communication.EPD_290_DrawImage(uDP_Class, IP, bitmap);
                 }
-                return Communication.EPD_266_DrawImage(uDP_Class, IP, bitmap);
+                flag_ok = Communication.EPD_266_DrawImage(uDP_Class, IP, bitmap);
+                return flag_ok;
             }
             return false;
         }

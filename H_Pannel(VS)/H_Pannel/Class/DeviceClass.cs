@@ -31,7 +31,26 @@ namespace H_Pannel_lib
 
     }
   
-
+    static public class StockClassMethod
+    {
+        static public int GetTolalQty(this List<StockClass> stockClasses)
+        {
+            int qty = 0;
+            for(int i = 0; i < stockClasses.Count; i++)
+            {
+                qty += stockClasses[i].Qty.StringToInt32();
+            }
+            return qty;
+        }
+        static public List<StockClass> QtyAbs(this List<StockClass> stockClasses)
+        {
+            for (int i = 0; i < stockClasses.Count; i++)
+            {
+                stockClasses[i].Qty = (stockClasses[i].Qty.StringToDouble() * -1).ToString();
+            }
+            return stockClasses;
+        }
+    }
 
     static public class DeviceBasicMethod
     {
@@ -678,9 +697,6 @@ namespace H_Pannel_lib
             }
         }
 
-        
-     
-
         public void 效期庫存異動(string 效期, int 異動量)
         {
             this.效期庫存異動(效期, 異動量.ToString());
@@ -890,7 +906,63 @@ namespace H_Pannel_lib
 
 
         }
-     
+
+        public List<StockClass> 庫存異動(double 總異動量)
+        {
+            return 庫存異動(總異動量, true);
+        }
+        public List<StockClass> 庫存異動(string 總異動量)
+        {
+            return 庫存異動(總異動量.StringToDouble(), true);
+        }
+        public List<StockClass> 庫存異動(double 總異動量, bool 要寫入)
+        {
+
+            List<StockClass> stockClasses = new List<StockClass>();
+            double int_總異動量 = 總異動量;
+            double 總庫存 = 取得庫存();
+            double 剩餘庫存數量 = 0;
+            double 效期庫存 = 0;
+            if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
+            if (this.List_Inventory == null) this.List_Inventory = new List<string>();
+            this.List_Validity_period = this.List_Validity_period.OrderBy(r => DateTime.Parse(r.ToDateString())).ToList();
+            for (int i = 0; i < this.List_Validity_period.Count; i++)
+            {
+                StockClass stockClass = new StockClass();
+                if (總庫存 > 0)
+                {
+                    效期庫存 = 取得庫存(this.List_Validity_period[i]);
+                    剩餘庫存數量 = 效期庫存 + int_總異動量;
+                    if (剩餘庫存數量 >= 0)
+                    {
+                        stockClass.Validity_period = this.List_Validity_period[i];
+                        stockClass.Lot_number = this.List_Lot_number[i];
+                        stockClass.Qty = int_總異動量.ToString();
+                        stockClasses.Add(stockClass);
+                        break;
+                    }
+                    else
+                    {
+                        stockClass.Validity_period = this.List_Validity_period[i];
+                        stockClass.Lot_number = this.List_Lot_number[i];
+                        stockClass.Qty = int_總異動量.ToString();
+                        stockClasses.Add(stockClass);
+                        int_總異動量 = int_總異動量 + (效期庫存);
+                    }
+                }
+            }
+            if (要寫入)
+            {
+                for (int i = 0; i < stockClasses.Count; i++)
+                {
+                    this.效期庫存異動(stockClasses[i].Validity_period, stockClasses[i].Qty.StringToInt32());
+                }
+            }
+            return stockClasses;
+
+        }
+
+
         public string 取得批號(string 效期)
         {
             if (!效期.Check_Date_String()) return "";
@@ -1170,6 +1242,18 @@ namespace H_Pannel_lib
                 return uDP_Class;
             }
             return null;
+        }
+
+
+        static public int GetInventory(this List<DeviceBasic> deviceBasics)
+        {
+            int 庫存 = 0;
+            for (int i = 0; i < deviceBasics.Count; i++)
+            {
+                庫存 += deviceBasics[i].Inventory.StringToInt32();
+            }
+
+            return 庫存;
         }
     }
   

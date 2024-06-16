@@ -61,7 +61,22 @@ namespace H_Pannel_lib
             return json_result;
         }
 
+        static public void SQL_ReplaceByIP(SQLUI.SQLControl sQLControl, RowsLED rowsLED)
+        {
+            string IP = rowsLED.IP;
+            List<object[]> list_value = sQLControl.GetRowsByDefult(null, enum_DeviceTable.IP.GetEnumName(), IP);
+            if (list_value.Count == 0) return;
+            list_value[0][(int)enum_DeviceTable.Value] = rowsLED.JsonSerializationt<RowsLED>();
+            sQLControl.UpdateByDefulteExtra(null, list_value[0]);
+        }
 
+        static public RowsLED SQL_GetRowsLEDByIP(SQLUI.SQLControl sQLControl, string IP)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetRowsByDefult(null, (int)enum_DeviceTable.IP, IP);
+            List<RowsLED> rowsLEDs = SQL_GetAllRowsLED(deviceBasicTables);
+            if (rowsLEDs.Count == 0) return null;
+            return rowsLEDs[0];
+        }
 
         static public List<RowsLED> SQL_GetAllRowsLED(SQLUI.SQLControl sQLControl)
         {
@@ -95,6 +110,56 @@ namespace H_Pannel_lib
             return RowsLEDs;
         }
 
+        static public List<RowsLED> SQL_GetRowsLEDByCode(SQLUI.SQLControl sQLControl, string Code)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
+            return SQL_GetRowsLEDByCode(deviceBasicTables , Code);
+        }
+        static public List<RowsLED> SQL_GetRowsLEDByCode(List<object[]> deviceTables, string Code)
+        {
+            List<RowsLED> RowsLEDs = new List<RowsLED>();
+            List<RowsLED> RowsLEDs_src = new List<RowsLED>();
+
+
+            List<string> json_strings = (from temp in deviceTables
+                                         where temp[(int)enum_DeviceTable.Value].ObjectToString().Contains(Code)
+                                         select temp[(int)enum_DeviceTable.Value].ObjectToString()).ToList();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < json_strings.Count; i++)
+            {
+                string jsonString = json_strings[i];
+                if (i == 0) sb.Append("[");
+                if (jsonString.Contains(Code) == false) continue;
+
+                sb.Append($"{jsonString}");
+
+                if (i != json_strings.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                if (i == json_strings.Count - 1) sb.Append("]");
+            }
+
+            string json_result = sb.ToString();
+            if (json_result.StringIsEmpty()) json_result = "[]";
+            RowsLEDs_src = json_result.JsonDeserializet<List<RowsLED>>();
+            for (int i = 0; i < RowsLEDs_src.Count; i++)
+            {
+                if (RowsLEDs_src[i].SortByCode(Code).Count == 0) continue;
+
+                RowsLEDs.Add(RowsLEDs_src[i]);
+            }
+
+
+            return RowsLEDs;
+        }
+
+        static public List<DeviceBasic> GetAllDeviceBasic(SQLUI.SQLControl sQLControl)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
+            return GetAllDeviceBasic(deviceBasicTables);
+        }
         public static List<DeviceBasic> GetAllDeviceBasic(List<object[]> deviceTables)
         {
             List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
@@ -117,24 +182,64 @@ namespace H_Pannel_lib
 
             string json_result = sb.ToString();
             if (json_result.StringIsEmpty()) json_result = "[]";
+            List<RowsLED> rowsLEDs = json_result.JsonDeserializet<List<RowsLED>>();
+            for(int i = 0; i < rowsLEDs.Count; i++)
+            {
+                for (int k = 0; k < rowsLEDs[i].RowsDevices.Count; k++)
+                {
+                    deviceBasics.LockAdd(rowsLEDs[i].RowsDevices[k]);
+                }
+            }
 
-            deviceBasics = json_result.JsonDeserializet<List<DeviceBasic>>();
-
-            //Parallel.ForEach(list_value, value =>
-            //{
-            //    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-            //    RowsLEDBasic rowsLEDBasic = jsonString.JsonDeserializet<RowsLEDBasic>();
-            //    for (int i = 0; i < rowsLEDBasic.RowsDevices.Count; i++)
-            //    {
-            //        deviceBasics.LockAdd(rowsLEDBasic.RowsDevices[i]);
-            //    }
-            //});
-
-            //deviceBasics = (from value in deviceBasics
-            //                where value != null
-            //                select value).ToList();
             return deviceBasics;
         }
+
+        static public List<DeviceBasic> GetDeviceBasicByCode(SQLUI.SQLControl sQLControl, string Code)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
+            return GetDeviceBasicByCode(deviceBasicTables, Code);
+        }
+        public static List<DeviceBasic> GetDeviceBasicByCode(List<object[]> deviceTables , string Code)
+        {
+            List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
+            List<object[]> list_value = deviceTables;
+
+            List<string> json_strings = (from temp in deviceTables
+                                         where temp[(int)enum_DeviceTable.Value].ObjectToString().Contains(Code)
+                                         select temp[(int)enum_DeviceTable.Value].ObjectToString()).ToList();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < json_strings.Count; i++)
+            {
+                string jsonString = json_strings[i];
+                if (i == 0) sb.Append("[");
+                if (jsonString.Contains(Code) == false) continue;
+
+                sb.Append($"{jsonString}");
+
+                if (i != json_strings.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                if (i == json_strings.Count - 1) sb.Append("]");
+            }
+
+            string json_result = sb.ToString();
+            if (json_result.StringIsEmpty()) json_result = "[]";
+            List<RowsLED> rowsLEDs = json_result.JsonDeserializet<List<RowsLED>>();
+            for (int i = 0; i < rowsLEDs.Count; i++)
+            {
+                for (int k = 0; k < rowsLEDs[i].RowsDevices.Count; k++)
+                {
+                    if (rowsLEDs[i].RowsDevices[k].Code != Code) continue;
+                    deviceBasics.LockAdd(rowsLEDs[i].RowsDevices[k]);
+                }
+            }
+
+            return deviceBasics;
+        }
+
+
         static public List<RowsLED> Add_NewRowsLED(this List<RowsLED> rowsLEDs, RowsDevice rowsDevice)
         {
             if (rowsDevice == null) return rowsLEDs;

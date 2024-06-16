@@ -18,6 +18,15 @@ namespace H_Pannel_lib
 {
     public static class RFIDMethod
     {
+        static public void SQL_ReplaceByIP(SQLUI.SQLControl sQLControl, RFIDClass rFIDClass)
+        {
+            string IP = rFIDClass.IP;
+            List<object[]> list_value = sQLControl.GetRowsByDefult(null, enum_DeviceTable.IP.GetEnumName(), IP);
+            if (list_value.Count == 0) return;
+            list_value[0][(int)enum_DeviceTable.Value] = rFIDClass.JsonSerializationt<RFIDClass>();
+            sQLControl.UpdateByDefulteExtra(null, list_value[0]);
+        }
+
         static public List<RFIDClass> SQL_GetAllRFIDClass(List<object[]> deviceTables)
         {
             List<RFIDClass> rFIDClasses = new List<RFIDClass>();

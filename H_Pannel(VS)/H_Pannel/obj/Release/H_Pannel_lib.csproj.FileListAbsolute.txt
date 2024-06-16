@@ -1595,7 +1595,6 @@ C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\S
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\System.Text.Json.xml
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\System.Threading.Tasks.Extensions.xml
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\System.ValueTuple.xml
-C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.csproj.AssemblyReference.cache
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Dialog_Pannel35.resources
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Dialog_RFID_DeviceSetting.resources
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Dialog_選取顯示網段.resources
@@ -1729,3 +1728,4 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\S
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\SkiaSharp.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\SkiaSharp.pdb
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\SkiaSharp.xml
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.csproj.AssemblyReference.cache

@@ -18,7 +18,29 @@ namespace H_Pannel_lib
     [Serializable]
     public static class DrawerMethod
     {
-        public static List<Drawer> SQL_GetAllDrawers(List<object[]> deviceTables)
+        static public void SQL_ReplaceByIP(SQLUI.SQLControl sQLControl, Drawer drawer)
+        {
+            string IP = drawer.IP;
+            List<object[]> list_value = sQLControl.GetRowsByDefult(null, enum_DeviceTable.IP.GetEnumName(), IP);
+            if (list_value.Count == 0) return;
+            list_value[0][(int)enum_DeviceTable.Value] = drawer.JsonSerializationt<Drawer>();
+            sQLControl.UpdateByDefulteExtra(null, list_value[0]);
+        }
+
+        static public Drawer SQL_GetDrawerByIP(SQLUI.SQLControl sQLControl,string IP)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetRowsByDefult(null, (int)enum_DeviceTable.IP, IP);
+            List<Drawer> drawers = SQL_GetAllDrawers(deviceBasicTables);
+            if (drawers.Count == 0) return null;
+            return drawers[0];
+        }
+
+        static public List<Drawer> SQL_GetAllDrawers(SQLUI.SQLControl sQLControl)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
+            return SQL_GetAllDrawers(deviceBasicTables);
+        }
+        static public List<Drawer> SQL_GetAllDrawers(List<object[]> deviceTables)
         {
             List<Drawer> drawers = new List<Drawer>();
             List<object[]> list_value = deviceTables;
@@ -35,7 +57,7 @@ namespace H_Pannel_lib
                 {
                     sb.Append($",");
                 }
-                
+
                 if (i == list_value.Count - 1) sb.Append("]");
             }
 
@@ -55,7 +77,52 @@ namespace H_Pannel_lib
             //           select value).ToList();
             return drawers;
         }
-        public static List<DeviceBasic> GetAllDeviceBasic(List<object[]> deviceTables)
+
+        static public List<Drawer> SQL_GetDrawersByCode(SQLUI.SQLControl sQLControl, string Code)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
+            return SQL_GetDrawersByCode(deviceBasicTables , Code);
+        }
+        static public  List<Drawer> SQL_GetDrawersByCode(List<object[]> deviceTables , string Code)
+        {
+            List<Drawer> drawers = new List<Drawer>();
+            List<object[]> list_value = deviceTables;
+
+            List<string> json_strings = (from temp in list_value
+                                         where temp[(int)enum_DeviceTable.Value].ObjectToString().Contains(Code)
+                                         select temp[(int)enum_DeviceTable.Value].ObjectToString()).ToList();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < json_strings.Count; i++)
+            {
+                string jsonString = json_strings[i];
+                if (i == 0) sb.Append("[");
+                if (jsonString.Contains(Code) == false) continue;
+
+                sb.Append($"{jsonString}");
+
+                if (i != json_strings.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                if (i == json_strings.Count - 1) sb.Append("]");
+            }
+
+            string json_result = sb.ToString();
+            if (json_result.StringIsEmpty()) json_result = "[]";
+            drawers = json_result.JsonDeserializet<List<Drawer>>();
+
+
+            return drawers;
+        }
+
+ 
+        static public  List<DeviceBasic> GetAllDeviceBasic(SQLUI.SQLControl sQLControl)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
+            return GetAllDeviceBasic(deviceBasicTables);
+        }
+        static public List<DeviceBasic> GetAllDeviceBasic(List<object[]> deviceTables)
         {
             List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
             List<object[]> list_value = deviceTables;
@@ -77,8 +144,12 @@ namespace H_Pannel_lib
             }
 
             string json_result = sb.ToString();
-
-            deviceBasics = json_result.JsonDeserializet<List<DeviceBasic>>();
+            List<Drawer> drawers = json_result.JsonDeserializet<List<Drawer>>();
+            List<Box> boxes = drawers.GetAllBoxes();
+            for (int i = 0; i < boxes.Count; i++)
+            {
+                deviceBasics.Add(boxes[i]);
+            }
 
             //Parallel.ForEach(list_value, value =>
             //{
@@ -98,6 +169,49 @@ namespace H_Pannel_lib
             //                select value).ToList();
             return deviceBasics;
         }
+
+        static public List<DeviceBasic> GetDeviceBasicByCode(SQLUI.SQLControl sQLControl, string Code)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
+            return GetDeviceBasicByCode(deviceBasicTables, Code);
+        }
+        static public List<DeviceBasic> GetDeviceBasicByCode(List<object[]> deviceTables , string Code)
+        {
+            List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
+            List<object[]> list_value = deviceTables;
+            List<string> json_strings = (from temp in list_value
+                                         where temp[(int)enum_DeviceTable.Value].ObjectToString().Contains(Code)
+                                         select temp[(int)enum_DeviceTable.Value].ObjectToString()).ToList();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < json_strings.Count; i++)
+            {
+                string jsonString = json_strings[i];  
+                if (i == 0) sb.Append("[");
+                if (jsonString.Contains(Code) == false) continue;
+
+                sb.Append($"{jsonString}");
+
+                if (i != json_strings.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                if (i == json_strings.Count - 1) sb.Append("]");
+            }
+
+            string json_result = sb.ToString();
+            List<Drawer> drawers = json_result.JsonDeserializet<List<Drawer>>();
+            List<Box> boxes = drawers.GetAllBoxes();
+            for (int i = 0; i < boxes.Count; i++)
+            {
+                if (boxes[i].Code != Code) continue;
+                deviceBasics.Add(boxes[i]);
+            }
+
+ 
+            return deviceBasics;
+        }
+
         static public Drawer SQL_GetDevice(SQLUI.SQLControl sQLControl, string IP)
         {
             List<object[]> deviceBasicTables = sQLControl.GetRowsByDefult(sQLControl.TableName, "IP", IP);
@@ -477,6 +591,7 @@ namespace H_Pannel_lib
         public static int NumOfLED = 450;
         [JsonIgnore]
         public byte[] LED_Bytes = new byte[NumOfLED * 3];
+        [JsonIgnore]
         public Color[] LED_Colors
         {
             get

@@ -86,46 +86,26 @@ namespace H_Pannel_lib
             return new List<Storage>();
         }
 
+        static public void SQL_ReplaceByIP(SQLUI.SQLControl sQLControl, Storage storage)
+        {
+            string IP = storage.IP;
+            List<object[]> list_value = sQLControl.GetRowsByDefult(null, enum_DeviceTable.IP.GetEnumName(), IP);
+            if (list_value.Count == 0) return;
+            list_value[0][(int)enum_DeviceTable.Value] = storage.JsonSerializationt<Storage>();
+            sQLControl.UpdateByDefulteExtra(null, list_value[0]);
+        }
+        static public Storage SQL_GetStorageByIP(SQLUI.SQLControl sQLControl, string IP)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetRowsByDefult(null, (int)enum_DeviceTable.IP, IP);
+            List<Storage> storages = SQL_GetAllStorage(deviceBasicTables);
+            if (storages.Count == 0) return null;
+            return storages[0];
+        }
         static public List<Storage> SQL_GetAllStorage(SQLUI.SQLControl sQLControl)
         {
-            List<object[]> deviceTables = sQLControl.GetAllRows(null);
-            List<Storage> storages = new List<Storage>();
-
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < deviceTables.Count; i++)
-            {
-                string jsonString = deviceTables[i][(int)enum_DeviceTable.Value].ObjectToString();
-                if (i == 0) sb.Append("[");
-
-                sb.Append($"{jsonString}");
-
-                if (i != deviceTables.Count - 1)
-                {
-                    sb.Append($",");
-                }
-                if (i == deviceTables.Count - 1) sb.Append("]");
-            }
-
-            string json_result = sb.ToString();
-            if (json_result.StringIsEmpty()) json_result = "[]";
-            storages = json_result.JsonDeserializet<List<Storage>>();
-
-            //Parallel.ForEach(deviceTables, value =>
-            //{
-            //    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-            //    Storage storage = jsonString.JsonDeserializet<Storage>();
-            //    if (storage != null)
-            //    {
-            //        storage.Port = value[(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
-            //        storages.LockAdd(storage);
-            //    }
-
-            //});
-            //storages = (from value in storages
-            //            where value != null
-            //            select value).ToList();
-            return storages;
-        }
+            List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
+            return SQL_GetAllStorage(deviceBasicTables);
+        }   
         static public List<Storage> SQL_GetAllStorage(List<object[]> deviceTables)
         {
             List<Storage> storages = new List<Storage>();
@@ -150,23 +130,51 @@ namespace H_Pannel_lib
             if (json_result.StringIsEmpty()) json_result = "[]";
             storages = json_result.JsonDeserializet<List<Storage>>();
 
-
-
-            //Parallel.ForEach(deviceTables, value =>
-            //{
-            //    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-            //    Storage storage = jsonString.JsonDeserializet<Storage>();
-            //    if (storage != null)
-            //    {
-            //        storage.Port = value[(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
-            //        storages.LockAdd(storage);
-            //    }
-
-            //});
-            //storages = (from value in storages
-            //            where value != null
-            //            select value).ToList();
             return storages;
+        }
+
+        static public List<Storage> SQL_GetStorageByCode(SQLUI.SQLControl sQLControl, string Code)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
+            return SQL_GetStorageByCode(deviceBasicTables , Code);
+        }
+        static public List<Storage> SQL_GetStorageByCode(List<object[]> deviceTables , string Code)
+        {
+            List<Storage> storages = new List<Storage>();
+
+            List<string> json_strings = (from temp in deviceTables
+                                         where temp[(int)enum_DeviceTable.Value].ObjectToString().Contains(Code)
+                                         select temp[(int)enum_DeviceTable.Value].ObjectToString()).ToList();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < json_strings.Count; i++)
+            {
+                string jsonString = json_strings[i];
+                if (i == 0) sb.Append("[");
+                if (jsonString.Contains(Code) == false) continue;
+
+                sb.Append($"{jsonString}");
+
+                if (i != json_strings.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                if (i == json_strings.Count - 1) sb.Append("]");
+            }
+
+            string json_result = sb.ToString();
+            if (json_result.StringIsEmpty()) json_result = "[]";
+            storages = json_result.JsonDeserializet<List<Storage>>();
+            storages = (from temp in storages
+                        where temp.Code == Code
+                        select temp).ToList();
+            return storages;
+        }
+
+        static public List<DeviceBasic> GetAllDeviceBasic(SQLUI.SQLControl sQLControl)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
+            return GetAllDeviceBasic(deviceBasicTables);
         }
         public static List<DeviceBasic> GetAllDeviceBasic(List<object[]> deviceTables)
         {
@@ -187,6 +195,60 @@ namespace H_Pannel_lib
                     sb.Append($",");
                 }
                 if (i == deviceTables.Count - 1) sb.Append("]");
+            }
+
+            string json_result = sb.ToString();
+            if (json_result.StringIsEmpty()) json_result = "[]";
+            deviceBasics = json_result.JsonDeserializet<List<DeviceBasic>>();
+
+
+            //Parallel.ForEach(list_value, value =>
+            //{
+            //    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
+            //    DeviceBasic deviceBasic = jsonString.JsonDeserializet<DeviceBasic>();
+            //    if (deviceBasic != null)
+            //    {
+            //        deviceBasic.確認效期庫存(true);
+            //        deviceBasics.LockAdd(deviceBasic);
+            //    }
+
+            //});
+            //deviceBasics = (from value in deviceBasics
+            //                where value != null
+            //            select value).ToList();
+            return deviceBasics;
+        }
+
+
+        static public List<DeviceBasic> GetDeviceBasicByCode(SQLUI.SQLControl sQLControl, string Code)
+        {
+            List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
+            return GetDeviceBasicByCode(deviceBasicTables ,Code);
+        }
+        public static List<DeviceBasic> GetDeviceBasicByCode(List<object[]> deviceTables , string Code)
+        {
+            List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
+            List<object[]> list_value = deviceTables;
+
+
+            List<string> json_strings = (from temp in deviceTables
+                                         where temp[(int)enum_DeviceTable.Value].ObjectToString().Contains(Code)
+                                         select temp[(int)enum_DeviceTable.Value].ObjectToString()).ToList();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < json_strings.Count; i++)
+            {
+                string jsonString = json_strings[i];
+                if (i == 0) sb.Append("[");
+                if (jsonString.Contains(Code) == false) continue;
+
+                sb.Append($"{jsonString}");
+
+                if (i != json_strings.Count - 1)
+                {
+                    sb.Append($",");
+                }
+                if (i == json_strings.Count - 1) sb.Append("]");
             }
 
             string json_result = sb.ToString();
