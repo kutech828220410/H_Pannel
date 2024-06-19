@@ -117,6 +117,8 @@ namespace H_Pannel_lib
         }
         static public List<RowsLED> SQL_GetRowsLEDByCode(List<object[]> deviceTables, string Code)
         {
+            Code = Code.Replace("*", "");
+
             List<RowsLED> RowsLEDs = new List<RowsLED>();
             List<RowsLED> RowsLEDs_src = new List<RowsLED>();
 
@@ -201,6 +203,8 @@ namespace H_Pannel_lib
         }
         public static List<DeviceBasic> GetDeviceBasicByCode(List<object[]> deviceTables , string Code)
         {
+            Code = Code.Replace("*", "");
+
             List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
             List<object[]> list_value = deviceTables;
 
@@ -334,18 +338,29 @@ namespace H_Pannel_lib
         }
         static public List<RowsDevice> SortByCode(this List<RowsLED> rowsLEDs, string Code)
         {
+            bool flag_serch = Code.Contains("*");
+            Code = Code.Replace("*", "");
             List<RowsDevice> rowsDevices = new List<RowsDevice>();
             for (int i = 0; i < rowsLEDs.Count; i++)
             {
                 for (int k = 0; k < rowsLEDs[i].RowsDevices.Count; k++)
                 {
-                    if (rowsLEDs[i].RowsDevices[k].Code.ToUpper() == Code.ToUpper()) rowsDevices.Add(rowsLEDs[i].RowsDevices[k]);
+                    if(flag_serch)
+                    {
+                        if (rowsLEDs[i].RowsDevices[k].Code.ToUpper().Contains(Code.ToUpper())) rowsDevices.Add(rowsLEDs[i].RowsDevices[k]);
+                    }
+                    else
+                    {
+                        if (rowsLEDs[i].RowsDevices[k].Code.ToUpper() == Code.ToUpper()) rowsDevices.Add(rowsLEDs[i].RowsDevices[k]);
+                    }
+             
                 }
             }
             return rowsDevices;
         }
         static public List<RowsDevice> SortLikeByCode(this List<RowsLED> rowsLEDs, string Code)
         {
+            Code = Code.Replace("*", "");
             List<RowsDevice> rowsDevices = new List<RowsDevice>();
             for (int i = 0; i < rowsLEDs.Count; i++)
             {
@@ -358,15 +373,26 @@ namespace H_Pannel_lib
         }
         static public List<RowsDevice> SortByCode(this RowsLED rowsLED, string Code)
         {
+            bool flag_serch = Code.Contains("*");
+            Code = Code.Replace("*", "");
             List<RowsDevice> rowsDevices = new List<RowsDevice>();
             for (int k = 0; k < rowsLED.RowsDevices.Count; k++)
             {
-                if (rowsLED.RowsDevices[k].Code.ToUpper() == Code.ToUpper()) rowsDevices.Add(rowsLED.RowsDevices[k]);
+                if(flag_serch)
+                {
+                    if (rowsLED.RowsDevices[k].Code.ToUpper().Contains(Code.ToUpper())) rowsDevices.Add(rowsLED.RowsDevices[k]);
+                }
+                else
+                {
+                    if (rowsLED.RowsDevices[k].Code.ToUpper() == Code.ToUpper()) rowsDevices.Add(rowsLED.RowsDevices[k]);
+                }
+          
             }
             return rowsDevices;
         }
         static public List<RowsDevice> SortLikeByCode(this RowsLED rowsLED, string Code)
         {
+            Code = Code.Replace("*", "");
             List<RowsDevice> rowsDevices = new List<RowsDevice>();
             for (int k = 0; k < rowsLED.RowsDevices.Count; k++)
             {

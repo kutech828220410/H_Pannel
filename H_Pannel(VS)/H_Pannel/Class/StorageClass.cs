@@ -140,6 +140,8 @@ namespace H_Pannel_lib
         }
         static public List<Storage> SQL_GetStorageByCode(List<object[]> deviceTables , string Code)
         {
+            Code = Code.Replace("*", "");
+
             List<Storage> storages = new List<Storage>();
 
             List<string> json_strings = (from temp in deviceTables
@@ -227,6 +229,9 @@ namespace H_Pannel_lib
         }
         public static List<DeviceBasic> GetDeviceBasicByCode(List<object[]> deviceTables , string Code)
         {
+            Code = Code.Replace("*", "");
+
+
             List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
             List<object[]> list_value = deviceTables;
 
@@ -321,13 +326,27 @@ namespace H_Pannel_lib
         }
         static public List<Storage> SortByCode(this List<Storage> Storages, string Code)
         {
+            bool flag_serch = Code.Contains("*");
+            Code = Code.Replace("*", "");
+
             List<Storage> storages = new List<Storage>();
             foreach (Storage storage in Storages)
             {
-                if (storage.Code.ToUpper() == Code.ToUpper())
+                if(flag_serch)
                 {
-                    storages.Add(storage);
+                    if (storage.Code.ToUpper().Contains(Code.ToUpper()))
+                    {
+                        storages.Add(storage);
+                    }
                 }
+                else
+                {
+                    if (storage.Code.ToUpper() == Code.ToUpper())
+                    {
+                        storages.Add(storage);
+                    }
+                }
+               
             }
             return storages;
         }

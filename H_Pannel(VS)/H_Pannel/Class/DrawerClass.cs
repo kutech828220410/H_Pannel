@@ -65,26 +65,18 @@ namespace H_Pannel_lib
             if (json_result.StringIsEmpty()) json_result = "[]";
             drawers = json_result.JsonDeserializet<List<Drawer>>();
 
-            //Parallel.ForEach(list_value, value =>
-            //{
-            //    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-            //    Drawer drawer = jsonString.JsonDeserializet<Drawer>();
-            //    if (drawer != null) drawers.LockAdd(drawer);
-            //});
-
-            //drawers = (from value in drawers
-            //           where value != null
-            //           select value).ToList();
             return drawers;
         }
 
         static public List<Drawer> SQL_GetDrawersByCode(SQLUI.SQLControl sQLControl, string Code)
         {
+
             List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
             return SQL_GetDrawersByCode(deviceBasicTables , Code);
         }
         static public  List<Drawer> SQL_GetDrawersByCode(List<object[]> deviceTables , string Code)
         {
+            Code = Code.Replace("*", "");
             List<Drawer> drawers = new List<Drawer>();
             List<object[]> list_value = deviceTables;
 
@@ -177,6 +169,8 @@ namespace H_Pannel_lib
         }
         static public List<DeviceBasic> GetDeviceBasicByCode(List<object[]> deviceTables , string Code)
         {
+            Code = Code.Replace("*", "");
+
             List<DeviceBasic> deviceBasics = new List<DeviceBasic>();
             List<object[]> list_value = deviceTables;
             List<string> json_strings = (from temp in list_value
@@ -329,7 +323,9 @@ namespace H_Pannel_lib
             return Drawers_buf;
         }
         static public List<Box> SortByCode(this List<Drawer> Drawers, string Code)
-        {
+        {    
+            bool flag_serch = Code.Contains("*");
+            Code = Code.Replace("*", "");
             List<Box> boxes = new List<Box>();
             for (int i = 0; i < Drawers.Count; i++)
             {
@@ -337,7 +333,15 @@ namespace H_Pannel_lib
                 {
                     for(int row = 0; row < Drawers[i].Boxes[col].Length; row ++)
                     {
-                        if (Drawers[i].Boxes[col][row].Code.ToUpper() == Code.ToUpper()) boxes.Add(Drawers[i].Boxes[col][row]);
+                        if(flag_serch)
+                        {
+                            if (Drawers[i].Boxes[col][row].Code.ToUpper().Contains(Code.ToUpper())) boxes.Add(Drawers[i].Boxes[col][row]);
+                        }
+                        else
+                        {
+                            if (Drawers[i].Boxes[col][row].Code.ToUpper() == Code.ToUpper()) boxes.Add(Drawers[i].Boxes[col][row]);
+                        }
+                      
                     }
                
                 }
@@ -346,6 +350,7 @@ namespace H_Pannel_lib
         }
         static public List<Box> SortLikeByCode(this List<Drawer> Drawers, string Code)
         {
+            Code = Code.Replace("*", "");
             List<Box> boxes = new List<Box>();
             for (int i = 0; i < Drawers.Count; i++)
             {
@@ -374,6 +379,7 @@ namespace H_Pannel_lib
         }
         static public List<Box> SortByBarCode(this List<Drawer> Drawers, string Code)
         {
+            Code = Code.Replace("*", "");
             List<Box> boxes = new List<Box>();
             for (int i = 0; i < Drawers.Count; i++)
             {

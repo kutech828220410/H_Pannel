@@ -238,13 +238,19 @@ namespace H_Pannel_lib
         }
         static public List<DeviceBasic> SortByCode(this List<DeviceBasic> DeviceBasics, string Code)
         {
+            bool flag_serch = Code.Contains("*");
+            Code = Code.Replace("*", "");
             List<DeviceBasic> DeviceBasics_buf = new List<DeviceBasic>();
             foreach (DeviceBasic deviceBasic in DeviceBasics)
             {
-                if (deviceBasic.Code == Code)
+                if(flag_serch == false)
                 {
-                    DeviceBasics_buf.Add(deviceBasic);
+                    if (deviceBasic.Code == Code)
+                    {
+                        DeviceBasics_buf.Add(deviceBasic);
+                    }
                 }
+              
             }
             return DeviceBasics_buf;
         }
@@ -274,11 +280,27 @@ namespace H_Pannel_lib
         }
         static public List<DeviceBasic> SortDictionaryByCode(this System.Collections.Generic.Dictionary<string, List<DeviceBasic>> dictionary, string code)
         {
+            code = code.Replace("*", "");
             if (dictionary.ContainsKey(code))
             {
                 return dictionary[code];
             }
             return new List<DeviceBasic>();
+        }
+        public static List<DeviceBasic> SearchDictionaryByCode(this Dictionary<string, List<DeviceBasic>> dictionary, string code)
+        {
+            code = code.Replace("*", "");
+            // 找到所有包含特定子字符串的鍵
+            var matchingKeys = dictionary.Keys.Where(key => key.Contains(code)).ToList();
+
+            // 聚合所有匹配鍵的值
+            var result = new List<DeviceBasic>();
+            foreach (var key in matchingKeys)
+            {
+                result.AddRange(dictionary[key]);
+            }
+
+            return result;
         }
     }
     
