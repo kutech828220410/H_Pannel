@@ -1625,7 +1625,6 @@ C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\Newtonsoft.Json.dll
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\Newtonsoft.Json.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\CSkin.dll
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\Microsoft.mshtml.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\PopupControl.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\SunnyUI.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\SunnyUI.Common.dll
@@ -1729,3 +1728,4 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\S
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\SkiaSharp.pdb
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\SkiaSharp.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.csproj.AssemblyReference.cache
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\HIS_DB_Lib.dll

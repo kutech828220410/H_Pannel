@@ -462,6 +462,10 @@ namespace H_Pannel_lib
     [Serializable]
     public class RowsLED
     {
+        public string serverIP = "";
+        public uint serverPort = 0;
+        public string dbName = "";
+
         public static int NumOfLED = 250;
         [JsonIgnore]
         public byte[] LED_Bytes = new byte[NumOfLED * 3];

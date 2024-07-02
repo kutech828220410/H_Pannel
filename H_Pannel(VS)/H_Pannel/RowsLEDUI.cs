@@ -114,6 +114,15 @@ namespace H_Pannel_lib
             }
             return false;
         }
+        static public byte[] Get_RowsLED_LEDBytes_UDP(UDP_Class uDP_Class, string IP)
+        {
+            byte[] LED_Bytes = new byte[NumOfLED * 3];
+            if (uDP_Class != null)
+            {
+                return Communication.Get_WS2812_Buffer(uDP_Class, IP, NumOfLED * 3);
+            }
+            return LED_Bytes;
+        }
         #endregion
 
         private enum ContextMenuStrip_Main
@@ -413,6 +422,18 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_DeviceTable.SQL_ReplaceExtra(enum_DeviceTable.GUID.GetEnumName(), list_Replace_SerchValue, list_Replace_Value, false);
             return true;
         }
+
+        public byte[] Get_RowsLED_LED_UDP(RowsLED rowsLED)
+        {
+            rowsLED.LED_Bytes = Get_RowsLED_LED_UDP(rowsLED.IP, rowsLED.Port);
+            return rowsLED.LED_Bytes;
+        }
+        public byte[] Get_RowsLED_LED_UDP(string IP, int Port)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+            return Get_RowsLED_LEDBytes_UDP(uDP_Class, IP);
+        }
+
 
         #region Event
         private void RowsLEDUI_UDP_DataReceiveMouseDownRightEvent(string selectedText, List<IPEndPoint> iPEndPoints)

@@ -242,3 +242,4 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\S
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\System.Numerics.Vectors.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\TestForm\obj\Release\TestForm.exe.config
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\TestForm\bin\Release\HIS_DB_Lib.dll

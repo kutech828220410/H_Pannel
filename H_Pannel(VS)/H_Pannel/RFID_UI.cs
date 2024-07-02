@@ -546,7 +546,10 @@ namespace H_Pannel_lib
         {
             InitializeComponent();
         }
-
+        public void Init(SQLUI.SQL_DataGridView.ConnentionClass connentionClass)
+        {
+            this.Init(connentionClass.DataBaseName, connentionClass.UserName, connentionClass.Password, connentionClass.IP, connentionClass.Port, connentionClass.MySqlSslMode);
+        }
         public void Init(string DataBaseName, string UserName, string Password, string IP, uint Port, MySql.Data.MySqlClient.MySqlSslMode SSLMode)
         {
             this.DataBaseName = DataBaseName;

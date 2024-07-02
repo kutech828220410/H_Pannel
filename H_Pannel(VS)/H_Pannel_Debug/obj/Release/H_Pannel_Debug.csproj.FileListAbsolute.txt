@@ -962,3 +962,4 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Rel
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\SkiaSharp.pdb
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\SkiaSharp.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.exe.config
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\HIS_DB_Lib.dll

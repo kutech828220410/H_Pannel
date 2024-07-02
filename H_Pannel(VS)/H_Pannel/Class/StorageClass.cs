@@ -498,5 +498,19 @@ namespace H_Pannel_lib
             }
             return null;
         }
+
+
+        static public Storage SetMedClass(this Storage storage, HIS_DB_Lib.medClass medClass)
+        {
+            storage.Code = medClass.藥品碼;
+            storage.SKDIACODE = medClass.料號;
+            storage.Name = medClass.藥品名稱;
+            storage.Scientific_Name = medClass.藥品學名;
+            storage.ChineseName = medClass.中文名稱;
+            storage.DRUGKIND = medClass.管制級別;
+            storage.Package = medClass.包裝單位;
+
+            return storage;
+        }
     }
 }

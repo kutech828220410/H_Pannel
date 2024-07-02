@@ -11,7 +11,8 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using HIS_DB_Lib;
+using SQLUI;
 namespace H_Pannel_lib
 {
     public enum enum_UDP_DataReceive
@@ -714,11 +715,56 @@ namespace H_Pannel_lib
             List<object[]> list_value = this.sqL_DataGridView_DeviceTable.SQL_GetRows((int)enum_DeviceTable.IP, IP, false);
             return list_value;
         }
+        public List<object[]> SQL_GetDeviceTableRows(List<ServerSettingClass> serverSettingClasses, string IP)
+        {
+            List<object[]> list_value = new List<object[]>();
+            List<Task> tasks = new List<Task>();
+            for (int i = 0; i < serverSettingClasses.Count; i++)
+            {
+                ServerSettingClass serverSettingClass = serverSettingClasses[i];
+                tasks.Add(Task.Run(new Action(delegate
+                {
+                    string Server = serverSettingClass.Server;
+                    string DB = serverSettingClass.DBName;
+                    string UserName = serverSettingClass.User;
+                    string Password = serverSettingClass.Password;
+                    uint Port = (uint)serverSettingClass.Port.StringToInt32();
+                    SQLControl sQLControl = new SQLControl(Server, DB, this.sqL_DataGridView_DeviceTable.TableName, UserName, Password, Port, mySqlSslMode);
+                    List<object[]> list_value_buf = sQLControl.GetRowsByDefult(null, (int)enum_DeviceTable.IP, IP);
+                    list_value.LockAdd(list_value_buf);
+                })));
+            }
+
+            return list_value;
+        }
         public List<object[]> SQL_GetAllDeviceTableRows()
         {
             List<object[]> list_value = this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(false);
             return list_value;
         }
+        public List<object[]> SQL_GetAllDeviceTableRows(List<ServerSettingClass> serverSettingClasses)
+        {
+            List<object[]> list_value = new List<object[]>();
+            List<Task> tasks = new List<Task>();
+            for (int i = 0; i < serverSettingClasses.Count; i++)
+            {
+                ServerSettingClass serverSettingClass = serverSettingClasses[i];
+                tasks.Add(Task.Run(new Action(delegate
+                {
+                    string Server = serverSettingClass.Server;
+                    string DB = serverSettingClass.DBName;
+                    string UserName = serverSettingClass.User;
+                    string Password = serverSettingClass.Password;
+                    uint Port = (uint)serverSettingClass.Port.StringToInt32();
+                    SQLControl sQLControl = new SQLControl(Server, DB, this.sqL_DataGridView_DeviceTable.TableName, UserName, Password, Port, mySqlSslMode);
+                    List<object[]> list_value_buf = sQLControl.GetAllRows(null);
+                    list_value.LockAdd(list_value_buf);
+                })));
+            }
+          
+            return list_value;
+        }
+
         public List<string> SQL_GetAllDeviceTableValue()
         {
             List<object[]> list_value = this.SQL_GetAllDeviceTableRows();
@@ -730,7 +776,17 @@ namespace H_Pannel_lib
             }
             return list_DeviceTableValue;
         }
+        public List<string> SQL_GetAllDeviceTableValue(List<ServerSettingClass> serverSettingClasses)
+        {
+            List<object[]> list_value = this.SQL_GetAllDeviceTableRows(serverSettingClasses);
+            List<string> list_DeviceTableValue = new List<string>();
 
+            for (int i = 0; i < list_value.Count; i++)
+            {
+
+            }
+            return list_DeviceTableValue;
+        }
 
 
 

@@ -130,22 +130,7 @@ namespace H_Pannel_lib
             if (json_result.StringIsEmpty()) json_result = "[]";
             deviceBasics = json_result.JsonDeserializet<List<DeviceSimple>>();
             return deviceBasics;
-            //List<object[]> deviceBasicTables = sQLControl.GetAllRows(null);
-            //List<DeviceSimple> deviceBasics = new List<DeviceSimple>();
-            //Parallel.ForEach(deviceBasicTables, value =>
-            //{
-            //    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-            //    DeviceSimple deviceBasic = jsonString.JsonDeserializet<DeviceSimple>();
-            //    if (deviceBasic != null)
-            //    {
-            //        deviceBasics.LockAdd(deviceBasic);
-            //    }
-
-            //});
-            //deviceBasics = (from value in deviceBasics
-            //                where value != null
-            //                select value).ToList();
-            //return deviceBasics;
+       
         }
         static public DeviceBasic SQL_GetDeviceBasic(SQLUI.SQL_DataGridView.ConnentionClass connentionClass, string TableName, DeviceBasic deviceBasic)
         {
@@ -166,6 +151,11 @@ namespace H_Pannel_lib
             if (deviceBasicTables.Count == 0) return null;
             string jsonString = deviceBasicTables[0][(int)enum_DeviceTable.Value].ObjectToString();
             DeviceBasic deviceBasic = jsonString.JsonDeserializet<DeviceBasic>();
+
+            deviceBasic.serverIP = sQLControl.Server;
+            deviceBasic.serverPort = sQLControl.Port;
+            deviceBasic.dbName = sQLControl.Database;
+
             return deviceBasic;
         }
 
@@ -554,6 +544,9 @@ namespace H_Pannel_lib
     [Serializable]
     public class DeviceBasic : DeviceSimple
     {
+        public string serverIP = "";
+        public uint serverPort = 0;
+        public string dbName = "";
 
         public DeviceType DeviceType
         {
@@ -576,7 +569,8 @@ namespace H_Pannel_lib
                 _ChineseName = value;
             }
         }
-
+        private string _Scientific_Name = "";
+        public string Scientific_Name { get => _Scientific_Name; set => _Scientific_Name = value; }
         private string _BarCode = "";
         public string BarCode
         {
@@ -686,16 +680,12 @@ namespace H_Pannel_lib
         }
 
 
-   
-
-      
-
         private string speaker = "";
         public string Speaker { get => speaker; set => speaker = value; }
 
+        private string area = "";
+        public string Area { get => area; set => area = value; }
 
-
-      
         [JsonIgnore]   
         public List<StockClass> stockClasses
         {
@@ -718,6 +708,8 @@ namespace H_Pannel_lib
 
             }
         }
+
+    
 
         public void 效期庫存異動(string 效期, int 異動量)
         {
@@ -1266,7 +1258,7 @@ namespace H_Pannel_lib
             return null;
         }
 
-
+        
         static public int GetInventory(this List<DeviceBasic> deviceBasics)
         {
             int 庫存 = 0;
@@ -1277,6 +1269,8 @@ namespace H_Pannel_lib
 
             return 庫存;
         }
+
+    
     }
   
 
@@ -2967,8 +2961,7 @@ namespace H_Pannel_lib
         #region Scientific_Name
         private string _Scientific_Name_Title = "";
         public string Scientific_Name_Title { get => _Scientific_Name_Title; set => _Scientific_Name_Title = value; }
-        private string _Scientific_Name = "";
-        public string Scientific_Name { get => _Scientific_Name; set => _Scientific_Name = value; }
+
         [JsonIgnore]
         public Font Scientific_Name_font
         {

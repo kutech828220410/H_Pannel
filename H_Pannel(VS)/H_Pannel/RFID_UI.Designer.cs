@@ -31,9 +31,11 @@ namespace H_Pannel_lib
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RFID_UI));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.rJ_GroupBox1 = new MyUI.RJ_GroupBox();
             this.sqL_DataGridView_UDP_DataReceive = new SQLUI.SQL_DataGridView();
-            this.rJ_GroupBox2 = new MyUI.RJ_GroupBox();
+            this.sqL_DataGridView_DeviceTable = new SQLUI.SQL_DataGridView();
+            this.openFileDialog_LoadExcel = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog_SaveExcel = new System.Windows.Forms.SaveFileDialog();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.rJ_Button_輸出_寫入 = new MyUI.RJ_Button();
             this.checkBox_輸出10 = new System.Windows.Forms.CheckBox();
@@ -93,8 +95,6 @@ namespace H_Pannel_lib
             this.checkBox_RFID_Enable_03 = new System.Windows.Forms.CheckBox();
             this.checkBox_RFID_Enable_02 = new System.Windows.Forms.CheckBox();
             this.checkBox_RFID_Enable_01 = new System.Windows.Forms.CheckBox();
-            this.rJ_Button_Write = new MyUI.RJ_Button();
-            this.rJ_Button_Read = new MyUI.RJ_Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel21 = new System.Windows.Forms.Panel();
             this.label28 = new System.Windows.Forms.Label();
@@ -167,23 +167,18 @@ namespace H_Pannel_lib
             this.textBox_IP_Adress_A = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel23 = new System.Windows.Forms.Panel();
             this.rJ_Button_Station_Write = new MyUI.RJ_Button();
             this.textBox_COM = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.textBox_Station = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.rJ_GroupBox4 = new MyUI.RJ_GroupBox();
+            this.panel24 = new System.Windows.Forms.Panel();
             this.sqL_DataGridView_PING = new SQLUI.SQL_DataGridView();
-            this.rJ_GroupBox3 = new MyUI.RJ_GroupBox();
-            this.sqL_DataGridView_DeviceTable = new SQLUI.SQL_DataGridView();
-            this.openFileDialog_LoadExcel = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog_SaveExcel = new System.Windows.Forms.SaveFileDialog();
+            this.rJ_Button_Write = new MyUI.RJ_Button();
+            this.rJ_Button_Read = new MyUI.RJ_Button();
             this.panel1.SuspendLayout();
-            this.rJ_GroupBox1.ContentsPanel.SuspendLayout();
-            this.rJ_GroupBox1.SuspendLayout();
-            this.rJ_GroupBox2.ContentsPanel.SuspendLayout();
-            this.rJ_GroupBox2.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -210,63 +205,19 @@ namespace H_Pannel_lib
             this.panel6.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.rJ_GroupBox4.ContentsPanel.SuspendLayout();
-            this.rJ_GroupBox4.SuspendLayout();
-            this.rJ_GroupBox3.ContentsPanel.SuspendLayout();
-            this.rJ_GroupBox3.SuspendLayout();
+            this.panel23.SuspendLayout();
+            this.panel24.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.rJ_GroupBox1);
-            this.panel1.Controls.Add(this.rJ_GroupBox2);
+            this.panel1.Controls.Add(this.sqL_DataGridView_UDP_DataReceive);
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1393, 754);
+            this.panel1.Size = new System.Drawing.Size(1393, 725);
             this.panel1.TabIndex = 0;
-            // 
-            // rJ_GroupBox1
-            // 
-            // 
-            // rJ_GroupBox1.ContentsPanel
-            // 
-            this.rJ_GroupBox1.ContentsPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.rJ_GroupBox1.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
-            this.rJ_GroupBox1.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
-            this.rJ_GroupBox1.ContentsPanel.BorderRadius = 2;
-            this.rJ_GroupBox1.ContentsPanel.BorderSize = 2;
-            this.rJ_GroupBox1.ContentsPanel.Controls.Add(this.sqL_DataGridView_UDP_DataReceive);
-            this.rJ_GroupBox1.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rJ_GroupBox1.ContentsPanel.ForeColor = System.Drawing.Color.White;
-            this.rJ_GroupBox1.ContentsPanel.IsSelected = false;
-            this.rJ_GroupBox1.ContentsPanel.Location = new System.Drawing.Point(0, 37);
-            this.rJ_GroupBox1.ContentsPanel.Name = "ContentsPanel";
-            this.rJ_GroupBox1.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.rJ_GroupBox1.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
-            this.rJ_GroupBox1.ContentsPanel.ShadowSize = 0;
-            this.rJ_GroupBox1.ContentsPanel.Size = new System.Drawing.Size(867, 717);
-            this.rJ_GroupBox1.ContentsPanel.TabIndex = 2;
-            this.rJ_GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rJ_GroupBox1.GUID = "";
-            this.rJ_GroupBox1.Location = new System.Drawing.Point(526, 0);
-            this.rJ_GroupBox1.Name = "rJ_GroupBox1";
-            this.rJ_GroupBox1.PannelBackColor = System.Drawing.SystemColors.Window;
-            this.rJ_GroupBox1.PannelBorderColor = System.Drawing.Color.SkyBlue;
-            this.rJ_GroupBox1.PannelBorderRadius = 2;
-            this.rJ_GroupBox1.PannelBorderSize = 2;
-            this.rJ_GroupBox1.Size = new System.Drawing.Size(867, 754);
-            this.rJ_GroupBox1.TabIndex = 43;
-            this.rJ_GroupBox1.TitleBackColor = System.Drawing.SystemColors.Window;
-            this.rJ_GroupBox1.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_GroupBox1.TitleBorderRadius = 5;
-            this.rJ_GroupBox1.TitleBorderSize = 0;
-            this.rJ_GroupBox1.TitleFont = new System.Drawing.Font("新細明體", 12F);
-            this.rJ_GroupBox1.TitleForeColor = System.Drawing.Color.White;
-            this.rJ_GroupBox1.TitleHeight = 37;
-            this.rJ_GroupBox1.TitleTextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_GroupBox1.TitleTexts = "接收資料";
             // 
             // sqL_DataGridView_UDP_DataReceive
             // 
@@ -275,11 +226,13 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_UDP_DataReceive.BorderColor = System.Drawing.Color.LightBlue;
             this.sqL_DataGridView_UDP_DataReceive.BorderRadius = 0;
             this.sqL_DataGridView_UDP_DataReceive.BorderSize = 2;
+            this.sqL_DataGridView_UDP_DataReceive.CellBorderColor = System.Drawing.Color.White;
             this.sqL_DataGridView_UDP_DataReceive.cellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.sqL_DataGridView_UDP_DataReceive.cellStylBackColor = System.Drawing.Color.LightBlue;
             this.sqL_DataGridView_UDP_DataReceive.cellStyleFont = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Bold);
             this.sqL_DataGridView_UDP_DataReceive.cellStylForeColor = System.Drawing.Color.Black;
             this.sqL_DataGridView_UDP_DataReceive.columnHeaderBackColor = System.Drawing.Color.SkyBlue;
+            this.sqL_DataGridView_UDP_DataReceive.columnHeaderBorderColor = System.Drawing.Color.DimGray;
             this.sqL_DataGridView_UDP_DataReceive.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Bold);
             this.sqL_DataGridView_UDP_DataReceive.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.sqL_DataGridView_UDP_DataReceive.columnHeadersHeight = 18;
@@ -292,10 +245,11 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_UDP_DataReceive.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_UDP_DataReceive.Columns5"))));
             this.sqL_DataGridView_UDP_DataReceive.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_UDP_DataReceive.Columns6"))));
             this.sqL_DataGridView_UDP_DataReceive.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_UDP_DataReceive.Columns7"))));
+            this.sqL_DataGridView_UDP_DataReceive.DataGridViewAutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.sqL_DataGridView_UDP_DataReceive.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sqL_DataGridView_UDP_DataReceive.Font = new System.Drawing.Font("新細明體", 9F);
             this.sqL_DataGridView_UDP_DataReceive.ImageBox = false;
-            this.sqL_DataGridView_UDP_DataReceive.Location = new System.Drawing.Point(5, 5);
+            this.sqL_DataGridView_UDP_DataReceive.Location = new System.Drawing.Point(526, 0);
             this.sqL_DataGridView_UDP_DataReceive.Name = "sqL_DataGridView_UDP_DataReceive";
             this.sqL_DataGridView_UDP_DataReceive.OnlineState = SQLUI.SQL_DataGridView.OnlineEnum.Offline;
             this.sqL_DataGridView_UDP_DataReceive.Password = "user82822040";
@@ -305,8 +259,12 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_UDP_DataReceive.RowsColor = System.Drawing.SystemColors.Control;
             this.sqL_DataGridView_UDP_DataReceive.RowsHeight = 40;
             this.sqL_DataGridView_UDP_DataReceive.SaveFileName = "SQL_DataGridView";
+            this.sqL_DataGridView_UDP_DataReceive.selectedBorderSize = 0;
+            this.sqL_DataGridView_UDP_DataReceive.selectedRowBackColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_UDP_DataReceive.selectedRowBorderColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_UDP_DataReceive.selectedRowForeColor = System.Drawing.Color.White;
             this.sqL_DataGridView_UDP_DataReceive.Server = "127.0.0.0";
-            this.sqL_DataGridView_UDP_DataReceive.Size = new System.Drawing.Size(857, 707);
+            this.sqL_DataGridView_UDP_DataReceive.Size = new System.Drawing.Size(867, 725);
             this.sqL_DataGridView_UDP_DataReceive.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
             this.sqL_DataGridView_UDP_DataReceive.TabIndex = 1;
             this.sqL_DataGridView_UDP_DataReceive.UserName = "root";
@@ -322,54 +280,92 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_UDP_DataReceive.首列樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.sqL_DataGridView_UDP_DataReceive.首行樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             // 
-            // rJ_GroupBox2
+            // sqL_DataGridView_DeviceTable
             // 
+            this.sqL_DataGridView_DeviceTable.AutoSelectToDeep = false;
+            this.sqL_DataGridView_DeviceTable.AutoSize = true;
+            this.sqL_DataGridView_DeviceTable.backColor = System.Drawing.Color.LightBlue;
+            this.sqL_DataGridView_DeviceTable.BorderColor = System.Drawing.Color.LightBlue;
+            this.sqL_DataGridView_DeviceTable.BorderRadius = 0;
+            this.sqL_DataGridView_DeviceTable.BorderSize = 2;
+            this.sqL_DataGridView_DeviceTable.CellBorderColor = System.Drawing.Color.White;
+            this.sqL_DataGridView_DeviceTable.cellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.sqL_DataGridView_DeviceTable.cellStylBackColor = System.Drawing.Color.LightBlue;
+            this.sqL_DataGridView_DeviceTable.cellStyleFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.sqL_DataGridView_DeviceTable.cellStylForeColor = System.Drawing.Color.Black;
+            this.sqL_DataGridView_DeviceTable.columnHeaderBackColor = System.Drawing.Color.SkyBlue;
+            this.sqL_DataGridView_DeviceTable.columnHeaderBorderColor = System.Drawing.Color.DimGray;
+            this.sqL_DataGridView_DeviceTable.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
+            this.sqL_DataGridView_DeviceTable.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.sqL_DataGridView_DeviceTable.columnHeadersHeight = 19;
+            this.sqL_DataGridView_DeviceTable.columnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.sqL_DataGridView_DeviceTable.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_DeviceTable.Columns"))));
+            this.sqL_DataGridView_DeviceTable.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_DeviceTable.Columns1"))));
+            this.sqL_DataGridView_DeviceTable.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_DeviceTable.Columns2"))));
+            this.sqL_DataGridView_DeviceTable.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_DeviceTable.Columns3"))));
+            this.sqL_DataGridView_DeviceTable.DataGridViewAutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.sqL_DataGridView_DeviceTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sqL_DataGridView_DeviceTable.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
+            this.sqL_DataGridView_DeviceTable.ImageBox = false;
+            this.sqL_DataGridView_DeviceTable.Location = new System.Drawing.Point(0, 0);
+            this.sqL_DataGridView_DeviceTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.sqL_DataGridView_DeviceTable.Name = "sqL_DataGridView_DeviceTable";
+            this.sqL_DataGridView_DeviceTable.OnlineState = SQLUI.SQL_DataGridView.OnlineEnum.Online;
+            this.sqL_DataGridView_DeviceTable.Password = "user82822040";
+            this.sqL_DataGridView_DeviceTable.Port = ((uint)(3306u));
+            this.sqL_DataGridView_DeviceTable.rowHeaderBackColor = System.Drawing.Color.CornflowerBlue;
+            this.sqL_DataGridView_DeviceTable.rowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.sqL_DataGridView_DeviceTable.RowsColor = System.Drawing.SystemColors.Control;
+            this.sqL_DataGridView_DeviceTable.RowsHeight = 40;
+            this.sqL_DataGridView_DeviceTable.SaveFileName = "SQL_DataGridView";
+            this.sqL_DataGridView_DeviceTable.selectedBorderSize = 0;
+            this.sqL_DataGridView_DeviceTable.selectedRowBackColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_DeviceTable.selectedRowBorderColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_DeviceTable.selectedRowForeColor = System.Drawing.Color.White;
+            this.sqL_DataGridView_DeviceTable.Server = "127.0.0.0";
+            this.sqL_DataGridView_DeviceTable.Size = new System.Drawing.Size(1162, 244);
+            this.sqL_DataGridView_DeviceTable.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
+            this.sqL_DataGridView_DeviceTable.TabIndex = 1;
+            this.sqL_DataGridView_DeviceTable.UserName = "root";
+            this.sqL_DataGridView_DeviceTable.可拖曳欄位寬度 = false;
+            this.sqL_DataGridView_DeviceTable.可選擇多列 = true;
+            this.sqL_DataGridView_DeviceTable.單格樣式 = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.sqL_DataGridView_DeviceTable.自動換行 = true;
+            this.sqL_DataGridView_DeviceTable.表單字體 = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
+            this.sqL_DataGridView_DeviceTable.邊框樣式 = System.Windows.Forms.BorderStyle.None;
+            this.sqL_DataGridView_DeviceTable.顯示CheckBox = false;
+            this.sqL_DataGridView_DeviceTable.顯示首列 = false;
+            this.sqL_DataGridView_DeviceTable.顯示首行 = true;
+            this.sqL_DataGridView_DeviceTable.首列樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.sqL_DataGridView_DeviceTable.首行樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             // 
-            // rJ_GroupBox2.ContentsPanel
+            // openFileDialog_LoadExcel
             // 
-            this.rJ_GroupBox2.ContentsPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.rJ_GroupBox2.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
-            this.rJ_GroupBox2.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
-            this.rJ_GroupBox2.ContentsPanel.BorderRadius = 5;
-            this.rJ_GroupBox2.ContentsPanel.BorderSize = 2;
-            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.groupBox6);
-            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.groupBox5);
-            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.groupBox3);
-            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.groupBox2);
-            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.groupBox4);
-            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Button_Write);
-            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.rJ_Button_Read);
-            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.groupBox1);
-            this.rJ_GroupBox2.ContentsPanel.Controls.Add(this.panel2);
-            this.rJ_GroupBox2.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rJ_GroupBox2.ContentsPanel.ForeColor = System.Drawing.Color.Black;
-            this.rJ_GroupBox2.ContentsPanel.IsSelected = false;
-            this.rJ_GroupBox2.ContentsPanel.Location = new System.Drawing.Point(0, 37);
-            this.rJ_GroupBox2.ContentsPanel.Name = "ContentsPanel";
-            this.rJ_GroupBox2.ContentsPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.rJ_GroupBox2.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
-            this.rJ_GroupBox2.ContentsPanel.ShadowSize = 0;
-            this.rJ_GroupBox2.ContentsPanel.Size = new System.Drawing.Size(526, 717);
-            this.rJ_GroupBox2.ContentsPanel.TabIndex = 2;
-            this.rJ_GroupBox2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.rJ_GroupBox2.GUID = "";
-            this.rJ_GroupBox2.Location = new System.Drawing.Point(0, 0);
-            this.rJ_GroupBox2.Name = "rJ_GroupBox2";
-            this.rJ_GroupBox2.PannelBackColor = System.Drawing.SystemColors.Window;
-            this.rJ_GroupBox2.PannelBorderColor = System.Drawing.Color.SkyBlue;
-            this.rJ_GroupBox2.PannelBorderRadius = 5;
-            this.rJ_GroupBox2.PannelBorderSize = 2;
-            this.rJ_GroupBox2.Size = new System.Drawing.Size(526, 754);
-            this.rJ_GroupBox2.TabIndex = 42;
-            this.rJ_GroupBox2.TitleBackColor = System.Drawing.SystemColors.Window;
-            this.rJ_GroupBox2.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_GroupBox2.TitleBorderRadius = 5;
-            this.rJ_GroupBox2.TitleBorderSize = 0;
-            this.rJ_GroupBox2.TitleFont = new System.Drawing.Font("新細明體", 12F);
-            this.rJ_GroupBox2.TitleForeColor = System.Drawing.Color.White;
-            this.rJ_GroupBox2.TitleHeight = 37;
-            this.rJ_GroupBox2.TitleTextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_GroupBox2.TitleTexts = "UART";
+            this.openFileDialog_LoadExcel.DefaultExt = "txt";
+            this.openFileDialog_LoadExcel.Filter = "txt File (*.txt)|*.txt;";
+            // 
+            // saveFileDialog_SaveExcel
+            // 
+            this.saveFileDialog_SaveExcel.DefaultExt = "txt";
+            this.saveFileDialog_SaveExcel.Filter = "txt File (*.txt)|*.txt;";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.rJ_Button_Read);
+            this.panel2.Controls.Add(this.rJ_Button_Write);
+            this.panel2.Controls.Add(this.groupBox6);
+            this.panel2.Controls.Add(this.groupBox5);
+            this.panel2.Controls.Add(this.groupBox3);
+            this.panel2.Controls.Add(this.groupBox2);
+            this.panel2.Controls.Add(this.groupBox4);
+            this.panel2.Controls.Add(this.groupBox1);
+            this.panel2.Controls.Add(this.panel23);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(5);
+            this.panel2.Size = new System.Drawing.Size(526, 725);
+            this.panel2.TabIndex = 0;
             // 
             // groupBox6
             // 
@@ -385,10 +381,10 @@ namespace H_Pannel_lib
             this.groupBox6.Controls.Add(this.checkBox_輸出02);
             this.groupBox6.Controls.Add(this.checkBox_輸出01);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox6.Location = new System.Drawing.Point(3, 607);
+            this.groupBox6.Location = new System.Drawing.Point(5, 609);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(520, 54);
-            this.groupBox6.TabIndex = 40;
+            this.groupBox6.Size = new System.Drawing.Size(516, 54);
+            this.groupBox6.TabIndex = 49;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "輸出";
             // 
@@ -401,13 +397,18 @@ namespace H_Pannel_lib
             this.rJ_Button_輸出_寫入.BorderRadius = 5;
             this.rJ_Button_輸出_寫入.BorderSize = 0;
             this.rJ_Button_輸出_寫入.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_輸出_寫入.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_輸出_寫入.FlatAppearance.BorderSize = 0;
             this.rJ_Button_輸出_寫入.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_輸出_寫入.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_輸出_寫入.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_輸出_寫入.GUID = "";
+            this.rJ_Button_輸出_寫入.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_輸出_寫入.Location = new System.Drawing.Point(430, 12);
             this.rJ_Button_輸出_寫入.Name = "rJ_Button_輸出_寫入";
+            this.rJ_Button_輸出_寫入.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_輸出_寫入.ProhibitionLineWidth = 4;
+            this.rJ_Button_輸出_寫入.ProhibitionSymbolSize = 30;
             this.rJ_Button_輸出_寫入.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_輸出_寫入.ShadowSize = 0;
             this.rJ_Button_輸出_寫入.ShowLoadingForm = false;
@@ -416,6 +417,7 @@ namespace H_Pannel_lib
             this.rJ_Button_輸出_寫入.TabIndex = 36;
             this.rJ_Button_輸出_寫入.Text = "寫入";
             this.rJ_Button_輸出_寫入.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_輸出_寫入.TextHeight = 0;
             this.rJ_Button_輸出_寫入.UseVisualStyleBackColor = false;
             // 
             // checkBox_輸出10
@@ -532,10 +534,10 @@ namespace H_Pannel_lib
             this.groupBox5.Controls.Add(this.checkBox_輸入02);
             this.groupBox5.Controls.Add(this.checkBox_輸入01);
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox5.Location = new System.Drawing.Point(3, 553);
+            this.groupBox5.Location = new System.Drawing.Point(5, 555);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(520, 54);
-            this.groupBox5.TabIndex = 39;
+            this.groupBox5.Size = new System.Drawing.Size(516, 54);
+            this.groupBox5.TabIndex = 48;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "輸入";
             // 
@@ -548,13 +550,18 @@ namespace H_Pannel_lib
             this.rJ_Button_輸入_讀取.BorderRadius = 5;
             this.rJ_Button_輸入_讀取.BorderSize = 0;
             this.rJ_Button_輸入_讀取.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_輸入_讀取.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_輸入_讀取.FlatAppearance.BorderSize = 0;
             this.rJ_Button_輸入_讀取.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_輸入_讀取.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_輸入_讀取.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_輸入_讀取.GUID = "";
+            this.rJ_Button_輸入_讀取.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_輸入_讀取.Location = new System.Drawing.Point(430, 12);
             this.rJ_Button_輸入_讀取.Name = "rJ_Button_輸入_讀取";
+            this.rJ_Button_輸入_讀取.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_輸入_讀取.ProhibitionLineWidth = 4;
+            this.rJ_Button_輸入_讀取.ProhibitionSymbolSize = 30;
             this.rJ_Button_輸入_讀取.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_輸入_讀取.ShadowSize = 0;
             this.rJ_Button_輸入_讀取.ShowLoadingForm = false;
@@ -563,6 +570,7 @@ namespace H_Pannel_lib
             this.rJ_Button_輸入_讀取.TabIndex = 36;
             this.rJ_Button_輸入_讀取.Text = "讀取";
             this.rJ_Button_輸入_讀取.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_輸入_讀取.TextHeight = 0;
             this.rJ_Button_輸入_讀取.UseVisualStyleBackColor = false;
             // 
             // checkBox_輸入10
@@ -690,10 +698,10 @@ namespace H_Pannel_lib
             this.groupBox3.Controls.Add(this.checkBox_輸出方向_02);
             this.groupBox3.Controls.Add(this.checkBox_輸出方向_01);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(3, 499);
+            this.groupBox3.Location = new System.Drawing.Point(5, 501);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(520, 54);
-            this.groupBox3.TabIndex = 38;
+            this.groupBox3.Size = new System.Drawing.Size(516, 54);
+            this.groupBox3.TabIndex = 47;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "輸出方向";
             // 
@@ -706,13 +714,18 @@ namespace H_Pannel_lib
             this.rJ_Button_輸出方向_寫入.BorderRadius = 5;
             this.rJ_Button_輸出方向_寫入.BorderSize = 0;
             this.rJ_Button_輸出方向_寫入.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_輸出方向_寫入.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_輸出方向_寫入.FlatAppearance.BorderSize = 0;
             this.rJ_Button_輸出方向_寫入.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_輸出方向_寫入.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_輸出方向_寫入.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_輸出方向_寫入.GUID = "";
+            this.rJ_Button_輸出方向_寫入.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_輸出方向_寫入.Location = new System.Drawing.Point(476, 11);
             this.rJ_Button_輸出方向_寫入.Name = "rJ_Button_輸出方向_寫入";
+            this.rJ_Button_輸出方向_寫入.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_輸出方向_寫入.ProhibitionLineWidth = 4;
+            this.rJ_Button_輸出方向_寫入.ProhibitionSymbolSize = 30;
             this.rJ_Button_輸出方向_寫入.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_輸出方向_寫入.ShadowSize = 0;
             this.rJ_Button_輸出方向_寫入.ShowLoadingForm = false;
@@ -721,6 +734,7 @@ namespace H_Pannel_lib
             this.rJ_Button_輸出方向_寫入.TabIndex = 41;
             this.rJ_Button_輸出方向_寫入.Text = "寫入";
             this.rJ_Button_輸出方向_寫入.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_輸出方向_寫入.TextHeight = 0;
             this.rJ_Button_輸出方向_寫入.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_輸出方向_讀取
@@ -732,13 +746,18 @@ namespace H_Pannel_lib
             this.rJ_Button_輸出方向_讀取.BorderRadius = 5;
             this.rJ_Button_輸出方向_讀取.BorderSize = 0;
             this.rJ_Button_輸出方向_讀取.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_輸出方向_讀取.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_輸出方向_讀取.FlatAppearance.BorderSize = 0;
             this.rJ_Button_輸出方向_讀取.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_輸出方向_讀取.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_輸出方向_讀取.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_輸出方向_讀取.GUID = "";
+            this.rJ_Button_輸出方向_讀取.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_輸出方向_讀取.Location = new System.Drawing.Point(430, 11);
             this.rJ_Button_輸出方向_讀取.Name = "rJ_Button_輸出方向_讀取";
+            this.rJ_Button_輸出方向_讀取.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_輸出方向_讀取.ProhibitionLineWidth = 4;
+            this.rJ_Button_輸出方向_讀取.ProhibitionSymbolSize = 30;
             this.rJ_Button_輸出方向_讀取.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_輸出方向_讀取.ShadowSize = 0;
             this.rJ_Button_輸出方向_讀取.ShowLoadingForm = false;
@@ -747,6 +766,7 @@ namespace H_Pannel_lib
             this.rJ_Button_輸出方向_讀取.TabIndex = 40;
             this.rJ_Button_輸出方向_讀取.Text = "讀取";
             this.rJ_Button_輸出方向_讀取.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_輸出方向_讀取.TextHeight = 0;
             this.rJ_Button_輸出方向_讀取.UseVisualStyleBackColor = false;
             // 
             // checkBox_輸出方向_10
@@ -864,10 +884,10 @@ namespace H_Pannel_lib
             this.groupBox2.Controls.Add(this.checkBox_輸入方向_02);
             this.groupBox2.Controls.Add(this.checkBox_輸入方向_01);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(3, 445);
+            this.groupBox2.Location = new System.Drawing.Point(5, 447);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(520, 54);
-            this.groupBox2.TabIndex = 37;
+            this.groupBox2.Size = new System.Drawing.Size(516, 54);
+            this.groupBox2.TabIndex = 46;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "輸入方向";
             // 
@@ -880,13 +900,18 @@ namespace H_Pannel_lib
             this.rJ_Button_輸入方向_寫入.BorderRadius = 5;
             this.rJ_Button_輸入方向_寫入.BorderSize = 0;
             this.rJ_Button_輸入方向_寫入.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_輸入方向_寫入.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_輸入方向_寫入.FlatAppearance.BorderSize = 0;
             this.rJ_Button_輸入方向_寫入.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_輸入方向_寫入.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_輸入方向_寫入.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_輸入方向_寫入.GUID = "";
+            this.rJ_Button_輸入方向_寫入.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_輸入方向_寫入.Location = new System.Drawing.Point(476, 12);
             this.rJ_Button_輸入方向_寫入.Name = "rJ_Button_輸入方向_寫入";
+            this.rJ_Button_輸入方向_寫入.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_輸入方向_寫入.ProhibitionLineWidth = 4;
+            this.rJ_Button_輸入方向_寫入.ProhibitionSymbolSize = 30;
             this.rJ_Button_輸入方向_寫入.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_輸入方向_寫入.ShadowSize = 0;
             this.rJ_Button_輸入方向_寫入.ShowLoadingForm = false;
@@ -895,6 +920,7 @@ namespace H_Pannel_lib
             this.rJ_Button_輸入方向_寫入.TabIndex = 39;
             this.rJ_Button_輸入方向_寫入.Text = "寫入";
             this.rJ_Button_輸入方向_寫入.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_輸入方向_寫入.TextHeight = 0;
             this.rJ_Button_輸入方向_寫入.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_輸入方向_讀取
@@ -906,13 +932,18 @@ namespace H_Pannel_lib
             this.rJ_Button_輸入方向_讀取.BorderRadius = 5;
             this.rJ_Button_輸入方向_讀取.BorderSize = 0;
             this.rJ_Button_輸入方向_讀取.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_輸入方向_讀取.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_輸入方向_讀取.FlatAppearance.BorderSize = 0;
             this.rJ_Button_輸入方向_讀取.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_輸入方向_讀取.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_輸入方向_讀取.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_輸入方向_讀取.GUID = "";
+            this.rJ_Button_輸入方向_讀取.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_輸入方向_讀取.Location = new System.Drawing.Point(430, 12);
             this.rJ_Button_輸入方向_讀取.Name = "rJ_Button_輸入方向_讀取";
+            this.rJ_Button_輸入方向_讀取.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_輸入方向_讀取.ProhibitionLineWidth = 4;
+            this.rJ_Button_輸入方向_讀取.ProhibitionSymbolSize = 30;
             this.rJ_Button_輸入方向_讀取.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_輸入方向_讀取.ShadowSize = 0;
             this.rJ_Button_輸入方向_讀取.ShowLoadingForm = false;
@@ -921,6 +952,7 @@ namespace H_Pannel_lib
             this.rJ_Button_輸入方向_讀取.TabIndex = 36;
             this.rJ_Button_輸入方向_讀取.Text = "讀取";
             this.rJ_Button_輸入方向_讀取.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_輸入方向_讀取.TextHeight = 0;
             this.rJ_Button_輸入方向_讀取.UseVisualStyleBackColor = false;
             // 
             // checkBox_輸入方向_10
@@ -1034,10 +1066,10 @@ namespace H_Pannel_lib
             this.groupBox4.Controls.Add(this.checkBox_RFID_Enable_02);
             this.groupBox4.Controls.Add(this.checkBox_RFID_Enable_01);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox4.Location = new System.Drawing.Point(3, 391);
+            this.groupBox4.Location = new System.Drawing.Point(5, 393);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(520, 54);
-            this.groupBox4.TabIndex = 34;
+            this.groupBox4.Size = new System.Drawing.Size(516, 54);
+            this.groupBox4.TabIndex = 45;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "RFID致能";
             // 
@@ -1121,58 +1153,6 @@ namespace H_Pannel_lib
             this.checkBox_RFID_Enable_01.Text = "01";
             this.checkBox_RFID_Enable_01.UseVisualStyleBackColor = true;
             // 
-            // rJ_Button_Write
-            // 
-            this.rJ_Button_Write.AutoResetState = false;
-            this.rJ_Button_Write.BackColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_Write.BackgroundColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_Write.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_Write.BorderRadius = 5;
-            this.rJ_Button_Write.BorderSize = 0;
-            this.rJ_Button_Write.buttonType = MyUI.RJ_Button.ButtonType.Push;
-            this.rJ_Button_Write.FlatAppearance.BorderSize = 0;
-            this.rJ_Button_Write.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Button_Write.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Button_Write.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_Write.GUID = "";
-            this.rJ_Button_Write.Location = new System.Drawing.Point(96, 669);
-            this.rJ_Button_Write.Name = "rJ_Button_Write";
-            this.rJ_Button_Write.ShadowColor = System.Drawing.Color.DimGray;
-            this.rJ_Button_Write.ShadowSize = 0;
-            this.rJ_Button_Write.ShowLoadingForm = false;
-            this.rJ_Button_Write.Size = new System.Drawing.Size(80, 42);
-            this.rJ_Button_Write.State = false;
-            this.rJ_Button_Write.TabIndex = 33;
-            this.rJ_Button_Write.Text = "Write";
-            this.rJ_Button_Write.TextColor = System.Drawing.Color.White;
-            this.rJ_Button_Write.UseVisualStyleBackColor = false;
-            // 
-            // rJ_Button_Read
-            // 
-            this.rJ_Button_Read.AutoResetState = false;
-            this.rJ_Button_Read.BackColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_Read.BackgroundColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_Read.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_Read.BorderRadius = 5;
-            this.rJ_Button_Read.BorderSize = 0;
-            this.rJ_Button_Read.buttonType = MyUI.RJ_Button.ButtonType.Push;
-            this.rJ_Button_Read.FlatAppearance.BorderSize = 0;
-            this.rJ_Button_Read.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Button_Read.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Button_Read.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_Read.GUID = "";
-            this.rJ_Button_Read.Location = new System.Drawing.Point(10, 669);
-            this.rJ_Button_Read.Name = "rJ_Button_Read";
-            this.rJ_Button_Read.ShadowColor = System.Drawing.Color.DimGray;
-            this.rJ_Button_Read.ShadowSize = 0;
-            this.rJ_Button_Read.ShowLoadingForm = false;
-            this.rJ_Button_Read.Size = new System.Drawing.Size(80, 42);
-            this.rJ_Button_Read.State = false;
-            this.rJ_Button_Read.TabIndex = 32;
-            this.rJ_Button_Read.Text = "Read";
-            this.rJ_Button_Read.TextColor = System.Drawing.Color.White;
-            this.rJ_Button_Read.UseVisualStyleBackColor = false;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.panel21);
@@ -1186,11 +1166,11 @@ namespace H_Pannel_lib
             this.groupBox1.Controls.Add(this.panel5);
             this.groupBox1.Controls.Add(this.panel3);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(3, 46);
+            this.groupBox1.Location = new System.Drawing.Point(5, 48);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.groupBox1.Size = new System.Drawing.Size(520, 345);
-            this.groupBox1.TabIndex = 11;
+            this.groupBox1.Size = new System.Drawing.Size(516, 345);
+            this.groupBox1.TabIndex = 42;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "參數";
             // 
@@ -1202,7 +1182,7 @@ namespace H_Pannel_lib
             this.panel21.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel21.Location = new System.Drawing.Point(10, 295);
             this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(500, 30);
+            this.panel21.Size = new System.Drawing.Size(496, 30);
             this.panel21.TabIndex = 10;
             // 
             // label28
@@ -1247,7 +1227,7 @@ namespace H_Pannel_lib
             this.panel19.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel19.Location = new System.Drawing.Point(10, 265);
             this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(500, 30);
+            this.panel19.Size = new System.Drawing.Size(496, 30);
             this.panel19.TabIndex = 9;
             // 
             // textBox_Password
@@ -1283,7 +1263,7 @@ namespace H_Pannel_lib
             this.panel17.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel17.Location = new System.Drawing.Point(10, 235);
             this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(500, 30);
+            this.panel17.Size = new System.Drawing.Size(496, 30);
             this.panel17.TabIndex = 8;
             // 
             // textBox_SSID
@@ -1319,7 +1299,7 @@ namespace H_Pannel_lib
             this.panel15.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel15.Location = new System.Drawing.Point(10, 205);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(500, 30);
+            this.panel15.Size = new System.Drawing.Size(496, 30);
             this.panel15.TabIndex = 7;
             // 
             // textBox_Server_Port
@@ -1355,7 +1335,7 @@ namespace H_Pannel_lib
             this.panel13.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel13.Location = new System.Drawing.Point(10, 175);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(500, 30);
+            this.panel13.Size = new System.Drawing.Size(496, 30);
             this.panel13.TabIndex = 6;
             // 
             // textBox_Local_Port
@@ -1397,7 +1377,7 @@ namespace H_Pannel_lib
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(10, 145);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(500, 30);
+            this.panel11.Size = new System.Drawing.Size(496, 30);
             this.panel11.TabIndex = 5;
             // 
             // textBox_Server_IP_Adress_D
@@ -1487,7 +1467,7 @@ namespace H_Pannel_lib
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(10, 115);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(500, 30);
+            this.panel9.Size = new System.Drawing.Size(496, 30);
             this.panel9.TabIndex = 4;
             // 
             // textBox_DNS_D
@@ -1577,7 +1557,7 @@ namespace H_Pannel_lib
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(10, 85);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(500, 30);
+            this.panel7.Size = new System.Drawing.Size(496, 30);
             this.panel7.TabIndex = 3;
             // 
             // textBox_Gateway_D
@@ -1667,7 +1647,7 @@ namespace H_Pannel_lib
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(10, 55);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(500, 30);
+            this.panel5.Size = new System.Drawing.Size(496, 30);
             this.panel5.TabIndex = 2;
             // 
             // textBox_Subnet_D
@@ -1757,7 +1737,7 @@ namespace H_Pannel_lib
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(10, 25);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(500, 30);
+            this.panel3.Size = new System.Drawing.Size(496, 30);
             this.panel3.TabIndex = 1;
             // 
             // textBox_IP_Adress_D
@@ -1834,18 +1814,18 @@ namespace H_Pannel_lib
             this.label1.Text = "IP Adress :";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panel2
+            // panel23
             // 
-            this.panel2.Controls.Add(this.rJ_Button_Station_Write);
-            this.panel2.Controls.Add(this.textBox_COM);
-            this.panel2.Controls.Add(this.label26);
-            this.panel2.Controls.Add(this.textBox_Station);
-            this.panel2.Controls.Add(this.label25);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(520, 43);
-            this.panel2.TabIndex = 10;
+            this.panel23.Controls.Add(this.rJ_Button_Station_Write);
+            this.panel23.Controls.Add(this.textBox_COM);
+            this.panel23.Controls.Add(this.label26);
+            this.panel23.Controls.Add(this.textBox_Station);
+            this.panel23.Controls.Add(this.label25);
+            this.panel23.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel23.Location = new System.Drawing.Point(5, 5);
+            this.panel23.Name = "panel23";
+            this.panel23.Size = new System.Drawing.Size(516, 43);
+            this.panel23.TabIndex = 41;
             // 
             // rJ_Button_Station_Write
             // 
@@ -1856,13 +1836,18 @@ namespace H_Pannel_lib
             this.rJ_Button_Station_Write.BorderRadius = 5;
             this.rJ_Button_Station_Write.BorderSize = 0;
             this.rJ_Button_Station_Write.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Station_Write.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_Station_Write.FlatAppearance.BorderSize = 0;
             this.rJ_Button_Station_Write.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_Station_Write.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_Station_Write.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_Station_Write.GUID = "";
+            this.rJ_Button_Station_Write.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_Station_Write.Location = new System.Drawing.Point(281, 4);
             this.rJ_Button_Station_Write.Name = "rJ_Button_Station_Write";
+            this.rJ_Button_Station_Write.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_Station_Write.ProhibitionLineWidth = 4;
+            this.rJ_Button_Station_Write.ProhibitionSymbolSize = 30;
             this.rJ_Button_Station_Write.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_Station_Write.ShadowSize = 0;
             this.rJ_Button_Station_Write.ShowLoadingForm = false;
@@ -1871,6 +1856,7 @@ namespace H_Pannel_lib
             this.rJ_Button_Station_Write.TabIndex = 41;
             this.rJ_Button_Station_Write.Text = "Write";
             this.rJ_Button_Station_Write.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Station_Write.TextHeight = 0;
             this.rJ_Button_Station_Write.UseVisualStyleBackColor = false;
             // 
             // textBox_COM
@@ -1907,46 +1893,14 @@ namespace H_Pannel_lib
             this.label25.TabIndex = 1;
             this.label25.Text = "Station :";
             // 
-            // rJ_GroupBox4
+            // panel24
             // 
-            // 
-            // rJ_GroupBox4.ContentsPanel
-            // 
-            this.rJ_GroupBox4.ContentsPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.rJ_GroupBox4.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
-            this.rJ_GroupBox4.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
-            this.rJ_GroupBox4.ContentsPanel.BorderRadius = 2;
-            this.rJ_GroupBox4.ContentsPanel.BorderSize = 2;
-            this.rJ_GroupBox4.ContentsPanel.Controls.Add(this.sqL_DataGridView_PING);
-            this.rJ_GroupBox4.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rJ_GroupBox4.ContentsPanel.ForeColor = System.Drawing.Color.White;
-            this.rJ_GroupBox4.ContentsPanel.IsSelected = false;
-            this.rJ_GroupBox4.ContentsPanel.Location = new System.Drawing.Point(0, 37);
-            this.rJ_GroupBox4.ContentsPanel.Name = "ContentsPanel";
-            this.rJ_GroupBox4.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.rJ_GroupBox4.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
-            this.rJ_GroupBox4.ContentsPanel.ShadowSize = 0;
-            this.rJ_GroupBox4.ContentsPanel.Size = new System.Drawing.Size(163, 178);
-            this.rJ_GroupBox4.ContentsPanel.TabIndex = 2;
-            this.rJ_GroupBox4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rJ_GroupBox4.GUID = "";
-            this.rJ_GroupBox4.Location = new System.Drawing.Point(1230, 754);
-            this.rJ_GroupBox4.Name = "rJ_GroupBox4";
-            this.rJ_GroupBox4.PannelBackColor = System.Drawing.SystemColors.Window;
-            this.rJ_GroupBox4.PannelBorderColor = System.Drawing.Color.SkyBlue;
-            this.rJ_GroupBox4.PannelBorderRadius = 2;
-            this.rJ_GroupBox4.PannelBorderSize = 2;
-            this.rJ_GroupBox4.Size = new System.Drawing.Size(163, 215);
-            this.rJ_GroupBox4.TabIndex = 40;
-            this.rJ_GroupBox4.TitleBackColor = System.Drawing.SystemColors.Window;
-            this.rJ_GroupBox4.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_GroupBox4.TitleBorderRadius = 5;
-            this.rJ_GroupBox4.TitleBorderSize = 0;
-            this.rJ_GroupBox4.TitleFont = new System.Drawing.Font("新細明體", 12F);
-            this.rJ_GroupBox4.TitleForeColor = System.Drawing.Color.White;
-            this.rJ_GroupBox4.TitleHeight = 37;
-            this.rJ_GroupBox4.TitleTextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_GroupBox4.TitleTexts = "未上線裝置";
+            this.panel24.Controls.Add(this.sqL_DataGridView_DeviceTable);
+            this.panel24.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel24.Location = new System.Drawing.Point(0, 725);
+            this.panel24.Name = "panel24";
+            this.panel24.Size = new System.Drawing.Size(1162, 244);
+            this.panel24.TabIndex = 35;
             // 
             // sqL_DataGridView_PING
             // 
@@ -1956,20 +1910,23 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_PING.BorderColor = System.Drawing.Color.LightBlue;
             this.sqL_DataGridView_PING.BorderRadius = 0;
             this.sqL_DataGridView_PING.BorderSize = 2;
+            this.sqL_DataGridView_PING.CellBorderColor = System.Drawing.Color.White;
             this.sqL_DataGridView_PING.cellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.sqL_DataGridView_PING.cellStylBackColor = System.Drawing.Color.LightBlue;
             this.sqL_DataGridView_PING.cellStyleFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.sqL_DataGridView_PING.cellStylForeColor = System.Drawing.Color.Black;
             this.sqL_DataGridView_PING.columnHeaderBackColor = System.Drawing.Color.SkyBlue;
+            this.sqL_DataGridView_PING.columnHeaderBorderColor = System.Drawing.Color.DimGray;
             this.sqL_DataGridView_PING.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
             this.sqL_DataGridView_PING.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.sqL_DataGridView_PING.columnHeadersHeight = 19;
             this.sqL_DataGridView_PING.columnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.sqL_DataGridView_PING.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_PING.Columns"))));
+            this.sqL_DataGridView_PING.DataGridViewAutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.sqL_DataGridView_PING.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sqL_DataGridView_PING.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
             this.sqL_DataGridView_PING.ImageBox = false;
-            this.sqL_DataGridView_PING.Location = new System.Drawing.Point(5, 5);
+            this.sqL_DataGridView_PING.Location = new System.Drawing.Point(1162, 725);
             this.sqL_DataGridView_PING.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.sqL_DataGridView_PING.Name = "sqL_DataGridView_PING";
             this.sqL_DataGridView_PING.OnlineState = SQLUI.SQL_DataGridView.OnlineEnum.Online;
@@ -1980,10 +1937,14 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_PING.RowsColor = System.Drawing.SystemColors.Control;
             this.sqL_DataGridView_PING.RowsHeight = 20;
             this.sqL_DataGridView_PING.SaveFileName = "SQL_DataGridView";
+            this.sqL_DataGridView_PING.selectedBorderSize = 0;
+            this.sqL_DataGridView_PING.selectedRowBackColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_PING.selectedRowBorderColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_PING.selectedRowForeColor = System.Drawing.Color.White;
             this.sqL_DataGridView_PING.Server = "127.0.0.0";
-            this.sqL_DataGridView_PING.Size = new System.Drawing.Size(153, 168);
+            this.sqL_DataGridView_PING.Size = new System.Drawing.Size(231, 244);
             this.sqL_DataGridView_PING.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
-            this.sqL_DataGridView_PING.TabIndex = 34;
+            this.sqL_DataGridView_PING.TabIndex = 36;
             this.sqL_DataGridView_PING.UserName = "root";
             this.sqL_DataGridView_PING.可拖曳欄位寬度 = false;
             this.sqL_DataGridView_PING.可選擇多列 = true;
@@ -1997,124 +1958,84 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_PING.首列樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.sqL_DataGridView_PING.首行樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             // 
-            // rJ_GroupBox3
+            // rJ_Button_Write
             // 
+            this.rJ_Button_Write.AutoResetState = false;
+            this.rJ_Button_Write.BackColor = System.Drawing.Color.Transparent;
+            this.rJ_Button_Write.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Write.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_Write.BorderRadius = 20;
+            this.rJ_Button_Write.BorderSize = 0;
+            this.rJ_Button_Write.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Write.DisenableColor = System.Drawing.Color.Gray;
+            this.rJ_Button_Write.Dock = System.Windows.Forms.DockStyle.Right;
+            this.rJ_Button_Write.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_Write.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_Write.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_Write.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Write.GUID = "";
+            this.rJ_Button_Write.Image_padding = new System.Windows.Forms.Padding(0);
+            this.rJ_Button_Write.Location = new System.Drawing.Point(441, 663);
+            this.rJ_Button_Write.Name = "rJ_Button_Write";
+            this.rJ_Button_Write.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_Write.ProhibitionLineWidth = 4;
+            this.rJ_Button_Write.ProhibitionSymbolSize = 30;
+            this.rJ_Button_Write.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_Write.ShadowSize = 3;
+            this.rJ_Button_Write.ShowLoadingForm = false;
+            this.rJ_Button_Write.Size = new System.Drawing.Size(80, 57);
+            this.rJ_Button_Write.State = false;
+            this.rJ_Button_Write.TabIndex = 50;
+            this.rJ_Button_Write.Text = "Write";
+            this.rJ_Button_Write.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Write.TextHeight = 0;
+            this.rJ_Button_Write.UseVisualStyleBackColor = false;
             // 
-            // rJ_GroupBox3.ContentsPanel
+            // rJ_Button_Read
             // 
-            this.rJ_GroupBox3.ContentsPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.rJ_GroupBox3.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
-            this.rJ_GroupBox3.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
-            this.rJ_GroupBox3.ContentsPanel.BorderRadius = 2;
-            this.rJ_GroupBox3.ContentsPanel.BorderSize = 2;
-            this.rJ_GroupBox3.ContentsPanel.Controls.Add(this.sqL_DataGridView_DeviceTable);
-            this.rJ_GroupBox3.ContentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rJ_GroupBox3.ContentsPanel.ForeColor = System.Drawing.Color.White;
-            this.rJ_GroupBox3.ContentsPanel.IsSelected = false;
-            this.rJ_GroupBox3.ContentsPanel.Location = new System.Drawing.Point(0, 37);
-            this.rJ_GroupBox3.ContentsPanel.Name = "ContentsPanel";
-            this.rJ_GroupBox3.ContentsPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.rJ_GroupBox3.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
-            this.rJ_GroupBox3.ContentsPanel.ShadowSize = 0;
-            this.rJ_GroupBox3.ContentsPanel.Size = new System.Drawing.Size(1230, 178);
-            this.rJ_GroupBox3.ContentsPanel.TabIndex = 2;
-            this.rJ_GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rJ_GroupBox3.GUID = "";
-            this.rJ_GroupBox3.Location = new System.Drawing.Point(0, 754);
-            this.rJ_GroupBox3.Name = "rJ_GroupBox3";
-            this.rJ_GroupBox3.PannelBackColor = System.Drawing.SystemColors.Window;
-            this.rJ_GroupBox3.PannelBorderColor = System.Drawing.Color.SkyBlue;
-            this.rJ_GroupBox3.PannelBorderRadius = 2;
-            this.rJ_GroupBox3.PannelBorderSize = 2;
-            this.rJ_GroupBox3.Size = new System.Drawing.Size(1230, 215);
-            this.rJ_GroupBox3.TabIndex = 41;
-            this.rJ_GroupBox3.TitleBackColor = System.Drawing.SystemColors.Window;
-            this.rJ_GroupBox3.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_GroupBox3.TitleBorderRadius = 5;
-            this.rJ_GroupBox3.TitleBorderSize = 0;
-            this.rJ_GroupBox3.TitleFont = new System.Drawing.Font("新細明體", 12F);
-            this.rJ_GroupBox3.TitleForeColor = System.Drawing.Color.White;
-            this.rJ_GroupBox3.TitleHeight = 37;
-            this.rJ_GroupBox3.TitleTextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_GroupBox3.TitleTexts = "DeviceTable";
-            // 
-            // sqL_DataGridView_DeviceTable
-            // 
-            this.sqL_DataGridView_DeviceTable.AutoSelectToDeep = false;
-            this.sqL_DataGridView_DeviceTable.AutoSize = true;
-            this.sqL_DataGridView_DeviceTable.backColor = System.Drawing.Color.LightBlue;
-            this.sqL_DataGridView_DeviceTable.BorderColor = System.Drawing.Color.LightBlue;
-            this.sqL_DataGridView_DeviceTable.BorderRadius = 0;
-            this.sqL_DataGridView_DeviceTable.BorderSize = 2;
-            this.sqL_DataGridView_DeviceTable.cellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.sqL_DataGridView_DeviceTable.cellStylBackColor = System.Drawing.Color.LightBlue;
-            this.sqL_DataGridView_DeviceTable.cellStyleFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.sqL_DataGridView_DeviceTable.cellStylForeColor = System.Drawing.Color.Black;
-            this.sqL_DataGridView_DeviceTable.columnHeaderBackColor = System.Drawing.Color.SkyBlue;
-            this.sqL_DataGridView_DeviceTable.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
-            this.sqL_DataGridView_DeviceTable.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.sqL_DataGridView_DeviceTable.columnHeadersHeight = 19;
-            this.sqL_DataGridView_DeviceTable.columnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.sqL_DataGridView_DeviceTable.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_DeviceTable.Columns"))));
-            this.sqL_DataGridView_DeviceTable.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_DeviceTable.Columns1"))));
-            this.sqL_DataGridView_DeviceTable.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_DeviceTable.Columns2"))));
-            this.sqL_DataGridView_DeviceTable.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_DeviceTable.Columns3"))));
-            this.sqL_DataGridView_DeviceTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sqL_DataGridView_DeviceTable.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
-            this.sqL_DataGridView_DeviceTable.ImageBox = false;
-            this.sqL_DataGridView_DeviceTable.Location = new System.Drawing.Point(5, 5);
-            this.sqL_DataGridView_DeviceTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.sqL_DataGridView_DeviceTable.Name = "sqL_DataGridView_DeviceTable";
-            this.sqL_DataGridView_DeviceTable.OnlineState = SQLUI.SQL_DataGridView.OnlineEnum.Online;
-            this.sqL_DataGridView_DeviceTable.Password = "user82822040";
-            this.sqL_DataGridView_DeviceTable.Port = ((uint)(3306u));
-            this.sqL_DataGridView_DeviceTable.rowHeaderBackColor = System.Drawing.Color.CornflowerBlue;
-            this.sqL_DataGridView_DeviceTable.rowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.sqL_DataGridView_DeviceTable.RowsColor = System.Drawing.SystemColors.Control;
-            this.sqL_DataGridView_DeviceTable.RowsHeight = 40;
-            this.sqL_DataGridView_DeviceTable.SaveFileName = "SQL_DataGridView";
-            this.sqL_DataGridView_DeviceTable.Server = "127.0.0.0";
-            this.sqL_DataGridView_DeviceTable.Size = new System.Drawing.Size(1220, 168);
-            this.sqL_DataGridView_DeviceTable.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
-            this.sqL_DataGridView_DeviceTable.TabIndex = 1;
-            this.sqL_DataGridView_DeviceTable.UserName = "root";
-            this.sqL_DataGridView_DeviceTable.可拖曳欄位寬度 = false;
-            this.sqL_DataGridView_DeviceTable.可選擇多列 = true;
-            this.sqL_DataGridView_DeviceTable.單格樣式 = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.sqL_DataGridView_DeviceTable.自動換行 = true;
-            this.sqL_DataGridView_DeviceTable.表單字體 = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
-            this.sqL_DataGridView_DeviceTable.邊框樣式 = System.Windows.Forms.BorderStyle.None;
-            this.sqL_DataGridView_DeviceTable.顯示CheckBox = false;
-            this.sqL_DataGridView_DeviceTable.顯示首列 = false;
-            this.sqL_DataGridView_DeviceTable.顯示首行 = true;
-            this.sqL_DataGridView_DeviceTable.首列樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.sqL_DataGridView_DeviceTable.首行樣式 = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            // 
-            // openFileDialog_LoadExcel
-            // 
-            this.openFileDialog_LoadExcel.DefaultExt = "txt";
-            this.openFileDialog_LoadExcel.Filter = "txt File (*.txt)|*.txt;";
-            // 
-            // saveFileDialog_SaveExcel
-            // 
-            this.saveFileDialog_SaveExcel.DefaultExt = "txt";
-            this.saveFileDialog_SaveExcel.Filter = "txt File (*.txt)|*.txt;";
+            this.rJ_Button_Read.AutoResetState = false;
+            this.rJ_Button_Read.BackColor = System.Drawing.Color.Transparent;
+            this.rJ_Button_Read.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_Read.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_Read.BorderRadius = 20;
+            this.rJ_Button_Read.BorderSize = 0;
+            this.rJ_Button_Read.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_Read.DisenableColor = System.Drawing.Color.Gray;
+            this.rJ_Button_Read.Dock = System.Windows.Forms.DockStyle.Right;
+            this.rJ_Button_Read.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_Read.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_Read.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_Read.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_Read.GUID = "";
+            this.rJ_Button_Read.Image_padding = new System.Windows.Forms.Padding(0);
+            this.rJ_Button_Read.Location = new System.Drawing.Point(361, 663);
+            this.rJ_Button_Read.Name = "rJ_Button_Read";
+            this.rJ_Button_Read.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_Read.ProhibitionLineWidth = 4;
+            this.rJ_Button_Read.ProhibitionSymbolSize = 30;
+            this.rJ_Button_Read.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_Read.ShadowSize = 3;
+            this.rJ_Button_Read.ShowLoadingForm = false;
+            this.rJ_Button_Read.Size = new System.Drawing.Size(80, 57);
+            this.rJ_Button_Read.State = false;
+            this.rJ_Button_Read.TabIndex = 51;
+            this.rJ_Button_Read.Text = "Read";
+            this.rJ_Button_Read.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_Read.TextHeight = 0;
+            this.rJ_Button_Read.UseVisualStyleBackColor = false;
             // 
             // RFID_UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.Controls.Add(this.rJ_GroupBox3);
-            this.Controls.Add(this.rJ_GroupBox4);
+            this.Controls.Add(this.sqL_DataGridView_PING);
+            this.Controls.Add(this.panel24);
             this.Controls.Add(this.panel1);
             this.Name = "RFID_UI";
             this.Size = new System.Drawing.Size(1393, 969);
             this.panel1.ResumeLayout(false);
-            this.rJ_GroupBox1.ContentsPanel.ResumeLayout(false);
-            this.rJ_GroupBox1.ResumeLayout(false);
-            this.rJ_GroupBox2.ContentsPanel.ResumeLayout(false);
-            this.rJ_GroupBox2.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -2156,24 +2077,73 @@ namespace H_Pannel_lib
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.rJ_GroupBox4.ContentsPanel.ResumeLayout(false);
-            this.rJ_GroupBox4.ContentsPanel.PerformLayout();
-            this.rJ_GroupBox4.ResumeLayout(false);
-            this.rJ_GroupBox3.ContentsPanel.ResumeLayout(false);
-            this.rJ_GroupBox3.ContentsPanel.PerformLayout();
-            this.rJ_GroupBox3.ResumeLayout(false);
+            this.panel23.ResumeLayout(false);
+            this.panel23.PerformLayout();
+            this.panel24.ResumeLayout(false);
+            this.panel24.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private MyUI.RJ_GroupBox rJ_GroupBox1;
         public SQLUI.SQL_DataGridView sqL_DataGridView_UDP_DataReceive;
-        private MyUI.RJ_GroupBox rJ_GroupBox2;
+        public SQLUI.SQL_DataGridView sqL_DataGridView_DeviceTable;
+        protected System.Windows.Forms.OpenFileDialog openFileDialog_LoadExcel;
+        protected System.Windows.Forms.SaveFileDialog saveFileDialog_SaveExcel;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private MyUI.RJ_Button rJ_Button_輸出_寫入;
+        private System.Windows.Forms.CheckBox checkBox_輸出10;
+        private System.Windows.Forms.CheckBox checkBox_輸出09;
+        private System.Windows.Forms.CheckBox checkBox_輸出08;
+        private System.Windows.Forms.CheckBox checkBox_輸出07;
+        private System.Windows.Forms.CheckBox checkBox_輸出06;
+        private System.Windows.Forms.CheckBox checkBox_輸出05;
+        private System.Windows.Forms.CheckBox checkBox_輸出04;
+        private System.Windows.Forms.CheckBox checkBox_輸出03;
+        private System.Windows.Forms.CheckBox checkBox_輸出02;
+        private System.Windows.Forms.CheckBox checkBox_輸出01;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private MyUI.RJ_Button rJ_Button_輸入_讀取;
+        private System.Windows.Forms.CheckBox checkBox_輸入10;
+        private System.Windows.Forms.CheckBox checkBox_輸入09;
+        private System.Windows.Forms.CheckBox checkBox_輸入08;
+        private System.Windows.Forms.CheckBox checkBox_輸入07;
+        private System.Windows.Forms.CheckBox checkBox_輸入06;
+        private System.Windows.Forms.CheckBox checkBox_輸入05;
+        private System.Windows.Forms.CheckBox checkBox_輸入04;
+        private System.Windows.Forms.CheckBox checkBox_輸入03;
+        private System.Windows.Forms.CheckBox checkBox_輸入02;
+        private System.Windows.Forms.CheckBox checkBox_輸入01;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private MyUI.RJ_Button rJ_Button_輸出方向_寫入;
+        private MyUI.RJ_Button rJ_Button_輸出方向_讀取;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_10;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_09;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_08;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_07;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_06;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_05;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_04;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_03;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_02;
+        private System.Windows.Forms.CheckBox checkBox_輸出方向_01;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private MyUI.RJ_Button rJ_Button_輸入方向_寫入;
+        private MyUI.RJ_Button rJ_Button_輸入方向_讀取;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_10;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_09;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_08;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_07;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_06;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_05;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_04;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_03;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_02;
+        private System.Windows.Forms.CheckBox checkBox_輸入方向_01;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.CheckBox checkBox_RFID_Enable_08;
         private System.Windows.Forms.CheckBox checkBox_RFID_Enable_07;
@@ -2183,8 +2153,6 @@ namespace H_Pannel_lib
         private System.Windows.Forms.CheckBox checkBox_RFID_Enable_03;
         private System.Windows.Forms.CheckBox checkBox_RFID_Enable_02;
         private System.Windows.Forms.CheckBox checkBox_RFID_Enable_01;
-        private MyUI.RJ_Button rJ_Button_Write;
-        private MyUI.RJ_Button rJ_Button_Read;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Panel panel21;
         private System.Windows.Forms.Label label28;
@@ -2257,67 +2225,15 @@ namespace H_Pannel_lib
         private System.Windows.Forms.TextBox textBox_IP_Adress_A;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel23;
         private MyUI.RJ_Button rJ_Button_Station_Write;
         private System.Windows.Forms.TextBox textBox_COM;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.TextBox textBox_Station;
         private System.Windows.Forms.Label label25;
-        private MyUI.RJ_GroupBox rJ_GroupBox4;
+        private System.Windows.Forms.Panel panel24;
         private SQLUI.SQL_DataGridView sqL_DataGridView_PING;
-        private MyUI.RJ_GroupBox rJ_GroupBox3;
-        public SQLUI.SQL_DataGridView sqL_DataGridView_DeviceTable;
-        protected System.Windows.Forms.OpenFileDialog openFileDialog_LoadExcel;
-        protected System.Windows.Forms.SaveFileDialog saveFileDialog_SaveExcel;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private MyUI.RJ_Button rJ_Button_輸出方向_寫入;
-        private MyUI.RJ_Button rJ_Button_輸出方向_讀取;
-        private System.Windows.Forms.CheckBox checkBox_輸出方向_10;
-        private System.Windows.Forms.CheckBox checkBox_輸出方向_09;
-        private System.Windows.Forms.CheckBox checkBox_輸出方向_08;
-        private System.Windows.Forms.CheckBox checkBox_輸出方向_07;
-        private System.Windows.Forms.CheckBox checkBox_輸出方向_06;
-        private System.Windows.Forms.CheckBox checkBox_輸出方向_05;
-        private System.Windows.Forms.CheckBox checkBox_輸出方向_04;
-        private System.Windows.Forms.CheckBox checkBox_輸出方向_03;
-        private System.Windows.Forms.CheckBox checkBox_輸出方向_02;
-        private System.Windows.Forms.CheckBox checkBox_輸出方向_01;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private MyUI.RJ_Button rJ_Button_輸入方向_寫入;
-        private MyUI.RJ_Button rJ_Button_輸入方向_讀取;
-        private System.Windows.Forms.CheckBox checkBox_輸入方向_10;
-        private System.Windows.Forms.CheckBox checkBox_輸入方向_09;
-        private System.Windows.Forms.CheckBox checkBox_輸入方向_08;
-        private System.Windows.Forms.CheckBox checkBox_輸入方向_07;
-        private System.Windows.Forms.CheckBox checkBox_輸入方向_06;
-        private System.Windows.Forms.CheckBox checkBox_輸入方向_05;
-        private System.Windows.Forms.CheckBox checkBox_輸入方向_04;
-        private System.Windows.Forms.CheckBox checkBox_輸入方向_03;
-        private System.Windows.Forms.CheckBox checkBox_輸入方向_02;
-        private System.Windows.Forms.CheckBox checkBox_輸入方向_01;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private MyUI.RJ_Button rJ_Button_輸出_寫入;
-        private System.Windows.Forms.CheckBox checkBox_輸出10;
-        private System.Windows.Forms.CheckBox checkBox_輸出09;
-        private System.Windows.Forms.CheckBox checkBox_輸出08;
-        private System.Windows.Forms.CheckBox checkBox_輸出07;
-        private System.Windows.Forms.CheckBox checkBox_輸出06;
-        private System.Windows.Forms.CheckBox checkBox_輸出05;
-        private System.Windows.Forms.CheckBox checkBox_輸出04;
-        private System.Windows.Forms.CheckBox checkBox_輸出03;
-        private System.Windows.Forms.CheckBox checkBox_輸出02;
-        private System.Windows.Forms.CheckBox checkBox_輸出01;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private MyUI.RJ_Button rJ_Button_輸入_讀取;
-        private System.Windows.Forms.CheckBox checkBox_輸入10;
-        private System.Windows.Forms.CheckBox checkBox_輸入09;
-        private System.Windows.Forms.CheckBox checkBox_輸入08;
-        private System.Windows.Forms.CheckBox checkBox_輸入07;
-        private System.Windows.Forms.CheckBox checkBox_輸入06;
-        private System.Windows.Forms.CheckBox checkBox_輸入05;
-        private System.Windows.Forms.CheckBox checkBox_輸入04;
-        private System.Windows.Forms.CheckBox checkBox_輸入03;
-        private System.Windows.Forms.CheckBox checkBox_輸入02;
-        private System.Windows.Forms.CheckBox checkBox_輸入01;
+        private MyUI.RJ_Button rJ_Button_Read;
+        private MyUI.RJ_Button rJ_Button_Write;
     }
 }

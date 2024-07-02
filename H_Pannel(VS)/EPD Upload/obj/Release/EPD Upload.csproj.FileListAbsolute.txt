@@ -189,3 +189,4 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\SkiaSharp.pdb
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\SkiaSharp.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\System.Memory.xml
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\HIS_DB_Lib.dll

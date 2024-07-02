@@ -592,6 +592,10 @@ namespace H_Pannel_lib
     [Serializable]
     public class Drawer
     {
+        public string serverIP = "";
+        public uint serverPort = 0;
+        public string dbName = "";
+
         public bool ActionDone = false;
         public bool UpToSQL = false;
         public static int NumOfLED = 450;
