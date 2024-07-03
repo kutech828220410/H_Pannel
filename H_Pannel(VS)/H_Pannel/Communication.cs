@@ -36,6 +36,7 @@ namespace H_Pannel_lib
         EPD290_V3,
         EPD420,
         EPD1020,
+        EPD730F
     }
     public class Driver_IO_Board
     {
@@ -657,6 +658,33 @@ namespace H_Pannel_lib
             return Command_EPD_SendSPI(uDP_Class, IP, start_ptr, value);
         }
 
+        static public bool EPD_730_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
+        {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"EPD730 DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
+                return false;
+            }
+            int EPD583_frameDIV = 0;
+            if (Chip_Type == ChipType.ESP32)
+            {
+                EPD583_frameDIV = 20;
+            }
+            if (Chip_Type == ChipType.BW16)
+            {
+                EPD583_frameDIV = 120;
+            }
+            bool flag_OK;
+            int width = bmp.Width;
+            int height = bmp.Height;
+            byte[] bytes = new byte[400 * height];
+            BitmapToByte(bmp, ref bytes, EPD_Type.EPD730F);
+            MyTimer myTimer = new MyTimer();
+            myTimer.StartTickTime(50000);
+            flag_OK = EPD_DrawImageSPI(uDP_Class, IP, bytes, (400 * height) / EPD583_frameDIV);
+            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 730 DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+            return flag_OK;
+        }
         static public bool EPD_583_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
             if (!Basic.Net.Ping(IP, 2, 150))
@@ -867,6 +895,65 @@ namespace H_Pannel_lib
             return true;
 
         }
+        static public bool EPD_DrawImageSPI(UDP_Class uDP_Class, string IP, byte[] datas, int Split_DataSize)
+        {
+            int Width_Size = Split_DataSize;
+            int NumOfArray = datas.Length / (Split_DataSize);
+            List<byte[]> list_datas = new List<byte[]>();
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                byte[] Array_temp = new byte[Width_Size];
+                for (int k = 0; k < Width_Size; k++)
+                {
+                    Array_temp[k] = datas[i * Width_Size + k];
+                }
+                list_datas.Add(Array_temp);
+            }
+
+
+            if (!EPD_Set_WakeUp(uDP_Class, IP))
+            {
+                return false;
+            }
+            for (int i = 0; i < NumOfArray / 2; i++)
+            {
+                if (!EPD_Send_Framebuffer(uDP_Class, IP, i * Width_Size, list_datas[i]))
+                {
+                    return false;
+                }
+            }
+            if (!EPD_DrawFrame_RW(uDP_Class, IP))
+            {
+                return false;
+            }
+            for (int i = NumOfArray / 2; i < NumOfArray; i++)
+            {
+                if (!EPD_Send_Framebuffer(uDP_Class, IP, (i - NumOfArray / 2) * Width_Size, list_datas[i]))
+                {
+                    return false;
+                }
+            }
+            if (!EPD_DrawFrame_BW(uDP_Class, IP))
+            {
+                return false;
+            }
+            //for (int i = 0; i < NumOfArray; i++)
+            //{
+            //    if (!EPD_SendSPI(uDP_Class, IP, i * Width_Size, list_datas[i]))
+            //    {
+            //        return false;
+            //    }
+            //}
+
+            if (!EPD_RefreshCanvas(uDP_Class, IP))
+            {
+                return false;
+            }
+
+            return true;
+
+        }
+
         static public bool EPD_DrawImageEx0(UDP_Class uDP_Class, string IP, byte[] BW_data, byte[] RW_data, int Split_DataSize)
         {
             int Width_Size = Split_DataSize;
@@ -4307,7 +4394,7 @@ namespace H_Pannel_lib
             {
                 if (cnt == 0)
                 {
-                    if (retry >= UDP_RetryNum)
+                    if (retry >= 10)
                     {
                         flag_OK = false;
                         break;
@@ -4320,7 +4407,7 @@ namespace H_Pannel_lib
                 }
                 else if (cnt == 1)
                 {
-                    if (retry >= 3)
+                    if (retry >= 10)
                     {
                         flag_OK = false;
                         break;
@@ -6937,7 +7024,17 @@ namespace H_Pannel_lib
             }
         }
         #endregion
-
+        public class EPDColors
+        {
+            public const int EPD_7IN3F_BLACK = 0x0;   // 000
+            public const int EPD_7IN3F_WHITE = 0x1;   // 001
+            public const int EPD_7IN3F_GREEN = 0x2;   // 010
+            public const int EPD_7IN3F_BLUE = 0x3;    // 011
+            public const int EPD_7IN3F_RED = 0x4;     // 100
+            public const int EPD_7IN3F_YELLOW = 0x5;  // 101
+            public const int EPD_7IN3F_ORANGE = 0x6;  // 110
+            public const int EPD_7IN3F_CLEAN = 0x7;   // 111   unavailable Afterimage
+        }
         static public Bitmap EPD266_GetBitmap(Storage storage)
         {
             Bitmap bitmap = new Bitmap(296, 152);
@@ -7446,7 +7543,7 @@ namespace H_Pannel_lib
             }
             RW = sb_RW.ToString().ToUpper();
         }
-        static unsafe public void BitmapToByte(Bitmap bimage, ref byte[] BW_bytes, ref byte[] RW_bytes , EPD_Type ePD_Type)
+        static unsafe public void BitmapToByte(Bitmap bimage, ref byte[] BW_bytes, ref byte[] RW_bytes, EPD_Type ePD_Type)
         {
             List<byte> list_byte_image_BW = new List<byte>();
             List<byte> list_byte_image_RW = new List<byte>();
@@ -7537,7 +7634,7 @@ namespace H_Pannel_lib
                                 if (R[i] > 0 && G[i] <= 128 && B[i] <= 128)
                                 {
                                     temp_BW |= (byte)(0x00);
-                                    temp_RW |= (byte)(0x00);                    
+                                    temp_RW |= (byte)(0x00);
                                 }
                                 else if (R[i] > 0 && G[i] > 0 && B[i] >= 0)
                                 {
@@ -7549,7 +7646,7 @@ namespace H_Pannel_lib
                                     temp_BW |= (byte)(0x00);
                                     temp_RW |= (byte)(0x01);
                                 }
-                                
+
                             }
                             else if (ePD_Type == EPD_Type.EPD290_V2)
                             {
@@ -7568,7 +7665,7 @@ namespace H_Pannel_lib
                                     temp_BW |= (byte)(0x01);
                                     temp_RW |= (byte)(0x00);
                                 }
-                               
+
 
                             }
                             else if (ePD_Type == EPD_Type.EPD290_V3)
@@ -7597,7 +7694,6 @@ namespace H_Pannel_lib
                         list_byte_image_BW.Add(temp_BW);
                         list_byte_image_RW.Add(temp_RW);
                         flag_index++;
-                        ;
                     }
                 }
             }
@@ -7605,6 +7701,109 @@ namespace H_Pannel_lib
             bimage.UnlockBits(bmData);
             BW_bytes = list_byte_image_BW.ToArray();
             RW_bytes = list_byte_image_RW.ToArray();
+            //bimage.Dispose();
+        }
+        static bool IsEqualColor(Color color, int R, int G, int B)
+        {
+            int offset = 5;
+            int colorR_L = color.R - offset;
+            int colorG_L = color.G - offset;
+            int colorB_L = color.B - offset;
+
+            int colorR_H = color.R + offset;
+            int colorG_H = color.G + offset;
+            int colorB_H = color.B + offset;
+
+            if (colorR_L < 0) colorR_L = 0;
+            if (colorG_L < 0) colorG_L = 0;
+            if (colorB_L < 0) colorB_L = 0;
+
+            if (colorR_H > 255) colorR_H = 255;
+            if (colorG_H > 255) colorG_H = 255;
+            if (colorB_H > 255) colorB_H = 255;
+            //if (color.R == R && color.G == G && color.B == B) return true;
+            //return false;
+            if (R < colorR_L || R > colorR_H) return false;
+            if (G < colorG_L || G > colorG_H) return false;
+            if (B < colorB_L || B > colorB_H) return false;
+
+            return true;
+        }
+        static unsafe public void BitmapToByte(Bitmap bimage, ref byte[] _7colors_bytes, EPD_Type ePD_Type)
+        {
+            List<byte> list_bytes = new List<byte>();
+            //pictureBox1.Image = bimage;
+            BitmapData bmData = bimage.LockBits(new Rectangle(0, 0, bimage.Width, bimage.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            int width = bmData.Width;
+            int height = bmData.Height;
+            int ByteOfSkip = GetBitmapSkip(width, 3);
+            IntPtr SurfacePtr = bmData.Scan0;
+            int ByteOfWidth = width * 3 + ByteOfSkip;
+            int SrcWidthxY;
+            int SrcIndex;
+            int[] R = new int[8];
+            int[] G = new int[8];
+            int[] B = new int[8];
+            byte temp = 0;
+            byte temp_L = 0;
+            byte temp_H = 0;
+            int flag_index = 0;
+            unsafe
+            {
+                byte* SrcPtr = (byte*)SurfacePtr;
+                for (int y = 0; y < height; y++)
+                {
+                    SrcWidthxY = ByteOfWidth * y;
+                    for (int x = 0; x < (width / 2); x++)
+                    {
+                        if (ePD_Type == EPD_Type.EPD730F)
+                        {
+                            SrcIndex = SrcWidthxY + (x * 6);
+
+                            B[0] = SrcPtr[SrcIndex + 00];
+                            G[0] = SrcPtr[SrcIndex + 01];
+                            R[0] = SrcPtr[SrcIndex + 02];
+
+                            B[1] = SrcPtr[SrcIndex + 03];
+                            G[1] = SrcPtr[SrcIndex + 04];
+                            R[1] = SrcPtr[SrcIndex + 05];
+                            temp_L = 0;
+                            temp_H = 0;
+                            if (IsEqualColor(Color.White, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_WHITE;
+                            else if (IsEqualColor(Color.Yellow, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_YELLOW;
+                            else if (IsEqualColor(Color.Red, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_RED;
+                            else if (IsEqualColor(Color.Green, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_GREEN;
+                            else if (IsEqualColor(Color.Blue, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_BLUE;
+                            else if (IsEqualColor(Color.Orange, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_ORANGE;
+                            else if (IsEqualColor(Color.Black, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_BLACK;
+                            else
+                            {
+
+                            }
+
+                            if (IsEqualColor(Color.White, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_WHITE;
+                            else if (IsEqualColor(Color.Yellow, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_YELLOW;
+                            else if (IsEqualColor(Color.Red, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_RED;
+                            else if (IsEqualColor(Color.Green, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_GREEN;
+                            else if (IsEqualColor(Color.Blue, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_BLUE;
+                            else if (IsEqualColor(Color.Orange, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_ORANGE;
+                            else if (IsEqualColor(Color.Black, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_BLACK;
+                            else
+                            {
+
+                            }
+               
+                            temp = (byte)(temp_H | (temp_L << 4));
+                            list_bytes.Add(temp);
+                        }
+                       
+                        
+                    }
+                }
+            }
+
+            bimage.UnlockBits(bmData);
+            _7colors_bytes = list_bytes.ToArray();
             //bimage.Dispose();
         }
         static private List<byte> BmpByteToGray(List<byte> list_bmp_Byte, ref int len)
@@ -7639,9 +7838,16 @@ namespace H_Pannel_lib
         }
         static private int GetBitmapSkip(int ByteOfNumWidth, int ColorDepth)
         {
-            int ByteOfSkip = ByteOfNumWidth * ColorDepth % 4;
-            if (ByteOfSkip > 0) ByteOfSkip = 4 - ByteOfSkip;
-            return ByteOfSkip;
+            // 計算每行的總字節數
+            int totalBytesPerLine = ByteOfNumWidth * ColorDepth;
+
+            // 計算不滿4字節的餘數
+            int remainder = totalBytesPerLine % 4;
+
+            // 計算需要補齊的字節數
+            int byteOfSkip = (remainder > 0) ? (4 - remainder) : 0;
+
+            return byteOfSkip;
         }
         static public Bitmap TextToBitmap(string text, Font font)
         {

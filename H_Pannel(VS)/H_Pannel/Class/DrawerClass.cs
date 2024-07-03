@@ -755,8 +755,19 @@ namespace H_Pannel_lib
                 drawerType = value;
             }
         }
+        public DeviceType DeviceType
+        {
+            get
+            {
+                List<Box> list_Boxes = this.GetAllBoxes();
+                for (int i = 0; i < list_Boxes.Count; i++)
+                {
+                    return list_Boxes[i].DeviceType;
+                }
+                return DeviceType.None;
+            }
+        }
 
-      
 
         public void SetDeviceType(DeviceType deviceType)
         {

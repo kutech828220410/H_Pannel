@@ -3,14 +3,12 @@
 #include <SPI.h>
 void EPD::Init()
 {
-    //Psram_heap_init();
-    //this -> framebuffer = (byte*) malloc(EPD_WIDTH * EPD_HEIGHT);
-    //framebuffer = frame_buf;
+    this -> framebuffer = (byte*) malloc(EPD_WIDTH * EPD_HEIGHT);
     pinMode(this -> PIN_CS, OUTPUT);
     pinMode(this -> PIN_RST, OUTPUT);
     pinMode(this -> PIN_DC, OUTPUT);
     pinMode(this -> PIN_BUSY, INPUT); 
-   
+    
     digitalWrite(this -> PIN_CS , HIGH);
    
     delay(20);
@@ -65,9 +63,9 @@ void EPD::Clear()
             SendData(0xFF);
         }
     }
-
+    SPI_End();
     this -> RefreshCanvas(); 
-    //WaitUntilIdle();
+    WaitUntilIdle();
 
 }
 void EPD::DrawFrame_BW()
@@ -103,8 +101,6 @@ void EPD::DrawFrame_RW()
 void EPD::RefreshCanvas()
 {
    SPI_Begin();
-   SendCommand(0x22);
-   SendData(0xF7);
    SendCommand(0x20);
    SPI_End();
    this -> SetToSleep = true;
@@ -113,7 +109,7 @@ void EPD::Sleep_Check()
 {
    if(this -> SetToSleep)
    {     
-       this -> MyTimer_SleepWaitTime.StartTickTime(60000);
+       this -> MyTimer_SleepWaitTime.StartTickTime(10000);
        if(this -> MyTimer_SleepWaitTime.IsTimeOut())
        {
          if(this -> SetToSleep)
@@ -125,59 +121,14 @@ void EPD::Sleep_Check()
        }     
    }   
 }
-void EPD::SendSPI(char* framebuffer ,int size, int offset)
-{
-   SPI_Begin();
-   for (int i = offset; i < size + offset; i++) 
-   {
-      SendData(*(framebuffer + i));
-   }
-   SPI_End();
-}
 void EPD::BW_Command()
 {
-   SPI_Begin();
-   SendCommand(0x4E);
-   SendData(0x00);
-   SendData(0x00);
-   SendCommand(0x4F);
-   SendData(0x7F);
-   SendData(0x02);
-   WaitUntilIdle();
    SendCommand(0x24);
-   SPI_End();
 } 
 void EPD::RW_Command()
 {
-   SPI_Begin();
-   SendCommand(0x4E);
-   SendData(0x00);
-   SendData(0x00);
-   SendCommand(0x4F);
-   SendData(0x7F);
-   SendData(0x02);
-   WaitUntilIdle();
    SendCommand(0x26);
-   SPI_End();
 } 
-void EPD::WhiteScreen_ALL(const unsigned char *BW_datas,const unsigned char *R_datas)
-{
-   BW_Command();
-   SPI_Begin();
-   for (int i = 0; i < 76800; i++) 
-   {
-      SendData(*(BW_datas + i));
-   }
-   SPI_End();
-   RW_Command();
-   SPI_Begin();
-   for (int i = 0; i < 76800; i++) 
-   {
-      SendData(*(R_datas + i));
-   }
-   SPI_End();
-   RefreshCanvas();
-}
 void EPD::SendCommand(unsigned char command)
 {
    digitalWrite(this -> PIN_DC, LOW);
@@ -190,9 +141,7 @@ void EPD::SendData(unsigned char data)
 }
 void EPD::SPI_Begin()
 {
-//    pinMode(this -> PIN_MOSI, OUTPUT);
-//    pinMode(this -> PIN_SCK, OUTPUT);
-   SPI.beginTransaction(SPISettings(20000000, MSBFIRST, SPI_MODE0));
+   SPI.beginTransaction(SPISettings(50000000, MSBFIRST, SPI_MODE0));
 }
 void EPD::SPI_End()
 {
@@ -201,32 +150,14 @@ void EPD::SPI_End()
 void EPD::SpiTransfer(unsigned char value)
 {
    digitalWrite(this -> PIN_CS , LOW);
-//   unsigned char tempCom;
-//   unsigned char scnt;
-//   tempCom = value;
-//   for(scnt = 0 ; scnt < 8 ; scnt++)
-//   {
-//       if(tempCom & 0x80)
-//       {
-//           digitalWrite(this -> PIN_MOSI , HIGH);
-//       }
-//       else
-//       {
-//           digitalWrite(this -> PIN_MOSI , LOW);
-//       }
-//       digitalWrite(this -> PIN_SCK , LOW);
-//       digitalWrite(this -> PIN_SCK , HIGH);
-//       tempCom = tempCom << 1;
-//   }
    SPI.transfer(value);
    digitalWrite(this -> PIN_CS , HIGH);
 
 }
 void EPD::HardwareReset()
 {
-   delay(10);
    digitalWrite(this -> PIN_RST, LOW);                //module reset    
-   delay(10);
+   delay(1);
    digitalWrite(this -> PIN_RST, HIGH);
    delay(10);   
 }
@@ -234,7 +165,7 @@ void EPD::Wakeup()
 {
     this -> MyTimer_SleepWaitTime.TickStop();  
     this -> MyTimer_SleepWaitTime.StartTickTime(10000);
-//    mySerial -> println("Wake up!");
+    mySerial -> println("Wake up!");
     this -> SetToSleep = false;
     this -> HardwareReset();
     SPI_Begin();
@@ -244,61 +175,28 @@ void EPD::Wakeup()
 
 
     SPI_Begin();
-    SendCommand(0x0C);      
-    SendData(0xAE);
-    SendData(0xC7);
-    SendData(0xC3);
-    SendData(0xC0);
-    SendData(0x80);
-  
-    SendCommand(0x01);      
-    SendData(0x7F);
-    SendData(0x02);
-    SendData(0x00);
-    
-    SendCommand(0x11);  
-    SendData(0x01);
-    
-    SendCommand(0x44);  
-    SendData(0x00);
-    SendData(0x00);
-    SendData(0xBF);
+    SendCommand(0x11); //data entry mode       
     SendData(0x03);
-
-    SendCommand(0x45);  
-    SendData(0x7F);
-    SendData(0x02);
+  
+    SetWindows(0, 0, EPD_WIDTH * 8 -1, EPD_HEIGHT-1);
+    
+    SendCommand(0x21); //  Display update control
     SendData(0x00);
-    SendData(0x00);
-
-    SendCommand(0x3C);  
-    SendData(0x01);
-
-    SendCommand(0x18);  
-    SendData(0x80);
-
-    SendCommand(0x4E);
-    SendData(0x00);
-    SendData(0x00);
-    SendCommand(0x4F);
-    SendData(0x7F);
-    SendData(0x02);
-   
+    SendData(0x80);  
+  
+    SetCursor(0, 0);
     SPI_End();
 }
 void EPD::WaitUntilIdle()
 {
-   delay(50);
-//    while(digitalRead(PIN_BUSY) == HIGH) {      //LOW: idle, HIGH: busy
-//      delay(10);
-//    }
+   //delay(50);
+    while(digitalRead(PIN_BUSY) == HIGH) {      //LOW: idle, HIGH: busy
+        //delay(10);
+    }
     //delay(50);
 }
 void EPD::Sleep()
 {  
-    mySerial -> println("Sleep!");
-    SPI_Begin();
     SendCommand(0x10);
-    SendData(0x03);
-    SPI_End();
+    SendData(0x01);
 }

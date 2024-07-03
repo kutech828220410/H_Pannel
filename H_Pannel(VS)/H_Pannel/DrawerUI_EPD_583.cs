@@ -346,7 +346,7 @@ namespace H_Pannel_lib
         {
             using (Bitmap bitmap = Get_Drawer_bmp(drawer))
             {
-                return DrawToEpd_UDP(uDP_Class, drawer.IP, bitmap);
+                return DrawToEpd_UDP(uDP_Class, drawer.IP, bitmap , drawer.DeviceType);
             }
         }
         static public bool DrawToEpd_BarCode_UDP(UDP_Class uDP_Class, Drawer drawer)
@@ -355,6 +355,14 @@ namespace H_Pannel_lib
             {
                 return DrawToEpd_UDP(uDP_Class, drawer.IP, bitmap);
             }
+        }
+        static public bool DrawToEpd_UDP(UDP_Class uDP_Class, string IP, Bitmap bmp , DeviceType deviceType)
+        {
+            if (deviceType == DeviceType.EPD730 || deviceType == DeviceType.EPD730_lock)
+            {
+                return Communication.EPD_730_DrawImage(uDP_Class, IP, bmp);
+            }
+            return Communication.EPD_583_DrawImage(uDP_Class, IP, bmp);
         }
         static public bool DrawToEpd_UDP(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
@@ -706,8 +714,10 @@ namespace H_Pannel_lib
         {
             設為大抽屜4X8,
             設為小抽屜3X8,
-            設為有鎖控,
-            設為無鎖控,
+            設為EPD583有鎖控,
+            設為EPD583無鎖控,
+            設為EPD730有鎖控,
+            設為EPD730無鎖控,
             設為隔板亮燈,
             設為把手亮燈,
         }
@@ -727,8 +737,10 @@ namespace H_Pannel_lib
         {
             設為大抽屜4X8,
             設為小抽屜3X8,
-            設為有鎖控,
-            設為無鎖控,
+            設為EPD583有鎖控,
+            設為EPD583無鎖控,
+            設為EPD730有鎖控,
+            設為EPD730無鎖控,
             設為隔板亮燈,
             設為把手亮燈,
         }
@@ -864,10 +876,16 @@ namespace H_Pannel_lib
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
             return DrawToEpd_UDP(uDP_Class, drawer);
         }
+
         public bool DrawToEpd_UDP(string IP, int Port, Bitmap bitmap)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return DrawToEpd_UDP(uDP_Class, IP , bitmap);
+            return DrawToEpd_UDP(uDP_Class, IP , bitmap , DeviceType.EPD583);
+        }
+        public bool DrawToEpd_UDP(string IP, int Port, Bitmap bitmap , DeviceType deviceType)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+            return DrawToEpd_UDP(uDP_Class, IP, bitmap , deviceType);
         }
         public bool Set_LockOpen(Drawer drawer)
         {
@@ -975,50 +993,107 @@ namespace H_Pannel_lib
             }
             return false;
         }
-        private Bitmap DrawTestImage(string IP , int Port)
+        private Bitmap DrawTestImage(string IP, int Port)
         {
-            int width = DrawerUI_EPD_583.Pannel_Width;
-            int height = DrawerUI_EPD_583.Pannel_Height;
-            Bitmap bitmap = new Bitmap(DrawerUI_EPD_583.Pannel_Width, DrawerUI_EPD_583.Pannel_Height);
-            Graphics g = Graphics.FromImage(bitmap);
-            g.FillRectangle(new SolidBrush(Color.Red), new RectangleF((width / 3) * 0, (height / 3) * 0, (width), height / 3));
-            g.FillRectangle(new SolidBrush(Color.Black), new RectangleF((width / 3) * 0, (height / 3) * 1, (width), height / 3));
-            g.FillRectangle(new SolidBrush(Color.White), new RectangleF((width / 3) * 0, (height / 3) * 2, (width), height / 3));
+            return DrawTestImage(IP, Port, DeviceType.EPD583);
+        }
+        private Bitmap DrawTestImage(string IP , int Port , DeviceType deviceType)
+        {
+            Bitmap bitmap = null;
+            if (deviceType == DeviceType.EPD583 || deviceType == DeviceType.EPD583_lock)
+            {
+                int width = DrawerUI_EPD_583.Pannel_Width;
+                int height = DrawerUI_EPD_583.Pannel_Height;
+                bitmap = new Bitmap(DrawerUI_EPD_583.Pannel_Width, DrawerUI_EPD_583.Pannel_Height);
+                Graphics g = Graphics.FromImage(bitmap);
+                g.FillRectangle(new SolidBrush(Color.Red), new RectangleF((width / 3) * 0, (height / 3) * 0, (width), height / 3));
+                g.FillRectangle(new SolidBrush(Color.Black), new RectangleF((width / 3) * 0, (height / 3) * 1, (width), height / 3));
+                g.FillRectangle(new SolidBrush(Color.White), new RectangleF((width / 3) * 0, (height / 3) * 2, (width), height / 3));
 
-            string text = $"{IP} : {Port}";
-            Font font = new Font("微軟正黑體", 20);
-            Size text_size = TextRenderer.MeasureText(text, font);
-            Point text_point = new Point();
+                string text = $"{IP} : {Port}";
+                Font font = new Font("微軟正黑體", 20);
+                Size text_size = TextRenderer.MeasureText(text, font);
+                Point text_point = new Point();
 
-            text_point.X = ((width / 2) - text_size.Width) / 2;
-            text_point.Y = ((height / 3) - text_size.Height) / 2;
-            g.DrawString(text, font, new SolidBrush(Color.Black), text_point);
-            text_point.X = ((width / 2) - text_size.Width) / 2;
-            text_point.X += (width / 2);
-            text_point.Y = ((height / 3) - text_size.Height) / 2;
-            g.DrawString(text, font, new SolidBrush(Color.White), text_point);
+                text_point.X = ((width / 2) - text_size.Width) / 2;
+                text_point.Y = ((height / 3) - text_size.Height) / 2;
+                g.DrawString(text, font, new SolidBrush(Color.Black), text_point);
+                text_point.X = ((width / 2) - text_size.Width) / 2;
+                text_point.X += (width / 2);
+                text_point.Y = ((height / 3) - text_size.Height) / 2;
+                g.DrawString(text, font, new SolidBrush(Color.White), text_point);
 
-            text_point.X = ((width / 2) - text_size.Width) / 2;
-            text_point.Y = ((height / 3) - text_size.Height) / 2;
-            text_point.Y += (height / 3) * 1;
-            g.DrawString(text, font, new SolidBrush(Color.Red), text_point);
-            text_point.X = ((width / 2) - text_size.Width) / 2;
-            text_point.X += (width / 2);
-            text_point.Y = ((height / 3) - text_size.Height) / 2;
-            text_point.Y += (height / 3) * 1;
-            g.DrawString(text, font, new SolidBrush(Color.White), text_point);
+                text_point.X = ((width / 2) - text_size.Width) / 2;
+                text_point.Y = ((height / 3) - text_size.Height) / 2;
+                text_point.Y += (height / 3) * 1;
+                g.DrawString(text, font, new SolidBrush(Color.Red), text_point);
+                text_point.X = ((width / 2) - text_size.Width) / 2;
+                text_point.X += (width / 2);
+                text_point.Y = ((height / 3) - text_size.Height) / 2;
+                text_point.Y += (height / 3) * 1;
+                g.DrawString(text, font, new SolidBrush(Color.White), text_point);
 
-            text_point.X = ((width / 2) - text_size.Width) / 2;
-            text_point.Y = ((height / 3) - text_size.Height) / 2;
-            text_point.Y += (height / 3) * 2;
-            g.DrawString(text, font, new SolidBrush(Color.Red), text_point);
-            text_point.X = ((width / 2) - text_size.Width) / 2;
-            text_point.X += (width / 2);
-            text_point.Y = ((height / 3) - text_size.Height) / 2;
-            text_point.Y += (height / 3) * 2;
-            g.DrawString(text, font, new SolidBrush(Color.Black), text_point);
+                text_point.X = ((width / 2) - text_size.Width) / 2;
+                text_point.Y = ((height / 3) - text_size.Height) / 2;
+                text_point.Y += (height / 3) * 2;
+                g.DrawString(text, font, new SolidBrush(Color.Red), text_point);
+                text_point.X = ((width / 2) - text_size.Width) / 2;
+                text_point.X += (width / 2);
+                text_point.Y = ((height / 3) - text_size.Height) / 2;
+                text_point.Y += (height / 3) * 2;
+                g.DrawString(text, font, new SolidBrush(Color.Black), text_point);
 
-            g.Dispose();
+                g.Dispose();
+            }
+            if (deviceType == DeviceType.EPD730 || deviceType == DeviceType.EPD730_lock)
+            {
+                int width = 800;
+                int height = 480;
+                bitmap = new Bitmap(width, height);
+                Graphics g = Graphics.FromImage(bitmap);
+                g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.CompositingQuality = CompositingQuality.HighQuality;
+                g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+                g.FillRectangle(new SolidBrush(Color.Red), new RectangleF((width / 4) * 0, (height / 3) * 0, (width), height / 3));
+                g.FillRectangle(new SolidBrush(Color.Black), new RectangleF((width / 4) * 0, (height / 3) * 1, (width), height / 3));
+                g.FillRectangle(new SolidBrush(Color.White), new RectangleF((width / 4) * 0, (height / 3) * 2, (width), height / 3));
+
+                string text = $"{IP} : {Port}";
+                Font font = new Font("微軟正黑體", 20);
+                Size text_size = TextRenderer.MeasureText(text, font);
+                Point text_point = new Point();
+
+                text_point.X = ((width / 2) - text_size.Width) / 2;
+                text_point.Y = ((height / 3) - text_size.Height) / 2;
+                g.DrawString(text, font, new SolidBrush(Color.Black), text_point);
+                text_point.X = ((width / 2) - text_size.Width) / 2;
+                text_point.X += (width / 2);
+                text_point.Y = ((height / 3) - text_size.Height) / 2;
+                g.DrawString(text, font, new SolidBrush(Color.White), text_point);
+
+                text_point.X = ((width / 2) - text_size.Width) / 2;
+                text_point.Y = ((height / 3) - text_size.Height) / 2;
+                text_point.Y += (height / 3) * 1;
+                g.DrawString(text, font, new SolidBrush(Color.Red), text_point);
+                text_point.X = ((width / 2) - text_size.Width) / 2;
+                text_point.X += (width / 2);
+                text_point.Y = ((height / 3) - text_size.Height) / 2;
+                text_point.Y += (height / 3) * 1;
+                g.DrawString(text, font, new SolidBrush(Color.White), text_point);
+
+                text_point.X = ((width / 2) - text_size.Width) / 2;
+                text_point.Y = ((height / 3) - text_size.Height) / 2;
+                text_point.Y += (height / 3) * 2;
+                g.DrawString(text, font, new SolidBrush(Color.Red), text_point);
+                text_point.X = ((width / 2) - text_size.Width) / 2;
+                text_point.X += (width / 2);
+                text_point.Y = ((height / 3) - text_size.Height) / 2;
+                text_point.Y += (height / 3) * 2;
+                g.DrawString(text, font, new SolidBrush(Color.Black), text_point);
+
+                g.Dispose();
+            }
             return bitmap;
         }
 
@@ -1181,7 +1256,7 @@ namespace H_Pannel_lib
                             Task allTask = Task.WhenAll(taskList);
                         }
                     }
-                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_參數設定.設為有鎖控.GetEnumName())
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_參數設定.設為EPD583有鎖控.GetEnumName())
                     {
                         List<Task> taskList = new List<Task>();
                         for (int i = 0; i < iPEndPoints.Count; i++)
@@ -1199,7 +1274,7 @@ namespace H_Pannel_lib
                         Task allTask = Task.WhenAll(taskList);
                         this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
                     }
-                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_參數設定.設為無鎖控.GetEnumName())
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_參數設定.設為EPD583無鎖控.GetEnumName())
                     {
                         List<Task> taskList = new List<Task>();
                         for (int i = 0; i < iPEndPoints.Count; i++)
@@ -1291,9 +1366,11 @@ namespace H_Pannel_lib
                             int Port = iPEndPoints[i].Port;
                             taskList.Add(Task.Run(() =>
                             {
-                                using (Bitmap bitmap = this.DrawTestImage(IP, Port))
+                                Drawer drawer = this.SQL_GetDrawer(IP);
+                                if (drawer == null) return;
+                                using (Bitmap bitmap = this.DrawTestImage(IP, Port, drawer.DeviceType))
                                 {
-                                    this.DrawToEpd_UDP(IP, Port, bitmap);
+                                    this.DrawToEpd_UDP(IP, Port, bitmap, drawer.DeviceType);
                                 }
                             }));
                         }
@@ -1418,7 +1495,7 @@ namespace H_Pannel_lib
                             Task allTask = Task.WhenAll(taskList);
                         }
                     }
-                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為有鎖控.GetEnumName())
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為EPD583有鎖控.GetEnumName())
                     {
                         List<Task> taskList = new List<Task>();
                         for (int i = 0; i < iPEndPoints.Count; i++)
@@ -1436,7 +1513,7 @@ namespace H_Pannel_lib
                         Task allTask = Task.WhenAll(taskList);
                         this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
                     }
-                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為無鎖控.GetEnumName())
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為EPD583無鎖控.GetEnumName())
                     {
                         List<Task> taskList = new List<Task>();
                         for (int i = 0; i < iPEndPoints.Count; i++)
@@ -1446,6 +1523,42 @@ namespace H_Pannel_lib
                             Drawer drawer = this.SQL_GetDrawer(IP);
                             if (drawer == null) continue;
                             drawer.SetDeviceType(DeviceType.EPD583);
+                            taskList.Add(Task.Run(() =>
+                            {
+                                SQL_ReplaceDrawer(drawer);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                        this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                    }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為EPD730有鎖控.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Drawer drawer = this.SQL_GetDrawer(IP);
+                            if (drawer == null) continue;
+                            drawer.SetDeviceType(DeviceType.EPD730_lock);
+                            taskList.Add(Task.Run(() =>
+                            {
+                                SQL_ReplaceDrawer(drawer);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                        this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                    }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為EPD730無鎖控.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Drawer drawer = this.SQL_GetDrawer(IP);
+                            if (drawer == null) continue;
+                            drawer.SetDeviceType(DeviceType.EPD730);
                             taskList.Add(Task.Run(() =>
                             {
                                 SQL_ReplaceDrawer(drawer);
