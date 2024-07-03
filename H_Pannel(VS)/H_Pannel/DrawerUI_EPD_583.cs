@@ -494,9 +494,15 @@ namespace H_Pannel_lib
             g.Dispose();
             return bitmap;
         }
+  
         static public Bitmap Get_Drawer_bmp(Drawer drawer)
         {
+            if (drawer.DeviceType == DeviceType.EPD730 || drawer.DeviceType == DeviceType.EPD730_lock)
+            {
+                return Communication.EPD730_GetBitmap(drawer);
+            }
             return Communication.EPD583_GetBitmap(drawer);
+
         }
         
         #endregion

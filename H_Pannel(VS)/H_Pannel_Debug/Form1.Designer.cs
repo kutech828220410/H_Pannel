@@ -233,13 +233,18 @@
             this.rJ_Button_WT32_初始化.BorderRadius = 5;
             this.rJ_Button_WT32_初始化.BorderSize = 0;
             this.rJ_Button_WT32_初始化.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_WT32_初始化.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_WT32_初始化.FlatAppearance.BorderSize = 0;
             this.rJ_Button_WT32_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_WT32_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_初始化.GUID = "";
+            this.rJ_Button_WT32_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_WT32_初始化.Location = new System.Drawing.Point(1384, 13);
             this.rJ_Button_WT32_初始化.Name = "rJ_Button_WT32_初始化";
+            this.rJ_Button_WT32_初始化.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_WT32_初始化.ProhibitionLineWidth = 4;
+            this.rJ_Button_WT32_初始化.ProhibitionSymbolSize = 30;
             this.rJ_Button_WT32_初始化.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_WT32_初始化.ShadowSize = 0;
             this.rJ_Button_WT32_初始化.ShowLoadingForm = false;
@@ -248,6 +253,7 @@
             this.rJ_Button_WT32_初始化.TabIndex = 34;
             this.rJ_Button_WT32_初始化.Text = "初始化";
             this.rJ_Button_WT32_初始化.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_初始化.TextHeight = 0;
             this.rJ_Button_WT32_初始化.UseVisualStyleBackColor = false;
             this.rJ_Button_WT32_初始化.Click += new System.EventHandler(this.rJ_Button_WT32_初始化_Click);
             // 
@@ -293,7 +299,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1068, 989);
+            this.tabPage4.Size = new System.Drawing.Size(1557, 989);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "面板設定";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -307,13 +313,18 @@
             this.rJ_Button_WT32_測試.BorderRadius = 10;
             this.rJ_Button_WT32_測試.BorderSize = 0;
             this.rJ_Button_WT32_測試.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_WT32_測試.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_WT32_測試.FlatAppearance.BorderSize = 0;
             this.rJ_Button_WT32_測試.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_WT32_測試.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_測試.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_測試.GUID = "";
+            this.rJ_Button_WT32_測試.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_WT32_測試.Location = new System.Drawing.Point(1608, 812);
             this.rJ_Button_WT32_測試.Name = "rJ_Button_WT32_測試";
+            this.rJ_Button_WT32_測試.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_WT32_測試.ProhibitionLineWidth = 4;
+            this.rJ_Button_WT32_測試.ProhibitionSymbolSize = 30;
             this.rJ_Button_WT32_測試.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_WT32_測試.ShadowSize = 0;
             this.rJ_Button_WT32_測試.ShowLoadingForm = false;
@@ -322,6 +333,7 @@
             this.rJ_Button_WT32_測試.TabIndex = 33;
             this.rJ_Button_WT32_測試.Text = "測試";
             this.rJ_Button_WT32_測試.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_測試.TextHeight = 0;
             this.rJ_Button_WT32_測試.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_WT32_上傳畫面
@@ -333,13 +345,18 @@
             this.rJ_Button_WT32_上傳畫面.BorderRadius = 10;
             this.rJ_Button_WT32_上傳畫面.BorderSize = 0;
             this.rJ_Button_WT32_上傳畫面.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_WT32_上傳畫面.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_WT32_上傳畫面.FlatAppearance.BorderSize = 0;
             this.rJ_Button_WT32_上傳畫面.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_WT32_上傳畫面.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_上傳畫面.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_上傳畫面.GUID = "";
+            this.rJ_Button_WT32_上傳畫面.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_WT32_上傳畫面.Location = new System.Drawing.Point(1608, 627);
             this.rJ_Button_WT32_上傳畫面.Name = "rJ_Button_WT32_上傳畫面";
+            this.rJ_Button_WT32_上傳畫面.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_WT32_上傳畫面.ProhibitionLineWidth = 4;
+            this.rJ_Button_WT32_上傳畫面.ProhibitionSymbolSize = 30;
             this.rJ_Button_WT32_上傳畫面.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_WT32_上傳畫面.ShadowSize = 0;
             this.rJ_Button_WT32_上傳畫面.ShowLoadingForm = false;
@@ -348,6 +365,7 @@
             this.rJ_Button_WT32_上傳畫面.TabIndex = 32;
             this.rJ_Button_WT32_上傳畫面.Text = "上傳畫面";
             this.rJ_Button_WT32_上傳畫面.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_上傳畫面.TextHeight = 0;
             this.rJ_Button_WT32_上傳畫面.UseVisualStyleBackColor = false;
             // 
             // rJ_GroupBox1
@@ -408,13 +426,18 @@
             this.rJ_Button_WT32_資料寫入.BorderRadius = 10;
             this.rJ_Button_WT32_資料寫入.BorderSize = 0;
             this.rJ_Button_WT32_資料寫入.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_WT32_資料寫入.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_WT32_資料寫入.FlatAppearance.BorderSize = 0;
             this.rJ_Button_WT32_資料寫入.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_WT32_資料寫入.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_資料寫入.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_資料寫入.GUID = "";
+            this.rJ_Button_WT32_資料寫入.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_WT32_資料寫入.Location = new System.Drawing.Point(262, 494);
             this.rJ_Button_WT32_資料寫入.Name = "rJ_Button_WT32_資料寫入";
+            this.rJ_Button_WT32_資料寫入.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_WT32_資料寫入.ProhibitionLineWidth = 4;
+            this.rJ_Button_WT32_資料寫入.ProhibitionSymbolSize = 30;
             this.rJ_Button_WT32_資料寫入.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_WT32_資料寫入.ShadowSize = 0;
             this.rJ_Button_WT32_資料寫入.ShowLoadingForm = false;
@@ -423,6 +446,7 @@
             this.rJ_Button_WT32_資料寫入.TabIndex = 133;
             this.rJ_Button_WT32_資料寫入.Text = "資料寫入";
             this.rJ_Button_WT32_資料寫入.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_資料寫入.TextHeight = 0;
             this.rJ_Button_WT32_資料寫入.UseVisualStyleBackColor = false;
             this.rJ_Button_WT32_資料寫入.Click += new System.EventHandler(this.rJ_Button_WT32_資料寫入_Click);
             // 
@@ -975,13 +999,18 @@
             this.rJ_Button_WT32_上傳選擇儲位.BorderRadius = 10;
             this.rJ_Button_WT32_上傳選擇儲位.BorderSize = 0;
             this.rJ_Button_WT32_上傳選擇儲位.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_WT32_上傳選擇儲位.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_WT32_上傳選擇儲位.FlatAppearance.BorderSize = 0;
             this.rJ_Button_WT32_上傳選擇儲位.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_WT32_上傳選擇儲位.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_上傳選擇儲位.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_上傳選擇儲位.GUID = "";
+            this.rJ_Button_WT32_上傳選擇儲位.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_WT32_上傳選擇儲位.Location = new System.Drawing.Point(1083, 927);
             this.rJ_Button_WT32_上傳選擇儲位.Name = "rJ_Button_WT32_上傳選擇儲位";
+            this.rJ_Button_WT32_上傳選擇儲位.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_WT32_上傳選擇儲位.ProhibitionLineWidth = 4;
+            this.rJ_Button_WT32_上傳選擇儲位.ProhibitionSymbolSize = 30;
             this.rJ_Button_WT32_上傳選擇儲位.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_WT32_上傳選擇儲位.ShadowSize = 0;
             this.rJ_Button_WT32_上傳選擇儲位.ShowLoadingForm = false;
@@ -990,6 +1019,7 @@
             this.rJ_Button_WT32_上傳選擇儲位.TabIndex = 29;
             this.rJ_Button_WT32_上傳選擇儲位.Text = "上傳選擇儲位";
             this.rJ_Button_WT32_上傳選擇儲位.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_上傳選擇儲位.TextHeight = 0;
             this.rJ_Button_WT32_上傳選擇儲位.UseVisualStyleBackColor = false;
             this.rJ_Button_WT32_上傳選擇儲位.Click += new System.EventHandler(this.rJ_Button_WT32_上傳選擇儲位_Click);
             // 
@@ -1002,13 +1032,18 @@
             this.rJ_Button_WT32_讀取選擇儲位.BorderRadius = 10;
             this.rJ_Button_WT32_讀取選擇儲位.BorderSize = 0;
             this.rJ_Button_WT32_讀取選擇儲位.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_WT32_讀取選擇儲位.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_WT32_讀取選擇儲位.FlatAppearance.BorderSize = 0;
             this.rJ_Button_WT32_讀取選擇儲位.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_WT32_讀取選擇儲位.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_讀取選擇儲位.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_讀取選擇儲位.GUID = "";
+            this.rJ_Button_WT32_讀取選擇儲位.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_WT32_讀取選擇儲位.Location = new System.Drawing.Point(1083, 866);
             this.rJ_Button_WT32_讀取選擇儲位.Name = "rJ_Button_WT32_讀取選擇儲位";
+            this.rJ_Button_WT32_讀取選擇儲位.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_WT32_讀取選擇儲位.ProhibitionLineWidth = 4;
+            this.rJ_Button_WT32_讀取選擇儲位.ProhibitionSymbolSize = 30;
             this.rJ_Button_WT32_讀取選擇儲位.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_WT32_讀取選擇儲位.ShadowSize = 0;
             this.rJ_Button_WT32_讀取選擇儲位.ShowLoadingForm = false;
@@ -1017,6 +1052,7 @@
             this.rJ_Button_WT32_讀取選擇儲位.TabIndex = 28;
             this.rJ_Button_WT32_讀取選擇儲位.Text = "讀取選擇儲位";
             this.rJ_Button_WT32_讀取選擇儲位.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_WT32_讀取選擇儲位.TextHeight = 0;
             this.rJ_Button_WT32_讀取選擇儲位.UseVisualStyleBackColor = false;
             this.rJ_Button_WT32_讀取選擇儲位.Click += new System.EventHandler(this.rJ_Button_WT32_讀取選擇儲位_Click);
             // 
@@ -1048,7 +1084,7 @@
             this.EPD266.Controls.Add(this.tabControl3);
             this.EPD266.Location = new System.Drawing.Point(4, 22);
             this.EPD266.Name = "EPD266";
-            this.EPD266.Size = new System.Drawing.Size(1076, 1015);
+            this.EPD266.Size = new System.Drawing.Size(1565, 1015);
             this.EPD266.TabIndex = 1;
             this.EPD266.Text = "EPD266";
             this.EPD266.UseVisualStyleBackColor = true;
@@ -1061,7 +1097,7 @@
             this.tabControl3.Location = new System.Drawing.Point(0, 0);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(1076, 1015);
+            this.tabControl3.Size = new System.Drawing.Size(1565, 1015);
             this.tabControl3.TabIndex = 0;
             // 
             // tabPage1
@@ -1072,7 +1108,7 @@
             this.tabPage1.Controls.Add(this.storageUI_EPD_266);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1068, 989);
+            this.tabPage1.Size = new System.Drawing.Size(1557, 989);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "資料設定";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1086,13 +1122,18 @@
             this.rJ_Button_EPD266_TEST.BorderRadius = 5;
             this.rJ_Button_EPD266_TEST.BorderSize = 0;
             this.rJ_Button_EPD266_TEST.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_EPD266_TEST.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_EPD266_TEST.FlatAppearance.BorderSize = 0;
             this.rJ_Button_EPD266_TEST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD266_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD266_TEST.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD266_TEST.GUID = "";
+            this.rJ_Button_EPD266_TEST.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_EPD266_TEST.Location = new System.Drawing.Point(1516, 161);
             this.rJ_Button_EPD266_TEST.Name = "rJ_Button_EPD266_TEST";
+            this.rJ_Button_EPD266_TEST.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_EPD266_TEST.ProhibitionLineWidth = 4;
+            this.rJ_Button_EPD266_TEST.ProhibitionSymbolSize = 30;
             this.rJ_Button_EPD266_TEST.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_EPD266_TEST.ShadowSize = 0;
             this.rJ_Button_EPD266_TEST.ShowLoadingForm = false;
@@ -1101,6 +1142,7 @@
             this.rJ_Button_EPD266_TEST.TabIndex = 37;
             this.rJ_Button_EPD266_TEST.Text = "TEST";
             this.rJ_Button_EPD266_TEST.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD266_TEST.TextHeight = 0;
             this.rJ_Button_EPD266_TEST.UseVisualStyleBackColor = false;
             // 
             // epD_266_Pannel
@@ -1120,13 +1162,18 @@
             this.rJ_Button_EPD_266_初始化.BorderRadius = 5;
             this.rJ_Button_EPD_266_初始化.BorderSize = 0;
             this.rJ_Button_EPD_266_初始化.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_EPD_266_初始化.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_EPD_266_初始化.FlatAppearance.BorderSize = 0;
             this.rJ_Button_EPD_266_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_266_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_266_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_266_初始化.GUID = "";
+            this.rJ_Button_EPD_266_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_EPD_266_初始化.Location = new System.Drawing.Point(1384, 161);
             this.rJ_Button_EPD_266_初始化.Name = "rJ_Button_EPD_266_初始化";
+            this.rJ_Button_EPD_266_初始化.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_EPD_266_初始化.ProhibitionLineWidth = 4;
+            this.rJ_Button_EPD_266_初始化.ProhibitionSymbolSize = 30;
             this.rJ_Button_EPD_266_初始化.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_EPD_266_初始化.ShadowSize = 0;
             this.rJ_Button_EPD_266_初始化.ShowLoadingForm = false;
@@ -1135,6 +1182,7 @@
             this.rJ_Button_EPD_266_初始化.TabIndex = 35;
             this.rJ_Button_EPD_266_初始化.Text = "初始化";
             this.rJ_Button_EPD_266_初始化.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_266_初始化.TextHeight = 0;
             this.rJ_Button_EPD_266_初始化.UseVisualStyleBackColor = false;
             this.rJ_Button_EPD_266_初始化.Click += new System.EventHandler(this.rJ_Button_EPD_266_初始化_Click);
             // 
@@ -1172,7 +1220,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1888, 989);
+            this.tabPage2.Size = new System.Drawing.Size(1068, 989);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "面板設定";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1185,7 +1233,7 @@
             this.EPD290.Controls.Add(this.storageUI_EPD_290);
             this.EPD290.Location = new System.Drawing.Point(4, 22);
             this.EPD290.Name = "EPD290";
-            this.EPD290.Size = new System.Drawing.Size(1076, 1015);
+            this.EPD290.Size = new System.Drawing.Size(1565, 1015);
             this.EPD290.TabIndex = 6;
             this.EPD290.Text = "EPD290";
             this.EPD290.UseVisualStyleBackColor = true;
@@ -1199,13 +1247,18 @@
             this.rJ_Button_EPD_290_TEST.BorderRadius = 5;
             this.rJ_Button_EPD_290_TEST.BorderSize = 0;
             this.rJ_Button_EPD_290_TEST.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_EPD_290_TEST.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_EPD_290_TEST.FlatAppearance.BorderSize = 0;
             this.rJ_Button_EPD_290_TEST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_290_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_290_TEST.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_290_TEST.GUID = "";
+            this.rJ_Button_EPD_290_TEST.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_EPD_290_TEST.Location = new System.Drawing.Point(1531, 137);
             this.rJ_Button_EPD_290_TEST.Name = "rJ_Button_EPD_290_TEST";
+            this.rJ_Button_EPD_290_TEST.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_EPD_290_TEST.ProhibitionLineWidth = 4;
+            this.rJ_Button_EPD_290_TEST.ProhibitionSymbolSize = 30;
             this.rJ_Button_EPD_290_TEST.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_EPD_290_TEST.ShadowSize = 0;
             this.rJ_Button_EPD_290_TEST.ShowLoadingForm = false;
@@ -1214,6 +1267,7 @@
             this.rJ_Button_EPD_290_TEST.TabIndex = 39;
             this.rJ_Button_EPD_290_TEST.Text = "TEST";
             this.rJ_Button_EPD_290_TEST.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_290_TEST.TextHeight = 0;
             this.rJ_Button_EPD_290_TEST.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_EPD_290_初始化
@@ -1225,13 +1279,18 @@
             this.rJ_Button_EPD_290_初始化.BorderRadius = 5;
             this.rJ_Button_EPD_290_初始化.BorderSize = 0;
             this.rJ_Button_EPD_290_初始化.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_EPD_290_初始化.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_EPD_290_初始化.FlatAppearance.BorderSize = 0;
             this.rJ_Button_EPD_290_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_290_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_290_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_290_初始化.GUID = "";
+            this.rJ_Button_EPD_290_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_EPD_290_初始化.Location = new System.Drawing.Point(1399, 137);
             this.rJ_Button_EPD_290_初始化.Name = "rJ_Button_EPD_290_初始化";
+            this.rJ_Button_EPD_290_初始化.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_EPD_290_初始化.ProhibitionLineWidth = 4;
+            this.rJ_Button_EPD_290_初始化.ProhibitionSymbolSize = 30;
             this.rJ_Button_EPD_290_初始化.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_EPD_290_初始化.ShadowSize = 0;
             this.rJ_Button_EPD_290_初始化.ShowLoadingForm = false;
@@ -1240,6 +1299,7 @@
             this.rJ_Button_EPD_290_初始化.TabIndex = 38;
             this.rJ_Button_EPD_290_初始化.Text = "初始化";
             this.rJ_Button_EPD_290_初始化.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_290_初始化.TextHeight = 0;
             this.rJ_Button_EPD_290_初始化.UseVisualStyleBackColor = false;
             // 
             // epD_290_Pannel
@@ -1282,7 +1342,7 @@
             this.EPD420.Controls.Add(this.tabControl7);
             this.EPD420.Location = new System.Drawing.Point(4, 22);
             this.EPD420.Name = "EPD420";
-            this.EPD420.Size = new System.Drawing.Size(1076, 1015);
+            this.EPD420.Size = new System.Drawing.Size(1565, 1015);
             this.EPD420.TabIndex = 8;
             this.EPD420.Text = "EPD420";
             this.EPD420.UseVisualStyleBackColor = true;
@@ -1295,7 +1355,7 @@
             this.tabControl7.Location = new System.Drawing.Point(0, 0);
             this.tabControl7.Name = "tabControl7";
             this.tabControl7.SelectedIndex = 0;
-            this.tabControl7.Size = new System.Drawing.Size(1076, 1015);
+            this.tabControl7.Size = new System.Drawing.Size(1565, 1015);
             this.tabControl7.TabIndex = 2;
             // 
             // tabPage11
@@ -1303,7 +1363,7 @@
             this.tabPage11.Controls.Add(this.drawerUI_EPD_420);
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(1068, 989);
+            this.tabPage11.Size = new System.Drawing.Size(1557, 989);
             this.tabPage11.TabIndex = 0;
             this.tabPage11.Text = "資料設定";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -1342,7 +1402,7 @@
             this.tabPage12.Location = new System.Drawing.Point(4, 22);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(1888, 989);
+            this.tabPage12.Size = new System.Drawing.Size(1068, 989);
             this.tabPage12.TabIndex = 1;
             this.tabPage12.Text = "面板設定";
             this.tabPage12.UseVisualStyleBackColor = true;
@@ -1365,13 +1425,18 @@
             this.rJ_Button_EPD_420_填入測試畫面.BorderRadius = 5;
             this.rJ_Button_EPD_420_填入測試畫面.BorderSize = 0;
             this.rJ_Button_EPD_420_填入測試畫面.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_EPD_420_填入測試畫面.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_EPD_420_填入測試畫面.FlatAppearance.BorderSize = 0;
             this.rJ_Button_EPD_420_填入測試畫面.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_420_填入測試畫面.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_420_填入測試畫面.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_420_填入測試畫面.GUID = "";
+            this.rJ_Button_EPD_420_填入測試畫面.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_EPD_420_填入測試畫面.Location = new System.Drawing.Point(430, 21);
             this.rJ_Button_EPD_420_填入測試畫面.Name = "rJ_Button_EPD_420_填入測試畫面";
+            this.rJ_Button_EPD_420_填入測試畫面.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_EPD_420_填入測試畫面.ProhibitionLineWidth = 4;
+            this.rJ_Button_EPD_420_填入測試畫面.ProhibitionSymbolSize = 30;
             this.rJ_Button_EPD_420_填入測試畫面.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_EPD_420_填入測試畫面.ShadowSize = 0;
             this.rJ_Button_EPD_420_填入測試畫面.ShowLoadingForm = false;
@@ -1380,6 +1445,7 @@
             this.rJ_Button_EPD_420_填入測試畫面.TabIndex = 40;
             this.rJ_Button_EPD_420_填入測試畫面.Text = "填入測試畫面";
             this.rJ_Button_EPD_420_填入測試畫面.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_420_填入測試畫面.TextHeight = 0;
             this.rJ_Button_EPD_420_填入測試畫面.UseVisualStyleBackColor = false;
             // 
             // EPD583
@@ -1387,7 +1453,7 @@
             this.EPD583.Controls.Add(this.tabControl4);
             this.EPD583.Location = new System.Drawing.Point(4, 22);
             this.EPD583.Name = "EPD583";
-            this.EPD583.Size = new System.Drawing.Size(1076, 1015);
+            this.EPD583.Size = new System.Drawing.Size(1565, 1015);
             this.EPD583.TabIndex = 2;
             this.EPD583.Text = "EPD583";
             this.EPD583.UseVisualStyleBackColor = true;
@@ -1400,7 +1466,7 @@
             this.tabControl4.Location = new System.Drawing.Point(0, 0);
             this.tabControl4.Name = "tabControl4";
             this.tabControl4.SelectedIndex = 0;
-            this.tabControl4.Size = new System.Drawing.Size(1076, 1015);
+            this.tabControl4.Size = new System.Drawing.Size(1565, 1015);
             this.tabControl4.TabIndex = 0;
             // 
             // tabPage5
@@ -1418,7 +1484,7 @@
             this.tabPage5.Controls.Add(this.drawerUI_EPD_583);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1068, 989);
+            this.tabPage5.Size = new System.Drawing.Size(1557, 989);
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "資料設定";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1432,13 +1498,18 @@
             this.rJ_Button_epD_583_Pannel_TEST.BorderRadius = 5;
             this.rJ_Button_epD_583_Pannel_TEST.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_TEST.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_epD_583_Pannel_TEST.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_epD_583_Pannel_TEST.FlatAppearance.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_TEST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_TEST.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_TEST.GUID = "";
+            this.rJ_Button_epD_583_Pannel_TEST.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_epD_583_Pannel_TEST.Location = new System.Drawing.Point(1520, 3);
             this.rJ_Button_epD_583_Pannel_TEST.Name = "rJ_Button_epD_583_Pannel_TEST";
+            this.rJ_Button_epD_583_Pannel_TEST.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_epD_583_Pannel_TEST.ProhibitionLineWidth = 4;
+            this.rJ_Button_epD_583_Pannel_TEST.ProhibitionSymbolSize = 30;
             this.rJ_Button_epD_583_Pannel_TEST.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_epD_583_Pannel_TEST.ShadowSize = 0;
             this.rJ_Button_epD_583_Pannel_TEST.ShowLoadingForm = false;
@@ -1447,6 +1518,7 @@
             this.rJ_Button_epD_583_Pannel_TEST.TabIndex = 53;
             this.rJ_Button_epD_583_Pannel_TEST.Text = "TEST";
             this.rJ_Button_epD_583_Pannel_TEST.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_TEST.TextHeight = 0;
             this.rJ_Button_epD_583_Pannel_TEST.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_epD_583_Pannel_全部滅燈
@@ -1458,13 +1530,18 @@
             this.rJ_Button_epD_583_Pannel_全部滅燈.BorderRadius = 5;
             this.rJ_Button_epD_583_Pannel_全部滅燈.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_全部滅燈.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_epD_583_Pannel_全部滅燈.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_epD_583_Pannel_全部滅燈.FlatAppearance.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_全部滅燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_全部滅燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_全部滅燈.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_全部滅燈.GUID = "";
+            this.rJ_Button_epD_583_Pannel_全部滅燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_epD_583_Pannel_全部滅燈.Location = new System.Drawing.Point(1374, 641);
             this.rJ_Button_epD_583_Pannel_全部滅燈.Name = "rJ_Button_epD_583_Pannel_全部滅燈";
+            this.rJ_Button_epD_583_Pannel_全部滅燈.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_epD_583_Pannel_全部滅燈.ProhibitionLineWidth = 4;
+            this.rJ_Button_epD_583_Pannel_全部滅燈.ProhibitionSymbolSize = 30;
             this.rJ_Button_epD_583_Pannel_全部滅燈.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_epD_583_Pannel_全部滅燈.ShadowSize = 0;
             this.rJ_Button_epD_583_Pannel_全部滅燈.ShowLoadingForm = false;
@@ -1473,6 +1550,7 @@
             this.rJ_Button_epD_583_Pannel_全部滅燈.TabIndex = 52;
             this.rJ_Button_epD_583_Pannel_全部滅燈.Text = "全部滅燈";
             this.rJ_Button_epD_583_Pannel_全部滅燈.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_全部滅燈.TextHeight = 0;
             this.rJ_Button_epD_583_Pannel_全部滅燈.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_epD_583_Pannel_全部亮燈
@@ -1484,13 +1562,18 @@
             this.rJ_Button_epD_583_Pannel_全部亮燈.BorderRadius = 5;
             this.rJ_Button_epD_583_Pannel_全部亮燈.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_全部亮燈.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_epD_583_Pannel_全部亮燈.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_epD_583_Pannel_全部亮燈.FlatAppearance.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_全部亮燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_全部亮燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_全部亮燈.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_全部亮燈.GUID = "";
+            this.rJ_Button_epD_583_Pannel_全部亮燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_epD_583_Pannel_全部亮燈.Location = new System.Drawing.Point(1228, 641);
             this.rJ_Button_epD_583_Pannel_全部亮燈.Name = "rJ_Button_epD_583_Pannel_全部亮燈";
+            this.rJ_Button_epD_583_Pannel_全部亮燈.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_epD_583_Pannel_全部亮燈.ProhibitionLineWidth = 4;
+            this.rJ_Button_epD_583_Pannel_全部亮燈.ProhibitionSymbolSize = 30;
             this.rJ_Button_epD_583_Pannel_全部亮燈.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_epD_583_Pannel_全部亮燈.ShadowSize = 0;
             this.rJ_Button_epD_583_Pannel_全部亮燈.ShowLoadingForm = false;
@@ -1499,6 +1582,7 @@
             this.rJ_Button_epD_583_Pannel_全部亮燈.TabIndex = 51;
             this.rJ_Button_epD_583_Pannel_全部亮燈.Text = "全部亮燈";
             this.rJ_Button_epD_583_Pannel_全部亮燈.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_全部亮燈.TextHeight = 0;
             this.rJ_Button_epD_583_Pannel_全部亮燈.UseVisualStyleBackColor = false;
             this.rJ_Button_epD_583_Pannel_全部亮燈.Click += new System.EventHandler(this.rJ_Button_epD_583_Pannel_全部亮燈_Click);
             // 
@@ -1511,13 +1595,18 @@
             this.rJ_Button_epD_583_Pannel_面板滅燈.BorderRadius = 5;
             this.rJ_Button_epD_583_Pannel_面板滅燈.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_面板滅燈.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_epD_583_Pannel_面板滅燈.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_epD_583_Pannel_面板滅燈.FlatAppearance.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_面板滅燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_面板滅燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_面板滅燈.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_面板滅燈.GUID = "";
+            this.rJ_Button_epD_583_Pannel_面板滅燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_epD_583_Pannel_面板滅燈.Location = new System.Drawing.Point(1666, 568);
             this.rJ_Button_epD_583_Pannel_面板滅燈.Name = "rJ_Button_epD_583_Pannel_面板滅燈";
+            this.rJ_Button_epD_583_Pannel_面板滅燈.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_epD_583_Pannel_面板滅燈.ProhibitionLineWidth = 4;
+            this.rJ_Button_epD_583_Pannel_面板滅燈.ProhibitionSymbolSize = 30;
             this.rJ_Button_epD_583_Pannel_面板滅燈.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_epD_583_Pannel_面板滅燈.ShadowSize = 0;
             this.rJ_Button_epD_583_Pannel_面板滅燈.ShowLoadingForm = false;
@@ -1526,6 +1615,7 @@
             this.rJ_Button_epD_583_Pannel_面板滅燈.TabIndex = 50;
             this.rJ_Button_epD_583_Pannel_面板滅燈.Text = "面板滅燈";
             this.rJ_Button_epD_583_Pannel_面板滅燈.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_面板滅燈.TextHeight = 0;
             this.rJ_Button_epD_583_Pannel_面板滅燈.UseVisualStyleBackColor = false;
             this.rJ_Button_epD_583_Pannel_面板滅燈.Click += new System.EventHandler(this.rJ_Button_epD_583_Pannel_面板滅燈_Click);
             // 
@@ -1538,13 +1628,18 @@
             this.rJ_Button_epD_583_Pannel_面板亮燈.BorderRadius = 5;
             this.rJ_Button_epD_583_Pannel_面板亮燈.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_面板亮燈.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_epD_583_Pannel_面板亮燈.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_epD_583_Pannel_面板亮燈.FlatAppearance.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_面板亮燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_面板亮燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_面板亮燈.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_面板亮燈.GUID = "";
+            this.rJ_Button_epD_583_Pannel_面板亮燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_epD_583_Pannel_面板亮燈.Location = new System.Drawing.Point(1520, 568);
             this.rJ_Button_epD_583_Pannel_面板亮燈.Name = "rJ_Button_epD_583_Pannel_面板亮燈";
+            this.rJ_Button_epD_583_Pannel_面板亮燈.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_epD_583_Pannel_面板亮燈.ProhibitionLineWidth = 4;
+            this.rJ_Button_epD_583_Pannel_面板亮燈.ProhibitionSymbolSize = 30;
             this.rJ_Button_epD_583_Pannel_面板亮燈.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_epD_583_Pannel_面板亮燈.ShadowSize = 0;
             this.rJ_Button_epD_583_Pannel_面板亮燈.ShowLoadingForm = false;
@@ -1553,6 +1648,7 @@
             this.rJ_Button_epD_583_Pannel_面板亮燈.TabIndex = 49;
             this.rJ_Button_epD_583_Pannel_面板亮燈.Text = "面板亮燈";
             this.rJ_Button_epD_583_Pannel_面板亮燈.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_面板亮燈.TextHeight = 0;
             this.rJ_Button_epD_583_Pannel_面板亮燈.UseVisualStyleBackColor = false;
             this.rJ_Button_epD_583_Pannel_面板亮燈.Click += new System.EventHandler(this.rJ_Button_epD_583_Pannel_面板亮燈_Click);
             // 
@@ -1565,13 +1661,18 @@
             this.rJ_Button_epD_583_Pannel_儲位滅燈.BorderRadius = 5;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_epD_583_Pannel_儲位滅燈.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.FlatAppearance.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_儲位滅燈.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.GUID = "";
+            this.rJ_Button_epD_583_Pannel_儲位滅燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Location = new System.Drawing.Point(1374, 568);
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Name = "rJ_Button_epD_583_Pannel_儲位滅燈";
+            this.rJ_Button_epD_583_Pannel_儲位滅燈.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_epD_583_Pannel_儲位滅燈.ProhibitionLineWidth = 4;
+            this.rJ_Button_epD_583_Pannel_儲位滅燈.ProhibitionSymbolSize = 30;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.ShadowSize = 0;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.ShowLoadingForm = false;
@@ -1580,6 +1681,7 @@
             this.rJ_Button_epD_583_Pannel_儲位滅燈.TabIndex = 48;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Text = "儲位滅燈";
             this.rJ_Button_epD_583_Pannel_儲位滅燈.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_儲位滅燈.TextHeight = 0;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.UseVisualStyleBackColor = false;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Click += new System.EventHandler(this.rJ_Button_epD_583_Pannel_儲位滅燈_Click);
             // 
@@ -1592,13 +1694,18 @@
             this.rJ_Button_epD_583_Pannel_儲位亮燈.BorderRadius = 5;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_epD_583_Pannel_儲位亮燈.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.FlatAppearance.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_儲位亮燈.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.GUID = "";
+            this.rJ_Button_epD_583_Pannel_儲位亮燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Location = new System.Drawing.Point(1228, 568);
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Name = "rJ_Button_epD_583_Pannel_儲位亮燈";
+            this.rJ_Button_epD_583_Pannel_儲位亮燈.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_epD_583_Pannel_儲位亮燈.ProhibitionLineWidth = 4;
+            this.rJ_Button_epD_583_Pannel_儲位亮燈.ProhibitionSymbolSize = 30;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.ShadowSize = 0;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.ShowLoadingForm = false;
@@ -1607,6 +1714,7 @@
             this.rJ_Button_epD_583_Pannel_儲位亮燈.TabIndex = 47;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Text = "儲位亮燈";
             this.rJ_Button_epD_583_Pannel_儲位亮燈.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_儲位亮燈.TextHeight = 0;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_epD_583_Pannel_上傳
@@ -1618,13 +1726,18 @@
             this.rJ_Button_epD_583_Pannel_上傳.BorderRadius = 5;
             this.rJ_Button_epD_583_Pannel_上傳.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_上傳.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_epD_583_Pannel_上傳.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_epD_583_Pannel_上傳.FlatAppearance.BorderSize = 0;
             this.rJ_Button_epD_583_Pannel_上傳.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_epD_583_Pannel_上傳.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_上傳.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_上傳.GUID = "";
+            this.rJ_Button_epD_583_Pannel_上傳.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_epD_583_Pannel_上傳.Location = new System.Drawing.Point(1374, 3);
             this.rJ_Button_epD_583_Pannel_上傳.Name = "rJ_Button_epD_583_Pannel_上傳";
+            this.rJ_Button_epD_583_Pannel_上傳.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_epD_583_Pannel_上傳.ProhibitionLineWidth = 4;
+            this.rJ_Button_epD_583_Pannel_上傳.ProhibitionSymbolSize = 30;
             this.rJ_Button_epD_583_Pannel_上傳.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_epD_583_Pannel_上傳.ShadowSize = 0;
             this.rJ_Button_epD_583_Pannel_上傳.ShowLoadingForm = false;
@@ -1633,13 +1746,14 @@
             this.rJ_Button_epD_583_Pannel_上傳.TabIndex = 46;
             this.rJ_Button_epD_583_Pannel_上傳.Text = "上傳";
             this.rJ_Button_epD_583_Pannel_上傳.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_epD_583_Pannel_上傳.TextHeight = 0;
             this.rJ_Button_epD_583_Pannel_上傳.UseVisualStyleBackColor = false;
             this.rJ_Button_epD_583_Pannel_上傳.Click += new System.EventHandler(this.rJ_Button_epD_583_Pannel_上傳_Click);
             // 
             // epD_583_Pannel
             // 
             this.epD_583_Pannel.CurrentDrawer = null;
-            this.epD_583_Pannel.Location = new System.Drawing.Point(1228, 73);
+            this.epD_583_Pannel.Location = new System.Drawing.Point(1138, 73);
             this.epD_583_Pannel.Margin = new System.Windows.Forms.Padding(0);
             this.epD_583_Pannel.Name = "epD_583_Pannel";
             this.epD_583_Pannel.Size = new System.Drawing.Size(648, 480);
@@ -1654,13 +1768,18 @@
             this.rJ_Button_EPD_583_初始化.BorderRadius = 5;
             this.rJ_Button_EPD_583_初始化.BorderSize = 0;
             this.rJ_Button_EPD_583_初始化.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_EPD_583_初始化.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_EPD_583_初始化.FlatAppearance.BorderSize = 0;
             this.rJ_Button_EPD_583_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_583_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_583_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_583_初始化.GUID = "";
+            this.rJ_Button_EPD_583_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_EPD_583_初始化.Location = new System.Drawing.Point(1228, 3);
             this.rJ_Button_EPD_583_初始化.Name = "rJ_Button_EPD_583_初始化";
+            this.rJ_Button_EPD_583_初始化.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_EPD_583_初始化.ProhibitionLineWidth = 4;
+            this.rJ_Button_EPD_583_初始化.ProhibitionSymbolSize = 30;
             this.rJ_Button_EPD_583_初始化.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_EPD_583_初始化.ShadowSize = 0;
             this.rJ_Button_EPD_583_初始化.ShowLoadingForm = false;
@@ -1669,6 +1788,7 @@
             this.rJ_Button_EPD_583_初始化.TabIndex = 38;
             this.rJ_Button_EPD_583_初始化.Text = "初始化";
             this.rJ_Button_EPD_583_初始化.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_583_初始化.TextHeight = 0;
             this.rJ_Button_EPD_583_初始化.UseVisualStyleBackColor = false;
             this.rJ_Button_EPD_583_初始化.Click += new System.EventHandler(this.rJ_Button_EPD_583_初始化_Click);
             // 
@@ -1688,7 +1808,7 @@
             this.drawerUI_EPD_583.Port = ((uint)(3306u));
             this.drawerUI_EPD_583.Server_IP_Adress = "0.0.0.0";
             this.drawerUI_EPD_583.Server_Port = "0";
-            this.drawerUI_EPD_583.Size = new System.Drawing.Size(1206, 989);
+            this.drawerUI_EPD_583.Size = new System.Drawing.Size(1135, 989);
             this.drawerUI_EPD_583.SSID = "";
             this.drawerUI_EPD_583.Station = "0";
             this.drawerUI_EPD_583.Subnet = "0.0.0.0";
@@ -1704,7 +1824,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1888, 989);
+            this.tabPage6.Size = new System.Drawing.Size(1068, 989);
             this.tabPage6.TabIndex = 1;
             this.tabPage6.Text = "面板設定";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1777,13 +1897,18 @@
             this.rJ_Button_EPD1020_初始化.BorderRadius = 5;
             this.rJ_Button_EPD1020_初始化.BorderSize = 0;
             this.rJ_Button_EPD1020_初始化.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_EPD1020_初始化.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_EPD1020_初始化.FlatAppearance.BorderSize = 0;
             this.rJ_Button_EPD1020_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD1020_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD1020_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD1020_初始化.GUID = "";
+            this.rJ_Button_EPD1020_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_EPD1020_初始化.Location = new System.Drawing.Point(1402, 3);
             this.rJ_Button_EPD1020_初始化.Name = "rJ_Button_EPD1020_初始化";
+            this.rJ_Button_EPD1020_初始化.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_EPD1020_初始化.ProhibitionLineWidth = 4;
+            this.rJ_Button_EPD1020_初始化.ProhibitionSymbolSize = 30;
             this.rJ_Button_EPD1020_初始化.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_EPD1020_初始化.ShadowSize = 0;
             this.rJ_Button_EPD1020_初始化.ShowLoadingForm = false;
@@ -1792,6 +1917,7 @@
             this.rJ_Button_EPD1020_初始化.TabIndex = 39;
             this.rJ_Button_EPD1020_初始化.Text = "初始化";
             this.rJ_Button_EPD1020_初始化.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD1020_初始化.TextHeight = 0;
             this.rJ_Button_EPD1020_初始化.UseVisualStyleBackColor = false;
             // 
             // tabPage10
@@ -1802,7 +1928,7 @@
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(1888, 989);
+            this.tabPage10.Size = new System.Drawing.Size(1557, 989);
             this.tabPage10.TabIndex = 1;
             this.tabPage10.Text = "面板設定";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -1816,13 +1942,18 @@
             this.rJ_Button_EPD_1020_門片畫面測試.BorderRadius = 5;
             this.rJ_Button_EPD_1020_門片畫面測試.BorderSize = 0;
             this.rJ_Button_EPD_1020_門片畫面測試.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_EPD_1020_門片畫面測試.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_EPD_1020_門片畫面測試.FlatAppearance.BorderSize = 0;
             this.rJ_Button_EPD_1020_門片畫面測試.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_1020_門片畫面測試.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_1020_門片畫面測試.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_1020_門片畫面測試.GUID = "";
+            this.rJ_Button_EPD_1020_門片畫面測試.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_EPD_1020_門片畫面測試.Location = new System.Drawing.Point(673, 130);
             this.rJ_Button_EPD_1020_門片畫面測試.Name = "rJ_Button_EPD_1020_門片畫面測試";
+            this.rJ_Button_EPD_1020_門片畫面測試.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_EPD_1020_門片畫面測試.ProhibitionLineWidth = 4;
+            this.rJ_Button_EPD_1020_門片畫面測試.ProhibitionSymbolSize = 30;
             this.rJ_Button_EPD_1020_門片畫面測試.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_EPD_1020_門片畫面測試.ShadowSize = 0;
             this.rJ_Button_EPD_1020_門片畫面測試.ShowLoadingForm = false;
@@ -1831,6 +1962,7 @@
             this.rJ_Button_EPD_1020_門片畫面測試.TabIndex = 41;
             this.rJ_Button_EPD_1020_門片畫面測試.Text = "門片畫面測試";
             this.rJ_Button_EPD_1020_門片畫面測試.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_1020_門片畫面測試.TextHeight = 0;
             this.rJ_Button_EPD_1020_門片畫面測試.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_EPD_1020_填入測試畫面
@@ -1842,13 +1974,18 @@
             this.rJ_Button_EPD_1020_填入測試畫面.BorderRadius = 5;
             this.rJ_Button_EPD_1020_填入測試畫面.BorderSize = 0;
             this.rJ_Button_EPD_1020_填入測試畫面.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_EPD_1020_填入測試畫面.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_EPD_1020_填入測試畫面.FlatAppearance.BorderSize = 0;
             this.rJ_Button_EPD_1020_填入測試畫面.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_EPD_1020_填入測試畫面.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_1020_填入測試畫面.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_1020_填入測試畫面.GUID = "";
+            this.rJ_Button_EPD_1020_填入測試畫面.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_EPD_1020_填入測試畫面.Location = new System.Drawing.Point(673, 6);
             this.rJ_Button_EPD_1020_填入測試畫面.Name = "rJ_Button_EPD_1020_填入測試畫面";
+            this.rJ_Button_EPD_1020_填入測試畫面.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_EPD_1020_填入測試畫面.ProhibitionLineWidth = 4;
+            this.rJ_Button_EPD_1020_填入測試畫面.ProhibitionSymbolSize = 30;
             this.rJ_Button_EPD_1020_填入測試畫面.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_EPD_1020_填入測試畫面.ShadowSize = 0;
             this.rJ_Button_EPD_1020_填入測試畫面.ShowLoadingForm = false;
@@ -1857,6 +1994,7 @@
             this.rJ_Button_EPD_1020_填入測試畫面.TabIndex = 40;
             this.rJ_Button_EPD_1020_填入測試畫面.Text = "填入測試畫面";
             this.rJ_Button_EPD_1020_填入測試畫面.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_EPD_1020_填入測試畫面.TextHeight = 0;
             this.rJ_Button_EPD_1020_填入測試畫面.UseVisualStyleBackColor = false;
             // 
             // epD_1020_Pannel
@@ -1910,13 +2048,18 @@
             this.rJ_Button_RowsLED_初始化.BorderRadius = 5;
             this.rJ_Button_RowsLED_初始化.BorderSize = 0;
             this.rJ_Button_RowsLED_初始化.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_RowsLED_初始化.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_RowsLED_初始化.FlatAppearance.BorderSize = 0;
             this.rJ_Button_RowsLED_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_RowsLED_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_RowsLED_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_RowsLED_初始化.GUID = "";
+            this.rJ_Button_RowsLED_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_RowsLED_初始化.Location = new System.Drawing.Point(1402, 3);
             this.rJ_Button_RowsLED_初始化.Name = "rJ_Button_RowsLED_初始化";
+            this.rJ_Button_RowsLED_初始化.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_RowsLED_初始化.ProhibitionLineWidth = 4;
+            this.rJ_Button_RowsLED_初始化.ProhibitionSymbolSize = 30;
             this.rJ_Button_RowsLED_初始化.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_RowsLED_初始化.ShadowSize = 0;
             this.rJ_Button_RowsLED_初始化.ShowLoadingForm = false;
@@ -1925,6 +2068,7 @@
             this.rJ_Button_RowsLED_初始化.TabIndex = 39;
             this.rJ_Button_RowsLED_初始化.Text = "初始化";
             this.rJ_Button_RowsLED_初始化.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_RowsLED_初始化.TextHeight = 0;
             this.rJ_Button_RowsLED_初始化.UseVisualStyleBackColor = false;
             this.rJ_Button_RowsLED_初始化.Click += new System.EventHandler(this.rJ_Button_RowsLED_初始化_Click);
             // 
@@ -1960,7 +2104,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(1888, 989);
+            this.tabPage8.Size = new System.Drawing.Size(1557, 989);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "面板設定";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -1987,13 +2131,18 @@
             this.rJ_Button1.BorderRadius = 5;
             this.rJ_Button1.BorderSize = 0;
             this.rJ_Button1.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button1.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button1.FlatAppearance.BorderSize = 0;
             this.rJ_Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button1.ForeColor = System.Drawing.Color.White;
             this.rJ_Button1.GUID = "";
+            this.rJ_Button1.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button1.Location = new System.Drawing.Point(1399, 159);
             this.rJ_Button1.Name = "rJ_Button1";
+            this.rJ_Button1.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button1.ProhibitionLineWidth = 4;
+            this.rJ_Button1.ProhibitionSymbolSize = 30;
             this.rJ_Button1.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button1.ShadowSize = 0;
             this.rJ_Button1.ShowLoadingForm = false;
@@ -2002,6 +2151,7 @@
             this.rJ_Button1.TabIndex = 42;
             this.rJ_Button1.Text = "RS485_TEST";
             this.rJ_Button1.TextColor = System.Drawing.Color.White;
+            this.rJ_Button1.TextHeight = 0;
             this.rJ_Button1.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_RFID_RS485_TEST
@@ -2013,13 +2163,18 @@
             this.rJ_Button_RFID_RS485_TEST.BorderRadius = 5;
             this.rJ_Button_RFID_RS485_TEST.BorderSize = 0;
             this.rJ_Button_RFID_RS485_TEST.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_RFID_RS485_TEST.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_RFID_RS485_TEST.FlatAppearance.BorderSize = 0;
             this.rJ_Button_RFID_RS485_TEST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_RFID_RS485_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_RFID_RS485_TEST.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_RFID_RS485_TEST.GUID = "";
+            this.rJ_Button_RFID_RS485_TEST.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_RFID_RS485_TEST.Location = new System.Drawing.Point(1399, 86);
             this.rJ_Button_RFID_RS485_TEST.Name = "rJ_Button_RFID_RS485_TEST";
+            this.rJ_Button_RFID_RS485_TEST.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_RFID_RS485_TEST.ProhibitionLineWidth = 4;
+            this.rJ_Button_RFID_RS485_TEST.ProhibitionSymbolSize = 30;
             this.rJ_Button_RFID_RS485_TEST.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_RFID_RS485_TEST.ShadowSize = 0;
             this.rJ_Button_RFID_RS485_TEST.ShowLoadingForm = false;
@@ -2028,6 +2183,7 @@
             this.rJ_Button_RFID_RS485_TEST.TabIndex = 41;
             this.rJ_Button_RFID_RS485_TEST.Text = "RS485_TEST";
             this.rJ_Button_RFID_RS485_TEST.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_RFID_RS485_TEST.TextHeight = 0;
             this.rJ_Button_RFID_RS485_TEST.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_RFID_初始化
@@ -2039,13 +2195,18 @@
             this.rJ_Button_RFID_初始化.BorderRadius = 5;
             this.rJ_Button_RFID_初始化.BorderSize = 0;
             this.rJ_Button_RFID_初始化.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_RFID_初始化.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_RFID_初始化.FlatAppearance.BorderSize = 0;
             this.rJ_Button_RFID_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_RFID_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_RFID_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_RFID_初始化.GUID = "";
+            this.rJ_Button_RFID_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_RFID_初始化.Location = new System.Drawing.Point(1399, 3);
             this.rJ_Button_RFID_初始化.Name = "rJ_Button_RFID_初始化";
+            this.rJ_Button_RFID_初始化.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_RFID_初始化.ProhibitionLineWidth = 4;
+            this.rJ_Button_RFID_初始化.ProhibitionSymbolSize = 30;
             this.rJ_Button_RFID_初始化.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_RFID_初始化.ShadowSize = 0;
             this.rJ_Button_RFID_初始化.ShowLoadingForm = false;
@@ -2054,6 +2215,7 @@
             this.rJ_Button_RFID_初始化.TabIndex = 40;
             this.rJ_Button_RFID_初始化.Text = "初始化";
             this.rJ_Button_RFID_初始化.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_RFID_初始化.TextHeight = 0;
             this.rJ_Button_RFID_初始化.UseVisualStyleBackColor = false;
             // 
             // rfiD_UI
@@ -2091,7 +2253,7 @@
             this.H_RFID.Controls.Add(this.h_RFID_UI);
             this.H_RFID.Location = new System.Drawing.Point(4, 22);
             this.H_RFID.Name = "H_RFID";
-            this.H_RFID.Size = new System.Drawing.Size(1076, 1015);
+            this.H_RFID.Size = new System.Drawing.Size(1565, 1015);
             this.H_RFID.TabIndex = 5;
             this.H_RFID.Text = "H_RFID";
             this.H_RFID.UseVisualStyleBackColor = true;
@@ -2103,11 +2265,13 @@
             this.sqL_DataGridView_h_RFID_Datas.BorderColor = System.Drawing.Color.LightBlue;
             this.sqL_DataGridView_h_RFID_Datas.BorderRadius = 10;
             this.sqL_DataGridView_h_RFID_Datas.BorderSize = 2;
+            this.sqL_DataGridView_h_RFID_Datas.CellBorderColor = System.Drawing.Color.White;
             this.sqL_DataGridView_h_RFID_Datas.cellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.sqL_DataGridView_h_RFID_Datas.cellStylBackColor = System.Drawing.Color.LightBlue;
             this.sqL_DataGridView_h_RFID_Datas.cellStyleFont = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
             this.sqL_DataGridView_h_RFID_Datas.cellStylForeColor = System.Drawing.Color.Black;
             this.sqL_DataGridView_h_RFID_Datas.columnHeaderBackColor = System.Drawing.Color.SkyBlue;
+            this.sqL_DataGridView_h_RFID_Datas.columnHeaderBorderColor = System.Drawing.Color.DimGray;
             this.sqL_DataGridView_h_RFID_Datas.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
             this.sqL_DataGridView_h_RFID_Datas.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Raised;
             this.sqL_DataGridView_h_RFID_Datas.columnHeadersHeight = 26;
@@ -2116,6 +2280,7 @@
             this.sqL_DataGridView_h_RFID_Datas.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_h_RFID_Datas.Columns1"))));
             this.sqL_DataGridView_h_RFID_Datas.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_h_RFID_Datas.Columns2"))));
             this.sqL_DataGridView_h_RFID_Datas.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_h_RFID_Datas.Columns3"))));
+            this.sqL_DataGridView_h_RFID_Datas.DataGridViewAutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.sqL_DataGridView_h_RFID_Datas.Dock = System.Windows.Forms.DockStyle.Top;
             this.sqL_DataGridView_h_RFID_Datas.Font = new System.Drawing.Font("新細明體", 9F);
             this.sqL_DataGridView_h_RFID_Datas.ImageBox = false;
@@ -2129,8 +2294,12 @@
             this.sqL_DataGridView_h_RFID_Datas.RowsColor = System.Drawing.SystemColors.Control;
             this.sqL_DataGridView_h_RFID_Datas.RowsHeight = 30;
             this.sqL_DataGridView_h_RFID_Datas.SaveFileName = "SQL_DataGridView";
+            this.sqL_DataGridView_h_RFID_Datas.selectedBorderSize = 0;
+            this.sqL_DataGridView_h_RFID_Datas.selectedRowBackColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_h_RFID_Datas.selectedRowBorderColor = System.Drawing.Color.Blue;
+            this.sqL_DataGridView_h_RFID_Datas.selectedRowForeColor = System.Drawing.Color.White;
             this.sqL_DataGridView_h_RFID_Datas.Server = "127.0.0.0";
-            this.sqL_DataGridView_h_RFID_Datas.Size = new System.Drawing.Size(0, 545);
+            this.sqL_DataGridView_h_RFID_Datas.Size = new System.Drawing.Size(172, 545);
             this.sqL_DataGridView_h_RFID_Datas.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
             this.sqL_DataGridView_h_RFID_Datas.TabIndex = 42;
             this.sqL_DataGridView_h_RFID_Datas.UserName = "root";
@@ -2155,13 +2324,18 @@
             this.rJ_Button_H_RFID_初始化.BorderRadius = 5;
             this.rJ_Button_H_RFID_初始化.BorderSize = 0;
             this.rJ_Button_H_RFID_初始化.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_H_RFID_初始化.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_H_RFID_初始化.FlatAppearance.BorderSize = 0;
             this.rJ_Button_H_RFID_初始化.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_H_RFID_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_H_RFID_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_H_RFID_初始化.GUID = "";
+            this.rJ_Button_H_RFID_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_H_RFID_初始化.Location = new System.Drawing.Point(1422, 566);
             this.rJ_Button_H_RFID_初始化.Name = "rJ_Button_H_RFID_初始化";
+            this.rJ_Button_H_RFID_初始化.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_H_RFID_初始化.ProhibitionLineWidth = 4;
+            this.rJ_Button_H_RFID_初始化.ProhibitionSymbolSize = 30;
             this.rJ_Button_H_RFID_初始化.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Button_H_RFID_初始化.ShadowSize = 0;
             this.rJ_Button_H_RFID_初始化.ShowLoadingForm = false;
@@ -2170,6 +2344,7 @@
             this.rJ_Button_H_RFID_初始化.TabIndex = 41;
             this.rJ_Button_H_RFID_初始化.Text = "初始化";
             this.rJ_Button_H_RFID_初始化.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_H_RFID_初始化.TextHeight = 0;
             this.rJ_Button_H_RFID_初始化.UseVisualStyleBackColor = false;
             // 
             // h_RFID_UI

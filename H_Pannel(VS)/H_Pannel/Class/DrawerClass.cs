@@ -771,6 +771,16 @@ namespace H_Pannel_lib
 
         public void SetDeviceType(DeviceType deviceType)
         {
+            if (deviceType == DeviceType.EPD583 || deviceType == DeviceType.EPD583_lock)
+            {
+                this.pannelWidth = 648;
+                this.pannelHeight = 480;
+            }
+            if (deviceType == DeviceType.EPD730 || deviceType == DeviceType.EPD730_lock)
+            {
+                this.pannelWidth = 800;
+                this.pannelHeight = 480;
+            }
             List<Box> list_Boxes = this.GetAllBoxes();
             for (int i = 0; i < list_Boxes.Count; i++)
             {
@@ -804,6 +814,17 @@ namespace H_Pannel_lib
         }
         public void BoxInit()
         {
+            DeviceType deviceType = this.DeviceType;
+            if (this.DeviceType == DeviceType.EPD583 || this.DeviceType == DeviceType.EPD583_lock)
+            {
+                this.pannelWidth = 648;
+                this.pannelHeight = 480;
+            }
+            if (this.DeviceType == DeviceType.EPD730 || this.DeviceType == DeviceType.EPD730_lock)
+            {
+                this.pannelWidth = 800;
+                this.pannelHeight = 480;
+            }
             int x, y, width, height;
             height = 0;
             Size Box_size = this.GetBoxSize();
@@ -820,6 +841,7 @@ namespace H_Pannel_lib
                 for (int k = 0; k < this.Num_Of_Rows; k++)
                 {
                     box = new Box(this.IP, this.Port, i, k);
+                    box.DeviceType = deviceType;
                     y += height;
                     height = Box_size.Height;
                     box.X = x;
@@ -831,7 +853,8 @@ namespace H_Pannel_lib
                 list_RectOfBox.Add(list_colOfBox.ToArray());
             }
             this.Boxes = list_RectOfBox;
-            this.SetDeviceType(DeviceType.EPD583_lock);
+       
+    
         }
 
         private Size GetBoxSize()

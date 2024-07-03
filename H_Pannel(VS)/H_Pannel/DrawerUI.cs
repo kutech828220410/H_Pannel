@@ -101,6 +101,7 @@ namespace H_Pannel_lib
             string jsonString = this.SQL_GetDrawerJsonString(IP);
             if (jsonString.StringIsEmpty()) return null;
             Drawer Drawer = jsonString.JsonDeserializet<Drawer>();
+            Drawer.BoxInit();
             if (DrawerChangeEvent != null)
             {
                 List<Drawer> drawers = new List<Drawer>();
@@ -118,17 +119,22 @@ namespace H_Pannel_lib
             string jsonString = this.SQL_GetDrawerJsonString(IP);
             if (jsonString.StringIsEmpty()) return null;
             Drawer Drawer = jsonString.JsonDeserializet<Drawer>();
+            Drawer.BoxInit();
             return Drawer.Boxes[col][row];
         }
 
 
-   
+
         public List<Drawer> SQL_GetAllDrawers()
         {
             List<Drawer> drawers = new List<Drawer>();
             List<object[]> list_value = new List<object[]>();
             list_value = this.SQL_GetAllDeviceTableRows();
             drawers = DrawerMethod.SQL_GetAllDrawers(list_value);
+            foreach (Drawer drawer in drawers)
+            {
+                drawer.BoxInit();
+            }
             if (DrawerChangeEvent != null)
             {
                 DrawerChangeEvent(drawers);

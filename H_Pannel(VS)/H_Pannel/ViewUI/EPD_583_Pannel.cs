@@ -438,6 +438,15 @@ namespace H_Pannel_lib
             this.CurrentDrawer = drawer;
             using (Bitmap bitmap = this.Get_Drawer_Barcode_bmp(drawer))
             {
+                if (drawer.PannelWidth != pictureBox.Width || drawer.PannelHeight != pictureBox.Height)
+                {
+                    this.Invoke(new Action(delegate
+                    {
+                        this.Width = drawer.PannelWidth;
+                        this.Height = drawer.PannelHeight;
+                        this.Invalidate();
+                    }));
+                }
                 using (Graphics g = pictureBox.CreateGraphics())
                 {
                     g.DrawImage(bitmap, new PointF());
@@ -451,6 +460,15 @@ namespace H_Pannel_lib
             this.CurrentDrawer = drawer;
             using(Bitmap bitmap = this.Get_Drawer_bmp(drawer))
             {
+                if (drawer.PannelWidth != pictureBox.Width || drawer.PannelHeight != pictureBox.Height)
+                {
+                    this.Invoke(new Action(delegate 
+                    {
+                        this.Width = drawer.PannelWidth;
+                        this.Height = drawer.PannelHeight;
+                        this.Invalidate();
+                    }));
+                }
                 using (Graphics g = pictureBox.CreateGraphics())
                 {
                     g.DrawImage(bitmap, new PointF());
