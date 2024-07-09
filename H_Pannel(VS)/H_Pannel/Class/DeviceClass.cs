@@ -1270,7 +1270,18 @@ namespace H_Pannel_lib
             return 庫存;
         }
 
-    
+        static public Device SetMedClass(this Device device, HIS_DB_Lib.medClass medClass)
+        {
+            device.Code = medClass.藥品碼;
+            device.SKDIACODE = medClass.料號;
+            device.Name = medClass.藥品名稱;
+            device.Scientific_Name = medClass.藥品學名;
+            device.ChineseName = medClass.中文名稱;
+            device.DRUGKIND = medClass.管制級別;
+            device.Package = medClass.包裝單位;
+
+            return device;
+        }
     }
   
 
@@ -3768,7 +3779,8 @@ namespace H_Pannel_lib
         }
 
 
- 
+    
+
 
     }
     //建立一個排序類別

@@ -494,7 +494,6 @@ namespace H_Pannel_lib
             g.Dispose();
             return bitmap;
         }
-  
         static public Bitmap Get_Drawer_bmp(Drawer drawer)
         {
             if (drawer.DeviceType == DeviceType.EPD730 || drawer.DeviceType == DeviceType.EPD730_lock)
@@ -781,7 +780,6 @@ namespace H_Pannel_lib
                 }
             }
         }
-
         public byte[] Get_Drawer_LED_UDP(Drawer drawer)
         {
             drawer.LED_Bytes = Get_Drawer_LED_UDP(drawer.IP, drawer.Port);
@@ -801,8 +799,6 @@ namespace H_Pannel_lib
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
             return Set_Pannel_LED_UDP(uDP_Class, IP, LED_Bytes, color);
         }
-
-
         public bool Set_Drawer_LED_UDP(Drawer drawer, Box box, Color color)
         {
             List<Box> boxes = new List<Box>();
@@ -834,7 +830,6 @@ namespace H_Pannel_lib
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
             return Set_Drawer_LED_UDP(uDP_Class , drawer, col, row, color, ClearAll);
         }
-
 
         public bool Set_LED_UDP(Drawer drawer)
         {
@@ -876,13 +871,11 @@ namespace H_Pannel_lib
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
             return DrawToEpd_BarCode_UDP(uDP_Class, drawer);
         }
-     
         public bool DrawToEpd_UDP(Drawer drawer)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
             return DrawToEpd_UDP(uDP_Class, drawer);
         }
-
         public bool DrawToEpd_UDP(string IP, int Port, Bitmap bitmap)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
@@ -980,7 +973,6 @@ namespace H_Pannel_lib
             if (uDP_READ == null) return false;
             return uDP_READ.Get_Output_dir(0);
         }
-
         public bool Set_OutputPINTrigger(string IP, int Port, int PIN_Num, bool value)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);

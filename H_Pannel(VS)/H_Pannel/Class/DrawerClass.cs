@@ -599,6 +599,10 @@ namespace H_Pannel_lib
         public bool ActionDone = false;
         public bool UpToSQL = false;
         public static int NumOfLED = 450;
+
+        private string area = "";
+        public string Area { get => area; set => area = value; }
+
         [JsonIgnore]
         public byte[] LED_Bytes = new byte[NumOfLED * 3];
         [JsonIgnore]
@@ -809,6 +813,39 @@ namespace H_Pannel_lib
                 for (int r = 0; r < Boxes[c].Length; r++)
                 {
                     Boxes[c][r].Clear();
+                }
+            }
+        }
+        public void BoxResize()
+        {
+            DeviceType deviceType = this.DeviceType;
+            if (this.DeviceType == DeviceType.EPD583 || this.DeviceType == DeviceType.EPD583_lock)
+            {
+                this.pannelWidth = 648;
+                this.pannelHeight = 480;
+            }
+            if (this.DeviceType == DeviceType.EPD730 || this.DeviceType == DeviceType.EPD730_lock)
+            {
+                this.pannelWidth = 800;
+                this.pannelHeight = 480;
+            }
+            int x, y, width, height;
+            Size Box_size = this.GetBoxSize();
+            for (int c = 0; c < this.Boxes.Count; c++)
+            {
+                x = c * Box_size.Width;
+                y = 0;
+                width = Box_size.Width;
+                height = 0;
+                for (int r = 0; r < this.Boxes[c].Length; r++)
+                {
+                    this.Boxes[c][r].DeviceType = deviceType;
+                    y += height;
+                    height = Box_size.Height;
+                    this.Boxes[c][r].X = x;
+                    this.Boxes[c][r].Y = y;
+                    this.Boxes[c][r].Width = width;
+                    this.Boxes[c][r].Height = height;
                 }
             }
         }
