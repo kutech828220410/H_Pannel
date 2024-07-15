@@ -85,6 +85,37 @@ namespace H_Pannel_lib
             }
             return new List<Storage>();
         }
+        static public System.Collections.Generic.Dictionary<string, List<Storage>> CoverToDictionaryByIP(this List<Storage> DeviceBasics)
+        {
+            Dictionary<string, List<Storage>> dictionary = new Dictionary<string, List<Storage>>();
+
+            foreach (var item in DeviceBasics)
+            {
+                string key = item.IP;
+
+                // 如果字典中已經存在該索引鍵，則將值添加到對應的列表中
+                if (dictionary.ContainsKey(key))
+                {
+                    dictionary[key].Add(item);
+                }
+                // 否則創建一個新的列表並添加值
+                else
+                {
+                    List<Storage> values = new List<Storage> { item };
+                    dictionary[key] = values;
+                }
+            }
+
+            return dictionary;
+        }
+        static public List<Storage> SortDictionaryByIP(this System.Collections.Generic.Dictionary<string, List<Storage>> dictionary, string IP)
+        {
+            if (dictionary.ContainsKey(IP))
+            {
+                return dictionary[IP];
+            }
+            return new List<Storage>();
+        }
 
         static public void SQL_ReplaceByIP(SQLUI.SQLControl sQLControl, Storage storage)
         {

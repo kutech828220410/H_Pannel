@@ -535,10 +535,20 @@ namespace H_Pannel_lib
         }
         static public bool Set_Output(UDP_Class uDP_Class, string IP, int value)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"Set_Output {DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
+                return false;
+            }
             return Command_Set_Output(uDP_Class, IP, value);
         }
         static public bool Set_OutputPIN(UDP_Class uDP_Class, string IP, int PIN_Num, bool value)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"Set_OutputPIN {DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
+                return false;
+            }
             return Command_Set_OutputPIN(uDP_Class, IP, PIN_Num, value);
         }
         static public bool Set_OutputTrigger(UDP_Class uDP_Class, string IP, int value)
@@ -606,6 +616,13 @@ namespace H_Pannel_lib
         }
         static public bool Get_IO(UDP_Class uDP_Class, string IP, out int input, out int output)
         {
+            input = 0;
+            output = 0;
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"Get_IO {DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
+                return false;
+            }
             return Command_Get_IO(uDP_Class, IP, out input, out output);
         }
         static public bool Set_BlinkEnable(UDP_Class uDP_Class, string IP, int PIN_Num, bool value, int blinklTime)
@@ -7024,16 +7041,16 @@ namespace H_Pannel_lib
             }
         }
         #endregion
-        public class EPDColors
+        public enum EPDColors
         {
-            public const int EPD_7IN3F_BLACK = 0x0;   // 000
-            public const int EPD_7IN3F_WHITE = 0x1;   // 001
-            public const int EPD_7IN3F_GREEN = 0x2;   // 010
-            public const int EPD_7IN3F_BLUE = 0x3;    // 011
-            public const int EPD_7IN3F_RED = 0x4;     // 100
-            public const int EPD_7IN3F_YELLOW = 0x5;  // 101
-            public const int EPD_7IN3F_ORANGE = 0x6;  // 110
-            public const int EPD_7IN3F_CLEAN = 0x7;   // 111   unavailable Afterimage
+            EPD_7IN3F_BLACK = 0x0,   // 000
+            EPD_7IN3F_WHITE = 0x1,   // 001
+            EPD_7IN3F_GREEN = 0x2,   // 010
+            EPD_7IN3F_BLUE = 0x3,    // 011
+            EPD_7IN3F_RED = 0x4,     // 100
+            EPD_7IN3F_YELLOW = 0x5,  // 101
+            EPD_7IN3F_ORANGE = 0x6,  // 110
+            EPD_7IN3F_CLEAN = 0x7,   // 111   unavailable Afterimage
         }
         static public Bitmap EPD266_GetBitmap(Storage storage)
         {
@@ -7375,9 +7392,8 @@ namespace H_Pannel_lib
                     if (Boxes[i][k].Slave == false)
                     {
                         float posy = 0;
-                        Color backgroundColor = (_box.IsWarning ? Color.Red : Color.White);
-                        Color foreColor = (_box.IsWarning ? Color.White : Color.Black);
-                        g.FillRectangle(new SolidBrush(backgroundColor), rect);
+     
+                        g.FillRectangle(new SolidBrush(_box.BackColor), rect);
                         g.DrawRectangle(new Pen(Color.Black, _box.Pen_Width), rect);
 
                         g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
@@ -7418,7 +7434,7 @@ namespace H_Pannel_lib
 
                         SizeF size_Name = g.MeasureString(_box.Name, _box.Name_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
                         size_Name = new SizeF((int)size_Name.Width, (int)size_Name.Height);
-                        g.DrawString(_box.Name, _box.Name_font, new SolidBrush(foreColor), new RectangleF(rect.X, rect.Y + posy, rect.Width, rect.Height), StringFormat.GenericDefault);
+                        g.DrawString(_box.Name, _box.Name_font, new SolidBrush(_box.Name_ForeColor), new RectangleF(rect.X, rect.Y + posy, rect.Width, rect.Height), StringFormat.GenericDefault);
                         posy += size_Name.Height;
                         posy += 3;
 
@@ -7447,7 +7463,7 @@ namespace H_Pannel_lib
                         {
                             if (_box.Code_Visable || _box.Inventory_Visable)
                             {
-                                g.DrawString($"{Code_Inventory}", _box.Code_font, new SolidBrush(foreColor), rect.X, ((rect.Y + rect.Height) - size_Code.Height));
+                                g.DrawString($"{Code_Inventory}", _box.Code_font, new SolidBrush(_box.Code_ForeColor), rect.X, ((rect.Y + rect.Height) - size_Code.Height));
                             }
 
                         }
@@ -7874,25 +7890,25 @@ namespace H_Pannel_lib
                             R[1] = SrcPtr[SrcIndex + 05];
                             temp_L = 0;
                             temp_H = 0;
-                            if (IsEqualColor(Color.White, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_WHITE;
-                            else if (IsEqualColor(Color.Yellow, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_YELLOW;
-                            else if (IsEqualColor(Color.Red, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_RED;
-                            else if (IsEqualColor(Color.Green, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_GREEN;
-                            else if (IsEqualColor(Color.Blue, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_BLUE;
-                            else if (IsEqualColor(Color.Orange, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_ORANGE;
-                            else if (IsEqualColor(Color.Black, R[0], G[0], B[0]) == true) temp_L = EPDColors.EPD_7IN3F_BLACK;
+                            if (IsEqualColor(Color.White, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_WHITE;
+                            else if (IsEqualColor(Color.Yellow, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_YELLOW;
+                            else if (IsEqualColor(Color.Red, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_RED;
+                            else if (IsEqualColor(Color.Green, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_GREEN;
+                            else if (IsEqualColor(Color.Blue, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_BLUE;
+                            else if (IsEqualColor(Color.Orange, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_ORANGE;
+                            else if (IsEqualColor(Color.Black, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_BLACK;
                             else
                             {
 
                             }
 
-                            if (IsEqualColor(Color.White, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_WHITE;
-                            else if (IsEqualColor(Color.Yellow, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_YELLOW;
-                            else if (IsEqualColor(Color.Red, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_RED;
-                            else if (IsEqualColor(Color.Green, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_GREEN;
-                            else if (IsEqualColor(Color.Blue, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_BLUE;
-                            else if (IsEqualColor(Color.Orange, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_ORANGE;
-                            else if (IsEqualColor(Color.Black, R[1], G[1], B[1]) == true) temp_H = EPDColors.EPD_7IN3F_BLACK;
+                            if (IsEqualColor(Color.White, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_WHITE;
+                            else if (IsEqualColor(Color.Yellow, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_YELLOW;
+                            else if (IsEqualColor(Color.Red, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_RED;
+                            else if (IsEqualColor(Color.Green, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_GREEN;
+                            else if (IsEqualColor(Color.Blue, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_BLUE;
+                            else if (IsEqualColor(Color.Orange, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_ORANGE;
+                            else if (IsEqualColor(Color.Black, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_BLACK;
                             else
                             {
 

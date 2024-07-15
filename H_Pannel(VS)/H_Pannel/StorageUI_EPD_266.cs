@@ -127,6 +127,7 @@ namespace H_Pannel_lib
                 if (bitmap.Height == 128)
                 {
                     flag_ok = Communication.EPD_290_DrawImage(uDP_Class, IP, bitmap);
+                    return flag_ok;
                 }
                 flag_ok = Communication.EPD_266_DrawImage(uDP_Class, IP, bitmap);
                 return flag_ok;

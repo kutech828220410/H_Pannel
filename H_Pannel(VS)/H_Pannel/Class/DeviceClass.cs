@@ -686,6 +686,8 @@ namespace H_Pannel_lib
         private string area = "";
         public string Area { get => area; set => area = value; }
 
+        public bool IsLightOn = false;
+
         [JsonIgnore]   
         public List<StockClass> stockClasses
         {

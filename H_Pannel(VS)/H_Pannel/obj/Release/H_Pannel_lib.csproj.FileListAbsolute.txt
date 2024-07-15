@@ -1835,3 +1835,4 @@ C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\Basic.xml
 C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\Newtonsoft.Json.xml
 C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\SkiaSharp.pdb
 C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\SkiaSharp.xml
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Dialog_EPD730_顏色選擇.resources

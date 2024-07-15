@@ -63,7 +63,7 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.4.6";
+String Version = "Ver 1.5.5";
 
 #define EPD
 //#define RowLED

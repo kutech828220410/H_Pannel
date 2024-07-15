@@ -5,8 +5,8 @@
 #include "Timer.h"
 
 
-#define EPD266
-//#define EPD290
+//#define EPD266
+#define EPD290
 
 #ifdef EPD266
 #define EPD_WIDTH 19

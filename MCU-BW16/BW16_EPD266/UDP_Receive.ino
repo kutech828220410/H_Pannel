@@ -172,6 +172,8 @@ void onPacketCallBack()
           {
             if(flag_udp_232back)printf("EPD RefreshCanvas\n");
             epd.RefreshCanvas();
+            delay(100);
+            flag_WS2812B_Refresh = true;
             Get_Checksum_UDP();
            
           }  

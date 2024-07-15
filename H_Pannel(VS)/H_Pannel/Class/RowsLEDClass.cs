@@ -481,6 +481,9 @@ namespace H_Pannel_lib
         private List<RowsDevice> rowsDevices = new List<RowsDevice>();
         private string speaker = "";
 
+        private string area = "";
+        public string Area { get => area; set => area = value; }
+
         public bool UpToSQL = false;
         public string IP { get => iP; set => iP = value; }
         public int Port { get => port; set => port = value; }
