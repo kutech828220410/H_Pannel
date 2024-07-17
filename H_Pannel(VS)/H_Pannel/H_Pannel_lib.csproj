@@ -171,6 +171,12 @@
     <Compile Include="Dialog\Dialog_EPD730_顏色選擇.Designer.cs">
       <DependentUpon>Dialog_EPD730_顏色選擇.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\Dialog_EPD266_顏色選擇.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Dialog_EPD266_顏色選擇.Designer.cs">
+      <DependentUpon>Dialog_EPD266_顏色選擇.cs</DependentUpon>
+    </Compile>
     <Compile Include="DrawerUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -182,6 +188,18 @@
     </Compile>
     <Compile Include="DrawerUI_EPD_583.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewUI\StoragePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewUI\StoragePanel.Designer.cs">
+      <DependentUpon>StoragePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewUI\EPD266_Paint_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewUI\EPD266_Paint_Form.Designer.cs">
+      <DependentUpon>EPD266_Paint_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="H_RFID_UI.cs">
       <SubType>UserControl</SubType>
@@ -299,8 +317,14 @@
     <EmbeddedResource Include="Dialog\Dialog_EPD730_顏色選擇.resx">
       <DependentUpon>Dialog_EPD730_顏色選擇.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Dialog_EPD266_顏色選擇.resx">
+      <DependentUpon>Dialog_EPD266_顏色選擇.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DrawerUI_EPD_420.resx">
       <DependentUpon>DrawerUI_EPD_420.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewUI\EPD266_Paint_Form.resx">
+      <DependentUpon>EPD266_Paint_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RFID_UI.resx">
       <DependentUpon>RFID_UI.cs</DependentUpon>
@@ -339,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewUI\RowsLED_Pannel.resx">
       <DependentUpon>RowsLED_Pannel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewUI\StoragePanel.resx">
+      <DependentUpon>StoragePanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewUI\WT32-GPADC.resx">
       <DependentUpon>WT32-GPADC.cs</DependentUpon>

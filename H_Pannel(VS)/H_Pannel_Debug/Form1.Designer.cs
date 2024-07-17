@@ -133,6 +133,7 @@
             this.sqL_DataGridView_h_RFID_Datas = new SQLUI.SQL_DataGridView();
             this.rJ_Button_H_RFID_初始化 = new MyUI.RJ_Button();
             this.h_RFID_UI = new H_Pannel_lib.H_RFID_UI();
+            this.storagePanel = new H_Pannel_lib.StoragePanel();
             this.tabControl1.SuspendLayout();
             this.WT32.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -187,7 +188,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1573, 1041);
+            this.tabControl1.Size = new System.Drawing.Size(1936, 1041);
             this.tabControl1.TabIndex = 1;
             // 
             // WT32
@@ -195,7 +196,7 @@
             this.WT32.Controls.Add(this.tabControl2);
             this.WT32.Location = new System.Drawing.Point(4, 22);
             this.WT32.Name = "WT32";
-            this.WT32.Size = new System.Drawing.Size(1565, 1015);
+            this.WT32.Size = new System.Drawing.Size(1928, 1015);
             this.WT32.TabIndex = 0;
             this.WT32.Text = "WT32";
             this.WT32.UseVisualStyleBackColor = true;
@@ -209,7 +210,7 @@
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1565, 1015);
+            this.tabControl2.Size = new System.Drawing.Size(1928, 1015);
             this.tabControl2.TabIndex = 29;
             // 
             // tabPage3
@@ -219,7 +220,7 @@
             this.tabPage3.Controls.Add(this.storageUI_WT32);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1557, 989);
+            this.tabPage3.Size = new System.Drawing.Size(1920, 989);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "資料設定";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -239,7 +240,7 @@
             this.rJ_Button_WT32_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_初始化.GUID = "";
-            this.rJ_Button_WT32_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_WT32_初始化.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_WT32_初始化.Location = new System.Drawing.Point(1384, 13);
             this.rJ_Button_WT32_初始化.Name = "rJ_Button_WT32_初始化";
             this.rJ_Button_WT32_初始化.ProhibitionBorderLineWidth = 1;
@@ -319,7 +320,7 @@
             this.rJ_Button_WT32_測試.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_測試.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_測試.GUID = "";
-            this.rJ_Button_WT32_測試.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_WT32_測試.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_WT32_測試.Location = new System.Drawing.Point(1608, 812);
             this.rJ_Button_WT32_測試.Name = "rJ_Button_WT32_測試";
             this.rJ_Button_WT32_測試.ProhibitionBorderLineWidth = 1;
@@ -351,7 +352,7 @@
             this.rJ_Button_WT32_上傳畫面.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_上傳畫面.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_上傳畫面.GUID = "";
-            this.rJ_Button_WT32_上傳畫面.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_WT32_上傳畫面.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_WT32_上傳畫面.Location = new System.Drawing.Point(1608, 627);
             this.rJ_Button_WT32_上傳畫面.Name = "rJ_Button_WT32_上傳畫面";
             this.rJ_Button_WT32_上傳畫面.ProhibitionBorderLineWidth = 1;
@@ -432,7 +433,7 @@
             this.rJ_Button_WT32_資料寫入.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_資料寫入.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_資料寫入.GUID = "";
-            this.rJ_Button_WT32_資料寫入.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_WT32_資料寫入.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_WT32_資料寫入.Location = new System.Drawing.Point(262, 494);
             this.rJ_Button_WT32_資料寫入.Name = "rJ_Button_WT32_資料寫入";
             this.rJ_Button_WT32_資料寫入.ProhibitionBorderLineWidth = 1;
@@ -1005,7 +1006,7 @@
             this.rJ_Button_WT32_上傳選擇儲位.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_上傳選擇儲位.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_上傳選擇儲位.GUID = "";
-            this.rJ_Button_WT32_上傳選擇儲位.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_WT32_上傳選擇儲位.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_WT32_上傳選擇儲位.Location = new System.Drawing.Point(1083, 927);
             this.rJ_Button_WT32_上傳選擇儲位.Name = "rJ_Button_WT32_上傳選擇儲位";
             this.rJ_Button_WT32_上傳選擇儲位.ProhibitionBorderLineWidth = 1;
@@ -1038,7 +1039,7 @@
             this.rJ_Button_WT32_讀取選擇儲位.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_WT32_讀取選擇儲位.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_WT32_讀取選擇儲位.GUID = "";
-            this.rJ_Button_WT32_讀取選擇儲位.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_WT32_讀取選擇儲位.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_WT32_讀取選擇儲位.Location = new System.Drawing.Point(1083, 866);
             this.rJ_Button_WT32_讀取選擇儲位.Name = "rJ_Button_WT32_讀取選擇儲位";
             this.rJ_Button_WT32_讀取選擇儲位.ProhibitionBorderLineWidth = 1;
@@ -1084,7 +1085,7 @@
             this.EPD266.Controls.Add(this.tabControl3);
             this.EPD266.Location = new System.Drawing.Point(4, 22);
             this.EPD266.Name = "EPD266";
-            this.EPD266.Size = new System.Drawing.Size(1565, 1015);
+            this.EPD266.Size = new System.Drawing.Size(1928, 1015);
             this.EPD266.TabIndex = 1;
             this.EPD266.Text = "EPD266";
             this.EPD266.UseVisualStyleBackColor = true;
@@ -1097,18 +1098,19 @@
             this.tabControl3.Location = new System.Drawing.Point(0, 0);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(1565, 1015);
+            this.tabControl3.Size = new System.Drawing.Size(1928, 1015);
             this.tabControl3.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.storagePanel);
             this.tabPage1.Controls.Add(this.rJ_Button_EPD266_TEST);
             this.tabPage1.Controls.Add(this.epD_266_Pannel);
             this.tabPage1.Controls.Add(this.rJ_Button_EPD_266_初始化);
             this.tabPage1.Controls.Add(this.storageUI_EPD_266);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1557, 989);
+            this.tabPage1.Size = new System.Drawing.Size(1920, 989);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "資料設定";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1128,7 +1130,7 @@
             this.rJ_Button_EPD266_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD266_TEST.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD266_TEST.GUID = "";
-            this.rJ_Button_EPD266_TEST.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_EPD266_TEST.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_EPD266_TEST.Location = new System.Drawing.Point(1516, 161);
             this.rJ_Button_EPD266_TEST.Name = "rJ_Button_EPD266_TEST";
             this.rJ_Button_EPD266_TEST.ProhibitionBorderLineWidth = 1;
@@ -1147,6 +1149,7 @@
             // 
             // epD_266_Pannel
             // 
+            this.epD_266_Pannel.BackColor = System.Drawing.Color.Transparent;
             this.epD_266_Pannel.CurrentStorage = null;
             this.epD_266_Pannel.Location = new System.Drawing.Point(1384, 0);
             this.epD_266_Pannel.Name = "epD_266_Pannel";
@@ -1168,7 +1171,7 @@
             this.rJ_Button_EPD_266_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_266_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_266_初始化.GUID = "";
-            this.rJ_Button_EPD_266_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_EPD_266_初始化.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_EPD_266_初始化.Location = new System.Drawing.Point(1384, 161);
             this.rJ_Button_EPD_266_初始化.Name = "rJ_Button_EPD_266_初始化";
             this.rJ_Button_EPD_266_初始化.ProhibitionBorderLineWidth = 1;
@@ -1220,7 +1223,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1068, 989);
+            this.tabPage2.Size = new System.Drawing.Size(1920, 989);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "面板設定";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1233,7 +1236,7 @@
             this.EPD290.Controls.Add(this.storageUI_EPD_290);
             this.EPD290.Location = new System.Drawing.Point(4, 22);
             this.EPD290.Name = "EPD290";
-            this.EPD290.Size = new System.Drawing.Size(1565, 1015);
+            this.EPD290.Size = new System.Drawing.Size(1928, 1015);
             this.EPD290.TabIndex = 6;
             this.EPD290.Text = "EPD290";
             this.EPD290.UseVisualStyleBackColor = true;
@@ -1253,7 +1256,7 @@
             this.rJ_Button_EPD_290_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_290_TEST.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_290_TEST.GUID = "";
-            this.rJ_Button_EPD_290_TEST.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_EPD_290_TEST.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_EPD_290_TEST.Location = new System.Drawing.Point(1531, 137);
             this.rJ_Button_EPD_290_TEST.Name = "rJ_Button_EPD_290_TEST";
             this.rJ_Button_EPD_290_TEST.ProhibitionBorderLineWidth = 1;
@@ -1285,7 +1288,7 @@
             this.rJ_Button_EPD_290_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_290_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_290_初始化.GUID = "";
-            this.rJ_Button_EPD_290_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_EPD_290_初始化.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_EPD_290_初始化.Location = new System.Drawing.Point(1399, 137);
             this.rJ_Button_EPD_290_初始化.Name = "rJ_Button_EPD_290_初始化";
             this.rJ_Button_EPD_290_初始化.ProhibitionBorderLineWidth = 1;
@@ -1342,7 +1345,7 @@
             this.EPD420.Controls.Add(this.tabControl7);
             this.EPD420.Location = new System.Drawing.Point(4, 22);
             this.EPD420.Name = "EPD420";
-            this.EPD420.Size = new System.Drawing.Size(1565, 1015);
+            this.EPD420.Size = new System.Drawing.Size(1928, 1015);
             this.EPD420.TabIndex = 8;
             this.EPD420.Text = "EPD420";
             this.EPD420.UseVisualStyleBackColor = true;
@@ -1355,7 +1358,7 @@
             this.tabControl7.Location = new System.Drawing.Point(0, 0);
             this.tabControl7.Name = "tabControl7";
             this.tabControl7.SelectedIndex = 0;
-            this.tabControl7.Size = new System.Drawing.Size(1565, 1015);
+            this.tabControl7.Size = new System.Drawing.Size(1928, 1015);
             this.tabControl7.TabIndex = 2;
             // 
             // tabPage11
@@ -1363,7 +1366,7 @@
             this.tabPage11.Controls.Add(this.drawerUI_EPD_420);
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(1557, 989);
+            this.tabPage11.Size = new System.Drawing.Size(1920, 989);
             this.tabPage11.TabIndex = 0;
             this.tabPage11.Text = "資料設定";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -1402,7 +1405,7 @@
             this.tabPage12.Location = new System.Drawing.Point(4, 22);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(1068, 989);
+            this.tabPage12.Size = new System.Drawing.Size(1557, 989);
             this.tabPage12.TabIndex = 1;
             this.tabPage12.Text = "面板設定";
             this.tabPage12.UseVisualStyleBackColor = true;
@@ -1431,7 +1434,7 @@
             this.rJ_Button_EPD_420_填入測試畫面.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_420_填入測試畫面.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_420_填入測試畫面.GUID = "";
-            this.rJ_Button_EPD_420_填入測試畫面.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_EPD_420_填入測試畫面.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_EPD_420_填入測試畫面.Location = new System.Drawing.Point(430, 21);
             this.rJ_Button_EPD_420_填入測試畫面.Name = "rJ_Button_EPD_420_填入測試畫面";
             this.rJ_Button_EPD_420_填入測試畫面.ProhibitionBorderLineWidth = 1;
@@ -1453,7 +1456,7 @@
             this.EPD583.Controls.Add(this.tabControl4);
             this.EPD583.Location = new System.Drawing.Point(4, 22);
             this.EPD583.Name = "EPD583";
-            this.EPD583.Size = new System.Drawing.Size(1565, 1015);
+            this.EPD583.Size = new System.Drawing.Size(1928, 1015);
             this.EPD583.TabIndex = 2;
             this.EPD583.Text = "EPD583";
             this.EPD583.UseVisualStyleBackColor = true;
@@ -1466,7 +1469,7 @@
             this.tabControl4.Location = new System.Drawing.Point(0, 0);
             this.tabControl4.Name = "tabControl4";
             this.tabControl4.SelectedIndex = 0;
-            this.tabControl4.Size = new System.Drawing.Size(1565, 1015);
+            this.tabControl4.Size = new System.Drawing.Size(1928, 1015);
             this.tabControl4.TabIndex = 0;
             // 
             // tabPage5
@@ -1484,7 +1487,7 @@
             this.tabPage5.Controls.Add(this.drawerUI_EPD_583);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1557, 989);
+            this.tabPage5.Size = new System.Drawing.Size(1920, 989);
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "資料設定";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1504,7 +1507,7 @@
             this.rJ_Button_epD_583_Pannel_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_TEST.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_TEST.GUID = "";
-            this.rJ_Button_epD_583_Pannel_TEST.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_epD_583_Pannel_TEST.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_epD_583_Pannel_TEST.Location = new System.Drawing.Point(1520, 3);
             this.rJ_Button_epD_583_Pannel_TEST.Name = "rJ_Button_epD_583_Pannel_TEST";
             this.rJ_Button_epD_583_Pannel_TEST.ProhibitionBorderLineWidth = 1;
@@ -1536,7 +1539,7 @@
             this.rJ_Button_epD_583_Pannel_全部滅燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_全部滅燈.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_全部滅燈.GUID = "";
-            this.rJ_Button_epD_583_Pannel_全部滅燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_epD_583_Pannel_全部滅燈.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_epD_583_Pannel_全部滅燈.Location = new System.Drawing.Point(1374, 641);
             this.rJ_Button_epD_583_Pannel_全部滅燈.Name = "rJ_Button_epD_583_Pannel_全部滅燈";
             this.rJ_Button_epD_583_Pannel_全部滅燈.ProhibitionBorderLineWidth = 1;
@@ -1568,7 +1571,7 @@
             this.rJ_Button_epD_583_Pannel_全部亮燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_全部亮燈.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_全部亮燈.GUID = "";
-            this.rJ_Button_epD_583_Pannel_全部亮燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_epD_583_Pannel_全部亮燈.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_epD_583_Pannel_全部亮燈.Location = new System.Drawing.Point(1228, 641);
             this.rJ_Button_epD_583_Pannel_全部亮燈.Name = "rJ_Button_epD_583_Pannel_全部亮燈";
             this.rJ_Button_epD_583_Pannel_全部亮燈.ProhibitionBorderLineWidth = 1;
@@ -1601,7 +1604,7 @@
             this.rJ_Button_epD_583_Pannel_面板滅燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_面板滅燈.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_面板滅燈.GUID = "";
-            this.rJ_Button_epD_583_Pannel_面板滅燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_epD_583_Pannel_面板滅燈.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_epD_583_Pannel_面板滅燈.Location = new System.Drawing.Point(1666, 568);
             this.rJ_Button_epD_583_Pannel_面板滅燈.Name = "rJ_Button_epD_583_Pannel_面板滅燈";
             this.rJ_Button_epD_583_Pannel_面板滅燈.ProhibitionBorderLineWidth = 1;
@@ -1634,7 +1637,7 @@
             this.rJ_Button_epD_583_Pannel_面板亮燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_面板亮燈.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_面板亮燈.GUID = "";
-            this.rJ_Button_epD_583_Pannel_面板亮燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_epD_583_Pannel_面板亮燈.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_epD_583_Pannel_面板亮燈.Location = new System.Drawing.Point(1520, 568);
             this.rJ_Button_epD_583_Pannel_面板亮燈.Name = "rJ_Button_epD_583_Pannel_面板亮燈";
             this.rJ_Button_epD_583_Pannel_面板亮燈.ProhibitionBorderLineWidth = 1;
@@ -1667,7 +1670,7 @@
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_儲位滅燈.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.GUID = "";
-            this.rJ_Button_epD_583_Pannel_儲位滅燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_epD_583_Pannel_儲位滅燈.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Location = new System.Drawing.Point(1374, 568);
             this.rJ_Button_epD_583_Pannel_儲位滅燈.Name = "rJ_Button_epD_583_Pannel_儲位滅燈";
             this.rJ_Button_epD_583_Pannel_儲位滅燈.ProhibitionBorderLineWidth = 1;
@@ -1700,7 +1703,7 @@
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_儲位亮燈.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.GUID = "";
-            this.rJ_Button_epD_583_Pannel_儲位亮燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_epD_583_Pannel_儲位亮燈.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Location = new System.Drawing.Point(1228, 568);
             this.rJ_Button_epD_583_Pannel_儲位亮燈.Name = "rJ_Button_epD_583_Pannel_儲位亮燈";
             this.rJ_Button_epD_583_Pannel_儲位亮燈.ProhibitionBorderLineWidth = 1;
@@ -1732,7 +1735,7 @@
             this.rJ_Button_epD_583_Pannel_上傳.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_epD_583_Pannel_上傳.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_上傳.GUID = "";
-            this.rJ_Button_epD_583_Pannel_上傳.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_epD_583_Pannel_上傳.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_epD_583_Pannel_上傳.Location = new System.Drawing.Point(1374, 3);
             this.rJ_Button_epD_583_Pannel_上傳.Name = "rJ_Button_epD_583_Pannel_上傳";
             this.rJ_Button_epD_583_Pannel_上傳.ProhibitionBorderLineWidth = 1;
@@ -1774,7 +1777,7 @@
             this.rJ_Button_EPD_583_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_583_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_583_初始化.GUID = "";
-            this.rJ_Button_EPD_583_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_EPD_583_初始化.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_EPD_583_初始化.Location = new System.Drawing.Point(1228, 3);
             this.rJ_Button_EPD_583_初始化.Name = "rJ_Button_EPD_583_初始化";
             this.rJ_Button_EPD_583_初始化.ProhibitionBorderLineWidth = 1;
@@ -1824,7 +1827,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1068, 989);
+            this.tabPage6.Size = new System.Drawing.Size(1557, 989);
             this.tabPage6.TabIndex = 1;
             this.tabPage6.Text = "面板設定";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1834,7 +1837,7 @@
             this.EPD1020.Controls.Add(this.tabControl6);
             this.EPD1020.Location = new System.Drawing.Point(4, 22);
             this.EPD1020.Name = "EPD1020";
-            this.EPD1020.Size = new System.Drawing.Size(1565, 1015);
+            this.EPD1020.Size = new System.Drawing.Size(1928, 1015);
             this.EPD1020.TabIndex = 7;
             this.EPD1020.Text = "EPD1020";
             this.EPD1020.UseVisualStyleBackColor = true;
@@ -1847,7 +1850,7 @@
             this.tabControl6.Location = new System.Drawing.Point(0, 0);
             this.tabControl6.Name = "tabControl6";
             this.tabControl6.SelectedIndex = 0;
-            this.tabControl6.Size = new System.Drawing.Size(1565, 1015);
+            this.tabControl6.Size = new System.Drawing.Size(1928, 1015);
             this.tabControl6.TabIndex = 1;
             // 
             // tabPage9
@@ -1856,7 +1859,7 @@
             this.tabPage9.Controls.Add(this.rJ_Button_EPD1020_初始化);
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(1557, 989);
+            this.tabPage9.Size = new System.Drawing.Size(1920, 989);
             this.tabPage9.TabIndex = 0;
             this.tabPage9.Text = "資料設定";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -1903,7 +1906,7 @@
             this.rJ_Button_EPD1020_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD1020_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD1020_初始化.GUID = "";
-            this.rJ_Button_EPD1020_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_EPD1020_初始化.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_EPD1020_初始化.Location = new System.Drawing.Point(1402, 3);
             this.rJ_Button_EPD1020_初始化.Name = "rJ_Button_EPD1020_初始化";
             this.rJ_Button_EPD1020_初始化.ProhibitionBorderLineWidth = 1;
@@ -1948,7 +1951,7 @@
             this.rJ_Button_EPD_1020_門片畫面測試.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_1020_門片畫面測試.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_1020_門片畫面測試.GUID = "";
-            this.rJ_Button_EPD_1020_門片畫面測試.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_EPD_1020_門片畫面測試.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_EPD_1020_門片畫面測試.Location = new System.Drawing.Point(673, 130);
             this.rJ_Button_EPD_1020_門片畫面測試.Name = "rJ_Button_EPD_1020_門片畫面測試";
             this.rJ_Button_EPD_1020_門片畫面測試.ProhibitionBorderLineWidth = 1;
@@ -1980,7 +1983,7 @@
             this.rJ_Button_EPD_1020_填入測試畫面.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_EPD_1020_填入測試畫面.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_EPD_1020_填入測試畫面.GUID = "";
-            this.rJ_Button_EPD_1020_填入測試畫面.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_EPD_1020_填入測試畫面.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_EPD_1020_填入測試畫面.Location = new System.Drawing.Point(673, 6);
             this.rJ_Button_EPD_1020_填入測試畫面.Name = "rJ_Button_EPD_1020_填入測試畫面";
             this.rJ_Button_EPD_1020_填入測試畫面.ProhibitionBorderLineWidth = 1;
@@ -2012,7 +2015,7 @@
             this.RowsLED.Controls.Add(this.tabControl5);
             this.RowsLED.Location = new System.Drawing.Point(4, 22);
             this.RowsLED.Name = "RowsLED";
-            this.RowsLED.Size = new System.Drawing.Size(1565, 1015);
+            this.RowsLED.Size = new System.Drawing.Size(1928, 1015);
             this.RowsLED.TabIndex = 3;
             this.RowsLED.Text = "RowsLED";
             this.RowsLED.UseVisualStyleBackColor = true;
@@ -2025,7 +2028,7 @@
             this.tabControl5.Location = new System.Drawing.Point(0, 0);
             this.tabControl5.Name = "tabControl5";
             this.tabControl5.SelectedIndex = 0;
-            this.tabControl5.Size = new System.Drawing.Size(1565, 1015);
+            this.tabControl5.Size = new System.Drawing.Size(1928, 1015);
             this.tabControl5.TabIndex = 0;
             // 
             // tabPage7
@@ -2034,7 +2037,7 @@
             this.tabPage7.Controls.Add(this.rowsLEDUI);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(1557, 989);
+            this.tabPage7.Size = new System.Drawing.Size(1920, 989);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "資料設定";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -2054,7 +2057,7 @@
             this.rJ_Button_RowsLED_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_RowsLED_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_RowsLED_初始化.GUID = "";
-            this.rJ_Button_RowsLED_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_RowsLED_初始化.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_RowsLED_初始化.Location = new System.Drawing.Point(1402, 3);
             this.rJ_Button_RowsLED_初始化.Name = "rJ_Button_RowsLED_初始化";
             this.rJ_Button_RowsLED_初始化.ProhibitionBorderLineWidth = 1;
@@ -2117,7 +2120,7 @@
             this.RFID.Controls.Add(this.rfiD_UI);
             this.RFID.Location = new System.Drawing.Point(4, 22);
             this.RFID.Name = "RFID";
-            this.RFID.Size = new System.Drawing.Size(1565, 1015);
+            this.RFID.Size = new System.Drawing.Size(1928, 1015);
             this.RFID.TabIndex = 4;
             this.RFID.Text = "RFID";
             this.RFID.UseVisualStyleBackColor = true;
@@ -2137,7 +2140,7 @@
             this.rJ_Button1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button1.ForeColor = System.Drawing.Color.White;
             this.rJ_Button1.GUID = "";
-            this.rJ_Button1.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button1.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button1.Location = new System.Drawing.Point(1399, 159);
             this.rJ_Button1.Name = "rJ_Button1";
             this.rJ_Button1.ProhibitionBorderLineWidth = 1;
@@ -2169,7 +2172,7 @@
             this.rJ_Button_RFID_RS485_TEST.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_RFID_RS485_TEST.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_RFID_RS485_TEST.GUID = "";
-            this.rJ_Button_RFID_RS485_TEST.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_RFID_RS485_TEST.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_RFID_RS485_TEST.Location = new System.Drawing.Point(1399, 86);
             this.rJ_Button_RFID_RS485_TEST.Name = "rJ_Button_RFID_RS485_TEST";
             this.rJ_Button_RFID_RS485_TEST.ProhibitionBorderLineWidth = 1;
@@ -2201,7 +2204,7 @@
             this.rJ_Button_RFID_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_RFID_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_RFID_初始化.GUID = "";
-            this.rJ_Button_RFID_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_RFID_初始化.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_RFID_初始化.Location = new System.Drawing.Point(1399, 3);
             this.rJ_Button_RFID_初始化.Name = "rJ_Button_RFID_初始化";
             this.rJ_Button_RFID_初始化.ProhibitionBorderLineWidth = 1;
@@ -2253,7 +2256,7 @@
             this.H_RFID.Controls.Add(this.h_RFID_UI);
             this.H_RFID.Location = new System.Drawing.Point(4, 22);
             this.H_RFID.Name = "H_RFID";
-            this.H_RFID.Size = new System.Drawing.Size(1565, 1015);
+            this.H_RFID.Size = new System.Drawing.Size(1928, 1015);
             this.H_RFID.TabIndex = 5;
             this.H_RFID.Text = "H_RFID";
             this.H_RFID.UseVisualStyleBackColor = true;
@@ -2299,7 +2302,7 @@
             this.sqL_DataGridView_h_RFID_Datas.selectedRowBorderColor = System.Drawing.Color.Blue;
             this.sqL_DataGridView_h_RFID_Datas.selectedRowForeColor = System.Drawing.Color.White;
             this.sqL_DataGridView_h_RFID_Datas.Server = "127.0.0.0";
-            this.sqL_DataGridView_h_RFID_Datas.Size = new System.Drawing.Size(172, 545);
+            this.sqL_DataGridView_h_RFID_Datas.Size = new System.Drawing.Size(535, 545);
             this.sqL_DataGridView_h_RFID_Datas.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
             this.sqL_DataGridView_h_RFID_Datas.TabIndex = 42;
             this.sqL_DataGridView_h_RFID_Datas.UserName = "root";
@@ -2330,7 +2333,7 @@
             this.rJ_Button_H_RFID_初始化.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_H_RFID_初始化.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_H_RFID_初始化.GUID = "";
-            this.rJ_Button_H_RFID_初始化.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_H_RFID_初始化.Image_padding = new System.Windows.Forms.Padding(0);
             this.rJ_Button_H_RFID_初始化.Location = new System.Drawing.Point(1422, 566);
             this.rJ_Button_H_RFID_初始化.Name = "rJ_Button_H_RFID_初始化";
             this.rJ_Button_H_RFID_初始化.ProhibitionBorderLineWidth = 1;
@@ -2374,11 +2377,19 @@
             this.h_RFID_UI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("h_RFID_UI.UDP_ServerPorts")));
             this.h_RFID_UI.UserName = "root";
             // 
+            // storagePanel
+            // 
+            this.storagePanel.CurrentStorage = null;
+            this.storagePanel.Location = new System.Drawing.Point(1384, 243);
+            this.storagePanel.Name = "storagePanel";
+            this.storagePanel.Size = new System.Drawing.Size(296, 152);
+            this.storagePanel.TabIndex = 38;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1573, 1041);
+            this.ClientSize = new System.Drawing.Size(1936, 1041);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -2531,6 +2542,7 @@
         private MyUI.RJ_Button rJ_Button_EPD_1020_門片畫面測試;
         private MyUI.RJ_Button rJ_Button_RFID_RS485_TEST;
         private MyUI.RJ_Button rJ_Button1;
+        private H_Pannel_lib.StoragePanel storagePanel;
     }
 }
 

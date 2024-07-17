@@ -1393,6 +1393,7 @@ namespace H_Pannel_lib
             IP,
             Port,
             最大存量,
+            None,
         }
         public enum ValueType
         {
@@ -2713,6 +2714,65 @@ namespace H_Pannel_lib
             }
             return vlaueClass;
         }
+        public Bitmap Get_EPD_Bitmap(ValueName valueName, double bmp_Scale)
+        {
+            return this.Get_EPD_Bitmap(valueName, bmp_Scale, null, 0, false);
+        }
+        public Bitmap Get_EPD_Bitmap(ValueName valueName, double bmp_Scale, Color? color, int BorderSize, bool dash)
+        {
+            VlaueClass vlaueClass = this.GetValue(valueName);
+
+            if (valueName != ValueName.BarCode)
+            {
+                Bitmap bitmap = Communication.TextToBitmap(vlaueClass.Value, vlaueClass.Font, bmp_Scale, vlaueClass.Width, vlaueClass.Height, vlaueClass.ForeColor, vlaueClass.BackColor, vlaueClass.BorderSize, vlaueClass.BorderColor, vlaueClass.HorizontalAlignment);
+                if (bitmap == null) return null;
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.CompositingQuality = CompositingQuality.HighQuality;
+                    g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+                    if (color != null)
+                    {
+                        float[] dashValues = { 2, 2, 2, 2 };
+                        Pen pen = new Pen((Color)color, BorderSize);
+                        if (dash) pen.DashPattern = dashValues;
+
+                        g.DrawRectangle(pen, BorderSize / 2, BorderSize / 2, (int)(bitmap.Width - BorderSize), (int)(bitmap.Height - BorderSize));
+                    }
+                }
+                return bitmap;
+            }
+            else
+            {
+                Size Rect_Size = new Size((int)(vlaueClass.Width * bmp_Scale), (int)(vlaueClass.Height * bmp_Scale));
+
+                Bitmap bitmap = Communication.CreateBarCode(vlaueClass.Value, Rect_Size.Width, Rect_Size.Height);
+                if (bitmap != null)
+                {
+                    using (Graphics g = Graphics.FromImage(bitmap))
+                    {
+                        if (color != null)
+                        {
+                            g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            g.CompositingQuality = CompositingQuality.HighQuality;
+                            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+
+                            float[] dashValues = { 2, 2, 2, 2 };
+                            Pen pen = new Pen((Color)color, BorderSize);
+                            if (dash) pen.DashPattern = dashValues;
+
+                            g.DrawRectangle(pen, BorderSize / 2, BorderSize / 2, (int)(vlaueClass.Width * bmp_Scale - BorderSize), (int)(vlaueClass.Height * bmp_Scale - BorderSize));
+                        }
+                    }
+                }
+
+                return bitmap;
+            }
+
+
+        }
         public Bitmap GetBitmap(ValueName valueName, double bmp_Scale)
         {
             return this.GetBitmap(valueName, bmp_Scale, null , 0 , false);
@@ -2789,6 +2849,29 @@ namespace H_Pannel_lib
             };
             var barCode = barcodeWriter.Write(content);
             return barCode;
+        }
+
+        static public ValueName GetValueName(string text)
+        {
+            if(text.StringIsEmpty())return ValueName.None;
+            if (text == "藥碼" || text == "藥品碼") return ValueName.藥品碼;
+            if (text == "藥品名稱" || text == "藥名") return ValueName.藥品名稱;
+            if (text == "藥品中文名稱" || text.Contains("中文名")) return ValueName.藥品中文名稱;
+            if (text == "藥品學名" || text == "商品名") return ValueName.藥品學名;
+            if (text == "廠牌") return ValueName.廠牌;
+            if (text == "效期") return ValueName.效期;
+            if (text == "庫存") return ValueName.庫存;
+            if (text == "包裝單位" || text == "單位") return ValueName.包裝單位;
+            if (text == "最小包裝單位" || text == "最小單位") return ValueName.最小包裝單位;
+            if (text == "最小包裝單位數量" || text == "最小單位數量") return ValueName.最小包裝單位數量;
+            if (text.ToUpper() == "BarCode".ToUpper() || text.Contains("條碼")) return ValueName.BarCode;
+            if (text == "儲位名稱") return ValueName.儲位名稱;
+            if (text == "IP") return ValueName.IP;
+            if (text == "Port") return ValueName.Port;
+            if (text == "最大存量") return ValueName.最大存量;
+
+
+            return ValueName.None;
         }
 
         #region Name

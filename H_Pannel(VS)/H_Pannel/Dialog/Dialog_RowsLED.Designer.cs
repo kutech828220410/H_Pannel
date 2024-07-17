@@ -38,23 +38,33 @@ namespace H_Pannel_lib
             // rJ_Button_OK
             // 
             this.rJ_Button_OK.AutoResetState = false;
-            this.rJ_Button_OK.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Button_OK.BackColor = System.Drawing.Color.Transparent;
             this.rJ_Button_OK.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Button_OK.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_OK.BorderRadius = 5;
+            this.rJ_Button_OK.BorderRadius = 10;
             this.rJ_Button_OK.BorderSize = 0;
             this.rJ_Button_OK.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_OK.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_OK.FlatAppearance.BorderSize = 0;
             this.rJ_Button_OK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_OK.Font = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_OK.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_OK.GUID = "";
-            this.rJ_Button_OK.Location = new System.Drawing.Point(548, 35);
+            this.rJ_Button_OK.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_OK.Location = new System.Drawing.Point(548, 27);
             this.rJ_Button_OK.Name = "rJ_Button_OK";
-            this.rJ_Button_OK.Size = new System.Drawing.Size(76, 40);
+            this.rJ_Button_OK.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_OK.ProhibitionLineWidth = 4;
+            this.rJ_Button_OK.ProhibitionSymbolSize = 30;
+            this.rJ_Button_OK.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_OK.ShadowSize = 0;
+            this.rJ_Button_OK.ShowLoadingForm = false;
+            this.rJ_Button_OK.Size = new System.Drawing.Size(76, 54);
             this.rJ_Button_OK.State = false;
             this.rJ_Button_OK.TabIndex = 15;
             this.rJ_Button_OK.Text = "OK";
             this.rJ_Button_OK.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_OK.TextHeight = 0;
             this.rJ_Button_OK.UseVisualStyleBackColor = false;
             this.rJ_Button_OK.Click += new System.EventHandler(this.rJ_Button_OK_Click);
             // 
@@ -71,7 +81,7 @@ namespace H_Pannel_lib
             this.rJ_TrackBar.Minimum = 0;
             this.rJ_TrackBar.MinValue = 0;
             this.rJ_TrackBar.Name = "rJ_TrackBar";
-            this.rJ_TrackBar.Size = new System.Drawing.Size(513, 70);
+            this.rJ_TrackBar.Size = new System.Drawing.Size(502, 70);
             this.rJ_TrackBar.SliderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.rJ_TrackBar.SliderSize = 10;
             this.rJ_TrackBar.TabIndex = 16;

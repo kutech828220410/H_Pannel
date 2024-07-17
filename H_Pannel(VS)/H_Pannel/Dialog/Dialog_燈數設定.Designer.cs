@@ -36,18 +36,20 @@ namespace H_Pannel_lib
             // 
             // rJ_Lable1
             // 
-            this.rJ_Lable1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable1.BackColor = System.Drawing.Color.White;
             this.rJ_Lable1.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable1.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Lable1.BorderRadius = 12;
+            this.rJ_Lable1.BorderRadius = 10;
             this.rJ_Lable1.BorderSize = 0;
             this.rJ_Lable1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Lable1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Lable1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Lable1.ForeColor = System.Drawing.Color.White;
             this.rJ_Lable1.GUID = "";
-            this.rJ_Lable1.Location = new System.Drawing.Point(12, 16);
+            this.rJ_Lable1.Location = new System.Drawing.Point(12, 17);
             this.rJ_Lable1.Name = "rJ_Lable1";
-            this.rJ_Lable1.Size = new System.Drawing.Size(105, 48);
+            this.rJ_Lable1.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable1.ShadowSize = 0;
+            this.rJ_Lable1.Size = new System.Drawing.Size(105, 46);
             this.rJ_Lable1.TabIndex = 0;
             this.rJ_Lable1.Text = "燈 數";
             this.rJ_Lable1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -56,35 +58,44 @@ namespace H_Pannel_lib
             // rJ_Button_退出
             // 
             this.rJ_Button_退出.AutoResetState = false;
-            this.rJ_Button_退出.BackColor = System.Drawing.Color.Gray;
+            this.rJ_Button_退出.BackColor = System.Drawing.Color.Transparent;
             this.rJ_Button_退出.BackgroundColor = System.Drawing.Color.Gray;
             this.rJ_Button_退出.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_退出.BorderRadius = 5;
+            this.rJ_Button_退出.BorderRadius = 10;
             this.rJ_Button_退出.BorderSize = 0;
             this.rJ_Button_退出.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_退出.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_退出.FlatAppearance.BorderSize = 0;
             this.rJ_Button_退出.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_退出.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_退出.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_退出.GUID = "";
-            this.rJ_Button_退出.Location = new System.Drawing.Point(239, 14);
+            this.rJ_Button_退出.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            this.rJ_Button_退出.Location = new System.Drawing.Point(269, 15);
             this.rJ_Button_退出.Name = "rJ_Button_退出";
-            this.rJ_Button_退出.Size = new System.Drawing.Size(136, 51);
+            this.rJ_Button_退出.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_退出.ProhibitionLineWidth = 4;
+            this.rJ_Button_退出.ProhibitionSymbolSize = 30;
+            this.rJ_Button_退出.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_退出.ShadowSize = 0;
+            this.rJ_Button_退出.ShowLoadingForm = false;
+            this.rJ_Button_退出.Size = new System.Drawing.Size(106, 51);
             this.rJ_Button_退出.State = false;
             this.rJ_Button_退出.TabIndex = 12;
             this.rJ_Button_退出.Text = "退出";
             this.rJ_Button_退出.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_退出.TextHeight = 0;
             this.rJ_Button_退出.UseVisualStyleBackColor = false;
             // 
             // plC_NumBox_燈數
             // 
             this.plC_NumBox_燈數.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.plC_NumBox_燈數.Location = new System.Drawing.Point(135, 22);
+            this.plC_NumBox_燈數.Location = new System.Drawing.Point(135, 25);
             this.plC_NumBox_燈數.mBackColor = System.Drawing.SystemColors.Window;
             this.plC_NumBox_燈數.mForeColor = System.Drawing.SystemColors.WindowText;
             this.plC_NumBox_燈數.Name = "plC_NumBox_燈數";
             this.plC_NumBox_燈數.ReadOnly = false;
-            this.plC_NumBox_燈數.Size = new System.Drawing.Size(75, 37);
+            this.plC_NumBox_燈數.Size = new System.Drawing.Size(110, 35);
             this.plC_NumBox_燈數.TabIndex = 13;
             this.plC_NumBox_燈數.Value = 0;
             this.plC_NumBox_燈數.字元長度 = MyUI.PLC_NumBox.WordLengthEnum.單字元;

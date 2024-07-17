@@ -24,18 +24,28 @@ namespace H_Pannel_lib
         {
             InitializeComponent();
             this.rJ_ComboBox.DataSource = dataSource;
+            this.rJ_Button_Cancel.MouseDownEvent += RJ_Button_Cancel_MouseDownEvent;
+            this.rJ_Button_OK.MouseDownEvent += RJ_Button_OK_MouseDownEvent;
         }
 
-        private void rJ_Button_OK_Click(object sender, EventArgs e)
+        private void RJ_Button_OK_MouseDownEvent(MouseEventArgs mevent)
         {
             this.DialogResult = DialogResult.Yes;
             this.Close();
         }
-
-        private void rJ_Button_Cancel_Click(object sender, EventArgs e)
+        private void RJ_Button_Cancel_MouseDownEvent(MouseEventArgs mevent)
         {
             this.DialogResult = DialogResult.No;
             this.Close();
+        }
+
+        private void rJ_Button_OK_Click(object sender, EventArgs e)
+        {
+     
+        }
+        private void rJ_Button_Cancel_Click(object sender, EventArgs e)
+        {
+       
         }
     }
 }

@@ -23,6 +23,7 @@ namespace WT32_SC01
         Driver_IO_Board driver_IO_Board = new Driver_IO_Board();
         MySerialPort mySerialPort_IO_Board = new MySerialPort();
         Basic.MyThread MyThread_Program;
+
         public Form1()
         {
             InitializeComponent();
@@ -102,6 +103,9 @@ namespace WT32_SC01
 
             this.storageUI_EPD_266.Init();
             this.epD_266_Pannel.Init(this.storageUI_EPD_266.List_UDP_Local);
+            this.epD_266_Pannel.MouseDown += EpD_266_Pannel_MouseDown;
+            this.storagePanel.SureClick += StoragePanel_SureClick;
+
             this.storageUI_EPD_290.Init();
             this.epD_290_Pannel.Init(this.storageUI_EPD_290.List_UDP_Local);
 
@@ -111,62 +115,20 @@ namespace WT32_SC01
 
             this.drawerUI_EPD_1020.Init();
             this.epD_1020_Pannel.Init(this.drawerUI_EPD_1020.List_UDP_Local);
+
+
             this.rJ_Button_EPD_1020_填入測試畫面.MouseDownEvent += RJ_Button_EPD_1020_填入測試畫面_MouseDownEvent;
             this.rJ_Button_EPD1020_初始化.MouseDownEvent += RJ_Button_EPD1020_初始化_MouseDownEvent;
             this.rJ_Button_EPD_1020_門片畫面測試.MouseDownEvent += RJ_Button_EPD_1020_門片畫面測試_MouseDownEvent;
             this.rfiD_UI.Init();
-            this.rJ_Button_RFID_RS485_TEST.MouseDownEvent += RJ_Button_RFID_RS485_TEST_MouseDownEvent;
-            this.rJ_Button1.MouseDownEvent += RJ_Button1_MouseDownEvent;
+
             MyUI.數字鍵盤.音效 = false;
             H_Pannel_lib.Communication.UART_ConsoletWrite = true;
 
-            //mySerialPort_IO_Board.Init("COM1", 115200, 8, System.IO.Ports.Parity.None, System.IO.Ports.StopBits.One);
-            //driver_IO_Board.Init(mySerialPort_IO_Board, new byte[] { 0, 1, 2, 3 });
-            //driver_IO_Board.ProgramEvent += Driver_IO_Board_ProgramEvent;
-        }
-        int index = 0;
-        private void RJ_Button1_MouseDownEvent(MouseEventArgs mevent)
-        {
-
-
 
         }
-        bool flag_init = false;
-        private void Driver_IO_Board_ProgramEvent(Driver_IO_Board driver_IO_Board)
-        {
-            for (int k = 0; k < 16; k++)
-            {
-                if (flag_init == true)
-                {
-                    if (k == index)
-                    {
-                        driver_IO_Board[0].Output[k] = true;
 
-                    }
-                    else
-                    {
-                        driver_IO_Board[0].Output[k] = false;
-
-                    }
-                }
-                else
-                {
-                    driver_IO_Board[0].Output[k] = false;
-                    driver_IO_Board[1].Output[k] = false;
-                    driver_IO_Board[2].Output[k] = false;
-                    driver_IO_Board[3].Output[k] = false;
-                    flag_init = true;
-                }
-            }
-            index++;
-            if (index >= 10) index = 0;
-        }
-
-
-        private void RJ_Button_RFID_RS485_TEST_MouseDownEvent(MouseEventArgs mevent)
-        {
-
-        }
+  
 
         #region WT32
         private void rJ_Button_WT32_初始化_Click(object sender, EventArgs e)
@@ -269,9 +231,14 @@ namespace WT32_SC01
         }
 
         #region EPD266
-        private void pictureBox_2_66_Click(object sender, EventArgs e)
+        private void EpD_266_Pannel_MouseDown(object sender, MouseEventArgs e)
         {
+            EPD266_Paint_Form ePD266_Paint_Form = new EPD266_Paint_Form(this.epD_266_Pannel.CurrentStorage);
+            if (ePD266_Paint_Form.ShowDialog() != DialogResult.Yes) return;
 
+            Storage storage = ePD266_Paint_Form.CurrentStorage;
+
+            storageUI_EPD_266.SQL_ReplaceStorage(storage);
         }
         private void rJ_Button_EPD_266_初始化_Click(object sender, EventArgs e)
         {
@@ -325,13 +292,18 @@ namespace WT32_SC01
                 }
             }
         }
-
+        private void StoragePanel_SureClick(Storage storage)
+        {
+            storageUI_EPD_266.SQL_ReplaceStorage(storage);
+            this.storagePanel.DrawToPictureBox(storage);
+        }
         private void SqL_DataGridView_DeviceTable_EPD266_RowDoubleClickEvent1(object[] RowValue)
         {
             string IP = RowValue[(int)enum_DeviceTable.IP].ObjectToString();
             Storage storage = this.storageUI_EPD_266.SQL_GetStorage(IP);
             if (storage == null) return;
             this.epD_266_Pannel.DrawToPictureBox(storage);
+            this.storagePanel.DrawToPictureBox(storage);
         }
         #endregion
         #region EPD420

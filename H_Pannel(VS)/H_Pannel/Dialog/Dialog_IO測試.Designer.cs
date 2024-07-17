@@ -44,46 +44,64 @@ namespace H_Pannel_lib
             // rJ_Button_退出
             // 
             this.rJ_Button_退出.AutoResetState = false;
-            this.rJ_Button_退出.BackColor = System.Drawing.Color.Gray;
+            this.rJ_Button_退出.BackColor = System.Drawing.Color.Transparent;
             this.rJ_Button_退出.BackgroundColor = System.Drawing.Color.Gray;
             this.rJ_Button_退出.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_退出.BorderRadius = 5;
+            this.rJ_Button_退出.BorderRadius = 10;
             this.rJ_Button_退出.BorderSize = 0;
             this.rJ_Button_退出.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_退出.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_退出.FlatAppearance.BorderSize = 0;
             this.rJ_Button_退出.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_退出.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_Button_退出.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_退出.GUID = "";
+            this.rJ_Button_退出.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_退出.Location = new System.Drawing.Point(382, 12);
             this.rJ_Button_退出.Name = "rJ_Button_退出";
+            this.rJ_Button_退出.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_退出.ProhibitionLineWidth = 4;
+            this.rJ_Button_退出.ProhibitionSymbolSize = 30;
+            this.rJ_Button_退出.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_退出.ShadowSize = 0;
+            this.rJ_Button_退出.ShowLoadingForm = false;
             this.rJ_Button_退出.Size = new System.Drawing.Size(136, 103);
             this.rJ_Button_退出.State = false;
             this.rJ_Button_退出.TabIndex = 11;
             this.rJ_Button_退出.Text = "退出";
             this.rJ_Button_退出.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_退出.TextHeight = 0;
             this.rJ_Button_退出.UseVisualStyleBackColor = false;
             // 
             // rJ_Button_鎖控輸出
             // 
             this.rJ_Button_鎖控輸出.AutoResetState = false;
-            this.rJ_Button_鎖控輸出.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Button_鎖控輸出.BackColor = System.Drawing.Color.Transparent;
             this.rJ_Button_鎖控輸出.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Button_鎖控輸出.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_鎖控輸出.BorderRadius = 5;
+            this.rJ_Button_鎖控輸出.BorderRadius = 10;
             this.rJ_Button_鎖控輸出.BorderSize = 0;
             this.rJ_Button_鎖控輸出.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_鎖控輸出.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_鎖控輸出.FlatAppearance.BorderSize = 0;
             this.rJ_Button_鎖控輸出.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_鎖控輸出.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_鎖控輸出.GUID = "";
+            this.rJ_Button_鎖控輸出.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_鎖控輸出.Location = new System.Drawing.Point(12, 12);
             this.rJ_Button_鎖控輸出.Name = "rJ_Button_鎖控輸出";
+            this.rJ_Button_鎖控輸出.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_鎖控輸出.ProhibitionLineWidth = 4;
+            this.rJ_Button_鎖控輸出.ProhibitionSymbolSize = 30;
+            this.rJ_Button_鎖控輸出.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_鎖控輸出.ShadowSize = 0;
+            this.rJ_Button_鎖控輸出.ShowLoadingForm = false;
             this.rJ_Button_鎖控輸出.Size = new System.Drawing.Size(96, 51);
             this.rJ_Button_鎖控輸出.State = false;
             this.rJ_Button_鎖控輸出.TabIndex = 1;
             this.rJ_Button_鎖控輸出.Text = "鎖控輸出";
             this.rJ_Button_鎖控輸出.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_鎖控輸出.TextHeight = 0;
             this.rJ_Button_鎖控輸出.UseVisualStyleBackColor = false;
             // 
             // checkBox_輸入狀態
@@ -130,23 +148,32 @@ namespace H_Pannel_lib
             // rJ_Button_ADC輸出
             // 
             this.rJ_Button_ADC輸出.AutoResetState = false;
-            this.rJ_Button_ADC輸出.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Button_ADC輸出.BackColor = System.Drawing.Color.Transparent;
             this.rJ_Button_ADC輸出.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Button_ADC輸出.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_ADC輸出.BorderRadius = 5;
+            this.rJ_Button_ADC輸出.BorderRadius = 10;
             this.rJ_Button_ADC輸出.BorderSize = 0;
             this.rJ_Button_ADC輸出.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_ADC輸出.DisenableColor = System.Drawing.Color.Gray;
             this.rJ_Button_ADC輸出.FlatAppearance.BorderSize = 0;
             this.rJ_Button_ADC輸出.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Button_ADC輸出.ForeColor = System.Drawing.Color.White;
             this.rJ_Button_ADC輸出.GUID = "";
+            this.rJ_Button_ADC輸出.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.rJ_Button_ADC輸出.Location = new System.Drawing.Point(12, 69);
             this.rJ_Button_ADC輸出.Name = "rJ_Button_ADC輸出";
+            this.rJ_Button_ADC輸出.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_ADC輸出.ProhibitionLineWidth = 4;
+            this.rJ_Button_ADC輸出.ProhibitionSymbolSize = 30;
+            this.rJ_Button_ADC輸出.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_ADC輸出.ShadowSize = 0;
+            this.rJ_Button_ADC輸出.ShowLoadingForm = false;
             this.rJ_Button_ADC輸出.Size = new System.Drawing.Size(96, 51);
             this.rJ_Button_ADC輸出.State = false;
             this.rJ_Button_ADC輸出.TabIndex = 27;
             this.rJ_Button_ADC輸出.Text = "ADC輸出";
             this.rJ_Button_ADC輸出.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_ADC輸出.TextHeight = 0;
             this.rJ_Button_ADC輸出.UseVisualStyleBackColor = false;
             // 
             // numericUpDown_ADC_DelayTime

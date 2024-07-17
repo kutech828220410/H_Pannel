@@ -47,6 +47,7 @@ namespace H_Pannel_lib
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.pictureBox);
             this.Name = "EPD_266_Pannel";
             this.Size = new System.Drawing.Size(296, 152);

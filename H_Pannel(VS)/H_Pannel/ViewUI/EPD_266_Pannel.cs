@@ -12,6 +12,8 @@ namespace H_Pannel_lib
 {
     public partial class EPD_266_Pannel : UserControl
     {
+
+
         [ReadOnly(false), Browsable(false)]
         public Storage CurrentStorage
         {
@@ -37,13 +39,28 @@ namespace H_Pannel_lib
         public EPD_266_Pannel()
         {
             InitializeComponent();
+            this.Load += EPD_266_Pannel_Load;
         }
+
+        private void EPD_266_Pannel_Load(object sender, EventArgs e)
+        {
+            if(this.DesignMode == false)
+            {
+                this.pictureBox.MouseDown += PictureBox_MouseDown;
+                this.pictureBox.Paint += PictureBox_Paint;
+            }
+
+        }
+
         public void Init(List<UDP_Class> List_UDP_Local)
         {
             this.List_UDP_Local = List_UDP_Local;
+  
+        }
 
-            this.pictureBox.MouseDown += PictureBox_MouseDown;
-            this.pictureBox.Paint += PictureBox_Paint;
+        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            base.OnMouseDown(e);
         }
 
         async private void PictureBox_Paint(object sender, PaintEventArgs e)
@@ -75,11 +92,6 @@ namespace H_Pannel_lib
         {
             return StorageUI_EPD_266.Get_Storage_bmp(storage);
         }
-        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
         public static Bitmap ScaleImage(Bitmap SrcBitmap, int dstWidth, int dstHeight)
         {
             Graphics g = null;

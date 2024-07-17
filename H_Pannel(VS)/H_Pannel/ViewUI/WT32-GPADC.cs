@@ -320,7 +320,6 @@ namespace H_Pannel_lib
             }));
         
         }
-
         public bool Set_LED(string IP, int Port ,StorageUI_WT32.UDP_READ.LED_Type lED_Type , bool statu)
         {
             bool flag = false;
@@ -1116,7 +1115,6 @@ namespace H_Pannel_lib
                 this.DrawToPictureBox();
             }));
             await task;
-
         }
         static public TxMouseDownType GetMouseDownType(int mouse_X, int mouse_Y, int X, int Y, int Width, int Height)
         {
@@ -1516,6 +1514,7 @@ namespace H_Pannel_lib
             }
             this.DrawToPictureBox();
         }
+
         private class ICP_PostrionX : IComparer<int>
         {
             Storage CurrentStorage;
