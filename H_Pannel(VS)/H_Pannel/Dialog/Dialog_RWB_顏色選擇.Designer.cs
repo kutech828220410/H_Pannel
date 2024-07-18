@@ -1,7 +1,7 @@
 ﻿
 namespace H_Pannel_lib
 {
-    partial class Dialog_EPD266_顏色選擇
+    partial class Dialog_RWB_顏色選擇
     {
         /// <summary>
         /// Required designer variable.
@@ -154,7 +154,7 @@ namespace H_Pannel_lib
             this.rJ_Button_確認.TextHeight = 0;
             this.rJ_Button_確認.UseVisualStyleBackColor = false;
             // 
-            // Dialog_EPD266_顏色選擇
+            // Dialog_RWB_顏色選擇
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -165,7 +165,7 @@ namespace H_Pannel_lib
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
-            this.Name = "Dialog_EPD266_顏色選擇";
+            this.Name = "Dialog_RWB_顏色選擇";
             this.Text = "顏色選擇";
             this.panel8.ResumeLayout(false);
             this.ResumeLayout(false);

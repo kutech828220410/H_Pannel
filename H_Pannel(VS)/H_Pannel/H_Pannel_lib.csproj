@@ -171,11 +171,11 @@
     <Compile Include="Dialog\Dialog_EPD730_顏色選擇.Designer.cs">
       <DependentUpon>Dialog_EPD730_顏色選擇.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\Dialog_EPD266_顏色選擇.cs">
+    <Compile Include="Dialog\Dialog_RWB_顏色選擇.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialog\Dialog_EPD266_顏色選擇.Designer.cs">
-      <DependentUpon>Dialog_EPD266_顏色選擇.cs</DependentUpon>
+    <Compile Include="Dialog\Dialog_RWB_顏色選擇.Designer.cs">
+      <DependentUpon>Dialog_RWB_顏色選擇.cs</DependentUpon>
     </Compile>
     <Compile Include="DrawerUI.cs">
       <SubType>UserControl</SubType>
@@ -188,6 +188,17 @@
     </Compile>
     <Compile Include="DrawerUI_EPD_583.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewUI\EPD290_Paint_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewUI\EPD290_Paint_Form.Designer.cs">
+      <DependentUpon>EPD290_Paint_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewUI\StoragePanel.cs">
       <SubType>UserControl</SubType>
@@ -317,11 +328,15 @@
     <EmbeddedResource Include="Dialog\Dialog_EPD730_顏色選擇.resx">
       <DependentUpon>Dialog_EPD730_顏色選擇.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialog\Dialog_EPD266_顏色選擇.resx">
-      <DependentUpon>Dialog_EPD266_顏色選擇.cs</DependentUpon>
+    <EmbeddedResource Include="Dialog\Dialog_RWB_顏色選擇.resx">
+      <DependentUpon>Dialog_RWB_顏色選擇.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DrawerUI_EPD_420.resx">
       <DependentUpon>DrawerUI_EPD_420.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewUI\EPD266_Paint_Form.resx">
       <DependentUpon>EPD266_Paint_Form.cs</DependentUpon>
@@ -335,6 +350,9 @@
     <EmbeddedResource Include="StorageUI_WT32.resx">
       <DependentUpon>StorageUI_WT32.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewUI\EPD290_Paint_Form.resx">
+      <DependentUpon>EPD290_Paint_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewUI\EPD_420_Pannel.resx">
       <DependentUpon>EPD_420_Pannel.cs</DependentUpon>
     </EmbeddedResource>
@@ -345,7 +363,7 @@
       <DependentUpon>EPD_266_Pannel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="DeviceBasicUI.resx">
@@ -400,7 +418,21 @@
   <ItemGroup>
     <None Include="Resources\UNLOCK.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\4871563_align_center_horizontal_text_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4871539_align_center_text_vertical_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm_filled_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alarm_filled_red.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

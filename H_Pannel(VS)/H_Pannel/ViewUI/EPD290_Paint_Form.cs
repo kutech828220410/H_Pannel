@@ -23,9 +23,8 @@ using System.Text.Json.Serialization;
 
 namespace H_Pannel_lib
 {
-    public partial class EPD266_Paint_Form : MyDialog
+    public partial class EPD290_Paint_Form : MyDialog
     {
- 
         public delegate void PanelSelectEventHandler(Storage.ValueName valueName);
         public event PanelSelectEventHandler PanelSelectEvent;
 
@@ -43,7 +42,7 @@ namespace H_Pannel_lib
         {
             get
             {
-                return 152;
+                return 128;
             }
         }
 
@@ -115,7 +114,7 @@ namespace H_Pannel_lib
         {
             get
             {
-          
+
                 return _selectedText;
             }
         }
@@ -127,7 +126,7 @@ namespace H_Pannel_lib
                 return mainSelect;
             }
             set
-            {
+            {      
                 this.Invoke(new Action(delegate
                 {
                     this.comboBox_選擇項目.SelectedIndex = value;
@@ -144,7 +143,7 @@ namespace H_Pannel_lib
             }
         }
 
-        public EPD266_Paint_Form(Storage _storage)
+        public EPD290_Paint_Form(Storage _storage)
         {
             InitializeComponent();
             currentStorage = _storage;
@@ -155,22 +154,22 @@ namespace H_Pannel_lib
             this.pictureBox_paint.MouseUp += PictureBox_paint_MouseUp;
 
 
-            this.ShowDialogEvent += EPD266_Paint_Form_ShowDialogEvent;
-            this.LoadFinishedEvent += EPD266_Paint_Form_LoadFinishedEvent;
+            this.ShowDialogEvent += EPD290_Paint_Form_ShowDialogEvent;
+            this.LoadFinishedEvent += EPD290_Paint_Form_LoadFinishedEvent;
 
             this.rJ_Button_確定.MouseDownEvent += RJ_Button_確定_MouseDownEvent;
             this.rJ_Button_取消.MouseDownEvent += RJ_Button_取消_MouseDownEvent;
         }
 
-        private void EPD266_Paint_Form_ShowDialogEvent()
+        private void EPD290_Paint_Form_ShowDialogEvent()
         {
-            
+
         }
-        private void EPD266_Paint_Form_LoadFinishedEvent(EventArgs e)
+        private void EPD290_Paint_Form_LoadFinishedEvent(EventArgs e)
         {
             DrawToPictureBox(CurrentStorage);
 
-            this.PanelSelectEvent += EPD266_Paint_Form_PanelSelectEvent;
+            this.PanelSelectEvent += EPD290_Paint_Form_PanelSelectEvent;
             this.comboBox_選擇項目.DataSource = new StoragePanel.enum_ValueName().GetEnumNames();
             this.comboBox_選擇項目.SelectedIndexChanged += ComboBox_圖形編輯_編輯內容名稱_SelectedIndexChanged;
             this.comboBox_選擇項目.SelectedIndex = 0;
@@ -225,10 +224,10 @@ namespace H_Pannel_lib
             {
                 rJ_RatioButton_自定義.Checked = true;
             }
-        
+
         }
 
-   
+
 
         private void ComboBox_圖形編輯_編輯內容名稱_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -238,10 +237,10 @@ namespace H_Pannel_lib
 
             this.DrawToPictureBox();
         }
-        private void EPD266_Paint_Form_PanelSelectEvent(Device.ValueName valueName)
+        private void EPD290_Paint_Form_PanelSelectEvent(Device.ValueName valueName)
         {
             this.textBox_邊框大小.Text = CurrentStorage.GetValue(valueName).BorderSize.ToString();
-            textBox_字體.Text = CurrentStorage.GetValue(valueName).Font.ToString();
+            textBox_字體.Text = CurrentStorage.GetValue(valueName).Font.ToFontString();
             rJ_Pannel_邊框顏色.BackgroundColor = CurrentStorage.GetValue(valueName).BorderColor;
             rJ_Pannel_字體顏色.BackgroundColor = CurrentStorage.GetValue(valueName).ForeColor;
             rJ_Pannel_文字背景顏色.BackgroundColor = CurrentStorage.GetValue(valueName).BackColor;
@@ -484,7 +483,7 @@ namespace H_Pannel_lib
             Dialog_RWB_顏色選擇 Dialog_RWB_顏色選擇 = new Dialog_RWB_顏色選擇(this.rJ_Pannel_文字背景顏色.BackgroundColor);
             if (Dialog_RWB_顏色選擇.ShowDialog() != DialogResult.Yes) return;
             this.rJ_Pannel_文字背景顏色.BackgroundColor = Dialog_RWB_顏色選擇.Value;
-            
+
             Storage.ValueName valueName = (GetSelectValueName());
             CurrentStorage.SetValue(valueName, Device.ValueType.BackColor, this.rJ_Pannel_文字背景顏色.BackgroundColor);
             this.DrawToPictureBox();
@@ -507,7 +506,7 @@ namespace H_Pannel_lib
             this.rJ_Pannel_邊框顏色.BackgroundColor = Dialog_RWB_顏色選擇.Value;
 
             Storage.ValueName valueName = (GetSelectValueName());
-            CurrentStorage.SetValue(valueName, Device.ValueType.ForeColor, this.rJ_Pannel_邊框顏色.BackgroundColor);
+            CurrentStorage.SetValue(valueName, Device.ValueType.BorderColor, this.rJ_Pannel_邊框顏色.BackgroundColor);
             this.DrawToPictureBox();
         }
         private void RJ_Pannel_背景顏色_Click(object sender, EventArgs e)
@@ -598,7 +597,7 @@ namespace H_Pannel_lib
             for (int i = 0; i < List_ValueSelected.Count; i++)
             {
                 _value_selected = ((StoragePanel.enum_ValueName)List_ValueSelected[i]).GetEnumName();
-                vlaueClass = currentStorage.GetValue(Storage.GetValueName(_value_selected));           
+                vlaueClass = currentStorage.GetValue(Storage.GetValueName(_value_selected));
                 CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Position, new Point(X - (vlaueClass.Width / 2), vlaueClass.Position.Y));
             }
 
@@ -706,7 +705,7 @@ namespace H_Pannel_lib
         }
         private void RJ_RatioButton_自定義_CheckedChanged(object sender, EventArgs e)
         {
-            if(this.rJ_RatioButton_自定義.Checked)
+            if (this.rJ_RatioButton_自定義.Checked)
             {
                 currentStorage.Enum_drawType = Storage.enum_DrawType.constom;
                 panel_選擇項目.Enabled = true;
@@ -796,7 +795,7 @@ namespace H_Pannel_lib
             Bitmap bitmap = Communication.EPD266_GetBitmap(storage, CanvasScale);
             using (Graphics g = Graphics.FromImage(bitmap))
             {
-              
+
                 for (int i = 0; i < List_ValueSelected.Count; i++)
                 {
                     string _value_selected = ((StoragePanel.enum_ValueName)this.List_ValueSelected[i]).GetEnumName();
@@ -813,8 +812,6 @@ namespace H_Pannel_lib
                         }
                     }
                 }
-
-
             }
             return bitmap;
         }
@@ -887,6 +884,5 @@ namespace H_Pannel_lib
             }
         }
 
-    
     }
 }

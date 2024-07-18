@@ -7,11 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Basic;
 namespace H_Pannel_lib
 {
     public partial class StoragePanel : UserControl
     {
+        public enum enum_ValueName
+        {
+            藥碼,
+            藥名,
+            中文名,
+            商品名,
+            儲位名稱,
+            效期,
+            庫存,
+            單位,
+            條碼,
+            圖片1,
+        }
+
         public delegate void SureClickHandler(Storage storage);
         public event SureClickHandler SureClick;
 
@@ -60,10 +74,17 @@ namespace H_Pannel_lib
         }
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            if(CurrentStorage.DeviceType == DeviceType.EPD266 || CurrentStorage.DeviceType == DeviceType.EPD266_lock)
+            if (CurrentStorage == null) return;
+            if (CurrentStorage.DeviceType == DeviceType.EPD266 || CurrentStorage.DeviceType == DeviceType.EPD266_lock)
             {
                 EPD266_Paint_Form ePD266_Paint_Form = new EPD266_Paint_Form(this.CurrentStorage);
                 if (ePD266_Paint_Form.ShowDialog() != DialogResult.Yes) return;
+                if (SureClick != null) SureClick(currentStorage);
+            }
+            if (CurrentStorage.DeviceType == DeviceType.EPD290 || CurrentStorage.DeviceType == DeviceType.EPD290_lock)
+            {
+                EPD290_Paint_Form ePD290_Paint_Form = new EPD290_Paint_Form(this.CurrentStorage);
+                if (ePD290_Paint_Form.ShowDialog() != DialogResult.Yes) return;
                 if (SureClick != null) SureClick(currentStorage);
             }
             base.OnMouseDown(e);
@@ -79,6 +100,11 @@ namespace H_Pannel_lib
         public void DrawToPictureBox(Storage storage)
         {
             if (storage == null) return;
+            this.Invoke(new Action(delegate 
+            {
+                this.Width = storage.PanelSize.Width;
+                this.Height = storage.PanelSize.Height;
+            }));
             this.currentStorage = storage;
             using (Bitmap bitmap = this.Get_Storage_bmp(storage))
             {
@@ -90,7 +116,15 @@ namespace H_Pannel_lib
         }
         virtual public Bitmap Get_Storage_bmp(Storage storage)
         {
-            return EPD266_Paint_Form.Get_Storage_bmp(storage, 1);
+            if(storage.DeviceType == DeviceType.EPD266 || storage.DeviceType == DeviceType.EPD266_lock)
+            {
+                return Communication.EPD266_GetBitmap(storage);
+            }
+            if (storage.DeviceType == DeviceType.EPD290 || storage.DeviceType == DeviceType.EPD290_lock)
+            {
+                return Communication.EPD266_GetBitmap(storage);
+            }
+            return Communication.Get_Storage_bmp(storage, new StoragePanel.enum_ValueName().GetEnumNames(), 1);
         }
         public static Bitmap ScaleImage(Bitmap SrcBitmap, int dstWidth, int dstHeight)
         {

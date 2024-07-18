@@ -18,10 +18,17 @@ namespace H_Pannel_lib
     [Serializable]
     public class Storage : Device
     {
+        public enum enum_DrawType
+        {
+            type1,
+            constom,
+        }
+    
         private string outputAdress = "";
         private string inputAdress = "";
         private bool alarmEnable = false;
         private bool tOFON = false;
+        private enum_DrawType _enum_drawType = Storage.enum_DrawType.type1;
 
         public byte[] LED_Bytes = new byte[450 * 3];
 
@@ -29,6 +36,7 @@ namespace H_Pannel_lib
         public string InputAdress { get => inputAdress; set => inputAdress = value; }      
         public bool TOFON { get => tOFON; set => tOFON = value; }
         public bool AlarmEnable { get => alarmEnable; set => alarmEnable = value; }
+        public enum_DrawType Enum_drawType { get => _enum_drawType; set => _enum_drawType = value; }
 
         public bool ActionDone = false;
         public Storage(int station)
@@ -51,6 +59,15 @@ namespace H_Pannel_lib
             this.DeviceType = deviceType;
         }
 
+        public override void PasteFormat(object obj)
+        {
+            if(obj is Storage)
+            {
+                Storage storage = obj as Storage;
+               this.Enum_drawType = storage.Enum_drawType;
+            }
+            base.PasteFormat(obj);
+        }
     }
     static public class StorageMethod
     {

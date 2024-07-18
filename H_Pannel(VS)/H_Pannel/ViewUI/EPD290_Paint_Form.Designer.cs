@@ -1,7 +1,7 @@
 ﻿
 namespace H_Pannel_lib
 {
-    partial class EPD266_Paint_Form
+    partial class EPD290_Paint_Form
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,14 @@ namespace H_Pannel_lib
             this.checkBox_藥碼 = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.rJ_RatioButton_自定義 = new MyUI.RJ_RatioButton();
+            this.rJ_RatioButton_預設樣式1 = new MyUI.RJ_RatioButton();
+            this.pictureBox_paint = new System.Windows.Forms.PictureBox();
             this.rJ_Pannel_設計 = new MyUI.RJ_Pannel();
+            this.rJ_Lable8 = new MyUI.RJ_Lable();
+            this.rJ_Lable7 = new MyUI.RJ_Lable();
+            this.button_水平平均分配 = new System.Windows.Forms.Button();
+            this.button_垂直平均分配 = new System.Windows.Forms.Button();
             this.groupBox_對齊方式 = new System.Windows.Forms.GroupBox();
             this.button_對齊靠右 = new System.Windows.Forms.Button();
             this.button_對齊置中 = new System.Windows.Forms.Button();
@@ -40,6 +47,7 @@ namespace H_Pannel_lib
             this.button_對齊靠下 = new System.Windows.Forms.Button();
             this.button_對齊靠上 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox_圖片1 = new System.Windows.Forms.CheckBox();
             this.checkBox_儲位名稱 = new System.Windows.Forms.CheckBox();
             this.checkBox_條碼 = new System.Windows.Forms.CheckBox();
             this.checkBox_單位 = new System.Windows.Forms.CheckBox();
@@ -49,6 +57,7 @@ namespace H_Pannel_lib
             this.checkBox_中文名 = new System.Windows.Forms.CheckBox();
             this.checkBox_藥名 = new System.Windows.Forms.CheckBox();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.rJ_Pannel_背景顏色 = new MyUI.RJ_Pannel();
             this.rJ_Button_取消 = new MyUI.RJ_Button();
             this.panel8 = new System.Windows.Forms.Panel();
             this.rJ_Button_確定 = new MyUI.RJ_Button();
@@ -70,16 +79,8 @@ namespace H_Pannel_lib
             this.rJ_Lable1 = new MyUI.RJ_Lable();
             this.comboBox_選擇項目 = new System.Windows.Forms.ComboBox();
             this.fontDialog = new System.Windows.Forms.FontDialog();
-            this.rJ_Lable7 = new MyUI.RJ_Lable();
-            this.rJ_Lable8 = new MyUI.RJ_Lable();
-            this.button_水平平均分配 = new System.Windows.Forms.Button();
-            this.button_垂直平均分配 = new System.Windows.Forms.Button();
-            this.pictureBox_paint = new System.Windows.Forms.PictureBox();
-            this.rJ_Pannel_背景顏色 = new MyUI.RJ_Pannel();
-            this.checkBox_圖片1 = new System.Windows.Forms.CheckBox();
-            this.rJ_RatioButton_預設樣式1 = new MyUI.RJ_RatioButton();
-            this.rJ_RatioButton_自定義 = new MyUI.RJ_RatioButton();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_paint)).BeginInit();
             this.rJ_Pannel_設計.SuspendLayout();
             this.groupBox_對齊方式.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -88,7 +89,6 @@ namespace H_Pannel_lib
             this.panel_字體型態.SuspendLayout();
             this.panel_字體.SuspendLayout();
             this.panel_選擇項目.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_paint)).BeginInit();
             this.SuspendLayout();
             // 
             // checkBox_藥碼
@@ -120,6 +120,44 @@ namespace H_Pannel_lib
             this.panel1.Size = new System.Drawing.Size(665, 351);
             this.panel1.TabIndex = 3;
             // 
+            // rJ_RatioButton_自定義
+            // 
+            this.rJ_RatioButton_自定義.AutoSize = true;
+            this.rJ_RatioButton_自定義.CheckColor = System.Drawing.Color.MediumSlateBlue;
+            this.rJ_RatioButton_自定義.Location = new System.Drawing.Point(126, 322);
+            this.rJ_RatioButton_自定義.MinimumSize = new System.Drawing.Size(0, 21);
+            this.rJ_RatioButton_自定義.Name = "rJ_RatioButton_自定義";
+            this.rJ_RatioButton_自定義.Size = new System.Drawing.Size(71, 21);
+            this.rJ_RatioButton_自定義.TabIndex = 2;
+            this.rJ_RatioButton_自定義.TabStop = true;
+            this.rJ_RatioButton_自定義.Text = "自定義";
+            this.rJ_RatioButton_自定義.UncheckColor = System.Drawing.Color.Gray;
+            this.rJ_RatioButton_自定義.UseVisualStyleBackColor = true;
+            // 
+            // rJ_RatioButton_預設樣式1
+            // 
+            this.rJ_RatioButton_預設樣式1.AutoSize = true;
+            this.rJ_RatioButton_預設樣式1.CheckColor = System.Drawing.Color.MediumSlateBlue;
+            this.rJ_RatioButton_預設樣式1.Location = new System.Drawing.Point(33, 322);
+            this.rJ_RatioButton_預設樣式1.MinimumSize = new System.Drawing.Size(0, 21);
+            this.rJ_RatioButton_預設樣式1.Name = "rJ_RatioButton_預設樣式1";
+            this.rJ_RatioButton_預設樣式1.Size = new System.Drawing.Size(89, 21);
+            this.rJ_RatioButton_預設樣式1.TabIndex = 1;
+            this.rJ_RatioButton_預設樣式1.TabStop = true;
+            this.rJ_RatioButton_預設樣式1.Text = "預設樣式1";
+            this.rJ_RatioButton_預設樣式1.UncheckColor = System.Drawing.Color.Gray;
+            this.rJ_RatioButton_預設樣式1.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox_paint
+            // 
+            this.pictureBox_paint.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox_paint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox_paint.Location = new System.Drawing.Point(39, 20);
+            this.pictureBox_paint.Name = "pictureBox_paint";
+            this.pictureBox_paint.Size = new System.Drawing.Size(584, 256);
+            this.pictureBox_paint.TabIndex = 0;
+            this.pictureBox_paint.TabStop = false;
+            // 
             // rJ_Pannel_設計
             // 
             this.rJ_Pannel_設計.BackColor = System.Drawing.Color.White;
@@ -148,6 +186,68 @@ namespace H_Pannel_lib
             this.rJ_Pannel_設計.ShadowSize = 3;
             this.rJ_Pannel_設計.Size = new System.Drawing.Size(665, 551);
             this.rJ_Pannel_設計.TabIndex = 4;
+            // 
+            // rJ_Lable8
+            // 
+            this.rJ_Lable8.BackColor = System.Drawing.Color.White;
+            this.rJ_Lable8.BackgroundColor = System.Drawing.Color.White;
+            this.rJ_Lable8.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Lable8.BorderRadius = 10;
+            this.rJ_Lable8.BorderSize = 0;
+            this.rJ_Lable8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Lable8.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Lable8.ForeColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable8.GUID = "";
+            this.rJ_Lable8.Location = new System.Drawing.Point(494, 355);
+            this.rJ_Lable8.Name = "rJ_Lable8";
+            this.rJ_Lable8.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable8.ShadowSize = 0;
+            this.rJ_Lable8.Size = new System.Drawing.Size(116, 25);
+            this.rJ_Lable8.TabIndex = 13;
+            this.rJ_Lable8.Text = "水平平均分配";
+            this.rJ_Lable8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_Lable8.TextColor = System.Drawing.Color.Black;
+            // 
+            // rJ_Lable7
+            // 
+            this.rJ_Lable7.BackColor = System.Drawing.Color.White;
+            this.rJ_Lable7.BackgroundColor = System.Drawing.Color.White;
+            this.rJ_Lable7.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Lable7.BorderRadius = 10;
+            this.rJ_Lable7.BorderSize = 0;
+            this.rJ_Lable7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Lable7.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Lable7.ForeColor = System.Drawing.Color.Transparent;
+            this.rJ_Lable7.GUID = "";
+            this.rJ_Lable7.Location = new System.Drawing.Point(494, 261);
+            this.rJ_Lable7.Name = "rJ_Lable7";
+            this.rJ_Lable7.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable7.ShadowSize = 0;
+            this.rJ_Lable7.Size = new System.Drawing.Size(116, 25);
+            this.rJ_Lable7.TabIndex = 12;
+            this.rJ_Lable7.Text = "垂直平均分配";
+            this.rJ_Lable7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rJ_Lable7.TextColor = System.Drawing.Color.Black;
+            // 
+            // button_水平平均分配
+            // 
+            this.button_水平平均分配.BackgroundImage = global::H_Pannel_lib.Properties.Resources._4871539_align_center_text_vertical_icon;
+            this.button_水平平均分配.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_水平平均分配.Location = new System.Drawing.Point(516, 384);
+            this.button_水平平均分配.Name = "button_水平平均分配";
+            this.button_水平平均分配.Size = new System.Drawing.Size(72, 57);
+            this.button_水平平均分配.TabIndex = 11;
+            this.button_水平平均分配.UseVisualStyleBackColor = true;
+            // 
+            // button_垂直平均分配
+            // 
+            this.button_垂直平均分配.BackgroundImage = global::H_Pannel_lib.Properties.Resources._4871563_align_center_horizontal_text_icon;
+            this.button_垂直平均分配.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_垂直平均分配.Location = new System.Drawing.Point(516, 289);
+            this.button_垂直平均分配.Name = "button_垂直平均分配";
+            this.button_垂直平均分配.Size = new System.Drawing.Size(72, 57);
+            this.button_垂直平均分配.TabIndex = 10;
+            this.button_垂直平均分配.UseVisualStyleBackColor = true;
             // 
             // groupBox_對齊方式
             // 
@@ -223,6 +323,16 @@ namespace H_Pannel_lib
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "顯示";
+            // 
+            // checkBox_圖片1
+            // 
+            this.checkBox_圖片1.AutoSize = true;
+            this.checkBox_圖片1.Location = new System.Drawing.Point(124, 152);
+            this.checkBox_圖片1.Name = "checkBox_圖片1";
+            this.checkBox_圖片1.Size = new System.Drawing.Size(71, 25);
+            this.checkBox_圖片1.TabIndex = 19;
+            this.checkBox_圖片1.Text = "圖片1";
+            this.checkBox_圖片1.UseVisualStyleBackColor = true;
             // 
             // checkBox_儲位名稱
             // 
@@ -316,6 +426,22 @@ namespace H_Pannel_lib
             this.panel7.Padding = new System.Windows.Forms.Padding(5);
             this.panel7.Size = new System.Drawing.Size(625, 74);
             this.panel7.TabIndex = 7;
+            // 
+            // rJ_Pannel_背景顏色
+            // 
+            this.rJ_Pannel_背景顏色.BackColor = System.Drawing.Color.White;
+            this.rJ_Pannel_背景顏色.BackgroundColor = System.Drawing.Color.Transparent;
+            this.rJ_Pannel_背景顏色.BorderColor = System.Drawing.Color.Black;
+            this.rJ_Pannel_背景顏色.BorderRadius = 1;
+            this.rJ_Pannel_背景顏色.BorderSize = 1;
+            this.rJ_Pannel_背景顏色.ForeColor = System.Drawing.Color.White;
+            this.rJ_Pannel_背景顏色.IsSelected = false;
+            this.rJ_Pannel_背景顏色.Location = new System.Drawing.Point(11, 8);
+            this.rJ_Pannel_背景顏色.Name = "rJ_Pannel_背景顏色";
+            this.rJ_Pannel_背景顏色.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Pannel_背景顏色.ShadowSize = 0;
+            this.rJ_Pannel_背景顏色.Size = new System.Drawing.Size(237, 50);
+            this.rJ_Pannel_背景顏色.TabIndex = 39;
             // 
             // rJ_Button_取消
             // 
@@ -647,133 +773,7 @@ namespace H_Pannel_lib
             this.comboBox_選擇項目.Size = new System.Drawing.Size(353, 35);
             this.comboBox_選擇項目.TabIndex = 1;
             // 
-            // rJ_Lable7
-            // 
-            this.rJ_Lable7.BackColor = System.Drawing.Color.White;
-            this.rJ_Lable7.BackgroundColor = System.Drawing.Color.White;
-            this.rJ_Lable7.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Lable7.BorderRadius = 10;
-            this.rJ_Lable7.BorderSize = 0;
-            this.rJ_Lable7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Lable7.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Lable7.ForeColor = System.Drawing.Color.Transparent;
-            this.rJ_Lable7.GUID = "";
-            this.rJ_Lable7.Location = new System.Drawing.Point(494, 261);
-            this.rJ_Lable7.Name = "rJ_Lable7";
-            this.rJ_Lable7.ShadowColor = System.Drawing.Color.DimGray;
-            this.rJ_Lable7.ShadowSize = 0;
-            this.rJ_Lable7.Size = new System.Drawing.Size(116, 25);
-            this.rJ_Lable7.TabIndex = 12;
-            this.rJ_Lable7.Text = "垂直平均分配";
-            this.rJ_Lable7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_Lable7.TextColor = System.Drawing.Color.Black;
-            // 
-            // rJ_Lable8
-            // 
-            this.rJ_Lable8.BackColor = System.Drawing.Color.White;
-            this.rJ_Lable8.BackgroundColor = System.Drawing.Color.White;
-            this.rJ_Lable8.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Lable8.BorderRadius = 10;
-            this.rJ_Lable8.BorderSize = 0;
-            this.rJ_Lable8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Lable8.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Lable8.ForeColor = System.Drawing.Color.Transparent;
-            this.rJ_Lable8.GUID = "";
-            this.rJ_Lable8.Location = new System.Drawing.Point(494, 355);
-            this.rJ_Lable8.Name = "rJ_Lable8";
-            this.rJ_Lable8.ShadowColor = System.Drawing.Color.DimGray;
-            this.rJ_Lable8.ShadowSize = 0;
-            this.rJ_Lable8.Size = new System.Drawing.Size(116, 25);
-            this.rJ_Lable8.TabIndex = 13;
-            this.rJ_Lable8.Text = "水平平均分配";
-            this.rJ_Lable8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rJ_Lable8.TextColor = System.Drawing.Color.Black;
-            // 
-            // button_水平平均分配
-            // 
-            this.button_水平平均分配.BackgroundImage = global::H_Pannel_lib.Properties.Resources._4871539_align_center_text_vertical_icon;
-            this.button_水平平均分配.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_水平平均分配.Location = new System.Drawing.Point(516, 384);
-            this.button_水平平均分配.Name = "button_水平平均分配";
-            this.button_水平平均分配.Size = new System.Drawing.Size(72, 57);
-            this.button_水平平均分配.TabIndex = 11;
-            this.button_水平平均分配.UseVisualStyleBackColor = true;
-            // 
-            // button_垂直平均分配
-            // 
-            this.button_垂直平均分配.BackgroundImage = global::H_Pannel_lib.Properties.Resources._4871563_align_center_horizontal_text_icon;
-            this.button_垂直平均分配.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_垂直平均分配.Location = new System.Drawing.Point(516, 289);
-            this.button_垂直平均分配.Name = "button_垂直平均分配";
-            this.button_垂直平均分配.Size = new System.Drawing.Size(72, 57);
-            this.button_垂直平均分配.TabIndex = 10;
-            this.button_垂直平均分配.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox_paint
-            // 
-            this.pictureBox_paint.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox_paint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox_paint.Location = new System.Drawing.Point(39, 12);
-            this.pictureBox_paint.Name = "pictureBox_paint";
-            this.pictureBox_paint.Size = new System.Drawing.Size(584, 304);
-            this.pictureBox_paint.TabIndex = 0;
-            this.pictureBox_paint.TabStop = false;
-            // 
-            // rJ_Pannel_背景顏色
-            // 
-            this.rJ_Pannel_背景顏色.BackColor = System.Drawing.Color.White;
-            this.rJ_Pannel_背景顏色.BackgroundColor = System.Drawing.Color.Transparent;
-            this.rJ_Pannel_背景顏色.BorderColor = System.Drawing.Color.Black;
-            this.rJ_Pannel_背景顏色.BorderRadius = 1;
-            this.rJ_Pannel_背景顏色.BorderSize = 1;
-            this.rJ_Pannel_背景顏色.ForeColor = System.Drawing.Color.White;
-            this.rJ_Pannel_背景顏色.IsSelected = false;
-            this.rJ_Pannel_背景顏色.Location = new System.Drawing.Point(11, 8);
-            this.rJ_Pannel_背景顏色.Name = "rJ_Pannel_背景顏色";
-            this.rJ_Pannel_背景顏色.ShadowColor = System.Drawing.Color.DimGray;
-            this.rJ_Pannel_背景顏色.ShadowSize = 0;
-            this.rJ_Pannel_背景顏色.Size = new System.Drawing.Size(237, 50);
-            this.rJ_Pannel_背景顏色.TabIndex = 39;
-            // 
-            // checkBox_圖片1
-            // 
-            this.checkBox_圖片1.AutoSize = true;
-            this.checkBox_圖片1.Location = new System.Drawing.Point(124, 152);
-            this.checkBox_圖片1.Name = "checkBox_圖片1";
-            this.checkBox_圖片1.Size = new System.Drawing.Size(71, 25);
-            this.checkBox_圖片1.TabIndex = 19;
-            this.checkBox_圖片1.Text = "圖片1";
-            this.checkBox_圖片1.UseVisualStyleBackColor = true;
-            // 
-            // rJ_RatioButton_預設樣式1
-            // 
-            this.rJ_RatioButton_預設樣式1.AutoSize = true;
-            this.rJ_RatioButton_預設樣式1.CheckColor = System.Drawing.Color.MediumSlateBlue;
-            this.rJ_RatioButton_預設樣式1.Location = new System.Drawing.Point(33, 322);
-            this.rJ_RatioButton_預設樣式1.MinimumSize = new System.Drawing.Size(0, 21);
-            this.rJ_RatioButton_預設樣式1.Name = "rJ_RatioButton_預設樣式1";
-            this.rJ_RatioButton_預設樣式1.Size = new System.Drawing.Size(89, 21);
-            this.rJ_RatioButton_預設樣式1.TabIndex = 1;
-            this.rJ_RatioButton_預設樣式1.TabStop = true;
-            this.rJ_RatioButton_預設樣式1.Text = "預設樣式1";
-            this.rJ_RatioButton_預設樣式1.UncheckColor = System.Drawing.Color.Gray;
-            this.rJ_RatioButton_預設樣式1.UseVisualStyleBackColor = true;
-            // 
-            // rJ_RatioButton_自定義
-            // 
-            this.rJ_RatioButton_自定義.AutoSize = true;
-            this.rJ_RatioButton_自定義.CheckColor = System.Drawing.Color.MediumSlateBlue;
-            this.rJ_RatioButton_自定義.Location = new System.Drawing.Point(126, 322);
-            this.rJ_RatioButton_自定義.MinimumSize = new System.Drawing.Size(0, 21);
-            this.rJ_RatioButton_自定義.Name = "rJ_RatioButton_自定義";
-            this.rJ_RatioButton_自定義.Size = new System.Drawing.Size(71, 21);
-            this.rJ_RatioButton_自定義.TabIndex = 2;
-            this.rJ_RatioButton_自定義.TabStop = true;
-            this.rJ_RatioButton_自定義.Text = "自定義";
-            this.rJ_RatioButton_自定義.UncheckColor = System.Drawing.Color.Gray;
-            this.rJ_RatioButton_自定義.UseVisualStyleBackColor = true;
-            // 
-            // EPD266_Paint_Form
+            // EPD290_Paint_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -784,10 +784,11 @@ namespace H_Pannel_lib
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.MaximizeBox = false;
-            this.Name = "EPD266_Paint_Form";
-            this.Text = "EPD 266 Paint";
+            this.Name = "EPD290_Paint_Form";
+            this.Text = "EPD 290 Paint";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_paint)).EndInit();
             this.rJ_Pannel_設計.ResumeLayout(false);
             this.groupBox_對齊方式.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -799,7 +800,6 @@ namespace H_Pannel_lib
             this.panel_字體.ResumeLayout(false);
             this.panel_字體.PerformLayout();
             this.panel_選擇項目.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_paint)).EndInit();
             this.ResumeLayout(false);
 
         }

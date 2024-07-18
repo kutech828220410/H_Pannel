@@ -11,14 +11,14 @@ using MyUI;
 
 namespace H_Pannel_lib
 {
-    public partial class Dialog_EPD266_顏色選擇 : MyDialog
+    public partial class Dialog_RWB_顏色選擇 : MyDialog
     {
         public Color Value = Color.White;
 
-        public Dialog_EPD266_顏色選擇(Color color)
+        public Dialog_RWB_顏色選擇(Color color)
         {
             InitializeComponent();
-            this.Load += Dialog_EPD266_顏色選擇_Load; 
+            this.Load += Dialog_RWB_顏色選擇_Load; 
             this.rJ_Button_確認.MouseDownEvent += RJ_Button_確認_MouseDownEvent;
             rJ_Lable_Black.Click += RJ_Lable_Click;
             rJ_Lable_Red.Click += RJ_Lable_Click;
@@ -40,7 +40,7 @@ namespace H_Pannel_lib
             Value = color;
         }
 
-        private void Dialog_EPD266_顏色選擇_Load(object sender, EventArgs e)
+        private void Dialog_RWB_顏色選擇_Load(object sender, EventArgs e)
         {
 
         }

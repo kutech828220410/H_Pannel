@@ -1375,7 +1375,26 @@ namespace H_Pannel_lib
     [Serializable]
     public class Device :DeviceBasic
     {
-      
+        public Size PanelSize
+        {
+            get
+            {
+                if (DeviceType == DeviceType.EPD266 || DeviceType == DeviceType.EPD266_lock)
+                {
+                    return new Size(296, 152);
+                }
+                if (DeviceType == DeviceType.EPD290 || DeviceType == DeviceType.EPD290_lock)
+                {
+                    return new Size(296, 128);
+                }
+                if (DeviceType == DeviceType.Pannel35 || DeviceType == DeviceType.Pannel35_lock)
+                {
+                    return new Size(360, 240);
+                }
+                return new Size(0, 0);
+            }
+        }
+
         public enum ValueName
         {
             藥品碼,
@@ -1389,6 +1408,7 @@ namespace H_Pannel_lib
             最小包裝單位,
             最小包裝單位數量,
             BarCode,
+            圖片1,
             儲位名稱,
             IP,
             Port,
@@ -2111,6 +2131,55 @@ namespace H_Pannel_lib
                         }
                         break;
                     }
+                case ValueName.圖片1:
+                    {
+                   
+                        if (valueType == ValueType.Title)
+                        {
+                            if (Value is string) this.Picture1_Title = (string)Value;
+                        }
+                        else if (valueType == ValueType.Font)
+                        {
+                            if (Value is Font) this.Picture1_font = (Font)Value;
+                        }
+                        else if (valueType == ValueType.ForeColor)
+                        {
+                            if (Value is Color) this.Picture1_ForeColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.BackColor)
+                        {
+                            if (Value is Color) this.Picture1_BackColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.Position)
+                        {
+                            if (Value is Point) this.Picture1_Position = (Point)Value;
+                        }
+                        else if (valueType == ValueType.Width)
+                        {
+                            if (Value is int) this.Picture1_Width = (int)Value;
+                        }
+                        else if (valueType == ValueType.Height)
+                        {
+                            if (Value is int) this.Picture1_Height = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderSize)
+                        {
+                            if (Value is int) this.Picture1_BorderSize = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderColor)
+                        {
+                            if (Value is Color) this.Picture1_BorderColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.HorizontalAlignment)
+                        {
+                            if (Value is HorizontalAlignment) this.Picture1_HorizontalAlignment = (HorizontalAlignment)Value;
+                        }
+                        else if (valueType == ValueType.Visable)
+                        {
+                            if (Value is bool) this.Picture1_Visable = (bool)Value;
+                        }
+                        break;
+                    }
                 case ValueName.庫存:
                     {
                         if (valueType == ValueType.Value)
@@ -2400,6 +2469,8 @@ namespace H_Pannel_lib
                         vlaueClass.BorderSize = this.Name_BorderSize;
                         vlaueClass.BorderColor = this.Name_BorderColor;
                         vlaueClass.Visable = this.Name_Visable;
+                        if (vlaueClass.Width > this.PanelSize.Width) vlaueClass.Width = this.PanelSize.Width;
+                        if (vlaueClass.Height > this.PanelSize.Height) vlaueClass.Height = this.PanelSize.Height;
 
                         //Size size = TextRenderer.MeasureText(vlaueClass.StringValue, vlaueClass.Font);
                         //if (vlaueClass.Width < size.Width) vlaueClass.Width = size.Width;
@@ -2627,6 +2698,30 @@ namespace H_Pannel_lib
                         ////if (vlaueClass.Height < size.Height) vlaueClass.Height = size.Height;
                         break;
                     }
+                case ValueName.圖片1:
+                    {
+                        vlaueClass.valueName = valueName;
+                        vlaueClass.Title = this.Picture1_Title;
+                        vlaueClass.Font = this.Picture1_font;
+                        vlaueClass.ForeColor = this.Picture1_ForeColor;
+                        vlaueClass.BackColor = this.Picture1_BackColor;
+                        vlaueClass.Position = this.Picture1_Position;
+                        vlaueClass.Width = this.Picture1_Width;
+                        vlaueClass.Height = this.Picture1_Height;
+                        vlaueClass.HorizontalAlignment = this.Picture1_HorizontalAlignment;
+                        vlaueClass.BorderSize = this.Picture1_BorderSize;
+                        vlaueClass.BorderColor = this.Picture1_BorderColor;
+                        vlaueClass.Visable = this.Picture1_Visable;
+
+                        if (vlaueClass.Value.StringIsEmpty())
+                        {
+                            vlaueClass.Value = "None";
+                        }
+                        ////Size size = TextRenderer.MeasureText(vlaueClass.Value, vlaueClass.Font);
+                        ////if (vlaueClass.Width < size.Width) vlaueClass.Width = size.Width;
+                        ////if (vlaueClass.Height < size.Height) vlaueClass.Height = size.Height;
+                        break;
+                    }
                 case ValueName.庫存:
                     {
                         vlaueClass.valueName = valueName;
@@ -2712,6 +2807,8 @@ namespace H_Pannel_lib
                         break;
                     }
             }
+            if (vlaueClass.Width > this.PanelSize.Width) vlaueClass.Width = this.PanelSize.Width;
+            if (vlaueClass.Height > this.PanelSize.Height) vlaueClass.Height = this.PanelSize.Height;
             return vlaueClass;
         }
         public Bitmap Get_EPD_Bitmap(ValueName valueName, double bmp_Scale)
@@ -2722,29 +2819,9 @@ namespace H_Pannel_lib
         {
             VlaueClass vlaueClass = this.GetValue(valueName);
 
-            if (valueName != ValueName.BarCode)
+            if (valueName == ValueName.BarCode)
             {
-                Bitmap bitmap = Communication.TextToBitmap(vlaueClass.Value, vlaueClass.Font, bmp_Scale, vlaueClass.Width, vlaueClass.Height, vlaueClass.ForeColor, vlaueClass.BackColor, vlaueClass.BorderSize, vlaueClass.BorderColor, vlaueClass.HorizontalAlignment);
-                if (bitmap == null) return null;
-                using (Graphics g = Graphics.FromImage(bitmap))
-                {
-                    g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    g.CompositingQuality = CompositingQuality.HighQuality;
-                    g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-                    if (color != null)
-                    {
-                        float[] dashValues = { 2, 2, 2, 2 };
-                        Pen pen = new Pen((Color)color, BorderSize);
-                        if (dash) pen.DashPattern = dashValues;
 
-                        g.DrawRectangle(pen, BorderSize / 2, BorderSize / 2, (int)(bitmap.Width - BorderSize), (int)(bitmap.Height - BorderSize));
-                    }
-                }
-                return bitmap;
-            }
-            else
-            {
                 Size Rect_Size = new Size((int)(vlaueClass.Width * bmp_Scale), (int)(vlaueClass.Height * bmp_Scale));
 
                 Bitmap bitmap = Communication.CreateBarCode(vlaueClass.Value, Rect_Size.Width, Rect_Size.Height);
@@ -2767,7 +2844,55 @@ namespace H_Pannel_lib
                         }
                     }
                 }
+                return bitmap;          
+            }
+            else if (valueName == ValueName.圖片1)
+            {
 
+                Size Rect_Size = new Size((int)(vlaueClass.Width * bmp_Scale), (int)(vlaueClass.Height * bmp_Scale));
+                Bitmap bitmap = Resource1.Alarm_filled_red;
+                bitmap = Communication.ScaleImage(bitmap, Rect_Size.Width, Rect_Size.Height);
+                if (bitmap != null)
+                {
+                    using (Graphics g = Graphics.FromImage(bitmap))
+                    {
+                        if (color != null)
+                        {
+                            g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            g.CompositingQuality = CompositingQuality.HighQuality;
+                            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+
+                            float[] dashValues = { 2, 2, 2, 2 };
+                            Pen pen = new Pen((Color)color, BorderSize);
+                            if (dash) pen.DashPattern = dashValues;
+
+                            g.DrawRectangle(pen, BorderSize / 2, BorderSize / 2, (int)(vlaueClass.Width * bmp_Scale - BorderSize), (int)(vlaueClass.Height * bmp_Scale - BorderSize));
+                        }
+                    }
+                }
+                return bitmap;
+            }
+            else
+            {
+                Bitmap bitmap = Communication.TextToBitmap(vlaueClass.Value, vlaueClass.Font, bmp_Scale, vlaueClass.Width, vlaueClass.Height, vlaueClass.ForeColor, vlaueClass.BackColor, vlaueClass.BorderSize, vlaueClass.BorderColor, vlaueClass.HorizontalAlignment);
+                if (bitmap == null) return null;
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.CompositingQuality = CompositingQuality.HighQuality;
+                    g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+                    if (color != null)
+                    {
+                        float[] dashValues = { 2, 2, 2, 2 };
+                        Pen pen = new Pen((Color)color, BorderSize);
+                        if (dash) pen.DashPattern = dashValues;
+
+                        g.DrawRectangle(pen, BorderSize / 2, BorderSize / 2, (int)(bitmap.Width - BorderSize), (int)(bitmap.Height - BorderSize));
+
+                    }
+                }
                 return bitmap;
             }
 
@@ -2869,6 +2994,7 @@ namespace H_Pannel_lib
             if (text == "IP") return ValueName.IP;
             if (text == "Port") return ValueName.Port;
             if (text == "最大存量") return ValueName.最大存量;
+            if (text == "圖片1") return ValueName.圖片1;
 
 
             return ValueName.None;
@@ -3780,6 +3906,66 @@ namespace H_Pannel_lib
         private HorizontalAlignment _Port_HorizontalAlignment = HorizontalAlignment.Left;
         public HorizontalAlignment Port_HorizontalAlignment { get => _Port_HorizontalAlignment; set => _Port_HorizontalAlignment = value; }
         #endregion
+        #region Picture1
+        private string _Picture1_Title = "";
+        public string Picture1_Title { get => _Picture1_Title; set => _Picture1_Title = value; }
+
+        [JsonIgnore]
+        public Font Picture1_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_Picture1_font_Serialize);
+            }
+            set
+            {
+                _Picture1_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _Picture1_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
+        [Browsable(false)]
+        public string Picture1_font_Serialize
+        {
+            get { return _Picture1_font_Serialize; }
+            set { _Picture1_font_Serialize = value; }
+        }
+        [JsonIgnore]
+        public Color Picture1_BackColor = Color.White;
+        [Browsable(false)]
+        public string Picture1_BackColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(Picture1_BackColor); }
+            set { Picture1_BackColor = ColorSerializationHelper.FromString(value); }
+        }
+        [JsonIgnore]
+        public Color Picture1_ForeColor = Color.Black;
+        [Browsable(false)]
+        public string Picture1_ForeColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(Picture1_ForeColor); }
+            set { Picture1_ForeColor = ColorSerializationHelper.FromString(value); }
+        }
+        private Point _Picture1_Position = new Point();
+        public Point Picture1_Position { get => _Picture1_Position; set => _Picture1_Position = value; }
+        private bool _Picture1_Visable = true;
+        public bool Picture1_Visable { get => _Picture1_Visable; set => _Picture1_Visable = value; }
+        private int _Picture1_Width = 50;
+        public int Picture1_Width { get => _Picture1_Width; set => _Picture1_Width = value; }
+        private int _Picture1_Height = 50;
+        public int Picture1_Height { get => _Picture1_Height; set => _Picture1_Height = value; }
+        private int _Picture1_BorderSize = 1;
+        public int Picture1_BorderSize { get => _Picture1_BorderSize; set => _Picture1_BorderSize = value; }
+        [JsonIgnore]
+        public Color Picture1_BorderColor = Color.Black;
+        [Browsable(false)]
+        public string Picture1_BorderColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(Picture1_BorderColor); }
+            set { Picture1_BorderColor = ColorSerializationHelper.FromString(value); }
+        }
+        private HorizontalAlignment _Picture1_HorizontalAlignment = HorizontalAlignment.Left;
+        public HorizontalAlignment Picture1_HorizontalAlignment { get => _Picture1_HorizontalAlignment; set => _Picture1_HorizontalAlignment = value; }
+        #endregion
 
         [JsonIgnore]
         public Color BackColor = Color.White;
@@ -3812,36 +3998,49 @@ namespace H_Pannel_lib
         private int index = 0;
 
 
-        virtual public void PasteFormat(Device device)
+        virtual public void PasteFormat(object obj)
         {
-            this.BackColor = device.BackColor;
-            this.ForeColor = device.ForeColor;
-            for (int i = 0; i < new ValueName().GetEnumNames().Length; i++)
+            if(obj is Device)
             {
-                for (int k = 0; k < new ValueType().GetEnumNames().Length; k++)
+                Device device = obj as Device;
+
+                this.BackColor = device.BackColor;
+                this.ForeColor = device.ForeColor;
+                for (int i = 0; i < new ValueName().GetEnumNames().Length; i++)
                 {
-                    if ((ValueType)k == ValueType.StringValue) continue;
-                    if ((ValueType)k == ValueType.Value) continue;
-                    if ((ValueType)k == ValueType.Title) continue;
-                    object value = device.GetValue((ValueName)i, (ValueType)k);
-                    this.SetValue((ValueName)i, (ValueType)k, value);
+                    for (int k = 0; k < new ValueType().GetEnumNames().Length; k++)
+                    {
+                        if ((ValueType)k == ValueType.StringValue) continue;
+                        if ((ValueType)k == ValueType.Value) continue;
+                        if ((ValueType)k == ValueType.Title) continue;
+                        object value = device.GetValue((ValueName)i, (ValueType)k);
+                        this.SetValue((ValueName)i, (ValueType)k, value);
+                    }
                 }
+                this.Speaker = device.Speaker;
             }
-            this.Speaker = device.Speaker;
+            
         }
-        virtual public void Paste(Device device)
+        virtual public void Paste(object obj)
         {
-            this.BackColor = device.BackColor;
-            this.ForeColor = device.ForeColor;
-            for (int i = 0; i < new ValueName().GetEnumNames().Length; i++)
+            if (obj is Device)
             {
-                for (int k = 0; k < new ValueType().GetEnumNames().Length; k++)
+                Device device = obj as Device;
+
+                this.BackColor = device.BackColor;
+                this.ForeColor = device.ForeColor;
+
+                for (int i = 0; i < new ValueName().GetEnumNames().Length; i++)
                 {
-                    object value = device.GetValue((ValueName)i, (ValueType)k);
-                    this.SetValue((ValueName)i, (ValueType)k, value);
+                    for (int k = 0; k < new ValueType().GetEnumNames().Length; k++)
+                    {
+                        object value = device.GetValue((ValueName)i, (ValueType)k);
+                        this.SetValue((ValueName)i, (ValueType)k, value);
+                    }
                 }
+                this.Speaker = device.Speaker;
             }
-            this.Speaker = device.Speaker;
+          
         }
         public void Clear()
         {
