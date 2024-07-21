@@ -90,6 +90,23 @@ namespace H_Pannel_lib
             }
             return false;
         }
+        static public bool Set_Rows_LED_UDP_Ex(UDP_Class uDP_Class, string IP, int startNum, int EndNum, Color color)
+        {
+            if (uDP_Class != null)
+            {
+                int len = EndNum - startNum;
+                if (len <= 0) return false;
+                byte[] LED_Bytes = new byte[len * 3];
+                for (int i = 0; i < len; i++)
+                {
+                    LED_Bytes[i * 3 + 0] = color.R;
+                    LED_Bytes[i * 3 + 1] = color.G;
+                    LED_Bytes[i * 3 + 2] = color.B;
+                }
+                return Communication.Set_WS2812_Buffer(uDP_Class, IP, startNum * 3, LED_Bytes);
+            }
+            return false;
+        }
         static public bool Set_Rows_LED_UDP(UDP_Class uDP_Class, RowsLED rowsLED)
         {
             if (uDP_Class != null)
@@ -149,6 +166,12 @@ namespace H_Pannel_lib
         {
             return Set_Rows_LED_UDP(rowsLED, startNum, EndNum, color, true);
         }
+        public bool Set_Rows_LED_UDP_Ex(RowsLED rowsLED, int startNum, int EndNum, Color color)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(rowsLED.Port);
+            return Set_Rows_LED_UDP_Ex(uDP_Class , rowsLED.IP, startNum, EndNum, color);
+        }
+
         public bool Set_Rows_LED_UDP(RowsLED rowsLED, int startNum, int EndNum, Color color , bool ClearAll)
         {
             if (ClearAll)
