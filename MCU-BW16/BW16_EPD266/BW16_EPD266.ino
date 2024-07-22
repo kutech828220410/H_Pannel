@@ -1,5 +1,4 @@
 #include "EPD.h"
-#include "WS2812B.h"
 #include <WiFi.h>
 #include <WiFiUdp.h> 
 #include <FreeRTOS.h>
@@ -63,10 +62,10 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.5.5";
+String Version = "Ver 1.5.8";
 
-#define EPD
-//#define RowLED
+//#define EPD
+#define RowLED
 
 
 #ifdef EPD
@@ -224,15 +223,15 @@ void Core0Task2( void * pvParameters )
     for(;;)
     {      
        
-       if(flag_boradInit)
-       {
-          if(!myWS2812.IsON(200))
-          {
-            flag_WS2812B_Refresh = true;
-          }
-       }
-          
-       delay(20000);
+//       if(flag_boradInit)
+//       {
+//          if(!myWS2812.IsON(200))
+//          {
+//            flag_WS2812B_Refresh = true;
+//          }
+//       }
+//          
+//       delay(20000);
     }
     
 }

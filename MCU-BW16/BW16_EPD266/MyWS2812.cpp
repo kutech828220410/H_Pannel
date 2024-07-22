@@ -52,6 +52,29 @@ void MyWS2812::Show()
     delay(100);
     digitalWrite(this -> PIN_CS , LOW);
 }
+void MyWS2812::Show(byte bytes[] , int _numOfLed)
+{    
+    
+    digitalWrite(this -> PIN_CS , HIGH);
+    delay(10);
+
+     for(int i = 0 ; i < offset * 24; i++)
+    {
+      *(rgbBytesBuffer + i) = 0;
+    }
+    for(int i = 0 ; i < _numOfLed ;i++)
+    {
+        RGBConvert2812Bytes(i + offset, bytes[i * 3 + 0], bytes[i * 3 + 1], bytes[i * 3 + 2]);  
+    }    
+    
+    SPI.begin(); 
+    SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
+     
+    SPI.transfer(rgbBytesBuffer , _numOfLed * 24 + offset * 24);
+    SPI.endTransaction();
+    delay(100);
+    digitalWrite(this -> PIN_CS , LOW);
+}
 
 
 

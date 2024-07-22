@@ -16,6 +16,7 @@ class MyWS2812
     void SetRGB(int lednum ,byte R, byte G, byte B);
     byte* rgbBuffer;
     byte* GetRGB();
+    void Show(byte bytes[] , int numOfLed);
     void Show();
     int numOfLed = 0;
     double brightness = 100;
