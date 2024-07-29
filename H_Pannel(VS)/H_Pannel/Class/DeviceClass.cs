@@ -293,16 +293,7 @@ namespace H_Pannel_lib
             return result;
         }
     }
-    public class LightState
-    {
-        public bool State = false;
-        public double Interval = 0;
-        public double LightOffTime = 0;
-        public Color LightColor = Color.Black;
-        public DateTime LightingDateTime = DateTime.Now;
-        public bool IsLightOn = false;
 
-    }
     [Serializable]
     public class DeviceBasicClass
     {
@@ -553,6 +544,17 @@ namespace H_Pannel_lib
     [Serializable]
     public class DeviceBasic : DeviceSimple
     {
+        public class LightStateClass
+        {
+            public bool State = false;
+            public double Interval = 0;
+            public double LightOffTime = 0;
+            public Color LightColor = Color.Black;
+            public DateTime LightingDateTime = DateTime.Now;
+            public bool IsLightOn = false;
+
+        }
+
         public string serverIP = "";
         public uint serverPort = 0;
         public string dbName = "";
@@ -695,7 +697,18 @@ namespace H_Pannel_lib
         private string area = "";
         public string Area { get => area; set => area = value; }
 
-        public LightState LightState = new LightState();
+        public LightStateClass LightState = new LightStateClass();
+
+
+        public void SetLight(bool state , Color color , double intervlal , double light_off_time)
+        {
+            LightState.State = state;
+            if (color != Color.Transparent) LightState.LightColor = color;
+            if (intervlal > 0 || intervlal != -1) LightState.Interval = intervlal;
+            if (light_off_time > 0 || light_off_time!= -1) LightState.LightOffTime = light_off_time;
+            LightState.LightingDateTime = DateTime.Now;
+        }
+
 
         [JsonIgnore]   
         public List<StockClass> stockClasses

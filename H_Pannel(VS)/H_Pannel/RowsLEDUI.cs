@@ -58,6 +58,7 @@ namespace H_Pannel_lib
             LED_Bytes = Get_Rows_LEDBytes(ref LED_Bytes, rowsDevice.StartLED, rowsDevice.EndLED, color);
             return LED_Bytes;
         }
+
         static public byte[] Get_RowsLightStateLEDBytes(RowsLED rowsLED)
         {
             byte[] LED_Bytes = Get_Empty_LEDBytes();
@@ -71,7 +72,7 @@ namespace H_Pannel_lib
                         TimeSpan interval = DateTime.Now - rowsLED.RowsDevices[i].LightState.LightingDateTime;
                         // 取得毫秒間隔
                         double milliseconds = interval.TotalMilliseconds;
-                        if ((milliseconds / rowsLED.RowsDevices[i].LightState.Interval) % 2 == 0)
+                        if ((int)(milliseconds / rowsLED.RowsDevices[i].LightState.Interval) % 2 == 0)
                         {
                             continue;
                         }
@@ -87,7 +88,7 @@ namespace H_Pannel_lib
                         }
 
                     }
-                    LED_Bytes = Get_Rows_LEDBytes(ref rowsLED.LED_Bytes, rowsLED.RowsDevices[i].StartLED, rowsLED.RowsDevices[i].EndLED, rowsLED.RowsDevices[i].LightState.LightColor);
+                    LED_Bytes = Get_Rows_LEDBytes(ref LED_Bytes, rowsLED.RowsDevices[i].StartLED, rowsLED.RowsDevices[i].EndLED, rowsLED.RowsDevices[i].LightState.LightColor);
                 }       
             }
 
@@ -127,6 +128,8 @@ namespace H_Pannel_lib
             {
                 rowsLED.LED_Bytes_buf = new byte[rowsLED.LED_Bytes.Length];
             }
+
+
             for (int i = 0; i < rowsLED.LED_Bytes.Length; i++)
             {
                 if (rowsLED.LED_Bytes_buf[i] != rowsLED.LED_Bytes[i])
@@ -206,12 +209,35 @@ namespace H_Pannel_lib
         }
         static public bool Check_LEDBytesBuf_Diff(byte[] bytes1, byte[] bytes2)
         {
-            if (bytes1.Length < bytes2.Length) return false;
-            for (int i = 0; i < bytes1.Length; i++)
+            bool flag_diff = true;
+            try
             {
-                if (bytes1[i] != bytes2[i]) return false;
+                if (bytes1.Length < bytes2.Length)
+                {
+                    flag_diff = true;
+                    return flag_diff;
+                }
+                for (int i = 0; i < bytes1.Length; i++)
+                {
+                    if (bytes1[i] != bytes2[i])
+                    {
+                        flag_diff = true;
+                        return flag_diff;
+                    }
+                }
+                flag_diff = false;
+                return flag_diff;
             }
-            return true;
+            catch
+            {
+                flag_diff = false;
+                return flag_diff;
+            }
+            finally
+            {
+
+            }
+         
         }
         #endregion
 
@@ -290,8 +316,6 @@ namespace H_Pannel_lib
             return Set_Rows_LED_UDP(uDP_Class, rowsLED, check_buf_diff);
         }
     
-
-
         public bool Set_Rows_LED_UDP_Ex(RowsLED rowsLED, int startNum, int EndNum, Color color)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(rowsLED.Port);

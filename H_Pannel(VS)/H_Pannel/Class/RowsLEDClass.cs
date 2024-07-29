@@ -471,6 +471,8 @@ namespace H_Pannel_lib
         public byte[] LED_Bytes = new byte[NumOfLED * 3];
         [JsonIgnore]
         public byte[] LED_Bytes_buf = new byte[NumOfLED * 3];
+        [JsonIgnore]
+        public byte[] LED_Bytes_temp = new byte[NumOfLED * 3];
         public RowsLED(string IP, int Port)
         {
             this.IP = IP;
@@ -486,7 +488,11 @@ namespace H_Pannel_lib
         private string area = "";
         public string Area { get => area; set => area = value; }
 
+        [JsonIgnore]
         public bool UpToSQL = false;
+        [JsonIgnore]
+        public bool UploadLED = false;
+
         public string IP { get => iP; set => iP = value; }
         public int Port { get => port; set => port = value; }
         public string Name { get => name; set => name = value; }
@@ -540,6 +546,14 @@ namespace H_Pannel_lib
             }
         }
 
+        public void CopyLedTemp()
+        {
+            LED_Bytes = LED_Bytes_temp.DeepClone();
+        }
+        public void ClearLedTemp()
+        {
+            LED_Bytes_temp = new byte[NumOfLED * 3];
+        }
 
         public class ICP_SortByIP : IComparer<RowsLED>
         {
