@@ -704,8 +704,8 @@ namespace H_Pannel_lib
         {
             LightState.State = state;
             if (color != Color.Transparent) LightState.LightColor = color;
-            if (intervlal > 0 || intervlal != -1) LightState.Interval = intervlal;
-            if (light_off_time > 0 || light_off_time!= -1) LightState.LightOffTime = light_off_time;
+            if (intervlal > 0 || intervlal == -1) LightState.Interval = intervlal;
+            if (light_off_time > 0 || light_off_time == -1) LightState.LightOffTime = light_off_time;
             LightState.LightingDateTime = DateTime.Now;
         }
 

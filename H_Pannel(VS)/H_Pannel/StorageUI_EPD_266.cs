@@ -93,6 +93,39 @@ namespace H_Pannel_lib
 
             return LED_Bytes;
         }
+        static public byte[] Get_LightStateLEDBytes(Storage storage)
+        {
+            byte[] LED_Bytes = Get_Empty_LEDBytes();
+
+            if (storage.LightState.State)
+            {
+                if (storage.LightState.Interval > 0)
+                {
+                    // 計算時間間隔
+                    TimeSpan interval = DateTime.Now - storage.LightState.LightingDateTime;
+                    // 取得毫秒間隔
+                    double milliseconds = interval.TotalMilliseconds;
+                    if ((int)(milliseconds / storage.LightState.Interval) % 2 == 0)
+                    {
+                        return Get_Empty_LEDBytes(); 
+                    }
+                }
+                if (storage.LightState.LightOffTime > 0)
+                {
+                    TimeSpan interval = DateTime.Now - storage.LightState.LightingDateTime;
+                    double milliseconds = interval.TotalMilliseconds;
+                    if (milliseconds > storage.LightState.LightOffTime)
+                    {
+                        storage.LightState.State = false;
+                        return Get_Empty_LEDBytes();
+                    }
+
+                }
+                LED_Bytes = Get_Pannel_LEDBytes(storage.LightState.LightColor);
+            }
+            return LED_Bytes;
+        }
+
         static public bool Set_Stroage_TOF(UDP_Class uDP_Class, string IP, bool value)
         {
             return Communication.Set_TOF(uDP_Class, IP, value);

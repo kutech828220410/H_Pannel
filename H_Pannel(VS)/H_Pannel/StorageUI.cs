@@ -25,6 +25,7 @@ namespace H_Pannel_lib
  
     public partial class StorageUI : DeviceBasicUI
     {
+      
 
         private List<Storage> Storages = new List<Storage>();
 
@@ -320,9 +321,48 @@ namespace H_Pannel_lib
                 this.sqL_DataGridView_DeviceTable.SQL_AddRow(value, true);
             }
         }
- 
 
 
+        static public bool Check_LEDBytesBuf_Diff(Storage storage)
+        {
+            return Check_LEDBytesBuf_Diff(storage.LED_Bytes, storage.LED_Bytes_buf);
+        }
+        static public bool Check_LEDBytesBuf_Diff(Storage storage, byte[] bytes2)
+        {
+            return Check_LEDBytesBuf_Diff(storage.LED_Bytes, bytes2);
+        }
+        static public bool Check_LEDBytesBuf_Diff(byte[] bytes1, byte[] bytes2)
+        {
+            bool flag_diff = true;
+            try
+            {
+                if (bytes1.Length < bytes2.Length)
+                {
+                    flag_diff = true;
+                    return flag_diff;
+                }
+                for (int i = 0; i < bytes1.Length; i++)
+                {
+                    if (bytes1[i] != bytes2[i])
+                    {
+                        flag_diff = true;
+                        return flag_diff;
+                    }
+                }
+                flag_diff = false;
+                return flag_diff;
+            }
+            catch
+            {
+                flag_diff = false;
+                return flag_diff;
+            }
+            finally
+            {
+
+            }
+
+        }
     }
 
 

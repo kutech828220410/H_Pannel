@@ -31,7 +31,12 @@ namespace H_Pannel_lib
         private enum_DrawType _enum_drawType = Storage.enum_DrawType.type1;
 
         public byte[] LED_Bytes = new byte[450 * 3];
-
+        [JsonIgnore]
+        public byte[] LED_Bytes_buf = new byte[450 * 3];
+        [JsonIgnore]
+        public byte[] LED_Bytes_temp = new byte[450 * 3];
+        [JsonIgnore]
+        public bool UploadLED = false;
         public string OutputAdress { get => outputAdress; set => outputAdress = value; }
         public string InputAdress { get => inputAdress; set => inputAdress = value; }      
         public bool TOFON { get => tOFON; set => tOFON = value; }
