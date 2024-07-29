@@ -469,6 +469,8 @@ namespace H_Pannel_lib
         public static int NumOfLED = 250;
         [JsonIgnore]
         public byte[] LED_Bytes = new byte[NumOfLED * 3];
+        [JsonIgnore]
+        public byte[] LED_Bytes_buf = new byte[NumOfLED * 3];
         public RowsLED(string IP, int Port)
         {
             this.IP = IP;

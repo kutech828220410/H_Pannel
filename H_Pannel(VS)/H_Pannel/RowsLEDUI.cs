@@ -104,30 +104,65 @@ namespace H_Pannel_lib
         }
 
 
-
+    
         static public bool Set_Rows_LED_UDP(UDP_Class uDP_Class, RowsLED rowsLED, int startNum, int EndNum, Color color, bool ClearAll)
         {
-            if (uDP_Class != null)
+            return Set_Rows_LED_UDP(uDP_Class, rowsLED, startNum, EndNum, color, ClearAll, false);
+        }
+        static public bool Set_Rows_LED_UDP(UDP_Class uDP_Class, RowsLED rowsLED, int startNum, int EndNum, Color color, bool ClearAll, bool check_buf_diff)
+        {
+            if (ClearAll)
             {
-                if (ClearAll)
-                {
-                    rowsLED.LED_Bytes = Get_Empty_LEDBytes();
-                }
-                rowsLED.LED_Bytes = Get_Rows_LEDBytes(ref rowsLED.LED_Bytes, startNum, EndNum, color);
-                return Communication.Set_WS2812_Buffer(uDP_Class, rowsLED.IP, 0, rowsLED.LED_Bytes);
+                rowsLED.LED_Bytes = Get_Empty_LEDBytes();
             }
-            return false;
+            rowsLED.LED_Bytes = Get_Rows_LEDBytes(ref rowsLED.LED_Bytes, startNum, EndNum, color);
+            return Set_Rows_LED_UDP(uDP_Class, rowsLED, check_buf_diff);
+        }
+        static public bool Set_Rows_LED_UDP(UDP_Class uDP_Class, RowsLED rowsLED)
+        {
+            return Set_Rows_LED_UDP(uDP_Class, rowsLED, false);
+        }
+        static public bool Set_Rows_LED_UDP(UDP_Class uDP_Class, RowsLED rowsLED , bool check_buf_diff)
+        {
+            bool flag_buf_diff = false;
+            if(rowsLED.LED_Bytes_buf.Length != rowsLED.LED_Bytes.Length)
+            {
+                rowsLED.LED_Bytes_buf = new byte[rowsLED.LED_Bytes.Length];
+            }
+            for (int i = 0; i < rowsLED.LED_Bytes.Length; i++)
+            {
+                if (rowsLED.LED_Bytes_buf[i] != rowsLED.LED_Bytes[i])
+                {
+                    rowsLED.LED_Bytes_buf[i] = rowsLED.LED_Bytes[i];
+                    flag_buf_diff = true;
+                }
+                  
+            }
+            if (check_buf_diff)
+            {
+                if(flag_buf_diff)
+                {
+                    Set_Rows_LED_UDP(uDP_Class, rowsLED.IP, rowsLED.LED_Bytes);
+                }
+                return true;
+            }
+            return Set_Rows_LED_UDP(uDP_Class, rowsLED.IP, rowsLED.LED_Bytes);
         }
         static public bool Set_Rows_LED_UDP(UDP_Class uDP_Class, string IP, int startNum, int EndNum, Color color)
         {
+            byte[] LED_Bytes = Get_Empty_LEDBytes();
+            LED_Bytes = Get_Rows_LEDBytes(ref LED_Bytes, startNum, EndNum, color);
+            return Set_Rows_LED_UDP(uDP_Class, IP, LED_Bytes);
+        }
+        static public bool Set_Rows_LED_UDP(UDP_Class uDP_Class, string IP, byte[] LED_Bytes)
+        {
             if (uDP_Class != null)
             {
-                byte[] LED_Bytes = Get_Empty_LEDBytes();
-                LED_Bytes = Get_Rows_LEDBytes(ref LED_Bytes, startNum, EndNum, color);
                 return Communication.Set_WS2812_Buffer(uDP_Class, IP, 0, LED_Bytes);
             }
             return false;
         }
+
         static public bool Set_Rows_LED_UDP_Ex(UDP_Class uDP_Class, string IP, int startNum, int EndNum, Color color)
         {
             if (uDP_Class != null)
@@ -142,22 +177,6 @@ namespace H_Pannel_lib
                     LED_Bytes[i * 3 + 2] = color.B;
                 }
                 return Communication.Set_WS2812_Buffer(uDP_Class, IP, startNum * 3, LED_Bytes);
-            }
-            return false;
-        }
-        static public bool Set_Rows_LED_UDP(UDP_Class uDP_Class, RowsLED rowsLED)
-        {
-            if (uDP_Class != null)
-            {
-                return Communication.Set_WS2812_Buffer(uDP_Class, rowsLED.IP, 0, rowsLED.LED_Bytes);
-            }
-            return false;
-        }
-        static public bool Set_Rows_LED_UDP(UDP_Class uDP_Class, string IP, byte[] LED_Bytes)
-        {
-            if (uDP_Class != null)
-            {
-                return Communication.Set_WS2812_Buffer(uDP_Class, IP, 0, LED_Bytes);
             }
             return false;
         }

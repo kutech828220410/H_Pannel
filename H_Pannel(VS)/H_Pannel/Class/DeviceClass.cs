@@ -300,6 +300,7 @@ namespace H_Pannel_lib
         public double LightOffTime = 0;
         public Color LightColor = Color.Black;
         public DateTime LightingDateTime = DateTime.Now;
+        public bool IsLightOn = false;
 
     }
     [Serializable]
