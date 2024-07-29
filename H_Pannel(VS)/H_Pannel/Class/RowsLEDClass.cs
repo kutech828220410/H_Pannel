@@ -613,6 +613,13 @@ namespace H_Pannel_lib
             this.endLED = endLED;
             this.DeviceType = DeviceType.RowsLED;
         }
+        public RowsDevice Paste(Device device)
+        {
+            RowsDevice rowsDevice = (RowsDevice)device;
+            rowsDevice.startLED = this.startLED;
+            rowsDevice.endLED = this.endLED;
+            return rowsDevice;
+        }
     }
 
    

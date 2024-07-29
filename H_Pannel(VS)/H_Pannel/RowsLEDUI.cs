@@ -58,6 +58,41 @@ namespace H_Pannel_lib
             LED_Bytes = Get_Rows_LEDBytes(ref LED_Bytes, rowsDevice.StartLED, rowsDevice.EndLED, color);
             return LED_Bytes;
         }
+        static public byte[] Get_RowsLightStateLEDBytes(RowsLED rowsLED)
+        {
+            byte[] LED_Bytes = Get_Empty_LEDBytes();
+            for (int i = 0; i < rowsLED.RowsDevices.Count; i++)
+            {
+                if (rowsLED.RowsDevices[i].LightState.State)
+                {
+                    if(rowsLED.RowsDevices[i].LightState.Interval > 0)
+                    {
+                        // 計算時間間隔
+                        TimeSpan interval = DateTime.Now - rowsLED.RowsDevices[i].LightState.LightingDateTime;
+                        // 取得毫秒間隔
+                        double milliseconds = interval.TotalMilliseconds;
+                        if ((milliseconds / rowsLED.RowsDevices[i].LightState.Interval) % 2 == 0)
+                        {
+                            continue;
+                        }
+                    }
+                    if (rowsLED.RowsDevices[i].LightState.LightOffTime > 0)
+                    {
+                        TimeSpan interval = DateTime.Now - rowsLED.RowsDevices[i].LightState.LightingDateTime;
+                        double milliseconds = interval.TotalMilliseconds;
+                        if (milliseconds > rowsLED.RowsDevices[i].LightState.LightOffTime)
+                        {
+                            rowsLED.RowsDevices[i].LightState.State = false;
+                            continue;
+                        }
+
+                    }
+                    LED_Bytes = Get_Rows_LEDBytes(ref rowsLED.LED_Bytes, rowsLED.RowsDevices[i].StartLED, rowsLED.RowsDevices[i].EndLED, rowsLED.RowsDevices[i].LightState.LightColor);
+                }       
+            }
+
+            return LED_Bytes;
+        }
         static public byte[] Get_Rows_LEDBytes(ref byte[] LED_Bytes, List<RowsDevice> rowsDevices, Color color)
         {
             for (int i = 0; i < rowsDevices.Count; i++)
@@ -67,6 +102,9 @@ namespace H_Pannel_lib
            
             return LED_Bytes;
         }
+
+
+
         static public bool Set_Rows_LED_UDP(UDP_Class uDP_Class, RowsLED rowsLED, int startNum, int EndNum, Color color, bool ClearAll)
         {
             if (uDP_Class != null)

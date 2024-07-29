@@ -293,7 +293,15 @@ namespace H_Pannel_lib
             return result;
         }
     }
-    
+    public class LightState
+    {
+        public bool State = false;
+        public double Interval = 0;
+        public double LightOffTime = 0;
+        public Color LightColor = Color.Black;
+        public DateTime LightingDateTime = DateTime.Now;
+
+    }
     [Serializable]
     public class DeviceBasicClass
     {
@@ -686,7 +694,7 @@ namespace H_Pannel_lib
         private string area = "";
         public string Area { get => area; set => area = value; }
 
-        public bool IsLightOn = false;
+        public LightState LightState = new LightState();
 
         [JsonIgnore]   
         public List<StockClass> stockClasses
@@ -3996,6 +4004,7 @@ namespace H_Pannel_lib
         public int Index { get => index; set => index = value; }
        
         private int index = 0;
+        public bool LightOn = true;
 
 
         virtual public void PasteFormat(object obj)

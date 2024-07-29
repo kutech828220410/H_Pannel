@@ -841,5 +841,17 @@ namespace H_Pannel_lib
 
             }
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // StorageUI_EPD_266
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.Name = "StorageUI_EPD_266";
+            this.ResumeLayout(false);
+
+        }
     }
 }

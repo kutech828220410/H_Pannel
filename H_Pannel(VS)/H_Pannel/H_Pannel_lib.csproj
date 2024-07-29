@@ -338,6 +338,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="StorageUI_EPD_266.resx">
+      <DependentUpon>StorageUI_EPD_266.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewUI\EPD266_Paint_Form.resx">
       <DependentUpon>EPD266_Paint_Form.cs</DependentUpon>
     </EmbeddedResource>
