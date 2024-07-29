@@ -103,8 +103,6 @@ namespace H_Pannel_lib
             return LED_Bytes;
         }
 
-
-    
         static public bool Set_Rows_LED_UDP(UDP_Class uDP_Class, RowsLED rowsLED, int startNum, int EndNum, Color color, bool ClearAll)
         {
             return Set_Rows_LED_UDP(uDP_Class, rowsLED, startNum, EndNum, color, ClearAll, false);
@@ -197,6 +195,24 @@ namespace H_Pannel_lib
             }
             return LED_Bytes;
         }
+
+        static public bool Check_LEDBytesBuf_Diff(RowsLED rowsLED)
+        {
+            return Check_LEDBytesBuf_Diff(rowsLED.LED_Bytes, rowsLED.LED_Bytes_buf);
+        }
+        static public bool Check_LEDBytesBuf_Diff(RowsLED rowsLED, byte[] bytes2)
+        {
+            return Check_LEDBytesBuf_Diff(rowsLED.LED_Bytes, bytes2);
+        }
+        static public bool Check_LEDBytesBuf_Diff(byte[] bytes1, byte[] bytes2)
+        {
+            if (bytes1.Length < bytes2.Length) return false;
+            for (int i = 0; i < bytes1.Length; i++)
+            {
+                if (bytes1[i] != bytes2[i]) return false;
+            }
+            return true;
+        }
         #endregion
 
         private enum ContextMenuStrip_Main
@@ -215,34 +231,49 @@ namespace H_Pannel_lib
             Enum_ContextMenuStrip_DeviceTable = new ContextMenuStrip_Main();
             Enum_ContextMenuStrip_UDP_DataReceive = new ContextMenuStrip_Main();
         }
+
+        public bool Set_Rows_LED_Clear_UDP(RowsLED rowsLED, RowsDevice rowsDevice, bool check_buf_diff)
+        {
+            return Set_Rows_LED_UDP(rowsLED, rowsDevice, Color.Black, check_buf_diff);
+        }
         public bool Set_Rows_LED_UDP(RowsLED rowsLED, RowsDevice rowsDevice, Color color)
         {
-            return Set_Rows_LED_UDP(rowsLED, rowsDevice.StartLED, rowsDevice.EndLED, color, true);
+            return Set_Rows_LED_UDP(rowsLED, rowsDevice.StartLED, rowsDevice.EndLED, color, true, false);
         }
-        public bool Set_Rows_LED_UDP(RowsLED rowsLED, int startNum, int EndNum, Color color)
+        public bool Set_Rows_LED_UDP(RowsLED rowsLED, RowsDevice rowsDevice, Color color, bool check_buf_diff)
         {
-            return Set_Rows_LED_UDP(rowsLED, startNum, EndNum, color, true);
+            return Set_Rows_LED_UDP(rowsLED, rowsDevice.StartLED, rowsDevice.EndLED, color, true, check_buf_diff);
         }
-        public bool Set_Rows_LED_UDP_Ex(RowsLED rowsLED, int startNum, int EndNum, Color color)
+        public bool Set_Rows_LED_UDP(RowsLED rowsLED, RowsDevice rowsDevice, Color color, bool ClearAll, bool check_buf_diff)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(rowsLED.Port);
-            return Set_Rows_LED_UDP_Ex(uDP_Class , rowsLED.IP, startNum, EndNum, color);
+            return Set_Rows_LED_UDP(rowsLED, rowsDevice.StartLED, rowsDevice.EndLED, color, ClearAll, check_buf_diff);
         }
 
-        public bool Set_Rows_LED_UDP(RowsLED rowsLED, int startNum, int EndNum, Color color , bool ClearAll)
+
+        public bool Set_Rows_LED_UDP(RowsLED rowsLED, int startNum, int EndNum, Color color)
         {
-            if (ClearAll)
-            {
-                rowsLED.LED_Bytes = Get_Empty_LEDBytes();
-            }
-            Get_Rows_LEDBytes(ref rowsLED.LED_Bytes, startNum, EndNum, color);
-            return Set_Rows_LED_UDP(rowsLED);
+            return Set_Rows_LED_UDP(rowsLED, startNum, EndNum, color, true, false);
         }
-        public bool Set_Rows_LED_UDP(RowsLED rowsLED)
+        public bool Set_Rows_LED_UDP(RowsLED rowsLED, int startNum, int EndNum, Color color, bool check_buf_diff)
+        {
+            return Set_Rows_LED_UDP(rowsLED, startNum, EndNum, color, true, check_buf_diff);
+        }        
+        public bool Set_Rows_LED_UDP(RowsLED rowsLED, int startNum, int EndNum, Color color, bool ClearAll, bool check_buf_diff)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(rowsLED.Port);
-            return Set_Rows_LED_UDP(uDP_Class, rowsLED);
+            return Set_Rows_LED_UDP(uDP_Class, rowsLED, startNum, EndNum, color, ClearAll, check_buf_diff);
         }
+
+        public bool Set_Rows_LED_UDP(RowsLED rowsLED)
+        {
+            return Set_Rows_LED_UDP(rowsLED , false);
+        }
+        public bool Set_Rows_LED_UDP(RowsLED rowsLED, bool check_buf_diff)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(rowsLED.Port);
+            return Set_Rows_LED_UDP(uDP_Class, rowsLED, check_buf_diff);
+        }
+
         public bool Set_Rows_LED_UDP(string IP, int Port, byte[] LED_Bytes)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
@@ -250,13 +281,21 @@ namespace H_Pannel_lib
         }
         public bool Set_Rows_LED_Clear_UDP(RowsLED rowsLED)
         {
+            return Set_Rows_LED_Clear_UDP(rowsLED, false);
+        }
+        public bool Set_Rows_LED_Clear_UDP(RowsLED rowsLED, bool check_buf_diff)
+        {
             rowsLED.LED_Bytes = Get_Empty_LEDBytes();
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(rowsLED.Port);
-            return Set_Rows_LED_UDP(uDP_Class, rowsLED);
+            return Set_Rows_LED_UDP(uDP_Class, rowsLED, check_buf_diff);
         }
-        public bool Set_Rows_LED_Clear_UDP(RowsLED rowsLED , RowsDevice rowsDevice)
+    
+
+
+        public bool Set_Rows_LED_UDP_Ex(RowsLED rowsLED, int startNum, int EndNum, Color color)
         {
-            return Set_Rows_LED_UDP(rowsLED, rowsDevice, Color.Black);
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(rowsLED.Port);
+            return Set_Rows_LED_UDP_Ex(uDP_Class, rowsLED.IP, startNum, EndNum, color);
         }
 
         protected override void Import()
