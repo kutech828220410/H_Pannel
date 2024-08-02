@@ -51,7 +51,7 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 //SoftwareSerial mySerial(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.3.3";
+String Version = "Ver 1.3.4";
 
 void setup() 
 {
@@ -100,12 +100,12 @@ void loop()
          Connect_UDP(Localport);
          
       }   
-//      if(flag_WS2812B_Refresh)
-//      {
-//          myWS2812.Show();
-//        
-//          flag_WS2812B_Refresh = false;
-//      }  
+      if(flag_WS2812B_Refresh)
+      {
+          myWS2812.Show();
+        
+          flag_WS2812B_Refresh = false;
+      }  
       if(WiFi.status() == WL_CONNECTED)
       {
           sub_UDP_Send();
