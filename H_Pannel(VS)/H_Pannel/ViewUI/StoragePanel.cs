@@ -24,6 +24,10 @@ namespace H_Pannel_lib
             單位,
             條碼,
             圖片1,
+            文本1,
+            文本2,
+            文本3,
+
         }
 
         public delegate void SureClickHandler(Storage storage);

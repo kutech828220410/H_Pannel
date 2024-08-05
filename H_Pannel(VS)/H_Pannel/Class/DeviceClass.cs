@@ -628,7 +628,13 @@ namespace H_Pannel_lib
             }
         }
 
-  
+        private string _CustomText1 = "";
+        public string CustomText1 { get => _CustomText1; set => _CustomText1 = value; }
+        private string _CustomText2 = "";
+        public string CustomText2 { get => _CustomText2; set => _CustomText2 = value; }
+        private string _CustomText3 = "";
+        public string CustomText3 { get => _CustomText3; set => _CustomText3 = value; }
+
         private int max_shipping = 1;
         public int Max_shipping
         {
@@ -734,7 +740,7 @@ namespace H_Pannel_lib
             }
         }
 
-    
+     
 
         public void 效期庫存異動(string 效期, int 異動量)
         {
@@ -1431,6 +1437,9 @@ namespace H_Pannel_lib
             最小包裝單位,
             最小包裝單位數量,
             BarCode,
+            CustomText1,
+            CustomText2,
+            CustomText3,
             圖片1,
             儲位名稱,
             IP,
@@ -2416,6 +2425,168 @@ namespace H_Pannel_lib
                         }
                         break;
                     }
+                case ValueName.CustomText1:
+                    {
+
+                        if (valueType == ValueType.Value)
+                        {
+                            if (Value is string) this.CustomText1 = (string)Value;
+                        }
+                        else if (valueType == ValueType.Title)
+                        {
+                            if (Value is string) this.CustomText1_Title = (string)Value;
+                        }
+                        else if (valueType == ValueType.Font)
+                        {
+                            if (Value is Font) this.CustomText1_font = (Font)Value;
+                        }
+                        else if (valueType == ValueType.ForeColor)
+                        {
+                            if (Value is Color) this.CustomText1_ForeColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.BackColor)
+                        {
+                            if (Value is Color) this.CustomText1_BackColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.Position)
+                        {
+                            if (Value is Point) this.CustomText1_Position = (Point)Value;
+                        }
+                        else if (valueType == ValueType.Width)
+                        {
+                            if (Value is int) this.CustomText1_Width = (int)Value;
+                        }
+                        else if (valueType == ValueType.Height)
+                        {
+                            if (Value is int) this.CustomText1_Height = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderSize)
+                        {
+                            if (Value is int) this.CustomText1_BorderSize = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderColor)
+                        {
+                            if (Value is Color) this.CustomText1_BorderColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.HorizontalAlignment)
+                        {
+                            if (Value is HorizontalAlignment) this.CustomText1_HorizontalAlignment = (HorizontalAlignment)Value;
+                        }
+                        else if (valueType == ValueType.Visable)
+                        {
+                            if (Value is bool) this.CustomText1_Visable = (bool)Value;
+                        }
+
+                        break;
+                    }
+                case ValueName.CustomText2:
+                    {
+
+                        if (valueType == ValueType.Value)
+                        {
+                            if (Value is string) this.CustomText2 = (string)Value;
+                        }
+                        else if (valueType == ValueType.Title)
+                        {
+                            if (Value is string) this.CustomText2_Title = (string)Value;
+                        }
+                        else if (valueType == ValueType.Font)
+                        {
+                            if (Value is Font) this.CustomText2_font = (Font)Value;
+                        }
+                        else if (valueType == ValueType.ForeColor)
+                        {
+                            if (Value is Color) this.CustomText2_ForeColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.BackColor)
+                        {
+                            if (Value is Color) this.CustomText2_BackColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.Position)
+                        {
+                            if (Value is Point) this.CustomText2_Position = (Point)Value;
+                        }
+                        else if (valueType == ValueType.Width)
+                        {
+                            if (Value is int) this.CustomText2_Width = (int)Value;
+                        }
+                        else if (valueType == ValueType.Height)
+                        {
+                            if (Value is int) this.CustomText2_Height = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderSize)
+                        {
+                            if (Value is int) this.CustomText2_BorderSize = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderColor)
+                        {
+                            if (Value is Color) this.CustomText2_BorderColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.HorizontalAlignment)
+                        {
+                            if (Value is HorizontalAlignment) this.CustomText2_HorizontalAlignment = (HorizontalAlignment)Value;
+                        }
+                        else if (valueType == ValueType.Visable)
+                        {
+                            if (Value is bool) this.CustomText2_Visable = (bool)Value;
+                        }
+
+                        break;
+                    }
+                case ValueName.CustomText3:
+                    {
+
+                        if (valueType == ValueType.Value)
+                        {
+                            if (Value is string) this.CustomText3 = (string)Value;
+                        }
+                        else if (valueType == ValueType.Title)
+                        {
+                            if (Value is string) this.CustomText3_Title = (string)Value;
+                        }
+                        else if (valueType == ValueType.Font)
+                        {
+                            if (Value is Font) this.CustomText3_font = (Font)Value;
+                        }
+                        else if (valueType == ValueType.ForeColor)
+                        {
+                            if (Value is Color) this.CustomText3_ForeColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.BackColor)
+                        {
+                            if (Value is Color) this.CustomText3_BackColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.Position)
+                        {
+                            if (Value is Point) this.CustomText3_Position = (Point)Value;
+                        }
+                        else if (valueType == ValueType.Width)
+                        {
+                            if (Value is int) this.CustomText3_Width = (int)Value;
+                        }
+                        else if (valueType == ValueType.Height)
+                        {
+                            if (Value is int) this.CustomText3_Height = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderSize)
+                        {
+                            if (Value is int) this.CustomText3_BorderSize = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderColor)
+                        {
+                            if (Value is Color) this.CustomText3_BorderColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.HorizontalAlignment)
+                        {
+                            if (Value is HorizontalAlignment) this.CustomText3_HorizontalAlignment = (HorizontalAlignment)Value;
+                        }
+                        else if (valueType == ValueType.Visable)
+                        {
+                            if (Value is bool) this.CustomText3_Visable = (bool)Value;
+                        }
+
+                        break;
+                    }
             }
         }
         public object GetValue(ValueName valueName, ValueType valueType)
@@ -2515,6 +2686,69 @@ namespace H_Pannel_lib
                         vlaueClass.BorderSize = this.ChineseName_BorderSize;
                         vlaueClass.BorderColor = this.ChineseName_BorderColor;
                         vlaueClass.Visable = this.ChineseName_Visable;
+
+                        //Size size = TextRenderer.MeasureText(vlaueClass.StringValue, vlaueClass.Font);
+                        //if (vlaueClass.Width < size.Width) vlaueClass.Width = size.Width;
+                        //if (vlaueClass.Height < size.Height) vlaueClass.Height = size.Height;
+                        break;
+                    }
+                case ValueName.CustomText1:
+                    {
+                        vlaueClass.valueName = valueName;
+                        vlaueClass.Title = this.CustomText1_Title;
+                        vlaueClass.Value = this.CustomText1;
+                        vlaueClass.Font = this.CustomText1_font;
+                        vlaueClass.ForeColor = this.CustomText1_ForeColor;
+                        vlaueClass.BackColor = this.CustomText1_BackColor;
+                        vlaueClass.Position = this.CustomText1_Position;
+                        vlaueClass.Width = this.CustomText1_Width;
+                        vlaueClass.Height = this.CustomText1_Height;
+                        vlaueClass.HorizontalAlignment = this.CustomText1_HorizontalAlignment;
+                        vlaueClass.BorderSize = this.CustomText1_BorderSize;
+                        vlaueClass.BorderColor = this.CustomText1_BorderColor;
+                        vlaueClass.Visable = this.CustomText1_Visable;
+
+                        //Size size = TextRenderer.MeasureText(vlaueClass.StringValue, vlaueClass.Font);
+                        //if (vlaueClass.Width < size.Width) vlaueClass.Width = size.Width;
+                        //if (vlaueClass.Height < size.Height) vlaueClass.Height = size.Height;
+                        break;
+                    }
+                case ValueName.CustomText2:
+                    {
+                        vlaueClass.valueName = valueName;
+                        vlaueClass.Title = this.CustomText2_Title;
+                        vlaueClass.Value = this.CustomText2;
+                        vlaueClass.Font = this.CustomText2_font;
+                        vlaueClass.ForeColor = this.CustomText2_ForeColor;
+                        vlaueClass.BackColor = this.CustomText2_BackColor;
+                        vlaueClass.Position = this.CustomText2_Position;
+                        vlaueClass.Width = this.CustomText2_Width;
+                        vlaueClass.Height = this.CustomText2_Height;
+                        vlaueClass.HorizontalAlignment = this.CustomText2_HorizontalAlignment;
+                        vlaueClass.BorderSize = this.CustomText2_BorderSize;
+                        vlaueClass.BorderColor = this.CustomText2_BorderColor;
+                        vlaueClass.Visable = this.CustomText2_Visable;
+
+                        //Size size = TextRenderer.MeasureText(vlaueClass.StringValue, vlaueClass.Font);
+                        //if (vlaueClass.Width < size.Width) vlaueClass.Width = size.Width;
+                        //if (vlaueClass.Height < size.Height) vlaueClass.Height = size.Height;
+                        break;
+                    }
+                case ValueName.CustomText3:
+                    {
+                        vlaueClass.valueName = valueName;
+                        vlaueClass.Title = this.CustomText3_Title;
+                        vlaueClass.Value = this.CustomText3;
+                        vlaueClass.Font = this.CustomText3_font;
+                        vlaueClass.ForeColor = this.CustomText3_ForeColor;
+                        vlaueClass.BackColor = this.CustomText3_BackColor;
+                        vlaueClass.Position = this.CustomText3_Position;
+                        vlaueClass.Width = this.CustomText3_Width;
+                        vlaueClass.Height = this.CustomText3_Height;
+                        vlaueClass.HorizontalAlignment = this.CustomText3_HorizontalAlignment;
+                        vlaueClass.BorderSize = this.CustomText3_BorderSize;
+                        vlaueClass.BorderColor = this.CustomText3_BorderColor;
+                        vlaueClass.Visable = this.CustomText3_Visable;
 
                         //Size size = TextRenderer.MeasureText(vlaueClass.StringValue, vlaueClass.Font);
                         //if (vlaueClass.Width < size.Width) vlaueClass.Width = size.Width;
@@ -3018,6 +3252,12 @@ namespace H_Pannel_lib
             if (text == "Port") return ValueName.Port;
             if (text == "最大存量") return ValueName.最大存量;
             if (text == "圖片1") return ValueName.圖片1;
+            if (text == "CustomText1" || text.Contains("文本1"))
+            {
+                return ValueName.CustomText1;
+            }
+            if (text == "CustomText2" || text.Contains("文本2")) return ValueName.CustomText2;
+            if (text == "CustomText3" || text.Contains("文本3")) return ValueName.CustomText3;
 
 
             return ValueName.None;
@@ -3988,6 +4228,186 @@ namespace H_Pannel_lib
         }
         private HorizontalAlignment _Picture1_HorizontalAlignment = HorizontalAlignment.Left;
         public HorizontalAlignment Picture1_HorizontalAlignment { get => _Picture1_HorizontalAlignment; set => _Picture1_HorizontalAlignment = value; }
+        #endregion
+        #region CustomText1
+        private string _CustomText1_Title = "";
+        public string CustomText1_Title { get => _CustomText1_Title; set => _CustomText1_Title = value; }
+
+        [JsonIgnore]
+        public Font CustomText1_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_CustomText1_font_Serialize);
+            }
+            set
+            {
+                _CustomText1_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _CustomText1_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
+        [Browsable(false)]
+        public string CustomText1_font_Serialize
+        {
+            get { return _CustomText1_font_Serialize; }
+            set { _CustomText1_font_Serialize = value; }
+        }
+        [JsonIgnore]
+        public Color CustomText1_BackColor = Color.White;
+        [Browsable(false)]
+        public string CustomText1_BackColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(CustomText1_BackColor); }
+            set { CustomText1_BackColor = ColorSerializationHelper.FromString(value); }
+        }
+        [JsonIgnore]
+        public Color CustomText1_ForeColor = Color.Black;
+        [Browsable(false)]
+        public string CustomText1_ForeColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(CustomText1_ForeColor); }
+            set { CustomText1_ForeColor = ColorSerializationHelper.FromString(value); }
+        }
+        private Point _CustomText1_Position = new Point();
+        public Point CustomText1_Position { get => _CustomText1_Position; set => _CustomText1_Position = value; }
+        private bool _CustomText1_Visable = true;
+        public bool CustomText1_Visable { get => _CustomText1_Visable; set => _CustomText1_Visable = value; }
+        private int _CustomText1_Width = 0;
+        public int CustomText1_Width { get => _CustomText1_Width; set => _CustomText1_Width = value; }
+        private int _CustomText1_Height = 0;
+        public int CustomText1_Height { get => _CustomText1_Height; set => _CustomText1_Height = value; }
+        private int _CustomText1_BorderSize = 2;
+        public int CustomText1_BorderSize { get => _CustomText1_BorderSize; set => _CustomText1_BorderSize = value; }
+        [JsonIgnore]
+        public Color CustomText1_BorderColor = Color.Black;
+        [Browsable(false)]
+        public string CustomText1_BorderColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(CustomText1_BorderColor); }
+            set { CustomText1_BorderColor = ColorSerializationHelper.FromString(value); }
+        }
+        private HorizontalAlignment _CustomText1_HorizontalAlignment = HorizontalAlignment.Left;
+        public HorizontalAlignment CustomText1_HorizontalAlignment { get => _CustomText1_HorizontalAlignment; set => _CustomText1_HorizontalAlignment = value; }
+        #endregion
+        #region CustomText2
+        private string _CustomText2_Title = "";
+        public string CustomText2_Title { get => _CustomText2_Title; set => _CustomText2_Title = value; }
+
+        [JsonIgnore]
+        public Font CustomText2_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_CustomText2_font_Serialize);
+            }
+            set
+            {
+                _CustomText2_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _CustomText2_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
+        [Browsable(false)]
+        public string CustomText2_font_Serialize
+        {
+            get { return _CustomText2_font_Serialize; }
+            set { _CustomText2_font_Serialize = value; }
+        }
+        [JsonIgnore]
+        public Color CustomText2_BackColor = Color.White;
+        [Browsable(false)]
+        public string CustomText2_BackColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(CustomText2_BackColor); }
+            set { CustomText2_BackColor = ColorSerializationHelper.FromString(value); }
+        }
+        [JsonIgnore]
+        public Color CustomText2_ForeColor = Color.Black;
+        [Browsable(false)]
+        public string CustomText2_ForeColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(CustomText2_ForeColor); }
+            set { CustomText2_ForeColor = ColorSerializationHelper.FromString(value); }
+        }
+        private Point _CustomText2_Position = new Point();
+        public Point CustomText2_Position { get => _CustomText2_Position; set => _CustomText2_Position = value; }
+        private bool _CustomText2_Visable = true;
+        public bool CustomText2_Visable { get => _CustomText2_Visable; set => _CustomText2_Visable = value; }
+        private int _CustomText2_Width = 0;
+        public int CustomText2_Width { get => _CustomText2_Width; set => _CustomText2_Width = value; }
+        private int _CustomText2_Height = 0;
+        public int CustomText2_Height { get => _CustomText2_Height; set => _CustomText2_Height = value; }
+        private int _CustomText2_BorderSize = 2;
+        public int CustomText2_BorderSize { get => _CustomText2_BorderSize; set => _CustomText2_BorderSize = value; }
+        [JsonIgnore]
+        public Color CustomText2_BorderColor = Color.Black;
+        [Browsable(false)]
+        public string CustomText2_BorderColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(CustomText2_BorderColor); }
+            set { CustomText2_BorderColor = ColorSerializationHelper.FromString(value); }
+        }
+        private HorizontalAlignment _CustomText2_HorizontalAlignment = HorizontalAlignment.Left;
+        public HorizontalAlignment CustomText2_HorizontalAlignment { get => _CustomText2_HorizontalAlignment; set => _CustomText2_HorizontalAlignment = value; }
+        #endregion
+        #region CustomText3
+        private string _CustomText3_Title = "";
+        public string CustomText3_Title { get => _CustomText3_Title; set => _CustomText3_Title = value; }
+
+        [JsonIgnore]
+        public Font CustomText3_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_CustomText3_font_Serialize);
+            }
+            set
+            {
+                _CustomText3_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _CustomText3_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
+        [Browsable(false)]
+        public string CustomText3_font_Serialize
+        {
+            get { return _CustomText3_font_Serialize; }
+            set { _CustomText3_font_Serialize = value; }
+        }
+        [JsonIgnore]
+        public Color CustomText3_BackColor = Color.White;
+        [Browsable(false)]
+        public string CustomText3_BackColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(CustomText3_BackColor); }
+            set { CustomText3_BackColor = ColorSerializationHelper.FromString(value); }
+        }
+        [JsonIgnore]
+        public Color CustomText3_ForeColor = Color.Black;
+        [Browsable(false)]
+        public string CustomText3_ForeColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(CustomText3_ForeColor); }
+            set { CustomText3_ForeColor = ColorSerializationHelper.FromString(value); }
+        }
+        private Point _CustomText3_Position = new Point();
+        public Point CustomText3_Position { get => _CustomText3_Position; set => _CustomText3_Position = value; }
+        private bool _CustomText3_Visable = true;
+        public bool CustomText3_Visable { get => _CustomText3_Visable; set => _CustomText3_Visable = value; }
+        private int _CustomText3_Width = 0;
+        public int CustomText3_Width { get => _CustomText3_Width; set => _CustomText3_Width = value; }
+        private int _CustomText3_Height = 0;
+        public int CustomText3_Height { get => _CustomText3_Height; set => _CustomText3_Height = value; }
+        private int _CustomText3_BorderSize = 2;
+        public int CustomText3_BorderSize { get => _CustomText3_BorderSize; set => _CustomText3_BorderSize = value; }
+        [JsonIgnore]
+        public Color CustomText3_BorderColor = Color.Black;
+        [Browsable(false)]
+        public string CustomText3_BorderColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(CustomText3_BorderColor); }
+            set { CustomText3_BorderColor = ColorSerializationHelper.FromString(value); }
+        }
+        private HorizontalAlignment _CustomText3_HorizontalAlignment = HorizontalAlignment.Left;
+        public HorizontalAlignment CustomText3_HorizontalAlignment { get => _CustomText3_HorizontalAlignment; set => _CustomText3_HorizontalAlignment = value; }
         #endregion
 
         [JsonIgnore]

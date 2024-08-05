@@ -131,7 +131,7 @@ namespace H_Pannel_lib
         {
             get
             {
-          
+
                 return _selectedText;
             }
         }
@@ -180,7 +180,7 @@ namespace H_Pannel_lib
 
         private void EPD266_Paint_Form_ShowDialogEvent()
         {
-            
+
         }
         private void EPD266_Paint_Form_LoadFinishedEvent(EventArgs e)
         {
@@ -204,9 +204,13 @@ namespace H_Pannel_lib
             this.button_對齊置中.Click += Button_對齊置中_Click;
             this.button_對齊靠左.Click += Button_對齊靠左_Click;
             this.button_對齊靠右.Click += Button_對齊靠右_Click;
+            this.button_文本1_儲存.Click += Button_文本1_儲存_Click;
+            this.button_文本2_儲存.Click += Button_文本2_儲存_Click;
+            this.button_文本3_儲存.Click += Button_文本3_儲存_Click;
 
-            this.button_垂直平均分配.Click += Button_垂直平均分配_Click;
-            this.button_水平平均分配.Click += Button_水平平均分配_Click;
+            rJ_TextBox_文本1.Texts = currentStorage.CustomText1;
+            rJ_TextBox_文本2.Texts = currentStorage.CustomText2;
+            rJ_TextBox_文本3.Texts = currentStorage.CustomText3;
 
             this.checkBox_藥碼.Checked = currentStorage.Code_Visable;
             this.checkBox_藥名.Checked = currentStorage.Name_Visable;
@@ -218,6 +222,9 @@ namespace H_Pannel_lib
             this.checkBox_單位.Checked = currentStorage.Package_Visable;
             this.checkBox_條碼.Checked = currentStorage.BarCode_Visable;
             this.checkBox_圖片1.Checked = currentStorage.Picture1_Visable;
+            this.checkBox_文本1.Checked = currentStorage.CustomText1_Visable;
+            this.checkBox_文本2.Checked = currentStorage.CustomText2_Visable;
+            this.checkBox_文本3.Checked = currentStorage.CustomText3_Visable;
 
             this.checkBox_藥碼.CheckedChanged += CheckBox_CheckedChanged;
             this.checkBox_藥名.CheckedChanged += CheckBox_CheckedChanged;
@@ -229,7 +236,9 @@ namespace H_Pannel_lib
             this.checkBox_單位.CheckedChanged += CheckBox_CheckedChanged;
             this.checkBox_條碼.CheckedChanged += CheckBox_CheckedChanged;
             this.checkBox_圖片1.CheckedChanged += CheckBox_CheckedChanged;
-
+            this.checkBox_文本1.CheckedChanged += CheckBox_CheckedChanged;
+            this.checkBox_文本2.CheckedChanged += CheckBox_CheckedChanged;
+            this.checkBox_文本3.CheckedChanged += CheckBox_CheckedChanged;
             rJ_Pannel_背景顏色.BackgroundColor = CurrentStorage.BackColor;
             this.rJ_RatioButton_預設樣式1.CheckedChanged += RJ_RatioButton_預設樣式1_CheckedChanged;
             this.rJ_RatioButton_自定義.CheckedChanged += RJ_RatioButton_自定義_CheckedChanged;
@@ -241,10 +250,10 @@ namespace H_Pannel_lib
             {
                 rJ_RatioButton_自定義.Checked = true;
             }
-        
+            this.Refresh();
         }
 
-   
+
 
         private void ComboBox_圖形編輯_編輯內容名稱_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -257,7 +266,7 @@ namespace H_Pannel_lib
         private void EPD266_Paint_Form_PanelSelectEvent(Device.ValueName valueName)
         {
             this.textBox_邊框大小.Text = CurrentStorage.GetValue(valueName).BorderSize.ToString();
-            textBox_字體.Text = CurrentStorage.GetValue(valueName).Font.ToString();
+            textBox_字體.Text = CurrentStorage.GetValue(valueName).Font.ToFontString();
             rJ_Pannel_邊框顏色.BackgroundColor = CurrentStorage.GetValue(valueName).BorderColor;
             rJ_Pannel_字體顏色.BackgroundColor = CurrentStorage.GetValue(valueName).ForeColor;
             rJ_Pannel_文字背景顏色.BackgroundColor = CurrentStorage.GetValue(valueName).BackColor;
@@ -387,10 +396,6 @@ namespace H_Pannel_lib
                     vlaueClass.Width = Size.Width;
                     vlaueClass.Height = Size.Height;
                 }
-                if(vlaueClass.Width == 0 || vlaueClass.Height == 0)
-                {
-
-                }
                 this.MouseDownType = GetMouseDownType(X, Y, vlaueClass.Position.X, vlaueClass.Position.Y, vlaueClass.Width, vlaueClass.Height);
                 if (this.MouseDownType != TxMouseDownType.NONE)
                 {
@@ -447,7 +452,7 @@ namespace H_Pannel_lib
             Dialog_RWB_顏色選擇 Dialog_RWB_顏色選擇 = new Dialog_RWB_顏色選擇(this.rJ_Pannel_文字背景顏色.BackgroundColor);
             if (Dialog_RWB_顏色選擇.ShowDialog() != DialogResult.Yes) return;
             this.rJ_Pannel_文字背景顏色.BackgroundColor = Dialog_RWB_顏色選擇.Value;
-            
+
             Storage.ValueName valueName = (GetSelectValueName());
             CurrentStorage.SetValue(valueName, Device.ValueType.BackColor, this.rJ_Pannel_文字背景顏色.BackgroundColor);
             this.DrawToPictureBox();
@@ -470,7 +475,7 @@ namespace H_Pannel_lib
             this.rJ_Pannel_邊框顏色.BackgroundColor = Dialog_RWB_顏色選擇.Value;
 
             Storage.ValueName valueName = (GetSelectValueName());
-            CurrentStorage.SetValue(valueName, Device.ValueType.ForeColor, this.rJ_Pannel_邊框顏色.BackgroundColor);
+            CurrentStorage.SetValue(valueName, Device.ValueType.BorderColor, this.rJ_Pannel_邊框顏色.BackgroundColor);
             this.DrawToPictureBox();
         }
         private void RJ_Pannel_背景顏色_Click(object sender, EventArgs e)
@@ -482,11 +487,30 @@ namespace H_Pannel_lib
             CurrentStorage.BackColor = rJ_Pannel_背景顏色.BackgroundColor;
             this.DrawToPictureBox();
         }
-
+        private void Button_文本3_儲存_Click(object sender, EventArgs e)
+        {
+            CurrentStorage.CustomText3 = rJ_TextBox_文本3.Texts;
+            this.DrawToPictureBox();
+            MyMessageBox.ShowDialog("完成");
+        }
+        private void Button_文本2_儲存_Click(object sender, EventArgs e)
+        {
+            CurrentStorage.CustomText2 = rJ_TextBox_文本2.Texts;
+            this.DrawToPictureBox();
+            MyMessageBox.ShowDialog("完成");
+        }
+        private void Button_文本1_儲存_Click(object sender, EventArgs e)
+        {
+            CurrentStorage.CustomText1 = rJ_TextBox_文本1.Texts;
+            this.DrawToPictureBox();
+            MyMessageBox.ShowDialog("完成");
+        }
         private void Button_字體_Click(object sender, EventArgs e)
         {
-            if (this.fontDialog.ShowDialog() != DialogResult.OK) return;
             Storage.ValueName valueName = (GetSelectValueName());
+            this.fontDialog.Font = CurrentStorage.GetValue(valueName).Font;
+            if (this.fontDialog.ShowDialog() != DialogResult.OK) return;
+
             CurrentStorage.SetValue(valueName, Device.ValueType.Font, this.fontDialog.Font);
             this.DrawToPictureBox();
         }
@@ -561,7 +585,7 @@ namespace H_Pannel_lib
             for (int i = 0; i < List_ValueSelected.Count; i++)
             {
                 _value_selected = ((StoragePanel.enum_ValueName)List_ValueSelected[i]).GetEnumName();
-                vlaueClass = currentStorage.GetValue(Storage.GetValueName(_value_selected));           
+                vlaueClass = currentStorage.GetValue(Storage.GetValueName(_value_selected));
                 CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Position, new Point(X - (vlaueClass.Width / 2), vlaueClass.Position.Y));
             }
 
@@ -604,72 +628,9 @@ namespace H_Pannel_lib
             this.DrawToPictureBox();
         }
 
-        private void Button_水平平均分配_Click(object sender, EventArgs e)
-        {
-            if (List_ValueSelected.Count <= 1)
-            {
-                MyMessageBox.ShowDialog("請選取兩個以上面板資料!");
-                return;
-            }
-            int maxValue = 0;
-            int minValue = 99999;
-            float average = 0;
-
-            for (int i = 0; i < List_ValueSelected.Count; i++)
-            {
-                string _value_selected = ((StoragePanel.enum_ValueName)List_ValueSelected[i]).GetEnumName();
-
-                Point p0 = (Point)this.CurrentStorage.GetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Position);
-                if (maxValue < p0.X) maxValue = p0.X;
-                if (minValue > p0.X) minValue = p0.X;
-            }
-            List_ValueSelected.Sort(new ICP_PostrionX(CurrentStorage));
-            average = ((float)maxValue - (float)minValue) / (float)(List_ValueSelected.Count - 1);
-            for (int i = 0; i < List_ValueSelected.Count; i++)
-            {
-                string _value_selected = ((StoragePanel.enum_ValueName)List_ValueSelected[i]).GetEnumName();
-
-                Point p0 = (Point)this.CurrentStorage.GetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Position);
-                p0.X = (int)(minValue + i * average);
-                this.CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Position, p0);
-            }
-            this.DrawToPictureBox();
-        }
-        private void Button_垂直平均分配_Click(object sender, EventArgs e)
-        {
-            if (List_ValueSelected.Count <= 1)
-            {
-                MyMessageBox.ShowDialog("請選取兩個以上面板資料!");
-            }
-            int maxValue = 0;
-            int minValue = 99999;
-            float average = 0;
-
-            for (int i = 0; i < List_ValueSelected.Count; i++)
-            {
-
-                string _value_selected = ((StoragePanel.enum_ValueName)List_ValueSelected[i]).GetEnumName();
-
-
-                Point p0 = (Point)this.CurrentStorage.GetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Position);
-                if (maxValue < p0.Y) maxValue = p0.Y;
-                if (minValue > p0.Y) minValue = p0.Y;
-            }
-            List_ValueSelected.Sort(new ICP_PostrionY(CurrentStorage));
-            average = ((float)maxValue - (float)minValue) / (float)(List_ValueSelected.Count - 1);
-            for (int i = 0; i < List_ValueSelected.Count; i++)
-            {
-                string _value_selected = ((StoragePanel.enum_ValueName)List_ValueSelected[i]).GetEnumName();
-
-                Point p0 = (Point)this.CurrentStorage.GetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Position);
-                p0.Y = (int)(minValue + i * average);
-                this.CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Position, p0);
-            }
-            this.DrawToPictureBox();
-        }
         private void RJ_RatioButton_自定義_CheckedChanged(object sender, EventArgs e)
         {
-            if(this.rJ_RatioButton_自定義.Checked)
+            if (this.rJ_RatioButton_自定義.Checked)
             {
                 currentStorage.Enum_drawType = Storage.enum_DrawType.constom;
                 panel_選擇項目.Enabled = true;
@@ -677,8 +638,6 @@ namespace H_Pannel_lib
                 panel_字體型態.Enabled = true;
                 panel_邊框大小.Enabled = true;
                 groupBox_對齊方式.Enabled = true;
-                button_垂直平均分配.Enabled = true;
-                button_水平平均分配.Enabled = true;
                 DrawToPictureBox();
             }
         }
@@ -692,8 +651,6 @@ namespace H_Pannel_lib
                 panel_字體型態.Enabled = false;
                 panel_邊框大小.Enabled = false;
                 groupBox_對齊方式.Enabled = false;
-                button_垂直平均分配.Enabled = false;
-                button_水平平均分配.Enabled = false;
                 DrawToPictureBox();
             }
         }
@@ -759,7 +716,7 @@ namespace H_Pannel_lib
             Bitmap bitmap = Communication.EPD266_GetBitmap(storage, CanvasScale);
             using (Graphics g = Graphics.FromImage(bitmap))
             {
-              
+
                 for (int i = 0; i < List_ValueSelected.Count; i++)
                 {
                     string _value_selected = ((StoragePanel.enum_ValueName)this.List_ValueSelected[i]).GetEnumName();
@@ -776,8 +733,6 @@ namespace H_Pannel_lib
                         }
                     }
                 }
-
-
             }
             return bitmap;
         }
@@ -871,6 +826,5 @@ namespace H_Pannel_lib
             }
         }
 
-    
     }
 }
