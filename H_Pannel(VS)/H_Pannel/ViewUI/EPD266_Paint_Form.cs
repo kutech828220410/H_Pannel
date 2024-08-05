@@ -64,10 +64,14 @@ namespace H_Pannel_lib
         {
             NONE,
             TOP,
-            BUTTOM,
+            BOTTOM,
             LEFT,
             RIGHT,
             INSIDE,
+            TOP_LEFT,
+            TOP_RIGHT,
+            BOTTOM_LEFT,
+            BOTTOM_RIGHT
         }
         private int pictureBox_mouseDown_X = 0;
         private int pictureBox_mouseDown_Y = 0;
@@ -103,8 +107,20 @@ namespace H_Pannel_lib
                     case TxMouseDownType.TOP:
                         this.Cursor = Cursors.SizeNS;
                         break;
-                    case TxMouseDownType.BUTTOM:
+                    case TxMouseDownType.BOTTOM:
                         this.Cursor = Cursors.SizeNS;
+                        break;
+                    case TxMouseDownType.TOP_LEFT:
+                        this.Cursor = Cursors.SizeNWSE;
+                        break;
+                    case TxMouseDownType.TOP_RIGHT:
+                        this.Cursor = Cursors.SizeNESW;
+                        break;
+                    case TxMouseDownType.BOTTOM_LEFT:
+                        this.Cursor = Cursors.SizeNESW;
+                        break;
+                    case TxMouseDownType.BOTTOM_RIGHT:
+                        this.Cursor = Cursors.SizeNWSE;
                         break;
                 }
             }
@@ -275,141 +291,84 @@ namespace H_Pannel_lib
                 if (vlaueClass.Visable == false) return;
                 this.MouseDownType = GetMouseDownType(X, Y, vlaueClass.Position.X, vlaueClass.Position.Y, vlaueClass.Width, vlaueClass.Height);
                 // Output debug information to the console
-                //Console.WriteLine($"MouseDownType: {this.MouseDownType}");
-                //Console.WriteLine($"X: {X}, Y: {Y}, Value Position: ({vlaueClass.Position.X}, {vlaueClass.Position.Y}), Width: {vlaueClass.Width}, Height: {vlaueClass.Height}");
+                // Console.WriteLine($"MouseDownType: {this.MouseDownType}");
+                // Console.WriteLine($"X: {X}, Y: {Y}, Value Position: ({vlaueClass.Position.X}, {vlaueClass.Position.Y}), Width: {vlaueClass.Width}, Height: {vlaueClass.Height}");
             }
 
             if (this.flag_pictureBox_mouseDown)
             {
-                if (this.MouseDownType == TxMouseDownType.INSIDE)
+                int move_X = X - this.pictureBox_mouseDown_X;
+                int move_Y = Y - this.pictureBox_mouseDown_Y;
+
+                for (int i = 0; i < List_ValueSelected.Count; i++)
                 {
-                    int move_X = X - this.pictureBox_mouseDown_X;
-                    int move_Y = Y - this.pictureBox_mouseDown_Y;
-                    for (int i = 0; i < List_ValueSelected.Count; i++)
+                    string valueName = ((StoragePanel.enum_ValueName)List_ValueSelected[i]).GetEnumName();
+                    vlaueClass = currentStorage_buf.GetValue(Storage.GetValueName(valueName));
+                    if (vlaueClass.Visable == false) return;
+
+                    int result_po_X = vlaueClass.Position.X;
+                    int result_po_Y = vlaueClass.Position.Y;
+                    int result_Width = vlaueClass.Width;
+                    int result_Height = vlaueClass.Height;
+
+                    switch (this.MouseDownType)
                     {
-                        string valueName = ((StoragePanel.enum_ValueName)List_ValueSelected[i]).GetEnumName();
-                        vlaueClass = currentStorage_buf.GetValue(Storage.GetValueName(valueName));
-                        if (vlaueClass.Visable == false) return;
-                        int result_po_X = move_X + vlaueClass.Position.X;
-                        int result_po_Y = move_Y + vlaueClass.Position.Y;
-                        if (result_po_X < 0) result_po_X = 0;
-                        if (result_po_Y < 0) result_po_Y = 0;
-                        string _value_selected = ((StoragePanel.enum_ValueName)this.List_ValueSelected[i]).GetEnumName();
-                        CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Position, new Point(result_po_X, result_po_Y));
-                    }
-                }
-                else if (this.MouseDownType == TxMouseDownType.LEFT)
-                {
-                    int move_X = X - this.pictureBox_mouseDown_X;
-                    int move_Y = Y - this.pictureBox_mouseDown_Y;
-
-                    for (int i = 0; i < List_ValueSelected.Count; i++)
-                    {
-                        string _value_selected = ((StoragePanel.enum_ValueName)this.List_ValueSelected[i]).GetEnumName();
-                        vlaueClass = currentStorage_buf.GetValue(Storage.GetValueName(_value_selected));
-                        if (vlaueClass.Visable == false) return;
-                        int result_po_X = vlaueClass.Position.X + move_X;
-                        int result_po_Y = vlaueClass.Position.Y;
-                        int result_Width = vlaueClass.Width - move_X;
-                        int result_Height = vlaueClass.Height;
-                        if (result_po_X < 0) result_po_X = 0;
-                        if (result_po_Y < 0) result_po_Y = 0;
-                        if (result_Width < 0) result_Width = 0;
-                        if (result_Height < 0) result_Height = 0;
-                        CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Position, new Point(result_po_X, result_po_Y));
-                        CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Width, result_Width);
-                        CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Height, result_Height);
-                    }
-                }
-                else if (this.MouseDownType == TxMouseDownType.RIGHT)
-                {
-                    int move_X = X - this.pictureBox_mouseDown_X;
-                    int move_Y = Y - this.pictureBox_mouseDown_Y;
-
-                    for (int i = 0; i < this.List_ValueSelected.Count; i++)
-                    {
-                        string _value_selected = ((StoragePanel.enum_ValueName)this.List_ValueSelected[i]).GetEnumName();
-
-                        vlaueClass = currentStorage_buf.GetValue(Storage.GetValueName(_value_selected));
-                        if (vlaueClass.Visable == false)
-                        {
-                            return;
-                        }
-
-                        int result_po_X = vlaueClass.Position.X;
-                        int result_po_Y = vlaueClass.Position.Y;
-                        int result_Width = vlaueClass.Width + move_X;
-                        int result_Height = vlaueClass.Height;
-
-
-                        if (result_po_X < 0) result_po_X = 0;
-                        if (result_po_Y < 0) result_po_Y = 0;
-                        if (result_Width < 0) result_Width = 0;
-                        if (result_Height < 0) result_Height = 0;
-
-
-                        CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Position, new Point(result_po_X, result_po_Y));
-                        CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Width, result_Width);
-                        CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Height, result_Height);
-                    }
-                }
-                else if (this.MouseDownType == TxMouseDownType.TOP)
-                {
-                    int move_X = X - this.pictureBox_mouseDown_X;
-                    int move_Y = Y - this.pictureBox_mouseDown_Y;
-
-                    for (int i = 0; i < List_ValueSelected.Count; i++)
-                    {
-                        string _value_selected = ((StoragePanel.enum_ValueName)this.List_ValueSelected[i]).GetEnumName();
-
-                        vlaueClass = currentStorage_buf.GetValue(Storage.GetValueName(_value_selected));
-                        if (vlaueClass.Visable == false) return;
-                        int result_po_X = vlaueClass.Position.X;
-                        int result_po_Y = vlaueClass.Position.Y + move_Y;
-                        int result_Width = vlaueClass.Width;
-                        int result_Height = vlaueClass.Height - move_Y;
-                        if (result_po_X < 0) result_po_X = 0;
-                        if (result_po_Y < 0) result_po_Y = 0;
-                        if (result_Width < 0) result_Width = 0;
-                        if (result_Height < 0) result_Height = 0;
-
-                        CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Position, new Point(result_po_X, result_po_Y));
-                        CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Width, result_Width);
-                        CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Height, result_Height);
-                    }
-                }
-                else if (this.MouseDownType == TxMouseDownType.BUTTOM)
-                {
-                    int move_X = X - this.pictureBox_mouseDown_X;
-                    int move_Y = Y - this.pictureBox_mouseDown_Y;
-
-                    for (int i = 0; i < List_ValueSelected.Count; i++)
-                    {
-                        string _value_selected = ((StoragePanel.enum_ValueName)this.List_ValueSelected[i]).GetEnumName();
-
-                        vlaueClass = currentStorage_buf.GetValue(Storage.GetValueName(_value_selected));
-                        if (vlaueClass.Visable == false) return;
-                        int result_po_X = vlaueClass.Position.X;
-                        int result_po_Y = vlaueClass.Position.Y;
-                        int result_Width = vlaueClass.Width;
-                        int result_Height = vlaueClass.Height + move_Y;
-                        if (result_po_X < 0) result_po_X = 0;
-                        if (result_po_Y < 0) result_po_Y = 0;
-                        if (result_Width < 0) result_Width = 0;
-                        if (result_Height < 0) result_Height = 0;
-
-                        CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Position, new Point(result_po_X, result_po_Y));
-                        CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Width, result_Width);
-                        CurrentStorage.SetValue(Storage.GetValueName(_value_selected), Storage.ValueType.Height, result_Height);
+                        case TxMouseDownType.INSIDE:
+                            result_po_X += move_X;
+                            result_po_Y += move_Y;
+                            break;
+                        case TxMouseDownType.LEFT:
+                            result_po_X += move_X;
+                            result_Width -= move_X;
+                            break;
+                        case TxMouseDownType.RIGHT:
+                            result_Width += move_X;
+                            break;
+                        case TxMouseDownType.TOP:
+                            result_po_Y += move_Y;
+                            result_Height -= move_Y;
+                            break;
+                        case TxMouseDownType.BOTTOM:
+                            result_Height += move_Y;
+                            break;
+                        case TxMouseDownType.TOP_LEFT:
+                            result_po_X += move_X;
+                            result_Width -= move_X;
+                            result_po_Y += move_Y;
+                            result_Height -= move_Y;
+                            break;
+                        case TxMouseDownType.TOP_RIGHT:
+                            result_Width += move_X;
+                            result_po_Y += move_Y;
+                            result_Height -= move_Y;
+                            break;
+                        case TxMouseDownType.BOTTOM_LEFT:
+                            result_po_X += move_X;
+                            result_Width -= move_X;
+                            result_Height += move_Y;
+                            break;
+                        case TxMouseDownType.BOTTOM_RIGHT:
+                            result_Width += move_X;
+                            result_Height += move_Y;
+                            break;
                     }
 
+                    // 防止位置和大小的负值
+                    if (result_po_X < 0) result_po_X = 0;
+                    if (result_po_Y < 0) result_po_Y = 0;
+                    if (result_Width < 0) result_Width = 0;
+                    if (result_Height < 0) result_Height = 0;
+
+                    CurrentStorage.SetValue(Storage.GetValueName(valueName), Storage.ValueType.Position, new Point(result_po_X, result_po_Y));
+                    CurrentStorage.SetValue(Storage.GetValueName(valueName), Storage.ValueType.Width, result_Width);
+                    CurrentStorage.SetValue(Storage.GetValueName(valueName), Storage.ValueType.Height, result_Height);
                 }
             }
+
             if (flag_pictureBox_mouseDown)
             {
                 this.DrawToPictureBox();
             }
-
         }
         private void PictureBox_paint_MouseDown(object sender, MouseEventArgs e)
         {
@@ -427,6 +386,10 @@ namespace H_Pannel_lib
                 {
                     vlaueClass.Width = Size.Width;
                     vlaueClass.Height = Size.Height;
+                }
+                if(vlaueClass.Width == 0 || vlaueClass.Height == 0)
+                {
+
                 }
                 this.MouseDownType = GetMouseDownType(X, Y, vlaueClass.Position.X, vlaueClass.Position.Y, vlaueClass.Width, vlaueClass.Height);
                 if (this.MouseDownType != TxMouseDownType.NONE)
@@ -830,11 +793,32 @@ namespace H_Pannel_lib
             bool flag_in_left_line = (mouse_X >= start_X - 5) && (mouse_X <= start_X + 5);
             bool flag_in_right_line = (mouse_X >= end_X - 5) && (mouse_X <= end_X + 5);
             bool flag_in_top_line = (mouse_Y >= start_Y - 5) && (mouse_Y <= start_Y + 5);
-            bool flag_in_button_line = (mouse_Y >= end_Y - 5) && (mouse_Y <= end_Y + 5);
+            bool flag_in_bottom_line = (mouse_Y >= end_Y - 5) && (mouse_Y <= end_Y + 5);
+
+            bool flag_in_top_left_corner = flag_in_left_line && flag_in_top_line;
+            bool flag_in_top_right_corner = flag_in_right_line && flag_in_top_line;
+            bool flag_in_bottom_left_corner = flag_in_left_line && flag_in_bottom_line;
+            bool flag_in_bottom_right_corner = flag_in_right_line && flag_in_bottom_line;
 
             if (flag_inside_X && flag_inside_Y)
             {
                 return TxMouseDownType.INSIDE;
+            }
+            else if (flag_in_top_left_corner)
+            {
+                return TxMouseDownType.TOP_LEFT;
+            }
+            else if (flag_in_top_right_corner)
+            {
+                return TxMouseDownType.TOP_RIGHT;
+            }
+            else if (flag_in_bottom_left_corner)
+            {
+                return TxMouseDownType.BOTTOM_LEFT;
+            }
+            else if (flag_in_bottom_right_corner)
+            {
+                return TxMouseDownType.BOTTOM_RIGHT;
             }
             else if (flag_in_left_line && flag_inside_Y)
             {
@@ -848,9 +832,9 @@ namespace H_Pannel_lib
             {
                 return TxMouseDownType.TOP;
             }
-            else if (flag_in_button_line && flag_inside_X)
+            else if (flag_in_bottom_line && flag_inside_X)
             {
-                return TxMouseDownType.BUTTOM;
+                return TxMouseDownType.BOTTOM;
             }
             else
             {

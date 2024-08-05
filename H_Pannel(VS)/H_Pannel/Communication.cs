@@ -8026,7 +8026,10 @@ namespace H_Pannel_lib
         }
         static public Bitmap TextToBitmap(string text, Font font,double scale ,int width,int height, Color foreColor, Color backColor, int borderSize , Color borderColor ,HorizontalAlignment horizontalAlignment)
         {
-            if (text.StringIsEmpty()) return null;
+            if (text.StringIsEmpty())
+            {
+                text = "";
+            }
 
             //Size size = DrawingClass.Draw.MeasureText(text, font);
     

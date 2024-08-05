@@ -170,7 +170,7 @@ namespace H_Pannel_lib
         {
             NONE,
             TOP,
-            BUTTOM,
+            BOTTOM,
             LEFT,
             RIGHT,
             INSIDE,
@@ -209,7 +209,7 @@ namespace H_Pannel_lib
                     case TxMouseDownType.TOP:
                         this.Cursor = Cursors.SizeNS;
                         break;
-                    case TxMouseDownType.BUTTOM:
+                    case TxMouseDownType.BOTTOM:
                         this.Cursor = Cursors.SizeNS;
                         break;
                 }
@@ -1071,7 +1071,7 @@ namespace H_Pannel_lib
                         CurrentStorage.SetValue((Storage.ValueName)this.List_ValueSelected[i], Storage.ValueType.Height, result_Height);
                     }      
                 }
-                else if (this.MouseDownType == TxMouseDownType.BUTTOM)
+                else if (this.MouseDownType == TxMouseDownType.BOTTOM)
                 {
                     int move_X = X - this.pictureBox_mouseDown_X;
                     int move_Y = Y - this.pictureBox_mouseDown_Y;
@@ -1148,7 +1148,7 @@ namespace H_Pannel_lib
             }
             else if (flag_in_button_line && flag_inside_X)
             {
-                return TxMouseDownType.BUTTOM;
+                return TxMouseDownType.BOTTOM;
             }
             else
             {

@@ -544,6 +544,7 @@ namespace H_Pannel_lib
     [Serializable]
     public class DeviceBasic : DeviceSimple
     {
+        [Serializable]
         public class LightStateClass
         {
             public bool State = false;

@@ -474,6 +474,7 @@ namespace H_Pannel_lib
 
             if (flag_UDP_Class_Init == false)
             {
+                flag_UDP_Class_Init = true;
                 this.Invoke(new Action(delegate
                 {
                     this.sqL_DataGridView_UDP_DataReceive.DataGridRowsChangeEvent += SqL_DataGridView_UDP_DataReceive_DataGridRowsChangeEvent;
@@ -521,7 +522,7 @@ namespace H_Pannel_lib
                 this.MyThread_PING.SetSleepTime(100);
 
             }
-            flag_UDP_Class_Init = true;
+  
 
         }
         public void UDP_Class_Init()
@@ -1348,7 +1349,7 @@ namespace H_Pannel_lib
                         }
                         else
                         {
-                            SqL_DataGridView_DeviceTable_MouseDown(sender, e);
+                            
                         }
                     }
                     else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable.設置發送時間.GetEnumName())
@@ -1372,7 +1373,7 @@ namespace H_Pannel_lib
                         }
                         else
                         {
-                            SqL_DataGridView_DeviceTable_MouseDown(sender, e);
+
                         }
 
                     }
@@ -1397,7 +1398,7 @@ namespace H_Pannel_lib
                         }
                         else
                         {
-                            SqL_DataGridView_DeviceTable_MouseDown(sender, e);
+                            
                         }
 
                     }
@@ -1422,7 +1423,6 @@ namespace H_Pannel_lib
                         }
                         else
                         {
-                            SqL_DataGridView_UDP_DataReceive_MouseDown(sender, e);
                         }
 
                     }
@@ -1447,7 +1447,7 @@ namespace H_Pannel_lib
                         }
                         else
                         {
-                            SqL_DataGridView_DeviceTable_MouseDown(sender, e);
+                            
                         }
 
                     }
@@ -1471,7 +1471,7 @@ namespace H_Pannel_lib
                         }
                         else
                         {
-                            this.SqL_DataGridView_DeviceTable_MouseDown(sender, e);
+                          
                         }
                     }
                     else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable.新增儲位.GetEnumName())
@@ -1483,7 +1483,7 @@ namespace H_Pannel_lib
                         }
                         else
                         {
-                            SqL_DataGridView_DeviceTable_MouseDown(sender, e);
+                           
                         }
                     }
                     else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable.修改儲位.GetEnumName())
@@ -1537,7 +1537,7 @@ namespace H_Pannel_lib
                         }
                         else
                         {
-                            SqL_DataGridView_UDP_DataReceive_MouseDown(sender, e);
+                            
                         }
                     }
                     else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable.刷新.GetEnumName())
