@@ -14,6 +14,8 @@ namespace H_Pannel_lib
 {
     public class DrawerUI_EPD_583 : DrawerUI
     {
+        static int LocalPort = 0;
+        static int ServerPort = 0;
         [Serializable]
         public class UDP_READ
         {
@@ -59,8 +61,8 @@ namespace H_Pannel_lib
         #region 靜態參數
         static public double Lightness = 1.0D;
         static public int NumOfLED = 450;
-        static private int Drawer_NumOf_H_Line = 4;
-        static private int Drawer_NumOf_V_Line = 8;
+        //static private int drawer.Num_Of_Columns = 4;
+        //static private int drawer.Num_Of_Rows = 8;
         static private int NumOfLED_Pannel = 42;
         static private int NumOfLED_Drawer = 450 - NumOfLED_Pannel;
 
@@ -162,9 +164,9 @@ namespace H_Pannel_lib
                 if (row >= drawer.Boxes[i].Length) return drawer.LED_Bytes;
             }
             Rectangle rect = Get_Box_Combine(drawer, col, row);
-            int width = rect.Width / (Pannel_Width / Drawer_NumOf_H_Line);
-            int height = rect.Height / (Pannel_Height / Drawer_NumOf_V_Line);
-            return Set_LEDBytes(col, row, width, height, ref drawer.LED_Bytes, color);
+            int width = rect.Width / (Pannel_Width / drawer.Num_Of_Columns);
+            int height = rect.Height / (Pannel_Height / drawer.Num_Of_Rows);
+            return Set_LEDBytes(col, row, width, height, ref drawer.LED_Bytes, color, drawer.DrawerType);
         }
         static public byte[] Set_LEDBytes(Drawer drawer, int col_x, int row_y, ref byte[] LEDBytes, Color color)
         {
@@ -175,22 +177,44 @@ namespace H_Pannel_lib
             }
 
             Rectangle rect = Get_Box_Combine(drawer, col_x, row_y);
-            int width = rect.Width / (Pannel_Width / Drawer_NumOf_H_Line);
-            int height = rect.Height / (Pannel_Height / Drawer_NumOf_V_Line);
-            return Set_LEDBytes(col_x, row_y, width, height, ref LEDBytes, color);
+            int width = rect.Width / (Pannel_Width / drawer.Num_Of_Columns);
+            int height = rect.Height / (Pannel_Height / drawer.Num_Of_Rows);
+            return Set_LEDBytes(col_x, row_y, width, height, ref LEDBytes, color, drawer.DrawerType);
         }
-        static public byte[] Set_LEDBytes(int col_x, int row_y, int width, int height, ref byte[] LEDBytes, Color color)
+        static public byte[] Set_LEDBytes(int col_x, int row_y, int width, int height, ref byte[] LEDBytes, Color color, Drawer.Enum_DrawerType enum_DrawerType)
         {
+            int Num_Of_Columns = 4;
+            int Num_Of_Rows = 8;
+            if (enum_DrawerType == Drawer.Enum_DrawerType._4X8)
+            {
+                Num_Of_Columns = 4;
+                Num_Of_Rows = 8;
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._3X8)
+            {
+                Num_Of_Columns = 4;
+                Num_Of_Rows = 8;
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._4X8_A)
+            {
+                Num_Of_Columns = 5;
+                Num_Of_Rows = 8;
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._5X8_A)
+            {
+                Num_Of_Columns = 5;
+                Num_Of_Rows = 8;
+            }
             for (int i = 0; i < width; i++)
             {
-                Set_Drawer_H_Leds(col_x + i + row_y * Drawer_NumOf_H_Line, ref LEDBytes, color);
-                Set_Drawer_H_Leds(col_x + i + (height + row_y) * Drawer_NumOf_H_Line, ref LEDBytes, color);
+                Set_Drawer_H_Leds(col_x + i + row_y * Num_Of_Columns, ref LEDBytes, color, enum_DrawerType);
+                Set_Drawer_H_Leds(col_x + i + (height + row_y) * Num_Of_Columns, ref LEDBytes, color, enum_DrawerType);
 
             }
             for (int k = 0; k < height; k++)
             {
-                Set_Drawer_V_Leds(row_y + k + col_x * Drawer_NumOf_V_Line, ref LEDBytes, color);
-                Set_Drawer_V_Leds(row_y + k + (width + col_x) * Drawer_NumOf_V_Line, ref LEDBytes, color);
+                Set_Drawer_V_Leds(row_y + k + col_x * Num_Of_Rows, ref LEDBytes, color, enum_DrawerType);
+                Set_Drawer_V_Leds(row_y + k + (width + col_x) * Num_Of_Rows, ref LEDBytes, color, enum_DrawerType);
             }
             return LEDBytes;
         }
@@ -228,8 +252,6 @@ namespace H_Pannel_lib
             }
             return false;
         }
-
-
         static public bool Set_Drawer_LED_UDP(UDP_Class uDP_Class, Drawer drawer, int col, int row, Color color)
         {
             return Set_Drawer_LED_UDP(uDP_Class, drawer, col, row, color, false);
@@ -341,7 +363,6 @@ namespace H_Pannel_lib
             return true;
         }
 
-
         static public bool DrawToEpd_UDP(UDP_Class uDP_Class, Drawer drawer)
         {
             using (Bitmap bitmap = Get_Drawer_bmp(drawer))
@@ -370,7 +391,6 @@ namespace H_Pannel_lib
         }
 
 
-
         static public byte[] Get_Drawer_LEDBytes_UDP(UDP_Class uDP_Class, string IP)
         {
             byte[] LED_Bytes = new byte[NumOfLED * 3];
@@ -380,25 +400,24 @@ namespace H_Pannel_lib
             }
             return LED_Bytes;
         }
-
         static public bool Set_LockOpen(UDP_Class uDP_Class, string IP)
         {
             return Communication.Set_OutputPINTrigger(uDP_Class, IP, 1, true);
-        }
-      
+        }      
 
-        static public void Set_Drawer_H_Leds(int col, ref byte[] LEDBytes, Color color)
+        static public void Set_Drawer_H_Leds(int col, ref byte[] LEDBytes, Color color, Drawer.Enum_DrawerType enum_DrawerType)
         {
+            List<int[]> List_Drawer_H_Line_Leds = Get_H_Line_Leds(enum_DrawerType);
             for (int i = 0; i < List_Drawer_H_Line_Leds[col].Length; i++)
             {
-
                 LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 0] = (byte)(color.R );
                 LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 1] = (byte)(color.G );
                 LEDBytes[List_Drawer_H_Line_Leds[col][i] * 3 + 2] = (byte)(color.B );
             }
         }
-        static public void Set_Drawer_V_Leds(int row, ref byte[] LEDBytes, Color color)
+        static public void Set_Drawer_V_Leds(int row, ref byte[] LEDBytes, Color color, Drawer.Enum_DrawerType enum_DrawerType)
         {
+            List<int[]> List_Drawer_V_Line_Leds = Get_V_Line_Leds(enum_DrawerType);
             for (int i = 0; i < List_Drawer_V_Line_Leds[row].Length; i++)
             {
 
@@ -503,205 +522,388 @@ namespace H_Pannel_lib
             return Communication.EPD583_GetBitmap(drawer);
 
         }
-        
+
         #endregion
         #region LED_Line
-
-        private static  List<int[]> List_Drawer_H_Line_Leds = new List<int[]>();
-        private static  List<int[]> List_Drawer_V_Line_Leds = new List<int[]>();
-        private static int[] Line_H_00 = new int[] { 376 + 0, 376 + 1, 376 + 2, 376 + 3, 376 + 4, 376 + 5, 376 + 6, 376 + 7 };
-        private static int[] Line_H_01 = new int[] { 384 + 0, 384 + 1, 384 + 2, 384 + 3, 384 + 4, 384 + 5, 384 + 6, 384 + 7 };
-        private static int[] Line_H_02 = new int[] { 392 + 0, 392 + 1, 392 + 2, 392 + 3, 392 + 4, 392 + 5, 392 + 6, 392 + 7 };
-        private static int[] Line_H_03 = new int[] { 400 + 0, 400 + 1, 400 + 2, 400 + 3, 400 + 4, 400 + 5, 400 + 6, 400 + 7 };
-
-        private static int[] Line_H_04 = new int[] { 368 + 0, 368 + 1, 368 + 2, 368 + 3, 368 + 4, 368 + 5, 368 + 6, 368 + 7 };
-        private static int[] Line_H_05 = new int[] { 360 + 0, 360 + 1, 360 + 2, 360 + 3, 360 + 4, 360 + 5, 360 + 6, 360 + 7 };
-        private static int[] Line_H_06 = new int[] { 352 + 0, 352 + 1, 352 + 2, 352 + 3, 352 + 4, 352 + 5, 352 + 6, 352 + 7 };
-        private static int[] Line_H_07 = new int[] { 344 + 0, 344 + 1, 344 + 2, 344 + 3, 344 + 4, 344 + 5, 344 + 6, 344 + 7 };
-
-        private static int[] Line_H_08 = new int[] { 312 + 0, 312 + 1, 312 + 2, 312 + 3, 312 + 4, 312 + 5, 312 + 6, 312 + 7 };
-        private static int[] Line_H_09 = new int[] { 320 + 0, 320 + 1, 320 + 2, 320 + 3, 320 + 4, 320 + 5, 320 + 6, 320 + 7 };
-        private static int[] Line_H_10 = new int[] { 328 + 0, 328 + 1, 328 + 2, 328 + 3, 328 + 4, 328 + 5, 328 + 6, 328 + 7 };
-        private static int[] Line_H_11 = new int[] { 336 + 0, 336 + 1, 336 + 2, 336 + 3, 336 + 4, 336 + 5, 336 + 6, 336 + 7 };
-
-        private static int[] Line_H_12 = new int[] { 304 + 0, 304 + 1, 304 + 2, 304 + 3, 304 + 4, 304 + 5, 304 + 6, 304 + 7 };
-        private static int[] Line_H_13 = new int[] { 296 + 0, 296 + 1, 296 + 2, 296 + 3, 296 + 4, 296 + 5, 296 + 6, 296 + 7 };
-        private static int[] Line_H_14 = new int[] { 288 + 0, 288 + 1, 288 + 2, 288 + 3, 288 + 4, 288 + 5, 288 + 6, 288 + 7 };
-        private static int[] Line_H_15 = new int[] { 280 + 0, 280 + 1, 280 + 2, 280 + 3, 280 + 4, 280 + 5, 280 + 6, 280 + 7 };
-
-        private static int[] Line_H_16 = new int[] { 248 + 0, 248 + 1, 248 + 2, 248 + 3, 248 + 4, 248 + 5, 248 + 6, 248 + 7 };
-        private static int[] Line_H_17 = new int[] { 256 + 0, 256 + 1, 256 + 2, 256 + 3, 256 + 4, 256 + 5, 256 + 6, 256 + 7 };
-        private static int[] Line_H_18 = new int[] { 264 + 0, 264 + 1, 264 + 2, 264 + 3, 264 + 4, 264 + 5, 264 + 6, 264 + 7 };
-        private static int[] Line_H_19 = new int[] { 272 + 0, 272 + 1, 272 + 2, 272 + 3, 272 + 4, 272 + 5, 272 + 6, 272 + 7 };
-
-        private static int[] Line_H_20 = new int[] { 240 + 0, 240 + 1, 240 + 2, 240 + 3, 240 + 4, 240 + 5, 240 + 6, 240 + 7 };
-        private static int[] Line_H_21 = new int[] { 232 + 0, 232 + 1, 232 + 2, 232 + 3, 232 + 4, 232 + 5, 232 + 6, 232 + 7 };
-        private static int[] Line_H_22 = new int[] { 224 + 0, 224 + 1, 224 + 2, 224 + 3, 224 + 4, 224 + 5, 224 + 6, 224 + 7 };
-        private static int[] Line_H_23 = new int[] { 216 + 0, 216 + 1, 216 + 2, 216 + 3, 216 + 4, 216 + 5, 216 + 6, 216 + 7 };
-
-        private static int[] Line_H_24 = new int[] { 184 + 0, 184 + 1, 184 + 2, 184 + 3, 184 + 4, 184 + 5, 184 + 6, 184 + 7 };
-        private static int[] Line_H_25 = new int[] { 192 + 0, 192 + 1, 192 + 2, 192 + 3, 192 + 4, 192 + 5, 192 + 6, 192 + 7 };
-        private static int[] Line_H_26 = new int[] { 200 + 0, 200 + 1, 200 + 2, 200 + 3, 200 + 4, 200 + 5, 200 + 6, 200 + 7 };
-        private static int[] Line_H_27 = new int[] { 208 + 0, 208 + 1, 208 + 2, 208 + 3, 208 + 4, 208 + 5, 208 + 6, 208 + 7 };
-
-        private static int[] Line_H_28 = new int[] { 176 + 0, 176 + 1, 176 + 2, 176 + 3, 176 + 4, 176 + 5, 176 + 6, 176 + 7 };
-        private static int[] Line_H_29 = new int[] { 168 + 0, 168 + 1, 168 + 2, 168 + 3, 168 + 4, 168 + 5, 168 + 6, 168 + 7 };
-        private static int[] Line_H_30 = new int[] { 160 + 0, 160 + 1, 160 + 2, 160 + 3, 160 + 4, 160 + 5, 160 + 6, 160 + 7 };
-        private static int[] Line_H_31 = new int[] { 152 + 0, 152 + 1, 152 + 2, 152 + 3, 152 + 4, 152 + 5, 152 + 6, 152 + 7 };
-
-        private static int[] Line_H_32 = new int[] { 120 + 0, 120 + 1, 120 + 2, 120 + 3, 120 + 4, 120 + 5, 120 + 6, 120 + 7 };
-        private static int[] Line_H_33 = new int[] { 128 + 0, 128 + 1, 128 + 2, 128 + 3, 128 + 4, 128 + 5, 128 + 6, 128 + 7 };
-        private static int[] Line_H_34 = new int[] { 136 + 0, 136 + 1, 136 + 2, 136 + 3, 136 + 4, 136 + 5, 136 + 6, 136 + 7 };
-        private static int[] Line_H_35 = new int[] { 144 + 0, 144 + 1, 144 + 2, 144 + 3, 144 + 4, 144 + 5, 144 + 6, 144 + 7 };
-
-
-        private static int[] Line_V_00 = new int[] { 96 + (0 * 3) + 0, 96 + (0 * 3) + 1, 96 + (0 * 3) + 2 };
-        private static int[] Line_V_01 = new int[] { 96 + (1 * 3) + 0, 96 + (1 * 3) + 1, 96 + (1 * 3) + 2 };
-        private static int[] Line_V_02 = new int[] { 96 + (2 * 3) + 0, 96 + (2 * 3) + 1, 96 + (2 * 3) + 2 };
-        private static int[] Line_V_03 = new int[] { 96 + (3 * 3) + 0, 96 + (3 * 3) + 1, 96 + (3 * 3) + 2 };
-        private static int[] Line_V_04 = new int[] { 96 + (4 * 3) + 0, 96 + (4 * 3) + 1, 96 + (4 * 3) + 2 };
-        private static int[] Line_V_05 = new int[] { 96 + (5 * 3) + 0, 96 + (5 * 3) + 1, 96 + (5 * 3) + 2 };
-        private static int[] Line_V_06 = new int[] { 96 + (6 * 3) + 0, 96 + (6 * 3) + 1, 96 + (6 * 3) + 2 };
-        private static int[] Line_V_07 = new int[] { 96 + (7 * 3) + 0, 96 + (7 * 3) + 1, 96 + (7 * 3) + 2 };
-
-        private static int[] Line_V_08 = new int[] { 95 - (0 * 3) - 0, 95 - (0 * 3) - 1, 95 - (0 * 3) - 2 };
-        private static int[] Line_V_09 = new int[] { 95 - (1 * 3) - 0, 95 - (1 * 3) - 1, 95 - (1 * 3) - 2 };
-        private static int[] Line_V_10 = new int[] { 95 - (2 * 3) - 0, 95 - (2 * 3) - 1, 95 - (2 * 3) - 2 };
-        private static int[] Line_V_11 = new int[] { 95 - (3 * 3) - 0, 95 - (3 * 3) - 1, 95 - (3 * 3) - 2 };
-        private static int[] Line_V_12 = new int[] { 95 - (4 * 3) - 0, 95 - (4 * 3) - 1, 95 - (4 * 3) - 2 };
-        private static int[] Line_V_13 = new int[] { 95 - (5 * 3) - 0, 95 - (5 * 3) - 1, 95 - (5 * 3) - 2 };
-        private static int[] Line_V_14 = new int[] { 95 - (6 * 3) - 0, 95 - (6 * 3) - 1, 95 - (6 * 3) - 2 };
-        private static int[] Line_V_15 = new int[] { 95 - (7 * 3) - 0, 95 - (7 * 3) - 1, 95 - (7 * 3) - 2 };
-
-        private static int[] Line_V_16 = new int[] { 48 + (0 * 3) + 0, 48 + (0 * 3) + 1, 48 + (0 * 3) + 2 };
-        private static int[] Line_V_17 = new int[] { 48 + (1 * 3) + 0, 48 + (1 * 3) + 1, 48 + (1 * 3) + 2 };
-        private static int[] Line_V_18 = new int[] { 48 + (2 * 3) + 0, 48 + (2 * 3) + 1, 48 + (2 * 3) + 2 };
-        private static int[] Line_V_19 = new int[] { 48 + (3 * 3) + 0, 48 + (3 * 3) + 1, 48 + (3 * 3) + 2 };
-        private static int[] Line_V_20 = new int[] { 48 + (4 * 3) + 0, 48 + (4 * 3) + 1, 48 + (4 * 3) + 2 };
-        private static int[] Line_V_21 = new int[] { 48 + (5 * 3) + 0, 48 + (5 * 3) + 1, 48 + (5 * 3) + 2 };
-        private static int[] Line_V_22 = new int[] { 48 + (6 * 3) + 0, 48 + (6 * 3) + 1, 48 + (6 * 3) + 2 };
-        private static int[] Line_V_23 = new int[] { 48 + (7 * 3) + 0, 48 + (7 * 3) + 1, 48 + (7 * 3) + 2 };
-
-        private static int[] Line_V_24 = new int[] { 47 - (0 * 3) - 0, 47 - (0 * 3) - 1, 47 - (0 * 3) - 2 };
-        private static int[] Line_V_25 = new int[] { 47 - (1 * 3) - 0, 47 - (1 * 3) - 1, 47 - (1 * 3) - 2 };
-        private static int[] Line_V_26 = new int[] { 47 - (2 * 3) - 0, 47 - (2 * 3) - 1, 47 - (2 * 3) - 2 };
-        private static int[] Line_V_27 = new int[] { 47 - (3 * 3) - 0, 47 - (3 * 3) - 1, 47 - (3 * 3) - 2 };
-        private static int[] Line_V_28 = new int[] { 47 - (4 * 3) - 0, 47 - (4 * 3) - 1, 47 - (4 * 3) - 2 };
-        private static int[] Line_V_29 = new int[] { 47 - (5 * 3) - 0, 47 - (5 * 3) - 1, 47 - (5 * 3) - 2 };
-        private static int[] Line_V_30 = new int[] { 47 - (6 * 3) - 0, 47 - (6 * 3) - 1, 47 - (6 * 3) - 2 };
-        private static int[] Line_V_31 = new int[] { 47 - (7 * 3) - 0, 47 - (7 * 3) - 1, 47 - (7 * 3) - 2 };
-
-        private static int[] Line_V_32 = new int[] { 00 + (0 * 3) + 0, 00 + (0 * 3) + 1, 00 + (0 * 3) + 2 };
-        private static int[] Line_V_33 = new int[] { 00 + (1 * 3) + 0, 00 + (1 * 3) + 1, 00 + (1 * 3) + 2 };
-        private static int[] Line_V_34 = new int[] { 00 + (2 * 3) + 0, 00 + (2 * 3) + 1, 00 + (2 * 3) + 2 };
-        private static int[] Line_V_35 = new int[] { 00 + (3 * 3) + 0, 00 + (3 * 3) + 1, 00 + (3 * 3) + 2 };
-        private static int[] Line_V_36 = new int[] { 00 + (4 * 3) + 0, 00 + (4 * 3) + 1, 00 + (4 * 3) + 2 };
-        private static int[] Line_V_37 = new int[] { 00 + (5 * 3) + 0, 00 + (5 * 3) + 1, 00 + (5 * 3) + 2 };
-        private static int[] Line_V_38 = new int[] { 00 + (6 * 3) + 0, 00 + (6 * 3) + 1, 00 + (6 * 3) + 2 };
-        private static int[] Line_V_39 = new int[] { 00 + (7 * 3) + 0, 00 + (7 * 3) + 1, 00 + (7 * 3) + 2 };
-        private void WS2812_Init()
+        public static List<int[]> Get_H_Line_Leds(Drawer.Enum_DrawerType enum_DrawerType)
         {
-            List_Drawer_H_Line_Leds.Add(Line_H_00);
-            List_Drawer_H_Line_Leds.Add(Line_H_01);
-            List_Drawer_H_Line_Leds.Add(Line_H_02);
-            List_Drawer_H_Line_Leds.Add(Line_H_03);
+            List<int[]> List_Drawer_H_Line_Leds = new List<int[]>();
+            if (enum_DrawerType == Drawer.Enum_DrawerType._3X8 || enum_DrawerType == Drawer.Enum_DrawerType._4X8)
+            {
+                int[] Line_H_00 = new int[] { 376 + 0, 376 + 1, 376 + 2, 376 + 3, 376 + 4, 376 + 5, 376 + 6, 376 + 7 };
+                int[] Line_H_01 = new int[] { 384 + 0, 384 + 1, 384 + 2, 384 + 3, 384 + 4, 384 + 5, 384 + 6, 384 + 7 };
+                int[] Line_H_02 = new int[] { 392 + 0, 392 + 1, 392 + 2, 392 + 3, 392 + 4, 392 + 5, 392 + 6, 392 + 7 };
+                int[] Line_H_03 = new int[] { 400 + 0, 400 + 1, 400 + 2, 400 + 3, 400 + 4, 400 + 5, 400 + 6, 400 + 7 };
 
-            List_Drawer_H_Line_Leds.Add(Line_H_04);
-            List_Drawer_H_Line_Leds.Add(Line_H_05);
-            List_Drawer_H_Line_Leds.Add(Line_H_06);
-            List_Drawer_H_Line_Leds.Add(Line_H_07);
+                int[] Line_H_04 = new int[] { 368 + 0, 368 + 1, 368 + 2, 368 + 3, 368 + 4, 368 + 5, 368 + 6, 368 + 7 };
+                int[] Line_H_05 = new int[] { 360 + 0, 360 + 1, 360 + 2, 360 + 3, 360 + 4, 360 + 5, 360 + 6, 360 + 7 };
+                int[] Line_H_06 = new int[] { 352 + 0, 352 + 1, 352 + 2, 352 + 3, 352 + 4, 352 + 5, 352 + 6, 352 + 7 };
+                int[] Line_H_07 = new int[] { 344 + 0, 344 + 1, 344 + 2, 344 + 3, 344 + 4, 344 + 5, 344 + 6, 344 + 7 };
 
-            List_Drawer_H_Line_Leds.Add(Line_H_08);
-            List_Drawer_H_Line_Leds.Add(Line_H_09);
-            List_Drawer_H_Line_Leds.Add(Line_H_10);
-            List_Drawer_H_Line_Leds.Add(Line_H_11);
+                int[] Line_H_08 = new int[] { 312 + 0, 312 + 1, 312 + 2, 312 + 3, 312 + 4, 312 + 5, 312 + 6, 312 + 7 };
+                int[] Line_H_09 = new int[] { 320 + 0, 320 + 1, 320 + 2, 320 + 3, 320 + 4, 320 + 5, 320 + 6, 320 + 7 };
+                int[] Line_H_10 = new int[] { 328 + 0, 328 + 1, 328 + 2, 328 + 3, 328 + 4, 328 + 5, 328 + 6, 328 + 7 };
+                int[] Line_H_11 = new int[] { 336 + 0, 336 + 1, 336 + 2, 336 + 3, 336 + 4, 336 + 5, 336 + 6, 336 + 7 };
 
-            List_Drawer_H_Line_Leds.Add(Line_H_12);
-            List_Drawer_H_Line_Leds.Add(Line_H_13);
-            List_Drawer_H_Line_Leds.Add(Line_H_14);
-            List_Drawer_H_Line_Leds.Add(Line_H_15);
+                int[] Line_H_12 = new int[] { 304 + 0, 304 + 1, 304 + 2, 304 + 3, 304 + 4, 304 + 5, 304 + 6, 304 + 7 };
+                int[] Line_H_13 = new int[] { 296 + 0, 296 + 1, 296 + 2, 296 + 3, 296 + 4, 296 + 5, 296 + 6, 296 + 7 };
+                int[] Line_H_14 = new int[] { 288 + 0, 288 + 1, 288 + 2, 288 + 3, 288 + 4, 288 + 5, 288 + 6, 288 + 7 };
+                int[] Line_H_15 = new int[] { 280 + 0, 280 + 1, 280 + 2, 280 + 3, 280 + 4, 280 + 5, 280 + 6, 280 + 7 };
 
-            List_Drawer_H_Line_Leds.Add(Line_H_16);
-            List_Drawer_H_Line_Leds.Add(Line_H_17);
-            List_Drawer_H_Line_Leds.Add(Line_H_18);
-            List_Drawer_H_Line_Leds.Add(Line_H_19);
+                int[] Line_H_16 = new int[] { 248 + 0, 248 + 1, 248 + 2, 248 + 3, 248 + 4, 248 + 5, 248 + 6, 248 + 7 };
+                int[] Line_H_17 = new int[] { 256 + 0, 256 + 1, 256 + 2, 256 + 3, 256 + 4, 256 + 5, 256 + 6, 256 + 7 };
+                int[] Line_H_18 = new int[] { 264 + 0, 264 + 1, 264 + 2, 264 + 3, 264 + 4, 264 + 5, 264 + 6, 264 + 7 };
+                int[] Line_H_19 = new int[] { 272 + 0, 272 + 1, 272 + 2, 272 + 3, 272 + 4, 272 + 5, 272 + 6, 272 + 7 };
 
-            List_Drawer_H_Line_Leds.Add(Line_H_20);
-            List_Drawer_H_Line_Leds.Add(Line_H_21);
-            List_Drawer_H_Line_Leds.Add(Line_H_22);
-            List_Drawer_H_Line_Leds.Add(Line_H_23);
+                int[] Line_H_20 = new int[] { 240 + 0, 240 + 1, 240 + 2, 240 + 3, 240 + 4, 240 + 5, 240 + 6, 240 + 7 };
+                int[] Line_H_21 = new int[] { 232 + 0, 232 + 1, 232 + 2, 232 + 3, 232 + 4, 232 + 5, 232 + 6, 232 + 7 };
+                int[] Line_H_22 = new int[] { 224 + 0, 224 + 1, 224 + 2, 224 + 3, 224 + 4, 224 + 5, 224 + 6, 224 + 7 };
+                int[] Line_H_23 = new int[] { 216 + 0, 216 + 1, 216 + 2, 216 + 3, 216 + 4, 216 + 5, 216 + 6, 216 + 7 };
 
-            List_Drawer_H_Line_Leds.Add(Line_H_24);
-            List_Drawer_H_Line_Leds.Add(Line_H_25);
-            List_Drawer_H_Line_Leds.Add(Line_H_26);
-            List_Drawer_H_Line_Leds.Add(Line_H_27);
+                int[] Line_H_24 = new int[] { 184 + 0, 184 + 1, 184 + 2, 184 + 3, 184 + 4, 184 + 5, 184 + 6, 184 + 7 };
+                int[] Line_H_25 = new int[] { 192 + 0, 192 + 1, 192 + 2, 192 + 3, 192 + 4, 192 + 5, 192 + 6, 192 + 7 };
+                int[] Line_H_26 = new int[] { 200 + 0, 200 + 1, 200 + 2, 200 + 3, 200 + 4, 200 + 5, 200 + 6, 200 + 7 };
+                int[] Line_H_27 = new int[] { 208 + 0, 208 + 1, 208 + 2, 208 + 3, 208 + 4, 208 + 5, 208 + 6, 208 + 7 };
 
-            List_Drawer_H_Line_Leds.Add(Line_H_28);
-            List_Drawer_H_Line_Leds.Add(Line_H_29);
-            List_Drawer_H_Line_Leds.Add(Line_H_30);
-            List_Drawer_H_Line_Leds.Add(Line_H_31);
+                int[] Line_H_28 = new int[] { 176 + 0, 176 + 1, 176 + 2, 176 + 3, 176 + 4, 176 + 5, 176 + 6, 176 + 7 };
+                int[] Line_H_29 = new int[] { 168 + 0, 168 + 1, 168 + 2, 168 + 3, 168 + 4, 168 + 5, 168 + 6, 168 + 7 };
+                int[] Line_H_30 = new int[] { 160 + 0, 160 + 1, 160 + 2, 160 + 3, 160 + 4, 160 + 5, 160 + 6, 160 + 7 };
+                int[] Line_H_31 = new int[] { 152 + 0, 152 + 1, 152 + 2, 152 + 3, 152 + 4, 152 + 5, 152 + 6, 152 + 7 };
 
-            List_Drawer_H_Line_Leds.Add(Line_H_32);
-            List_Drawer_H_Line_Leds.Add(Line_H_33);
-            List_Drawer_H_Line_Leds.Add(Line_H_34);
-            List_Drawer_H_Line_Leds.Add(Line_H_35);
+                int[] Line_H_32 = new int[] { 120 + 0, 120 + 1, 120 + 2, 120 + 3, 120 + 4, 120 + 5, 120 + 6, 120 + 7 };
+                int[] Line_H_33 = new int[] { 128 + 0, 128 + 1, 128 + 2, 128 + 3, 128 + 4, 128 + 5, 128 + 6, 128 + 7 };
+                int[] Line_H_34 = new int[] { 136 + 0, 136 + 1, 136 + 2, 136 + 3, 136 + 4, 136 + 5, 136 + 6, 136 + 7 };
+                int[] Line_H_35 = new int[] { 144 + 0, 144 + 1, 144 + 2, 144 + 3, 144 + 4, 144 + 5, 144 + 6, 144 + 7 };
 
-            List_Drawer_V_Line_Leds.Add(Line_V_00);
-            List_Drawer_V_Line_Leds.Add(Line_V_01);
-            List_Drawer_V_Line_Leds.Add(Line_V_02);
-            List_Drawer_V_Line_Leds.Add(Line_V_03);
-            List_Drawer_V_Line_Leds.Add(Line_V_04);
+                List_Drawer_H_Line_Leds.Add(Line_H_00);
+                List_Drawer_H_Line_Leds.Add(Line_H_01);
+                List_Drawer_H_Line_Leds.Add(Line_H_02);
+                List_Drawer_H_Line_Leds.Add(Line_H_03);
 
-            List_Drawer_V_Line_Leds.Add(Line_V_05);
-            List_Drawer_V_Line_Leds.Add(Line_V_06);
-            List_Drawer_V_Line_Leds.Add(Line_V_07);
-            List_Drawer_V_Line_Leds.Add(Line_V_08);
-            List_Drawer_V_Line_Leds.Add(Line_V_09);
+                List_Drawer_H_Line_Leds.Add(Line_H_04);
+                List_Drawer_H_Line_Leds.Add(Line_H_05);
+                List_Drawer_H_Line_Leds.Add(Line_H_06);
+                List_Drawer_H_Line_Leds.Add(Line_H_07);
 
-            List_Drawer_V_Line_Leds.Add(Line_V_10);
-            List_Drawer_V_Line_Leds.Add(Line_V_11);
-            List_Drawer_V_Line_Leds.Add(Line_V_12);
-            List_Drawer_V_Line_Leds.Add(Line_V_13);
-            List_Drawer_V_Line_Leds.Add(Line_V_14);
+                List_Drawer_H_Line_Leds.Add(Line_H_08);
+                List_Drawer_H_Line_Leds.Add(Line_H_09);
+                List_Drawer_H_Line_Leds.Add(Line_H_10);
+                List_Drawer_H_Line_Leds.Add(Line_H_11);
 
-            List_Drawer_V_Line_Leds.Add(Line_V_15);
-            List_Drawer_V_Line_Leds.Add(Line_V_16);
-            List_Drawer_V_Line_Leds.Add(Line_V_17);
-            List_Drawer_V_Line_Leds.Add(Line_V_18);
-            List_Drawer_V_Line_Leds.Add(Line_V_19);
+                List_Drawer_H_Line_Leds.Add(Line_H_12);
+                List_Drawer_H_Line_Leds.Add(Line_H_13);
+                List_Drawer_H_Line_Leds.Add(Line_H_14);
+                List_Drawer_H_Line_Leds.Add(Line_H_15);
 
-            List_Drawer_V_Line_Leds.Add(Line_V_20);
-            List_Drawer_V_Line_Leds.Add(Line_V_21);
-            List_Drawer_V_Line_Leds.Add(Line_V_22);
-            List_Drawer_V_Line_Leds.Add(Line_V_23);
-            List_Drawer_V_Line_Leds.Add(Line_V_24);
+                List_Drawer_H_Line_Leds.Add(Line_H_16);
+                List_Drawer_H_Line_Leds.Add(Line_H_17);
+                List_Drawer_H_Line_Leds.Add(Line_H_18);
+                List_Drawer_H_Line_Leds.Add(Line_H_19);
 
-            List_Drawer_V_Line_Leds.Add(Line_V_25);
-            List_Drawer_V_Line_Leds.Add(Line_V_26);
-            List_Drawer_V_Line_Leds.Add(Line_V_27);
-            List_Drawer_V_Line_Leds.Add(Line_V_28);
-            List_Drawer_V_Line_Leds.Add(Line_V_29);
+                List_Drawer_H_Line_Leds.Add(Line_H_20);
+                List_Drawer_H_Line_Leds.Add(Line_H_21);
+                List_Drawer_H_Line_Leds.Add(Line_H_22);
+                List_Drawer_H_Line_Leds.Add(Line_H_23);
 
-            List_Drawer_V_Line_Leds.Add(Line_V_30);
-            List_Drawer_V_Line_Leds.Add(Line_V_31);
-            List_Drawer_V_Line_Leds.Add(Line_V_32);
-            List_Drawer_V_Line_Leds.Add(Line_V_33);
-            List_Drawer_V_Line_Leds.Add(Line_V_34);
+                List_Drawer_H_Line_Leds.Add(Line_H_24);
+                List_Drawer_H_Line_Leds.Add(Line_H_25);
+                List_Drawer_H_Line_Leds.Add(Line_H_26);
+                List_Drawer_H_Line_Leds.Add(Line_H_27);
 
-            List_Drawer_V_Line_Leds.Add(Line_V_35);
-            List_Drawer_V_Line_Leds.Add(Line_V_36);
-            List_Drawer_V_Line_Leds.Add(Line_V_37);
-            List_Drawer_V_Line_Leds.Add(Line_V_38);
-            List_Drawer_V_Line_Leds.Add(Line_V_39);
+                List_Drawer_H_Line_Leds.Add(Line_H_28);
+                List_Drawer_H_Line_Leds.Add(Line_H_29);
+                List_Drawer_H_Line_Leds.Add(Line_H_30);
+                List_Drawer_H_Line_Leds.Add(Line_H_31);
+
+                List_Drawer_H_Line_Leds.Add(Line_H_32);
+                List_Drawer_H_Line_Leds.Add(Line_H_33);
+                List_Drawer_H_Line_Leds.Add(Line_H_34);
+                List_Drawer_H_Line_Leds.Add(Line_H_35);
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._4X8_A || enum_DrawerType == Drawer.Enum_DrawerType._5X8_A)
+            {
+
+                int index = 0;
+
+                index = 336;
+                for (int k = 0; k < 5; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 6; i++)
+                    {
+                        values.Add(index + ((k * 6) + i));
+                    }
+                    List_Drawer_H_Line_Leds.Add(values.ToArray());
+                }
+
+                index = 335;
+                for (int k = 0; k < 5; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 6; i++)
+                    {
+                        values.Add(index - ((k * 6) + i));
+                    }
+                    List_Drawer_H_Line_Leds.Add(values.ToArray());
+                }
+
+                index = 276;
+                for (int k = 0; k < 5; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 6; i++)
+                    {
+                        values.Add(index + ((k * 6) + i));
+                    }
+                    List_Drawer_H_Line_Leds.Add(values.ToArray());
+                }
+
+                index = 275;
+                for (int k = 0; k < 5; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 6; i++)
+                    {
+                        values.Add(index - ((k * 6) + i));
+                    }
+                    List_Drawer_H_Line_Leds.Add(values.ToArray());
+                }
+
+                index = 216;
+                for (int k = 0; k < 5; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 6; i++)
+                    {
+                        values.Add(index + ((k * 6) + i));
+                    }
+                    List_Drawer_H_Line_Leds.Add(values.ToArray());
+                }
+
+                index = 215;
+                for (int k = 0; k < 5; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 6; i++)
+                    {
+                        values.Add(index - ((k * 6) + i));
+                    }
+                    List_Drawer_H_Line_Leds.Add(values.ToArray());
+                }
+
+                index = 156;
+                for (int k = 0; k < 5; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 6; i++)
+                    {
+                        values.Add(index + ((k * 6) + i));
+                    }
+                    List_Drawer_H_Line_Leds.Add(values.ToArray());
+                }
+
+                index = 155;
+                for (int k = 0; k < 5; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 6; i++)
+                    {
+                        values.Add(index - ((k * 6) + i));
+                    }
+                    List_Drawer_H_Line_Leds.Add(values.ToArray());
+                }
+
+                index = 96;
+                for (int k = 0; k < 5; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 6; i++)
+                    {
+                        values.Add(index + ((k * 6) + i));
+                    }
+                    List_Drawer_H_Line_Leds.Add(values.ToArray());
+                }
+            }
+            return List_Drawer_H_Line_Leds;
         }
+        public static List<int[]> Get_V_Line_Leds(Drawer.Enum_DrawerType enum_DrawerType)
+        {
+            List<int[]> List_Drawer_V_Line_Leds = new List<int[]>();
+            if (enum_DrawerType == Drawer.Enum_DrawerType._3X8 || enum_DrawerType == Drawer.Enum_DrawerType._4X8)
+            {
+                int[] Line_V_00 = new int[] { 96 + (0 * 3) + 0, 96 + (0 * 3) + 1, 96 + (0 * 3) + 2 };
+                int[] Line_V_01 = new int[] { 96 + (1 * 3) + 0, 96 + (1 * 3) + 1, 96 + (1 * 3) + 2 };
+                int[] Line_V_02 = new int[] { 96 + (2 * 3) + 0, 96 + (2 * 3) + 1, 96 + (2 * 3) + 2 };
+                int[] Line_V_03 = new int[] { 96 + (3 * 3) + 0, 96 + (3 * 3) + 1, 96 + (3 * 3) + 2 };
+                int[] Line_V_04 = new int[] { 96 + (4 * 3) + 0, 96 + (4 * 3) + 1, 96 + (4 * 3) + 2 };
+                int[] Line_V_05 = new int[] { 96 + (5 * 3) + 0, 96 + (5 * 3) + 1, 96 + (5 * 3) + 2 };
+                int[] Line_V_06 = new int[] { 96 + (6 * 3) + 0, 96 + (6 * 3) + 1, 96 + (6 * 3) + 2 };
+                int[] Line_V_07 = new int[] { 96 + (7 * 3) + 0, 96 + (7 * 3) + 1, 96 + (7 * 3) + 2 };
+
+                int[] Line_V_08 = new int[] { 95 - (0 * 3) - 0, 95 - (0 * 3) - 1, 95 - (0 * 3) - 2 };
+                int[] Line_V_09 = new int[] { 95 - (1 * 3) - 0, 95 - (1 * 3) - 1, 95 - (1 * 3) - 2 };
+                int[] Line_V_10 = new int[] { 95 - (2 * 3) - 0, 95 - (2 * 3) - 1, 95 - (2 * 3) - 2 };
+                int[] Line_V_11 = new int[] { 95 - (3 * 3) - 0, 95 - (3 * 3) - 1, 95 - (3 * 3) - 2 };
+                int[] Line_V_12 = new int[] { 95 - (4 * 3) - 0, 95 - (4 * 3) - 1, 95 - (4 * 3) - 2 };
+                int[] Line_V_13 = new int[] { 95 - (5 * 3) - 0, 95 - (5 * 3) - 1, 95 - (5 * 3) - 2 };
+                int[] Line_V_14 = new int[] { 95 - (6 * 3) - 0, 95 - (6 * 3) - 1, 95 - (6 * 3) - 2 };
+                int[] Line_V_15 = new int[] { 95 - (7 * 3) - 0, 95 - (7 * 3) - 1, 95 - (7 * 3) - 2 };
+
+                int[] Line_V_16 = new int[] { 48 + (0 * 3) + 0, 48 + (0 * 3) + 1, 48 + (0 * 3) + 2 };
+                int[] Line_V_17 = new int[] { 48 + (1 * 3) + 0, 48 + (1 * 3) + 1, 48 + (1 * 3) + 2 };
+                int[] Line_V_18 = new int[] { 48 + (2 * 3) + 0, 48 + (2 * 3) + 1, 48 + (2 * 3) + 2 };
+                int[] Line_V_19 = new int[] { 48 + (3 * 3) + 0, 48 + (3 * 3) + 1, 48 + (3 * 3) + 2 };
+                int[] Line_V_20 = new int[] { 48 + (4 * 3) + 0, 48 + (4 * 3) + 1, 48 + (4 * 3) + 2 };
+                int[] Line_V_21 = new int[] { 48 + (5 * 3) + 0, 48 + (5 * 3) + 1, 48 + (5 * 3) + 2 };
+                int[] Line_V_22 = new int[] { 48 + (6 * 3) + 0, 48 + (6 * 3) + 1, 48 + (6 * 3) + 2 };
+                int[] Line_V_23 = new int[] { 48 + (7 * 3) + 0, 48 + (7 * 3) + 1, 48 + (7 * 3) + 2 };
+
+                int[] Line_V_24 = new int[] { 47 - (0 * 3) - 0, 47 - (0 * 3) - 1, 47 - (0 * 3) - 2 };
+                int[] Line_V_25 = new int[] { 47 - (1 * 3) - 0, 47 - (1 * 3) - 1, 47 - (1 * 3) - 2 };
+                int[] Line_V_26 = new int[] { 47 - (2 * 3) - 0, 47 - (2 * 3) - 1, 47 - (2 * 3) - 2 };
+                int[] Line_V_27 = new int[] { 47 - (3 * 3) - 0, 47 - (3 * 3) - 1, 47 - (3 * 3) - 2 };
+                int[] Line_V_28 = new int[] { 47 - (4 * 3) - 0, 47 - (4 * 3) - 1, 47 - (4 * 3) - 2 };
+                int[] Line_V_29 = new int[] { 47 - (5 * 3) - 0, 47 - (5 * 3) - 1, 47 - (5 * 3) - 2 };
+                int[] Line_V_30 = new int[] { 47 - (6 * 3) - 0, 47 - (6 * 3) - 1, 47 - (6 * 3) - 2 };
+                int[] Line_V_31 = new int[] { 47 - (7 * 3) - 0, 47 - (7 * 3) - 1, 47 - (7 * 3) - 2 };
+
+                int[] Line_V_32 = new int[] { 00 + (0 * 3) + 0, 00 + (0 * 3) + 1, 00 + (0 * 3) + 2 };
+                int[] Line_V_33 = new int[] { 00 + (1 * 3) + 0, 00 + (1 * 3) + 1, 00 + (1 * 3) + 2 };
+                int[] Line_V_34 = new int[] { 00 + (2 * 3) + 0, 00 + (2 * 3) + 1, 00 + (2 * 3) + 2 };
+                int[] Line_V_35 = new int[] { 00 + (3 * 3) + 0, 00 + (3 * 3) + 1, 00 + (3 * 3) + 2 };
+                int[] Line_V_36 = new int[] { 00 + (4 * 3) + 0, 00 + (4 * 3) + 1, 00 + (4 * 3) + 2 };
+                int[] Line_V_37 = new int[] { 00 + (5 * 3) + 0, 00 + (5 * 3) + 1, 00 + (5 * 3) + 2 };
+                int[] Line_V_38 = new int[] { 00 + (6 * 3) + 0, 00 + (6 * 3) + 1, 00 + (6 * 3) + 2 };
+                int[] Line_V_39 = new int[] { 00 + (7 * 3) + 0, 00 + (7 * 3) + 1, 00 + (7 * 3) + 2 };
+
+                List_Drawer_V_Line_Leds.Add(Line_V_00);
+                List_Drawer_V_Line_Leds.Add(Line_V_01);
+                List_Drawer_V_Line_Leds.Add(Line_V_02);
+                List_Drawer_V_Line_Leds.Add(Line_V_03);
+                List_Drawer_V_Line_Leds.Add(Line_V_04);
+
+                List_Drawer_V_Line_Leds.Add(Line_V_05);
+                List_Drawer_V_Line_Leds.Add(Line_V_06);
+                List_Drawer_V_Line_Leds.Add(Line_V_07);
+                List_Drawer_V_Line_Leds.Add(Line_V_08);
+                List_Drawer_V_Line_Leds.Add(Line_V_09);
+
+                List_Drawer_V_Line_Leds.Add(Line_V_10);
+                List_Drawer_V_Line_Leds.Add(Line_V_11);
+                List_Drawer_V_Line_Leds.Add(Line_V_12);
+                List_Drawer_V_Line_Leds.Add(Line_V_13);
+                List_Drawer_V_Line_Leds.Add(Line_V_14);
+
+                List_Drawer_V_Line_Leds.Add(Line_V_15);
+                List_Drawer_V_Line_Leds.Add(Line_V_16);
+                List_Drawer_V_Line_Leds.Add(Line_V_17);
+                List_Drawer_V_Line_Leds.Add(Line_V_18);
+                List_Drawer_V_Line_Leds.Add(Line_V_19);
+
+                List_Drawer_V_Line_Leds.Add(Line_V_20);
+                List_Drawer_V_Line_Leds.Add(Line_V_21);
+                List_Drawer_V_Line_Leds.Add(Line_V_22);
+                List_Drawer_V_Line_Leds.Add(Line_V_23);
+                List_Drawer_V_Line_Leds.Add(Line_V_24);
+
+                List_Drawer_V_Line_Leds.Add(Line_V_25);
+                List_Drawer_V_Line_Leds.Add(Line_V_26);
+                List_Drawer_V_Line_Leds.Add(Line_V_27);
+                List_Drawer_V_Line_Leds.Add(Line_V_28);
+                List_Drawer_V_Line_Leds.Add(Line_V_29);
+
+                List_Drawer_V_Line_Leds.Add(Line_V_30);
+                List_Drawer_V_Line_Leds.Add(Line_V_31);
+                List_Drawer_V_Line_Leds.Add(Line_V_32);
+                List_Drawer_V_Line_Leds.Add(Line_V_33);
+                List_Drawer_V_Line_Leds.Add(Line_V_34);
+
+                List_Drawer_V_Line_Leds.Add(Line_V_35);
+                List_Drawer_V_Line_Leds.Add(Line_V_36);
+                List_Drawer_V_Line_Leds.Add(Line_V_37);
+                List_Drawer_V_Line_Leds.Add(Line_V_38);
+                List_Drawer_V_Line_Leds.Add(Line_V_39);
+
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._4X8_A || enum_DrawerType == Drawer.Enum_DrawerType._5X8_A)
+            {
+
+                int index = 0;
+
+                index = 95;
+                for (int k = 0; k < 8; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 2; i++)
+                    {
+                        values.Add(index - ((k * 2) + i));
+                    }
+                    List_Drawer_V_Line_Leds.Add(values.ToArray());
+                }
+                index = 64;
+                for (int k = 0; k < 8; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 2; i++)
+                    {
+                        values.Add(index + ((k * 2) + i));
+                    }
+                    List_Drawer_V_Line_Leds.Add(values.ToArray());
+                }
+
+                index = 63;
+                for (int k = 0; k < 8; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 2; i++)
+                    {
+                        values.Add(index - ((k * 2) + i));
+                    }
+                    List_Drawer_V_Line_Leds.Add(values.ToArray());
+                }
+                index = 32;
+                for (int k = 0; k < 8; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 2; i++)
+                    {
+                        values.Add(index + ((k * 2) + i));
+                    }
+                    List_Drawer_V_Line_Leds.Add(values.ToArray());
+                }
+
+                index = 31;
+                for (int k = 0; k < 8; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 2; i++)
+                    {
+                        values.Add(index - ((k * 2) + i));
+                    }
+                    List_Drawer_V_Line_Leds.Add(values.ToArray());
+                }
+                index = 0;
+                for (int k = 0; k < 8; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 2; i++)
+                    {
+                        values.Add(index + ((k * 2) + i));
+                    }
+                    List_Drawer_V_Line_Leds.Add(values.ToArray());
+                }
+            }
+            return List_Drawer_V_Line_Leds;
+        }
+
+     
         #endregion
 
         private enum ContextMenuStrip_Main
         {
             畫面設置,
             IO設定,
-            參數設定,
-         
+            參數設定,       
         }
         private enum ContextMenuStrip_DeviceTable_畫面設置
         {
@@ -719,6 +921,8 @@ namespace H_Pannel_lib
         {
             設為大抽屜4X8,
             設為小抽屜3X8,
+            設為大抽屜4X8_A,
+            設為小抽屜5X8_A,
             設為EPD583有鎖控,
             設為EPD583無鎖控,
             設為EPD730有鎖控,
@@ -742,6 +946,8 @@ namespace H_Pannel_lib
         {
             設為大抽屜4X8,
             設為小抽屜3X8,
+            設為大抽屜4X8_A,
+            設為小抽屜5X8_A,
             設為EPD583有鎖控,
             設為EPD583無鎖控,
             設為EPD730有鎖控,
@@ -749,10 +955,11 @@ namespace H_Pannel_lib
             設為隔板亮燈,
             設為把手亮燈,
         }
+
         public DrawerUI_EPD_583()
         {
             this.TableName = "EPD583_Jsonstring";
-            WS2812_Init();
+
 
             this.DeviceTableMouseDownRightEvent += DrawerUI_EPD_583_DeviceTableMouseDownRightEvent;
             this.UDP_DataReceiveMouseDownRightEvent += DrawerUI_EPD_583_UDP_DataReceiveMouseDownRightEvent;
@@ -1254,6 +1461,46 @@ namespace H_Pannel_lib
                             Task allTask = Task.WhenAll(taskList);
                         }
                     }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_參數設定.設為大抽屜4X8_A.GetEnumName())
+                    {
+                        if (MyMessageBox.ShowDialog("確認將設為小抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
+                        {
+                            List<Task> taskList = new List<Task>();
+                            for (int i = 0; i < iPEndPoints.Count; i++)
+                            {
+                                string IP = iPEndPoints[i].Address.ToString();
+                                int Port = iPEndPoints[i].Port;
+                                Drawer drawer = this.SQL_GetDrawer(IP);
+                                if (drawer == null) continue;
+                                drawer.SetDrawerType(Drawer.Enum_DrawerType._4X8_A);
+                                taskList.Add(Task.Run(() =>
+                                {
+                                    SQL_ReplaceDrawer(drawer);
+                                }));
+                            }
+                            Task allTask = Task.WhenAll(taskList);
+                        }
+                    }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_參數設定.設為小抽屜5X8_A.GetEnumName())
+                    {
+                        if (MyMessageBox.ShowDialog("確認將設為小抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
+                        {
+                            List<Task> taskList = new List<Task>();
+                            for (int i = 0; i < iPEndPoints.Count; i++)
+                            {
+                                string IP = iPEndPoints[i].Address.ToString();
+                                int Port = iPEndPoints[i].Port;
+                                Drawer drawer = this.SQL_GetDrawer(IP);
+                                if (drawer == null) continue;
+                                drawer.SetDrawerType(Drawer.Enum_DrawerType._5X8_A);
+                                taskList.Add(Task.Run(() =>
+                                {
+                                    SQL_ReplaceDrawer(drawer);
+                                }));
+                            }
+                            Task allTask = Task.WhenAll(taskList);
+                        }
+                    }
                     else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_參數設定.設為EPD583有鎖控.GetEnumName())
                     {
                         List<Task> taskList = new List<Task>();
@@ -1485,6 +1732,46 @@ namespace H_Pannel_lib
                                 Drawer drawer = this.SQL_GetDrawer(IP);
                                 if (drawer == null) continue;
                                 drawer.SetDrawerType(Drawer.Enum_DrawerType._3X8);
+                                taskList.Add(Task.Run(() =>
+                                {
+                                    SQL_ReplaceDrawer(drawer);
+                                }));
+                            }
+                            Task allTask = Task.WhenAll(taskList);
+                        }
+                    }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為大抽屜4X8_A.GetEnumName())
+                    {
+                        if (MyMessageBox.ShowDialog("確認將設為小抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
+                        {
+                            List<Task> taskList = new List<Task>();
+                            for (int i = 0; i < iPEndPoints.Count; i++)
+                            {
+                                string IP = iPEndPoints[i].Address.ToString();
+                                int Port = iPEndPoints[i].Port;
+                                Drawer drawer = this.SQL_GetDrawer(IP);
+                                if (drawer == null) continue;
+                                drawer.SetDrawerType(Drawer.Enum_DrawerType._4X8_A);
+                                taskList.Add(Task.Run(() =>
+                                {
+                                    SQL_ReplaceDrawer(drawer);
+                                }));
+                            }
+                            Task allTask = Task.WhenAll(taskList);
+                        }
+                    }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_參數設定.設為小抽屜5X8_A.GetEnumName())
+                    {
+                        if (MyMessageBox.ShowDialog("確認將設為小抽屜,且清除該抽屜所有儲位?", MyMessageBox.enum_BoxType.Warning, MyMessageBox.enum_Button.Confirm_Cancel) == DialogResult.Yes)
+                        {
+                            List<Task> taskList = new List<Task>();
+                            for (int i = 0; i < iPEndPoints.Count; i++)
+                            {
+                                string IP = iPEndPoints[i].Address.ToString();
+                                int Port = iPEndPoints[i].Port;
+                                Drawer drawer = this.SQL_GetDrawer(IP);
+                                if (drawer == null) continue;
+                                drawer.SetDrawerType(Drawer.Enum_DrawerType._5X8_A);
                                 taskList.Add(Task.Run(() =>
                                 {
                                     SQL_ReplaceDrawer(drawer);

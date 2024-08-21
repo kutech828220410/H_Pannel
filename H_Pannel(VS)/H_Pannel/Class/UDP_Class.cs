@@ -116,6 +116,8 @@ namespace H_Pannel_lib
             udpClient =new UdpClient(Port);
             udpClient.Client.SendBufferSize = 409600;
             udpClient.Client.ReceiveBufferSize = 409600;
+            udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+            udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ExclusiveAddressUse, false);
 
             udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), udpClient);
             this.MyThread_Program = new MyThread();

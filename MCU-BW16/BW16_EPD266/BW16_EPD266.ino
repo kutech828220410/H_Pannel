@@ -62,7 +62,7 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.5.8";
+String Version = "Ver 1.5.9";
 
 //#define EPD
 #define RowLED
@@ -92,12 +92,12 @@ void loop()
       IO_Init();
       if(MCU_TYPE == 1)
       {
-        wiFiConfig.Set_Localport(29000);
+//        wiFiConfig.Set_Localport(29000);
         wiFiConfig.Set_Serverport(30000);
       }
       if(MCU_TYPE == 2)
       {
-        wiFiConfig.Set_Localport(29001);
+//        wiFiConfig.Set_Localport(29001);
         wiFiConfig.Set_Serverport(30001);
       }
 

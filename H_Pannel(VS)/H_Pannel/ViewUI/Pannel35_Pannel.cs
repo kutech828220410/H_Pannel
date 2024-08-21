@@ -101,6 +101,7 @@ namespace H_Pannel_lib
 
         public void Set_Stroage(Storage storage)
         {
+            string Code = storage.Code;
             CurrentStorage = storage;
 
             Storage.VlaueClass vlaueClass;
@@ -111,6 +112,7 @@ namespace H_Pannel_lib
                 if (vlaueClass.Width < size.Width) vlaueClass.Width = size.Width;
                 if (vlaueClass.Height < size.Height) vlaueClass.Height = size.Height;
                 CurrentStorage.SetValue(vlaueClass);
+                CurrentStorage.Code = Code;
             }
 
             this.DrawToPictureBox();

@@ -238,13 +238,8 @@ namespace H_Pannel_lib
             uDP_READ.LEDStateChangeEvent += UDP_READ_LEDStateChangeEvent;
             uDP_READ.LockStateChangeEvent += UDP_READ_LockStateChangeEvent;
             this.pictureBox.Paint += PictureBox_Paint;
-            string[] strin_array = Storage.ValueName.IP.GetEnumNames();
-            List<string> list_value = new List<string>();
-            for (int i = 0; i < strin_array.Length; i++)
-            {
-                list_value.Add(strin_array[i]);
-            }
-            comboBox_圖形編輯_編輯內容名稱.DataSource = list_value.ToArray();
+         
+            comboBox_圖形編輯_編輯內容名稱.DataSource = new Storage.ValueName().GetEnumNames();
             comboBox_圖形編輯_編輯內容名稱.SelectedIndex = 0;
             comboBox_圖形編輯_對齊方式.DataSource = new HorizontalAlignment().GetEnumNames();
 
@@ -702,6 +697,7 @@ namespace H_Pannel_lib
 
         public void Set_Stroage(Storage storage)
         {
+            string Code = storage.Code;
             CurrentStorage = storage;
 
             Storage.VlaueClass vlaueClass;
@@ -712,6 +708,7 @@ namespace H_Pannel_lib
                 if (vlaueClass.Width < size.Width) vlaueClass.Width = size.Width;
                 if (vlaueClass.Height < size.Height) vlaueClass.Height = size.Height;
                 CurrentStorage.SetValue(vlaueClass);
+                CurrentStorage.Code = Code;
             }
             this.DrawToPictureBox();
         }

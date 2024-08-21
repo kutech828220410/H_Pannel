@@ -77,6 +77,7 @@
             this.EPD266 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.storagePanel = new H_Pannel_lib.StoragePanel();
             this.rJ_Button_EPD266_TEST = new MyUI.RJ_Button();
             this.epD_266_Pannel = new H_Pannel_lib.EPD_266_Pannel();
             this.rJ_Button_EPD_266_初始化 = new MyUI.RJ_Button();
@@ -133,7 +134,6 @@
             this.sqL_DataGridView_h_RFID_Datas = new SQLUI.SQL_DataGridView();
             this.rJ_Button_H_RFID_初始化 = new MyUI.RJ_Button();
             this.h_RFID_UI = new H_Pannel_lib.H_RFID_UI();
-            this.storagePanel = new H_Pannel_lib.StoragePanel();
             this.tabControl1.SuspendLayout();
             this.WT32.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -188,7 +188,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1936, 1041);
+            this.tabControl1.Size = new System.Drawing.Size(1924, 1041);
             this.tabControl1.TabIndex = 1;
             // 
             // WT32
@@ -196,7 +196,7 @@
             this.WT32.Controls.Add(this.tabControl2);
             this.WT32.Location = new System.Drawing.Point(4, 22);
             this.WT32.Name = "WT32";
-            this.WT32.Size = new System.Drawing.Size(1928, 1015);
+            this.WT32.Size = new System.Drawing.Size(1916, 1015);
             this.WT32.TabIndex = 0;
             this.WT32.Text = "WT32";
             this.WT32.UseVisualStyleBackColor = true;
@@ -210,7 +210,7 @@
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1928, 1015);
+            this.tabControl2.Size = new System.Drawing.Size(1916, 1015);
             this.tabControl2.TabIndex = 29;
             // 
             // tabPage3
@@ -220,7 +220,7 @@
             this.tabPage3.Controls.Add(this.storageUI_WT32);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1920, 989);
+            this.tabPage3.Size = new System.Drawing.Size(1908, 989);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "資料設定";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -300,7 +300,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1557, 989);
+            this.tabPage4.Size = new System.Drawing.Size(1920, 989);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "面板設定";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1077,7 +1077,7 @@
             this.wT32_GPADC.Pannel_Green_Visible = false;
             this.wT32_GPADC.Pannel_Lock_Visible = true;
             this.wT32_GPADC.Pannel_Red_Visible = false;
-            this.wT32_GPADC.Size = new System.Drawing.Size(1074, 976);
+            this.wT32_GPADC.Size = new System.Drawing.Size(1074, 983);
             this.wT32_GPADC.TabIndex = 25;
             // 
             // EPD266
@@ -1114,6 +1114,14 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "資料設定";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // storagePanel
+            // 
+            this.storagePanel.CurrentStorage = null;
+            this.storagePanel.Location = new System.Drawing.Point(1384, 243);
+            this.storagePanel.Name = "storagePanel";
+            this.storagePanel.Size = new System.Drawing.Size(296, 152);
+            this.storagePanel.TabIndex = 38;
             // 
             // rJ_Button_EPD266_TEST
             // 
@@ -1405,7 +1413,7 @@
             this.tabPage12.Location = new System.Drawing.Point(4, 22);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(1557, 989);
+            this.tabPage12.Size = new System.Drawing.Size(1920, 989);
             this.tabPage12.TabIndex = 1;
             this.tabPage12.Text = "面板設定";
             this.tabPage12.UseVisualStyleBackColor = true;
@@ -1827,7 +1835,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(1557, 989);
+            this.tabPage6.Size = new System.Drawing.Size(1920, 989);
             this.tabPage6.TabIndex = 1;
             this.tabPage6.Text = "面板設定";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1931,7 +1939,7 @@
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(1557, 989);
+            this.tabPage10.Size = new System.Drawing.Size(1920, 989);
             this.tabPage10.TabIndex = 1;
             this.tabPage10.Text = "面板設定";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -2107,7 +2115,7 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(1557, 989);
+            this.tabPage8.Size = new System.Drawing.Size(1920, 989);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "面板設定";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -2273,6 +2281,7 @@
             this.sqL_DataGridView_h_RFID_Datas.cellStylBackColor = System.Drawing.Color.LightBlue;
             this.sqL_DataGridView_h_RFID_Datas.cellStyleFont = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
             this.sqL_DataGridView_h_RFID_Datas.cellStylForeColor = System.Drawing.Color.Black;
+            this.sqL_DataGridView_h_RFID_Datas.checkedRowBackColor = System.Drawing.Color.YellowGreen;
             this.sqL_DataGridView_h_RFID_Datas.columnHeaderBackColor = System.Drawing.Color.SkyBlue;
             this.sqL_DataGridView_h_RFID_Datas.columnHeaderBorderColor = System.Drawing.Color.DimGray;
             this.sqL_DataGridView_h_RFID_Datas.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
@@ -2284,6 +2293,7 @@
             this.sqL_DataGridView_h_RFID_Datas.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_h_RFID_Datas.Columns2"))));
             this.sqL_DataGridView_h_RFID_Datas.Columns.Add(((SQLUI.SQL_DataGridView.ColumnElement)(resources.GetObject("sqL_DataGridView_h_RFID_Datas.Columns3"))));
             this.sqL_DataGridView_h_RFID_Datas.DataGridViewAutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.sqL_DataGridView_h_RFID_Datas.DataKeyEnable = false;
             this.sqL_DataGridView_h_RFID_Datas.Dock = System.Windows.Forms.DockStyle.Top;
             this.sqL_DataGridView_h_RFID_Datas.Font = new System.Drawing.Font("新細明體", 9F);
             this.sqL_DataGridView_h_RFID_Datas.ImageBox = false;
@@ -2377,19 +2387,11 @@
             this.h_RFID_UI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("h_RFID_UI.UDP_ServerPorts")));
             this.h_RFID_UI.UserName = "root";
             // 
-            // storagePanel
-            // 
-            this.storagePanel.CurrentStorage = null;
-            this.storagePanel.Location = new System.Drawing.Point(1384, 243);
-            this.storagePanel.Name = "storagePanel";
-            this.storagePanel.Size = new System.Drawing.Size(296, 152);
-            this.storagePanel.TabIndex = 38;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1936, 1041);
+            this.ClientSize = new System.Drawing.Size(1924, 1041);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

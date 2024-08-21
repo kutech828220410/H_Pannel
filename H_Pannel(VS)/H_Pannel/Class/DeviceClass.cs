@@ -384,6 +384,7 @@ namespace H_Pannel_lib
             {
                 if (_Code != value) flag_replace = true;
                 _Code = value;
+                
             }
         }
         private string _SKDIACODE = "";
@@ -1471,6 +1472,10 @@ namespace H_Pannel_lib
                 get
                 {
                     if(valueName == ValueName.效期)
+                    {
+                        return this.Value;
+                    }
+                    if (valueName == ValueName.藥品碼)
                     {
                         return this.Value;
                     }
@@ -2648,6 +2653,11 @@ namespace H_Pannel_lib
 
             switch (valueName)
             {
+                case ValueName.None:
+                    {
+                        vlaueClass.valueName = valueName;
+                        break;
+                    }
                 case ValueName.藥品名稱:
                     {
                         vlaueClass.valueName = valueName;

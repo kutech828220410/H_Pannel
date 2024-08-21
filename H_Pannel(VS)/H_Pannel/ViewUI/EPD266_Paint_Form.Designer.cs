@@ -31,32 +31,6 @@ namespace H_Pannel_lib
         {
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.rJ_RatioButton_自定義 = new MyUI.RJ_RatioButton();
-            this.rJ_RatioButton_預設樣式1 = new MyUI.RJ_RatioButton();
-            this.pictureBox_paint = new System.Windows.Forms.PictureBox();
-            this.rJ_Pannel_設計 = new MyUI.RJ_Pannel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.rJ_Button_取消 = new MyUI.RJ_Button();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.rJ_Button_確定 = new MyUI.RJ_Button();
-            this.panel_邊框大小 = new System.Windows.Forms.Panel();
-            this.textBox_邊框大小 = new System.Windows.Forms.TextBox();
-            this.rJ_Lable6 = new MyUI.RJ_Lable();
-            this.panel_字體型態 = new System.Windows.Forms.Panel();
-            this.rJ_Pannel_字體顏色 = new MyUI.RJ_Pannel();
-            this.rJ_Lable5 = new MyUI.RJ_Lable();
-            this.rJ_Pannel_邊框顏色 = new MyUI.RJ_Pannel();
-            this.rJ_Lable4 = new MyUI.RJ_Lable();
-            this.rJ_Pannel_文字背景顏色 = new MyUI.RJ_Pannel();
-            this.rJ_Lable3 = new MyUI.RJ_Lable();
-            this.panel_字體 = new System.Windows.Forms.Panel();
-            this.button_字體 = new System.Windows.Forms.Button();
-            this.textBox_字體 = new System.Windows.Forms.TextBox();
-            this.rJ_Lable2 = new MyUI.RJ_Lable();
-            this.panel_選擇項目 = new System.Windows.Forms.Panel();
-            this.rJ_Lable1 = new MyUI.RJ_Lable();
-            this.comboBox_選擇項目 = new System.Windows.Forms.ComboBox();
-            this.fontDialog = new System.Windows.Forms.FontDialog();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button_文本3_儲存 = new System.Windows.Forms.Button();
             this.rJ_TextBox_文本3 = new MyUI.RJ_TextBox();
@@ -66,6 +40,10 @@ namespace H_Pannel_lib
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.button_文本1_儲存 = new System.Windows.Forms.Button();
             this.rJ_TextBox_文本1 = new MyUI.RJ_TextBox();
+            this.rJ_RatioButton_自定義 = new MyUI.RJ_RatioButton();
+            this.rJ_RatioButton_預設樣式1 = new MyUI.RJ_RatioButton();
+            this.pictureBox_paint = new System.Windows.Forms.PictureBox();
+            this.rJ_Pannel_設計 = new MyUI.RJ_Pannel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rJ_Pannel_背景顏色 = new MyUI.RJ_Pannel();
             this.groupBox_對齊方式 = new System.Windows.Forms.GroupBox();
@@ -88,20 +66,42 @@ namespace H_Pannel_lib
             this.checkBox_中文名 = new System.Windows.Forms.CheckBox();
             this.checkBox_藥名 = new System.Windows.Forms.CheckBox();
             this.checkBox_藥碼 = new System.Windows.Forms.CheckBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.rJ_Button_取消 = new MyUI.RJ_Button();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.rJ_Button_確定 = new MyUI.RJ_Button();
+            this.panel_邊框大小 = new System.Windows.Forms.Panel();
+            this.textBox_邊框大小 = new System.Windows.Forms.TextBox();
+            this.rJ_Lable6 = new MyUI.RJ_Lable();
+            this.panel_字體型態 = new System.Windows.Forms.Panel();
+            this.rJ_Pannel_字體顏色 = new MyUI.RJ_Pannel();
+            this.rJ_Lable5 = new MyUI.RJ_Lable();
+            this.rJ_Pannel_邊框顏色 = new MyUI.RJ_Pannel();
+            this.rJ_Lable4 = new MyUI.RJ_Lable();
+            this.rJ_Pannel_文字背景顏色 = new MyUI.RJ_Pannel();
+            this.rJ_Lable3 = new MyUI.RJ_Lable();
+            this.panel_字體 = new System.Windows.Forms.Panel();
+            this.button_字體 = new System.Windows.Forms.Button();
+            this.textBox_字體 = new System.Windows.Forms.TextBox();
+            this.rJ_Lable2 = new MyUI.RJ_Lable();
+            this.panel_選擇項目 = new System.Windows.Forms.Panel();
+            this.rJ_Lable1 = new MyUI.RJ_Lable();
+            this.comboBox_選擇項目 = new System.Windows.Forms.ComboBox();
+            this.fontDialog = new System.Windows.Forms.FontDialog();
             this.panel1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_paint)).BeginInit();
             this.rJ_Pannel_設計.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox_對齊方式.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel_邊框大小.SuspendLayout();
             this.panel_字體型態.SuspendLayout();
             this.panel_字體.SuspendLayout();
             this.panel_選擇項目.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox_對齊方式.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -125,6 +125,144 @@ namespace H_Pannel_lib
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(958, 351);
             this.panel1.TabIndex = 3;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.button_文本3_儲存);
+            this.groupBox5.Controls.Add(this.rJ_TextBox_文本3);
+            this.groupBox5.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox5.Location = new System.Drawing.Point(609, 218);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(329, 84);
+            this.groupBox5.TabIndex = 14;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "文本3";
+            // 
+            // button_文本3_儲存
+            // 
+            this.button_文本3_儲存.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button_文本3_儲存.Location = new System.Drawing.Point(262, 28);
+            this.button_文本3_儲存.Name = "button_文本3_儲存";
+            this.button_文本3_儲存.Size = new System.Drawing.Size(61, 42);
+            this.button_文本3_儲存.TabIndex = 10;
+            this.button_文本3_儲存.Text = "儲存";
+            this.button_文本3_儲存.UseVisualStyleBackColor = true;
+            // 
+            // rJ_TextBox_文本3
+            // 
+            this.rJ_TextBox_文本3.BackColor = System.Drawing.SystemColors.Window;
+            this.rJ_TextBox_文本3.BorderColor = System.Drawing.Color.Black;
+            this.rJ_TextBox_文本3.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.rJ_TextBox_文本3.BorderRadius = 0;
+            this.rJ_TextBox_文本3.BorderSize = 2;
+            this.rJ_TextBox_文本3.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_TextBox_文本3.ForeColor = System.Drawing.Color.Black;
+            this.rJ_TextBox_文本3.GUID = "";
+            this.rJ_TextBox_文本3.Location = new System.Drawing.Point(19, 28);
+            this.rJ_TextBox_文本3.Multiline = false;
+            this.rJ_TextBox_文本3.Name = "rJ_TextBox_文本3";
+            this.rJ_TextBox_文本3.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.rJ_TextBox_文本3.PassWordChar = false;
+            this.rJ_TextBox_文本3.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.rJ_TextBox_文本3.PlaceholderText = "";
+            this.rJ_TextBox_文本3.ShowTouchPannel = false;
+            this.rJ_TextBox_文本3.Size = new System.Drawing.Size(237, 42);
+            this.rJ_TextBox_文本3.TabIndex = 0;
+            this.rJ_TextBox_文本3.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
+            this.rJ_TextBox_文本3.Texts = "";
+            this.rJ_TextBox_文本3.UnderlineStyle = false;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button_文本2_儲存);
+            this.groupBox4.Controls.Add(this.rJ_TextBox_文本2);
+            this.groupBox4.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox4.Location = new System.Drawing.Point(609, 128);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(329, 84);
+            this.groupBox4.TabIndex = 13;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "文本2";
+            // 
+            // button_文本2_儲存
+            // 
+            this.button_文本2_儲存.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button_文本2_儲存.Location = new System.Drawing.Point(262, 28);
+            this.button_文本2_儲存.Name = "button_文本2_儲存";
+            this.button_文本2_儲存.Size = new System.Drawing.Size(61, 42);
+            this.button_文本2_儲存.TabIndex = 10;
+            this.button_文本2_儲存.Text = "儲存";
+            this.button_文本2_儲存.UseVisualStyleBackColor = true;
+            // 
+            // rJ_TextBox_文本2
+            // 
+            this.rJ_TextBox_文本2.BackColor = System.Drawing.SystemColors.Window;
+            this.rJ_TextBox_文本2.BorderColor = System.Drawing.Color.Black;
+            this.rJ_TextBox_文本2.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.rJ_TextBox_文本2.BorderRadius = 0;
+            this.rJ_TextBox_文本2.BorderSize = 2;
+            this.rJ_TextBox_文本2.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_TextBox_文本2.ForeColor = System.Drawing.Color.Black;
+            this.rJ_TextBox_文本2.GUID = "";
+            this.rJ_TextBox_文本2.Location = new System.Drawing.Point(19, 28);
+            this.rJ_TextBox_文本2.Multiline = false;
+            this.rJ_TextBox_文本2.Name = "rJ_TextBox_文本2";
+            this.rJ_TextBox_文本2.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.rJ_TextBox_文本2.PassWordChar = false;
+            this.rJ_TextBox_文本2.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.rJ_TextBox_文本2.PlaceholderText = "";
+            this.rJ_TextBox_文本2.ShowTouchPannel = false;
+            this.rJ_TextBox_文本2.Size = new System.Drawing.Size(237, 42);
+            this.rJ_TextBox_文本2.TabIndex = 0;
+            this.rJ_TextBox_文本2.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
+            this.rJ_TextBox_文本2.Texts = "";
+            this.rJ_TextBox_文本2.UnderlineStyle = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button_文本1_儲存);
+            this.groupBox3.Controls.Add(this.rJ_TextBox_文本1);
+            this.groupBox3.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox3.Location = new System.Drawing.Point(609, 38);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(329, 84);
+            this.groupBox3.TabIndex = 12;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "文本1";
+            // 
+            // button_文本1_儲存
+            // 
+            this.button_文本1_儲存.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button_文本1_儲存.Location = new System.Drawing.Point(262, 28);
+            this.button_文本1_儲存.Name = "button_文本1_儲存";
+            this.button_文本1_儲存.Size = new System.Drawing.Size(61, 42);
+            this.button_文本1_儲存.TabIndex = 9;
+            this.button_文本1_儲存.Text = "儲存";
+            this.button_文本1_儲存.UseVisualStyleBackColor = true;
+            // 
+            // rJ_TextBox_文本1
+            // 
+            this.rJ_TextBox_文本1.BackColor = System.Drawing.SystemColors.Window;
+            this.rJ_TextBox_文本1.BorderColor = System.Drawing.Color.Black;
+            this.rJ_TextBox_文本1.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.rJ_TextBox_文本1.BorderRadius = 0;
+            this.rJ_TextBox_文本1.BorderSize = 2;
+            this.rJ_TextBox_文本1.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_TextBox_文本1.ForeColor = System.Drawing.Color.Black;
+            this.rJ_TextBox_文本1.GUID = "";
+            this.rJ_TextBox_文本1.Location = new System.Drawing.Point(19, 28);
+            this.rJ_TextBox_文本1.Multiline = false;
+            this.rJ_TextBox_文本1.Name = "rJ_TextBox_文本1";
+            this.rJ_TextBox_文本1.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.rJ_TextBox_文本1.PassWordChar = false;
+            this.rJ_TextBox_文本1.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.rJ_TextBox_文本1.PlaceholderText = "";
+            this.rJ_TextBox_文本1.ShowTouchPannel = false;
+            this.rJ_TextBox_文本1.Size = new System.Drawing.Size(237, 42);
+            this.rJ_TextBox_文本1.TabIndex = 0;
+            this.rJ_TextBox_文本1.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
+            this.rJ_TextBox_文本1.Texts = "";
+            this.rJ_TextBox_文本1.UnderlineStyle = false;
             // 
             // rJ_RatioButton_自定義
             // 
@@ -189,6 +327,241 @@ namespace H_Pannel_lib
             this.rJ_Pannel_設計.ShadowSize = 3;
             this.rJ_Pannel_設計.Size = new System.Drawing.Size(958, 570);
             this.rJ_Pannel_設計.TabIndex = 4;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rJ_Pannel_背景顏色);
+            this.groupBox2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox2.Location = new System.Drawing.Point(569, 254);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(147, 197);
+            this.groupBox2.TabIndex = 13;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "背景顏色";
+            // 
+            // rJ_Pannel_背景顏色
+            // 
+            this.rJ_Pannel_背景顏色.BackColor = System.Drawing.Color.White;
+            this.rJ_Pannel_背景顏色.BackgroundColor = System.Drawing.Color.Transparent;
+            this.rJ_Pannel_背景顏色.BorderColor = System.Drawing.Color.Black;
+            this.rJ_Pannel_背景顏色.BorderRadius = 1;
+            this.rJ_Pannel_背景顏色.BorderSize = 1;
+            this.rJ_Pannel_背景顏色.ForeColor = System.Drawing.Color.White;
+            this.rJ_Pannel_背景顏色.IsSelected = false;
+            this.rJ_Pannel_背景顏色.Location = new System.Drawing.Point(12, 28);
+            this.rJ_Pannel_背景顏色.Name = "rJ_Pannel_背景顏色";
+            this.rJ_Pannel_背景顏色.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Pannel_背景顏色.ShadowSize = 0;
+            this.rJ_Pannel_背景顏色.Size = new System.Drawing.Size(122, 157);
+            this.rJ_Pannel_背景顏色.TabIndex = 39;
+            // 
+            // groupBox_對齊方式
+            // 
+            this.groupBox_對齊方式.Controls.Add(this.button_對齊靠右);
+            this.groupBox_對齊方式.Controls.Add(this.button_對齊置中);
+            this.groupBox_對齊方式.Controls.Add(this.button_對齊靠左);
+            this.groupBox_對齊方式.Controls.Add(this.button_對齊靠下);
+            this.groupBox_對齊方式.Controls.Add(this.button_對齊靠上);
+            this.groupBox_對齊方式.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox_對齊方式.Location = new System.Drawing.Point(315, 254);
+            this.groupBox_對齊方式.Name = "groupBox_對齊方式";
+            this.groupBox_對齊方式.Size = new System.Drawing.Size(251, 197);
+            this.groupBox_對齊方式.TabIndex = 12;
+            this.groupBox_對齊方式.TabStop = false;
+            this.groupBox_對齊方式.Text = "對齊方式";
+            // 
+            // button_對齊靠右
+            // 
+            this.button_對齊靠右.Location = new System.Drawing.Point(167, 84);
+            this.button_對齊靠右.Name = "button_對齊靠右";
+            this.button_對齊靠右.Size = new System.Drawing.Size(73, 45);
+            this.button_對齊靠右.TabIndex = 4;
+            this.button_對齊靠右.UseVisualStyleBackColor = true;
+            // 
+            // button_對齊置中
+            // 
+            this.button_對齊置中.Location = new System.Drawing.Point(88, 84);
+            this.button_對齊置中.Name = "button_對齊置中";
+            this.button_對齊置中.Size = new System.Drawing.Size(73, 45);
+            this.button_對齊置中.TabIndex = 3;
+            this.button_對齊置中.UseVisualStyleBackColor = true;
+            // 
+            // button_對齊靠左
+            // 
+            this.button_對齊靠左.Location = new System.Drawing.Point(9, 84);
+            this.button_對齊靠左.Name = "button_對齊靠左";
+            this.button_對齊靠左.Size = new System.Drawing.Size(73, 45);
+            this.button_對齊靠左.TabIndex = 2;
+            this.button_對齊靠左.UseVisualStyleBackColor = true;
+            // 
+            // button_對齊靠下
+            // 
+            this.button_對齊靠下.Location = new System.Drawing.Point(88, 137);
+            this.button_對齊靠下.Name = "button_對齊靠下";
+            this.button_對齊靠下.Size = new System.Drawing.Size(73, 45);
+            this.button_對齊靠下.TabIndex = 1;
+            this.button_對齊靠下.UseVisualStyleBackColor = true;
+            // 
+            // button_對齊靠上
+            // 
+            this.button_對齊靠上.Location = new System.Drawing.Point(88, 31);
+            this.button_對齊靠上.Name = "button_對齊靠上";
+            this.button_對齊靠上.Size = new System.Drawing.Size(73, 45);
+            this.button_對齊靠上.TabIndex = 0;
+            this.button_對齊靠上.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBox_文本3);
+            this.groupBox1.Controls.Add(this.checkBox_文本2);
+            this.groupBox1.Controls.Add(this.checkBox_文本1);
+            this.groupBox1.Controls.Add(this.checkBox_圖片1);
+            this.groupBox1.Controls.Add(this.checkBox_儲位名稱);
+            this.groupBox1.Controls.Add(this.checkBox_條碼);
+            this.groupBox1.Controls.Add(this.checkBox_單位);
+            this.groupBox1.Controls.Add(this.checkBox_庫存);
+            this.groupBox1.Controls.Add(this.checkBox_效期);
+            this.groupBox1.Controls.Add(this.checkBox_商品名);
+            this.groupBox1.Controls.Add(this.checkBox_中文名);
+            this.groupBox1.Controls.Add(this.checkBox_藥名);
+            this.groupBox1.Controls.Add(this.checkBox_藥碼);
+            this.groupBox1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.groupBox1.Location = new System.Drawing.Point(20, 254);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(289, 197);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "顯示";
+            // 
+            // checkBox_文本3
+            // 
+            this.checkBox_文本3.AutoSize = true;
+            this.checkBox_文本3.Location = new System.Drawing.Point(202, 90);
+            this.checkBox_文本3.Name = "checkBox_文本3";
+            this.checkBox_文本3.Size = new System.Drawing.Size(71, 25);
+            this.checkBox_文本3.TabIndex = 22;
+            this.checkBox_文本3.Text = "文本3";
+            this.checkBox_文本3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_文本2
+            // 
+            this.checkBox_文本2.AutoSize = true;
+            this.checkBox_文本2.Location = new System.Drawing.Point(202, 59);
+            this.checkBox_文本2.Name = "checkBox_文本2";
+            this.checkBox_文本2.Size = new System.Drawing.Size(71, 25);
+            this.checkBox_文本2.TabIndex = 21;
+            this.checkBox_文本2.Text = "文本2";
+            this.checkBox_文本2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_文本1
+            // 
+            this.checkBox_文本1.AutoSize = true;
+            this.checkBox_文本1.Location = new System.Drawing.Point(202, 28);
+            this.checkBox_文本1.Name = "checkBox_文本1";
+            this.checkBox_文本1.Size = new System.Drawing.Size(71, 25);
+            this.checkBox_文本1.TabIndex = 20;
+            this.checkBox_文本1.Text = "文本1";
+            this.checkBox_文本1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_圖片1
+            // 
+            this.checkBox_圖片1.AutoSize = true;
+            this.checkBox_圖片1.Location = new System.Drawing.Point(124, 152);
+            this.checkBox_圖片1.Name = "checkBox_圖片1";
+            this.checkBox_圖片1.Size = new System.Drawing.Size(71, 25);
+            this.checkBox_圖片1.TabIndex = 19;
+            this.checkBox_圖片1.Text = "圖片1";
+            this.checkBox_圖片1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_儲位名稱
+            // 
+            this.checkBox_儲位名稱.AutoSize = true;
+            this.checkBox_儲位名稱.Location = new System.Drawing.Point(25, 152);
+            this.checkBox_儲位名稱.Name = "checkBox_儲位名稱";
+            this.checkBox_儲位名稱.Size = new System.Drawing.Size(93, 25);
+            this.checkBox_儲位名稱.TabIndex = 18;
+            this.checkBox_儲位名稱.Text = "儲位名稱";
+            this.checkBox_儲位名稱.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_條碼
+            // 
+            this.checkBox_條碼.AutoSize = true;
+            this.checkBox_條碼.Location = new System.Drawing.Point(124, 121);
+            this.checkBox_條碼.Name = "checkBox_條碼";
+            this.checkBox_條碼.Size = new System.Drawing.Size(61, 25);
+            this.checkBox_條碼.TabIndex = 17;
+            this.checkBox_條碼.Text = "條碼";
+            this.checkBox_條碼.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_單位
+            // 
+            this.checkBox_單位.AutoSize = true;
+            this.checkBox_單位.Location = new System.Drawing.Point(124, 90);
+            this.checkBox_單位.Name = "checkBox_單位";
+            this.checkBox_單位.Size = new System.Drawing.Size(61, 25);
+            this.checkBox_單位.TabIndex = 16;
+            this.checkBox_單位.Text = "單位";
+            this.checkBox_單位.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_庫存
+            // 
+            this.checkBox_庫存.AutoSize = true;
+            this.checkBox_庫存.Location = new System.Drawing.Point(124, 59);
+            this.checkBox_庫存.Name = "checkBox_庫存";
+            this.checkBox_庫存.Size = new System.Drawing.Size(61, 25);
+            this.checkBox_庫存.TabIndex = 15;
+            this.checkBox_庫存.Text = "庫存";
+            this.checkBox_庫存.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_效期
+            // 
+            this.checkBox_效期.AutoSize = true;
+            this.checkBox_效期.Location = new System.Drawing.Point(124, 28);
+            this.checkBox_效期.Name = "checkBox_效期";
+            this.checkBox_效期.Size = new System.Drawing.Size(61, 25);
+            this.checkBox_效期.TabIndex = 14;
+            this.checkBox_效期.Text = "效期";
+            this.checkBox_效期.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_商品名
+            // 
+            this.checkBox_商品名.AutoSize = true;
+            this.checkBox_商品名.Location = new System.Drawing.Point(25, 121);
+            this.checkBox_商品名.Name = "checkBox_商品名";
+            this.checkBox_商品名.Size = new System.Drawing.Size(77, 25);
+            this.checkBox_商品名.TabIndex = 12;
+            this.checkBox_商品名.Text = "商品名";
+            this.checkBox_商品名.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_中文名
+            // 
+            this.checkBox_中文名.AutoSize = true;
+            this.checkBox_中文名.Location = new System.Drawing.Point(25, 90);
+            this.checkBox_中文名.Name = "checkBox_中文名";
+            this.checkBox_中文名.Size = new System.Drawing.Size(77, 25);
+            this.checkBox_中文名.TabIndex = 11;
+            this.checkBox_中文名.Text = "中文名";
+            this.checkBox_中文名.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_藥名
+            // 
+            this.checkBox_藥名.AutoSize = true;
+            this.checkBox_藥名.Location = new System.Drawing.Point(25, 59);
+            this.checkBox_藥名.Name = "checkBox_藥名";
+            this.checkBox_藥名.Size = new System.Drawing.Size(61, 25);
+            this.checkBox_藥名.TabIndex = 10;
+            this.checkBox_藥名.Text = "藥名";
+            this.checkBox_藥名.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_藥碼
+            // 
+            this.checkBox_藥碼.AutoSize = true;
+            this.checkBox_藥碼.Location = new System.Drawing.Point(25, 28);
+            this.checkBox_藥碼.Name = "checkBox_藥碼";
+            this.checkBox_藥碼.Size = new System.Drawing.Size(61, 25);
+            this.checkBox_藥碼.TabIndex = 9;
+            this.checkBox_藥碼.Text = "藥碼";
+            this.checkBox_藥碼.UseVisualStyleBackColor = true;
             // 
             // panel7
             // 
@@ -532,379 +905,6 @@ namespace H_Pannel_lib
             this.comboBox_選擇項目.Size = new System.Drawing.Size(353, 35);
             this.comboBox_選擇項目.TabIndex = 1;
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.button_文本3_儲存);
-            this.groupBox5.Controls.Add(this.rJ_TextBox_文本3);
-            this.groupBox5.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBox5.Location = new System.Drawing.Point(609, 218);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(329, 84);
-            this.groupBox5.TabIndex = 14;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "文本3";
-            // 
-            // button_文本3_儲存
-            // 
-            this.button_文本3_儲存.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button_文本3_儲存.Location = new System.Drawing.Point(262, 28);
-            this.button_文本3_儲存.Name = "button_文本3_儲存";
-            this.button_文本3_儲存.Size = new System.Drawing.Size(61, 42);
-            this.button_文本3_儲存.TabIndex = 10;
-            this.button_文本3_儲存.Text = "儲存";
-            this.button_文本3_儲存.UseVisualStyleBackColor = true;
-            // 
-            // rJ_TextBox_文本3
-            // 
-            this.rJ_TextBox_文本3.BackColor = System.Drawing.SystemColors.Window;
-            this.rJ_TextBox_文本3.BorderColor = System.Drawing.Color.Black;
-            this.rJ_TextBox_文本3.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.rJ_TextBox_文本3.BorderRadius = 0;
-            this.rJ_TextBox_文本3.BorderSize = 2;
-            this.rJ_TextBox_文本3.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_TextBox_文本3.ForeColor = System.Drawing.Color.Black;
-            this.rJ_TextBox_文本3.GUID = "";
-            this.rJ_TextBox_文本3.Location = new System.Drawing.Point(19, 28);
-            this.rJ_TextBox_文本3.Multiline = false;
-            this.rJ_TextBox_文本3.Name = "rJ_TextBox_文本3";
-            this.rJ_TextBox_文本3.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.rJ_TextBox_文本3.PassWordChar = false;
-            this.rJ_TextBox_文本3.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.rJ_TextBox_文本3.PlaceholderText = "";
-            this.rJ_TextBox_文本3.ShowTouchPannel = false;
-            this.rJ_TextBox_文本3.Size = new System.Drawing.Size(237, 42);
-            this.rJ_TextBox_文本3.TabIndex = 0;
-            this.rJ_TextBox_文本3.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
-            this.rJ_TextBox_文本3.Texts = "";
-            this.rJ_TextBox_文本3.UnderlineStyle = false;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.button_文本2_儲存);
-            this.groupBox4.Controls.Add(this.rJ_TextBox_文本2);
-            this.groupBox4.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBox4.Location = new System.Drawing.Point(609, 128);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(329, 84);
-            this.groupBox4.TabIndex = 13;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "文本2";
-            // 
-            // button_文本2_儲存
-            // 
-            this.button_文本2_儲存.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button_文本2_儲存.Location = new System.Drawing.Point(262, 28);
-            this.button_文本2_儲存.Name = "button_文本2_儲存";
-            this.button_文本2_儲存.Size = new System.Drawing.Size(61, 42);
-            this.button_文本2_儲存.TabIndex = 10;
-            this.button_文本2_儲存.Text = "儲存";
-            this.button_文本2_儲存.UseVisualStyleBackColor = true;
-            // 
-            // rJ_TextBox_文本2
-            // 
-            this.rJ_TextBox_文本2.BackColor = System.Drawing.SystemColors.Window;
-            this.rJ_TextBox_文本2.BorderColor = System.Drawing.Color.Black;
-            this.rJ_TextBox_文本2.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.rJ_TextBox_文本2.BorderRadius = 0;
-            this.rJ_TextBox_文本2.BorderSize = 2;
-            this.rJ_TextBox_文本2.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_TextBox_文本2.ForeColor = System.Drawing.Color.Black;
-            this.rJ_TextBox_文本2.GUID = "";
-            this.rJ_TextBox_文本2.Location = new System.Drawing.Point(19, 28);
-            this.rJ_TextBox_文本2.Multiline = false;
-            this.rJ_TextBox_文本2.Name = "rJ_TextBox_文本2";
-            this.rJ_TextBox_文本2.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.rJ_TextBox_文本2.PassWordChar = false;
-            this.rJ_TextBox_文本2.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.rJ_TextBox_文本2.PlaceholderText = "";
-            this.rJ_TextBox_文本2.ShowTouchPannel = false;
-            this.rJ_TextBox_文本2.Size = new System.Drawing.Size(237, 42);
-            this.rJ_TextBox_文本2.TabIndex = 0;
-            this.rJ_TextBox_文本2.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
-            this.rJ_TextBox_文本2.Texts = "";
-            this.rJ_TextBox_文本2.UnderlineStyle = false;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.button_文本1_儲存);
-            this.groupBox3.Controls.Add(this.rJ_TextBox_文本1);
-            this.groupBox3.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBox3.Location = new System.Drawing.Point(609, 38);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(329, 84);
-            this.groupBox3.TabIndex = 12;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "文本1";
-            // 
-            // button_文本1_儲存
-            // 
-            this.button_文本1_儲存.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button_文本1_儲存.Location = new System.Drawing.Point(262, 28);
-            this.button_文本1_儲存.Name = "button_文本1_儲存";
-            this.button_文本1_儲存.Size = new System.Drawing.Size(61, 42);
-            this.button_文本1_儲存.TabIndex = 9;
-            this.button_文本1_儲存.Text = "儲存";
-            this.button_文本1_儲存.UseVisualStyleBackColor = true;
-            // 
-            // rJ_TextBox_文本1
-            // 
-            this.rJ_TextBox_文本1.BackColor = System.Drawing.SystemColors.Window;
-            this.rJ_TextBox_文本1.BorderColor = System.Drawing.Color.Black;
-            this.rJ_TextBox_文本1.BorderFocusColor = System.Drawing.Color.HotPink;
-            this.rJ_TextBox_文本1.BorderRadius = 0;
-            this.rJ_TextBox_文本1.BorderSize = 2;
-            this.rJ_TextBox_文本1.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_TextBox_文本1.ForeColor = System.Drawing.Color.Black;
-            this.rJ_TextBox_文本1.GUID = "";
-            this.rJ_TextBox_文本1.Location = new System.Drawing.Point(19, 28);
-            this.rJ_TextBox_文本1.Multiline = false;
-            this.rJ_TextBox_文本1.Name = "rJ_TextBox_文本1";
-            this.rJ_TextBox_文本1.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
-            this.rJ_TextBox_文本1.PassWordChar = false;
-            this.rJ_TextBox_文本1.PlaceholderColor = System.Drawing.Color.DarkGray;
-            this.rJ_TextBox_文本1.PlaceholderText = "";
-            this.rJ_TextBox_文本1.ShowTouchPannel = false;
-            this.rJ_TextBox_文本1.Size = new System.Drawing.Size(237, 42);
-            this.rJ_TextBox_文本1.TabIndex = 0;
-            this.rJ_TextBox_文本1.TextAlgin = System.Windows.Forms.HorizontalAlignment.Left;
-            this.rJ_TextBox_文本1.Texts = "";
-            this.rJ_TextBox_文本1.UnderlineStyle = false;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.rJ_Pannel_背景顏色);
-            this.groupBox2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBox2.Location = new System.Drawing.Point(569, 254);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(147, 197);
-            this.groupBox2.TabIndex = 13;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "背景顏色";
-            // 
-            // rJ_Pannel_背景顏色
-            // 
-            this.rJ_Pannel_背景顏色.BackColor = System.Drawing.Color.White;
-            this.rJ_Pannel_背景顏色.BackgroundColor = System.Drawing.Color.Transparent;
-            this.rJ_Pannel_背景顏色.BorderColor = System.Drawing.Color.Black;
-            this.rJ_Pannel_背景顏色.BorderRadius = 1;
-            this.rJ_Pannel_背景顏色.BorderSize = 1;
-            this.rJ_Pannel_背景顏色.ForeColor = System.Drawing.Color.White;
-            this.rJ_Pannel_背景顏色.IsSelected = false;
-            this.rJ_Pannel_背景顏色.Location = new System.Drawing.Point(12, 28);
-            this.rJ_Pannel_背景顏色.Name = "rJ_Pannel_背景顏色";
-            this.rJ_Pannel_背景顏色.ShadowColor = System.Drawing.Color.DimGray;
-            this.rJ_Pannel_背景顏色.ShadowSize = 0;
-            this.rJ_Pannel_背景顏色.Size = new System.Drawing.Size(122, 157);
-            this.rJ_Pannel_背景顏色.TabIndex = 39;
-            // 
-            // groupBox_對齊方式
-            // 
-            this.groupBox_對齊方式.Controls.Add(this.button_對齊靠右);
-            this.groupBox_對齊方式.Controls.Add(this.button_對齊置中);
-            this.groupBox_對齊方式.Controls.Add(this.button_對齊靠左);
-            this.groupBox_對齊方式.Controls.Add(this.button_對齊靠下);
-            this.groupBox_對齊方式.Controls.Add(this.button_對齊靠上);
-            this.groupBox_對齊方式.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBox_對齊方式.Location = new System.Drawing.Point(315, 254);
-            this.groupBox_對齊方式.Name = "groupBox_對齊方式";
-            this.groupBox_對齊方式.Size = new System.Drawing.Size(251, 197);
-            this.groupBox_對齊方式.TabIndex = 12;
-            this.groupBox_對齊方式.TabStop = false;
-            this.groupBox_對齊方式.Text = "對齊方式";
-            // 
-            // button_對齊靠右
-            // 
-            this.button_對齊靠右.Location = new System.Drawing.Point(167, 84);
-            this.button_對齊靠右.Name = "button_對齊靠右";
-            this.button_對齊靠右.Size = new System.Drawing.Size(73, 45);
-            this.button_對齊靠右.TabIndex = 4;
-            this.button_對齊靠右.UseVisualStyleBackColor = true;
-            // 
-            // button_對齊置中
-            // 
-            this.button_對齊置中.Location = new System.Drawing.Point(88, 84);
-            this.button_對齊置中.Name = "button_對齊置中";
-            this.button_對齊置中.Size = new System.Drawing.Size(73, 45);
-            this.button_對齊置中.TabIndex = 3;
-            this.button_對齊置中.UseVisualStyleBackColor = true;
-            // 
-            // button_對齊靠左
-            // 
-            this.button_對齊靠左.Location = new System.Drawing.Point(9, 84);
-            this.button_對齊靠左.Name = "button_對齊靠左";
-            this.button_對齊靠左.Size = new System.Drawing.Size(73, 45);
-            this.button_對齊靠左.TabIndex = 2;
-            this.button_對齊靠左.UseVisualStyleBackColor = true;
-            // 
-            // button_對齊靠下
-            // 
-            this.button_對齊靠下.Location = new System.Drawing.Point(88, 137);
-            this.button_對齊靠下.Name = "button_對齊靠下";
-            this.button_對齊靠下.Size = new System.Drawing.Size(73, 45);
-            this.button_對齊靠下.TabIndex = 1;
-            this.button_對齊靠下.UseVisualStyleBackColor = true;
-            // 
-            // button_對齊靠上
-            // 
-            this.button_對齊靠上.Location = new System.Drawing.Point(88, 31);
-            this.button_對齊靠上.Name = "button_對齊靠上";
-            this.button_對齊靠上.Size = new System.Drawing.Size(73, 45);
-            this.button_對齊靠上.TabIndex = 0;
-            this.button_對齊靠上.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.checkBox_文本3);
-            this.groupBox1.Controls.Add(this.checkBox_文本2);
-            this.groupBox1.Controls.Add(this.checkBox_文本1);
-            this.groupBox1.Controls.Add(this.checkBox_圖片1);
-            this.groupBox1.Controls.Add(this.checkBox_儲位名稱);
-            this.groupBox1.Controls.Add(this.checkBox_條碼);
-            this.groupBox1.Controls.Add(this.checkBox_單位);
-            this.groupBox1.Controls.Add(this.checkBox_庫存);
-            this.groupBox1.Controls.Add(this.checkBox_效期);
-            this.groupBox1.Controls.Add(this.checkBox_商品名);
-            this.groupBox1.Controls.Add(this.checkBox_中文名);
-            this.groupBox1.Controls.Add(this.checkBox_藥名);
-            this.groupBox1.Controls.Add(this.checkBox_藥碼);
-            this.groupBox1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.groupBox1.Location = new System.Drawing.Point(20, 254);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(289, 197);
-            this.groupBox1.TabIndex = 11;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "顯示";
-            // 
-            // checkBox_文本3
-            // 
-            this.checkBox_文本3.AutoSize = true;
-            this.checkBox_文本3.Location = new System.Drawing.Point(202, 90);
-            this.checkBox_文本3.Name = "checkBox_文本3";
-            this.checkBox_文本3.Size = new System.Drawing.Size(71, 25);
-            this.checkBox_文本3.TabIndex = 22;
-            this.checkBox_文本3.Text = "文本3";
-            this.checkBox_文本3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_文本2
-            // 
-            this.checkBox_文本2.AutoSize = true;
-            this.checkBox_文本2.Location = new System.Drawing.Point(202, 59);
-            this.checkBox_文本2.Name = "checkBox_文本2";
-            this.checkBox_文本2.Size = new System.Drawing.Size(71, 25);
-            this.checkBox_文本2.TabIndex = 21;
-            this.checkBox_文本2.Text = "文本2";
-            this.checkBox_文本2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_文本1
-            // 
-            this.checkBox_文本1.AutoSize = true;
-            this.checkBox_文本1.Location = new System.Drawing.Point(202, 28);
-            this.checkBox_文本1.Name = "checkBox_文本1";
-            this.checkBox_文本1.Size = new System.Drawing.Size(71, 25);
-            this.checkBox_文本1.TabIndex = 20;
-            this.checkBox_文本1.Text = "文本1";
-            this.checkBox_文本1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_圖片1
-            // 
-            this.checkBox_圖片1.AutoSize = true;
-            this.checkBox_圖片1.Location = new System.Drawing.Point(124, 152);
-            this.checkBox_圖片1.Name = "checkBox_圖片1";
-            this.checkBox_圖片1.Size = new System.Drawing.Size(71, 25);
-            this.checkBox_圖片1.TabIndex = 19;
-            this.checkBox_圖片1.Text = "圖片1";
-            this.checkBox_圖片1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_儲位名稱
-            // 
-            this.checkBox_儲位名稱.AutoSize = true;
-            this.checkBox_儲位名稱.Location = new System.Drawing.Point(25, 152);
-            this.checkBox_儲位名稱.Name = "checkBox_儲位名稱";
-            this.checkBox_儲位名稱.Size = new System.Drawing.Size(93, 25);
-            this.checkBox_儲位名稱.TabIndex = 18;
-            this.checkBox_儲位名稱.Text = "儲位名稱";
-            this.checkBox_儲位名稱.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_條碼
-            // 
-            this.checkBox_條碼.AutoSize = true;
-            this.checkBox_條碼.Location = new System.Drawing.Point(124, 121);
-            this.checkBox_條碼.Name = "checkBox_條碼";
-            this.checkBox_條碼.Size = new System.Drawing.Size(61, 25);
-            this.checkBox_條碼.TabIndex = 17;
-            this.checkBox_條碼.Text = "條碼";
-            this.checkBox_條碼.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_單位
-            // 
-            this.checkBox_單位.AutoSize = true;
-            this.checkBox_單位.Location = new System.Drawing.Point(124, 90);
-            this.checkBox_單位.Name = "checkBox_單位";
-            this.checkBox_單位.Size = new System.Drawing.Size(61, 25);
-            this.checkBox_單位.TabIndex = 16;
-            this.checkBox_單位.Text = "單位";
-            this.checkBox_單位.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_庫存
-            // 
-            this.checkBox_庫存.AutoSize = true;
-            this.checkBox_庫存.Location = new System.Drawing.Point(124, 59);
-            this.checkBox_庫存.Name = "checkBox_庫存";
-            this.checkBox_庫存.Size = new System.Drawing.Size(61, 25);
-            this.checkBox_庫存.TabIndex = 15;
-            this.checkBox_庫存.Text = "庫存";
-            this.checkBox_庫存.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_效期
-            // 
-            this.checkBox_效期.AutoSize = true;
-            this.checkBox_效期.Location = new System.Drawing.Point(124, 28);
-            this.checkBox_效期.Name = "checkBox_效期";
-            this.checkBox_效期.Size = new System.Drawing.Size(61, 25);
-            this.checkBox_效期.TabIndex = 14;
-            this.checkBox_效期.Text = "效期";
-            this.checkBox_效期.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_商品名
-            // 
-            this.checkBox_商品名.AutoSize = true;
-            this.checkBox_商品名.Location = new System.Drawing.Point(25, 121);
-            this.checkBox_商品名.Name = "checkBox_商品名";
-            this.checkBox_商品名.Size = new System.Drawing.Size(77, 25);
-            this.checkBox_商品名.TabIndex = 12;
-            this.checkBox_商品名.Text = "商品名";
-            this.checkBox_商品名.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_中文名
-            // 
-            this.checkBox_中文名.AutoSize = true;
-            this.checkBox_中文名.Location = new System.Drawing.Point(25, 90);
-            this.checkBox_中文名.Name = "checkBox_中文名";
-            this.checkBox_中文名.Size = new System.Drawing.Size(77, 25);
-            this.checkBox_中文名.TabIndex = 11;
-            this.checkBox_中文名.Text = "中文名";
-            this.checkBox_中文名.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_藥名
-            // 
-            this.checkBox_藥名.AutoSize = true;
-            this.checkBox_藥名.Location = new System.Drawing.Point(25, 59);
-            this.checkBox_藥名.Name = "checkBox_藥名";
-            this.checkBox_藥名.Size = new System.Drawing.Size(61, 25);
-            this.checkBox_藥名.TabIndex = 10;
-            this.checkBox_藥名.Text = "藥名";
-            this.checkBox_藥名.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_藥碼
-            // 
-            this.checkBox_藥碼.AutoSize = true;
-            this.checkBox_藥碼.Location = new System.Drawing.Point(25, 28);
-            this.checkBox_藥碼.Name = "checkBox_藥碼";
-            this.checkBox_藥碼.Size = new System.Drawing.Size(61, 25);
-            this.checkBox_藥碼.TabIndex = 9;
-            this.checkBox_藥碼.Text = "藥碼";
-            this.checkBox_藥碼.UseVisualStyleBackColor = true;
-            // 
             // EPD266_Paint_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -920,8 +920,15 @@ namespace H_Pannel_lib
             this.Text = "EPD 266 Paint";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_paint)).EndInit();
             this.rJ_Pannel_設計.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox_對齊方式.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel_邊框大小.ResumeLayout(false);
             this.panel_邊框大小.PerformLayout();
@@ -929,13 +936,6 @@ namespace H_Pannel_lib
             this.panel_字體.ResumeLayout(false);
             this.panel_字體.PerformLayout();
             this.panel_選擇項目.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox_對齊方式.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }

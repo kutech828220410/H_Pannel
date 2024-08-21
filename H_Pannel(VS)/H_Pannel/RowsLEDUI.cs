@@ -58,7 +58,19 @@ namespace H_Pannel_lib
             LED_Bytes = Get_Rows_LEDBytes(ref LED_Bytes, rowsDevice.StartLED, rowsDevice.EndLED, color);
             return LED_Bytes;
         }
+        static public RowsLED ResetLightStateLEDBytes(RowsLED rowsLED)
+        {
+            rowsLED.LED_Bytes = Get_Empty_LEDBytes();
+            for (int i = 0; i < rowsLED.RowsDevices.Count; i++)
+            {
+                rowsLED.RowsDevices[i].LightState.State = false;
+                rowsLED.RowsDevices[i].LightState.LightColor = Color.Black;
+                rowsLED.RowsDevices[i].LightState.Interval = 0;
+                rowsLED.RowsDevices[i].LightState.LightOffTime = 0;
 
+            }
+            return rowsLED;
+        }
         static public byte[] Get_RowsLightStateLEDBytes(RowsLED rowsLED)
         {
             byte[] LED_Bytes = Get_Empty_LEDBytes();

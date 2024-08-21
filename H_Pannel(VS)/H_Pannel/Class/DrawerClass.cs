@@ -194,6 +194,7 @@ namespace H_Pannel_lib
             }
 
             string json_result = sb.ToString();
+            if (json_result.StringIsEmpty()) json_result = "[]";
             List<Drawer> drawers = json_result.JsonDeserializet<List<Drawer>>();
             List<Box> boxes = drawers.GetAllBoxes();
             for (int i = 0; i < boxes.Count; i++)
@@ -626,6 +627,8 @@ namespace H_Pannel_lib
         {
             _4X8,
             _3X8,
+            _5X8_A,
+            _4X8_A,
         }
         public Drawer()
         {
@@ -646,6 +649,16 @@ namespace H_Pannel_lib
             else if (this.drawerType == Enum_DrawerType._3X8)
             {
                 this.Num_Of_Columns = 3;
+                this.Num_Of_Rows = 8;
+            }
+            else if (this.drawerType == Enum_DrawerType._5X8_A)
+            {
+                this.Num_Of_Columns = 5;
+                this.Num_Of_Rows = 8;
+            }
+            else if (this.drawerType == Enum_DrawerType._4X8_A)
+            {
+                this.Num_Of_Columns = 4;
                 this.Num_Of_Rows = 8;
             }
             this.BoxInit();
@@ -802,6 +815,16 @@ namespace H_Pannel_lib
             else if (this.drawerType == Enum_DrawerType._3X8)
             {
                 this.Num_Of_Columns = 3;
+                this.Num_Of_Rows = 8;
+            }
+            else if (this.drawerType == Enum_DrawerType._5X8_A)
+            {
+                this.Num_Of_Columns = 5;
+                this.Num_Of_Rows = 8;
+            }
+            else if (this.drawerType == Enum_DrawerType._4X8_A)
+            {
+                this.Num_Of_Columns = 4;
                 this.Num_Of_Rows = 8;
             }
             this.BoxInit();

@@ -231,6 +231,7 @@ namespace H_Pannel_lib
             string json_result = sb.ToString();
             if (json_result.StringIsEmpty()) json_result = "[]";
             List<RowsLED> rowsLEDs = json_result.JsonDeserializet<List<RowsLED>>();
+            
             for (int i = 0; i < rowsLEDs.Count; i++)
             {
                 for (int k = 0; k < rowsLEDs[i].RowsDevices.Count; k++)

@@ -521,7 +521,7 @@ namespace H_Pannel_lib
             if (!Basic.Net.Ping(IP, 2, 150))
             {
                 Console.WriteLine($"Get_WS2812_Buffer {DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
-                return new byte[450];
+                return new byte[lenth];
             }
             return Command_Get_WS2812_Buffer(uDP_Class, IP, lenth);
         }

@@ -294,6 +294,21 @@ void onPacketCallBack()
               wiFiConfig.Set_UDP_SemdTime(ms);                                           
               Get_Checksum_UDP();
           }
+          else if(*(UdpRead + 1) == 'N')
+          {                  
+              int LocalPort_L = *(UdpRead + 2);
+              int LocalPort_H = *(UdpRead + 3);  
+              
+              int _LocalPort = LocalPort_L | (LocalPort_H << 8);
+
+              if(flag_udp_232back)mySerial.println("Set_Localport");
+              if(flag_udp_232back)mySerial.print("LocalPort[");
+              if(flag_udp_232back)mySerial.print(_LocalPort);
+              if(flag_udp_232back)mySerial.println("]");
+
+              wiFiConfig.Set_Localport(_LocalPort);                                           
+              Get_Checksum_UDP();
+          }
           else if(*(UdpRead + 1) == 'H')
           {                  
               int IPA = *(UdpRead + 2);

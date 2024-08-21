@@ -51,7 +51,7 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 //SoftwareSerial mySerial(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.3.4";
+String Version = "Ver 1.3.7";
 
 void setup() 
 {
@@ -77,8 +77,10 @@ void loop()
        epd.mySerial = &mySerial;
        wiFiConfig.Init(Version);
 
-       wiFiConfig.Set_Localport(29005);
-       wiFiConfig.Set_Serverport(30005);
+       wiFiConfig.Set_Serverport(30005);     
+ //wiFiConfig.Set_Localport(29005);
+
+
        
        Localport = wiFiConfig.Get_Localport();
        Serverport = wiFiConfig.Get_Serverport();
