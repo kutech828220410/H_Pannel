@@ -15,6 +15,13 @@ using Basic;
 using System.Collections.Concurrent;
 namespace H_Pannel_lib
 {
+    public enum enum_PictureType
+    {
+        無,
+        高警訊_1,
+        高警訊_2,
+        LASA_1
+    }
     public class StockClass
     {
 
@@ -445,76 +452,81 @@ namespace H_Pannel_lib
         protected List<string> list_Validity_period = new List<string>();
         protected List<string> list_Lot_number = new List<string>();
         protected List<string> list_Inventory = new List<string>();
-
+        private object _lock = new object();
         public void 確認效期庫存()
         {
             this.確認效期庫存(false);
         }
         public void 確認效期庫存(bool ClearAll)
         {
-            List<string> 效期_temp = new List<string>();
-            List<string> 庫存_temp = new List<string>();
-            List<string> 批號_temp = new List<string>();
-            if (this.list_Validity_period == null) this.list_Validity_period = new List<string>();
-            if (this.list_Inventory == null) this.list_Inventory = new List<string>();
-            if (this.list_Lot_number == null) this.list_Lot_number = new List<string>();
-
-            while (true)
+            lock(_lock)
             {
-                bool flag_break = true;
-                if (this.list_Validity_period.Count > this.list_Inventory.Count)
+                List<string> 效期_temp = new List<string>();
+                List<string> 庫存_temp = new List<string>();
+                List<string> 批號_temp = new List<string>();
+                if (this.list_Validity_period == null) this.list_Validity_period = new List<string>();
+                if (this.list_Inventory == null) this.list_Inventory = new List<string>();
+                if (this.list_Lot_number == null) this.list_Lot_number = new List<string>();
+
+                while (true)
                 {
-                    this.list_Inventory.Add("0");
-                    flag_break = false;
+                    bool flag_break = true;
+                    if (this.list_Validity_period.Count > this.list_Inventory.Count)
+                    {
+                        this.list_Inventory.Add("0");
+                        flag_break = false;
+                    }
+                    if (this.list_Validity_period.Count > this.list_Lot_number.Count)
+                    {
+                        this.list_Lot_number.Add("None");
+                        flag_break = false;
+                    }
+                    if (flag_break) break;
                 }
-                if (this.list_Validity_period.Count > this.list_Lot_number.Count)
+
+                int 庫存 = 0;
+                for (int i = 0; i < this.list_Validity_period.Count; i++)
                 {
-                    this.list_Lot_number.Add("None");
-                    flag_break = false;
+                    庫存 = this.list_Inventory[i].StringToInt32();
+                    if (庫存 > 0 || (this.list_Inventory[i] == "00" && !ClearAll))
+                    {
+                        效期_temp.Add(this.list_Validity_period[i].ToDateString("/"));
+                        批號_temp.Add(this.list_Lot_number[i]);
+                        庫存_temp.Add(this.list_Inventory[i]);
+                    }
                 }
-                if (flag_break) break;
-            }
 
-            int 庫存 = 0;
-            for (int i = 0; i < this.list_Validity_period.Count; i++)
-            {
-                庫存 = this.list_Inventory[i].StringToInt32();
-                if (庫存 > 0 || (this.list_Inventory[i] == "00" && !ClearAll))
+
+                this.list_Validity_period = 效期_temp;
+                this.list_Lot_number = 批號_temp;
+                this.list_Inventory = 庫存_temp;
+
+                List<object[]> list_value = new List<object[]>();
+                for (int i = 0; i < this.list_Validity_period.Count; i++)
                 {
-                    效期_temp.Add(this.list_Validity_period[i].ToDateString("/"));
-                    批號_temp.Add(this.list_Lot_number[i]);
-                    庫存_temp.Add(this.list_Inventory[i]);
+                    list_value.Add(new object[] { list_Validity_period[i], list_Lot_number[i], list_Inventory[i] });
                 }
+                list_value.Sort(new DateComparerby());
+                效期_temp.Clear();
+                批號_temp.Clear();
+                庫存_temp.Clear();
+                for (int i = 0; i < list_value.Count; i++)
+                {
+                    效期_temp.Add(list_value[i][0].ObjectToString());
+                    批號_temp.Add(list_value[i][1].ObjectToString());
+                    庫存_temp.Add(list_value[i][2].ObjectToString());
+                }
+                this.list_Validity_period = 效期_temp;
+                this.list_Lot_number = 批號_temp;
+                this.list_Inventory = 庫存_temp;
             }
-
-
-            this.list_Validity_period = 效期_temp;
-            this.list_Lot_number = 批號_temp;
-            this.list_Inventory = 庫存_temp;
-
-            List<object[]> list_value = new List<object[]>();
-            for (int i = 0; i < this.list_Validity_period.Count; i++)
-            {
-                list_value.Add(new object[] { list_Validity_period[i], list_Lot_number[i], list_Inventory[i] });
-            }
-            list_value.Sort(new DateComparerby());
-            效期_temp.Clear();
-            批號_temp.Clear();
-            庫存_temp.Clear();
-            for (int i = 0; i < list_value.Count; i++)
-            {
-                效期_temp.Add(list_value[i][0].ObjectToString());
-                批號_temp.Add(list_value[i][1].ObjectToString());
-                庫存_temp.Add(list_value[i][2].ObjectToString());
-            }
-            this.list_Validity_period = 效期_temp;
-            this.list_Lot_number = 批號_temp;
-            this.list_Inventory = 庫存_temp;
+          
 
         }
         public int 取得庫存(string 效期)
         {
             if (!效期.Check_Date_String()) return -1;
+            效期 = 效期.StringToDateTime().ToDateString("/");
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
             if (this.List_Inventory == null) this.List_Inventory = new List<string>();
             if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
@@ -752,6 +764,8 @@ namespace H_Pannel_lib
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
             if (this.List_Inventory == null) this.List_Inventory = new List<string>();
             if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
+            if (!效期.Check_Date_String()) return;
+            效期 = 效期.StringToDateTime().ToDateString("/");
             string 批號 = "";
             for (int i = 0; i < this.List_Validity_period.Count; i++)
             {
@@ -775,6 +789,7 @@ namespace H_Pannel_lib
         {
             if (異動量.StringToInt32() == 0) return;
             if (!效期.Check_Date_String()) return;
+            效期 = 效期.StringToDateTime().ToDateString("/");
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
             if (this.List_Inventory == null) this.List_Inventory = new List<string>();
             if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
@@ -800,6 +815,8 @@ namespace H_Pannel_lib
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
             if (this.List_Inventory == null) this.List_Inventory = new List<string>();
             if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
+            if (!效期.Check_Date_String()) return;
+            效期 = 效期.StringToDateTime().ToDateString("/");
             string 批號 = "";
             for (int i = 0; i < this.List_Validity_period.Count; i++)
             {
@@ -822,6 +839,7 @@ namespace H_Pannel_lib
         {
             if (異動量.StringToInt32() < 0) return;
             if (!效期.Check_Date_String()) return;
+            效期 = 效期.StringToDateTime().ToDateString("/");
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
             if (this.List_Inventory == null) this.List_Inventory = new List<string>();
             if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
@@ -851,6 +869,7 @@ namespace H_Pannel_lib
             if (庫存.StringToInt32() == -1 && 庫存 != "00") return;
             if (庫存.StringToInt32() < 0 && 庫存 != "00") return;
             if (!效期.Check_Date_String()) return;
+            效期 = 效期.StringToDateTime().ToDateString("/");
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
             if (this.List_Inventory == null) this.List_Inventory = new List<string>();
             if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
@@ -870,6 +889,7 @@ namespace H_Pannel_lib
         public void 清除效期(string 效期)
         {
             if (!效期.Check_Date_String()) return;
+            效期 = 效期.StringToDateTime().ToDateString("/");
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
             if (this.List_Inventory == null) this.List_Inventory = new List<string>();
             if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
@@ -1012,6 +1032,7 @@ namespace H_Pannel_lib
         public string 取得批號(string 效期)
         {
             if (!效期.Check_Date_String()) return "";
+            效期 = 效期.StringToDateTime().ToDateString("/");
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
             if (this.List_Inventory == null) this.List_Inventory = new List<string>();
             if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
@@ -1027,6 +1048,7 @@ namespace H_Pannel_lib
         public void 修正批號(string 效期, string 批號)
         {
             if (!效期.Check_Date_String()) return;
+            效期 = 效期.StringToDateTime().ToDateString("/");
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
             if (this.List_Inventory == null) this.List_Inventory = new List<string>();
             if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
@@ -1337,6 +1359,8 @@ namespace H_Pannel_lib
         EPD420_lock = 14,
         EPD730_lock = 15,
         EPD730 = 16,
+        EPD213_lock = 17,
+        EPD213 = 118,
     }
     public enum HorizontalAlignment
     {
@@ -1409,6 +1433,10 @@ namespace H_Pannel_lib
         {
             get
             {
+                if (DeviceType == DeviceType.EPD213 || DeviceType == DeviceType.EPD213_lock)
+                {
+                    return new Size(250, 122);
+                }
                 if (DeviceType == DeviceType.EPD266 || DeviceType == DeviceType.EPD266_lock)
                 {
                     return new Size(296, 152);
@@ -1442,6 +1470,7 @@ namespace H_Pannel_lib
             CustomText2,
             CustomText3,
             圖片1,
+            圖片2,
             儲位名稱,
             IP,
             Port,
@@ -2170,10 +2199,14 @@ namespace H_Pannel_lib
                     }
                 case ValueName.圖片1:
                     {
-                   
+
                         if (valueType == ValueType.Title)
                         {
                             if (Value is string) this.Picture1_Title = (string)Value;
+                        }
+                        else if (valueType == ValueType.Value)
+                        {
+                            if (Value is string) this.Picture1_Name = (string)Value;
                         }
                         else if (valueType == ValueType.Font)
                         {
@@ -2214,6 +2247,59 @@ namespace H_Pannel_lib
                         else if (valueType == ValueType.Visable)
                         {
                             if (Value is bool) this.Picture1_Visable = (bool)Value;
+                        }
+                        break;
+                    }
+                case ValueName.圖片2:
+                    {
+
+                        if (valueType == ValueType.Title)
+                        {
+                            if (Value is string) this.Picture2_Title = (string)Value;
+                        }
+                        else if (valueType == ValueType.Value)
+                        {
+                            if (Value is string) this.Picture2_Name = (string)Value;
+                        }
+                        else if (valueType == ValueType.Font)
+                        {
+                            if (Value is Font) this.Picture2_font = (Font)Value;
+                        }
+                        else if (valueType == ValueType.ForeColor)
+                        {
+                            if (Value is Color) this.Picture2_ForeColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.BackColor)
+                        {
+                            if (Value is Color) this.Picture2_BackColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.Position)
+                        {
+                            if (Value is Point) this.Picture2_Position = (Point)Value;
+                        }
+                        else if (valueType == ValueType.Width)
+                        {
+                            if (Value is int) this.Picture2_Width = (int)Value;
+                        }
+                        else if (valueType == ValueType.Height)
+                        {
+                            if (Value is int) this.Picture2_Height = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderSize)
+                        {
+                            if (Value is int) this.Picture2_BorderSize = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderColor)
+                        {
+                            if (Value is Color) this.Picture2_BorderColor = (Color)Value;
+                        }
+                        else if (valueType == ValueType.HorizontalAlignment)
+                        {
+                            if (Value is HorizontalAlignment) this.Picture2_HorizontalAlignment = (HorizontalAlignment)Value;
+                        }
+                        else if (valueType == ValueType.Visable)
+                        {
+                            if (Value is bool) this.Picture2_Visable = (bool)Value;
                         }
                         break;
                     }
@@ -2968,6 +3054,7 @@ namespace H_Pannel_lib
                 case ValueName.圖片1:
                     {
                         vlaueClass.valueName = valueName;
+                        vlaueClass.Value = this.Picture1_Name;
                         vlaueClass.Title = this.Picture1_Title;
                         vlaueClass.Font = this.Picture1_font;
                         vlaueClass.ForeColor = this.Picture1_ForeColor;
@@ -2979,6 +3066,31 @@ namespace H_Pannel_lib
                         vlaueClass.BorderSize = this.Picture1_BorderSize;
                         vlaueClass.BorderColor = this.Picture1_BorderColor;
                         vlaueClass.Visable = this.Picture1_Visable;
+
+                        if (vlaueClass.Value.StringIsEmpty())
+                        {
+                            vlaueClass.Value = "None";
+                        }
+                        ////Size size = TextRenderer.MeasureText(vlaueClass.Value, vlaueClass.Font);
+                        ////if (vlaueClass.Width < size.Width) vlaueClass.Width = size.Width;
+                        ////if (vlaueClass.Height < size.Height) vlaueClass.Height = size.Height;
+                        break;
+                    }
+                case ValueName.圖片2:
+                    {
+                        vlaueClass.valueName = valueName;
+                        vlaueClass.Value = this.Picture2_Name;
+                        vlaueClass.Title = this.Picture2_Title;
+                        vlaueClass.Font = this.Picture2_font;
+                        vlaueClass.ForeColor = this.Picture2_ForeColor;
+                        vlaueClass.BackColor = this.Picture2_BackColor;
+                        vlaueClass.Position = this.Picture2_Position;
+                        vlaueClass.Width = this.Picture2_Width;
+                        vlaueClass.Height = this.Picture2_Height;
+                        vlaueClass.HorizontalAlignment = this.Picture2_HorizontalAlignment;
+                        vlaueClass.BorderSize = this.Picture2_BorderSize;
+                        vlaueClass.BorderColor = this.Picture2_BorderColor;
+                        vlaueClass.Visable = this.Picture2_Visable;
 
                         if (vlaueClass.Value.StringIsEmpty())
                         {
@@ -3113,11 +3225,23 @@ namespace H_Pannel_lib
                 }
                 return bitmap;          
             }
-            else if (valueName == ValueName.圖片1)
+            else if (valueName == ValueName.圖片1|| valueName == ValueName.圖片2)
             {
-
+                Bitmap bitmap = null;
+                if (vlaueClass.Value == enum_PictureType.高警訊_1.GetEnumName())
+                {
+                    bitmap = Resource1.Alarm_filled_red;
+                }
+                if (vlaueClass.Value == enum_PictureType.高警訊_2.GetEnumName())
+                {
+                    bitmap = Resource1.高警訊_2;
+                }
+                else if (vlaueClass.Value == enum_PictureType.LASA_1.GetEnumName())
+                {
+                    bitmap = Resource1.LASA圖標;
+                }
                 Size Rect_Size = new Size((int)(vlaueClass.Width * bmp_Scale), (int)(vlaueClass.Height * bmp_Scale));
-                Bitmap bitmap = Resource1.Alarm_filled_red;
+                if (bitmap == null) return null;
                 bitmap = Communication.ScaleImage(bitmap, Rect_Size.Width, Rect_Size.Height);
                 if (bitmap != null)
                 {
@@ -3139,7 +3263,7 @@ namespace H_Pannel_lib
                     }
                 }
                 return bitmap;
-            }
+            }        
             else
             {
                 Bitmap bitmap = Communication.TextToBitmap(vlaueClass.Value, vlaueClass.Font, bmp_Scale, vlaueClass.Width, vlaueClass.Height, vlaueClass.ForeColor, vlaueClass.BackColor, vlaueClass.BorderSize, vlaueClass.BorderColor, vlaueClass.HorizontalAlignment);
@@ -3262,6 +3386,7 @@ namespace H_Pannel_lib
             if (text == "Port") return ValueName.Port;
             if (text == "最大存量") return ValueName.最大存量;
             if (text == "圖片1") return ValueName.圖片1;
+            if (text == "圖片2") return ValueName.圖片2;
             if (text == "CustomText1" || text.Contains("文本1"))
             {
                 return ValueName.CustomText1;
@@ -4182,7 +4307,8 @@ namespace H_Pannel_lib
         #region Picture1
         private string _Picture1_Title = "";
         public string Picture1_Title { get => _Picture1_Title; set => _Picture1_Title = value; }
-
+        private string _Picture1_Name = "";
+        public string Picture1_Name { get => _Picture1_Name; set => _Picture1_Name = value; }
         [JsonIgnore]
         public Font Picture1_font
         {
@@ -4238,6 +4364,67 @@ namespace H_Pannel_lib
         }
         private HorizontalAlignment _Picture1_HorizontalAlignment = HorizontalAlignment.Left;
         public HorizontalAlignment Picture1_HorizontalAlignment { get => _Picture1_HorizontalAlignment; set => _Picture1_HorizontalAlignment = value; }
+        #endregion
+        #region Picture2
+        private string _Picture2_Title = "";
+        public string Picture2_Title { get => _Picture2_Title; set => _Picture2_Title = value; }
+        private string _Picture2_Name = "";
+        public string Picture2_Name { get => _Picture2_Name; set => _Picture2_Name = value; }
+        [JsonIgnore]
+        public Font Picture2_font
+        {
+            get
+            {
+                return FontSerializationHelper.FromString(_Picture2_font_Serialize);
+            }
+            set
+            {
+                _Picture2_font_Serialize = FontSerializationHelper.ToString(value);
+            }
+        }
+        private string _Picture2_font_Serialize = "微軟正黑體:14:Bold:Point:1:False";
+        [Browsable(false)]
+        public string Picture2_font_Serialize
+        {
+            get { return _Picture2_font_Serialize; }
+            set { _Picture2_font_Serialize = value; }
+        }
+        [JsonIgnore]
+        public Color Picture2_BackColor = Color.White;
+        [Browsable(false)]
+        public string Picture2_BackColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(Picture2_BackColor); }
+            set { Picture2_BackColor = ColorSerializationHelper.FromString(value); }
+        }
+        [JsonIgnore]
+        public Color Picture2_ForeColor = Color.Black;
+        [Browsable(false)]
+        public string Picture2_ForeColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(Picture2_ForeColor); }
+            set { Picture2_ForeColor = ColorSerializationHelper.FromString(value); }
+        }
+        private Point _Picture2_Position = new Point();
+        public Point Picture2_Position { get => _Picture2_Position; set => _Picture2_Position = value; }
+        private bool _Picture2_Visable = true;
+        public bool Picture2_Visable { get => _Picture2_Visable; set => _Picture2_Visable = value; }
+        private int _Picture2_Width = 50;
+        public int Picture2_Width { get => _Picture2_Width; set => _Picture2_Width = value; }
+        private int _Picture2_Height = 50;
+        public int Picture2_Height { get => _Picture2_Height; set => _Picture2_Height = value; }
+        private int _Picture2_BorderSize = 1;
+        public int Picture2_BorderSize { get => _Picture2_BorderSize; set => _Picture2_BorderSize = value; }
+        [JsonIgnore]
+        public Color Picture2_BorderColor = Color.Black;
+        [Browsable(false)]
+        public string Picture2_BorderColor_Serialize
+        {
+            get { return ColorSerializationHelper.ToString(Picture2_BorderColor); }
+            set { Picture2_BorderColor = ColorSerializationHelper.FromString(value); }
+        }
+        private HorizontalAlignment _Picture2_HorizontalAlignment = HorizontalAlignment.Left;
+        public HorizontalAlignment Picture2_HorizontalAlignment { get => _Picture2_HorizontalAlignment; set => _Picture2_HorizontalAlignment = value; }
         #endregion
         #region CustomText1
         private string _CustomText1_Title = "";
@@ -4439,10 +4626,7 @@ namespace H_Pannel_lib
       
         public bool UpToSQL = false;
         public int station = -1;  
-        public int Station { get => station; set => station = value; }
-
-
-        
+        public int Station { get => station; set => station = value; }   
 
         private int masterIndex = -1;
         public int MasterIndex { get => masterIndex; set => masterIndex = value; }

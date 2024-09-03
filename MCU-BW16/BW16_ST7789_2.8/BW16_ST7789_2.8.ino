@@ -37,10 +37,10 @@
 #include <Adafruit_ST7789.h> // Hardware-specific library for ST7789
 #include <SPI.h>
 
-#define TFT_CS         PA15
-#define TFT_RST        PA30
+#define TFT_CS         PB3
+#define TFT_RST        PA13
 #define TFT_DC         PA27
-
+#define TFT_CS0        PA15
 
 // OPTION 1 (recommended) is to use the HARDWARE SPI pins, which are unique
 // to each board and not reassignable. For Arduino Uno: MOSI = pin 11 and
@@ -52,7 +52,7 @@
 
 // For 1.14", 1.3", 1.54", 1.69", and 2.0" TFT with ST7789:
 Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
-
+Adafruit_ST7789 tft0 = Adafruit_ST7789(TFT_CS0, TFT_DC, TFT_RST);
 
 // OPTION 2 lets you interface the display using ANY TWO or THREE PINS,
 // tradeoff being that performance is not as fast as hardware SPI above.
@@ -90,12 +90,12 @@ void setup(void) {
   // OR use this initializer (uncomment) if using a 1.69" 280x240 TFT:
   //tft.init(240, 280);           // Init ST7789 280x240
 
-  // OR use this initializer (uncomment) if using a 2.0" 320x240 TFT:
-  tft.init(240, 320);           // Init ST7789 320x240
+//  // OR use this initializer (uncomment) if using a 2.0" 320x240 TFT:
+//  tft.init(135, 240);           // Init ST7789 320x240
 
-  // OR use this initializer (uncomment) if using a 1.14" 240x135 TFT:
-  //tft.init(135, 240);           // Init ST7789 240x135
-  
+//   OR use this initializer (uncomment) if using a 1.14" 240x135 TFT:
+  tft.init(135, 240);           // Init ST7789 240x135
+  tft0.init(135, 240);  
   // OR use this initializer (uncomment) if using a 1.47" 172x320 TFT:
   //tft.init(172, 320);           // Init ST7789 172x320
 
@@ -108,6 +108,7 @@ void setup(void) {
 
   uint16_t time = millis();
   tft.fillScreen(ST77XX_BLACK);
+  tft0.fillScreen(ST77XX_BLACK);
   time = millis() - time;
 
   Serial.println(time, DEC);
@@ -115,6 +116,7 @@ void setup(void) {
 
   // large block of text
   tft.fillScreen(ST77XX_BLACK);
+  tft0.fillScreen(ST77XX_BLACK);
   testdrawtext("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur adipiscing ante sed nibh tincidunt feugiat. Maecenas enim massa, fringilla sed malesuada et, malesuada sit amet turpis. Sed porttitor neque ut ante pretium vitae malesuada nunc bibendum. Nullam aliquet ultrices massa eu hendrerit. Ut sed nisi lorem. In vestibulum purus a tortor imperdiet posuere. ", ST77XX_WHITE);
   delay(1000);
 
@@ -124,6 +126,7 @@ void setup(void) {
 
   // a single pixel
   tft.drawPixel(tft.width()/2, tft.height()/2, ST77XX_GREEN);
+  tft0.drawPixel(tft.width()/2, tft.height()/2, ST77XX_YELLOW);
   delay(500);
 
   // line draw test

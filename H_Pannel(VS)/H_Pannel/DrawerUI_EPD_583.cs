@@ -63,8 +63,7 @@ namespace H_Pannel_lib
         static public int NumOfLED = 450;
         //static private int drawer.Num_Of_Columns = 4;
         //static private int drawer.Num_Of_Rows = 8;
-        static private int NumOfLED_Pannel = 42;
-        static private int NumOfLED_Drawer = 450 - NumOfLED_Pannel;
+
 
 
         static public int Pannel_Width
@@ -90,10 +89,23 @@ namespace H_Pannel_lib
 
         static public byte[] LEDBytes_Pannel_Clear(Drawer drawer)
         {
-            return LEDBytes_Pannel_Clear(drawer.LED_Bytes);
+            return LEDBytes_Pannel_Clear(drawer.LED_Bytes, drawer.DrawerType);
         }
-        static public byte[] LEDBytes_Pannel_Clear(byte[] LED_Bytes)
+        static public byte[] LEDBytes_Pannel_Clear(byte[] LED_Bytes, Drawer.Enum_DrawerType enum_DrawerType)
         {
+            int NumOfLED_Pannel = 42;
+            int NumOfLED_Drawer = 450 - NumOfLED_Pannel;
+            if (enum_DrawerType == Drawer.Enum_DrawerType._3X8 || enum_DrawerType == Drawer.Enum_DrawerType._4X8)
+            {
+                NumOfLED_Pannel = 42;
+                NumOfLED_Drawer = 450 - NumOfLED_Pannel;
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._4X8_A || enum_DrawerType == Drawer.Enum_DrawerType._5X8_A)
+            {
+                NumOfLED_Pannel = 6;
+                NumOfLED_Drawer = 372 - NumOfLED_Pannel;
+            }
+
             for (int i = NumOfLED_Drawer * 3; i < Drawer.NumOfLED * 3; i++)
             {
                 if (i > LED_Bytes.Length) return LED_Bytes;
@@ -225,10 +237,22 @@ namespace H_Pannel_lib
             {
                 return Set_LEDBytes(drawer, color);
             }
-            return Set_Pannel_LEDBytes(ref drawer.LED_Bytes, color);
+            return Set_Pannel_LEDBytes(ref drawer.LED_Bytes, color, drawer.DrawerType);
         }
-        static public byte[] Set_Pannel_LEDBytes(ref byte[] LED_Bytes, Color color)
+        static public byte[] Set_Pannel_LEDBytes(ref byte[] LED_Bytes, Color color, Drawer.Enum_DrawerType enum_DrawerType)
         {
+            int NumOfLED_Pannel = 42;
+            int NumOfLED_Drawer = 450 - NumOfLED_Pannel;
+            if (enum_DrawerType == Drawer.Enum_DrawerType._3X8 || enum_DrawerType == Drawer.Enum_DrawerType._4X8)
+            {
+                NumOfLED_Pannel = 42;
+                NumOfLED_Drawer = 450 - NumOfLED_Pannel;
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._4X8_A || enum_DrawerType == Drawer.Enum_DrawerType._5X8_A)
+            {
+                NumOfLED_Pannel = 6;
+                NumOfLED_Drawer = 372 - NumOfLED_Pannel;
+            }
             for (int i = NumOfLED_Drawer ; i < NumOfLED ; i++)
             {
                 if (i * 3 > LED_Bytes.Length) return LED_Bytes;
@@ -238,14 +262,19 @@ namespace H_Pannel_lib
             }
             return LED_Bytes;
         }
-
+ 
         static public bool Set_Pannel_LED_UDP(UDP_Class uDP_Class, Drawer drawer, Color color)
         {
-            return Set_Pannel_LED_UDP(uDP_Class, drawer.IP, drawer.LED_Bytes, color);
+            return Set_Pannel_LED_UDP(uDP_Class, drawer.IP, drawer.LED_Bytes, color,drawer.DrawerType);
         }
         static public bool Set_Pannel_LED_UDP(UDP_Class uDP_Class, string IP, byte[] LED_Bytes, Color color)
         {
-            LED_Bytes = Set_Pannel_LEDBytes(ref LED_Bytes, color);
+            return Set_Pannel_LED_UDP(uDP_Class, IP, LED_Bytes, color, Drawer.Enum_DrawerType._4X8);
+        }
+
+        static public bool Set_Pannel_LED_UDP(UDP_Class uDP_Class, string IP, byte[] LED_Bytes, Color color, Drawer.Enum_DrawerType enum_DrawerType)
+        {
+            LED_Bytes = Set_Pannel_LEDBytes(ref LED_Bytes, color, enum_DrawerType);
             if (uDP_Class != null)
             {
                 return Set_LED_UDP(uDP_Class, IP, LED_Bytes);
@@ -999,12 +1028,16 @@ namespace H_Pannel_lib
         }
         public bool Set_Pannel_LED_UDP(Drawer drawer, Color color)
         {
-            return Set_Pannel_LED_UDP(drawer.IP, drawer.Port, drawer.LED_Bytes, color);
+            return Set_Pannel_LED_UDP(drawer.IP, drawer.Port, drawer.LED_Bytes, color,drawer.DrawerType);
         }
         public bool Set_Pannel_LED_UDP(string IP, int Port, byte[] LED_Bytes, Color color)
         {
+            return Set_Pannel_LED_UDP(IP, Port, LED_Bytes, color, Drawer.Enum_DrawerType._4X8);
+        }
+        public bool Set_Pannel_LED_UDP(string IP, int Port, byte[] LED_Bytes, Color color, Drawer.Enum_DrawerType enum_DrawerType)
+        {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return Set_Pannel_LED_UDP(uDP_Class, IP, LED_Bytes, color);
+            return Set_Pannel_LED_UDP(uDP_Class, IP, LED_Bytes, color, enum_DrawerType);
         }
         public bool Set_Drawer_LED_UDP(Drawer drawer, Box box, Color color)
         {

@@ -846,7 +846,6 @@ C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Rel
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\System.Text.Json.xml
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\System.Threading.Tasks.Extensions.xml
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\System.ValueTuple.xml
-C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.csproj.AssemblyReference.cache
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\WT32_SC01.Form1.resources
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.Properties.Resources.resources
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.csproj.GenerateResource.cache
@@ -1235,3 +1234,4 @@ C:\Users\hmisa\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_P
 C:\Users\hmisa\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.exe
 C:\Users\hmisa\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.pdb
 C:\Users\hmisa\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\H_Pannel_lib.pdb
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.csproj.AssemblyReference.cache

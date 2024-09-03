@@ -220,7 +220,6 @@ namespace H_Pannel_lib
             this.checkBox_庫存.Checked = currentStorage.Inventory_Visable;
             this.checkBox_單位.Checked = currentStorage.Package_Visable;
             this.checkBox_條碼.Checked = currentStorage.BarCode_Visable;
-            this.checkBox_圖片1.Checked = currentStorage.Picture1_Visable;
             this.checkBox_文本1.Checked = currentStorage.CustomText1_Visable;
             this.checkBox_文本2.Checked = currentStorage.CustomText2_Visable;
             this.checkBox_文本3.Checked = currentStorage.CustomText3_Visable;
@@ -234,11 +233,27 @@ namespace H_Pannel_lib
             this.checkBox_庫存.CheckedChanged += CheckBox_CheckedChanged;
             this.checkBox_單位.CheckedChanged += CheckBox_CheckedChanged;
             this.checkBox_條碼.CheckedChanged += CheckBox_CheckedChanged;
-            this.checkBox_圖片1.CheckedChanged += CheckBox_CheckedChanged;
             this.checkBox_文本1.CheckedChanged += CheckBox_CheckedChanged;
             this.checkBox_文本2.CheckedChanged += CheckBox_CheckedChanged;
             this.checkBox_文本3.CheckedChanged += CheckBox_CheckedChanged;
             rJ_Pannel_背景顏色.BackgroundColor = CurrentStorage.BackColor;
+
+            this.comboBox_圖片1.DataSource = new enum_PictureType().GetEnumNames();
+            this.comboBox_圖片1.Text = currentStorage.Picture1_Name;
+            if (this.comboBox_圖片1.Text.StringIsEmpty())
+            {
+                this.comboBox_圖片1.Text = "無";
+            }
+            this.comboBox_圖片1.SelectedIndexChanged += ComboBox_圖片1_SelectedIndexChanged;
+
+            this.comboBox_圖片2.DataSource = new enum_PictureType().GetEnumNames();
+            this.comboBox_圖片2.Text = currentStorage.Picture2_Name;
+            if (this.comboBox_圖片2.Text.StringIsEmpty())
+            {
+                this.comboBox_圖片2.Text = "無";
+            }
+            this.comboBox_圖片2.SelectedIndexChanged += ComboBox_圖片2_SelectedIndexChanged;
+
             this.rJ_RatioButton_預設樣式1.CheckedChanged += RJ_RatioButton_預設樣式1_CheckedChanged;
             this.rJ_RatioButton_自定義.CheckedChanged += RJ_RatioButton_自定義_CheckedChanged;
             if (currentStorage.Enum_drawType == Storage.enum_DrawType.type1)
@@ -252,7 +267,22 @@ namespace H_Pannel_lib
             this.Refresh();
         }
 
-     
+        private void ComboBox_圖片1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string name = "圖片1";
+
+            Storage.ValueName valueName = Storage.GetValueName(name);
+            CurrentStorage.SetValue(valueName, Device.ValueType.Value, this.comboBox_圖片1.Text);
+            this.DrawToPictureBox();
+        }
+        private void ComboBox_圖片2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string name = "圖片2";
+
+            Storage.ValueName valueName = Storage.GetValueName(name);
+            CurrentStorage.SetValue(valueName, Device.ValueType.Value, this.comboBox_圖片2.Text);
+            this.DrawToPictureBox();
+        }
 
         private void ComboBox_圖形編輯_編輯內容名稱_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -672,6 +702,11 @@ namespace H_Pannel_lib
                     if (vlaueClass.Width < 20) vlaueClass.Width = 20;
                     if (vlaueClass.Height < 20) vlaueClass.Height = 20;
                 }
+                if (vlaueClass.valueName == Device.ValueName.圖片2)
+                {
+                    if (vlaueClass.Width < 20) vlaueClass.Width = 20;
+                    if (vlaueClass.Height < 20) vlaueClass.Height = 20;
+                }
                 else if (vlaueClass.valueName == Device.ValueName.BarCode)
                 {
                     if (vlaueClass.Width < 30) vlaueClass.Width = 30;
@@ -712,7 +747,7 @@ namespace H_Pannel_lib
             storage.Label_Visable = false;
 
             Storage.VlaueClass vlaueClass;
-            Bitmap bitmap = Communication.EPD266_GetBitmap(storage, CanvasScale);
+            Bitmap bitmap = Communication.Storage_GetBitmap(storage, CanvasScale);
             using (Graphics g = Graphics.FromImage(bitmap))
             {
 

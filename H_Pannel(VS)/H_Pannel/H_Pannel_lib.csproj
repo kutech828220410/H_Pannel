@@ -189,6 +189,12 @@
     <Compile Include="DrawerUI_EPD_583.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ViewUI\EPD213_Paint_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewUI\EPD213_Paint_Form.Designer.cs">
+      <DependentUpon>EPD213_Paint_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Resource1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -341,6 +347,9 @@
     <EmbeddedResource Include="StorageUI_EPD_266.resx">
       <DependentUpon>StorageUI_EPD_266.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewUI\EPD213_Paint_Form.resx">
+      <DependentUpon>EPD213_Paint_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewUI\EPD266_Paint_Form.resx">
       <DependentUpon>EPD266_Paint_Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -435,6 +444,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Alarm_filled_red.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LASA圖標.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\高警訊_2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />

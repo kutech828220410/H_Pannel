@@ -4,6 +4,7 @@ byte UART1_RX[UART1_RX_SIZE];
 int UART1_len;
 MyTimer MyTimer_UART1;
 String str_distance = "999";
+String str_TOF10120 = "";
 int LaserDistance = -999;
 bool flag_UART1_Init = false;
 void serial2Event()
@@ -25,6 +26,7 @@ void serial2Event()
     {
        mySerial.println("mySerial2 buffer overrange!!");
        UART1_len = 0;
+       str_TOF10120 = "";
     }
     else
     {
@@ -40,7 +42,11 @@ void serial2Event()
   {
     MyTimer_UART1.TickStop();
     MyTimer_UART1.StartTickTime(1000);
-
+//    for (int i = 0 ; i < UART1_len ; i++)
+//    {
+//       str_TOF10120 += (char)UART1_RX[i];
+//    }
+    mySerial.println(str_TOF10120);
     if (UART1_RX[UART1_len - 1] == 0X0A && UART1_RX[UART1_len - 2] == 0X0D && UART1_RX[UART1_len - 3] == 0X0D && UART1_RX[UART1_len - 4] == 0X6D && UART1_RX[UART1_len - 5] == 0X6D)
     {
         
@@ -56,6 +62,7 @@ void serial2Event()
     }
     
     UART1_len = 0;
+    str_TOF10120 = "";
     for (int i = 0 ; i < UART1_RX_SIZE ; i++)
     {
       UART1_RX[i] = 0;

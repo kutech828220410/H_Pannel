@@ -23,9 +23,8 @@ using System.Text.Json.Serialization;
 
 namespace H_Pannel_lib
 {
-    public partial class EPD266_Paint_Form : MyDialog
+    public partial class EPD213_Paint_Form : MyDialog
     {
- 
         public delegate void PanelSelectEventHandler(Storage.ValueName valueName);
         public event PanelSelectEventHandler PanelSelectEvent;
 
@@ -36,14 +35,14 @@ namespace H_Pannel_lib
         {
             get
             {
-                return 296;
+                return 250;
             }
         }
         static public int Pannel_Height
         {
             get
             {
-                return 152;
+                return 144;
             }
         }
 
@@ -160,7 +159,7 @@ namespace H_Pannel_lib
             }
         }
 
-        public EPD266_Paint_Form(Storage _storage)
+        public EPD213_Paint_Form(Storage _storage)
         {
             InitializeComponent();
             currentStorage = _storage;
@@ -171,22 +170,21 @@ namespace H_Pannel_lib
             this.pictureBox_paint.MouseUp += PictureBox_paint_MouseUp;
 
 
-            this.ShowDialogEvent += EPD266_Paint_Form_ShowDialogEvent;
-            this.LoadFinishedEvent += EPD266_Paint_Form_LoadFinishedEvent;
+            this.ShowDialogEvent += EPD213_Paint_Form_ShowDialogEvent;
+            this.LoadFinishedEvent += EPD213_Paint_Form_LoadFinishedEvent;
 
             this.rJ_Button_確定.MouseDownEvent += RJ_Button_確定_MouseDownEvent;
             this.rJ_Button_取消.MouseDownEvent += RJ_Button_取消_MouseDownEvent;
         }
-
-        private void EPD266_Paint_Form_ShowDialogEvent()
+        private void EPD213_Paint_Form_ShowDialogEvent()
         {
 
         }
-        private void EPD266_Paint_Form_LoadFinishedEvent(EventArgs e)
+        private void EPD213_Paint_Form_LoadFinishedEvent(EventArgs e)
         {
             DrawToPictureBox(CurrentStorage);
 
-            this.PanelSelectEvent += EPD266_Paint_Form_PanelSelectEvent;
+            this.PanelSelectEvent += EPD213_Paint_Form_PanelSelectEvent;
             this.comboBox_選擇項目.DataSource = new StoragePanel.enum_ValueName().GetEnumNames();
             this.comboBox_選擇項目.SelectedIndexChanged += ComboBox_圖形編輯_編輯內容名稱_SelectedIndexChanged;
             this.comboBox_選擇項目.SelectedIndex = 0;
@@ -284,7 +282,6 @@ namespace H_Pannel_lib
             CurrentStorage.SetValue(valueName, Device.ValueType.Value, this.comboBox_圖片2.Text);
             this.DrawToPictureBox();
         }
-
         private void ComboBox_圖形編輯_編輯內容名稱_SelectedIndexChanged(object sender, EventArgs e)
         {
             MainSelect = this.comboBox_選擇項目.SelectedIndex;
@@ -293,7 +290,8 @@ namespace H_Pannel_lib
 
             this.DrawToPictureBox();
         }
-        private void EPD266_Paint_Form_PanelSelectEvent(Device.ValueName valueName)
+     
+        private void EPD213_Paint_Form_PanelSelectEvent(Device.ValueName valueName)
         {
             this.textBox_邊框大小.Text = CurrentStorage.GetValue(valueName).BorderSize.ToString();
             textBox_字體.Text = CurrentStorage.GetValue(valueName).Font.ToFontString();
@@ -703,11 +701,6 @@ namespace H_Pannel_lib
                     if (vlaueClass.Width < 20) vlaueClass.Width = 20;
                     if (vlaueClass.Height < 20) vlaueClass.Height = 20;
                 }
-                if (vlaueClass.valueName == Device.ValueName.圖片2)
-                {
-                    if (vlaueClass.Width < 20) vlaueClass.Width = 20;
-                    if (vlaueClass.Height < 20) vlaueClass.Height = 20;
-                }
                 else if (vlaueClass.valueName == Device.ValueName.BarCode)
                 {
                     if (vlaueClass.Width < 30) vlaueClass.Width = 30;
@@ -860,6 +853,5 @@ namespace H_Pannel_lib
                 return p0.Y.CompareTo(p1.Y);
             }
         }
-
     }
 }

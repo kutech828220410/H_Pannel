@@ -26,7 +26,6 @@ namespace H_Pannel_lib
     public partial class StorageUI : DeviceBasicUI
     {
       
-
         private List<Storage> Storages = new List<Storage>();
 
         public StorageUI()

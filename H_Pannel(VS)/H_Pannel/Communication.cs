@@ -30,6 +30,7 @@ namespace H_Pannel_lib
     }
     public enum EPD_Type
     {
+        EPD213_B,
         EPD266_B,
         EPD583,
         EPD290_V2,
@@ -730,6 +731,44 @@ namespace H_Pannel_lib
             if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 583 DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
             return flag_OK;
         }
+        static public bool EPD_213_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
+        {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"EPD213 DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
+            Console.WriteLine($"EPD213 DrawImage start {DateTime.Now.ToDateTimeString()} ");
+            using (Bitmap _bmp = bmp.DeepClone())
+            {
+                int EPD213_frameDIV = 0;
+                if (Chip_Type == ChipType.ESP32)
+                {
+                    EPD213_frameDIV = 1;
+                }
+                if (Chip_Type == ChipType.BW16)
+                {
+                    EPD213_frameDIV = 1;
+                }
+
+                bool flag_OK;
+                int width = bmp.Width;
+                int height = bmp.Height;
+                height = 128;
+                _bmp.RotateFlip(RotateFlipType.Rotate90FlipXY);
+                byte[] bytes_BW = new byte[(height / 8) * width];
+                byte[] bytes_RW = new byte[(height / 8) * width];
+                BitmapToByteEPD213(_bmp, ref bytes_BW, ref bytes_RW);
+                MyTimer myTimer = new MyTimer();
+                myTimer.StartTickTime(50000);
+                flag_OK = EPD_DrawImage(uDP_Class, IP, bytes_BW, bytes_RW, (height / 8) * width / EPD213_frameDIV);
+                if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 213 DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+                return flag_OK;
+            }
+
+
+        }
+
         static public bool EPD_266_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
             if (!Basic.Net.Ping(IP, 2, 150))
@@ -800,6 +839,7 @@ namespace H_Pannel_lib
                 return flag_OK;
             }
         }
+
         static public bool EPD_1020_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
             if (!Basic.Net.Ping(IP, 2, 150))
@@ -7104,11 +7144,11 @@ namespace H_Pannel_lib
             EPD_7IN3F_ORANGE = 0x6,  // 110
             EPD_7IN3F_CLEAN = 0x7,   // 111   unavailable Afterimage
         }
-        static public Bitmap EPD266_GetBitmap(Storage storage)
+        static public Bitmap Storage_GetBitmap(Storage storage)
         {
-            return EPD266_GetBitmap(storage, 1);
+            return Storage_GetBitmap(storage, 1);
         }
-        static public Bitmap EPD266_GetBitmap(Storage storage , int scale)
+        static public Bitmap Storage_GetBitmap(Storage storage , int scale)
         {
             if(storage.Enum_drawType == Storage.enum_DrawType.type1)
             {
@@ -7269,7 +7309,8 @@ namespace H_Pannel_lib
                 }
                 Bitmap bitmap_buf = null;
                 if (storage.DeviceType == DeviceType.EPD266 || storage.DeviceType == DeviceType.EPD266_lock
-                    || storage.DeviceType == DeviceType.EPD290 || storage.DeviceType == DeviceType.EPD290_lock)
+                    || storage.DeviceType == DeviceType.EPD290 || storage.DeviceType == DeviceType.EPD290_lock
+                    || storage.DeviceType == DeviceType.EPD213 || storage.DeviceType == DeviceType.EPD213_lock)
                 {
                     using (Graphics g_buf = Graphics.FromImage(bitmap))
                     {
@@ -7775,7 +7816,7 @@ namespace H_Pannel_lib
                         {
                             temp_BW <<= 1;
                             temp_RW <<= 1;
-                            if (ePD_Type == EPD_Type.EPD583 || ePD_Type == EPD_Type.EPD266_B || ePD_Type == EPD_Type.EPD1020)
+                            if (ePD_Type == EPD_Type.EPD583 || ePD_Type == EPD_Type.EPD213_B || ePD_Type == EPD_Type.EPD266_B || ePD_Type == EPD_Type.EPD1020)
                             {
                                 if (R[i] > 0 && G[i] <= 128 && B[i] <= 128)
                                 {
@@ -7868,6 +7909,106 @@ namespace H_Pannel_lib
             RW_bytes = list_byte_image_RW.ToArray();
             //bimage.Dispose();
         }
+        static unsafe public void BitmapToByteEPD213(Bitmap bimage, ref byte[] BW_bytes, ref byte[] RW_bytes)
+        {
+            List<byte> list_byte_image_BW = new List<byte>();
+            List<byte> list_byte_image_RW = new List<byte>();
+            //pictureBox1.Image = bimage;
+            BitmapData bmData = bimage.LockBits(new Rectangle(0, 0, bimage.Width, bimage.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            int width = bmData.Width;
+            int height = bmData.Height;
+            int ByteOfSkip = GetBitmapSkip(width, 3);
+            IntPtr SurfacePtr = bmData.Scan0;
+            int ByteOfWidth = width * 3 + ByteOfSkip;
+            int SrcWidthxY;
+            int SrcIndex;
+            int[] R = new int[8];
+            int[] G = new int[8];
+            int[] B = new int[8];
+            byte temp_BW = 0;
+            byte temp_RW = 0;
+            int flag_index = 0;
+            unsafe
+            {
+                byte* SrcPtr = (byte*)SurfacePtr;
+                for (int y = 0; y < height; y++)
+                {
+                    SrcWidthxY = ByteOfWidth * y;
+
+                    for (int x = 0; x < (16); x++)
+                    {
+                        SrcIndex = SrcWidthxY + (x * 24);
+
+                        B[0] = SrcPtr[SrcIndex + 00];
+                        G[0] = SrcPtr[SrcIndex + 01];
+                        R[0] = SrcPtr[SrcIndex + 02];
+
+                        B[1] = SrcPtr[SrcIndex + 03];
+                        G[1] = SrcPtr[SrcIndex + 04];
+                        R[1] = SrcPtr[SrcIndex + 05];
+
+                        B[2] = SrcPtr[SrcIndex + 06];
+                        G[2] = SrcPtr[SrcIndex + 07];
+                        R[2] = SrcPtr[SrcIndex + 08];
+
+                        B[3] = SrcPtr[SrcIndex + 09];
+                        G[3] = SrcPtr[SrcIndex + 10];
+                        R[3] = SrcPtr[SrcIndex + 11];
+
+                        B[4] = SrcPtr[SrcIndex + 12];
+                        G[4] = SrcPtr[SrcIndex + 13];
+                        R[4] = SrcPtr[SrcIndex + 14];
+
+                        B[5] = SrcPtr[SrcIndex + 15];
+                        G[5] = SrcPtr[SrcIndex + 16];
+                        R[5] = SrcPtr[SrcIndex + 17];
+
+                        B[6] = SrcPtr[SrcIndex + 18];
+                        G[6] = SrcPtr[SrcIndex + 19];
+                        R[6] = SrcPtr[SrcIndex + 20];
+
+                        B[7] = SrcPtr[SrcIndex + 21];
+                        G[7] = SrcPtr[SrcIndex + 22];
+                        R[7] = SrcPtr[SrcIndex + 23];
+                        temp_BW = 0;
+                        temp_RW = 0;
+                        for (int i = 0; i < 8; i++)
+                        {
+                            temp_BW <<= 1;
+                            temp_RW <<= 1;
+                            if (R[i] > 0 && G[i] <= 128 && B[i] <= 128)
+                            {
+                                temp_BW |= (byte)(0x00);
+                                temp_RW |= (byte)(0x01);
+                            }
+                            else if (R[i] > 0 && G[i] > 0 && B[i] >= 0)
+                            {
+                                temp_BW |= (byte)(0x01);
+                                temp_RW |= (byte)(0x00);
+                            }
+                            else if (R[i] == 0 && G[i] == 0 && B[i] == 0)
+                            {
+                                temp_BW |= (byte)(0x00);
+                                temp_RW |= (byte)(0x00);
+                            }
+
+
+                        }
+
+
+                        list_byte_image_BW.Add(temp_BW);
+                        list_byte_image_RW.Add(temp_RW);
+                        flag_index++;
+                    }
+                }
+            }
+
+            bimage.UnlockBits(bmData);
+            BW_bytes = list_byte_image_BW.ToArray();
+            RW_bytes = list_byte_image_RW.ToArray();
+            //bimage.Dispose();
+        }
+
         static bool IsEqualColor(Color color, int R, int G, int B)
         {
             int offset = 5;
@@ -8236,8 +8377,6 @@ namespace H_Pannel_lib
             }
             return null;
         }
-
-
         public static void DrawStorageString(Graphics g, Device storage, Device.ValueName valueName, float x, float y)
         {
             string str = (string)storage.GetValue(valueName, Device.ValueType.Value);

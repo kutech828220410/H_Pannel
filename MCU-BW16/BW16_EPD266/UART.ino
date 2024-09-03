@@ -39,11 +39,33 @@ void serialEvent()
         ota_platform_reset();
       }
     }
+    if (UART0_RX[0] == 'r' && UART0_len == 3)
+    {
+      String str = "";
+      str += (char)UART0_RX[0];
+      str += (char)UART0_RX[1];
+      str += (char)UART0_RX[2];
+      mySerial.print("TOF10120 read command : ");
+      mySerial.println(str);
+      mySerial2.print(str);
+    }
+    if (UART0_RX[0] == 's')
+    {
+      String str = "";
+      for (int i = 0 ; i < UART0_len ; i++)
+      {
+         str += (char)UART0_RX[i];
+      }
+      mySerial.print("TOF10120 write command : ");
+      mySerial.println(str);
+      mySerial2.print(str);
+    }
     if (UART0_RX[0] == 'w')
     {
       mySerial.println("flag_WS2812B_breathing");
       flag_WS2812B_breathing = !flag_WS2812B_breathing;
     }
+    
     if (UART0_RX[0] == 'b')
     {
       String str_int = "";

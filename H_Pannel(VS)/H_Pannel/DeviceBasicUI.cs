@@ -456,6 +456,7 @@ namespace H_Pannel_lib
             this.mySqlSslMode = SSLMode;
             this.Init();
         }
+
         public void Init(string DataBaseName, string UserName, string Password, string IP, uint Port, MySql.Data.MySqlClient.MySqlSslMode SSLMode, int serverPort, int localPort)
         {
             this.DataBaseName = DataBaseName;
@@ -489,7 +490,7 @@ namespace H_Pannel_lib
                     this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(60, enum_UDP_DataReceive.編號);
                     this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(150, enum_UDP_DataReceive.IP);
                     this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(60, enum_UDP_DataReceive.Port);
-                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(400, enum_UDP_DataReceive.Readline);
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(500, enum_UDP_DataReceive.Readline);
                     this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(100, enum_UDP_DataReceive.Time);
 
                     if (!this.sqL_DataGridView_DeviceTable.SQL_IsTableCreat()) this.sqL_DataGridView_DeviceTable.SQL_CreateTable();
@@ -500,7 +501,7 @@ namespace H_Pannel_lib
                     this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(100, enum_DeviceTable.GUID);
                     this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(150, enum_DeviceTable.IP);
                     this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(60, enum_DeviceTable.Port);
-                    this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(600, enum_DeviceTable.Value);
+                    //this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(600, enum_DeviceTable.Value);
                     this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
                 }));
 
@@ -546,6 +547,80 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_DeviceTable.Init(table_DeviceTable, this.TableName);
             this.UDP_Class_Init(serverPort , localPort);
         }
+        public void InitEx(string DataBaseName, string UserName, string Password, string IP, uint Port, MySql.Data.MySqlClient.MySqlSslMode SSLMode)
+        {
+            this.DataBaseName = DataBaseName;
+            this.UserName = UserName;
+            this.Password = Password;
+            this.IP = IP;
+            this.Port = Port;
+            this.mySqlSslMode = SSLMode;
+
+            Communication.ConsoleWrite = ConsoleWrite;
+            this.stopwatch.Start();
+            SQLUI.SQL_DataGridView.SQL_Set_Properties(this.sqL_DataGridView_DeviceTable, this.TableName, DataBaseName, UserName, Password, IP, Port, mySqlSslMode);
+
+            SQLUI.Table table_UDP_DataReceive = new SQLUI.Table(new enum_UDP_DataReceive());
+            SQLUI.Table table_DeviceTable = new SQLUI.Table(new enum_DeviceTable());
+
+            this.sqL_DataGridView_UDP_DataReceive.Init(table_UDP_DataReceive, this.TableName);
+            this.sqL_DataGridView_DeviceTable.Init(table_DeviceTable, this.TableName);
+
+
+            if (flag_UDP_Class_Init == false)
+            {
+                flag_UDP_Class_Init = true;
+                this.Invoke(new Action(delegate
+                {
+                    this.sqL_DataGridView_UDP_DataReceive.DataGridRowsChangeEvent += SqL_DataGridView_UDP_DataReceive_DataGridRowsChangeEvent;
+                    this.sqL_DataGridView_UDP_DataReceive.DataGridRefreshEvent += SqL_DataGridView_UDP_DataReceive_DataGridRefreshEvent;
+                    this.sqL_DataGridView_UDP_DataReceive.DataGridRowsChangeRefEvent += SqL_DataGridView_UDP_DataReceive_DataGridRowsChangeRefEvent;
+                    this.sqL_DataGridView_UDP_DataReceive.MouseDown += SqL_DataGridView_UDP_DataReceive_MouseDown;
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnVisible(false, new enum_UDP_DataReceive().GetEnumNames());
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(60, enum_UDP_DataReceive.編號);
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(150, enum_UDP_DataReceive.IP);
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(60, enum_UDP_DataReceive.Port);
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(500, enum_UDP_DataReceive.Readline);
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(100, enum_UDP_DataReceive.Time);
+
+                    if (!this.sqL_DataGridView_DeviceTable.SQL_IsTableCreat()) this.sqL_DataGridView_DeviceTable.SQL_CreateTable();
+                    this.sqL_DataGridView_DeviceTable.DataGridRowsChangeEvent += SqL_DataGridView_DeviceTable_DataGridRowsChangeEvent;
+                    this.sqL_DataGridView_DeviceTable.DataGridRowsChangeRefEvent += SqL_DataGridView_DeviceTable_DataGridRowsChangeRefEvent;
+                    this.sqL_DataGridView_DeviceTable.MouseDown += SqL_DataGridView_DeviceTable_MouseDown;
+                    this.sqL_DataGridView_DeviceTable.Set_ColumnVisible(false, new enum_DeviceTable().GetEnumNames());
+                    this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(100, enum_DeviceTable.GUID);
+                    this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(150, enum_DeviceTable.IP);
+                    this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(60, enum_DeviceTable.Port);
+                    //this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(600, enum_DeviceTable.Value);
+                    this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                }));
+
+              
+
+                this.Init_Offline();
+
+                this.MyThread_SqlDataRefrsh = new MyThread();
+                this.MyThread_SqlDataRefrsh.AutoRun(true);
+                this.MyThread_SqlDataRefrsh.Add_Method(this.sub_SqlDataRefrsh);
+                this.MyThread_SqlDataRefrsh.SetSleepTime(50);
+                this.MyThread_SqlDataRefrsh.Trigger();
+
+                SQLUI.Table table_IP_PING = new SQLUI.Table(new enum_IP_PING());
+
+                this.sqL_DataGridView_PING.Init(table_IP_PING);
+                this.MyThread_PING = new MyThread();
+                this.MyThread_PING = new MyThread();
+                this.MyThread_PING.AutoRun(true);
+                this.MyThread_PING.Add_Method(this.sub_PING);
+                this.MyThread_PING.SetSleepTime(100);
+            }
+            UDP_server_Init(this.UDP_ServerPorts);
+            List<object[]> list_DeviceTable = sqL_DataGridView_DeviceTable.SQL_GetAllRows(false);
+            this.UDP_LocalPorts = (from temp in list_DeviceTable
+                                   select temp[(int)enum_DeviceTable.Port].ObjectToString()).Distinct().ToList();
+
+            UDP_localPort_Init(this.UDP_LocalPorts);
+        }
         virtual public void Init()
         {
             Communication.ConsoleWrite = ConsoleWrite;
@@ -572,7 +647,7 @@ namespace H_Pannel_lib
                     this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(60, enum_UDP_DataReceive.編號);
                     this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(150, enum_UDP_DataReceive.IP);
                     this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(60, enum_UDP_DataReceive.Port);
-                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(400, enum_UDP_DataReceive.Readline);
+                    this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(500, enum_UDP_DataReceive.Readline);
                     this.sqL_DataGridView_UDP_DataReceive.Set_ColumnWidth(100, enum_UDP_DataReceive.Time);
 
                     if (!this.sqL_DataGridView_DeviceTable.SQL_IsTableCreat()) this.sqL_DataGridView_DeviceTable.SQL_CreateTable();
@@ -583,7 +658,7 @@ namespace H_Pannel_lib
                     this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(100, enum_DeviceTable.GUID);
                     this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(150, enum_DeviceTable.IP);
                     this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(60, enum_DeviceTable.Port);
-                    this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(600, enum_DeviceTable.Value);
+                    //this.sqL_DataGridView_DeviceTable.Set_ColumnWidth(600, enum_DeviceTable.Value);
                     this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
                 }));
 
@@ -625,12 +700,12 @@ namespace H_Pannel_lib
                 UDP_Class uDP_Class_localPort = new UDP_Class("0.0.0.0", localPort);
                 uDP_Class_localPort.ConsoleWrite = false;
                 List_UDP_Local.Add(uDP_Class_localPort);
-            }
-
-          
+            }         
         }
         public void UDP_Class_Init()
         {
+            List_UDP_Server.Clear();
+            List_UDP_Local.Clear();
             for (int i = 0; i < this.UDP_ServerPorts.Count; i++)
             {
                 UDP_Class uDP_Class = new UDP_Class("0.0.0.0", this.UDP_ServerPorts[i].StringToInt32());
@@ -644,6 +719,43 @@ namespace H_Pannel_lib
                 List_UDP_Local.Add(uDP_Class);
             }
         }
+        public void UDP_localPort_Init(List<string> port)
+        {
+            port = (from temp in port
+                    select temp).Distinct().ToList();
+            List<UDP_Class> uDP_Classes_buf = new List<UDP_Class>();
+            for (int i = 0; i < port.Count; i++)
+            {
+                uDP_Classes_buf = (from temp in List_UDP_Local
+                                   where temp.Port == port[i].StringToInt32()
+                                   select temp).ToList();
+                if (uDP_Classes_buf.Count == 0)
+                {
+                    UDP_Class uDP_Class = new UDP_Class("0.0.0.0", port[i].StringToInt32());
+                    uDP_Class.ConsoleWrite = false;
+                    List_UDP_Local.Add(uDP_Class);
+                }
+            }
+        }
+        public void UDP_server_Init(List<string> port)
+        {
+            port = (from temp in port
+                    select temp).Distinct().ToList();
+            List<UDP_Class> uDP_Classes_buf = new List<UDP_Class>();
+            for (int i = 0; i < port.Count; i++)
+            {
+                uDP_Classes_buf = (from temp in List_UDP_Server
+                                   where temp.Port == port[i].StringToInt32()
+                                   select temp).ToList();
+                if(uDP_Classes_buf.Count == 0)
+                {
+                    UDP_Class uDP_Class = new UDP_Class("0.0.0.0", port[i].StringToInt32());
+                    uDP_Class.ConsoleWrite = false;
+                    List_UDP_Server.Add(uDP_Class);
+                }            
+            }
+        }
+
         public void Set_UDP_WriteTime(int ms)
         {
             for (int i = 0; i < this.List_UDP_Server.Count; i++)

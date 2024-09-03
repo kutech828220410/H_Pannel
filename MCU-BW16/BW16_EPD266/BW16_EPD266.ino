@@ -62,10 +62,10 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.5.9";
+String Version = "Ver 1.5.10";
 
-//#define EPD
-#define RowLED
+#define EPD
+//#define RowLED
 
 
 #ifdef EPD
@@ -113,7 +113,7 @@ void loop()
       epd.Init(); 
       xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle);
       
-      if(MCU_TYPE == 2)xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
+      xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
       flag_boradInit = true;
    }
    if(flag_boradInit)
@@ -151,7 +151,7 @@ void Core0Task1( void * pvParameters )
           MyLED_IS_Connented.Blink();
           if( WiFi.status() == WL_CONNECTED  )
           {
-              serial2Event();
+//              serial2Event();
               MyLED_IS_Connented.BlinkTime = 100;      
           }
           else
@@ -223,13 +223,18 @@ void Core0Task2( void * pvParameters )
     for(;;)
     {      
        
-//       if(flag_boradInit)
-//       {
-//          if(!myWS2812.IsON(200))
-//          {
-//            flag_WS2812B_Refresh = true;
-//          }
-//       }
+       if(flag_boradInit)
+       {
+         if( WiFi.status() == WL_CONNECTED  )
+          {
+              serial2Event();
+         
+          }
+          else
+          {
+             
+          }
+       }
 //          
 //       delay(20000);
     }

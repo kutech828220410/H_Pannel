@@ -57,7 +57,6 @@ namespace H_Pannel_lib
             this.checkBox_文本3 = new System.Windows.Forms.CheckBox();
             this.checkBox_文本2 = new System.Windows.Forms.CheckBox();
             this.checkBox_文本1 = new System.Windows.Forms.CheckBox();
-            this.checkBox_圖片1 = new System.Windows.Forms.CheckBox();
             this.checkBox_儲位名稱 = new System.Windows.Forms.CheckBox();
             this.checkBox_條碼 = new System.Windows.Forms.CheckBox();
             this.checkBox_單位 = new System.Windows.Forms.CheckBox();
@@ -88,6 +87,12 @@ namespace H_Pannel_lib
             this.rJ_Lable1 = new MyUI.RJ_Lable();
             this.comboBox_選擇項目 = new System.Windows.Forms.ComboBox();
             this.fontDialog = new System.Windows.Forms.FontDialog();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox_圖片2 = new System.Windows.Forms.ComboBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox_圖片1 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -102,6 +107,8 @@ namespace H_Pannel_lib
             this.panel_字體型態.SuspendLayout();
             this.panel_字體.SuspendLayout();
             this.panel_選擇項目.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBox_藥碼
@@ -335,16 +342,16 @@ namespace H_Pannel_lib
             this.rJ_Pannel_設計.Padding = new System.Windows.Forms.Padding(20);
             this.rJ_Pannel_設計.ShadowColor = System.Drawing.Color.DimGray;
             this.rJ_Pannel_設計.ShadowSize = 3;
-            this.rJ_Pannel_設計.Size = new System.Drawing.Size(958, 570);
+            this.rJ_Pannel_設計.Size = new System.Drawing.Size(958, 582);
             this.rJ_Pannel_設計.TabIndex = 4;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.rJ_Pannel_背景顏色);
             this.groupBox2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBox2.Location = new System.Drawing.Point(569, 254);
+            this.groupBox2.Location = new System.Drawing.Point(791, 254);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(147, 197);
+            this.groupBox2.Size = new System.Drawing.Size(147, 228);
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "背景顏色";
@@ -373,9 +380,9 @@ namespace H_Pannel_lib
             this.groupBox_對齊方式.Controls.Add(this.button_對齊靠下);
             this.groupBox_對齊方式.Controls.Add(this.button_對齊靠上);
             this.groupBox_對齊方式.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBox_對齊方式.Location = new System.Drawing.Point(315, 254);
+            this.groupBox_對齊方式.Location = new System.Drawing.Point(534, 254);
             this.groupBox_對齊方式.Name = "groupBox_對齊方式";
-            this.groupBox_對齊方式.Size = new System.Drawing.Size(251, 197);
+            this.groupBox_對齊方式.Size = new System.Drawing.Size(251, 228);
             this.groupBox_對齊方式.TabIndex = 9;
             this.groupBox_對齊方式.TabStop = false;
             this.groupBox_對齊方式.Text = "對齊方式";
@@ -422,10 +429,11 @@ namespace H_Pannel_lib
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.panel3);
+            this.groupBox1.Controls.Add(this.panel4);
             this.groupBox1.Controls.Add(this.checkBox_文本3);
             this.groupBox1.Controls.Add(this.checkBox_文本2);
             this.groupBox1.Controls.Add(this.checkBox_文本1);
-            this.groupBox1.Controls.Add(this.checkBox_圖片1);
             this.groupBox1.Controls.Add(this.checkBox_儲位名稱);
             this.groupBox1.Controls.Add(this.checkBox_條碼);
             this.groupBox1.Controls.Add(this.checkBox_單位);
@@ -438,7 +446,7 @@ namespace H_Pannel_lib
             this.groupBox1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.groupBox1.Location = new System.Drawing.Point(20, 254);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(289, 197);
+            this.groupBox1.Size = new System.Drawing.Size(508, 228);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "顯示";
@@ -473,16 +481,6 @@ namespace H_Pannel_lib
             this.checkBox_文本1.Text = "文本1";
             this.checkBox_文本1.UseVisualStyleBackColor = true;
             // 
-            // checkBox_圖片1
-            // 
-            this.checkBox_圖片1.AutoSize = true;
-            this.checkBox_圖片1.Location = new System.Drawing.Point(124, 152);
-            this.checkBox_圖片1.Name = "checkBox_圖片1";
-            this.checkBox_圖片1.Size = new System.Drawing.Size(71, 25);
-            this.checkBox_圖片1.TabIndex = 19;
-            this.checkBox_圖片1.Text = "圖片1";
-            this.checkBox_圖片1.UseVisualStyleBackColor = true;
-            // 
             // checkBox_儲位名稱
             // 
             this.checkBox_儲位名稱.AutoSize = true;
@@ -496,7 +494,7 @@ namespace H_Pannel_lib
             // checkBox_條碼
             // 
             this.checkBox_條碼.AutoSize = true;
-            this.checkBox_條碼.Location = new System.Drawing.Point(124, 121);
+            this.checkBox_條碼.Location = new System.Drawing.Point(25, 183);
             this.checkBox_條碼.Name = "checkBox_條碼";
             this.checkBox_條碼.Size = new System.Drawing.Size(61, 25);
             this.checkBox_條碼.TabIndex = 17;
@@ -569,7 +567,7 @@ namespace H_Pannel_lib
             this.panel7.Controls.Add(this.panel8);
             this.panel7.Controls.Add(this.rJ_Button_確定);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(20, 476);
+            this.panel7.Location = new System.Drawing.Point(20, 488);
             this.panel7.Name = "panel7";
             this.panel7.Padding = new System.Windows.Forms.Padding(5);
             this.panel7.Size = new System.Drawing.Size(918, 74);
@@ -905,12 +903,66 @@ namespace H_Pannel_lib
             this.comboBox_選擇項目.Size = new System.Drawing.Size(353, 35);
             this.comboBox_選擇項目.TabIndex = 1;
             // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Controls.Add(this.comboBox_圖片2);
+            this.panel3.Location = new System.Drawing.Point(124, 171);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(228, 44);
+            this.panel3.TabIndex = 27;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 21);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "圖片2:";
+            // 
+            // comboBox_圖片2
+            // 
+            this.comboBox_圖片2.FormattingEnabled = true;
+            this.comboBox_圖片2.Location = new System.Drawing.Point(70, 7);
+            this.comboBox_圖片2.Name = "comboBox_圖片2";
+            this.comboBox_圖片2.Size = new System.Drawing.Size(139, 29);
+            this.comboBox_圖片2.TabIndex = 23;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.comboBox_圖片1);
+            this.panel4.Location = new System.Drawing.Point(124, 121);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(228, 44);
+            this.panel4.TabIndex = 26;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 21);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "圖片1:";
+            // 
+            // comboBox_圖片1
+            // 
+            this.comboBox_圖片1.FormattingEnabled = true;
+            this.comboBox_圖片1.Location = new System.Drawing.Point(70, 7);
+            this.comboBox_圖片1.Name = "comboBox_圖片1";
+            this.comboBox_圖片1.Size = new System.Drawing.Size(139, 29);
+            this.comboBox_圖片1.TabIndex = 23;
+            // 
             // EPD290_Paint_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(966, 970);
+            this.ClientSize = new System.Drawing.Size(966, 982);
             this.ControlBox = true;
             this.Controls.Add(this.rJ_Pannel_設計);
             this.Controls.Add(this.panel1);
@@ -936,6 +988,10 @@ namespace H_Pannel_lib
             this.panel_字體.ResumeLayout(false);
             this.panel_字體.PerformLayout();
             this.panel_選擇項目.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -985,7 +1041,6 @@ namespace H_Pannel_lib
         private System.Windows.Forms.Button button_對齊靠右;
         private System.Windows.Forms.Button button_對齊置中;
         private MyUI.RJ_Pannel rJ_Pannel_背景顏色;
-        private System.Windows.Forms.CheckBox checkBox_圖片1;
         private MyUI.RJ_RatioButton rJ_RatioButton_自定義;
         private MyUI.RJ_RatioButton rJ_RatioButton_預設樣式1;
         private System.Windows.Forms.CheckBox checkBox_文本3;
@@ -1001,5 +1056,11 @@ namespace H_Pannel_lib
         private System.Windows.Forms.Button button_文本1_儲存;
         private MyUI.RJ_TextBox rJ_TextBox_文本1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBox_圖片2;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox_圖片1;
     }
 }

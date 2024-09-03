@@ -24,6 +24,7 @@ namespace H_Pannel_lib
             單位,
             條碼,
             圖片1,
+            圖片2,
             文本1,
             文本2,
             文本3,
@@ -79,6 +80,12 @@ namespace H_Pannel_lib
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             if (CurrentStorage == null) return;
+            if (CurrentStorage.DeviceType == DeviceType.EPD213 || CurrentStorage.DeviceType == DeviceType.EPD213_lock)
+            {
+                EPD213_Paint_Form ePD213_Paint_Form = new EPD213_Paint_Form(this.CurrentStorage);
+                if (ePD213_Paint_Form.ShowDialog() != DialogResult.Yes) return;
+                if (SureClick != null) SureClick(currentStorage);
+            }
             if (CurrentStorage.DeviceType == DeviceType.EPD266 || CurrentStorage.DeviceType == DeviceType.EPD266_lock)
             {
                 EPD266_Paint_Form ePD266_Paint_Form = new EPD266_Paint_Form(this.CurrentStorage);
@@ -122,11 +129,15 @@ namespace H_Pannel_lib
         {
             if(storage.DeviceType == DeviceType.EPD266 || storage.DeviceType == DeviceType.EPD266_lock)
             {
-                return Communication.EPD266_GetBitmap(storage);
+                return Communication.Storage_GetBitmap(storage);
             }
             if (storage.DeviceType == DeviceType.EPD290 || storage.DeviceType == DeviceType.EPD290_lock)
             {
-                return Communication.EPD266_GetBitmap(storage);
+                return Communication.Storage_GetBitmap(storage);
+            }
+            if (storage.DeviceType == DeviceType.EPD213 || storage.DeviceType == DeviceType.EPD213_lock)
+            {
+                return Communication.Storage_GetBitmap(storage);
             }
             return Communication.Get_Storage_bmp(storage, new StoragePanel.enum_ValueName().GetEnumNames(), 1);
         }

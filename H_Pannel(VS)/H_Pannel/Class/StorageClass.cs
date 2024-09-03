@@ -551,8 +551,6 @@ namespace H_Pannel_lib
             }
             return null;
         }
-
-
         static public Storage SetMedClass(this Storage storage, HIS_DB_Lib.medClass medClass)
         {
             storage.Code = medClass.藥品碼;
