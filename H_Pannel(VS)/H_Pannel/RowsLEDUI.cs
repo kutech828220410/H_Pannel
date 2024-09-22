@@ -231,6 +231,7 @@ namespace H_Pannel_lib
                 }
                 for (int i = 0; i < bytes1.Length; i++)
                 {
+                    if (i >= bytes2.Length) break;
                     if (bytes1[i] != bytes2[i])
                     {
                         flag_diff = true;

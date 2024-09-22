@@ -98,29 +98,22 @@ namespace H_Pannel_lib
 
         public List<Storage> SQL_GetAllStorage()
         {
-            lock (this)
+            List<Storage> storages = new List<Storage>();
+            List<object[]> list_value = this.SQL_GetAllDeviceTableRows();
+            storages = StorageMethod.SQL_GetAllStorage(list_value);
+            for (int i = 0; i < storages.Count; i++)
             {
-                List<Storage> storages = new List<Storage>();
-                List<object[]> list_value = this.SQL_GetAllDeviceTableRows();
-
-                Parallel.ForEach(list_value, value =>
+                Storage storage = storages[i];
+                if (storage != null)
                 {
-                    string jsonString = value[(int)enum_DeviceTable.Value].ObjectToString();
-                    Storage storage = jsonString.JsonDeserializet<Storage>();
-                    if (storage != null)
-                    {
-                        storage.確認效期庫存(true);
-                        storage.Port = value[(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
-                        storages.LockAdd(storage);
-                    }
-
-                });
-                storages = (from value in storages
-                            where value != null
-                            select value).ToList();
-                return storages;
+                    storage.確認效期庫存(true);
+                }
             }
-           
+
+            storages = (from value in storages
+                        where value != null
+                        select value).ToList();
+            return storages;
         }
         public List<Device> SQL_GetAllDevice()
         {
@@ -342,6 +335,7 @@ namespace H_Pannel_lib
                 }
                 for (int i = 0; i < bytes1.Length; i++)
                 {
+                    if (i >= bytes2.Length) break;
                     if (bytes1[i] != bytes2[i])
                     {
                         flag_diff = true;

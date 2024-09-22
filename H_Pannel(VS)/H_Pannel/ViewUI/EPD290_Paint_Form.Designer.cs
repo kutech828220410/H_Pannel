@@ -54,6 +54,12 @@ namespace H_Pannel_lib
             this.button_對齊靠下 = new System.Windows.Forms.Button();
             this.button_對齊靠上 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox_圖片2 = new System.Windows.Forms.ComboBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox_圖片1 = new System.Windows.Forms.ComboBox();
             this.checkBox_文本3 = new System.Windows.Forms.CheckBox();
             this.checkBox_文本2 = new System.Windows.Forms.CheckBox();
             this.checkBox_文本1 = new System.Windows.Forms.CheckBox();
@@ -87,12 +93,6 @@ namespace H_Pannel_lib
             this.rJ_Lable1 = new MyUI.RJ_Lable();
             this.comboBox_選擇項目 = new System.Windows.Forms.ComboBox();
             this.fontDialog = new System.Windows.Forms.FontDialog();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox_圖片2 = new System.Windows.Forms.ComboBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboBox_圖片1 = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -102,13 +102,13 @@ namespace H_Pannel_lib
             this.groupBox2.SuspendLayout();
             this.groupBox_對齊方式.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel_邊框大小.SuspendLayout();
             this.panel_字體型態.SuspendLayout();
             this.panel_字體.SuspendLayout();
             this.panel_選擇項目.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBox_藥碼
@@ -450,6 +450,60 @@ namespace H_Pannel_lib
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "顯示";
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.label2);
+            this.panel3.Controls.Add(this.comboBox_圖片2);
+            this.panel3.Location = new System.Drawing.Point(124, 171);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(228, 44);
+            this.panel3.TabIndex = 27;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 21);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "圖片2:";
+            // 
+            // comboBox_圖片2
+            // 
+            this.comboBox_圖片2.FormattingEnabled = true;
+            this.comboBox_圖片2.Location = new System.Drawing.Point(70, 7);
+            this.comboBox_圖片2.Name = "comboBox_圖片2";
+            this.comboBox_圖片2.Size = new System.Drawing.Size(139, 29);
+            this.comboBox_圖片2.TabIndex = 23;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.comboBox_圖片1);
+            this.panel4.Location = new System.Drawing.Point(124, 121);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(228, 44);
+            this.panel4.TabIndex = 26;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 21);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "圖片1:";
+            // 
+            // comboBox_圖片1
+            // 
+            this.comboBox_圖片1.FormattingEnabled = true;
+            this.comboBox_圖片1.Location = new System.Drawing.Point(70, 7);
+            this.comboBox_圖片1.Name = "comboBox_圖片1";
+            this.comboBox_圖片1.Size = new System.Drawing.Size(139, 29);
+            this.comboBox_圖片1.TabIndex = 23;
             // 
             // checkBox_文本3
             // 
@@ -903,60 +957,6 @@ namespace H_Pannel_lib
             this.comboBox_選擇項目.Size = new System.Drawing.Size(353, 35);
             this.comboBox_選擇項目.TabIndex = 1;
             // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.comboBox_圖片2);
-            this.panel3.Location = new System.Drawing.Point(124, 171);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(228, 44);
-            this.panel3.TabIndex = 27;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 11);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 21);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "圖片2:";
-            // 
-            // comboBox_圖片2
-            // 
-            this.comboBox_圖片2.FormattingEnabled = true;
-            this.comboBox_圖片2.Location = new System.Drawing.Point(70, 7);
-            this.comboBox_圖片2.Name = "comboBox_圖片2";
-            this.comboBox_圖片2.Size = new System.Drawing.Size(139, 29);
-            this.comboBox_圖片2.TabIndex = 23;
-            // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.label1);
-            this.panel4.Controls.Add(this.comboBox_圖片1);
-            this.panel4.Location = new System.Drawing.Point(124, 121);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(228, 44);
-            this.panel4.TabIndex = 26;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 21);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "圖片1:";
-            // 
-            // comboBox_圖片1
-            // 
-            this.comboBox_圖片1.FormattingEnabled = true;
-            this.comboBox_圖片1.Location = new System.Drawing.Point(70, 7);
-            this.comboBox_圖片1.Name = "comboBox_圖片1";
-            this.comboBox_圖片1.Size = new System.Drawing.Size(139, 29);
-            this.comboBox_圖片1.TabIndex = 23;
-            // 
             // EPD290_Paint_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -981,6 +981,10 @@ namespace H_Pannel_lib
             this.groupBox_對齊方式.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel_邊框大小.ResumeLayout(false);
             this.panel_邊框大小.PerformLayout();
@@ -988,10 +992,6 @@ namespace H_Pannel_lib
             this.panel_字體.ResumeLayout(false);
             this.panel_字體.PerformLayout();
             this.panel_選擇項目.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
