@@ -109,7 +109,7 @@ namespace TestForm
         {
             this.PlC_RJ_Button_EPD290_刷新電子紙_MouseDownEvent(null);
             this.PlC_RJ_Button_EPD290_亮燈_MouseDownEvent(null);
-            MyMessageBox.ShowDialog($"版本 : {this.storageUI_EPD_290.Get_Version_UART(PortName)}");
+            //MyMessageBox.ShowDialog($"版本 : {this.storageUI_EPD_290.Get_Version_UART(PortName)}");
         }
         #endregion
         #region EPD266 Event
@@ -151,7 +151,7 @@ namespace TestForm
         {
             this.PlC_RJ_Button_EPD266_刷新電子紙_MouseDownEvent(null);
             this.PlC_RJ_Button_EPD266_亮燈_MouseDownEvent(null);
-            MyMessageBox.ShowDialog($"版本 : {this.storageUI_EPD_266.Get_Version_UART(PortName)}");
+            //MyMessageBox.ShowDialog($"版本 : {this.storageUI_EPD_266.Get_Version_UART(PortName)}");
         }  
         private void PlC_RJ_Button_EPD266_寫入參數_MouseDownEvent(MouseEventArgs mevent)
         {

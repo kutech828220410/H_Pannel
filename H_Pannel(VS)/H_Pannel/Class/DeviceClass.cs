@@ -20,7 +20,10 @@ namespace H_Pannel_lib
         無,
         高警訊_1,
         高警訊_2,
-        LASA_1
+        高警訊_3,
+        LASA_1,
+        LASA_2,
+
     }
     public class StockClass
     {
@@ -1444,6 +1447,10 @@ namespace H_Pannel_lib
                 if (DeviceType == DeviceType.EPD290 || DeviceType == DeviceType.EPD290_lock)
                 {
                     return new Size(296, 128);
+                }
+                if (DeviceType == DeviceType.EPD420 || DeviceType == DeviceType.EPD420_lock)
+                {
+                    return new Size(400, 300);
                 }
                 if (DeviceType == DeviceType.Pannel35 || DeviceType == DeviceType.Pannel35_lock)
                 {
@@ -3236,9 +3243,17 @@ namespace H_Pannel_lib
                 {
                     bitmap = Resource1.高警訊_2;
                 }
+                if (vlaueClass.Value == enum_PictureType.高警訊_3.GetEnumName())
+                {
+                    bitmap = Resource1.高警訊_3;
+                }
                 else if (vlaueClass.Value == enum_PictureType.LASA_1.GetEnumName())
                 {
                     bitmap = Resource1.LASA圖標;
+                }
+                else if (vlaueClass.Value == enum_PictureType.LASA_2.GetEnumName())
+                {
+                    bitmap = Resource1.LASA_2;
                 }
                 Size Rect_Size = new Size((int)(vlaueClass.Width * bmp_Scale), (int)(vlaueClass.Height * bmp_Scale));
                 if (bitmap == null) return null;

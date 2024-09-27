@@ -873,18 +873,18 @@ namespace H_Pannel_lib
         {
             using (Bitmap _bmp = bmp.DeepClone())
             {
-                int frameDIV = 10;
+                int frameDIV = 12;
 
                 bool flag_OK;
                 int width = bmp.Width;
                 int height = bmp.Height;
                 byte[] bytes_BW = new byte[(width / 8) * height];
                 byte[] bytes_RW = new byte[(width / 8) * height];
-                _bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                //_bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
                 BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD420);
                 MyTimer myTimer = new MyTimer();
                 myTimer.StartTickTime(50000);
-                flag_OK = EPD_DrawImageEx0(uDP_Class, IP, bytes_BW, bytes_RW, (width / 8) * height / frameDIV);
+                flag_OK = EPD_DrawImage(uDP_Class, IP, bytes_BW, bytes_RW, (width / 8) * height / frameDIV);
                 if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 420 DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
                 return flag_OK;
             }
@@ -892,7 +892,7 @@ namespace H_Pannel_lib
 
         }
        
-        static public Bitmap Get_Storage_bmp(Storage storage, string[] valuenames ,int canvasScale)
+        static public Bitmap Get_Storage_bmp(Storage storage, string[] valuenames ,double canvasScale)
         {
             int panelWidth = storage.PanelSize.Width;
             int panelHeight = storage.PanelSize.Height;
@@ -903,20 +903,20 @@ namespace H_Pannel_lib
             storage.Port_Visable = false;
             storage.Label_Visable = false;
             Storage.VlaueClass vlaueClass;
-            Bitmap bitmap = new Bitmap(panelWidth * canvasScale, panelHeight * canvasScale);
+            Bitmap bitmap = new Bitmap((int)(panelWidth * canvasScale), (int)(panelHeight * canvasScale));
             using (Graphics g = Graphics.FromImage(bitmap))
             {
                 g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 g.CompositingQuality = CompositingQuality.HighQuality;
                 g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
-                g.FillRectangle(new SolidBrush(storage.BackColor), 0, 0, panelWidth * canvasScale, panelHeight * canvasScale);
+                g.FillRectangle(new SolidBrush(storage.BackColor), 0, 0, (int)(panelWidth * canvasScale), (int)(panelHeight * canvasScale));
 
                 for (int i = 0; i < valuenames.Length; i++)
                 {
                     vlaueClass = storage.GetValue(Storage.GetValueName(valuenames[i]));
-                    vlaueClass.Position.X = vlaueClass.Position.X * canvasScale;
-                    vlaueClass.Position.Y = vlaueClass.Position.Y * canvasScale;
+                    vlaueClass.Position.X = (int)(vlaueClass.Position.X * canvasScale);
+                    vlaueClass.Position.Y = (int)(vlaueClass.Position.Y * canvasScale);
                     if (vlaueClass.Visable)
                     {
                         using (Bitmap bitmap_temp = storage.Get_EPD_Bitmap(Storage.GetValueName(valuenames[i]), canvasScale))
@@ -932,7 +932,7 @@ namespace H_Pannel_lib
                 {
                     string ip = ip_array[2] + "." + ip_array[3];
                     size_IP = TextRenderer.MeasureText(ip, new Font("微軟正黑體", 8, FontStyle.Bold));
-                    g.DrawString(ip, new Font("微軟正黑體", 8, FontStyle.Bold), new SolidBrush((Color)storage.GetValue(Storage.ValueName.IP, Storage.ValueType.ForeColor)), (panelWidth - size_IP.Width) * canvasScale, (panelHeight - size_IP.Height) * canvasScale);
+                    g.DrawString(ip, new Font("微軟正黑體", 8, FontStyle.Bold), new SolidBrush((Color)storage.GetValue(Storage.ValueName.IP, Storage.ValueType.ForeColor)), (float)((panelWidth - size_IP.Width) * canvasScale), (float)((panelHeight - size_IP.Height) * canvasScale));
                 }
 
             }
@@ -7148,7 +7148,7 @@ namespace H_Pannel_lib
         {
             return Storage_GetBitmap(storage, 1);
         }
-        static public Bitmap Storage_GetBitmap(Storage storage , int scale)
+        static public Bitmap Storage_GetBitmap(Storage storage , double scale)
         {
             if(storage.Enum_drawType == Storage.enum_DrawType.type1)
             {
@@ -7310,6 +7310,7 @@ namespace H_Pannel_lib
                 Bitmap bitmap_buf = null;
                 if (storage.DeviceType == DeviceType.EPD266 || storage.DeviceType == DeviceType.EPD266_lock
                     || storage.DeviceType == DeviceType.EPD290 || storage.DeviceType == DeviceType.EPD290_lock
+                    || storage.DeviceType == DeviceType.EPD420 || storage.DeviceType == DeviceType.EPD420_lock
                     || storage.DeviceType == DeviceType.EPD213 || storage.DeviceType == DeviceType.EPD213_lock)
                 {
                     using (Graphics g_buf = Graphics.FromImage(bitmap))
@@ -7322,7 +7323,7 @@ namespace H_Pannel_lib
                             bitmap_barcode.Dispose();
                         }
                     }
-                    bitmap_buf = Communication.ScaleImage(bitmap, storage.PanelSize.Width * scale, storage.PanelSize.Height * scale);
+                    bitmap_buf = Communication.ScaleImage(bitmap, (int)(storage.PanelSize.Width * scale), (int)(storage.PanelSize.Height * scale));
                 
 
                 }
@@ -7837,21 +7838,39 @@ namespace H_Pannel_lib
                             }
                             else if (ePD_Type == EPD_Type.EPD420)
                             {
+                                //if (y < 100)
+                                //{
+                                //    temp_BW |= (byte)(0x00);
+                                //    temp_RW |= (byte)(0x00);
+                                //}
+                                //else if (y > 100 && y < 200)
+                                //{
+                                //    temp_BW |= (byte)(0x00);
+                                //    temp_RW |= (byte)(0x01);
+                                //}
+                                //else
+                                //{
+                                //    temp_BW |= (byte)(0x01);
+                                //    temp_RW |= (byte)(0x00);
+                                //}
+
                                 if (R[i] > 0 && G[i] <= 128 && B[i] <= 128)
                                 {
                                     temp_BW |= (byte)(0x00);
-                                    temp_RW |= (byte)(0x00);
+                                    temp_RW |= (byte)(0x01);
                                 }
                                 else if (R[i] > 0 && G[i] > 0 && B[i] >= 0)
                                 {
                                     temp_BW |= (byte)(0x01);
-                                    temp_RW |= (byte)(0x01);
+                                    temp_RW |= (byte)(0x00);
                                 }
                                 else if (R[i] == 0 && G[i] == 0 && B[i] == 0)
                                 {
                                     temp_BW |= (byte)(0x00);
-                                    temp_RW |= (byte)(0x01);
+                                    temp_RW |= (byte)(0x00);
                                 }
+
+                           
 
                             }
                             else if (ePD_Type == EPD_Type.EPD290_V2)

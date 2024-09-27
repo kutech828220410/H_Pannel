@@ -57,12 +57,12 @@ namespace TestForm
             this.系統 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.EPD290 = new System.Windows.Forms.TabPage();
+            this.storageUI_EPD_290 = new H_Pannel_lib.StorageUI_EPD_290();
             this.EPD266 = new System.Windows.Forms.TabPage();
+            this.storageUI_EPD_266 = new H_Pannel_lib.StorageUI_EPD_266();
             this.PLC = new System.Windows.Forms.TabPage();
             this.plC_UI_Init = new MyUI.PLC_UI_Init();
             this.lowerMachine_Panel = new LadderUI.LowerMachine_Panel();
-            this.storageUI_EPD_290 = new H_Pannel_lib.StorageUI_EPD_290();
-            this.storageUI_EPD_266 = new H_Pannel_lib.StorageUI_EPD_266();
             this.tabControl1.SuspendLayout();
             this.測試單元.SuspendLayout();
             this.plC_RJ_GroupBox2.ContentsPanel.SuspendLayout();
@@ -107,7 +107,8 @@ namespace TestForm
             // 
             // plC_RJ_GroupBox2.ContentsPanel
             // 
-            this.plC_RJ_GroupBox2.ContentsPanel.BackColor = System.Drawing.Color.White;
+            this.plC_RJ_GroupBox2.ContentsPanel.BackColor = System.Drawing.Color.Transparent;
+            this.plC_RJ_GroupBox2.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
             this.plC_RJ_GroupBox2.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.plC_RJ_GroupBox2.ContentsPanel.BorderRadius = 5;
             this.plC_RJ_GroupBox2.ContentsPanel.BorderSize = 2;
@@ -132,12 +133,15 @@ namespace TestForm
             this.plC_RJ_GroupBox2.ContentsPanel.Location = new System.Drawing.Point(0, 45);
             this.plC_RJ_GroupBox2.ContentsPanel.Margin = new System.Windows.Forms.Padding(11, 12, 11, 12);
             this.plC_RJ_GroupBox2.ContentsPanel.Name = "ContentsPanel";
+            this.plC_RJ_GroupBox2.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.plC_RJ_GroupBox2.ContentsPanel.ShadowSize = 0;
             this.plC_RJ_GroupBox2.ContentsPanel.Size = new System.Drawing.Size(678, 460);
             this.plC_RJ_GroupBox2.ContentsPanel.TabIndex = 2;
+            this.plC_RJ_GroupBox2.GUID = "";
             this.plC_RJ_GroupBox2.Location = new System.Drawing.Point(200, 164);
             this.plC_RJ_GroupBox2.Margin = new System.Windows.Forms.Padding(6);
             this.plC_RJ_GroupBox2.Name = "plC_RJ_GroupBox2";
-            this.plC_RJ_GroupBox2.PannelBackColor = System.Drawing.Color.White;
+            this.plC_RJ_GroupBox2.PannelBackColor = System.Drawing.Color.Transparent;
             this.plC_RJ_GroupBox2.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.plC_RJ_GroupBox2.PannelBorderRadius = 5;
             this.plC_RJ_GroupBox2.PannelBorderSize = 2;
@@ -167,40 +171,51 @@ namespace TestForm
             // plC_RJ_Button_EPD266_IP加1
             // 
             this.plC_RJ_Button_EPD266_IP加1.AutoResetState = false;
-            this.plC_RJ_Button_EPD266_IP加1.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.plC_RJ_Button_EPD266_IP加1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.plC_RJ_Button_EPD266_IP加1.Bool = false;
             this.plC_RJ_Button_EPD266_IP加1.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.plC_RJ_Button_EPD266_IP加1.BorderRadius = 5;
             this.plC_RJ_Button_EPD266_IP加1.BorderSize = 0;
             this.plC_RJ_Button_EPD266_IP加1.but_press = false;
             this.plC_RJ_Button_EPD266_IP加1.buttonType = MyUI.RJ_Button.ButtonType.Toggle;
+            this.plC_RJ_Button_EPD266_IP加1.DisenableColor = System.Drawing.Color.Gray;
             this.plC_RJ_Button_EPD266_IP加1.FlatAppearance.BorderSize = 0;
             this.plC_RJ_Button_EPD266_IP加1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.plC_RJ_Button_EPD266_IP加1.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD266_IP加1.GUID = "";
             this.plC_RJ_Button_EPD266_IP加1.Icon = System.Windows.Forms.MessageBoxIcon.Warning;
+            this.plC_RJ_Button_EPD266_IP加1.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.plC_RJ_Button_EPD266_IP加1.Location = new System.Drawing.Point(436, 116);
             this.plC_RJ_Button_EPD266_IP加1.Margin = new System.Windows.Forms.Padding(6);
             this.plC_RJ_Button_EPD266_IP加1.Name = "plC_RJ_Button_EPD266_IP加1";
             this.plC_RJ_Button_EPD266_IP加1.OFF_文字內容 = "+1";
             this.plC_RJ_Button_EPD266_IP加1.OFF_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
             this.plC_RJ_Button_EPD266_IP加1.OFF_文字顏色 = System.Drawing.Color.White;
-            this.plC_RJ_Button_EPD266_IP加1.OFF_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_IP加1.OFF_背景顏色 = System.Drawing.SystemColors.InactiveCaptionText;
             this.plC_RJ_Button_EPD266_IP加1.ON_BorderSize = 5;
             this.plC_RJ_Button_EPD266_IP加1.ON_文字內容 = "+1";
             this.plC_RJ_Button_EPD266_IP加1.ON_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
-            this.plC_RJ_Button_EPD266_IP加1.ON_文字顏色 = System.Drawing.Color.Black;
-            this.plC_RJ_Button_EPD266_IP加1.ON_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_IP加1.ON_文字顏色 = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_IP加1.ON_背景顏色 = System.Drawing.SystemColors.ActiveCaptionText;
+            this.plC_RJ_Button_EPD266_IP加1.ProhibitionBorderLineWidth = 1;
+            this.plC_RJ_Button_EPD266_IP加1.ProhibitionLineWidth = 4;
+            this.plC_RJ_Button_EPD266_IP加1.ProhibitionSymbolSize = 30;
+            this.plC_RJ_Button_EPD266_IP加1.ShadowColor = System.Drawing.Color.DimGray;
+            this.plC_RJ_Button_EPD266_IP加1.ShadowSize = 0;
+            this.plC_RJ_Button_EPD266_IP加1.ShowLoadingForm = false;
             this.plC_RJ_Button_EPD266_IP加1.Size = new System.Drawing.Size(78, 40);
             this.plC_RJ_Button_EPD266_IP加1.State = false;
             this.plC_RJ_Button_EPD266_IP加1.TabIndex = 51;
             this.plC_RJ_Button_EPD266_IP加1.Text = "+1";
             this.plC_RJ_Button_EPD266_IP加1.TextColor = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_IP加1.TextHeight = 0;
             this.plC_RJ_Button_EPD266_IP加1.Texts = "+1";
             this.plC_RJ_Button_EPD266_IP加1.UseVisualStyleBackColor = false;
             this.plC_RJ_Button_EPD266_IP加1.字型鎖住 = false;
             this.plC_RJ_Button_EPD266_IP加1.按鈕型態 = MyUI.PLC_RJ_Button.StatusEnum.保持型;
             this.plC_RJ_Button_EPD266_IP加1.按鍵方式 = MyUI.PLC_RJ_Button.PressEnum.Mouse_左鍵;
             this.plC_RJ_Button_EPD266_IP加1.文字鎖住 = false;
+            this.plC_RJ_Button_EPD266_IP加1.背景圖片 = null;
             this.plC_RJ_Button_EPD266_IP加1.讀取位元反向 = false;
             this.plC_RJ_Button_EPD266_IP加1.讀寫鎖住 = false;
             this.plC_RJ_Button_EPD266_IP加1.音效 = true;
@@ -216,6 +231,7 @@ namespace TestForm
             this.rJ_TextBox_EPD266_ServerIP.BorderSize = 2;
             this.rJ_TextBox_EPD266_ServerIP.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_EPD266_ServerIP.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_EPD266_ServerIP.GUID = "";
             this.rJ_TextBox_EPD266_ServerIP.Location = new System.Drawing.Point(177, 299);
             this.rJ_TextBox_EPD266_ServerIP.Multiline = false;
             this.rJ_TextBox_EPD266_ServerIP.Name = "rJ_TextBox_EPD266_ServerIP";
@@ -232,7 +248,7 @@ namespace TestForm
             // 
             // rJ_Lable2
             // 
-            this.rJ_Lable2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable2.BackColor = System.Drawing.Color.Transparent;
             this.rJ_Lable2.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable2.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable2.BorderRadius = 8;
@@ -240,8 +256,11 @@ namespace TestForm
             this.rJ_Lable2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable2.Font = new System.Drawing.Font("新細明體", 16F);
             this.rJ_Lable2.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable2.GUID = "";
             this.rJ_Lable2.Location = new System.Drawing.Point(39, 294);
             this.rJ_Lable2.Name = "rJ_Lable2";
+            this.rJ_Lable2.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable2.ShadowSize = 0;
             this.rJ_Lable2.Size = new System.Drawing.Size(123, 51);
             this.rJ_Lable2.TabIndex = 49;
             this.rJ_Lable2.Text = "Server IP";
@@ -257,6 +276,7 @@ namespace TestForm
             this.rJ_TextBox_EPD266_Password.BorderSize = 2;
             this.rJ_TextBox_EPD266_Password.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_EPD266_Password.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_EPD266_Password.GUID = "";
             this.rJ_TextBox_EPD266_Password.Location = new System.Drawing.Point(177, 238);
             this.rJ_TextBox_EPD266_Password.Multiline = false;
             this.rJ_TextBox_EPD266_Password.Name = "rJ_TextBox_EPD266_Password";
@@ -273,7 +293,7 @@ namespace TestForm
             // 
             // rJ_Lable
             // 
-            this.rJ_Lable.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable.BackColor = System.Drawing.Color.Transparent;
             this.rJ_Lable.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable.BorderRadius = 8;
@@ -281,8 +301,11 @@ namespace TestForm
             this.rJ_Lable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable.Font = new System.Drawing.Font("新細明體", 16F);
             this.rJ_Lable.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable.GUID = "";
             this.rJ_Lable.Location = new System.Drawing.Point(39, 233);
             this.rJ_Lable.Name = "rJ_Lable";
+            this.rJ_Lable.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable.ShadowSize = 0;
             this.rJ_Lable.Size = new System.Drawing.Size(123, 51);
             this.rJ_Lable.TabIndex = 47;
             this.rJ_Lable.Text = "Password";
@@ -298,6 +321,7 @@ namespace TestForm
             this.rJ_TextBox_EPD266_SSID.BorderSize = 2;
             this.rJ_TextBox_EPD266_SSID.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_EPD266_SSID.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_EPD266_SSID.GUID = "";
             this.rJ_TextBox_EPD266_SSID.Location = new System.Drawing.Point(177, 176);
             this.rJ_TextBox_EPD266_SSID.Multiline = false;
             this.rJ_TextBox_EPD266_SSID.Name = "rJ_TextBox_EPD266_SSID";
@@ -314,7 +338,7 @@ namespace TestForm
             // 
             // rJ_Lable_EPD266_SSID
             // 
-            this.rJ_Lable_EPD266_SSID.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable_EPD266_SSID.BackColor = System.Drawing.Color.Transparent;
             this.rJ_Lable_EPD266_SSID.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable_EPD266_SSID.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable_EPD266_SSID.BorderRadius = 8;
@@ -322,8 +346,11 @@ namespace TestForm
             this.rJ_Lable_EPD266_SSID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable_EPD266_SSID.Font = new System.Drawing.Font("新細明體", 16F);
             this.rJ_Lable_EPD266_SSID.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable_EPD266_SSID.GUID = "";
             this.rJ_Lable_EPD266_SSID.Location = new System.Drawing.Point(39, 171);
             this.rJ_Lable_EPD266_SSID.Name = "rJ_Lable_EPD266_SSID";
+            this.rJ_Lable_EPD266_SSID.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable_EPD266_SSID.ShadowSize = 0;
             this.rJ_Lable_EPD266_SSID.Size = new System.Drawing.Size(123, 51);
             this.rJ_Lable_EPD266_SSID.TabIndex = 45;
             this.rJ_Lable_EPD266_SSID.Text = "SSID";
@@ -339,6 +366,7 @@ namespace TestForm
             this.rJ_TextBox_EPD266_IP.BorderSize = 2;
             this.rJ_TextBox_EPD266_IP.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.rJ_TextBox_EPD266_IP.ForeColor = System.Drawing.Color.DimGray;
+            this.rJ_TextBox_EPD266_IP.GUID = "";
             this.rJ_TextBox_EPD266_IP.Location = new System.Drawing.Point(177, 116);
             this.rJ_TextBox_EPD266_IP.Multiline = false;
             this.rJ_TextBox_EPD266_IP.Name = "rJ_TextBox_EPD266_IP";
@@ -355,7 +383,7 @@ namespace TestForm
             // 
             // rJ_Lable1
             // 
-            this.rJ_Lable1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.rJ_Lable1.BackColor = System.Drawing.Color.Transparent;
             this.rJ_Lable1.BackgroundColor = System.Drawing.Color.RoyalBlue;
             this.rJ_Lable1.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.rJ_Lable1.BorderRadius = 8;
@@ -363,8 +391,11 @@ namespace TestForm
             this.rJ_Lable1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rJ_Lable1.Font = new System.Drawing.Font("新細明體", 16F);
             this.rJ_Lable1.ForeColor = System.Drawing.Color.White;
+            this.rJ_Lable1.GUID = "";
             this.rJ_Lable1.Location = new System.Drawing.Point(39, 111);
             this.rJ_Lable1.Name = "rJ_Lable1";
+            this.rJ_Lable1.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Lable1.ShadowSize = 0;
             this.rJ_Lable1.Size = new System.Drawing.Size(123, 51);
             this.rJ_Lable1.TabIndex = 43;
             this.rJ_Lable1.Text = "IP";
@@ -374,40 +405,51 @@ namespace TestForm
             // plC_RJ_Button_EPD266_OTA
             // 
             this.plC_RJ_Button_EPD266_OTA.AutoResetState = false;
-            this.plC_RJ_Button_EPD266_OTA.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.plC_RJ_Button_EPD266_OTA.BackgroundColor = System.Drawing.SystemColors.Control;
             this.plC_RJ_Button_EPD266_OTA.Bool = false;
             this.plC_RJ_Button_EPD266_OTA.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.plC_RJ_Button_EPD266_OTA.BorderRadius = 5;
             this.plC_RJ_Button_EPD266_OTA.BorderSize = 0;
             this.plC_RJ_Button_EPD266_OTA.but_press = false;
             this.plC_RJ_Button_EPD266_OTA.buttonType = MyUI.RJ_Button.ButtonType.Toggle;
+            this.plC_RJ_Button_EPD266_OTA.DisenableColor = System.Drawing.Color.Gray;
             this.plC_RJ_Button_EPD266_OTA.FlatAppearance.BorderSize = 0;
             this.plC_RJ_Button_EPD266_OTA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.plC_RJ_Button_EPD266_OTA.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD266_OTA.GUID = "";
             this.plC_RJ_Button_EPD266_OTA.Icon = System.Windows.Forms.MessageBoxIcon.Warning;
+            this.plC_RJ_Button_EPD266_OTA.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.plC_RJ_Button_EPD266_OTA.Location = new System.Drawing.Point(165, 370);
             this.plC_RJ_Button_EPD266_OTA.Margin = new System.Windows.Forms.Padding(6);
             this.plC_RJ_Button_EPD266_OTA.Name = "plC_RJ_Button_EPD266_OTA";
             this.plC_RJ_Button_EPD266_OTA.OFF_文字內容 = "OTA";
             this.plC_RJ_Button_EPD266_OTA.OFF_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
             this.plC_RJ_Button_EPD266_OTA.OFF_文字顏色 = System.Drawing.Color.White;
-            this.plC_RJ_Button_EPD266_OTA.OFF_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_OTA.OFF_背景顏色 = System.Drawing.SystemColors.InactiveCaptionText;
             this.plC_RJ_Button_EPD266_OTA.ON_BorderSize = 5;
             this.plC_RJ_Button_EPD266_OTA.ON_文字內容 = "OTA";
             this.plC_RJ_Button_EPD266_OTA.ON_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
-            this.plC_RJ_Button_EPD266_OTA.ON_文字顏色 = System.Drawing.Color.Black;
-            this.plC_RJ_Button_EPD266_OTA.ON_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_OTA.ON_文字顏色 = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_OTA.ON_背景顏色 = System.Drawing.SystemColors.ActiveCaptionText;
+            this.plC_RJ_Button_EPD266_OTA.ProhibitionBorderLineWidth = 1;
+            this.plC_RJ_Button_EPD266_OTA.ProhibitionLineWidth = 4;
+            this.plC_RJ_Button_EPD266_OTA.ProhibitionSymbolSize = 30;
+            this.plC_RJ_Button_EPD266_OTA.ShadowColor = System.Drawing.Color.DimGray;
+            this.plC_RJ_Button_EPD266_OTA.ShadowSize = 0;
+            this.plC_RJ_Button_EPD266_OTA.ShowLoadingForm = false;
             this.plC_RJ_Button_EPD266_OTA.Size = new System.Drawing.Size(143, 72);
             this.plC_RJ_Button_EPD266_OTA.State = false;
             this.plC_RJ_Button_EPD266_OTA.TabIndex = 42;
             this.plC_RJ_Button_EPD266_OTA.Text = "OTA";
             this.plC_RJ_Button_EPD266_OTA.TextColor = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_OTA.TextHeight = 0;
             this.plC_RJ_Button_EPD266_OTA.Texts = "OTA";
             this.plC_RJ_Button_EPD266_OTA.UseVisualStyleBackColor = false;
             this.plC_RJ_Button_EPD266_OTA.字型鎖住 = false;
             this.plC_RJ_Button_EPD266_OTA.按鈕型態 = MyUI.PLC_RJ_Button.StatusEnum.保持型;
             this.plC_RJ_Button_EPD266_OTA.按鍵方式 = MyUI.PLC_RJ_Button.PressEnum.Mouse_左鍵;
             this.plC_RJ_Button_EPD266_OTA.文字鎖住 = false;
+            this.plC_RJ_Button_EPD266_OTA.背景圖片 = null;
             this.plC_RJ_Button_EPD266_OTA.讀取位元反向 = false;
             this.plC_RJ_Button_EPD266_OTA.讀寫鎖住 = false;
             this.plC_RJ_Button_EPD266_OTA.音效 = true;
@@ -417,40 +459,51 @@ namespace TestForm
             // plC_RJ_Button_EPD266_寫入參數
             // 
             this.plC_RJ_Button_EPD266_寫入參數.AutoResetState = false;
-            this.plC_RJ_Button_EPD266_寫入參數.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.plC_RJ_Button_EPD266_寫入參數.BackgroundColor = System.Drawing.SystemColors.Control;
             this.plC_RJ_Button_EPD266_寫入參數.Bool = false;
             this.plC_RJ_Button_EPD266_寫入參數.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.plC_RJ_Button_EPD266_寫入參數.BorderRadius = 5;
             this.plC_RJ_Button_EPD266_寫入參數.BorderSize = 0;
             this.plC_RJ_Button_EPD266_寫入參數.but_press = false;
             this.plC_RJ_Button_EPD266_寫入參數.buttonType = MyUI.RJ_Button.ButtonType.Toggle;
+            this.plC_RJ_Button_EPD266_寫入參數.DisenableColor = System.Drawing.Color.Gray;
             this.plC_RJ_Button_EPD266_寫入參數.FlatAppearance.BorderSize = 0;
             this.plC_RJ_Button_EPD266_寫入參數.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.plC_RJ_Button_EPD266_寫入參數.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD266_寫入參數.GUID = "";
             this.plC_RJ_Button_EPD266_寫入參數.Icon = System.Windows.Forms.MessageBoxIcon.Warning;
+            this.plC_RJ_Button_EPD266_寫入參數.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.plC_RJ_Button_EPD266_寫入參數.Location = new System.Drawing.Point(320, 370);
             this.plC_RJ_Button_EPD266_寫入參數.Margin = new System.Windows.Forms.Padding(6);
             this.plC_RJ_Button_EPD266_寫入參數.Name = "plC_RJ_Button_EPD266_寫入參數";
             this.plC_RJ_Button_EPD266_寫入參數.OFF_文字內容 = "寫入參數";
             this.plC_RJ_Button_EPD266_寫入參數.OFF_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
             this.plC_RJ_Button_EPD266_寫入參數.OFF_文字顏色 = System.Drawing.Color.White;
-            this.plC_RJ_Button_EPD266_寫入參數.OFF_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_寫入參數.OFF_背景顏色 = System.Drawing.SystemColors.InactiveCaptionText;
             this.plC_RJ_Button_EPD266_寫入參數.ON_BorderSize = 5;
             this.plC_RJ_Button_EPD266_寫入參數.ON_文字內容 = "寫入參數";
             this.plC_RJ_Button_EPD266_寫入參數.ON_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
-            this.plC_RJ_Button_EPD266_寫入參數.ON_文字顏色 = System.Drawing.Color.Black;
-            this.plC_RJ_Button_EPD266_寫入參數.ON_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_寫入參數.ON_文字顏色 = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_寫入參數.ON_背景顏色 = System.Drawing.SystemColors.ActiveCaptionText;
+            this.plC_RJ_Button_EPD266_寫入參數.ProhibitionBorderLineWidth = 1;
+            this.plC_RJ_Button_EPD266_寫入參數.ProhibitionLineWidth = 4;
+            this.plC_RJ_Button_EPD266_寫入參數.ProhibitionSymbolSize = 30;
+            this.plC_RJ_Button_EPD266_寫入參數.ShadowColor = System.Drawing.Color.DimGray;
+            this.plC_RJ_Button_EPD266_寫入參數.ShadowSize = 0;
+            this.plC_RJ_Button_EPD266_寫入參數.ShowLoadingForm = false;
             this.plC_RJ_Button_EPD266_寫入參數.Size = new System.Drawing.Size(143, 72);
             this.plC_RJ_Button_EPD266_寫入參數.State = false;
             this.plC_RJ_Button_EPD266_寫入參數.TabIndex = 41;
             this.plC_RJ_Button_EPD266_寫入參數.Text = "寫入參數";
             this.plC_RJ_Button_EPD266_寫入參數.TextColor = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_寫入參數.TextHeight = 0;
             this.plC_RJ_Button_EPD266_寫入參數.Texts = "寫入參數";
             this.plC_RJ_Button_EPD266_寫入參數.UseVisualStyleBackColor = false;
             this.plC_RJ_Button_EPD266_寫入參數.字型鎖住 = false;
             this.plC_RJ_Button_EPD266_寫入參數.按鈕型態 = MyUI.PLC_RJ_Button.StatusEnum.保持型;
             this.plC_RJ_Button_EPD266_寫入參數.按鍵方式 = MyUI.PLC_RJ_Button.PressEnum.Mouse_左鍵;
             this.plC_RJ_Button_EPD266_寫入參數.文字鎖住 = false;
+            this.plC_RJ_Button_EPD266_寫入參數.背景圖片 = null;
             this.plC_RJ_Button_EPD266_寫入參數.讀取位元反向 = false;
             this.plC_RJ_Button_EPD266_寫入參數.讀寫鎖住 = false;
             this.plC_RJ_Button_EPD266_寫入參數.音效 = true;
@@ -460,40 +513,51 @@ namespace TestForm
             // plC_RJ_Button_EPD266_亮燈
             // 
             this.plC_RJ_Button_EPD266_亮燈.AutoResetState = false;
-            this.plC_RJ_Button_EPD266_亮燈.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.plC_RJ_Button_EPD266_亮燈.BackgroundColor = System.Drawing.SystemColors.Control;
             this.plC_RJ_Button_EPD266_亮燈.Bool = false;
             this.plC_RJ_Button_EPD266_亮燈.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.plC_RJ_Button_EPD266_亮燈.BorderRadius = 5;
             this.plC_RJ_Button_EPD266_亮燈.BorderSize = 0;
             this.plC_RJ_Button_EPD266_亮燈.but_press = false;
             this.plC_RJ_Button_EPD266_亮燈.buttonType = MyUI.RJ_Button.ButtonType.Toggle;
+            this.plC_RJ_Button_EPD266_亮燈.DisenableColor = System.Drawing.Color.Gray;
             this.plC_RJ_Button_EPD266_亮燈.FlatAppearance.BorderSize = 0;
             this.plC_RJ_Button_EPD266_亮燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.plC_RJ_Button_EPD266_亮燈.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD266_亮燈.GUID = "";
             this.plC_RJ_Button_EPD266_亮燈.Icon = System.Windows.Forms.MessageBoxIcon.Warning;
+            this.plC_RJ_Button_EPD266_亮燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.plC_RJ_Button_EPD266_亮燈.Location = new System.Drawing.Point(19, 10);
             this.plC_RJ_Button_EPD266_亮燈.Margin = new System.Windows.Forms.Padding(6);
             this.plC_RJ_Button_EPD266_亮燈.Name = "plC_RJ_Button_EPD266_亮燈";
             this.plC_RJ_Button_EPD266_亮燈.OFF_文字內容 = "亮燈";
             this.plC_RJ_Button_EPD266_亮燈.OFF_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
             this.plC_RJ_Button_EPD266_亮燈.OFF_文字顏色 = System.Drawing.Color.White;
-            this.plC_RJ_Button_EPD266_亮燈.OFF_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_亮燈.OFF_背景顏色 = System.Drawing.SystemColors.InactiveCaptionText;
             this.plC_RJ_Button_EPD266_亮燈.ON_BorderSize = 5;
             this.plC_RJ_Button_EPD266_亮燈.ON_文字內容 = "亮燈";
             this.plC_RJ_Button_EPD266_亮燈.ON_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
-            this.plC_RJ_Button_EPD266_亮燈.ON_文字顏色 = System.Drawing.Color.Black;
-            this.plC_RJ_Button_EPD266_亮燈.ON_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_亮燈.ON_文字顏色 = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_亮燈.ON_背景顏色 = System.Drawing.SystemColors.ActiveCaptionText;
+            this.plC_RJ_Button_EPD266_亮燈.ProhibitionBorderLineWidth = 1;
+            this.plC_RJ_Button_EPD266_亮燈.ProhibitionLineWidth = 4;
+            this.plC_RJ_Button_EPD266_亮燈.ProhibitionSymbolSize = 30;
+            this.plC_RJ_Button_EPD266_亮燈.ShadowColor = System.Drawing.Color.DimGray;
+            this.plC_RJ_Button_EPD266_亮燈.ShadowSize = 0;
+            this.plC_RJ_Button_EPD266_亮燈.ShowLoadingForm = false;
             this.plC_RJ_Button_EPD266_亮燈.Size = new System.Drawing.Size(143, 72);
             this.plC_RJ_Button_EPD266_亮燈.State = false;
             this.plC_RJ_Button_EPD266_亮燈.TabIndex = 38;
             this.plC_RJ_Button_EPD266_亮燈.Text = "亮燈";
             this.plC_RJ_Button_EPD266_亮燈.TextColor = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_亮燈.TextHeight = 0;
             this.plC_RJ_Button_EPD266_亮燈.Texts = "亮燈";
             this.plC_RJ_Button_EPD266_亮燈.UseVisualStyleBackColor = false;
             this.plC_RJ_Button_EPD266_亮燈.字型鎖住 = false;
             this.plC_RJ_Button_EPD266_亮燈.按鈕型態 = MyUI.PLC_RJ_Button.StatusEnum.保持型;
             this.plC_RJ_Button_EPD266_亮燈.按鍵方式 = MyUI.PLC_RJ_Button.PressEnum.Mouse_左鍵;
             this.plC_RJ_Button_EPD266_亮燈.文字鎖住 = false;
+            this.plC_RJ_Button_EPD266_亮燈.背景圖片 = null;
             this.plC_RJ_Button_EPD266_亮燈.讀取位元反向 = false;
             this.plC_RJ_Button_EPD266_亮燈.讀寫鎖住 = false;
             this.plC_RJ_Button_EPD266_亮燈.音效 = true;
@@ -503,40 +567,51 @@ namespace TestForm
             // plC_RJ_Button_EPD266_測試一次
             // 
             this.plC_RJ_Button_EPD266_測試一次.AutoResetState = false;
-            this.plC_RJ_Button_EPD266_測試一次.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.plC_RJ_Button_EPD266_測試一次.BackgroundColor = System.Drawing.SystemColors.Control;
             this.plC_RJ_Button_EPD266_測試一次.Bool = false;
             this.plC_RJ_Button_EPD266_測試一次.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.plC_RJ_Button_EPD266_測試一次.BorderRadius = 5;
             this.plC_RJ_Button_EPD266_測試一次.BorderSize = 0;
             this.plC_RJ_Button_EPD266_測試一次.but_press = false;
             this.plC_RJ_Button_EPD266_測試一次.buttonType = MyUI.RJ_Button.ButtonType.Toggle;
+            this.plC_RJ_Button_EPD266_測試一次.DisenableColor = System.Drawing.Color.Gray;
             this.plC_RJ_Button_EPD266_測試一次.FlatAppearance.BorderSize = 0;
             this.plC_RJ_Button_EPD266_測試一次.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.plC_RJ_Button_EPD266_測試一次.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD266_測試一次.GUID = "";
             this.plC_RJ_Button_EPD266_測試一次.Icon = System.Windows.Forms.MessageBoxIcon.Warning;
+            this.plC_RJ_Button_EPD266_測試一次.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.plC_RJ_Button_EPD266_測試一次.Location = new System.Drawing.Point(320, 10);
             this.plC_RJ_Button_EPD266_測試一次.Margin = new System.Windows.Forms.Padding(6);
             this.plC_RJ_Button_EPD266_測試一次.Name = "plC_RJ_Button_EPD266_測試一次";
             this.plC_RJ_Button_EPD266_測試一次.OFF_文字內容 = "測試一次";
             this.plC_RJ_Button_EPD266_測試一次.OFF_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
             this.plC_RJ_Button_EPD266_測試一次.OFF_文字顏色 = System.Drawing.Color.White;
-            this.plC_RJ_Button_EPD266_測試一次.OFF_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_測試一次.OFF_背景顏色 = System.Drawing.SystemColors.InactiveCaptionText;
             this.plC_RJ_Button_EPD266_測試一次.ON_BorderSize = 5;
             this.plC_RJ_Button_EPD266_測試一次.ON_文字內容 = "測試一次";
             this.plC_RJ_Button_EPD266_測試一次.ON_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
-            this.plC_RJ_Button_EPD266_測試一次.ON_文字顏色 = System.Drawing.Color.Black;
-            this.plC_RJ_Button_EPD266_測試一次.ON_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_測試一次.ON_文字顏色 = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_測試一次.ON_背景顏色 = System.Drawing.SystemColors.ActiveCaptionText;
+            this.plC_RJ_Button_EPD266_測試一次.ProhibitionBorderLineWidth = 1;
+            this.plC_RJ_Button_EPD266_測試一次.ProhibitionLineWidth = 4;
+            this.plC_RJ_Button_EPD266_測試一次.ProhibitionSymbolSize = 30;
+            this.plC_RJ_Button_EPD266_測試一次.ShadowColor = System.Drawing.Color.DimGray;
+            this.plC_RJ_Button_EPD266_測試一次.ShadowSize = 0;
+            this.plC_RJ_Button_EPD266_測試一次.ShowLoadingForm = false;
             this.plC_RJ_Button_EPD266_測試一次.Size = new System.Drawing.Size(143, 72);
             this.plC_RJ_Button_EPD266_測試一次.State = false;
             this.plC_RJ_Button_EPD266_測試一次.TabIndex = 40;
             this.plC_RJ_Button_EPD266_測試一次.Text = "測試一次";
             this.plC_RJ_Button_EPD266_測試一次.TextColor = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_測試一次.TextHeight = 0;
             this.plC_RJ_Button_EPD266_測試一次.Texts = "測試一次";
             this.plC_RJ_Button_EPD266_測試一次.UseVisualStyleBackColor = false;
             this.plC_RJ_Button_EPD266_測試一次.字型鎖住 = false;
             this.plC_RJ_Button_EPD266_測試一次.按鈕型態 = MyUI.PLC_RJ_Button.StatusEnum.保持型;
             this.plC_RJ_Button_EPD266_測試一次.按鍵方式 = MyUI.PLC_RJ_Button.PressEnum.Mouse_左鍵;
             this.plC_RJ_Button_EPD266_測試一次.文字鎖住 = false;
+            this.plC_RJ_Button_EPD266_測試一次.背景圖片 = null;
             this.plC_RJ_Button_EPD266_測試一次.讀取位元反向 = false;
             this.plC_RJ_Button_EPD266_測試一次.讀寫鎖住 = false;
             this.plC_RJ_Button_EPD266_測試一次.音效 = true;
@@ -546,40 +621,51 @@ namespace TestForm
             // plC_RJ_Button_EPD266_刷新電子紙
             // 
             this.plC_RJ_Button_EPD266_刷新電子紙.AutoResetState = false;
-            this.plC_RJ_Button_EPD266_刷新電子紙.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.plC_RJ_Button_EPD266_刷新電子紙.BackgroundColor = System.Drawing.SystemColors.Control;
             this.plC_RJ_Button_EPD266_刷新電子紙.Bool = false;
             this.plC_RJ_Button_EPD266_刷新電子紙.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.plC_RJ_Button_EPD266_刷新電子紙.BorderRadius = 5;
             this.plC_RJ_Button_EPD266_刷新電子紙.BorderSize = 0;
             this.plC_RJ_Button_EPD266_刷新電子紙.but_press = false;
             this.plC_RJ_Button_EPD266_刷新電子紙.buttonType = MyUI.RJ_Button.ButtonType.Toggle;
+            this.plC_RJ_Button_EPD266_刷新電子紙.DisenableColor = System.Drawing.Color.Gray;
             this.plC_RJ_Button_EPD266_刷新電子紙.FlatAppearance.BorderSize = 0;
             this.plC_RJ_Button_EPD266_刷新電子紙.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.plC_RJ_Button_EPD266_刷新電子紙.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD266_刷新電子紙.GUID = "";
             this.plC_RJ_Button_EPD266_刷新電子紙.Icon = System.Windows.Forms.MessageBoxIcon.Warning;
+            this.plC_RJ_Button_EPD266_刷新電子紙.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.plC_RJ_Button_EPD266_刷新電子紙.Location = new System.Drawing.Point(165, 10);
             this.plC_RJ_Button_EPD266_刷新電子紙.Margin = new System.Windows.Forms.Padding(6);
             this.plC_RJ_Button_EPD266_刷新電子紙.Name = "plC_RJ_Button_EPD266_刷新電子紙";
             this.plC_RJ_Button_EPD266_刷新電子紙.OFF_文字內容 = "刷新電子紙";
             this.plC_RJ_Button_EPD266_刷新電子紙.OFF_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
             this.plC_RJ_Button_EPD266_刷新電子紙.OFF_文字顏色 = System.Drawing.Color.White;
-            this.plC_RJ_Button_EPD266_刷新電子紙.OFF_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_刷新電子紙.OFF_背景顏色 = System.Drawing.SystemColors.InactiveCaptionText;
             this.plC_RJ_Button_EPD266_刷新電子紙.ON_BorderSize = 5;
             this.plC_RJ_Button_EPD266_刷新電子紙.ON_文字內容 = "刷新電子紙";
             this.plC_RJ_Button_EPD266_刷新電子紙.ON_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
-            this.plC_RJ_Button_EPD266_刷新電子紙.ON_文字顏色 = System.Drawing.Color.Black;
-            this.plC_RJ_Button_EPD266_刷新電子紙.ON_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD266_刷新電子紙.ON_文字顏色 = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_刷新電子紙.ON_背景顏色 = System.Drawing.SystemColors.ActiveCaptionText;
+            this.plC_RJ_Button_EPD266_刷新電子紙.ProhibitionBorderLineWidth = 1;
+            this.plC_RJ_Button_EPD266_刷新電子紙.ProhibitionLineWidth = 4;
+            this.plC_RJ_Button_EPD266_刷新電子紙.ProhibitionSymbolSize = 30;
+            this.plC_RJ_Button_EPD266_刷新電子紙.ShadowColor = System.Drawing.Color.DimGray;
+            this.plC_RJ_Button_EPD266_刷新電子紙.ShadowSize = 0;
+            this.plC_RJ_Button_EPD266_刷新電子紙.ShowLoadingForm = false;
             this.plC_RJ_Button_EPD266_刷新電子紙.Size = new System.Drawing.Size(143, 72);
             this.plC_RJ_Button_EPD266_刷新電子紙.State = false;
             this.plC_RJ_Button_EPD266_刷新電子紙.TabIndex = 39;
             this.plC_RJ_Button_EPD266_刷新電子紙.Text = "刷新電子紙";
             this.plC_RJ_Button_EPD266_刷新電子紙.TextColor = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD266_刷新電子紙.TextHeight = 0;
             this.plC_RJ_Button_EPD266_刷新電子紙.Texts = "刷新電子紙";
             this.plC_RJ_Button_EPD266_刷新電子紙.UseVisualStyleBackColor = false;
             this.plC_RJ_Button_EPD266_刷新電子紙.字型鎖住 = false;
             this.plC_RJ_Button_EPD266_刷新電子紙.按鈕型態 = MyUI.PLC_RJ_Button.StatusEnum.保持型;
             this.plC_RJ_Button_EPD266_刷新電子紙.按鍵方式 = MyUI.PLC_RJ_Button.PressEnum.Mouse_左鍵;
             this.plC_RJ_Button_EPD266_刷新電子紙.文字鎖住 = false;
+            this.plC_RJ_Button_EPD266_刷新電子紙.背景圖片 = null;
             this.plC_RJ_Button_EPD266_刷新電子紙.讀取位元反向 = false;
             this.plC_RJ_Button_EPD266_刷新電子紙.讀寫鎖住 = false;
             this.plC_RJ_Button_EPD266_刷新電子紙.音效 = true;
@@ -591,7 +677,8 @@ namespace TestForm
             // 
             // plC_RJ_GroupBox1.ContentsPanel
             // 
-            this.plC_RJ_GroupBox1.ContentsPanel.BackColor = System.Drawing.Color.White;
+            this.plC_RJ_GroupBox1.ContentsPanel.BackColor = System.Drawing.Color.Transparent;
+            this.plC_RJ_GroupBox1.ContentsPanel.BackgroundColor = System.Drawing.Color.Transparent;
             this.plC_RJ_GroupBox1.ContentsPanel.BorderColor = System.Drawing.Color.SkyBlue;
             this.plC_RJ_GroupBox1.ContentsPanel.BorderRadius = 5;
             this.plC_RJ_GroupBox1.ContentsPanel.BorderSize = 2;
@@ -604,12 +691,15 @@ namespace TestForm
             this.plC_RJ_GroupBox1.ContentsPanel.Location = new System.Drawing.Point(0, 45);
             this.plC_RJ_GroupBox1.ContentsPanel.Margin = new System.Windows.Forms.Padding(11, 12, 11, 12);
             this.plC_RJ_GroupBox1.ContentsPanel.Name = "ContentsPanel";
+            this.plC_RJ_GroupBox1.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
+            this.plC_RJ_GroupBox1.ContentsPanel.ShadowSize = 0;
             this.plC_RJ_GroupBox1.ContentsPanel.Size = new System.Drawing.Size(532, 91);
             this.plC_RJ_GroupBox1.ContentsPanel.TabIndex = 2;
+            this.plC_RJ_GroupBox1.GUID = "";
             this.plC_RJ_GroupBox1.Location = new System.Drawing.Point(200, 16);
             this.plC_RJ_GroupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.plC_RJ_GroupBox1.Name = "plC_RJ_GroupBox1";
-            this.plC_RJ_GroupBox1.PannelBackColor = System.Drawing.Color.White;
+            this.plC_RJ_GroupBox1.PannelBackColor = System.Drawing.Color.Transparent;
             this.plC_RJ_GroupBox1.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.plC_RJ_GroupBox1.PannelBorderRadius = 5;
             this.plC_RJ_GroupBox1.PannelBorderSize = 2;
@@ -628,40 +718,51 @@ namespace TestForm
             // plC_RJ_Button_EPD290_亮燈
             // 
             this.plC_RJ_Button_EPD290_亮燈.AutoResetState = false;
-            this.plC_RJ_Button_EPD290_亮燈.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.plC_RJ_Button_EPD290_亮燈.BackgroundColor = System.Drawing.SystemColors.Control;
             this.plC_RJ_Button_EPD290_亮燈.Bool = false;
             this.plC_RJ_Button_EPD290_亮燈.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.plC_RJ_Button_EPD290_亮燈.BorderRadius = 5;
             this.plC_RJ_Button_EPD290_亮燈.BorderSize = 0;
             this.plC_RJ_Button_EPD290_亮燈.but_press = false;
             this.plC_RJ_Button_EPD290_亮燈.buttonType = MyUI.RJ_Button.ButtonType.Toggle;
+            this.plC_RJ_Button_EPD290_亮燈.DisenableColor = System.Drawing.Color.Gray;
             this.plC_RJ_Button_EPD290_亮燈.FlatAppearance.BorderSize = 0;
             this.plC_RJ_Button_EPD290_亮燈.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.plC_RJ_Button_EPD290_亮燈.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD290_亮燈.GUID = "";
             this.plC_RJ_Button_EPD290_亮燈.Icon = System.Windows.Forms.MessageBoxIcon.Warning;
+            this.plC_RJ_Button_EPD290_亮燈.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.plC_RJ_Button_EPD290_亮燈.Location = new System.Drawing.Point(19, 10);
             this.plC_RJ_Button_EPD290_亮燈.Margin = new System.Windows.Forms.Padding(6);
             this.plC_RJ_Button_EPD290_亮燈.Name = "plC_RJ_Button_EPD290_亮燈";
             this.plC_RJ_Button_EPD290_亮燈.OFF_文字內容 = "亮燈";
             this.plC_RJ_Button_EPD290_亮燈.OFF_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
             this.plC_RJ_Button_EPD290_亮燈.OFF_文字顏色 = System.Drawing.Color.White;
-            this.plC_RJ_Button_EPD290_亮燈.OFF_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD290_亮燈.OFF_背景顏色 = System.Drawing.SystemColors.InactiveCaptionText;
             this.plC_RJ_Button_EPD290_亮燈.ON_BorderSize = 5;
             this.plC_RJ_Button_EPD290_亮燈.ON_文字內容 = "亮燈";
             this.plC_RJ_Button_EPD290_亮燈.ON_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
-            this.plC_RJ_Button_EPD290_亮燈.ON_文字顏色 = System.Drawing.Color.Black;
-            this.plC_RJ_Button_EPD290_亮燈.ON_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD290_亮燈.ON_文字顏色 = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD290_亮燈.ON_背景顏色 = System.Drawing.SystemColors.ActiveCaptionText;
+            this.plC_RJ_Button_EPD290_亮燈.ProhibitionBorderLineWidth = 1;
+            this.plC_RJ_Button_EPD290_亮燈.ProhibitionLineWidth = 4;
+            this.plC_RJ_Button_EPD290_亮燈.ProhibitionSymbolSize = 30;
+            this.plC_RJ_Button_EPD290_亮燈.ShadowColor = System.Drawing.Color.DimGray;
+            this.plC_RJ_Button_EPD290_亮燈.ShadowSize = 0;
+            this.plC_RJ_Button_EPD290_亮燈.ShowLoadingForm = false;
             this.plC_RJ_Button_EPD290_亮燈.Size = new System.Drawing.Size(143, 72);
             this.plC_RJ_Button_EPD290_亮燈.State = false;
             this.plC_RJ_Button_EPD290_亮燈.TabIndex = 38;
             this.plC_RJ_Button_EPD290_亮燈.Text = "亮燈";
             this.plC_RJ_Button_EPD290_亮燈.TextColor = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD290_亮燈.TextHeight = 0;
             this.plC_RJ_Button_EPD290_亮燈.Texts = "亮燈";
             this.plC_RJ_Button_EPD290_亮燈.UseVisualStyleBackColor = false;
             this.plC_RJ_Button_EPD290_亮燈.字型鎖住 = false;
             this.plC_RJ_Button_EPD290_亮燈.按鈕型態 = MyUI.PLC_RJ_Button.StatusEnum.保持型;
             this.plC_RJ_Button_EPD290_亮燈.按鍵方式 = MyUI.PLC_RJ_Button.PressEnum.Mouse_左鍵;
             this.plC_RJ_Button_EPD290_亮燈.文字鎖住 = false;
+            this.plC_RJ_Button_EPD290_亮燈.背景圖片 = null;
             this.plC_RJ_Button_EPD290_亮燈.讀取位元反向 = false;
             this.plC_RJ_Button_EPD290_亮燈.讀寫鎖住 = false;
             this.plC_RJ_Button_EPD290_亮燈.音效 = true;
@@ -671,40 +772,51 @@ namespace TestForm
             // plC_RJ_Button_EPD290_測試一次
             // 
             this.plC_RJ_Button_EPD290_測試一次.AutoResetState = false;
-            this.plC_RJ_Button_EPD290_測試一次.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.plC_RJ_Button_EPD290_測試一次.BackgroundColor = System.Drawing.SystemColors.Control;
             this.plC_RJ_Button_EPD290_測試一次.Bool = false;
             this.plC_RJ_Button_EPD290_測試一次.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.plC_RJ_Button_EPD290_測試一次.BorderRadius = 5;
             this.plC_RJ_Button_EPD290_測試一次.BorderSize = 0;
             this.plC_RJ_Button_EPD290_測試一次.but_press = false;
             this.plC_RJ_Button_EPD290_測試一次.buttonType = MyUI.RJ_Button.ButtonType.Toggle;
+            this.plC_RJ_Button_EPD290_測試一次.DisenableColor = System.Drawing.Color.Gray;
             this.plC_RJ_Button_EPD290_測試一次.FlatAppearance.BorderSize = 0;
             this.plC_RJ_Button_EPD290_測試一次.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.plC_RJ_Button_EPD290_測試一次.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD290_測試一次.GUID = "";
             this.plC_RJ_Button_EPD290_測試一次.Icon = System.Windows.Forms.MessageBoxIcon.Warning;
+            this.plC_RJ_Button_EPD290_測試一次.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.plC_RJ_Button_EPD290_測試一次.Location = new System.Drawing.Point(320, 10);
             this.plC_RJ_Button_EPD290_測試一次.Margin = new System.Windows.Forms.Padding(6);
             this.plC_RJ_Button_EPD290_測試一次.Name = "plC_RJ_Button_EPD290_測試一次";
             this.plC_RJ_Button_EPD290_測試一次.OFF_文字內容 = "測試一次";
             this.plC_RJ_Button_EPD290_測試一次.OFF_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
             this.plC_RJ_Button_EPD290_測試一次.OFF_文字顏色 = System.Drawing.Color.White;
-            this.plC_RJ_Button_EPD290_測試一次.OFF_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD290_測試一次.OFF_背景顏色 = System.Drawing.SystemColors.InactiveCaptionText;
             this.plC_RJ_Button_EPD290_測試一次.ON_BorderSize = 5;
             this.plC_RJ_Button_EPD290_測試一次.ON_文字內容 = "測試一次";
             this.plC_RJ_Button_EPD290_測試一次.ON_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
-            this.plC_RJ_Button_EPD290_測試一次.ON_文字顏色 = System.Drawing.Color.Black;
-            this.plC_RJ_Button_EPD290_測試一次.ON_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD290_測試一次.ON_文字顏色 = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD290_測試一次.ON_背景顏色 = System.Drawing.SystemColors.ActiveCaptionText;
+            this.plC_RJ_Button_EPD290_測試一次.ProhibitionBorderLineWidth = 1;
+            this.plC_RJ_Button_EPD290_測試一次.ProhibitionLineWidth = 4;
+            this.plC_RJ_Button_EPD290_測試一次.ProhibitionSymbolSize = 30;
+            this.plC_RJ_Button_EPD290_測試一次.ShadowColor = System.Drawing.Color.DimGray;
+            this.plC_RJ_Button_EPD290_測試一次.ShadowSize = 0;
+            this.plC_RJ_Button_EPD290_測試一次.ShowLoadingForm = false;
             this.plC_RJ_Button_EPD290_測試一次.Size = new System.Drawing.Size(143, 72);
             this.plC_RJ_Button_EPD290_測試一次.State = false;
             this.plC_RJ_Button_EPD290_測試一次.TabIndex = 40;
             this.plC_RJ_Button_EPD290_測試一次.Text = "測試一次";
             this.plC_RJ_Button_EPD290_測試一次.TextColor = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD290_測試一次.TextHeight = 0;
             this.plC_RJ_Button_EPD290_測試一次.Texts = "測試一次";
             this.plC_RJ_Button_EPD290_測試一次.UseVisualStyleBackColor = false;
             this.plC_RJ_Button_EPD290_測試一次.字型鎖住 = false;
             this.plC_RJ_Button_EPD290_測試一次.按鈕型態 = MyUI.PLC_RJ_Button.StatusEnum.保持型;
             this.plC_RJ_Button_EPD290_測試一次.按鍵方式 = MyUI.PLC_RJ_Button.PressEnum.Mouse_左鍵;
             this.plC_RJ_Button_EPD290_測試一次.文字鎖住 = false;
+            this.plC_RJ_Button_EPD290_測試一次.背景圖片 = null;
             this.plC_RJ_Button_EPD290_測試一次.讀取位元反向 = false;
             this.plC_RJ_Button_EPD290_測試一次.讀寫鎖住 = false;
             this.plC_RJ_Button_EPD290_測試一次.音效 = true;
@@ -714,40 +826,51 @@ namespace TestForm
             // plC_RJ_Button_EPD290_刷新電子紙
             // 
             this.plC_RJ_Button_EPD290_刷新電子紙.AutoResetState = false;
-            this.plC_RJ_Button_EPD290_刷新電子紙.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.plC_RJ_Button_EPD290_刷新電子紙.BackgroundColor = System.Drawing.SystemColors.Control;
             this.plC_RJ_Button_EPD290_刷新電子紙.Bool = false;
             this.plC_RJ_Button_EPD290_刷新電子紙.BorderColor = System.Drawing.Color.PaleVioletRed;
             this.plC_RJ_Button_EPD290_刷新電子紙.BorderRadius = 5;
             this.plC_RJ_Button_EPD290_刷新電子紙.BorderSize = 0;
             this.plC_RJ_Button_EPD290_刷新電子紙.but_press = false;
             this.plC_RJ_Button_EPD290_刷新電子紙.buttonType = MyUI.RJ_Button.ButtonType.Toggle;
+            this.plC_RJ_Button_EPD290_刷新電子紙.DisenableColor = System.Drawing.Color.Gray;
             this.plC_RJ_Button_EPD290_刷新電子紙.FlatAppearance.BorderSize = 0;
             this.plC_RJ_Button_EPD290_刷新電子紙.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.plC_RJ_Button_EPD290_刷新電子紙.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
+            this.plC_RJ_Button_EPD290_刷新電子紙.GUID = "";
             this.plC_RJ_Button_EPD290_刷新電子紙.Icon = System.Windows.Forms.MessageBoxIcon.Warning;
+            this.plC_RJ_Button_EPD290_刷新電子紙.Image_padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             this.plC_RJ_Button_EPD290_刷新電子紙.Location = new System.Drawing.Point(165, 10);
             this.plC_RJ_Button_EPD290_刷新電子紙.Margin = new System.Windows.Forms.Padding(6);
             this.plC_RJ_Button_EPD290_刷新電子紙.Name = "plC_RJ_Button_EPD290_刷新電子紙";
             this.plC_RJ_Button_EPD290_刷新電子紙.OFF_文字內容 = "刷新電子紙";
             this.plC_RJ_Button_EPD290_刷新電子紙.OFF_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
             this.plC_RJ_Button_EPD290_刷新電子紙.OFF_文字顏色 = System.Drawing.Color.White;
-            this.plC_RJ_Button_EPD290_刷新電子紙.OFF_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD290_刷新電子紙.OFF_背景顏色 = System.Drawing.SystemColors.InactiveCaptionText;
             this.plC_RJ_Button_EPD290_刷新電子紙.ON_BorderSize = 5;
             this.plC_RJ_Button_EPD290_刷新電子紙.ON_文字內容 = "刷新電子紙";
             this.plC_RJ_Button_EPD290_刷新電子紙.ON_文字字體 = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold);
-            this.plC_RJ_Button_EPD290_刷新電子紙.ON_文字顏色 = System.Drawing.Color.Black;
-            this.plC_RJ_Button_EPD290_刷新電子紙.ON_背景顏色 = System.Drawing.SystemColors.Control;
+            this.plC_RJ_Button_EPD290_刷新電子紙.ON_文字顏色 = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD290_刷新電子紙.ON_背景顏色 = System.Drawing.SystemColors.ActiveCaptionText;
+            this.plC_RJ_Button_EPD290_刷新電子紙.ProhibitionBorderLineWidth = 1;
+            this.plC_RJ_Button_EPD290_刷新電子紙.ProhibitionLineWidth = 4;
+            this.plC_RJ_Button_EPD290_刷新電子紙.ProhibitionSymbolSize = 30;
+            this.plC_RJ_Button_EPD290_刷新電子紙.ShadowColor = System.Drawing.Color.DimGray;
+            this.plC_RJ_Button_EPD290_刷新電子紙.ShadowSize = 0;
+            this.plC_RJ_Button_EPD290_刷新電子紙.ShowLoadingForm = false;
             this.plC_RJ_Button_EPD290_刷新電子紙.Size = new System.Drawing.Size(143, 72);
             this.plC_RJ_Button_EPD290_刷新電子紙.State = false;
             this.plC_RJ_Button_EPD290_刷新電子紙.TabIndex = 39;
             this.plC_RJ_Button_EPD290_刷新電子紙.Text = "刷新電子紙";
             this.plC_RJ_Button_EPD290_刷新電子紙.TextColor = System.Drawing.Color.White;
+            this.plC_RJ_Button_EPD290_刷新電子紙.TextHeight = 0;
             this.plC_RJ_Button_EPD290_刷新電子紙.Texts = "刷新電子紙";
             this.plC_RJ_Button_EPD290_刷新電子紙.UseVisualStyleBackColor = false;
             this.plC_RJ_Button_EPD290_刷新電子紙.字型鎖住 = false;
             this.plC_RJ_Button_EPD290_刷新電子紙.按鈕型態 = MyUI.PLC_RJ_Button.StatusEnum.保持型;
             this.plC_RJ_Button_EPD290_刷新電子紙.按鍵方式 = MyUI.PLC_RJ_Button.PressEnum.Mouse_左鍵;
             this.plC_RJ_Button_EPD290_刷新電子紙.文字鎖住 = false;
+            this.plC_RJ_Button_EPD290_刷新電子紙.背景圖片 = null;
             this.plC_RJ_Button_EPD290_刷新電子紙.讀取位元反向 = false;
             this.plC_RJ_Button_EPD290_刷新電子紙.讀寫鎖住 = false;
             this.plC_RJ_Button_EPD290_刷新電子紙.音效 = true;
@@ -809,15 +932,69 @@ namespace TestForm
             this.EPD290.Text = "EPD290";
             this.EPD290.UseVisualStyleBackColor = true;
             // 
+            // storageUI_EPD_290
+            // 
+            this.storageUI_EPD_290._Password = "";
+            this.storageUI_EPD_290.DataBaseName = "TEST";
+            this.storageUI_EPD_290.DNS = "0.0.0.0";
+            this.storageUI_EPD_290.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.storageUI_EPD_290.Gateway = "0.0.0.0";
+            this.storageUI_EPD_290.IP = "localhost";
+            this.storageUI_EPD_290.IP_Adress = "0.0.0.0";
+            this.storageUI_EPD_290.Local_Port = "0";
+            this.storageUI_EPD_290.Location = new System.Drawing.Point(3, 3);
+            this.storageUI_EPD_290.Name = "storageUI_EPD_290";
+            this.storageUI_EPD_290.Password = "user82822040";
+            this.storageUI_EPD_290.Port = ((uint)(3306u));
+            this.storageUI_EPD_290.Server_IP_Adress = "0.0.0.0";
+            this.storageUI_EPD_290.Server_Port = "0";
+            this.storageUI_EPD_290.Size = new System.Drawing.Size(1411, 857);
+            this.storageUI_EPD_290.SSID = "";
+            this.storageUI_EPD_290.Station = "0";
+            this.storageUI_EPD_290.Subnet = "0.0.0.0";
+            this.storageUI_EPD_290.TabIndex = 2;
+            this.storageUI_EPD_290.TableName = "EPD290_Jsonstring";
+            this.storageUI_EPD_290.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_LocalPorts")));
+            this.storageUI_EPD_290.UDP_SendTime = "0";
+            this.storageUI_EPD_290.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_ServerPorts")));
+            this.storageUI_EPD_290.UserName = "root";
+            // 
             // EPD266
             // 
             this.EPD266.Controls.Add(this.storageUI_EPD_266);
             this.EPD266.Location = new System.Drawing.Point(4, 22);
             this.EPD266.Name = "EPD266";
-            this.EPD266.Size = new System.Drawing.Size(1417, 863);
+            this.EPD266.Size = new System.Drawing.Size(178, 42);
             this.EPD266.TabIndex = 2;
             this.EPD266.Text = "EPD266";
             this.EPD266.UseVisualStyleBackColor = true;
+            // 
+            // storageUI_EPD_266
+            // 
+            this.storageUI_EPD_266._Password = "";
+            this.storageUI_EPD_266.DataBaseName = "TEST";
+            this.storageUI_EPD_266.DNS = "0.0.0.0";
+            this.storageUI_EPD_266.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.storageUI_EPD_266.Gateway = "0.0.0.0";
+            this.storageUI_EPD_266.IP = "localhost";
+            this.storageUI_EPD_266.IP_Adress = "0.0.0.0";
+            this.storageUI_EPD_266.Local_Port = "0";
+            this.storageUI_EPD_266.Location = new System.Drawing.Point(0, 0);
+            this.storageUI_EPD_266.Name = "storageUI_EPD_266";
+            this.storageUI_EPD_266.Password = "user82822040";
+            this.storageUI_EPD_266.Port = ((uint)(3306u));
+            this.storageUI_EPD_266.Server_IP_Adress = "0.0.0.0";
+            this.storageUI_EPD_266.Server_Port = "0";
+            this.storageUI_EPD_266.Size = new System.Drawing.Size(178, 42);
+            this.storageUI_EPD_266.SSID = "";
+            this.storageUI_EPD_266.Station = "0";
+            this.storageUI_EPD_266.Subnet = "0.0.0.0";
+            this.storageUI_EPD_266.TabIndex = 0;
+            this.storageUI_EPD_266.TableName = "EPD266_Jsonstring";
+            this.storageUI_EPD_266.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_LocalPorts")));
+            this.storageUI_EPD_266.UDP_SendTime = "0";
+            this.storageUI_EPD_266.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_ServerPorts")));
+            this.storageUI_EPD_266.UserName = "root";
             // 
             // PLC
             // 
@@ -825,7 +1002,7 @@ namespace TestForm
             this.PLC.Controls.Add(this.lowerMachine_Panel);
             this.PLC.Location = new System.Drawing.Point(4, 22);
             this.PLC.Name = "PLC";
-            this.PLC.Size = new System.Drawing.Size(1417, 863);
+            this.PLC.Size = new System.Drawing.Size(178, 42);
             this.PLC.TabIndex = 1;
             this.PLC.Text = "PLC";
             this.PLC.UseVisualStyleBackColor = true;
@@ -855,60 +1032,6 @@ namespace TestForm
             this.lowerMachine_Panel.Size = new System.Drawing.Size(869, 565);
             this.lowerMachine_Panel.TabIndex = 0;
             this.lowerMachine_Panel.掃描速度 = 0;
-            // 
-            // storageUI_EPD_290
-            // 
-            this.storageUI_EPD_290._Password = "";
-            this.storageUI_EPD_290.DataBaseName = "TEST";
-            this.storageUI_EPD_290.DNS = "0.0.0.0";
-            this.storageUI_EPD_290.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.storageUI_EPD_290.Gateway = "0.0.0.0";
-            this.storageUI_EPD_290.IP = "localhost";
-            this.storageUI_EPD_290.IP_Adress = "0.0.0.0";
-            this.storageUI_EPD_290.Local_Port = "0";
-            this.storageUI_EPD_290.Location = new System.Drawing.Point(3, 3);
-            this.storageUI_EPD_290.Name = "storageUI_EPD_290";
-            this.storageUI_EPD_290.Password = "user82822040";
-            this.storageUI_EPD_290.Port = ((uint)(3306u));
-            this.storageUI_EPD_290.Server_IP_Adress = "0.0.0.0";
-            this.storageUI_EPD_290.Server_Port = "0";
-            this.storageUI_EPD_290.Size = new System.Drawing.Size(1411, 857);
-            this.storageUI_EPD_290.SSID = "";
-            this.storageUI_EPD_290.Station = "0";
-            this.storageUI_EPD_290.Subnet = "0.0.0.0";
-            this.storageUI_EPD_290.TabIndex = 2;
-            this.storageUI_EPD_290.TableName = "EPD290_Jsonstring";
-            this.storageUI_EPD_290.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_LocalPorts")));
-            this.storageUI_EPD_290.UDP_SendTime = "0";
-            this.storageUI_EPD_290.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_ServerPorts")));
-            this.storageUI_EPD_290.UserName = "root";
-            // 
-            // storageUI_EPD_266
-            // 
-            this.storageUI_EPD_266._Password = "";
-            this.storageUI_EPD_266.DataBaseName = "TEST";
-            this.storageUI_EPD_266.DNS = "0.0.0.0";
-            this.storageUI_EPD_266.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.storageUI_EPD_266.Gateway = "0.0.0.0";
-            this.storageUI_EPD_266.IP = "localhost";
-            this.storageUI_EPD_266.IP_Adress = "0.0.0.0";
-            this.storageUI_EPD_266.Local_Port = "0";
-            this.storageUI_EPD_266.Location = new System.Drawing.Point(0, 0);
-            this.storageUI_EPD_266.Name = "storageUI_EPD_266";
-            this.storageUI_EPD_266.Password = "user82822040";
-            this.storageUI_EPD_266.Port = ((uint)(3306u));
-            this.storageUI_EPD_266.Server_IP_Adress = "0.0.0.0";
-            this.storageUI_EPD_266.Server_Port = "0";
-            this.storageUI_EPD_266.Size = new System.Drawing.Size(1417, 863);
-            this.storageUI_EPD_266.SSID = "";
-            this.storageUI_EPD_266.Station = "0";
-            this.storageUI_EPD_266.Subnet = "0.0.0.0";
-            this.storageUI_EPD_266.TabIndex = 0;
-            this.storageUI_EPD_266.TableName = "EPD266_Jsonstring";
-            this.storageUI_EPD_266.UDP_LocalPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_LocalPorts")));
-            this.storageUI_EPD_266.UDP_SendTime = "0";
-            this.storageUI_EPD_266.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_ServerPorts")));
-            this.storageUI_EPD_266.UserName = "root";
             // 
             // Form1
             // 

@@ -98,6 +98,12 @@ namespace H_Pannel_lib
                 if (ePD290_Paint_Form.ShowDialog() != DialogResult.Yes) return;
                 if (SureClick != null) SureClick(currentStorage);
             }
+            if (CurrentStorage.DeviceType == DeviceType.EPD420 || CurrentStorage.DeviceType == DeviceType.EPD420_lock)
+            {
+                EPD420_Paint_Form ePD420_Paint_Form = new EPD420_Paint_Form(this.CurrentStorage);
+                if (ePD420_Paint_Form.ShowDialog() != DialogResult.Yes) return;
+                if (SureClick != null) SureClick(currentStorage);
+            }
             base.OnMouseDown(e);
         }
 
@@ -136,6 +142,10 @@ namespace H_Pannel_lib
                 return Communication.Storage_GetBitmap(storage);
             }
             if (storage.DeviceType == DeviceType.EPD213 || storage.DeviceType == DeviceType.EPD213_lock)
+            {
+                return Communication.Storage_GetBitmap(storage);
+            }
+            if (storage.DeviceType == DeviceType.EPD420 || storage.DeviceType == DeviceType.EPD420_lock)
             {
                 return Communication.Storage_GetBitmap(storage);
             }

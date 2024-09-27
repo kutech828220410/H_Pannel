@@ -46,7 +46,7 @@ void serial2Event()
 //    {
 //       str_TOF10120 += (char)UART1_RX[i];
 //    }
-    mySerial.println(str_TOF10120);
+//    mySerial.println(str_TOF10120);
     if (UART1_RX[UART1_len - 1] == 0X0A && UART1_RX[UART1_len - 2] == 0X0D && UART1_RX[UART1_len - 3] == 0X0D && UART1_RX[UART1_len - 4] == 0X6D && UART1_RX[UART1_len - 5] == 0X6D)
     {
         

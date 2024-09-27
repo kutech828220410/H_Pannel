@@ -1,4 +1,6 @@
+#include "Config.h"
 #include "EPD.h"
+#include "OLED114.h"
 #include <WiFi.h>
 #include <WiFiUdp.h> 
 #include <FreeRTOS.h>
@@ -16,8 +18,6 @@
 #include <SD.h>
 #include <SoftwareSerial.h>
 
-
-
 #define SPI_MOSI_PIN PA12
 #define NUM_WS2812B_CRGB  450
 #define NUM_OF_LEDS NUM_WS2812B_CRGB
@@ -28,6 +28,8 @@ bool flag_JsonSend = false;
 bool flag_writeMode = false;
 
 EPD epd;
+OLED114 oLED114;
+
 WiFiConfig wiFiConfig;
 int UDP_SemdTime = 0;
 int Localport = 0;
@@ -62,18 +64,6 @@ TaskHandle_t Core0Task4Handle;
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 
-String Version = "Ver 1.5.10";
-
-#define EPD
-//#define RowLED
-
-
-#ifdef EPD
-int MCU_TYPE = 1;
-#elif defined(RowLED)
-int MCU_TYPE = 2;
-#endif
-
 void setup() 
 {
     MyTimer_BoardInit.StartTickTime(3000);          
@@ -85,22 +75,13 @@ void loop()
    if(MyTimer_BoardInit.IsTimeOut() && !flag_boradInit)
    {     
       mySerial.begin(115200);        
-      mySerial.println(Version);  
+      mySerial.println(VERSION);  
       wiFiConfig.mySerial = &mySerial;
       epd.mySerial = &mySerial;
-      wiFiConfig.Init(Version);
+      wiFiConfig.Init(VERSION);
       IO_Init();
-      if(MCU_TYPE == 1)
-      {
-//        wiFiConfig.Set_Localport(29000);
-        wiFiConfig.Set_Serverport(30000);
-      }
-      if(MCU_TYPE == 2)
-      {
-//        wiFiConfig.Set_Localport(29001);
-        wiFiConfig.Set_Serverport(30001);
-      }
-
+      if(Device == "EPD") wiFiConfig.Set_Serverport(30000);
+      if(Device == "RowLED") wiFiConfig.Set_Serverport(30001);
       
       Localport = wiFiConfig.Get_Localport();
       Serverport = wiFiConfig.Get_Serverport();
@@ -110,9 +91,21 @@ void loop()
       MyLED_IS_Connented.Init(SYSTEM_LED_PIN);
       SPI.begin(); //SCLK, MISO, MOSI, SS
       myWS2812.Init(NUM_WS2812B_CRGB);
-      epd.Init(); 
-      xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle);
       
+      if(Device == "EPD")
+      {
+        epd.Init(); 
+        mySerial.println("EPD device init finished...");
+      }
+      if(Device == "OLED114_HandSensor")
+      {
+        oLED114.Lcd_Init();
+        oLED114.LCD_Clear(WHITE);
+        oLED114.LCD_ShowPicture(0,92,39,131);
+        oLED114.LCD_ShowNum1(80,95,0.05,4,BLUE);
+        mySerial.println("OLED114_HandSensor device init finished...");
+      }
+      xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle);     
       xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
       flag_boradInit = true;
    }

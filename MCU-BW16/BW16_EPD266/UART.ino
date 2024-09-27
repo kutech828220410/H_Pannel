@@ -113,7 +113,7 @@ void serialEvent()
       }
       else if (UART0_RX[1] == 'v')
       {
-        String str = Version;
+        String str = VERSION;
         mySerial.print(str);
         mySerial.flush();
       }

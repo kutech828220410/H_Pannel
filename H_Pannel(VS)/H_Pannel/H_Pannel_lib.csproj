@@ -200,6 +200,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewUI\EPD420_Paint_Form .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewUI\EPD420_Paint_Form .Designer.cs">
+      <DependentUpon>EPD420_Paint_Form .cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewUI\EPD290_Paint_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -362,6 +368,9 @@
     <EmbeddedResource Include="StorageUI_WT32.resx">
       <DependentUpon>StorageUI_WT32.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewUI\EPD420_Paint_Form .resx">
+      <DependentUpon>EPD420_Paint_Form .cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewUI\EPD290_Paint_Form.resx">
       <DependentUpon>EPD290_Paint_Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -450,6 +459,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\高警訊_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LASA.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\高警訊.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />

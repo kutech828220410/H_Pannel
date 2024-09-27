@@ -99,10 +99,22 @@ void EPD::DrawFrame_RW()
     SPI_End();
 }
 void EPD::RefreshCanvas()
-{
-   SPI_Begin();
-   SendCommand(0x20);
-   SPI_End();
+{ 
+   if(EPD_TYPE == "EPD420")
+   {
+     SPI_Begin();
+     SendCommand(0x22);
+     SendData(0xF7);
+     SendCommand(0x20);
+     SPI_End();
+   }
+   else
+   {
+     SPI_Begin();
+     SendCommand(0x20);
+     SPI_End();
+   }
+   
    this -> SetToSleep = true;
 }
 void EPD::Sleep_Check()
@@ -182,17 +194,49 @@ void EPD::Wakeup()
 
 
     SPI_Begin();
-    SendCommand(0x11); //data entry mode       
-    SendData(0x03);
+    if(EPD_TYPE == "EPD420")
+    {
+      mySerial -> println("EPD420 Init...");
+      SendCommand(0x3C); //BorderWavefrom
+      SendData(0x05);  
   
-    SetWindows(0, 0, EPD_WIDTH * 8 -1, EPD_HEIGHT-1);
+      SendCommand(0x18); //Read built-in temperature sensor
+      SendData(0x80); 
+  
+      SendCommand(0x11); //data entry mode       
+      SendData(0x03);
+  
+      SendCommand(0x44); //set Ram-X address start/end position   
+      SendData(0x00);
+      SendData(400/8-1);
+  
+      SendCommand(0x45); //set Ram-Y address start/end position          
+      SendData(0x00);
+      SendData(0x00); 
+      SendData((300-1)%256);    
+      SendData((300-1)/256);
+  
+      SendCommand(0x4E);   // set RAM x address count to 0;
+      SendData(0x00);
+      SendCommand(0x4F);   // set RAM y address count to 0X199;    
+      SendData(0x00);    
+      SendData(0x00);
+    }
+    else
+    {
+      SendCommand(0x11); //data entry mode       
+      SendData(0x03);
     
-    SendCommand(0x21); //  Display update control
-    SendData(0x00);
-    SendData(0x80);  
-  
-    SetCursor(0, 0);
-    SPI_End();
+      SetWindows(0, 0, EPD_WIDTH * 8 -1, EPD_HEIGHT-1);
+      
+      SendCommand(0x21); //  Display update control
+      SendData(0x00);
+      SendData(0x80);  
+    
+      SetCursor(0, 0);
+      SPI_End();
+    }
+    
 }
 void EPD::WaitUntilIdle()
 {

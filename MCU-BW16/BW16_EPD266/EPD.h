@@ -3,28 +3,7 @@
 
 #include "Arduino.h"
 #include "Timer.h"
-
-
-#define EPD213
-//#define EPD266
-//#define EPD290
-
-#ifdef EPD266
-#define EPD_WIDTH 19
-#define EPD_HEIGHT 296
-#define OA "EPD266"
-
-#elif defined(EPD290)
-#define EPD_WIDTH 16
-#define EPD_HEIGHT 296
-#define EPD_TYPE "EPD290"
-
-#elif defined(EPD213)
-#define EPD_WIDTH 16
-#define EPD_HEIGHT 250
-#define EPD_TYPE "EPD213"
-
-#endif
+#include "Config.h"
 
 
 #include <SoftwareSerial.h>

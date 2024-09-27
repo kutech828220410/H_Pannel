@@ -37,7 +37,7 @@ void sub_UDP_Send()
          doc["IP"] = wiFiConfig.Get_IPAdress_Str();
          doc["Port"] = wiFiConfig.Get_Localport();
          doc["RSSI"] = wiFiConfig.GetRSSI();        
-         doc["Version"] = Version;
+         doc["Version"] = VERSION;
          doc["Input"] = Input;
          doc["Output"] = Output;
          doc["Input_dir"] = Input_dir;
