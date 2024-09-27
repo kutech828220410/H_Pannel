@@ -873,8 +873,9 @@ namespace H_Pannel_lib
         {
             using (Bitmap _bmp = bmp.DeepClone())
             {
+                MyTimer myTimer = new MyTimer();
+                myTimer.StartTickTime(50000);
                 int frameDIV = 12;
-
                 bool flag_OK;
                 int width = bmp.Width;
                 int height = bmp.Height;
@@ -882,8 +883,7 @@ namespace H_Pannel_lib
                 byte[] bytes_RW = new byte[(width / 8) * height];
                 //_bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
                 BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD420);
-                MyTimer myTimer = new MyTimer();
-                myTimer.StartTickTime(50000);
+  
                 flag_OK = EPD_DrawImage(uDP_Class, IP, bytes_BW, bytes_RW, (width / 8) * height / frameDIV);
                 if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 420 DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
                 return flag_OK;
@@ -891,7 +891,61 @@ namespace H_Pannel_lib
 
 
         }
-       
+
+        static public bool LCD_144_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
+        {
+            using (Bitmap _bmp = bmp.DeepClone())
+            {
+                MyTimer myTimer = new MyTimer();
+                myTimer.StartTickTime(50000);
+                int frameDIV = 50;
+                bool flag_OK = false;
+                List<byte> bytes = LCD144_BitmapToByte(bmp);
+                flag_OK = LCD_DrawImage(uDP_Class, IP, bytes.ToArray(), bytes.Count / frameDIV);
+                if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : LCD_144_DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+
+                return flag_OK;
+            }
+        }
+        static public bool LCD_144_DrawImageEx(UDP_Class uDP_Class, string IP, Bitmap bmp, Color ForeColoe, Color BackColor)
+        {
+            using (Bitmap _bmp = bmp.DeepClone())
+            {
+                MyTimer myTimer = new MyTimer();
+                myTimer.StartTickTime(50000);
+                int frameDIV = 4;
+                bool flag_OK = false;
+                int len = 0;
+                List<byte> bytes = BitmapToByteEx(bmp , ref len);
+                flag_OK = LCD_DrawImageEx(uDP_Class, IP, bytes.ToArray(), bytes.Count / frameDIV, ForeColoe, BackColor);
+                if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : LCD_144_DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+
+                return flag_OK;
+            }
+        }
+
+        static public Bitmap Get_LCD_144_bmp(string text, Font font, Color ForeColor, Color BackColor)
+        {
+            try
+            {
+                Bitmap bitmap_Canvas = new Bitmap((int)(240), (int)(135));
+                using (Graphics g = Graphics.FromImage(bitmap_Canvas))
+                {
+                    Storage.VlaueClass vlaueClass;
+                    g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.CompositingQuality = CompositingQuality.HighQuality;
+                    g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+                    g.FillRectangle(new SolidBrush(BackColor), 0, 0, bitmap_Canvas.Width, bitmap_Canvas.Height);
+                    DrawingClass.Draw.文字中心繪製(text, new Rectangle(0, 0, (int)(bitmap_Canvas.Width), (int)(bitmap_Canvas.Height)), font, ForeColor, g);
+                }
+                return bitmap_Canvas;
+            }
+            catch
+            {
+                return null;
+            }
+        }
         static public Bitmap Get_Storage_bmp(Storage storage, string[] valuenames ,double canvasScale)
         {
             int panelWidth = storage.PanelSize.Width;
@@ -940,6 +994,65 @@ namespace H_Pannel_lib
 
         }
 
+
+        static public bool LCD_DrawImage(UDP_Class uDP_Class, string IP, byte[] datas, int Split_DataSize)
+        {
+            int Width_Size = Split_DataSize;
+            int NumOfArray = datas.Length / (Split_DataSize);
+            List<byte[]> list_data = new List<byte[]>();
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                byte[] Array_temp = new byte[Width_Size];
+                for (int k = 0; k < Width_Size; k++)
+                {
+                    Array_temp[k] = datas[i * Width_Size + k];
+                }
+                list_data.Add(Array_temp);
+            }
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                if (!Set_Framebuffer(uDP_Class, IP, (i * Width_Size) / 2, list_data[i]))
+                {
+                    return false;
+                }
+            }
+            if (!Command_DrawCanvas(uDP_Class, IP))
+            {
+                return false;
+            }
+            return true;
+        }
+        static public bool LCD_DrawImageEx(UDP_Class uDP_Class, string IP, byte[] datas, int Split_DataSize, Color ForeColoe, Color BackColor)
+        {
+            int Width_Size = Split_DataSize;
+            int NumOfArray = datas.Length / (Split_DataSize);
+            List<byte[]> list_data = new List<byte[]>();
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                byte[] Array_temp = new byte[Width_Size];
+                for (int k = 0; k < Width_Size; k++)
+                {
+                    Array_temp[k] = datas[i * Width_Size + k];
+                }
+                list_data.Add(Array_temp);
+            }
+            if (!Command_LCD114_FontColor(uDP_Class, IP, ForeColoe, BackColor))
+            {
+                return false;
+            }
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                if (!Command_FramebufferEx(uDP_Class, IP, (i * Width_Size * 8) , list_data[i] , list_data[i].Length * 8))
+                {
+                    return false;
+                }
+            }
+            if (!Command_DrawCanvas(uDP_Class, IP))
+            {
+                return false;
+            }
+            return true;
+        }
 
 
 
@@ -1062,7 +1175,6 @@ namespace H_Pannel_lib
             return true;
 
         }
-
         static public bool EPD_DrawImageEx0(UDP_Class uDP_Class, string IP, byte[] BW_data, byte[] RW_data, int Split_DataSize)
         {
             int Width_Size = Split_DataSize;
@@ -1792,6 +1904,108 @@ namespace H_Pannel_lib
                     }
                     string UDP_RX = uDP_Class.Get_ReadLineByIP(IP);
                
+                    if (UDP_RX != "")
+                    {
+                        if (UDP_RX == checksum.ToString("000"))
+                        {
+                            flag_OK = true;
+                            break;
+                        }
+                        else
+                        {
+                            cnt = 0;
+                        }
+                    }
+                }
+                System.Threading.Thread.Sleep(1);
+            }
+            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : FontColor {string.Format(flag_OK ? "sucess" : "failed")}!");
+            return flag_OK;
+        }
+        static private bool Command_LCD114_FontColor(UDP_Class uDP_Class, string IP, Color FontColor, Color ForeColor)
+        {
+            bool flag_OK = true;
+            byte checksum = 0;
+
+            int R = 0;
+            int G = 0;
+            int B = 0;
+            int temp = 0;
+            int FontColor_temp_H = 0;
+            int FontColor_temp_L = 0;
+            int ForeColor_temp_H = 0;
+            int ForeColor_temp_L = 0;
+
+            R = FontColor.R;
+            G = FontColor.G;
+            B = FontColor.B;
+
+            // 565 格式的顏色運算
+            B = (B * 31) / 255;   // 紅色轉換到5位 (0-31)
+            R = (R * 63) / 255;   // 綠色轉換到6位 (0-63)
+            G = (G * 31) / 255;   // 藍色轉換到5位 (0-31)
+            temp = (B << 11) | (R << 5) | G;
+
+            FontColor_temp_H = temp & 0x000000FF;
+            FontColor_temp_L = temp >> 8;
+
+            R = ForeColor.R;
+            G = ForeColor.G;
+            B = ForeColor.B;
+
+            // 565 格式的顏色運算
+            B = (B * 31) / 255;   // 紅色轉換到5位 (0-31)
+            R = (R * 63) / 255;   // 綠色轉換到6位 (0-63)
+            G = (G * 31) / 255;   // 藍色轉換到5位 (0-31)
+            temp = (B << 11) | (R << 5) | G;
+
+            ForeColor_temp_H = temp & 0x000000FF;
+            ForeColor_temp_L = temp >> 8;
+
+            List<byte> list_byte = new List<byte>();
+            list_byte.Add(2);
+            list_byte.Add((byte)UDP_Command.FontColor);
+            list_byte.Add((byte)FontColor_temp_L);
+            list_byte.Add((byte)FontColor_temp_H);
+            list_byte.Add((byte)ForeColor_temp_L);
+            list_byte.Add((byte)ForeColor_temp_H);
+            list_byte.Add(3);
+            for (int i = 0; i < list_byte.Count; i++)
+            {
+                checksum += list_byte[i];
+            }
+            MyTimer MyTimer_UART_TimeOut = new MyTimer();
+            int retry = 0;
+            int cnt = 0;
+            while (true)
+            {
+                if (cnt == 0)
+                {
+                    if (retry >= UDP_RetryNum)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    uDP_Class.Set_ReadLineClearByIP(IP);
+                    uDP_Class.WriteByte(list_byte.ToArray(), IP);
+                    MyTimer_UART_TimeOut.TickStop();
+                    MyTimer_UART_TimeOut.StartTickTime(UDP_TimeOut);
+                    cnt++;
+                }
+                else if (cnt == 1)
+                {
+                    if (retry >= UDP_RetryNum)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    if (MyTimer_UART_TimeOut.IsTimeOut())
+                    {
+                        retry++;
+                        cnt = 0;
+                    }
+                    string UDP_RX = uDP_Class.Get_ReadLineByIP(IP);
+
                     if (UDP_RX != "")
                     {
                         if (UDP_RX == checksum.ToString("000"))
@@ -7641,6 +7855,61 @@ namespace H_Pannel_lib
             //bimage.Dispose();
             return list_byte_image;
         }
+        static unsafe public List<byte> LCD144_BitmapToByte(Bitmap bimage)
+        {
+            List<byte> list_byte_image = new List<byte>();
+            //pictureBox1.Image = bimage;
+            BitmapData bmData = bimage.LockBits(new Rectangle(0, 0, bimage.Width, bimage.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            int width = bmData.Width;
+            int height = bmData.Height;
+            int ByteOfSkip = GetBitmapSkip(width, 3);
+            IntPtr SurfacePtr = bmData.Scan0;
+            int ByteOfWidth = width * 3 + ByteOfSkip;
+            int SrcWidthxY;
+            int SrcIndex;
+            int R;
+            int G;
+            int B;
+            int temp;
+            int temp_L;
+            int temp_H;
+            list_byte_image.Clear();
+            unsafe
+            {
+                byte* SrcPtr = (byte*)SurfacePtr;
+                for (int y = 0; y < height; y++)
+                {
+                    SrcWidthxY = ByteOfWidth * y;
+                    for (int x = 0; x < width; x++)
+                    {
+                        SrcIndex = SrcWidthxY + x * 3;
+                        B = SrcPtr[SrcIndex];      // 藍色分量
+                        G = SrcPtr[SrcIndex + 1];  // 綠色分量
+                        R = SrcPtr[SrcIndex + 2];  // 紅色分量
+
+                        // 根據新的顏色定義進行位移處理
+                        B = (B >> 3) & 0x1F;   // 紅色5位
+                        R = (R >> 2) & 0x3F;   // 綠色6位
+                        G = (G >> 3) & 0x1F;   // 藍色5位
+
+                        // 組合為16位顏色值
+                        temp = (B << 11) | (R << 5) | G;
+
+                        // 拆分為兩個byte，低位和高位
+                        temp_H = temp & 0x00FF;
+                        temp_L = (temp >> 8) & 0x00FF;
+
+                        // 添加到結果列表中
+                        list_byte_image.Add((byte)(temp_L));
+                        list_byte_image.Add((byte)(temp_H));
+                    }
+                }
+            }
+            bimage.UnlockBits(bmData);
+            //bimage.Dispose();
+            return list_byte_image;
+        }
+
         static unsafe public List<byte> BitmapToByteEx(Bitmap bimage ,ref int len)
         {
             List<byte> list_byte_image = new List<byte>();

@@ -189,6 +189,22 @@ void serialEvent()
         }
         Get_Checksum();
       }
+      else if (UART0_RX[1] == 'g')
+      {
+        oLED114.LCD_Clear(RED);
+        delay(100);
+        oLED114.LCD_Clear(GREEN);
+        delay(100);
+        oLED114.LCD_Clear(BLUE);
+        delay(100);
+        oLED114.LCD_Clear(YELLOW);
+        Get_Checksum();
+      }
+      else if (UART0_RX[1] == 'h')
+      {
+        oLED114.LCD_ShowPicture();
+        Get_Checksum();
+      }
       else if (UART0_RX[1] == '1' && UART0_len == 5)
       {
         flag_writeMode = true;

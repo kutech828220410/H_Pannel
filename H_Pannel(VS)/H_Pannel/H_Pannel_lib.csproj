@@ -189,6 +189,12 @@
     <Compile Include="DrawerUI_EPD_583.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ViewUI\LCD114_Panel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ViewUI\LCD114_Panel.Designer.cs">
+      <DependentUpon>LCD114_Panel.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewUI\EPD213_Paint_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -396,6 +402,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewUI\EPD_583_Pannel.resx">
       <DependentUpon>EPD_583_Pannel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewUI\LCD114_Panel.resx">
+      <DependentUpon>LCD114_Panel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewUI\Pannel35_Pannel.resx">
       <DependentUpon>Pannel35_Pannel.cs</DependentUpon>

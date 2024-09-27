@@ -2,7 +2,8 @@
 #define __OLED114_h
 #include "Timer.h"
 #include <SPI.h>
-
+#include "Arduino.h"
+#include <SoftwareSerial.h>
 
 typedef void (*OutputHandle) (void);
 #define USE_HORIZONTAL 2  //设置横屏或者竖屏显示 0或1为竖屏 2或3为横屏
@@ -22,12 +23,15 @@ typedef void (*OutputHandle) (void);
 #define WHITE            0xFFFF
 #define BLACK            0x0000
 #define BLUE             0x001F  
+#define GREEN            0x07E0
+#define RED              0xF800
+
 #define BRED             0XF81F
 #define GRED             0XFFE0
 #define GBLUE            0X07FF
-#define RED              0xF800
+
 #define MAGENTA          0xF81F
-#define GREEN            0x07E0
+
 #define CYAN             0x7FFF
 #define YELLOW           0xFFE0
 #define BROWN            0XBC40 //棕色
@@ -52,7 +56,8 @@ typedef void (*OutputHandle) (void);
 class OLED114
 {
    public:
-   byte* framebuffer;
+   uint16_t* framebuffer;
+   SoftwareSerial *mySerial;
    int index = 0;
    int dc=PA27;//定义数字接口11
    int cs=PA15;//定义数字接口12
@@ -74,6 +79,7 @@ class OLED114
    void LCD_ShowNum(short int x,short int y,short int num,uint8_t len,short int color);
    void LCD_ShowNum1(short int x,short int y,float num,uint8_t len,short int color);
    void LCD_ShowPicture(short int x1,short int y1,short int x2,short int y2);
+   void LCD_ShowPicture();
    void LCD_Address_Set(uint8_t x1,uint8_t y1,uint8_t x2,uint8_t y2);
    void LCD_DrawPoint_big(short int x,short int y,short int color);
    void OLED_CS_Clr();

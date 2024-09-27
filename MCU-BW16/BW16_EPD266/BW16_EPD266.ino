@@ -1,4 +1,5 @@
 #include "Config.h"
+
 #include "EPD.h"
 #include "OLED114.h"
 #include <WiFi.h>
@@ -80,8 +81,12 @@ void loop()
       epd.mySerial = &mySerial;
       wiFiConfig.Init(VERSION);
       IO_Init();
-      if(Device == "EPD") wiFiConfig.Set_Serverport(30000);
+      if(EPD_TYPE == "EPD266" || EPD_TYPE == "EPD290" || EPD_TYPE == "EPD420")
+      {
+         wiFiConfig.Set_Serverport(30000);
+      }
       if(Device == "RowLED") wiFiConfig.Set_Serverport(30001);
+      if(Device == "OLED114_HandSensor") wiFiConfig.Set_Serverport(30000);
       
       Localport = wiFiConfig.Get_Localport();
       Serverport = wiFiConfig.Get_Serverport();
@@ -94,16 +99,17 @@ void loop()
       
       if(Device == "EPD")
       {
+        mySerial.println("EPD device init ...");
         epd.Init(); 
-        mySerial.println("EPD device init finished...");
+        
       }
       if(Device == "OLED114_HandSensor")
       {
+        mySerial.println("OLED114_HandSensor device init ...");
+        oLED114.mySerial = &mySerial;
         oLED114.Lcd_Init();
-        oLED114.LCD_Clear(WHITE);
-        oLED114.LCD_ShowPicture(0,92,39,131);
-        oLED114.LCD_ShowNum1(80,95,0.05,4,BLUE);
-        mySerial.println("OLED114_HandSensor device init finished...");
+        oLED114.LCD_Clear(BLUE);
+        
       }
       xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle);     
       xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
@@ -115,7 +121,7 @@ void loop()
       if(WiFi.status() != WL_CONNECTED)
       {
          wiFiConfig.WIFI_Connenct();
-         if(WiFi.status() == WL_CONNECTED)
+         if(WiFi.status() == WL_CONNECTED) 
          {
            Connect_UDP(Localport);
          }                

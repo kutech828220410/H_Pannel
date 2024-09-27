@@ -134,6 +134,8 @@
             this.sqL_DataGridView_h_RFID_Datas = new SQLUI.SQL_DataGridView();
             this.rJ_Button_H_RFID_初始化 = new MyUI.RJ_Button();
             this.h_RFID_UI = new H_Pannel_lib.H_RFID_UI();
+            this.lcD114_Panel = new H_Pannel_lib.LCD114_Panel();
+            this.rJ_Button_lcD114_Panel_Write = new MyUI.RJ_Button();
             this.tabControl1.SuspendLayout();
             this.WT32.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -300,7 +302,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1920, 989);
+            this.tabPage4.Size = new System.Drawing.Size(1908, 989);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "面板設定";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1085,7 +1087,7 @@
             this.EPD266.Controls.Add(this.tabControl3);
             this.EPD266.Location = new System.Drawing.Point(4, 22);
             this.EPD266.Name = "EPD266";
-            this.EPD266.Size = new System.Drawing.Size(1928, 1015);
+            this.EPD266.Size = new System.Drawing.Size(1916, 1015);
             this.EPD266.TabIndex = 1;
             this.EPD266.Text = "EPD266";
             this.EPD266.UseVisualStyleBackColor = true;
@@ -1098,11 +1100,13 @@
             this.tabControl3.Location = new System.Drawing.Point(0, 0);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(1928, 1015);
+            this.tabControl3.Size = new System.Drawing.Size(1916, 1015);
             this.tabControl3.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.rJ_Button_lcD114_Panel_Write);
+            this.tabPage1.Controls.Add(this.lcD114_Panel);
             this.tabPage1.Controls.Add(this.storagePanel);
             this.tabPage1.Controls.Add(this.rJ_Button_EPD266_TEST);
             this.tabPage1.Controls.Add(this.epD_266_Pannel);
@@ -1110,7 +1114,7 @@
             this.tabPage1.Controls.Add(this.storageUI_EPD_266);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1920, 989);
+            this.tabPage1.Size = new System.Drawing.Size(1908, 989);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "資料設定";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1244,7 +1248,7 @@
             this.EPD290.Controls.Add(this.storageUI_EPD_290);
             this.EPD290.Location = new System.Drawing.Point(4, 22);
             this.EPD290.Name = "EPD290";
-            this.EPD290.Size = new System.Drawing.Size(1928, 1015);
+            this.EPD290.Size = new System.Drawing.Size(1916, 1015);
             this.EPD290.TabIndex = 6;
             this.EPD290.Text = "EPD290";
             this.EPD290.UseVisualStyleBackColor = true;
@@ -1353,7 +1357,7 @@
             this.EPD420.Controls.Add(this.tabControl7);
             this.EPD420.Location = new System.Drawing.Point(4, 22);
             this.EPD420.Name = "EPD420";
-            this.EPD420.Size = new System.Drawing.Size(1928, 1015);
+            this.EPD420.Size = new System.Drawing.Size(1916, 1015);
             this.EPD420.TabIndex = 8;
             this.EPD420.Text = "EPD420";
             this.EPD420.UseVisualStyleBackColor = true;
@@ -1366,7 +1370,7 @@
             this.tabControl7.Location = new System.Drawing.Point(0, 0);
             this.tabControl7.Name = "tabControl7";
             this.tabControl7.SelectedIndex = 0;
-            this.tabControl7.Size = new System.Drawing.Size(1928, 1015);
+            this.tabControl7.Size = new System.Drawing.Size(1916, 1015);
             this.tabControl7.TabIndex = 2;
             // 
             // tabPage11
@@ -1374,7 +1378,7 @@
             this.tabPage11.Controls.Add(this.drawerUI_EPD_420);
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(1920, 989);
+            this.tabPage11.Size = new System.Drawing.Size(1908, 989);
             this.tabPage11.TabIndex = 0;
             this.tabPage11.Text = "資料設定";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -1464,7 +1468,7 @@
             this.EPD583.Controls.Add(this.tabControl4);
             this.EPD583.Location = new System.Drawing.Point(4, 22);
             this.EPD583.Name = "EPD583";
-            this.EPD583.Size = new System.Drawing.Size(1928, 1015);
+            this.EPD583.Size = new System.Drawing.Size(1916, 1015);
             this.EPD583.TabIndex = 2;
             this.EPD583.Text = "EPD583";
             this.EPD583.UseVisualStyleBackColor = true;
@@ -1477,7 +1481,7 @@
             this.tabControl4.Location = new System.Drawing.Point(0, 0);
             this.tabControl4.Name = "tabControl4";
             this.tabControl4.SelectedIndex = 0;
-            this.tabControl4.Size = new System.Drawing.Size(1928, 1015);
+            this.tabControl4.Size = new System.Drawing.Size(1916, 1015);
             this.tabControl4.TabIndex = 0;
             // 
             // tabPage5
@@ -1495,7 +1499,7 @@
             this.tabPage5.Controls.Add(this.drawerUI_EPD_583);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(1920, 989);
+            this.tabPage5.Size = new System.Drawing.Size(1908, 989);
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "資料設定";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1845,7 +1849,7 @@
             this.EPD1020.Controls.Add(this.tabControl6);
             this.EPD1020.Location = new System.Drawing.Point(4, 22);
             this.EPD1020.Name = "EPD1020";
-            this.EPD1020.Size = new System.Drawing.Size(1928, 1015);
+            this.EPD1020.Size = new System.Drawing.Size(1916, 1015);
             this.EPD1020.TabIndex = 7;
             this.EPD1020.Text = "EPD1020";
             this.EPD1020.UseVisualStyleBackColor = true;
@@ -1858,7 +1862,7 @@
             this.tabControl6.Location = new System.Drawing.Point(0, 0);
             this.tabControl6.Name = "tabControl6";
             this.tabControl6.SelectedIndex = 0;
-            this.tabControl6.Size = new System.Drawing.Size(1928, 1015);
+            this.tabControl6.Size = new System.Drawing.Size(1916, 1015);
             this.tabControl6.TabIndex = 1;
             // 
             // tabPage9
@@ -1867,7 +1871,7 @@
             this.tabPage9.Controls.Add(this.rJ_Button_EPD1020_初始化);
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(1920, 989);
+            this.tabPage9.Size = new System.Drawing.Size(1908, 989);
             this.tabPage9.TabIndex = 0;
             this.tabPage9.Text = "資料設定";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -2023,7 +2027,7 @@
             this.RowsLED.Controls.Add(this.tabControl5);
             this.RowsLED.Location = new System.Drawing.Point(4, 22);
             this.RowsLED.Name = "RowsLED";
-            this.RowsLED.Size = new System.Drawing.Size(1928, 1015);
+            this.RowsLED.Size = new System.Drawing.Size(1916, 1015);
             this.RowsLED.TabIndex = 3;
             this.RowsLED.Text = "RowsLED";
             this.RowsLED.UseVisualStyleBackColor = true;
@@ -2036,7 +2040,7 @@
             this.tabControl5.Location = new System.Drawing.Point(0, 0);
             this.tabControl5.Name = "tabControl5";
             this.tabControl5.SelectedIndex = 0;
-            this.tabControl5.Size = new System.Drawing.Size(1928, 1015);
+            this.tabControl5.Size = new System.Drawing.Size(1916, 1015);
             this.tabControl5.TabIndex = 0;
             // 
             // tabPage7
@@ -2045,7 +2049,7 @@
             this.tabPage7.Controls.Add(this.rowsLEDUI);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(1920, 989);
+            this.tabPage7.Size = new System.Drawing.Size(1908, 989);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "資料設定";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -2128,7 +2132,7 @@
             this.RFID.Controls.Add(this.rfiD_UI);
             this.RFID.Location = new System.Drawing.Point(4, 22);
             this.RFID.Name = "RFID";
-            this.RFID.Size = new System.Drawing.Size(1928, 1015);
+            this.RFID.Size = new System.Drawing.Size(1916, 1015);
             this.RFID.TabIndex = 4;
             this.RFID.Text = "RFID";
             this.RFID.UseVisualStyleBackColor = true;
@@ -2264,7 +2268,7 @@
             this.H_RFID.Controls.Add(this.h_RFID_UI);
             this.H_RFID.Location = new System.Drawing.Point(4, 22);
             this.H_RFID.Name = "H_RFID";
-            this.H_RFID.Size = new System.Drawing.Size(1928, 1015);
+            this.H_RFID.Size = new System.Drawing.Size(1916, 1015);
             this.H_RFID.TabIndex = 5;
             this.H_RFID.Text = "H_RFID";
             this.H_RFID.UseVisualStyleBackColor = true;
@@ -2312,7 +2316,7 @@
             this.sqL_DataGridView_h_RFID_Datas.selectedRowBorderColor = System.Drawing.Color.Blue;
             this.sqL_DataGridView_h_RFID_Datas.selectedRowForeColor = System.Drawing.Color.White;
             this.sqL_DataGridView_h_RFID_Datas.Server = "127.0.0.0";
-            this.sqL_DataGridView_h_RFID_Datas.Size = new System.Drawing.Size(535, 545);
+            this.sqL_DataGridView_h_RFID_Datas.Size = new System.Drawing.Size(523, 545);
             this.sqL_DataGridView_h_RFID_Datas.SSLMode = MySql.Data.MySqlClient.MySqlSslMode.None;
             this.sqL_DataGridView_h_RFID_Datas.TabIndex = 42;
             this.sqL_DataGridView_h_RFID_Datas.UserName = "root";
@@ -2386,6 +2390,45 @@
             this.h_RFID_UI.UDP_SendTime = "0";
             this.h_RFID_UI.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("h_RFID_UI.UDP_ServerPorts")));
             this.h_RFID_UI.UserName = "root";
+            // 
+            // lcD114_Panel
+            // 
+            this.lcD114_Panel.Location = new System.Drawing.Point(1412, 449);
+            this.lcD114_Panel.Name = "lcD114_Panel";
+            this.lcD114_Panel.Size = new System.Drawing.Size(240, 135);
+            this.lcD114_Panel.TabIndex = 39;
+            // 
+            // rJ_Button_lcD114_Panel_Write
+            // 
+            this.rJ_Button_lcD114_Panel_Write.AutoResetState = false;
+            this.rJ_Button_lcD114_Panel_Write.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_lcD114_Panel_Write.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_lcD114_Panel_Write.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_lcD114_Panel_Write.BorderRadius = 5;
+            this.rJ_Button_lcD114_Panel_Write.BorderSize = 0;
+            this.rJ_Button_lcD114_Panel_Write.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_lcD114_Panel_Write.DisenableColor = System.Drawing.Color.Gray;
+            this.rJ_Button_lcD114_Panel_Write.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_lcD114_Panel_Write.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_lcD114_Panel_Write.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_lcD114_Panel_Write.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_lcD114_Panel_Write.GUID = "";
+            this.rJ_Button_lcD114_Panel_Write.Image_padding = new System.Windows.Forms.Padding(0);
+            this.rJ_Button_lcD114_Panel_Write.Location = new System.Drawing.Point(1412, 590);
+            this.rJ_Button_lcD114_Panel_Write.Name = "rJ_Button_lcD114_Panel_Write";
+            this.rJ_Button_lcD114_Panel_Write.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_lcD114_Panel_Write.ProhibitionLineWidth = 4;
+            this.rJ_Button_lcD114_Panel_Write.ProhibitionSymbolSize = 30;
+            this.rJ_Button_lcD114_Panel_Write.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_lcD114_Panel_Write.ShadowSize = 0;
+            this.rJ_Button_lcD114_Panel_Write.ShowLoadingForm = false;
+            this.rJ_Button_lcD114_Panel_Write.Size = new System.Drawing.Size(126, 67);
+            this.rJ_Button_lcD114_Panel_Write.State = false;
+            this.rJ_Button_lcD114_Panel_Write.TabIndex = 40;
+            this.rJ_Button_lcD114_Panel_Write.Text = "Write";
+            this.rJ_Button_lcD114_Panel_Write.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_lcD114_Panel_Write.TextHeight = 0;
+            this.rJ_Button_lcD114_Panel_Write.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
@@ -2545,6 +2588,8 @@
         private MyUI.RJ_Button rJ_Button_RFID_RS485_TEST;
         private MyUI.RJ_Button rJ_Button1;
         private H_Pannel_lib.StoragePanel storagePanel;
+        private H_Pannel_lib.LCD114_Panel lcD114_Panel;
+        private MyUI.RJ_Button rJ_Button_lcD114_Panel_Write;
     }
 }
 

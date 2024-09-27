@@ -55,10 +55,12 @@ namespace TestForm
             this.plC_RJ_Button_EPD266_IP加1.MouseDownEvent += PlC_RJ_Button_EPD266_IP加1_MouseDownEvent;
             this.plC_UI_Init.UI_Finished_Event += PlC_UI_Init_UI_Finished_Event;
             this.plC_UI_Init.Run(this.FindForm(), this.lowerMachine_Panel);
+
+ 
             MyMessageBox.音效 = false;
         }
 
-   
+     
 
         private void PlC_UI_Init_UI_Finished_Event()
         {
@@ -71,6 +73,7 @@ namespace TestForm
         }
 
         #region EPD290 Event
+   
         private void PlC_RJ_Button_EPD290_刷新電子紙_MouseDownEvent(MouseEventArgs mevent)
         {
             this.plC_RJ_Button_EPD290_刷新電子紙.Bool = true;

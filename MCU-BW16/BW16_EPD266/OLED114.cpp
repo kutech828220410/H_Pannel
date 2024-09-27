@@ -6,7 +6,7 @@ bool flag_LCD_init = true;
 //OLED的初始化
 void OLED114::Lcd_Init()
 { 
-    this -> framebuffer = (byte*) malloc(LCD_W * LCD_H * 2);
+    this->framebuffer = (uint16_t*) malloc(LCD_W * LCD_H * sizeof(uint16_t));
     pinMode(dc,OUTPUT);//设置数字11
     pinMode(cs,OUTPUT);//设置数字12 
 
@@ -110,7 +110,7 @@ void OLED114::OLED_CS_Clr()
   if(flag_LCD_init == false) SPI.beginTransaction(SPISettings(5000, MSBFIRST, SPI_MODE0));  // 开始 SPI 事务
   digitalWrite(cs, LOW); //CS
   if (flag_LCD_init == false)return;
-  SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));  // 开始 SPI 事务
+  SPI.beginTransaction(SPISettings(80000000, MSBFIRST, SPI_MODE0));  // 开始 SPI 事务
 
   
 }
@@ -466,4 +466,15 @@ void OLED114::LCD_ShowPicture(short int x1,short int y1,short int x2,short int y
     LCD_WR_DATA8(temp2);
   }    
   OLED_CS_Set(); 
+}
+void OLED114::LCD_ShowPicture()
+{
+  OLED_CS_Clr();  
+  short int i,j;    
+  LCD_Address_Set(0,0,LCD_W-1,LCD_H-1);
+  for( i = 0 ; i < LCD_H * LCD_W; i++)
+  {
+    LCD_WR_DATA((*(framebuffer + i)));
+  }
+  OLED_CS_Set();
 }

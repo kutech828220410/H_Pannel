@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#define UDP_BUFFER_SIZE 60000
+#define UDP_BUFFER_SIZE 50000
 #define UDP_RX_BUFFER_SIZE 1500
 char* UdpRead;
 char* UdpRead_buf;
@@ -18,6 +18,9 @@ bool flag_UDP0_packet = true;
 bool flag_UDP1_packet = true;
 MyTimer MyTimer_UDP;
 MyTimer MyTimer_UDP_RX_TimeOut;
+int ForeColor = 0;
+int BackColor = 0;
+
 void onPacketCallBack()
 {
   
@@ -399,14 +402,124 @@ void onPacketCallBack()
              wiFiConfig.Set_Output_dir(temp);
              Get_Checksum_UDP();
           }
+          else if(*(UdpRead + 1) == '2')
+          {
+            if(flag_udp_232back)mySerial.println("set graphicData..");
+            int _data;
+            int len = (UdpRead_len - 7) / 2;
+            
+            int startpo_LL = *(UdpRead + 2);
+            int startpo_LH = *(UdpRead + 3);
+            int startpo_L = startpo_LL | (startpo_LH << 8);
+            int startpo_HL = *(UdpRead + 4);
+            int startpo_HH = *(UdpRead + 5);
+            int startpo_H = startpo_HL | (startpo_HH << 8);
+            long startpo = startpo_L | (startpo_H << 16); 
+            if(flag_udp_232back)mySerial.print("Start Position[");
+            if(flag_udp_232back)mySerial.print(startpo);
+            if(flag_udp_232back)mySerial.println("]");
+            if(flag_udp_232back)mySerial.print("Num Of Data[");
+            if(flag_udp_232back)mySerial.print(len);
+            if(flag_udp_232back)mySerial.println("]");        
+            
+            for(int i = 0 ; i < len ; i ++)
+            {
+               _data = (*(UdpRead + 6 + i * 2)) |  (*(UdpRead + 7 + i * 2 ) << 8) ;   
+              *(oLED114.framebuffer + startpo + i ) = _data;
+               
+            }
+            if(flag_udp_232back)mySerial.println("set graphicData done..");    
+            Get_Checksum_UDP();
+          } 
+          else if(*(UdpRead + 1) == '3')
+          {
+            if(flag_udp_232back)mySerial.println("DrawCanvas");
+            oLED114.LCD_ShowPicture();
+            Get_Checksum_UDP();
+          }
+          else if(*(UdpRead + 1) == '7')
+          {                  
+              int BackColor_L = *(UdpRead + 2);
+              int BackColor_H = *(UdpRead + 3);
+              BackColor = BackColor_L | (BackColor_H << 8);
+              int Forecolor_L = *(UdpRead + 4);
+              int Forecolor_H = *(UdpRead + 5);
+              ForeColor = Forecolor_L | (Forecolor_H << 8);
+
+              if(flag_udp_232back)mySerial.println("Set_BackColor");
+              if(flag_udp_232back)mySerial.print("BackColor[");
+              if(flag_udp_232back)mySerial.print(BackColor);
+              if(flag_udp_232back)mySerial.println("]");
+              if(flag_udp_232back)mySerial.print("ForeColor[");
+              if(flag_udp_232back)mySerial.print(ForeColor);
+              if(flag_udp_232back)mySerial.println("]");
+              
+              Get_Checksum_UDP();
+          }
+          else if(*(UdpRead + 1) == '6')
+          {                  
+            int _data;
+            
+            if(flag_udp_232back)mySerial.println("設定GraphicDataEx");
+            int UDP_len = (UdpRead_len - 9);
+            int len_L = *(UdpRead + 2);
+            int len_H = *(UdpRead + 3);
+            int startpo_LL = *(UdpRead + 4);
+            int startpo_LH = *(UdpRead + 5);
+            int startpo_L = startpo_LL | (startpo_LH << 8);
+            int startpo_HL = *(UdpRead + 6);
+            int startpo_HH = *(UdpRead + 7);
+            int startpo_H = startpo_HL | (startpo_HH << 8);
+            long startpo = startpo_L | (startpo_H << 16); 
+            int len = len_L | (len_H << 8);
+            bool flag[8];
+            if(flag_udp_232back)mySerial.print("Start Position[");
+            if(flag_udp_232back)mySerial.print(startpo);
+            if(flag_udp_232back)mySerial.println("]");
+            if(flag_udp_232back)mySerial.print("Num Of Data[");
+            if(flag_udp_232back)mySerial.print(len);
+            if(flag_udp_232back)mySerial.println("]");        
+            int index = 0;
+            for(int i = 0 ; i < UDP_len ; i ++)
+            {
+               _data = *(UdpRead + 8 + i);
+               flag[0] = (((_data >> 0) % 2) == 1);
+               flag[1] = (((_data >> 1) % 2) == 1);
+               flag[2] = (((_data >> 2) % 2) == 1);
+               flag[3] = (((_data >> 3) % 2) == 1);
+               flag[4] = (((_data >> 4) % 2) == 1);
+               flag[5] = (((_data >> 5) % 2) == 1);
+               flag[6] = (((_data >> 6) % 2) == 1);
+               flag[7] = (((_data >> 7) % 2) == 1);
+               
+               for(int k = 0 ; k < 8 ; k++)
+               {
+                 if(index == len) break;
+                 if(flag[k])
+                 {
+                    *(oLED114.framebuffer + startpo + (i * 8) + k) = BackColor;
+                 }
+                 else
+                 {
+                    *(oLED114.framebuffer + startpo + (i * 8) + k) = ForeColor;
+                 }
+                 index++;
+               }
+               
+            }
+
+            Get_Checksum_UDP();
+          }          
           if(flag_udp_232back)
           {
-              mySerial.println("接收到結束碼[3]");
-              mySerial.println("-------------------------------------------");
+            mySerial.println("接收到結束碼[3]");
+            mySerial.println("-------------------------------------------");
           }
            
         }
+        
      }
+    
   }
 
    

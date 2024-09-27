@@ -2032,3 +2032,4 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H
 C:\Users\hmisa\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.StorageUI_EPD_266.resources
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.EPD213_Paint_Form.resources
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.EPD420_Paint_Form.resources
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.LCD114_Panel.resources
