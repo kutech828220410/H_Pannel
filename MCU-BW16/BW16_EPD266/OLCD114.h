@@ -1,5 +1,5 @@
-#ifndef __OLED114_h
-#define __OLED114_h
+#ifndef __OLCD114_h
+#define __OLCD114_h
 #include "Timer.h"
 #include <SPI.h>
 #include "Arduino.h"
@@ -53,7 +53,7 @@ typedef void (*OutputHandle) (void);
 
 
 
-class OLED114
+class OLCD114
 {
    public:
    uint16_t* framebuffer;

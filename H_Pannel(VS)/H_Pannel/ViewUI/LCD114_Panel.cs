@@ -14,7 +14,6 @@ namespace H_Pannel_lib
 {
     public partial class LCD114_Panel : UserControl
     {
-        static PaintHandler paintHandler;
         [ReadOnly(false), Browsable(false), Category(""), Description(""), DefaultValue("")]
         public int Pannel_Width
         {
@@ -47,38 +46,23 @@ namespace H_Pannel_lib
         {
             this.List_UDP_Local = List_UDP_Local;
             bitmap_Canvas = new Bitmap((int)(Pannel_Width * CanvasScale), (int)(Pannel_Height * CanvasScale));
-            paintHandler = this.BasePaint;
         }
-        public void DrawToPictureBox()
+        public void DrawToPictureBox(string text, Font font, Color ForeColoe, Color BackColor)
         {
-            if (paintHandler != null)
-            {
-                paintHandler();
-            }
+
             using (Graphics g = pictureBox.CreateGraphics())
             {
+                bitmap_Canvas = Communication.Get_LCD_144_bmp(text, font, ForeColoe, BackColor);
                 g.DrawImage(bitmap_Canvas, new PointF());
             }
         }
-        public bool DrawImage(string IP ,int port ,string text, Color ForeColoe, Color BackColor)
+        public bool DrawImage(string IP ,int port ,string text, Font font,Color ForeColoe, Color BackColor)
         {
+            DrawToPictureBox(text, font, ForeColoe, BackColor);
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(port);
             if (uDP_Class == null) return false;
-            bitmap_Canvas = Communication.Get_LCD_144_bmp(text, new Font("標楷體", 40, FontStyle.Bold), Color.White, Color.Black);
+            bitmap_Canvas = Communication.Get_LCD_144_bmp(text, font, Color.White, Color.Black);
             return Communication.LCD_144_DrawImageEx(uDP_Class, IP, bitmap_Canvas, ForeColoe, BackColor);
-        }
-        public void BasePaint()
-        {
-            try
-            {
-                bitmap_Canvas = Communication.Get_LCD_144_bmp("001", new Font("標楷體", 40, FontStyle.Bold), Color.White, Color.Black);
-    
-            }
-            catch
-            {
-
-            }
-
         }
     }
 }

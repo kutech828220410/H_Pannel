@@ -6,16 +6,15 @@ MyTimer MyTimer_UART1;
 String str_distance = "999";
 String str_TOF10120 = "";
 int LaserDistance = -999;
+bool LASER_ON = false;
+bool LASER_ON_buf = false;
 bool flag_UART1_Init = false;
 void serial2Event()
 {
   if(!flag_UART1_Init)
   {
-     if(!wiFiConfig.Get_IsLocker())
-     {
-        mySerial.println("mySerial2 init done!!");
-        mySerial2.begin(9600);         
-     }
+     mySerial.println("mySerial2 init done!!");
+     mySerial2.begin(9600);    
      
      flag_UART1_Init = true;
   }
@@ -57,6 +56,12 @@ void serial2Event()
       }
 
       LaserDistance = str_distance.toInt();
+      LASER_ON = (LaserDistance <= LASER_D);
+      if(LASER_ON_buf != LASER_ON)
+      {
+         LASER_ON_buf = LASER_ON;
+         flag_JsonSend = true;
+      }
 //      mySerial.print("LaserDistance : ");
 //      mySerial.println(str_distance);
     }

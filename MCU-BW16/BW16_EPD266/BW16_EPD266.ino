@@ -1,7 +1,7 @@
 #include "Config.h"
 
 #include "EPD.h"
-#include "OLED114.h"
+#include "OLCD114.h"
 #include <WiFi.h>
 #include <WiFiUdp.h> 
 #include <FreeRTOS.h>
@@ -29,7 +29,7 @@ bool flag_JsonSend = false;
 bool flag_writeMode = false;
 
 EPD epd;
-OLED114 oLED114;
+OLCD114 OLCD114;
 
 WiFiConfig wiFiConfig;
 int UDP_SemdTime = 0;
@@ -53,8 +53,12 @@ MyWS2812 myWS2812;
 byte* framebuffer;
 
 MyTimer MyTimer_BoardInit;
+MyTimer MyTimer_OLCD_144_Init;
 MyTimer MyTimer_CheckWS2812;
+
 bool flag_boradInit = false;
+bool flag_OLCD_144_boradInit = false;
+
 MyLED MyLED_IS_Connented;
 
 TaskHandle_t Core0Task1Handle;
@@ -68,11 +72,19 @@ SoftwareSerial mySerial2(PB2, PB1); // RX, TX
 void setup() 
 {
     MyTimer_BoardInit.StartTickTime(3000);          
+    MyTimer_OLCD_144_Init.StartTickTime(5000);          
 }
 bool flag_pb2 = true;
 void loop() 
 {
-   
+   if(MyTimer_OLCD_144_Init.IsTimeOut() && !flag_OLCD_144_boradInit)
+   {
+      if(Device == "OLCD_114")
+      {
+        OLCD114.LCD_Clear(BLACK);
+      }     
+      flag_OLCD_144_boradInit = true;
+   }
    if(MyTimer_BoardInit.IsTimeOut() && !flag_boradInit)
    {     
       mySerial.begin(115200);        
@@ -86,7 +98,7 @@ void loop()
          wiFiConfig.Set_Serverport(30000);
       }
       if(Device == "RowLED") wiFiConfig.Set_Serverport(30001);
-      if(Device == "OLED114_HandSensor") wiFiConfig.Set_Serverport(30000);
+      if(Device == "OLCD114") wiFiConfig.Set_Serverport(30008);
       
       Localport = wiFiConfig.Get_Localport();
       Serverport = wiFiConfig.Get_Serverport();
@@ -103,13 +115,11 @@ void loop()
         epd.Init(); 
         
       }
-      if(Device == "OLED114_HandSensor")
+      if(Device == "OLCD_114")
       {
-        mySerial.println("OLED114_HandSensor device init ...");
-        oLED114.mySerial = &mySerial;
-        oLED114.Lcd_Init();
-        oLED114.LCD_Clear(BLUE);
-        
+        mySerial.println("OLCD114 device init ...");
+        OLCD114.mySerial = &mySerial;
+        OLCD114.Lcd_Init();        
       }
       xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle);     
       xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
@@ -117,6 +127,8 @@ void loop()
    }
    if(flag_boradInit)
    {
+      
+      
       sub_IO_Program();
       if(WiFi.status() != WL_CONNECTED)
       {
@@ -150,7 +162,6 @@ void Core0Task1( void * pvParameters )
           MyLED_IS_Connented.Blink();
           if( WiFi.status() == WL_CONNECTED  )
           {
-//              serial2Event();
               MyLED_IS_Connented.BlinkTime = 100;      
           }
           else
@@ -226,7 +237,9 @@ void Core0Task2( void * pvParameters )
        {
          if( WiFi.status() == WL_CONNECTED  )
           {
+              #ifdef HandSensor
               serial2Event();
+              #endif
          
           }
           else

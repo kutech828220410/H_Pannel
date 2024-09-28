@@ -916,8 +916,24 @@ namespace H_Pannel_lib
                 int frameDIV = 4;
                 bool flag_OK = false;
                 int len = 0;
-                List<byte> bytes = BitmapToByteEx(bmp , ref len);
+                List<byte> bytes = BitmapToByteEx(bmp, ref len);
                 flag_OK = LCD_DrawImageEx(uDP_Class, IP, bytes.ToArray(), bytes.Count / frameDIV, ForeColoe, BackColor);
+                if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : LCD_144_DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+
+                return flag_OK;
+            }
+        }
+        static public bool LCD_144_DrawImageEx(UDP_Class uDP_Class, string IP, Color BackColor)
+        {
+            using (Bitmap _bmp = Get_LCD_144_bmp("", new Font("標楷體", 14), Color.Black, Color.Black))
+            {
+                MyTimer myTimer = new MyTimer();
+                myTimer.StartTickTime(50000);
+                int frameDIV = 4;
+                bool flag_OK = false;
+                int len = 0;
+                List<byte> bytes = BitmapToByteEx(_bmp, ref len);
+                flag_OK = LCD_DrawImageEx(uDP_Class, IP, bytes.ToArray(), bytes.Count / frameDIV, BackColor, BackColor);
                 if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : LCD_144_DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
 
                 return flag_OK;

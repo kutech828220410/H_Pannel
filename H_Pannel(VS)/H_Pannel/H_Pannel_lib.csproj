@@ -189,6 +189,10 @@
     <Compile Include="DrawerUI_EPD_583.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="StorageUI_LCD_114.cs" />
+    <Compile Include="StorageUI_LCD_114.Designer.cs">
+      <DependentUpon>StorageUI_LCD_114.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewUI\LCD114_Panel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -358,6 +362,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StorageUI_EPD_266.resx">
       <DependentUpon>StorageUI_EPD_266.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StorageUI_LCD_114.resx">
+      <DependentUpon>StorageUI_LCD_114.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewUI\EPD213_Paint_Form.resx">
       <DependentUpon>EPD213_Paint_Form.cs</DependentUpon>

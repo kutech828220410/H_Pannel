@@ -425,7 +425,7 @@ void onPacketCallBack()
             for(int i = 0 ; i < len ; i ++)
             {
                _data = (*(UdpRead + 6 + i * 2)) |  (*(UdpRead + 7 + i * 2 ) << 8) ;   
-              *(oLED114.framebuffer + startpo + i ) = _data;
+              *(OLCD114.framebuffer + startpo + i ) = _data;
                
             }
             if(flag_udp_232back)mySerial.println("set graphicData done..");    
@@ -434,7 +434,7 @@ void onPacketCallBack()
           else if(*(UdpRead + 1) == '3')
           {
             if(flag_udp_232back)mySerial.println("DrawCanvas");
-            oLED114.LCD_ShowPicture();
+            OLCD114.LCD_ShowPicture();
             Get_Checksum_UDP();
           }
           else if(*(UdpRead + 1) == '7')
@@ -497,11 +497,11 @@ void onPacketCallBack()
                  if(index == len) break;
                  if(flag[k])
                  {
-                    *(oLED114.framebuffer + startpo + (i * 8) + k) = BackColor;
+                    *(OLCD114.framebuffer + startpo + (i * 8) + k) = BackColor;
                  }
                  else
                  {
-                    *(oLED114.framebuffer + startpo + (i * 8) + k) = ForeColor;
+                    *(OLCD114.framebuffer + startpo + (i * 8) + k) = ForeColor;
                  }
                  index++;
                }

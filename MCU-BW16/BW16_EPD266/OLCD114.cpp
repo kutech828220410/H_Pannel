@@ -1,10 +1,10 @@
 #include "Timer.h"
-#include "OLED114.h"
+#include "OLCD114.h"
 #include "arduino.h"
 #include "font.h"
 bool flag_LCD_init = true;
 //OLED的初始化
-void OLED114::Lcd_Init()
+void OLCD114::Lcd_Init()
 { 
     this->framebuffer = (uint16_t*) malloc(LCD_W * LCD_H * sizeof(uint16_t));
     pinMode(dc,OUTPUT);//设置数字11
@@ -97,15 +97,15 @@ void OLED114::Lcd_Init()
     OLED_CS_Set();
     flag_LCD_init = true;
 }
-void OLED114::OLED_DC_Clr()
+void OLCD114::OLED_DC_Clr()
 {
    digitalWrite(dc,LOW);
 }
-void OLED114::OLED_DC_Set()
+void OLCD114::OLED_DC_Set()
 {
    digitalWrite(dc,HIGH);
 }
-void OLED114::OLED_CS_Clr()
+void OLCD114::OLED_CS_Clr()
 {
   if(flag_LCD_init == false) SPI.beginTransaction(SPISettings(5000, MSBFIRST, SPI_MODE0));  // 开始 SPI 事务
   digitalWrite(cs, LOW); //CS
@@ -114,7 +114,7 @@ void OLED114::OLED_CS_Clr()
 
   
 }
-void OLED114::OLED_CS_Set()
+void OLCD114::OLED_CS_Set()
 {
    digitalWrite(cs,HIGH);//CS
   if (flag_LCD_init == false)return;
@@ -126,7 +126,7 @@ void OLED114::OLED_CS_Set()
       入口数据：dat  要写入的串行数据
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_Writ_Bus(uint8_t dat)
+void OLCD114::LCD_Writ_Bus(uint8_t dat)
 {
   uint8_t i;
   SPI.transfer(dat);
@@ -136,7 +136,7 @@ void OLED114::LCD_Writ_Bus(uint8_t dat)
       入口数据：dat 写入的数据
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_WR_DATA8(uint8_t dat)
+void OLCD114::LCD_WR_DATA8(uint8_t dat)
 {
   OLED_DC_Set();
   LCD_Writ_Bus(dat);
@@ -146,7 +146,7 @@ void OLED114::LCD_WR_DATA8(uint8_t dat)
       入口数据：dat 写入的数据
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_WR_DATA(short int dat)
+void OLCD114::LCD_WR_DATA(short int dat)
 {
   OLED_DC_Set();
   LCD_Writ_Bus(dat>>8);
@@ -157,7 +157,7 @@ void OLED114::LCD_WR_DATA(short int dat)
       入口数据：dat 写入的命令
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_WR_REG(uint8_t dat)
+void OLCD114::LCD_WR_REG(uint8_t dat)
 {
   OLED_DC_Clr();//写命令
   LCD_Writ_Bus(dat);
@@ -169,7 +169,7 @@ void OLED114::LCD_WR_REG(uint8_t dat)
                 y1,y2 设置行的起始和结束地址
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_Address_Set(uint8_t x1,uint8_t y1,uint8_t x2,uint8_t y2)
+void OLCD114::LCD_Address_Set(uint8_t x1,uint8_t y1,uint8_t x2,uint8_t y2)
 {
   
   if(USE_HORIZONTAL==0)
@@ -219,7 +219,7 @@ void OLED114::LCD_Address_Set(uint8_t x1,uint8_t y1,uint8_t x2,uint8_t y2)
       入口数据：无
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_Clear(short int Color)
+void OLCD114::LCD_Clear(short int Color)
 {
   OLED_CS_Clr();  
   short int i,j;    
@@ -241,7 +241,7 @@ void OLED114::LCD_Clear(short int Color)
       入口数据：x,y   起始坐标
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_DrawPoint(short int x,short int y,short int color)
+void OLCD114::LCD_DrawPoint(short int x,short int y,short int color)
 {
   LCD_Address_Set(x,y,x,y);//设置光标位置 
   LCD_WR_DATA(color);
@@ -251,7 +251,7 @@ void OLED114::LCD_DrawPoint(short int x,short int y,short int color)
       入口数据：x,y   起始坐标
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_DrawPoint_big(short int x,short int y,short int color)
+void OLCD114::LCD_DrawPoint_big(short int x,short int y,short int color)
 {
   LCD_Fill(x-1,y-1,x+1,y+1,color);
 } 
@@ -261,7 +261,7 @@ void OLED114::LCD_DrawPoint_big(short int x,short int y,short int color)
                 xend,yend   终止坐标
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_Fill(short int xsta,short int ysta,short int xend,short int yend,short int color)
+void OLCD114::LCD_Fill(short int xsta,short int ysta,short int xend,short int yend,short int color)
 {          
   short int i,j; 
   LCD_Address_Set(xsta,ysta,xend,yend);      //设置光标位置 
@@ -279,7 +279,7 @@ void OLED114::LCD_Fill(short int xsta,short int ysta,short int xend,short int ye
                 x2,y2   终止坐标
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_DrawLine(short int x1,short int y1,short int x2,short int y2,short int color)
+void OLCD114::LCD_DrawLine(short int x1,short int y1,short int x2,short int y2,short int color)
 {
   short int t; 
   int xerr=0,yerr=0,delta_x,delta_y,distance;
@@ -319,7 +319,7 @@ void OLED114::LCD_DrawLine(short int x1,short int y1,short int x2,short int y2,s
                 x2,y2   终止坐标
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_DrawRectangle(short int x1, short int y1, short int x2, short int y2,short int color)
+void OLCD114::LCD_DrawRectangle(short int x1, short int y1, short int x2, short int y2,short int color)
 {
   LCD_DrawLine(x1,y1,x2,y1,color);
   LCD_DrawLine(x1,y1,x1,y2,color);
@@ -332,7 +332,7 @@ void OLED114::LCD_DrawRectangle(short int x1, short int y1, short int x2, short 
                 r       半径
       返回值：  无
 ******************************************************************************/
-void OLED114::Draw_Circle(short int x0,short int y0,uint8_t r,short int color)
+void OLCD114::Draw_Circle(short int x0,short int y0,uint8_t r,short int color)
 {
   int a,b;
   int di;
@@ -361,7 +361,7 @@ void OLED114::Draw_Circle(short int x0,short int y0,uint8_t r,short int color)
       入口数据：m底数，n指数
       返回值：  无
 ******************************************************************************/
-u32 OLED114::mypow(uint8_t m,uint8_t n)
+u32 OLCD114::mypow(uint8_t m,uint8_t n)
 {
   u32 result=1;
   while(n--)result*=m;    
@@ -375,7 +375,7 @@ u32 OLED114::mypow(uint8_t m,uint8_t n)
                 len    要显示的数字个数
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_ShowNum(short int x,short int y,short int num,uint8_t len,short int color)
+void OLCD114::LCD_ShowNum(short int x,short int y,short int num,uint8_t len,short int color)
 {           
   uint8_t t,temp;
   uint8_t enshow=0;
@@ -401,7 +401,7 @@ void OLED114::LCD_ShowNum(short int x,short int y,short int num,uint8_t len,shor
 //                color  颜色
 //      返回值：  无
 //******************************************************************************/
-void OLED114::LCD_ShowChar(short int x,short int y,uint8_t num,short int color)
+void OLCD114::LCD_ShowChar(short int x,short int y,uint8_t num,short int color)
 {
   uint8_t pos,t,temp;
   short int x1=x;
@@ -428,7 +428,7 @@ void OLED114::LCD_ShowChar(short int x,short int y,uint8_t num,short int color)
                 len    要显示的数字个数
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_ShowNum1(short int x,short int y,float num,uint8_t len,short int color)
+void OLCD114::LCD_ShowNum1(short int x,short int y,float num,uint8_t len,short int color)
 {      
   OLED_CS_Clr();       
   uint8_t t,temp;
@@ -453,7 +453,7 @@ void OLED114::LCD_ShowNum1(short int x,short int y,float num,uint8_t len,short i
       入口数据：x,y    起点坐标
       返回值：  无
 ******************************************************************************/
-void OLED114::LCD_ShowPicture(short int x1,short int y1,short int x2,short int y2)
+void OLCD114::LCD_ShowPicture(short int x1,short int y1,short int x2,short int y2)
 {
   OLED_CS_Clr();  
   int i,j,temp1,temp2;
@@ -467,7 +467,7 @@ void OLED114::LCD_ShowPicture(short int x1,short int y1,short int x2,short int y
   }    
   OLED_CS_Set(); 
 }
-void OLED114::LCD_ShowPicture()
+void OLCD114::LCD_ShowPicture()
 {
   OLED_CS_Clr();  
   short int i,j;    

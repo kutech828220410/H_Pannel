@@ -125,14 +125,16 @@ namespace WT32_SC01
             MyUI.數字鍵盤.音效 = false;
             H_Pannel_lib.Communication.UART_ConsoletWrite = true;
 
-            lcD114_Panel.Init(this.storageUI_EPD_266.List_UDP_Local);
+            storageUI_LCD_114.Init();
+            lcD114_Panel.Init(this.storageUI_LCD_114.List_UDP_Local);
             this.rJ_Button_lcD114_Panel_Write.MouseDownEvent += RJ_Button_lcD114_Panel_Write_MouseDownEvent;
         }
-
+        int index = 0;
         private void RJ_Button_lcD114_Panel_Write_MouseDownEvent(MouseEventArgs mevent)
         {
-            lcD114_Panel.DrawToPictureBox();
-            lcD114_Panel.DrawImage("192.168.40.200", 29000, "5566", Color.Green, Color.Purple);
+            Font font = new Font("標楷體", 80, FontStyle.Bold);
+            lcD114_Panel.DrawImage("192.168.40.200", 29000, index.ToString("000"), font, Color.White, Color.Red);
+            index++;
         }
 
 

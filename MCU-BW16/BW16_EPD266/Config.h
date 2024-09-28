@@ -1,11 +1,15 @@
 #define VERSION "Ver 1.5.12"
-
+#define HandSensor
 //#define RowLED_Device
 //#define EPD213
 //#define EPD266
 //#define EPD290
 //#define EPD420
-#define OLED114_HandSensor
+#define OLCD_114
+
+
+#define LASER_D 50
+
 
 #ifdef EPD266
 #define EPD_WIDTH 19
@@ -39,10 +43,8 @@
 
 
 
-
-
 #ifdef EPD_Device
 #define Device "EPD"
-#elif defined(OLED114_HandSensor)
-#define Device "OLED114_HandSensor"
+#elif defined(OLCD_114)
+#define Device "OLCD_114"
 #endif
