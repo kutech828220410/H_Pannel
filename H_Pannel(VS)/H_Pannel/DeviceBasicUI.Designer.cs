@@ -224,7 +224,7 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_UDP_DataReceive.columnHeaderBorderColor = System.Drawing.Color.DimGray;
             this.sqL_DataGridView_UDP_DataReceive.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 9F, System.Drawing.FontStyle.Bold);
             this.sqL_DataGridView_UDP_DataReceive.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.sqL_DataGridView_UDP_DataReceive.columnHeadersHeight = 18;
+            this.sqL_DataGridView_UDP_DataReceive.columnHeadersHeight = 4;
             this.sqL_DataGridView_UDP_DataReceive.columnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.sqL_DataGridView_UDP_DataReceive.DataGridViewAutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.NotSet;
             this.sqL_DataGridView_UDP_DataReceive.DataKeyEnable = false;
@@ -239,7 +239,7 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_UDP_DataReceive.rowHeaderBackColor = System.Drawing.Color.CornflowerBlue;
             this.sqL_DataGridView_UDP_DataReceive.rowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.sqL_DataGridView_UDP_DataReceive.RowsColor = System.Drawing.SystemColors.Control;
-            this.sqL_DataGridView_UDP_DataReceive.RowsHeight = 40;
+            this.sqL_DataGridView_UDP_DataReceive.RowsHeight = 50;
             this.sqL_DataGridView_UDP_DataReceive.SaveFileName = "SQL_DataGridView";
             this.sqL_DataGridView_UDP_DataReceive.selectedBorderSize = 0;
             this.sqL_DataGridView_UDP_DataReceive.selectedRowBackColor = System.Drawing.Color.Blue;
@@ -1311,7 +1311,7 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_DeviceTable.columnHeaderBorderColor = System.Drawing.Color.DimGray;
             this.sqL_DataGridView_DeviceTable.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
             this.sqL_DataGridView_DeviceTable.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.sqL_DataGridView_DeviceTable.columnHeadersHeight = 18;
+            this.sqL_DataGridView_DeviceTable.columnHeadersHeight = 15;
             this.sqL_DataGridView_DeviceTable.columnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.sqL_DataGridView_DeviceTable.DataGridViewAutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.sqL_DataGridView_DeviceTable.DataKeyEnable = false;
@@ -1409,7 +1409,7 @@ namespace H_Pannel_lib
             this.sqL_DataGridView_PING.columnHeaderBorderColor = System.Drawing.Color.DimGray;
             this.sqL_DataGridView_PING.columnHeaderFont = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold);
             this.sqL_DataGridView_PING.columnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.sqL_DataGridView_PING.columnHeadersHeight = 18;
+            this.sqL_DataGridView_PING.columnHeadersHeight = 4;
             this.sqL_DataGridView_PING.columnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.sqL_DataGridView_PING.DataGridViewAutoSizeColumnMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.sqL_DataGridView_PING.DataKeyEnable = false;
