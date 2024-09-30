@@ -1,5 +1,4 @@
 #include "Config.h"
-
 #include "EPD.h"
 #include "OLCD114.h"
 #include <WiFi.h>
@@ -18,6 +17,11 @@
 #include <SPI.h>
 #include <SD.h>
 #include <SoftwareSerial.h>
+
+#ifdef MCP23017
+#include "DFRobot_MCP23017.h"
+DFRobot_MCP23017 mcp(Wire, /*addr =*/0x20);//constructor, change the Level of A2, A1, A0 via DIP switch to revise the I2C address within 0x20~0x27.
+#endif
 
 #define SPI_MOSI_PIN PA12
 #define NUM_WS2812B_CRGB  450
@@ -89,6 +93,44 @@ void loop()
    {     
       mySerial.begin(115200);        
       mySerial.println(VERSION);  
+      
+      #ifdef MCP23017
+      while(mcp.begin() != 0)
+      {
+        mySerial.println("Initialization of the chip failed, please confirm that the chip connection is correct!");
+        delay(1000);
+      }
+      delay(500);    
+      mcp.pinMode(mcp.eGPA0, /*mode = */INPUT_PULLUP);
+      mcp.pinMode(mcp.eGPA1, /*mode = */INPUT_PULLUP);
+      mcp.pinMode(mcp.eGPA2, /*mode = */INPUT_PULLUP);
+      mcp.pinMode(mcp.eGPA3, /*mode = */INPUT_PULLUP);
+      mcp.pinMode(mcp.eGPA4, /*mode = */INPUT_PULLUP);
+      mcp.pinMode(mcp.eGPA5, /*mode = */INPUT_PULLUP);
+      mcp.pinMode(mcp.eGPA6, /*mode = */INPUT_PULLUP);
+      mcp.pinMode(mcp.eGPA7, /*mode = */INPUT_PULLUP);
+    
+      mcp.pinMode(mcp.eGPB0, /*mode = */OUTPUT);
+      mcp.pinMode(mcp.eGPB1, /*mode = */OUTPUT);
+      mcp.pinMode(mcp.eGPB2, /*mode = */OUTPUT);
+      mcp.pinMode(mcp.eGPB3, /*mode = */OUTPUT);
+      mcp.pinMode(mcp.eGPB4, /*mode = */OUTPUT);
+      mcp.pinMode(mcp.eGPB5, /*mode = */OUTPUT);
+      mcp.pinMode(mcp.eGPB6, /*mode = */OUTPUT);
+      mcp.pinMode(mcp.eGPB7, /*mode = */OUTPUT);
+      mcp.digitalWrite(mcp.eGPB0 , false);   
+      mcp.digitalWrite(mcp.eGPB1 , false);   
+      mcp.digitalWrite(mcp.eGPB2 , false);   
+      mcp.digitalWrite(mcp.eGPB3 , false);   
+      mcp.digitalWrite(mcp.eGPB4 , false);   
+      mcp.digitalWrite(mcp.eGPB5 , false);   
+      mcp.digitalWrite(mcp.eGPB6 , false);   
+      mcp.digitalWrite(mcp.eGPB7 , true);   
+      
+      OLCD114._mcp = &mcp;
+      mySerial.println("mcp.pinMode....ok");   
+      #endif
+      
       wiFiConfig.mySerial = &mySerial;
       epd.mySerial = &mySerial;
       wiFiConfig.Init(VERSION);

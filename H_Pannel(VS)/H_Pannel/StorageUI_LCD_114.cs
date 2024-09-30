@@ -12,25 +12,7 @@ using MyUI;
 using System.Reflection;
 namespace H_Pannel_lib
 {
-    static public class StorageUI_LCD_114_Method
-    {
-        static public bool Get_LASER_ON(this List<StorageUI_LCD_114.UDP_READ> uDP_READs, string IP)
-        {
-            List<StorageUI_LCD_114.UDP_READ> uDP_READs_buf = (from temp in uDP_READs
-                                                              where temp.IP == IP
-                                                              select temp).ToList();
-            if (uDP_READs_buf.Count == 0) return false;
-            return uDP_READs_buf[0].LASER_ON;
-        }
-        static public int Get_LaserDistance(this List<StorageUI_LCD_114.UDP_READ> uDP_READs, string IP)
-        {
-            List<StorageUI_LCD_114.UDP_READ> uDP_READs_buf = (from temp in uDP_READs
-                                                              where temp.IP == IP
-                                                              select temp).ToList();
-            if (uDP_READs_buf.Count == 0) return -999;
-            return uDP_READs_buf[0].LaserDistance;
-        }
-    }
+
     public partial class StorageUI_LCD_114 : StorageUI
     {
         [Serializable]
@@ -386,6 +368,26 @@ namespace H_Pannel_lib
             }
 
             
+    }
+
+    static public class StorageUI_LCD_114_Method
+    {
+        static public bool Get_LASER_ON(this List<StorageUI_LCD_114.UDP_READ> uDP_READs, string IP)
+        {
+            List<StorageUI_LCD_114.UDP_READ> uDP_READs_buf = (from temp in uDP_READs
+                                                              where temp.IP == IP
+                                                              select temp).ToList();
+            if (uDP_READs_buf.Count == 0) return false;
+            return uDP_READs_buf[0].LASER_ON;
+        }
+        static public int Get_LaserDistance(this List<StorageUI_LCD_114.UDP_READ> uDP_READs, string IP)
+        {
+            List<StorageUI_LCD_114.UDP_READ> uDP_READs_buf = (from temp in uDP_READs
+                                                              where temp.IP == IP
+                                                              select temp).ToList();
+            if (uDP_READs_buf.Count == 0) return -999;
+            return uDP_READs_buf[0].LaserDistance;
+        }
     }
 }
 

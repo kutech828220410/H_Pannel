@@ -755,6 +755,24 @@ namespace H_Pannel_lib
                     Task allTask = Task.WhenAll(taskList);
                     this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
                 }
+                else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD420有鎖控.GetEnumName())
+                {
+                    List<Task> taskList = new List<Task>();
+                    for (int i = 0; i < iPEndPoints.Count; i++)
+                    {
+                        string IP = iPEndPoints[i].Address.ToString();
+                        int Port = iPEndPoints[i].Port;
+                        Storage storage = this.SQL_GetStorage(IP);
+                        if (storage == null) continue;
+                        storage.SetDeviceType(DeviceType.EPD420_lock);
+                        taskList.Add(Task.Run(() =>
+                        {
+                            this.SQL_ReplaceStorage(storage);
+                        }));
+                    }
+                    Task allTask = Task.WhenAll(taskList);
+                    this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                }
             }
            
         }

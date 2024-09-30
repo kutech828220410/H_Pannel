@@ -1,7 +1,9 @@
 #include "Timer.h"
+#include "Config.h"
 #include "OLCD114.h"
 #include "arduino.h"
 #include "font.h"
+
 bool flag_LCD_init = true;
 //OLED的初始化
 void OLCD114::Lcd_Init()
@@ -9,10 +11,17 @@ void OLCD114::Lcd_Init()
     this->framebuffer = (uint16_t*) malloc(LCD_W * LCD_H * sizeof(uint16_t));
     pinMode(dc,OUTPUT);//设置数字11
     pinMode(cs,OUTPUT);//设置数字12 
-
+    #ifdef MCP23017
+    _mcp ->digitalWrite(/*pin = */_mcp -> eGPB7, true);
+    printf("(RST)mcp.eGPB7 'true' \n");
+    #endif
     LCD_WR_REG(0x11); 
     delay(300);
     OLED_CS_Clr();  
+    #ifdef MCP23017
+    _mcp ->digitalWrite(/*pin = */_mcp -> eGPB, /*Port Value = */0x80);
+    printf("(RST)/*pin = */_mcp -> eGPB, /*Port Value = */0x80 \n");
+    #endif
     delay(300);
     //************* Start Initial Sequence **********// 
     LCD_WR_REG(0x36); 
@@ -95,6 +104,9 @@ void OLCD114::Lcd_Init()
     
     LCD_WR_REG(0x29); 
     OLED_CS_Set();
+    #ifdef MCP23017
+    _mcp ->digitalWrite(/*pin = */_mcp -> eGPB, /*Port Value = */0xFF);
+    #endif
     flag_LCD_init = true;
 }
 void OLCD114::OLED_DC_Clr()
@@ -108,17 +120,34 @@ void OLCD114::OLED_DC_Set()
 void OLCD114::OLED_CS_Clr()
 {
   if(flag_LCD_init == false) SPI.beginTransaction(SPISettings(5000, MSBFIRST, SPI_MODE0));  // 开始 SPI 事务
-  digitalWrite(cs, LOW); //CS
+  digitalWrite(cs, LOW); //CS 
   if (flag_LCD_init == false)return;
   SPI.beginTransaction(SPISettings(80000000, MSBFIRST, SPI_MODE0));  // 开始 SPI 事务
+  #ifdef MCP23017
+  _mcp ->digitalWrite(_mcp ->eGPB0 , !(index == 0));
+  _mcp ->digitalWrite(_mcp ->eGPB1 , !(index == 1));
+  _mcp ->digitalWrite(_mcp ->eGPB2 , !(index == 2));
+  _mcp ->digitalWrite(_mcp ->eGPB3 , !(index == 3));
+  _mcp ->digitalWrite(_mcp ->eGPB4 , !(index == 4));
+  _mcp ->digitalWrite(_mcp ->eGPB5 , !(index == 5));
+  _mcp ->digitalWrite(_mcp ->eGPB6 , !(index == 6));
+  #endif
 
   
 }
 void OLCD114::OLED_CS_Set()
 {
-   digitalWrite(cs,HIGH);//CS
+   digitalWrite(cs,HIGH);//CS  
   if (flag_LCD_init == false)return;
-
+  #ifdef MCP23017
+  _mcp ->digitalWrite(_mcp ->eGPB0 , (index == 0));
+  _mcp ->digitalWrite(_mcp ->eGPB1 , (index == 1));
+  _mcp ->digitalWrite(_mcp ->eGPB2 , (index == 2));
+  _mcp ->digitalWrite(_mcp ->eGPB3 , (index == 3));
+  _mcp ->digitalWrite(_mcp ->eGPB4 , (index == 4));
+  _mcp ->digitalWrite(_mcp ->eGPB5 , (index == 5));
+  _mcp ->digitalWrite(_mcp ->eGPB6 , (index == 6));
+  #endif
   SPI.endTransaction();  // 结束 SPI 事务
 }
 /******************************************************************************

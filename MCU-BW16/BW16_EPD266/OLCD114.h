@@ -1,10 +1,13 @@
 #ifndef __OLCD114_h
 #define __OLCD114_h
 #include "Timer.h"
+#include "Config.h"
 #include <SPI.h>
 #include "Arduino.h"
 #include <SoftwareSerial.h>
-
+#ifdef MCP23017
+#include "DFRobot_MCP23017.h"
+#endif
 typedef void (*OutputHandle) (void);
 #define USE_HORIZONTAL 2  //设置横屏或者竖屏显示 0或1为竖屏 2或3为横屏
 
@@ -58,7 +61,10 @@ class OLCD114
    public:
    uint16_t* framebuffer;
    SoftwareSerial *mySerial;
-   int index = 0;
+   #ifdef MCP23017
+   DFRobot_MCP23017 *_mcp;
+   #endif
+   int index = 1;
    int dc=PA27;//定义数字接口11
    int cs=PA15;//定义数字接口12
    void Lcd_Init();
