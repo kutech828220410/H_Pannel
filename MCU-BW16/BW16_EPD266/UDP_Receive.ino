@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#define UDP_BUFFER_SIZE 50000
+#define UDP_BUFFER_SIZE 45000
 #define UDP_RX_BUFFER_SIZE 1500
 char* UdpRead;
 char* UdpRead_buf;

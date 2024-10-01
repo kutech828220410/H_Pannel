@@ -79,6 +79,12 @@ void serialEvent()
       mySerial.println(str_int);
       flag_WS2812B_Refresh = true;
     }
+    if (UART0_RX[0] == 'P')
+    {
+      mySerial.print("SetOutputPINTrigger(1 , (1 == 1));\n");
+      SetOutputPINTrigger(1 , true);
+    }
+    
     if (UART0_RX[0] == 2 && UART0_RX[UART0_len - 1] == 3)
     {
       if (UART0_RX[1] == '0' && UART0_len == 3)

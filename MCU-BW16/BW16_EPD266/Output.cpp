@@ -175,7 +175,7 @@ void MyOutput::Normal_Blink()
     State = true;
     if(PIN != -1)digitalWrite(PIN, this -> GetLogic(true));
     if(Output_ON != nullptr) Output_ON();
-    //Serial.printf("Output ON PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
+    printf("Output ON PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime );
     myTimer.StartTickTime(this -> OnDelayTime);
     (this -> cnt) = (this -> cnt) + 1 ;
   }
@@ -202,7 +202,7 @@ void MyOutput::Normal_Blink()
       if(PIN != -1)digitalWrite(PIN, this -> GetLogic(false));
       if(Output_OFF != nullptr) Output_OFF();
       myTimer.StartTickTime(this -> OnDelayTime);
-      //Serial.printf("Output OFF PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
+      printf("Output OFF PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
       (this -> cnt) = (this -> cnt) + 1 ;
     }
   }
