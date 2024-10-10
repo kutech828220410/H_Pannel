@@ -674,11 +674,11 @@ namespace H_Pannel_lib
             if (this.rJ_RatioButton_預設樣式1.Checked)
             {
                 currentStorage.Enum_drawType = Storage.enum_DrawType.type1;
-                panel_選擇項目.Enabled = false;
-                panel_字體.Enabled = false;
-                panel_字體型態.Enabled = false;
-                panel_邊框大小.Enabled = false;
-                groupBox_對齊方式.Enabled = false;
+                panel_選擇項目.Enabled = true;
+                panel_字體.Enabled = true;
+                panel_字體型態.Enabled = true;
+                panel_邊框大小.Enabled = true;
+                groupBox_對齊方式.Enabled = true;
                 DrawToPictureBox();
             }
         }
