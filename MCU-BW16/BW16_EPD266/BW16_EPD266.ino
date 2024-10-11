@@ -59,6 +59,7 @@ byte* framebuffer;
 MyTimer MyTimer_BoardInit;
 MyTimer MyTimer_OLCD_144_Init;
 MyTimer MyTimer_CheckWS2812;
+MyTimer MyTimer_CheckWIFI;
 
 bool flag_boradInit = false;
 bool flag_OLCD_144_boradInit = false;
@@ -72,11 +73,11 @@ TaskHandle_t Core0Task4Handle;
 
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
-
 void setup() 
 {
     MyTimer_BoardInit.StartTickTime(3000);          
     MyTimer_OLCD_144_Init.StartTickTime(5000);          
+    MyTimer_CheckWIFI.StartTickTime(20000);   
 }
 bool flag_pb2 = true;
 void loop() 
@@ -91,6 +92,8 @@ void loop()
    }
    if(MyTimer_BoardInit.IsTimeOut() && !flag_boradInit)
    {     
+
+      
       mySerial.begin(115200);        
       mySerial.println(VERSION);  
       
@@ -209,6 +212,11 @@ void Core0Task1( void * pvParameters )
           else
           {
               MyLED_IS_Connented.BlinkTime = 500;
+              if(MyTimer_CheckWIFI.IsTimeOut())
+              {
+                 mySerial.print("Wifi conneting failed....divice restart!");
+                 NVIC_SystemReset();
+              }
           }
           
           epd.Sleep_Check();
