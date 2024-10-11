@@ -854,7 +854,6 @@ C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Rel
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.exe
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.pdb
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\Newtonsoft.Json.dll
-C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\H_Pannel_lib.pdb
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\Newtonsoft.Json.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\PopupControl.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\SunnyUI.dll
@@ -1234,3 +1233,4 @@ C:\Users\hmisa\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_P
 C:\Users\hmisa\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.pdb
 C:\Users\hmisa\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\H_Pannel_lib.pdb
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.csproj.AssemblyReference.cache
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\H_Pannel_lib.pdb

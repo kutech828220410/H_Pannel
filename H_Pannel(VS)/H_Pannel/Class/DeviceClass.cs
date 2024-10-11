@@ -645,7 +645,11 @@ namespace H_Pannel_lib
         }
 
         private string _CustomText1 = "";
-        public string CustomText1 { get => _CustomText1; set => _CustomText1 = value; }
+        public string CustomText1 
+        {
+            get => _CustomText1; 
+            set => _CustomText1 = value;
+        }
         private string _CustomText2 = "";
         public string CustomText2 { get => _CustomText2; set => _CustomText2 = value; }
         private string _CustomText3 = "";
@@ -4661,13 +4665,20 @@ namespace H_Pannel_lib
                 this.ForeColor = device.ForeColor;
                 for (int i = 0; i < new ValueName().GetEnumNames().Length; i++)
                 {
+                    ValueName valueName = (ValueName)i;
                     for (int k = 0; k < new ValueType().GetEnumNames().Length; k++)
                     {
-                        if ((ValueType)k == ValueType.StringValue) continue;
-                        if ((ValueType)k == ValueType.Value) continue;
-                        if ((ValueType)k == ValueType.Title) continue;
-                        object value = device.GetValue((ValueName)i, (ValueType)k);
-                        this.SetValue((ValueName)i, (ValueType)k, value);
+                        ValueType valueType = (ValueType)k;
+
+
+                        if (valueName != ValueName.圖片1 && valueName != ValueName.圖片2 )
+                        {
+                            if (valueType == ValueType.StringValue) continue;
+                            if (valueType == ValueType.Value) continue;
+                            if (valueType == ValueType.Title) continue;
+                        }
+                        object value = device.GetValue(valueName, valueType);
+                        this.SetValue(valueName, valueType, value);
                     }
                 }
                 this.Speaker = device.Speaker;

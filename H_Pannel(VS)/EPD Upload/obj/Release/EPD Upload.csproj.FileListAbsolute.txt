@@ -66,7 +66,6 @@ C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.exe
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.pdb
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\Newtonsoft.Json.dll
-C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\H_Pannel_lib.pdb
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\Newtonsoft.Json.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\PopupControl.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\SunnyUI.dll
@@ -422,3 +421,4 @@ C:\Users\hmisa\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upl
 C:\Users\hmisa\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.exe
 C:\Users\hmisa\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.pdb
 C:\Users\hmisa\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\H_Pannel_lib.pdb
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\H_Pannel_lib.pdb
