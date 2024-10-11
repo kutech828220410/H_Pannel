@@ -39,15 +39,10 @@ void serialEvent()
         ota_platform_reset();
       }
     }
-    if (UART0_RX[0] == 'r' && UART0_len == 3)
+    if (UART0_RX[0] == 'r')
     {
-      String str = "";
-      str += (char)UART0_RX[0];
-      str += (char)UART0_RX[1];
-      str += (char)UART0_RX[2];
-      mySerial.print("TOF10120 read command : ");
-      mySerial.println(str);
-      mySerial2.print(str);
+       mySerial.print("Wifi conneting failed....divice restart!");
+       sys_reset();
     }
     if (UART0_RX[0] == 's')
     {

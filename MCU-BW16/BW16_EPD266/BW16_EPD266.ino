@@ -17,6 +17,10 @@
 #include <SPI.h>
 #include <SD.h>
 #include <SoftwareSerial.h>
+#include "ard_socket.h"
+#include "flash_api.h"
+#include "sys_api.h"
+#include "mDNS.h"
 
 #ifdef MCP23017
 #include "DFRobot_MCP23017.h"
@@ -73,11 +77,15 @@ TaskHandle_t Core0Task4Handle;
 
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
+
 void setup() 
 {
+    mySerial.begin(115200);        
+    mySerial.println(VERSION); 
+    delay(500);
     MyTimer_BoardInit.StartTickTime(3000);          
     MyTimer_OLCD_144_Init.StartTickTime(5000);          
-    MyTimer_CheckWIFI.StartTickTime(20000);   
+    MyTimer_CheckWIFI.StartTickTime(30000);   
 }
 bool flag_pb2 = true;
 void loop() 
@@ -93,9 +101,6 @@ void loop()
    if(MyTimer_BoardInit.IsTimeOut() && !flag_boradInit)
    {     
 
-      
-      mySerial.begin(115200);        
-      mySerial.println(VERSION);  
       
       #ifdef MCP23017
       while(mcp.begin() != 0)
