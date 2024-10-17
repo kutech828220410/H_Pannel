@@ -782,11 +782,11 @@ namespace H_Pannel_lib
                 int EPD266_frameDIV = 0;
                 if (Chip_Type == ChipType.ESP32)
                 {
-                    EPD266_frameDIV = 1;
+                    EPD266_frameDIV = 4;
                 }
                 if (Chip_Type == ChipType.BW16)
                 {
-                    EPD266_frameDIV = 1;
+                    EPD266_frameDIV = 4;
                 }
 
                 bool flag_OK;

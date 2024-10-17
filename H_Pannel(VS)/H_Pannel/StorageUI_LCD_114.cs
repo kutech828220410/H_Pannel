@@ -267,14 +267,10 @@ namespace H_Pannel_lib
                         {
                             string IP = iPEndPoints[i].Address.ToString();
                             int Port = iPEndPoints[i].Port;
-                            Storage storage = this.SQL_GetStorage(IP);
-                            if (storage != null)
+                            taskList.Add(Task.Run(() =>
                             {
-                                taskList.Add(Task.Run(() =>
-                                {
-                                    DrawImage(IP, Port, "測試", new Font("標楷體", 70, FontStyle.Bold), Color.White, Color.Red);
-                                }));
-                            }
+                                DrawImage(IP, Port, "---", new Font("標楷體", 70, FontStyle.Bold), Color.White, Color.Blue);
+                            }));
 
                         }
                         Task allTask = Task.WhenAll(taskList);
@@ -307,65 +303,61 @@ namespace H_Pannel_lib
             }
         }
         private void StorageUI_LCD_114_UDP_DataReceiveMouseDownRightEvent(string selectedText, List<System.Net.IPEndPoint> iPEndPoints)
+        {
+            if (selectedText == ContextMenuStrip_Main.畫面設置.GetEnumName())
             {
-                if (selectedText == ContextMenuStrip_Main.畫面設置.GetEnumName())
+                Dialog_ContextMenuStrip dialog_ContextMenuStrip = new Dialog_ContextMenuStrip(new ContextMenuStrip_UDP_DataReceive_畫面設置().GetEnumNames());
+                if (dialog_ContextMenuStrip.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
                 {
-                    Dialog_ContextMenuStrip dialog_ContextMenuStrip = new Dialog_ContextMenuStrip(new ContextMenuStrip_UDP_DataReceive_畫面設置().GetEnumNames());
-                    if (dialog_ContextMenuStrip.ShowDialog() == System.Windows.Forms.DialogResult.Yes)
+                    if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_畫面設置.清除畫布.GetEnumName())
                     {
-                        if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_畫面設置.清除畫布.GetEnumName())
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
                         {
-                            List<Task> taskList = new List<Task>();
-                            for (int i = 0; i < iPEndPoints.Count; i++)
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Storage storage = this.SQL_GetStorage(IP);
+                            if (storage == null) continue;
+                            Bitmap bmp = null;
+                            bmp = new Bitmap(storage.PanelSize.Width, storage.PanelSize.Height);
+                            Graphics g = Graphics.FromImage(bmp);
+                            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
+                            g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            g.CompositingQuality = CompositingQuality.HighQuality;
+                            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+                            g.FillRectangle(new SolidBrush(Color.Red), rect);
+                            g.Dispose();
+
+                            taskList.Add(Task.Run(() =>
                             {
-                                string IP = iPEndPoints[i].Address.ToString();
-                                int Port = iPEndPoints[i].Port;
-                                Storage storage = this.SQL_GetStorage(IP);
-                                if (storage == null) continue;
-                                Bitmap bmp = null;
-                                bmp = new Bitmap(storage.PanelSize.Width, storage.PanelSize.Height);
-                                Graphics g = Graphics.FromImage(bmp);
-                                Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                                g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
-                                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                                g.CompositingQuality = CompositingQuality.HighQuality;
-                                g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
-                                g.FillRectangle(new SolidBrush(Color.Red), rect);
-                                g.Dispose();
-
-                                taskList.Add(Task.Run(() =>
-                                {
-                                    DrawImage(IP, Port, Color.White);
-                                    bmp.Dispose();
-                                }));
-                            }
-                            Task allTask = Task.WhenAll(taskList);
+                                DrawImage(IP, Port, Color.White);
+                                bmp.Dispose();
+                            }));
                         }
-                        else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_畫面設置.測試資訊.GetEnumName())
-                        {
-                            List<Task> taskList = new List<Task>();
-                            for (int i = 0; i < iPEndPoints.Count; i++)
-                            {
-                                string IP = iPEndPoints[i].Address.ToString();
-                                int Port = iPEndPoints[i].Port;
-                                Storage storage = this.SQL_GetStorage(IP);
-                                if (storage != null)
-                                {
-                                    taskList.Add(Task.Run(() =>
-                                    {
-                                        DrawImage(IP, Port, "測試", new Font("標楷體", 70, FontStyle.Bold), Color.White, Color.Red);
-                                    }));
-                                }
-
-                            }
-                            Task allTask = Task.WhenAll(taskList);
-                        }
-
+                        Task allTask = Task.WhenAll(taskList);
                     }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_畫面設置.測試資訊.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            taskList.Add(Task.Run(() =>
+                            {
+                                DrawImage(IP, Port, "---", new Font("標楷體", 70, FontStyle.Bold), Color.White, Color.Blue);
+                            }));
+
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                    }
+
                 }
-
-
             }
+
+
+        }
 
             
     }

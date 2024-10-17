@@ -17,10 +17,6 @@
 #include <SPI.h>
 #include <SD.h>
 #include <SoftwareSerial.h>
-#include "ard_socket.h"
-#include "flash_api.h"
-#include "sys_api.h"
-#include "mDNS.h"
 
 #ifdef MCP23017
 #include "DFRobot_MCP23017.h"
@@ -77,15 +73,11 @@ TaskHandle_t Core0Task4Handle;
 
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
-
 void setup() 
 {
-    mySerial.begin(115200);        
-    mySerial.println(VERSION); 
-    delay(500);
     MyTimer_BoardInit.StartTickTime(3000);          
     MyTimer_OLCD_144_Init.StartTickTime(5000);          
-    MyTimer_CheckWIFI.StartTickTime(30000);   
+    MyTimer_CheckWIFI.StartTickTime(180000);   
 }
 bool flag_pb2 = true;
 void loop() 
@@ -94,13 +86,20 @@ void loop()
    {
       if(Device == "OLCD_114")
       {
-        OLCD114.LCD_Clear(BLACK);
+        mySerial.println("OLCD114 device init ...");
+        OLCD114.mySerial = &mySerial;
+        OLCD114.Lcd_Init();
+        delay(200);
+        OLCD114.LCD_Clear(GRAY);
       }     
       flag_OLCD_144_boradInit = true;
    }
    if(MyTimer_BoardInit.IsTimeOut() && !flag_boradInit)
    {     
 
+      
+      mySerial.begin(115200);        
+      mySerial.println(VERSION);  
       
       #ifdef MCP23017
       while(mcp.begin() != 0)
@@ -137,12 +136,15 @@ void loop()
       
       OLCD114._mcp = &mcp;
       mySerial.println("mcp.pinMode....ok");   
+      delay(200);
       #endif
       
       wiFiConfig.mySerial = &mySerial;
       epd.mySerial = &mySerial;
       wiFiConfig.Init(VERSION);
+      delay(200);
       IO_Init();
+      delay(200);
       if(EPD_TYPE == "EPD266" || EPD_TYPE == "EPD290" || EPD_TYPE == "EPD420")
       {
          wiFiConfig.Set_Serverport(30000);
@@ -157,22 +159,20 @@ void loop()
       GetwayStr = wiFiConfig.Get_Gateway_Str();
       MyLED_IS_Connented.Init(SYSTEM_LED_PIN);
       SPI.begin(); //SCLK, MISO, MOSI, SS
+      delay(200);
       myWS2812.Init(NUM_WS2812B_CRGB);
       
       if(Device == "EPD")
       {
         mySerial.println("EPD device init ...");
         epd.Init(); 
-        
+        delay(200);
       }
-      if(Device == "OLCD_114")
-      {
-        mySerial.println("OLCD114 device init ...");
-        OLCD114.mySerial = &mySerial;
-        OLCD114.Lcd_Init();        
-      }
-      xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle);     
+     
+      xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle); 
+//      delay(200);    
       xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
+//      delay(200);
       flag_boradInit = true;
    }
    if(flag_boradInit)

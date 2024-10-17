@@ -21,11 +21,11 @@ bool MyWS2812::IsON(int lednum)
 { 
     for(int i = 0 ; i < lednum ;i++)
     {
-        if(*(rgbBuffer + (i + offset)* 3 + 0) > 0) return true;
-        if(*(rgbBuffer + (i + offset)* 3 + 1) > 0) return true;
-        if(*(rgbBuffer + (i + offset)* 3 + 2) > 0) return true;
+        if(*(rgbBuffer + (i + 0)* 3 + 0) > 0) return true;
+        if(*(rgbBuffer + (i + 0)* 3 + 1) > 0) return true;
+        if(*(rgbBuffer + (i + 0)* 3 + 2) > 0) return true;
     }
-    return false;     
+    return flag_IS_ON;     
 }
 
 byte* MyWS2812::GetRGB()
@@ -57,14 +57,18 @@ void MyWS2812::Show(byte bytes[] , int _numOfLed)
     
     digitalWrite(this -> PIN_CS , HIGH);
     delay(10);
-
-     for(int i = 0 ; i < offset * 24; i++)
+    flag_IS_ON = false;
+    for(int i = 0 ; i < offset * 24; i++)
     {
       *(rgbBytesBuffer + i) = 0;
     }
     for(int i = 0 ; i < _numOfLed ;i++)
     {
         RGBConvert2812Bytes(i + offset, bytes[i * 3 + 0], bytes[i * 3 + 1], bytes[i * 3 + 2]);  
+
+        if((bytes[i * 3 + 0]) > 0) flag_IS_ON = true;
+        if((bytes[i * 3 + 1]) > 0) flag_IS_ON = true;
+        if((bytes[i * 3 + 2]) > 0) flag_IS_ON = true;
     }    
     
     SPI.begin(); 

@@ -1,14 +1,16 @@
 #include "Timer.h"
-#define UART1_RX_SIZE 1024
+#define UART1_RX_SIZE 256
 byte UART1_RX[UART1_RX_SIZE];
 int UART1_len;
 MyTimer MyTimer_UART1;
 String str_distance = "999";
 String str_TOF10120 = "";
 int LaserDistance = -999;
+int LASER_ON_cnt = 0;
 bool LASER_ON = false;
 bool LASER_ON_buf = false;
 bool flag_UART1_Init = false;
+int LASER_ON_num = 0;
 void serial2Event()
 {
   if(!flag_UART1_Init)
@@ -56,10 +58,34 @@ void serial2Event()
       }
 
       LaserDistance = str_distance.toInt();
-      LASER_ON = (LaserDistance <= LASER_D);
+      if((LaserDistance <= LASER_D_MAX) && (LaserDistance >= LASER_D_MIN))
+      {
+         LASER_ON_cnt++;
+      }
+      else
+      {
+         LASER_ON_cnt = 0;
+         LASER_ON = false;
+      }
+      if(LASER_ON_cnt >= 2)
+      {
+         LASER_ON = true;
+      }
+      else
+      {
+         LASER_ON = false;
+      }
+      if(LASER_ON == true)
+      {
+         flag_JsonSend = true;
+      }
       if(LASER_ON_buf != LASER_ON)
       {
          LASER_ON_buf = LASER_ON;
+         if(LASER_ON)
+         {
+           LASER_ON_num++;
+         }
          flag_JsonSend = true;
       }
 //      mySerial.print("LaserDistance : ");

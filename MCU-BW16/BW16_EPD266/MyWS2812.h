@@ -24,6 +24,7 @@ class MyWS2812
    private:  
     
     int offset = 5;
+    bool flag_IS_ON = false;
     byte rgbBytesBuffer[500 *24];
     void RGBConvert2812Bytes(int lednum ,byte R, byte G, byte B);
     void RGBConvert2812Bytes(byte R, byte G, byte B, byte* bytes);

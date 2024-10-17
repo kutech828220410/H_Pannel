@@ -263,6 +263,7 @@ void onPacketCallBack()
 //            flag_WS2812B_Refresh = true;
             myWS2812.Show(bytes ,numofLED );
             Get_Checksum_UDP();
+            flag_JsonSend = true;
           }
           else if (*(UdpRead + 1) == 'O')
           {           
