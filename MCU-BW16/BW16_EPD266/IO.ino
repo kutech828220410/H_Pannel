@@ -1,3 +1,26 @@
+#ifdef MCP23017
+#define INPUT_PIN01 0
+#define INPUT_PIN02 1
+#define INPUT_PIN03 2
+#define INPUT_PIN04 3
+#define INPUT_PIN05 4
+#define INPUT_PIN06 5
+#define INPUT_PIN07 6
+#define INPUT_PIN08 7
+#define INPUT_PIN09 -1
+#define INPUT_PIN10 -1
+
+#define OUTPUT_PIN01 8
+#define OUTPUT_PIN02 9
+#define OUTPUT_PIN03 10
+#define OUTPUT_PIN04 11
+#define OUTPUT_PIN05 12
+#define OUTPUT_PIN06 13
+#define OUTPUT_PIN07 14
+#define OUTPUT_PIN08 15
+#define OUTPUT_PIN09 -1
+#define OUTPUT_PIN10 -1
+#else
 #define INPUT_PIN01 PB2
 #define INPUT_PIN02 -1
 #define INPUT_PIN03 -1
@@ -19,6 +42,7 @@
 #define OUTPUT_PIN08 -1
 #define OUTPUT_PIN09 -1
 #define OUTPUT_PIN10 -1
+#endif
 
 MyOutput MyOutput_PIN01;
 MyOutput MyOutput_PIN02;
@@ -60,7 +84,29 @@ void IO_Init()
     Output_dir = wiFiConfig.Get_Output_dir();
     Set_Output_dir(Output_dir);
 
+    #ifdef MCP23017
+    MyOutput_PIN01.Init(OUTPUT_PIN01 ,mcp);
+    MyOutput_PIN02.Init(OUTPUT_PIN02 ,mcp);
+    MyOutput_PIN03.Init(OUTPUT_PIN03 ,mcp);
+    MyOutput_PIN04.Init(OUTPUT_PIN04 ,mcp);
+    MyOutput_PIN05.Init(OUTPUT_PIN05 ,mcp);
+    MyOutput_PIN06.Init(OUTPUT_PIN06 ,mcp);
+    MyOutput_PIN07.Init(OUTPUT_PIN07 ,mcp);
+    MyOutput_PIN08.Init(OUTPUT_PIN08 ,mcp);
+    MyOutput_PIN09.Init(OUTPUT_PIN09);
+    MyOutput_PIN10.Init(OUTPUT_PIN10);
     
+    MyInput_PIN01.Init(INPUT_PIN01 ,mcp);
+    MyInput_PIN02.Init(INPUT_PIN02 ,mcp);
+    MyInput_PIN03.Init(INPUT_PIN03 ,mcp);
+    MyInput_PIN04.Init(INPUT_PIN04 ,mcp);
+    MyInput_PIN05.Init(INPUT_PIN05 ,mcp);
+    MyInput_PIN06.Init(INPUT_PIN06 ,mcp);
+    MyInput_PIN07.Init(INPUT_PIN07 ,mcp);
+    MyInput_PIN08.Init(INPUT_PIN08 ,mcp);
+    MyInput_PIN09.Init(INPUT_PIN09);
+    MyInput_PIN10.Init(INPUT_PIN10);
+    #else
     MyOutput_PIN01.Init(INPUT_PIN01,OUTPUT_PIN01);
     MyOutput_PIN02.Init(OUTPUT_PIN02);
     MyOutput_PIN03.Init(OUTPUT_PIN03);
@@ -82,6 +128,8 @@ void IO_Init()
     MyInput_PIN08.Init(INPUT_PIN08);
     MyInput_PIN09.Init(INPUT_PIN09);
     MyInput_PIN10.Init(INPUT_PIN10);
+    #endif
+ 
 
   
 }
@@ -352,6 +400,31 @@ void SetOutput(int value)
     if(((value >> 9) % 2 ) ==  0) MyOutput_PIN10.Set_State(true);
     else MyOutput_PIN10.Set_State(false);   
 }
+#ifdef MCP23017
+void SetOutputEx(int value)
+{
+    if(((value >> 0) % 2 ) ==  0) MyOutput_PIN01.Set_StateEx(true);
+    else MyOutput_PIN01.Set_StateEx(false);
+    if(((value >> 1) % 2 ) ==  0) MyOutput_PIN02.Set_StateEx(true);
+    else MyOutput_PIN02.Set_StateEx(false);
+    if(((value >> 2) % 2 ) ==  0) MyOutput_PIN03.Set_StateEx(true);
+    else MyOutput_PIN03.Set_StateEx(false);
+    if(((value >> 3) % 2 ) ==  0) MyOutput_PIN04.Set_StateEx(true);
+    else MyOutput_PIN04.Set_StateEx(false);
+    if(((value >> 4) % 2 ) ==  0) MyOutput_PIN05.Set_StateEx(true);
+    else MyOutput_PIN05.Set_StateEx(false);
+    if(((value >> 5) % 2 ) ==  0) MyOutput_PIN06.Set_StateEx(true);
+    else MyOutput_PIN06.Set_StateEx(false);
+    if(((value >> 6) % 2 ) ==  0) MyOutput_PIN07.Set_StateEx(true);
+    else MyOutput_PIN07.Set_StateEx(false);
+    if(((value >> 7) % 2 ) ==  0) MyOutput_PIN08.Set_StateEx(true);
+    else MyOutput_PIN08.Set_StateEx(false);
+    if(((value >> 8) % 2 ) ==  0) MyOutput_PIN09.Set_StateEx(true);
+    else MyOutput_PIN09.Set_StateEx(false);
+    if(((value >> 9) % 2 ) ==  0) MyOutput_PIN10.Set_StateEx(true);
+    else MyOutput_PIN10.Set_StateEx(false);   
+}
+#endif
 void SetOutputPIN(byte pin_num , bool value)
 {
     if(pin_num == 1) MyOutput_PIN01.Set_State(value);

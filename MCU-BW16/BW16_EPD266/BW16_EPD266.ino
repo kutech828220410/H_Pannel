@@ -150,7 +150,11 @@ void loop()
          wiFiConfig.Set_Serverport(30000);
       }
       if(Device == "RowLED") wiFiConfig.Set_Serverport(30001);
-      if(Device == "OLCD114") wiFiConfig.Set_Serverport(30008);
+      if(Device == "OLCD114") 
+      {
+        wiFiConfig.Set_Localport(29008);
+        wiFiConfig.Set_Serverport(30008);
+      }
       
       Localport = wiFiConfig.Get_Localport();
       Serverport = wiFiConfig.Get_Serverport();

@@ -365,15 +365,23 @@ void onPacketCallBack()
           }
           else if(*(UdpRead + 1) == 'Q')
           {                  
+             #ifdef MCP23017
+
+             #else
              int pin_num = *(UdpRead + 2);
              int value = *(UdpRead + 3);
              if(flag_udp_232back)printf("Set_OutputPINTrigger : [PIN Num]%d [value]%d\n" , pin_num , value);
              MyOutput_PIN01.ADC_Mode = false;
              SetOutputPINTrigger(pin_num , (value == 1));
              Get_Checksum_UDP();
+             #endif
+    
           }
           else if(*(UdpRead + 1) == '!')
-          {                  
+          {
+             #ifdef MCP23017
+             
+             #else
              int pin_num = *(UdpRead + 2);
              int time_ms_L = *(UdpRead + 3);
              int time_ms_H = *(UdpRead + 4);
@@ -382,6 +390,8 @@ void onPacketCallBack()
 
              if(flag_udp_232back)printf("Set_ADCMotorTrigger : [PIN Num]%d [time_ms]%d\n" , pin_num , time_ms);
              Get_Checksum_UDP();
+             #endif                  
+             
           }
           else if(*(UdpRead + 1) == 'R')
           {                  
