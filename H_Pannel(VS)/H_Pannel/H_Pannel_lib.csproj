@@ -116,6 +116,12 @@
     <Compile Include="Class\DeviceClass.cs" />
     <Compile Include="Class\RFIDClass.cs" />
     <Compile Include="Class\RowsLEDClass.cs" />
+    <Compile Include="Dialog\Dialog_DrawerHandSensorCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Dialog_DrawerHandSensorCheck.Designer.cs">
+      <DependentUpon>Dialog_DrawerHandSensorCheck.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\Dialog_Pannel35.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -323,6 +329,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Dialog\Dialog_DrawerHandSensorCheck.resx">
+      <DependentUpon>Dialog_DrawerHandSensorCheck.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialog\Dialog_Pannel35.resx">
       <DependentUpon>Dialog_Pannel35.cs</DependentUpon>
     </EmbeddedResource>

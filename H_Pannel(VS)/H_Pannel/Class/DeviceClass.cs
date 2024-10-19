@@ -1318,7 +1318,14 @@ namespace H_Pannel_lib
             }
             return null;
         }
-
+        static public bool DeviceIsStorage(this Device device)
+        {
+            bool flag = (device.DeviceType == DeviceType.EPD266 || device.DeviceType == DeviceType.EPD266_lock
+                        || device.DeviceType == DeviceType.EPD290 || device.DeviceType == DeviceType.EPD290_lock
+                        || device.DeviceType == DeviceType.EPD420 || device.DeviceType == DeviceType.EPD420_lock
+                        || device.DeviceType == DeviceType.EPD213 || device.DeviceType == DeviceType.EPD213_lock);
+            return flag;
+        }
         
         static public int GetInventory(this List<DeviceBasic> deviceBasics)
         {

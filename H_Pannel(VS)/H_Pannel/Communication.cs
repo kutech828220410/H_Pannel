@@ -1040,6 +1040,7 @@ namespace H_Pannel_lib
         }
         static public bool LCD_DrawImageEx(UDP_Class uDP_Class, string IP, byte[] datas, int Split_DataSize, Color ForeColoe, Color BackColor)
         {
+            MyTimerBasic myTimerBasic = new MyTimerBasic(40000);
             int Width_Size = Split_DataSize;
             int NumOfArray = datas.Length / (Split_DataSize);
             List<byte[]> list_data = new List<byte[]>();
@@ -1056,17 +1057,20 @@ namespace H_Pannel_lib
             {
                 return false;
             }
+            Console.WriteLine($"[LCD_DrawImageEx][LCD114_FontColor]{myTimerBasic}");
             for (int i = 0; i < NumOfArray; i++)
             {
                 if (!Command_FramebufferEx(uDP_Class, IP, (i * Width_Size * 8) , list_data[i] , list_data[i].Length * 8))
                 {
                     return false;
                 }
+                Console.WriteLine($"[LCD_DrawImageEx][FramebufferEx-{i} ,length:{list_data[i].Length}]{myTimerBasic}");
             }
             if (!Command_DrawCanvas(uDP_Class, IP))
             {
                 return false;
             }
+            Console.WriteLine($"[LCD_DrawImageEx][Command_DrawCanvas]{myTimerBasic}");
             return true;
         }
 

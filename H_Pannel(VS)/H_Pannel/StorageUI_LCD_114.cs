@@ -15,6 +15,7 @@ namespace H_Pannel_lib
 
     public partial class StorageUI_LCD_114 : StorageUI
     {
+        public List<UDP_READ> UDP_READs = new List<UDP_READ>();
         [Serializable]
         public class UDP_READ
         {
@@ -198,6 +199,18 @@ namespace H_Pannel_lib
             }
             return -999;
         }
+        public void UDP_READ_Update()
+        {
+            UDP_READs = GerAllUDP_READ();
+        }
+        public bool Get_LASER_ON(string IP)
+        {
+            List<UDP_READ> uDP_READs_buf = (from temp in UDP_READs
+                                            where temp.IP == IP
+                                            select temp).ToList();
+            if (uDP_READs_buf.Count == 0) return false;
+            return uDP_READs_buf[0].LASER_ON;
+        }
         public List<UDP_READ> GerAllUDP_READ()
         {
             List<UDP_READ> uDP_READs = new List<UDP_READ>();
@@ -213,7 +226,7 @@ namespace H_Pannel_lib
 
             return uDP_READs;
         }
- 
+        
         public int Get_LaserDistance(Storage storage)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(storage.Port);
@@ -286,14 +299,14 @@ namespace H_Pannel_lib
 
                     if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_IO設定.IO測試.GetEnumName())
                     {
-                        List<object[]> list_value = this.sqL_DataGridView_DeviceTable.Get_All_Select_RowsValues();
-                        if (list_value.Count == 0) return;
-                        string IP = list_value[0][(int)enum_DeviceTable.IP].ObjectToString();
-                        int Port = list_value[0][(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
-                        UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-                        if (uDP_Class == null) return;
-                        Dialog_IO測試 Dialog_IO測試 = new Dialog_IO測試(uDP_Class, IP, list_UDP_Rx);
-                        Dialog_IO測試.ShowDialog();
+                        //List<object[]> list_value = this.sqL_DataGridView_DeviceTable.Get_All_Select_RowsValues();
+                        //if (list_value.Count == 0) return;
+                        //string IP = list_value[0][(int)enum_DeviceTable.IP].ObjectToString();
+                        //int Port = list_value[0][(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
+                        //UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                        //if (uDP_Class == null) return;
+                        Dialog_DrawerHandSensorCheck dialog_DrawerHandSensorCheck = new Dialog_DrawerHandSensorCheck( IP, list_UDP_Rx);
+                        dialog_DrawerHandSensorCheck.ShowDialog();
                     }
 
 
@@ -355,7 +368,29 @@ namespace H_Pannel_lib
 
                 }
             }
+            else if (selectedText == ContextMenuStrip_Main.IO設定.GetEnumName())
+            {
+                Dialog_ContextMenuStrip dialog_ContextMenuStrip = new Dialog_ContextMenuStrip(new ContextMenuStrip_UDP_DataReceive_IO設定().GetEnumNames());
+                if (dialog_ContextMenuStrip.ShowDialog() == DialogResult.Yes)
+                {
 
+                    if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_IO設定.IO測試.GetEnumName())
+                    {
+                        List<object[]> list_value = this.sqL_DataGridView_UDP_DataReceive.Get_All_Select_RowsValues();
+                        if (list_value.Count == 0) return;
+                        string IP = list_value[0][(int)enum_UDP_DataReceive.IP].ObjectToString();
+                        int Port = list_value[0][(int)enum_UDP_DataReceive.Port].ObjectToString().StringToInt32();
+                        UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                        if (uDP_Class == null) return;
+                        Dialog_DrawerHandSensorCheck dialog_DrawerHandSensorCheck = new Dialog_DrawerHandSensorCheck(IP, list_UDP_Rx);
+                        dialog_DrawerHandSensorCheck.ShowDialog();
+                    }
+
+
+                }
+
+
+            }
 
         }
 
