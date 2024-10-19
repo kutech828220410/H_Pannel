@@ -157,7 +157,6 @@ void OLCD114::OLED_CS_Set()
 ******************************************************************************/
 void OLCD114::LCD_Writ_Bus(uint8_t dat)
 {
-  uint8_t i;
   SPI.transfer(dat);
 }
 /******************************************************************************
@@ -501,9 +500,12 @@ void OLCD114::LCD_ShowPicture()
   OLED_CS_Clr();  
   short int i,j;    
   LCD_Address_Set(0,0,LCD_W-1,LCD_H-1);
+  OLED_DC_Set();
+  
   for( i = 0 ; i < LCD_H * LCD_W; i++)
   {
-    LCD_WR_DATA((*(framebuffer + i)));
+    LCD_Writ_Bus((*(framebuffer + i))>>8);
+    LCD_Writ_Bus((*(framebuffer + i)));
   }
   OLED_CS_Set();
 }

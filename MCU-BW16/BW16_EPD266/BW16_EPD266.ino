@@ -28,7 +28,7 @@ DFRobot_MCP23017 mcp(Wire, /*addr =*/0x20);//constructor, change the Level of A2
 #define NUM_OF_LEDS NUM_WS2812B_CRGB
 #define SYSTEM_LED_PIN PA30
 
-bool flag_udp_232back = true;
+bool flag_udp_232back = false;
 bool flag_JsonSend = false;
 bool flag_writeMode = false;
 
@@ -283,7 +283,7 @@ void Core0Task1( void * pvParameters )
           }  
        }
           
-       delay(1);
+       delay(10);
     }
     
 }
@@ -306,8 +306,7 @@ void Core0Task2( void * pvParameters )
              
           }
        }
-//          
-//       delay(20000);
+      delay(10);
     }
     
 }

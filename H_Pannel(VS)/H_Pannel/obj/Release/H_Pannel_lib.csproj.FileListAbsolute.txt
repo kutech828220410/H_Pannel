@@ -2035,3 +2035,15 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.LCD114_Panel.resources
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.StorageUI_LCD_114.resources
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Dialog_DrawerHandSensorCheck.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Dialog_DrawerHandSensorCheck.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Dialog_EPD730_顏色選擇.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Dialog_RWB_顏色選擇.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Resource1.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.StorageUI_EPD_266.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.StorageUI_LCD_114.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.EPD213_Paint_Form.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.EPD266_Paint_Form.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.EPD420_Paint_Form.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.EPD290_Paint_Form.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.LCD114_Panel.resources
+C:\Users\User\Desktop\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.StoragePanel.resources

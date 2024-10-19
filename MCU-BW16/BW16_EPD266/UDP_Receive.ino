@@ -47,34 +47,19 @@ void onPacketCallBack()
         packet_UDP0 = Udp.parsePacket();
         if(packet_UDP0 > 0) flag_UDP0_packet = true;
      }
-//     if(flag_UDP0_packet ==false)
-//     {
-//        packet_UDP1 = Udp1.parsePacket();
-//        if(packet_UDP1 > 0) flag_UDP1_packet = true;
-//     }
-  
-     
+
      if(packet_UDP0 > 0 || packet_UDP1 > 0)
      {
         int len = 0;
         if(packet_UDP0 > 0)
-        {
-                 
+        {               
             len = Udp.read(UdpRead_buf, UDP_RX_BUFFER_SIZE - 1);
-//            mySerial.println("UDP <0> have packet");
         }
-//        if(packet_UDP1 > 0)
-//        {
-//            remoteIP = Udp1.remoteIP();
-//            remotePort = Udp1.remotePort();
-//            len = Udp1.read(UdpRead_buf, UDP_RX_BUFFER_SIZE - 1);
-//            mySerial.println("UDP <1> have packet");
-//        }
         if(flag_UDP_header)
         {
             if(len != 4)
             {
-               mySerial.println("Received header length error!!");
+               if(flag_udp_232back)mySerial.println("Received header length error!!");
                break;
             }
             int len_LL = *(UdpRead_buf + 0);
@@ -85,8 +70,8 @@ void onPacketCallBack()
             int len_H = len_HL | (len_HH << 8);
             UDPcheck_len = len_L | (len_H << 16); 
             flag_UDP_header = false;
-            mySerial.print("Received header length : ");
-            mySerial.println(UDPcheck_len);
+            if(flag_udp_232back)mySerial.print("Received header length : ");
+            if(flag_udp_232back)mySerial.println(UDPcheck_len);
         }
         else
         {
@@ -95,8 +80,8 @@ void onPacketCallBack()
              *(UdpRead + UdpRead_len + i) = *(UdpRead_buf + i);
           }
           UdpRead_len += len;
-          mySerial.print("Received len sumary :");
-          mySerial.println(UdpRead_len);
+          if(flag_udp_232back)mySerial.print("Received len sumary :");
+          if(flag_udp_232back)mySerial.println(UdpRead_len);
           if(UDPcheck_len == UdpRead_len)
           {
              if(*(UdpRead + UdpRead_len - 1) == 3)
@@ -104,7 +89,7 @@ void onPacketCallBack()
                 remoteIP = Udp.remoteIP();
                 remotePort = Udp.remotePort();  
                 flag_UDP_RX_OK = true;
-                mySerial.println("Received End code!!");
+                if(flag_udp_232back)mySerial.println("Received End code!!");
                 break;
              }              
           }    
@@ -118,7 +103,7 @@ void onPacketCallBack()
         {
           if(UdpRead_len > 0)
           {
-             mySerial.println("-----RETRY!!-----");
+             if(flag_udp_232back)mySerial.println("-----RETRY!!-----");
              Send_StringTo("RETRY" ,remoteIP, remotePort);
           }
           break;
