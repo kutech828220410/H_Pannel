@@ -916,7 +916,16 @@ namespace H_Pannel_lib
        
     
         }
-
+        public void SetAllBoxes_LightOff()
+        {
+            for (int i = 0; i < this.Boxes.Count; i++)
+            {
+                for (int k = 0; k < this.Boxes[i].Length; k++)
+                {
+                    this.Boxes[i][k].LightOn = false;
+                }
+            }
+        }
         private Size GetBoxSize()
         {
             return this.GetBoxSize(this.Num_Of_Columns, this.Num_Of_Rows);
@@ -958,6 +967,7 @@ namespace H_Pannel_lib
         public int Row { get => row; set => row = value; }
         public int Pen_Width { get => pen_Width; set => pen_Width = value; }
         public bool Enable { get => enable; set => enable = value; }
+
 
         public Box(int station)
         {

@@ -4659,8 +4659,7 @@ namespace H_Pannel_lib
         public int Index { get => index; set => index = value; }
        
         private int index = 0;
-        public bool LightOn = true;
-
+        public bool LightOn = false;
 
         virtual public void PasteFormat(object obj)
         {

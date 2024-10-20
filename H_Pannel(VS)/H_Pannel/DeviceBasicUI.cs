@@ -864,7 +864,7 @@ namespace H_Pannel_lib
         public string GetUDPJsonString(string IP)
         {
             string JsonString = "";
-            List<object[]> list_value = this.Get_UDP_RX().DeepClone();
+            List<object[]> list_value = Get_UDP_RX().DeepClone();
             list_value = (from value in list_value
                           where value[(int)UDP_Class.UDP_Rx.IP].ObjectToString() == IP
                           select value).ToList();

@@ -70,17 +70,26 @@ namespace H_Pannel_lib
                 int H_line_pixel = width / 5;
                 int V_line_pixel = height / 5;
 
-                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(3) ? Color.Lime : Color.Gray), 6), new Point(0, V_line_pixel * 1), new Point(width, V_line_pixel * 1));
-                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(2) ? Color.Lime : Color.Gray), 6), new Point(0, V_line_pixel * 2), new Point(width, V_line_pixel * 2));
-                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(1) ? Color.Lime : Color.Gray), 6), new Point(0, V_line_pixel * 3), new Point(width, V_line_pixel * 3));
-                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(0) ? Color.Lime : Color.Gray), 6), new Point(0, V_line_pixel * 4), new Point(width, V_line_pixel * 4));
+                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(StorageUI_LCD_114.enum_InputName.X0) ? Color.Lime : Color.Gray), 6), new Point(0, V_line_pixel * 1), new Point(width, V_line_pixel * 1));
+                g.DrawString("X0", new Font("微軟正黑體", 16, FontStyle.Bold), new SolidBrush(Color.Black), new Point(0, V_line_pixel * 1));
+                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(StorageUI_LCD_114.enum_InputName.X1) ? Color.Lime : Color.Gray), 6), new Point(0, V_line_pixel * 2), new Point(width, V_line_pixel * 2));
+                g.DrawString("X1", new Font("微軟正黑體", 16, FontStyle.Bold), new SolidBrush(Color.Black), new Point(0, V_line_pixel * 2));
+                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(StorageUI_LCD_114.enum_InputName.X2) ? Color.Lime : Color.Gray), 6), new Point(0, V_line_pixel * 3), new Point(width, V_line_pixel * 3));
+                g.DrawString("X2", new Font("微軟正黑體", 16, FontStyle.Bold), new SolidBrush(Color.Black), new Point(0, V_line_pixel * 3));
+                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(StorageUI_LCD_114.enum_InputName.X3) ? Color.Lime : Color.Gray), 6), new Point(0, V_line_pixel * 4), new Point(width, V_line_pixel * 4));
+                g.DrawString("X3", new Font("微軟正黑體", 16, FontStyle.Bold), new SolidBrush(Color.Black), new Point(0, V_line_pixel * 4));
 
-                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(4) ? Color.Lime : Color.Gray), 6), new Point(H_line_pixel * 1, 0), new Point(H_line_pixel * 1, height));
-                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(5) ? Color.Lime : Color.Gray), 6), new Point(H_line_pixel * 2, 0), new Point(H_line_pixel * 2, height));
-                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(6) ? Color.Lime : Color.Gray), 6), new Point(H_line_pixel * 3, 0), new Point(H_line_pixel * 3, height));
-                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(7) ? Color.Lime : Color.Gray), 6), new Point(H_line_pixel * 4, 0), new Point(H_line_pixel * 4, height));
+                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(StorageUI_LCD_114.enum_InputName.Y0) ? Color.Lime : Color.Gray), 6), new Point(H_line_pixel * 1, 0), new Point(H_line_pixel * 1, height));
+                g.DrawString("Y0", new Font("微軟正黑體", 16, FontStyle.Bold), new SolidBrush(Color.Black), new Point(H_line_pixel * 1, 0));
+                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(StorageUI_LCD_114.enum_InputName.Y1) ? Color.Lime : Color.Gray), 6), new Point(H_line_pixel * 2, 0), new Point(H_line_pixel * 2, height));
+                g.DrawString("Y1", new Font("微軟正黑體", 16, FontStyle.Bold), new SolidBrush(Color.Black), new Point(H_line_pixel * 2, 0));
+                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(StorageUI_LCD_114.enum_InputName.Y2) ? Color.Lime : Color.Gray), 6), new Point(H_line_pixel * 3, 0), new Point(H_line_pixel * 3, height));
+                g.DrawString("Y2", new Font("微軟正黑體", 16, FontStyle.Bold), new SolidBrush(Color.Black), new Point(H_line_pixel * 3, 0));
+                g.DrawLine(new Pen(new SolidBrush(uDP_READ.Get_Input(StorageUI_LCD_114.enum_InputName.Y3) ? Color.Lime : Color.Gray), 6), new Point(H_line_pixel * 4, 0), new Point(H_line_pixel * 4, height));
+                g.DrawString("Y3", new Font("微軟正黑體", 16, FontStyle.Bold), new SolidBrush(Color.Black), new Point(H_line_pixel * 4, 0));
+
             }
-          
+
         }
     }
 }

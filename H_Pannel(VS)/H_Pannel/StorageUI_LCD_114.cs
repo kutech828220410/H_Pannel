@@ -15,6 +15,17 @@ namespace H_Pannel_lib
 
     public partial class StorageUI_LCD_114 : StorageUI
     {
+        public enum enum_InputName
+        {
+            X0,
+            X1,
+            X2,
+            X3,
+            Y0,
+            Y1,
+            Y2,
+            Y3,
+        }
         public List<UDP_READ> UDP_READs = new List<UDP_READ>();
         [Serializable]
         public class UDP_READ
@@ -58,6 +69,65 @@ namespace H_Pannel_lib
             public bool Get_Output(int index)
             {
                 return this.myConvert.Int32GetBit(Output, index);
+            }
+            public bool Get_Input(enum_InputName point_name)
+            {
+                return Get_Input(point_name.GetEnumName());
+            }
+            public bool Get_Input(string point_name)
+            {
+                if (point_name == "X0")
+                {
+                    return Get_Input(3);
+                }
+                else if (point_name == "X1")
+                {
+                    return Get_Input(2);
+                }
+                else if (point_name == "X2")
+                {
+                    return Get_Input(1);
+                }
+                else if (point_name == "X3")
+                {
+                    return Get_Input(0);
+                }
+                else if (point_name == "Y0")
+                {
+                    return Get_Input(4);
+                }
+                else if (point_name == "Y1")
+                {
+                    return Get_Input(5);
+                }
+                else if (point_name == "Y2")
+                {
+                    return Get_Input(6);
+                }
+                else if (point_name == "Y3")
+                {
+                    return Get_Input(7);
+                }
+                return false;
+            }
+
+
+            public bool IsSensorOn(DrawerUI_EPD_583.LightSensorClass lightSensorClass)
+            {
+                bool flag_H = false;
+                bool flag_V = false;
+                for (int i = 0; i < lightSensorClass.H_Sensor_Check.Count; i++)
+                {
+                    flag_H = Get_Input(lightSensorClass.H_Sensor_Check[i]);
+                    if (flag_H) break;
+                }
+                for (int i = 0; i < lightSensorClass.V_Sensor_Check.Count; i++)
+                {
+                    flag_V = Get_Input(lightSensorClass.V_Sensor_Check[i]);
+                    if (flag_V) break;
+                }
+                Console.WriteLine($"IsSensorOn : {(flag_H && flag_V)} , [flag_H : {flag_H}],[flag_V : {flag_V}]");
+                return (flag_H && flag_V);
             }
         }
 
@@ -198,6 +268,15 @@ namespace H_Pannel_lib
                 return Communication.EPD_Get_LaserDistance(uDP_Class, IP);
             }
             return -999;
+        }
+
+
+        public UDP_READ Get_UDP_READ(string IP)
+        {
+            string json = this.GetUDPJsonString(IP);
+            if (json.StringIsEmpty()) return null;
+            UDP_READ uDP_READ = json.JsonDeserializet<UDP_READ>();
+            return uDP_READ;
         }
         public void UDP_READ_Update()
         {

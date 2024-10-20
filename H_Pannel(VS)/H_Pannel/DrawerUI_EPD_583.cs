@@ -14,6 +14,32 @@ namespace H_Pannel_lib
 {
     public class DrawerUI_EPD_583 : DrawerUI
     {
+        public class LightSensorClass
+        {
+            public List<string> H_Sensor_Check = new List<string>();
+            public List<string> V_Sensor_Check = new List<string>();
+
+            public override string ToString()
+            {
+                string str_H = "";
+                string str_V = "";
+                for (int i = 0; i < H_Sensor_Check.Count; i++)
+                {
+                    str_H += H_Sensor_Check[i];
+                    if (i != H_Sensor_Check.Count - 1) str_H += ",";
+                    else str_H = $"「{str_H}」";
+                }
+                for (int i = 0; i < V_Sensor_Check.Count; i++)
+                {
+                    str_V += V_Sensor_Check[i];
+                    if (i != V_Sensor_Check.Count - 1) str_V += ",";
+                    else str_V = $"「{str_V}」";
+                }
+                return $"LightSensorClass , {str_H} {str_V} ";
+            }
+
+          
+        }
         static int LocalPort = 0;
         static int ServerPort = 0;
         [Serializable]
@@ -141,14 +167,27 @@ namespace H_Pannel_lib
         }
         static public byte[] Set_LEDBytes(Drawer drawer, List<Box> boxes, Color color)
         {
+            return Set_LEDBytes(drawer, boxes, color, false);
+        }
+        static public byte[] Set_LEDBytes(Drawer drawer, List<Box> boxes, Color color , bool check_lighton)
+        {
             byte[] led_bytes = drawer.LED_Bytes;
             for(int i = 0; i < boxes.Count; i++)
             {
                 if(boxes[i].IP == drawer.IP)
                 {
-                    led_bytes = Set_LEDBytes(drawer, boxes[i].Column, boxes[i].Row, color);
-                }
-               
+                    if (color == Color.Black || check_lighton == false)
+                    {
+                        led_bytes = Set_LEDBytes(drawer, boxes[i].Column, boxes[i].Row, color);
+                        boxes[i].LightOn = false;
+                        continue;
+                    }
+                    if (boxes[i].LightOn == false)
+                    {
+                        led_bytes = Set_LEDBytes(drawer, boxes[i].Column, boxes[i].Row, color);
+                        boxes[i].LightOn = true;
+                    }
+                }             
             }
             return led_bytes;
         }
@@ -372,6 +411,7 @@ namespace H_Pannel_lib
 
         static public bool Set_LED_Clear_UDP(UDP_Class uDP_Class, Drawer drawer)
         {
+            drawer.SetAllBoxes_LightOff();
             return Set_LED_Clear_UDP(uDP_Class, drawer.IP);
         }
         static public bool Set_LED_Clear_UDP(UDP_Class uDP_Class, string IP)
@@ -499,6 +539,46 @@ namespace H_Pannel_lib
 
 
         }
+        static public Rectangle Get_Box_rect(Drawer drawer, Box box)
+        {
+            Rectangle rectangle = Get_Box_Combine(drawer, box);
+            int width = rectangle.Width / (Pannel_Width / drawer.Num_Of_Columns);
+            int height = rectangle.Height / (Pannel_Height / drawer.Num_Of_Rows);
+            return new Rectangle(box.Column, box.Row, width, height);
+        }
+        static public LightSensorClass Get_LightSensorClass(Rectangle rectangle)
+        {
+            LightSensorClass lightSensorClass = new LightSensorClass();
+            int x = rectangle.X;
+            int y = rectangle.Y;
+            int width = rectangle.Width;
+            int height = rectangle.Height;
+
+            for (int i = x; i < (x + width); i++)
+            {
+                if (i == 0) lightSensorClass.V_Sensor_Check.Add("Y0");
+                else if (i == 1) lightSensorClass.V_Sensor_Check.Add("Y1");
+                else if (i == 2) lightSensorClass.V_Sensor_Check.Add("Y2");
+                else if (i == 3) lightSensorClass.V_Sensor_Check.Add("Y3");
+            }
+            for (int i = y; i < (y + height); i++)
+            {
+                if (i == 0 || i == 1) lightSensorClass.H_Sensor_Check.Add("X0");
+                else if (i == 2 || i == 3) lightSensorClass.H_Sensor_Check.Add("X1");
+                else if (i == 4 || i == 5) lightSensorClass.H_Sensor_Check.Add("X2");
+                else if (i == 6 || i == 7) lightSensorClass.H_Sensor_Check.Add("X3");
+            }
+
+            lightSensorClass.V_Sensor_Check = (from temp in lightSensorClass.V_Sensor_Check
+                                               select temp).Distinct().ToList();
+
+            lightSensorClass.H_Sensor_Check = (from temp in lightSensorClass.H_Sensor_Check
+                                               select temp).Distinct().ToList();
+
+            return lightSensorClass;
+
+        }
+
         static public Bitmap Get_Drawer_Barcode_bmp(Drawer drawer)
         {
             Bitmap bitmap = new Bitmap(DrawerUI_EPD_583.Pannel_Width, DrawerUI_EPD_583.Pannel_Height);
