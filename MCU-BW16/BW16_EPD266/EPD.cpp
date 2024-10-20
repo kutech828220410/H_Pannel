@@ -159,7 +159,10 @@ void EPD::SendData(unsigned char data)
 }
 void EPD::SPI_Begin()
 {
-   SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
+//   SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
+   SPI.beginTransaction(SPISettings(80000000, MSBFIRST, SPI_MODE0));
+
+   
 }
 void EPD::SPI_End()
 {

@@ -444,6 +444,12 @@ void onPacketCallBack()
             if(flag_udp_232back)mySerial.println("set graphicData done..");    
             Get_Checksum_UDP();
           } 
+          else if(*(UdpRead + 1) == '1')
+          {
+            if(flag_udp_232back)mySerial.println("ClearCanvas");
+            OLCD114.LCD_Clear(GRAY);
+            Get_Checksum_UDP();
+          }
           else if(*(UdpRead + 1) == '3')
           {
             if(flag_udp_232back)mySerial.println("DrawCanvas");
