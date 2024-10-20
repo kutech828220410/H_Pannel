@@ -219,8 +219,7 @@ namespace H_Pannel_lib
             Set_TOF = (byte)'D',
             DrawRect = (byte)'E',
             Set_UDP_SendTime = (byte)'F',
-            Set_ScreenPageInit = (byte)'G',
-        
+            Set_ScreenPageInit = (byte)'G',       
             Set_ServerConfig = (byte)'H',
             Set_JsonStringSend = (byte)'I',
             Set_Output = (byte)'J',
@@ -231,7 +230,7 @@ namespace H_Pannel_lib
             Get_WS2812_Buffer = (byte)'O',
             Set_OutputTrigger = (byte)'P',
             Set_OutputPINTrigger = (byte)'Q',
-            Set_ADCMotorTrigger = (byte)'!',
+     
             Set_Input_dir = (byte)'R',
             Set_Output_dir = (byte)'S',
             Set_RFID_Enable = (byte)'T',
@@ -239,10 +238,11 @@ namespace H_Pannel_lib
             Get_LEDSetting =(byte)'V',
             Set_LEDSetting = (byte)'W',
             Get_IO = (byte)'X',
-            Set_BlinkEnable = (byte)'Y',
-            Set_WS2812B_breathing = (byte)'@',
-
+            Set_BlinkEnable = (byte)'Y',       
             SendTestData = (byte)'Z',
+
+            Set_WS2812B_breathing = (byte)'@',
+            Set_ADCMotorTrigger = (byte)'!',
 
             EPD_Set_Sleep = (byte)'a',
             EPD_Set_WakeUp = (byte)'b',
