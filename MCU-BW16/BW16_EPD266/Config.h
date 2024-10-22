@@ -1,4 +1,4 @@
-#define VERSION "Ver 1.5.25"
+#define VERSION "Ver 1.5.26"
 #define HandSensor
 //#define RowLED_Device
 //#define EPD213
@@ -6,10 +6,10 @@
 //#define EPD290
 //#define EPD420
 #define OLCD_114
-#define MCP23017
+//#define MCP23017
 
-#define LASER_D_MIN 70
-#define LASER_D_MAX 105
+#define LASER_D_MIN 20
+#define LASER_D_MAX 115
 
 
 #ifdef EPD266

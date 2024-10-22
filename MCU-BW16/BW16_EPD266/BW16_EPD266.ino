@@ -224,7 +224,7 @@ void Core0Task1( void * pvParameters )
               if(MyTimer_CheckWIFI.IsTimeOut())
               {
                  mySerial.print("Wifi conneting failed....divice restart!");
-                 NVIC_SystemReset();
+//                 NVIC_SystemReset();
               }
           }
           
@@ -294,17 +294,20 @@ void Core0Task2( void * pvParameters )
        
        if(flag_boradInit)
        {
-         if( WiFi.status() == WL_CONNECTED  )
-          {
-              #ifdef HandSensor
-              serial2Event();
-              #endif
-         
-          }
-          else
-          {
-             
-          }
+          #ifdef HandSensor
+          serial2Event();
+          #endif
+//         if( WiFi.status() == WL_CONNECTED  )
+//          {
+//              #ifdef HandSensor
+//              serial2Event();
+//              #endif
+//         
+//          }
+//          else
+//          {
+//             
+//          }
        }
       delay(10);
     }
