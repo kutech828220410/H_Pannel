@@ -1326,8 +1326,9 @@ namespace H_Pannel_lib
             if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Set Cusor position {string.Format(flag_OK ? "sucess" : "failed")}!");
             return flag_OK;
         }
-        static private bool Command_ClearCanvas(UDP_Class uDP_Class, string IP, Color BackColor)
+        static public bool Command_ClearCanvas(UDP_Class uDP_Class, string IP, Color BackColor)
         {
+            MyTimerBasic myTimerBasic = new MyTimerBasic(50000);
             bool flag_OK = true;
             byte checksum = 0;
             int temp;
@@ -1399,7 +1400,7 @@ namespace H_Pannel_lib
                 }
                 System.Threading.Thread.Sleep(1);
             }
-            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : ClearCanvas {string.Format(flag_OK ? "sucess" : "failed")}!");
+            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : ClearCanvas {string.Format(flag_OK ? "sucess" : "failed")}! , {myTimerBasic}");
             return flag_OK;
         }
         static private bool Command_Framebuffer(UDP_Class uDP_Class, string IP, long start_ptr, byte[] value)

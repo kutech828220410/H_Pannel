@@ -179,23 +179,8 @@ namespace H_Pannel_lib
                 this.sqL_DataGridView_DeviceTable.SQL_Replace(enum_DeviceTable.GUID.GetEnumName(), GUID, list_SQL_Value_buf[0], true);
             }
         }
-        public bool DrawImage(string IP, int port, string text, Font font, Color ForeColoe, Color BackColor)
-        {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(port);
-            if (uDP_Class == null) return false;
-            using(Bitmap bmp = Communication.Get_LCD_144_bmp(text, font, Color.White, Color.Black))
-            {
-                return Communication.LCD_144_DrawImageEx(uDP_Class, IP, bmp, ForeColoe, BackColor);
-            }
-           
-        }
-        public bool DrawImage(string IP, int port, Color BackColor)
-        {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(port);
-            if (uDP_Class == null) return false;
-            return Communication.LCD_144_DrawImageEx(uDP_Class, IP, BackColor);
-
-        }
+     
+        
         #endregion
 
         private enum ContextMenuStrip_Main
@@ -317,6 +302,30 @@ namespace H_Pannel_lib
             return Get_LaserDistance(uDP_Class, IP);
         }
 
+        public bool DrawImage(string IP, int port, string text, Font font, Color ForeColoe, Color BackColor)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(port);
+            if (uDP_Class == null) return false;
+            using (Bitmap bmp = Communication.Get_LCD_144_bmp(text, font, Color.White, Color.Black))
+            {
+                return Communication.LCD_144_DrawImageEx(uDP_Class, IP, bmp, ForeColoe, BackColor);
+            }
+
+        }
+        public bool DrawImage(string IP, int port, Color BackColor)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(port);
+            if (uDP_Class == null) return false;
+            return Communication.LCD_144_DrawImageEx(uDP_Class, IP, BackColor);
+
+        }
+        public bool ClearCanvas(string IP, int port)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(port);
+            if (uDP_Class == null) return false;
+            return Communication.Command_ClearCanvas(uDP_Class, IP, Color.DimGray);
+
+        }
         private void StorageUI_LCD_114_DeviceTableMouseDownRightEvent(string selectedText, List<System.Net.IPEndPoint> iPEndPoints)
         {
             if (selectedText == ContextMenuStrip_Main.畫面設置.GetEnumName())
@@ -331,23 +340,10 @@ namespace H_Pannel_lib
                         {
                             string IP = iPEndPoints[i].Address.ToString();
                             int Port = iPEndPoints[i].Port;
-                            Storage storage = this.SQL_GetStorage(IP);
-                            if (storage == null) continue;
-                            Bitmap bmp = null;
-                            bmp = new Bitmap(storage.PanelSize.Width, storage.PanelSize.Height);
-                            Graphics g = Graphics.FromImage(bmp);
-                            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                            g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
-                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                            g.CompositingQuality = CompositingQuality.HighQuality;
-                            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
-                            g.FillRectangle(new SolidBrush(Color.Red), rect);
-                            g.Dispose();
-
+                 
                             taskList.Add(Task.Run(() =>
                             {
-                                DrawImage(IP, Port, Color.White);
-                                bmp.Dispose();
+                                ClearCanvas(IP, Port);
                             }));
                         }
                         Task allTask = Task.WhenAll(taskList);
@@ -408,23 +404,10 @@ namespace H_Pannel_lib
                         {
                             string IP = iPEndPoints[i].Address.ToString();
                             int Port = iPEndPoints[i].Port;
-                            Storage storage = this.SQL_GetStorage(IP);
-                            if (storage == null) continue;
-                            Bitmap bmp = null;
-                            bmp = new Bitmap(storage.PanelSize.Width, storage.PanelSize.Height);
-                            Graphics g = Graphics.FromImage(bmp);
-                            Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-                            g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
-                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                            g.CompositingQuality = CompositingQuality.HighQuality;
-                            g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
-                            g.FillRectangle(new SolidBrush(Color.Red), rect);
-                            g.Dispose();
 
                             taskList.Add(Task.Run(() =>
                             {
-                                DrawImage(IP, Port, Color.White);
-                                bmp.Dispose();
+                                ClearCanvas(IP, Port);
                             }));
                         }
                         Task allTask = Task.WhenAll(taskList);
