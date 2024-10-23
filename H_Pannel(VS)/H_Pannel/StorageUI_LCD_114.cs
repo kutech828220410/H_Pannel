@@ -126,7 +126,7 @@ namespace H_Pannel_lib
                     flag_V = Get_Input(lightSensorClass.V_Sensor_Check[i]);
                     if (flag_V) break;
                 }
-                Console.WriteLine($"IsSensorOn : {(flag_H && flag_V)} , [flag_H : {flag_H}],[flag_V : {flag_V}]");
+                //Console.WriteLine($"IsSensorOn : {(flag_H && flag_V)} , [flag_H : {flag_H}],[flag_V : {flag_V}]");
                 return (flag_H && flag_V);
             }
         }

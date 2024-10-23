@@ -89,7 +89,12 @@ namespace H_Pannel_lib
                 g.DrawString("Y3", new Font("微軟正黑體", 16, FontStyle.Bold), new SolidBrush(Color.Black), new Point(H_line_pixel * 4, 0));
 
             }
+            this.Invoke(new Action(delegate 
+            {
+                rJ_Lable_雷射距離.Text = uDP_READ.LaserDistance.ToString();
+                rJ_Lable_雷射距離.BackgroundColor = (uDP_READ.LASER_ON == true) ? Color.GreenYellow : Color.Red;
 
+            }));
         }
     }
 }

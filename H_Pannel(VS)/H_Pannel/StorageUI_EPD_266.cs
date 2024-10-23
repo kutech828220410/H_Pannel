@@ -578,31 +578,49 @@ namespace H_Pannel_lib
                     }
                     if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_IO設定.雷射開啟.GetEnumName())
                     {
+                        LoadingForm.ShowLoadingForm();
+                        List<Storage> storages_replace = new List<Storage>();
                         List<Task> taskList = new List<Task>();
                         for (int i = 0; i < iPEndPoints.Count; i++)
                         {
                             string IP = iPEndPoints[i].Address.ToString();
                             int Port = iPEndPoints[i].Port;
+
+
                             taskList.Add(Task.Run(() =>
                             {
-                                Set_TOF(IP, Port, true);
+                                Storage storage = this.SQL_GetStorage(IP);
+                                if (storage == null) return;
+                                storage.TOFON = true;
+                                this.SQL_ReplaceStorage(storage);
                             }));
                         }
                         Task allTask = Task.WhenAll(taskList);
+                        LoadingForm.CloseLoadingForm();
                     }
                     if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_IO設定.雷射關閉.GetEnumName())
                     {
+                        LoadingForm.ShowLoadingForm();
+                        List<Storage> storages_replace = new List<Storage>();
                         List<Task> taskList = new List<Task>();
                         for (int i = 0; i < iPEndPoints.Count; i++)
                         {
                             string IP = iPEndPoints[i].Address.ToString();
                             int Port = iPEndPoints[i].Port;
+
+
                             taskList.Add(Task.Run(() =>
                             {
-                                Set_TOF(IP, Port, false);
+                                Storage storage = this.SQL_GetStorage(IP);
+                                if (storage == null) return;
+                                storage.TOFON = false;
+                                this.SQL_ReplaceStorage(storage);
+                                //Set_TOF(IP, Port, false);
                             }));
                         }
                         Task allTask = Task.WhenAll(taskList);
+                        LoadingForm.CloseLoadingForm();
+
                     }
                 }
 
@@ -889,31 +907,49 @@ namespace H_Pannel_lib
                     }
                     if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_IO設定.雷射開啟.GetEnumName())
                     {
+                        List<Storage> storages_replace = new List<Storage>();
                         List<Task> taskList = new List<Task>();
                         for (int i = 0; i < iPEndPoints.Count; i++)
                         {
                             string IP = iPEndPoints[i].Address.ToString();
                             int Port = iPEndPoints[i].Port;
+
+                   
                             taskList.Add(Task.Run(() =>
                             {
-                                Set_TOF(IP, Port, true);
+                                Storage storage = this.SQL_GetStorage(IP);
+                                if (storage == null) return;
+                                storage.TOFON = true;
+                                storages_replace.LockAdd(storage);
+                                //Set_TOF(IP, Port, true);
                             }));
                         }
                         Task allTask = Task.WhenAll(taskList);
+
+                        this.SQL_ReplaceStorage(storages_replace);
                     }
                     if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_IO設定.雷射關閉.GetEnumName())
                     {
+                        List<Storage> storages_replace = new List<Storage>();
                         List<Task> taskList = new List<Task>();
                         for (int i = 0; i < iPEndPoints.Count; i++)
                         {
                             string IP = iPEndPoints[i].Address.ToString();
                             int Port = iPEndPoints[i].Port;
+
+
                             taskList.Add(Task.Run(() =>
                             {
-                                Set_TOF(IP, Port, false);
+                                Storage storage = this.SQL_GetStorage(IP);
+                                if (storage == null) return;
+                                storage.TOFON = false;
+                                storages_replace.LockAdd(storage);
+                                //Set_TOF(IP, Port, false);
                             }));
                         }
                         Task allTask = Task.WhenAll(taskList);
+
+                        this.SQL_ReplaceStorage(storages_replace);
                     }
 
                 }
