@@ -293,7 +293,7 @@ namespace H_Pannel_lib
                 if (storage == null) return;
                 storage.IP = IP;
                 value[(int)enum_DeviceTable.Value] = storage.JsonSerializationt();
-                this.sqL_DataGridView_DeviceTable.SQL_Replace(enum_DeviceTable.GUID.GetEnumName(), GUID, value, true);
+                this.sqL_DataGridView_DeviceTable.SQL_Replace(enum_DeviceTable.GUID.GetEnumName(), GUID, value, false);
             }
             else
             {
@@ -310,7 +310,7 @@ namespace H_Pannel_lib
                 storage.IP = IP;
                 storage.Port = Port;
                 value[(int)enum_DeviceTable.Value] = storage.JsonSerializationt();
-                this.sqL_DataGridView_DeviceTable.SQL_AddRow(value, true);
+                this.sqL_DataGridView_DeviceTable.SQL_AddRow(value, false);
             }
         }
 

@@ -294,7 +294,7 @@ namespace H_Pannel_lib
                 if (Drawer == null) return;
                 Drawer.IP = IP;
                 value[(int)enum_DeviceTable.Value] = Drawer.JsonSerializationt();
-                this.sqL_DataGridView_DeviceTable.SQL_Replace(enum_DeviceTable.GUID.GetEnumName(), GUID, value, true);
+                this.sqL_DataGridView_DeviceTable.SQL_Replace(enum_DeviceTable.GUID.GetEnumName(), GUID, value, false);
             }
             else
             {
@@ -311,7 +311,7 @@ namespace H_Pannel_lib
                 Drawer.IP = IP;
                 Drawer.Port = Port;
                 value[(int)enum_DeviceTable.Value] = Drawer.JsonSerializationt();
-                this.sqL_DataGridView_DeviceTable.SQL_AddRow(value, true);
+                this.sqL_DataGridView_DeviceTable.SQL_AddRow(value, false);
             }
         }
         public bool SQL_ReplaceDrawer(Drawer Drawer)

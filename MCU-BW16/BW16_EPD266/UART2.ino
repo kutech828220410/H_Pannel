@@ -67,7 +67,7 @@ void serial2Event()
          LASER_ON_cnt = 0;
          LASER_ON = false;
       }
-      if(LASER_ON_cnt >= 2)
+      if(LASER_ON_cnt >= 1)
       {
          LASER_ON = true;
       }

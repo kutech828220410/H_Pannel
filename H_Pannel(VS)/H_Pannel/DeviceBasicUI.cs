@@ -1652,14 +1652,17 @@ namespace H_Pannel_lib
                             List<Task> taskList = new List<Task>();
                             for (int i = 0; i < list_value.Count; i++)
                             {
+                                object[] value = list_value[i];
                                 string IP = list_value[i][(int)enum_DeviceTable.IP].ObjectToString();
                                 int Port = list_value[i][(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
                                 taskList.Add(Task.Run(() =>
                                 {
-                                    Set_LocalPort(IP, Port, num);
+                                    this.SQL_ReplaceDevice(value, IP, num);
                                 }));
                             }
                             Task allTask = Task.WhenAll(taskList);
+
+                            this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
                         }
                         else
                         {
