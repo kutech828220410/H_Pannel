@@ -1443,6 +1443,8 @@ namespace H_Pannel_lib
     [Serializable]
     public class Device :DeviceBasic
     {
+        public bool input = false;
+
         public Size PanelSize
         {
             get

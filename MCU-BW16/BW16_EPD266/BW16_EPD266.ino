@@ -309,7 +309,7 @@ void Core0Task2( void * pvParameters )
 //             
 //          }
        }
-      delay(10);
+      delay(0);
     }
     
 }

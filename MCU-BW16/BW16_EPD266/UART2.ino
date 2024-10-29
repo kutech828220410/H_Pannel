@@ -88,7 +88,9 @@ void serial2Event()
          }
          flag_JsonSend = true;
       }
-//      mySerial.print("LaserDistance : ");
+//      mySerial.print("LaserDistance(");
+//      mySerial.print(LASER_ON);
+//      mySerial.print("):");
 //      mySerial.println(str_distance);
     }
     
