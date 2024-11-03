@@ -871,6 +871,11 @@ namespace H_Pannel_lib
         }
         static public bool EPD_420_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"EPD_420_DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
             using (Bitmap _bmp = bmp.DeepClone())
             {
                 MyTimer myTimer = new MyTimer();
@@ -894,6 +899,11 @@ namespace H_Pannel_lib
 
         static public bool LCD_144_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"LCD_144_DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
             using (Bitmap _bmp = bmp.DeepClone())
             {
                 MyTimer myTimer = new MyTimer();
@@ -909,6 +919,11 @@ namespace H_Pannel_lib
         }
         static public bool LCD_144_DrawImageEx(UDP_Class uDP_Class, string IP, Bitmap bmp, Color ForeColoe, Color BackColor)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"LCD_144_DrawImageEx start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
             using (Bitmap _bmp = bmp.DeepClone())
             {
                 MyTimer myTimer = new MyTimer();
@@ -925,6 +940,11 @@ namespace H_Pannel_lib
         }
         static public bool LCD_144_DrawImageEx(UDP_Class uDP_Class, string IP, Color BackColor)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"LCD_144_DrawImageEx start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
             using (Bitmap _bmp = Get_LCD_144_bmp("", new Font("標楷體", 14), Color.Black, Color.Black))
             {
                 MyTimer myTimer = new MyTimer();
@@ -1328,6 +1348,12 @@ namespace H_Pannel_lib
         }
         static public bool Command_ClearCanvas(UDP_Class uDP_Class, string IP, Color BackColor)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"Command_ClearCanvas start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
+
             MyTimerBasic myTimerBasic = new MyTimerBasic(50000);
             bool flag_OK = true;
             byte checksum = 0;
