@@ -42,7 +42,7 @@ class WiFiConfig
    
    void HandleClient();
    void httpInit();
-  
+   void setMacAddress();
    int GetRSSI();
    byte* Get_IPAdress();
    byte* Get_Subnet();

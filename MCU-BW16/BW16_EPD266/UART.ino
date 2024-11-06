@@ -84,7 +84,21 @@ void serialEvent()
       mySerial.print("SetOutputPINTrigger(1 , (1 == 1));\n");
       SetOutputPINTrigger(1 , true);
     }
-    
+    if(UART0_RX[0] == 'M')
+    {
+      uint8_t mac[6];
+      WiFi.macAddress(mac);
+      String HEX_0 =  String(mac[0], HEX); 
+      String HEX_1 =  String(mac[1], HEX); 
+      String HEX_2 =  String(mac[2], HEX); 
+      String HEX_3 =  String(mac[3], HEX); 
+      String HEX_4 =  String(mac[4], HEX); 
+      String HEX_5 =  String(mac[5], HEX);   
+      
+      
+      String MacAdress = "MacAdress :" + HEX_0 + ":"+ HEX_1 + ":"+ HEX_2 + ":"+ HEX_3 + ":"+ HEX_4 + ":"+ HEX_5;   
+      mySerial.println(MacAdress);
+    }
     if (UART0_RX[0] == 2 && UART0_RX[UART0_len - 1] == 3)
     {
       if (UART0_RX[1] == '0' && UART0_len == 3)

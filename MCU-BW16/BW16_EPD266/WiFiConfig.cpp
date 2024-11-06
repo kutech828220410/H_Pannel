@@ -5,6 +5,32 @@
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include <Wire.h>
+#include "lwip/netif.h"
+#include "wifi_drv.h"
+#include "wifi_conf.h"
+
+//
+void WiFiConfig::setMacAddress() {
+    // 讀取當前 MAC 地址
+    uint8_t currentMac[6];
+    WiFi.macAddress(currentMac);
+
+    // 設定新的 MAC 地址（僅修改前 3 個字節）
+    currentMac[0] = 0x00;
+    currentMac[1] = 0xE0;
+    currentMac[2] = 0x4C;
+    // 列印 MAC 地址
+    mySerial -> print("MAC Address: ");
+    for (int i = 0; i < 6; i++) {
+        if (i > 0) mySerial -> print(":");
+        mySerial -> print(currentMac[i], HEX);  // 以16進制格式顯示
+    }
+    mySerial -> println();
+    // 將修改後的 MAC 地址重新設置
+    wifi_change_mac_address_from_ram(0, currentMac);
+}
+
+
 
 void WiFiConfig::Init(String Version)
 {
@@ -20,15 +46,9 @@ void WiFiConfig::Init(String Version)
     String dns = "Dns : " + this -> Get_DNS_Str();
     String _Localport = "Localport : " + this -> Get_Localport_Str();
     String _Serverport = "Serverport : " + this -> Get_Serverport_Str();
-    byte mac[6];
-    WiFi.macAddress(mac);
-    String HEX_0 =  String(mac[0], HEX); 
-    String HEX_1 =  String(mac[1], HEX); 
-    String HEX_2 =  String(mac[2], HEX); 
-    String HEX_3 =  String(mac[3], HEX); 
-    String HEX_4 =  String(mac[4], HEX); 
-    String HEX_5 =  String(mac[5], HEX);   
-    String MacAdress = "MacAdress :" + HEX_0 + ":"+ HEX_1 + ":"+ HEX_2 + ":"+ HEX_3 + ":"+ HEX_4 + ":"+ HEX_5;   
+    
+    
+    
     String PC_Restart = "PC Restart :" +   String(this -> Get_PC_Restart());
     String IsUpdate = "PC IsUpdate :" +   String(this -> Get_IsUpdate());
     String IsLocker = "IsLocker :" +   String(this -> Get_IsLocker());
@@ -42,7 +62,7 @@ void WiFiConfig::Init(String Version)
     mySerial -> println(_Serverport);
     mySerial -> println(_SSID);
     mySerial -> println(_Password);   
-    mySerial -> println(MacAdress);  
+      
     mySerial -> println(PC_Restart);   
     mySerial -> println(IsUpdate); 
     mySerial -> println(IsLocker); 
@@ -59,7 +79,21 @@ void WiFiConfig::WIFI_Disconnenct()
 void WiFiConfig::WIFI_Connenct()
 {
     WiFi.disablePowerSave();
-   
+    
+//    setMacAddress(netif_default);
+//    byte mac[6];
+//    WiFi.macAddress(mac);
+//    
+//    String HEX_0 =  String(mac[0], HEX); 
+//    String HEX_1 =  String(mac[1], HEX); 
+//    String HEX_2 =  String(mac[2], HEX); 
+//    String HEX_3 =  String(mac[3], HEX); 
+//    String HEX_4 =  String(mac[4], HEX); 
+//    String HEX_5 =  String(mac[5], HEX);   
+//    
+//    String MacAdress = "MacAdress :" + HEX_0 + ":"+ HEX_1 + ":"+ HEX_2 + ":"+ HEX_3 + ":"+ HEX_4 + ":"+ HEX_5;   
+//    mySerial -> println(MacAdress);
+    
     byte* ipAdress_ptr = this -> Get_IPAdress();
     byte* gateway_ptr = this -> Get_Gateway();
     byte* subnet_ptr = this -> Get_Subnet();
@@ -69,9 +103,9 @@ void WiFiConfig::WIFI_Connenct()
     IPAddress subnet(*(subnet_ptr + 0 ),*(subnet_ptr + 1 ),*(subnet_ptr + 2 ),*(subnet_ptr + 3 ));
     IPAddress dns1(168,95,1,1);
     IPAddress dns2(*(dns_ptr + 0 ),*(dns_ptr + 1 ),*(dns_ptr + 2 ),*(dns_ptr + 3 ));
+    
     WiFi.config(ipAdress ,dns2 ,gateway ,subnet );
-   
-  
+    setMacAddress();
     String _SSID =  this -> Get_SSID_Str();
     char _ssid[sizeof(_SSID)];
     _SSID.toCharArray(_ssid , sizeof(_SSID) );

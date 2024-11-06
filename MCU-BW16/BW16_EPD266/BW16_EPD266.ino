@@ -17,7 +17,6 @@
 #include <SPI.h>
 #include <SD.h>
 #include <SoftwareSerial.h>
-
 #ifdef MCP23017
 #include "DFRobot_MCP23017.h"
 DFRobot_MCP23017 mcp(Wire, /*addr =*/0x20);//constructor, change the Level of A2, A1, A0 via DIP switch to revise the I2C address within 0x20~0x27.
@@ -223,7 +222,6 @@ void Core0Task1( void * pvParameters )
               MyLED_IS_Connented.BlinkTime = 500;
               if(MyTimer_CheckWIFI.IsTimeOut())
               {
-                 mySerial.print("Wifi conneting failed....divice restart!");
 //                 NVIC_SystemReset();
               }
           }

@@ -2068,7 +2068,7 @@ namespace H_Pannel_lib
                 }
                 System.Threading.Thread.Sleep(1);
             }
-            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : FontColor {string.Format(flag_OK ? "sucess" : "failed")}!");
+            //if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : FontColor {string.Format(flag_OK ? "sucess" : "failed")}!");
             return flag_OK;
         }
         static private bool Command_FramebufferEx(UDP_Class uDP_Class, string IP, long start_ptr, byte[] value , int len)
@@ -2142,7 +2142,7 @@ namespace H_Pannel_lib
              
                 System.Threading.Thread.Sleep(1);
             }
-            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : FramebufferEx {string.Format(flag_OK ? "sucess" : "failed")}!");
+            //if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : FramebufferEx {string.Format(flag_OK ? "sucess" : "failed")}!");
             return flag_OK;
         }
         static private bool Command_Code_FrameWrite(UDP_Class uDP_Class, string IP, int x, int y, int width, int height, Color FontColor, Color ForeColor)
