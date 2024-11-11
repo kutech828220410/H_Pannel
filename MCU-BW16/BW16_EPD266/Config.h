@@ -1,12 +1,13 @@
-#define VERSION "Ver 1.5.29"
+#define VERSION "Ver 1.5.30"
 //#define HandSensor
 //#define RowLED_Device
 //#define EPD213
-#define EPD266
+//#define EPD266
 //#define EPD290
 //#define EPD420
-//#define OLCD_114
-//#define MCP23017
+//#define EPD583
+#define OLCD_114
+#define MCP23017
 
 #define LASER_D_MIN 20
 #define LASER_D_MAX 115
@@ -35,7 +36,11 @@
 #define EPD_HEIGHT 300
 #define EPD_TYPE "EPD420"
 #define EPD_Device
-
+#elif defined(EPD583)
+#define EPD_WIDTH 81
+#define EPD_HEIGHT 480
+#define EPD_TYPE "EPD583"
+#define EPD_Device
 #else
 #define EPD_WIDTH 0
 #define EPD_HEIGHT 0

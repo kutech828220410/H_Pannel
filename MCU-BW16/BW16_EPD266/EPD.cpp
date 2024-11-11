@@ -108,6 +108,12 @@ void EPD::RefreshCanvas()
      SendCommand(0x20);
      SPI_End();
    }
+   else if(EPD_TYPE == "EPD583")
+   {
+     SPI_Begin();
+     SendCommand(0x12);
+     SPI_End();
+   }
    else
    {
      SPI_Begin();
@@ -138,14 +144,30 @@ void EPD::BW_Command()
    this -> MyTimer_SleepWaitTime.TickStop();  
    this -> MyTimer_SleepWaitTime.StartTickTime(30000);
    this -> SetToSleep = false;
-   SendCommand(0x24);
+   if(EPD_TYPE == "EPD583")
+   {
+     SendCommand(0x10);
+   }
+   else
+   {
+     SendCommand(0x24);
+   }
+   
 } 
 void EPD::RW_Command()
 {
    this -> MyTimer_SleepWaitTime.TickStop();  
    this -> MyTimer_SleepWaitTime.StartTickTime(30000);
    this -> SetToSleep = false;
-   SendCommand(0x26);
+   
+   if(EPD_TYPE == "EPD583")
+   {
+     SendCommand(0x13);
+   }
+   else
+   {
+     SendCommand(0x26);
+   }
 } 
 void EPD::SendCommand(unsigned char command)
 {
@@ -225,6 +247,36 @@ void EPD::Wakeup()
       SendData(0x00);    
       SendData(0x00);
     }
+    else if(EPD_TYPE == "EPD583")
+    {
+      SendCommand(0x01);      //POWER SETTING
+      SendData (0x07);    //VGH=20V,VGL=-20V
+      SendData (0x07);    //VGH=20V,VGL=-20V
+      SendData (0x3f);    //VDH=15V
+      SendData (0x3f);    //VDL=-15V
+      SendCommand(0x04); //POWER ON
+     
+      WaitUntilIdle();
+      
+      SendCommand(0X00);      //PANNEL SETTING
+      SendData(0x0F);   //KW-3f   KWR-2F  BWROTP 0f BWOTP 1f
+    
+      SendCommand(0x61);          //tres      
+      SendData (0x02);    //source 648
+      SendData (0x88);
+      SendData (0x01);    //gate 480
+      SendData (0xe0);
+    
+      SendCommand(0X15);    
+      SendData(0x00);   
+    
+      SendCommand(0X50);      //VCOM AND DATA INTERVAL SETTING
+      SendData(0x11);
+      SendData(0x07);
+    
+      SendCommand(0X60);      //TCON SETTING
+      SendData(0x22);
+    }
     else
     {
       SendCommand(0x11); //data entry mode       
@@ -244,16 +296,53 @@ void EPD::Wakeup()
 void EPD::WaitUntilIdle()
 {
    //delay(50);
-    while(digitalRead(PIN_BUSY) == HIGH) {      //LOW: idle, HIGH: busy
-//      mySerial -> println("Watting for PIN_BUSY!");
-        //delay(10);
-    }
-    //delay(50);
+   if(EPD_TYPE == "EPD583")
+   {
+      delay(1);
+      mySerial -> println("Wait EPD BUSY!");
+      unsigned char busy;
+      do
+      {        
+         SPI_Begin();
+         SendCommand(0x71);
+         SPI_End();
+         busy = digitalRead(this -> PIN_BUSY);
+      }
+      while(busy);    
+      delay(200); 
+      mySerial -> println("Wait EPD BUSY release!");
+   }
+   else
+   {
+     while(digitalRead(PIN_BUSY) == HIGH) 
+     {  
+
+     } 
+   }
+   
+
 }
 void EPD::Sleep()
 {  
-    SPI_Begin();
-    SendCommand(0x10);
-    SendData(0x01);
-    SPI_End();
+    if(EPD_TYPE == "EPD583")
+    {
+      this -> HardwareReset();
+//    mySerial -> println("Sleep!");
+      SPI_Begin();
+      SendCommand(0x02); 
+      SPI_End();  
+      //this -> WaitUntilIdle();
+      SPI_Begin();
+      SendCommand(0x07); 
+      SendData(0xA5);
+      SPI_End();
+    }
+    else
+    {
+      SPI_Begin();
+      SendCommand(0x10);
+      SendData(0x01);
+      SPI_End();
+    }
+    
 }
