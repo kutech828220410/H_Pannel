@@ -1,5 +1,5 @@
 // include the necessary libraries
-String Version = "Ver 1.2.3";
+String Version = "Ver 1.2.4";
 
 #include "FT62XXTouchScreen.h"
 #include "Fonts.h"
@@ -315,7 +315,7 @@ void Core0Task3( void * pvParameters )
            }
            if(MyTimer_Touched2000ms.IsTimeOutPulse() && Screen_Page == 10)
            {
-               Screen_Page10_Init = true;
+//               Screen_Page10_Init = true;
            }
         }
         else

@@ -14,6 +14,8 @@ namespace H_Pannel_lib
 {
     public partial class StorageUI_EPD_266 : StorageUI
     {
+        static public double Lightness = 1.0D;
+
         [Serializable]
         public class UDP_READ
         {
@@ -86,9 +88,9 @@ namespace H_Pannel_lib
 
             for (int i = 0; i < NumOfLED; i++)
             {
-                LED_Bytes[i * 3 + 0] = color.R;
-                LED_Bytes[i * 3 + 1] = color.G;
-                LED_Bytes[i * 3 + 2] = color.B;
+                LED_Bytes[i * 3 + 0] = (byte)(color.R * Lightness);
+                LED_Bytes[i * 3 + 1] = (byte)(color.G * Lightness);
+                LED_Bytes[i * 3 + 2] = (byte)(color.B * Lightness);
             }
 
             return LED_Bytes;
