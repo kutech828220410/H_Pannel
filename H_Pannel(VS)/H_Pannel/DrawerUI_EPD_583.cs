@@ -1150,7 +1150,23 @@ namespace H_Pannel_lib
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
             return Set_Drawer_LED_UDP(uDP_Class , drawer, col, row, color, ClearAll);
         }
-
+        static public bool Set_WS2812B_breathing(UDP_Class uDP_Class, string IP, byte WS2812B_breathing_onAddVal, byte WS2812B_breathing_offSubVal, Color color)
+        {
+            if (uDP_Class != null)
+            {
+                return Communication.Set_WS2812B_breathing(uDP_Class, IP, WS2812B_breathing_onAddVal, WS2812B_breathing_offSubVal, color);
+            }
+            return false;
+        }
+        public bool Set_WS2812B_breathing(Drawer drawer, byte WS2812B_breathing_onAddVal, byte WS2812B_breathing_offSubVal, Color color)
+        {
+            return Set_WS2812B_breathing(drawer.IP, drawer.Port, WS2812B_breathing_onAddVal, WS2812B_breathing_offSubVal, color);
+        }
+        public bool Set_WS2812B_breathing(string IP, int Port, byte WS2812B_breathing_onAddVal, byte WS2812B_breathing_offSubVal, Color color)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+            return Set_WS2812B_breathing(uDP_Class, IP, WS2812B_breathing_onAddVal, WS2812B_breathing_offSubVal, color);
+        }
         public bool Set_LED_UDP(Drawer drawer)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);

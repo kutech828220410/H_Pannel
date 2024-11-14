@@ -383,26 +383,15 @@ namespace H_Pannel_lib
             Code = Code.Replace("*", "");
 
             List<Storage> storages = new List<Storage>();
-            foreach (Storage storage in Storages)
-            {
-                if(flag_serch)
-                {
-                    if (storage.Code.ToUpper().Contains(Code.ToUpper()))
-                    {
-                        storages.Add(storage);
-                    }
-                }
-                else
-                {
-                    if (storage.Code.ToUpper() == Code.ToUpper())
-                    {
-                        storages.Add(storage);
-                    }
-                }
-               
-            }
+
+            var result = flag_serch
+           ? Storages.Where(storage => storage.Code.ToUpper().Contains(Code.ToUpper())).ToList()
+           : Storages.Where(storage => storage.Code.ToUpper() == Code.ToUpper()).ToList();
+
+            storages = result;
             return storages;
         }
+
         static public Storage SortByName(this List<Storage> Storages, string StorageName)
         {
             List<Storage> storages = new List<Storage>();

@@ -127,7 +127,7 @@ void EPD::Sleep_Check()
 {
    if(this -> SetToSleep)
    {     
-       this -> MyTimer_SleepWaitTime.StartTickTime(30000);
+       this -> MyTimer_SleepWaitTime.StartTickTime(90000);
        if(this -> MyTimer_SleepWaitTime.IsTimeOut())
        {
          if(this -> SetToSleep)
@@ -142,7 +142,7 @@ void EPD::Sleep_Check()
 void EPD::BW_Command()
 {
    this -> MyTimer_SleepWaitTime.TickStop();  
-   this -> MyTimer_SleepWaitTime.StartTickTime(30000);
+   this -> MyTimer_SleepWaitTime.StartTickTime(90000);
    this -> SetToSleep = false;
    if(EPD_TYPE == "EPD583")
    {
@@ -157,7 +157,7 @@ void EPD::BW_Command()
 void EPD::RW_Command()
 {
    this -> MyTimer_SleepWaitTime.TickStop();  
-   this -> MyTimer_SleepWaitTime.StartTickTime(30000);
+   this -> MyTimer_SleepWaitTime.StartTickTime(90000);
    this -> SetToSleep = false;
    
    if(EPD_TYPE == "EPD583")
@@ -182,15 +182,13 @@ void EPD::SendData(unsigned char data)
 void EPD::SPI_Begin()
 {
 //   SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
-   SPI.beginTransaction(SPISettings(80000000, MSBFIRST, SPI_MODE0));
-
-   
+   if(EPD_TYPE == "EPD583")SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
+   else SPI.beginTransaction(SPISettings(80000000, MSBFIRST, SPI_MODE0));    
 }
 void EPD::SPI_End()
 {
 //   SPI.endTransaction();
    digitalWrite(this -> PIN_CS , LOW); 
-//   digitalWrite(this -> PIN_CS , HIGH);
 }
 void EPD::SpiTransfer(unsigned char value)
 {  
@@ -208,20 +206,21 @@ void EPD::HardwareReset()
 void EPD::Wakeup()
 {
     this -> MyTimer_SleepWaitTime.TickStop();  
-    this -> MyTimer_SleepWaitTime.StartTickTime(30000);
+    this -> MyTimer_SleepWaitTime.StartTickTime(90000);
 //    mySerial -> println("Wake up!");
     this -> SetToSleep = false;
     this -> HardwareReset();
-    SPI_Begin();
-    WaitUntilIdle();
-    SendCommand(0x12);//soft  reset
-    WaitUntilIdle();
+ 
 
 
     SPI_Begin();
     if(EPD_TYPE == "EPD420")
     {
       mySerial -> println("EPD420 Init...");
+      SPI_Begin();
+      WaitUntilIdle();
+      SendCommand(0x12);//soft  reset
+      WaitUntilIdle();
       SendCommand(0x3C); //BorderWavefrom
       SendData(0x05);  
   
@@ -249,6 +248,8 @@ void EPD::Wakeup()
     }
     else if(EPD_TYPE == "EPD583")
     {
+      mySerial -> println("EPD583 Init...");
+      SPI_Begin(); 
       SendCommand(0x01);      //POWER SETTING
       SendData (0x07);    //VGH=20V,VGL=-20V
       SendData (0x07);    //VGH=20V,VGL=-20V
@@ -279,6 +280,10 @@ void EPD::Wakeup()
     }
     else
     {
+      SPI_Begin();
+      WaitUntilIdle();
+      SendCommand(0x12);//soft  reset
+      WaitUntilIdle();
       SendCommand(0x11); //data entry mode       
       SendData(0x03);
     
@@ -301,13 +306,15 @@ void EPD::WaitUntilIdle()
       delay(1);
       mySerial -> println("Wait EPD BUSY!");
       unsigned char busy;
+      SPI_Begin();
       do
       {        
-         SPI_Begin();
+         
          SendCommand(0x71);
-         SPI_End();
+         
          busy = digitalRead(this -> PIN_BUSY);
       }
+//      SPI_End();
       while(busy);    
       delay(200); 
       mySerial -> println("Wait EPD BUSY release!");

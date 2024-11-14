@@ -1549,7 +1549,7 @@ namespace H_Pannel_lib
             public int BorderSize = 0;
             public Color BorderColor = Color.Black;
             public bool Visable = false;
-
+            public bool flag_breathing = false;
             public object Getvalue(ValueType valueType)
             {
                 if(valueType == ValueType.StringValue)

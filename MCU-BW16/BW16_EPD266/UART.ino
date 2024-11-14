@@ -62,8 +62,8 @@ void serialEvent()
     }
     if (UART0_RX[0] == 'w')
     {
-      mySerial.println("flag_WS2812B_breathing");
-      flag_WS2812B_breathing = !flag_WS2812B_breathing;
+      mySerial.println("flag_WS2812B_breathing_ON_OFF");
+      flag_WS2812B_breathing_ON_OFF = !flag_WS2812B_breathing_ON_OFF;
     }
     
     if (UART0_RX[0] == 'b')

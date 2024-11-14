@@ -195,7 +195,7 @@ void onPacketCallBack()
             
             if(WS2812B_breathing_onAddVal == 0 || WS2812B_breathing_offSubVal == 0 || (WS2812B_breathing_R == 0 && WS2812B_breathing_G == 0 && WS2812B_breathing_B == 0))
             {
-                flag_WS2812B_breathing = false;
+                flag_WS2812B_breathing_ON_OFF = false;
                 int numofLED = 450;
                 for(int i = 0 ; i < numofLED ; i++)
                 {             
@@ -207,7 +207,7 @@ void onPacketCallBack()
             }
             else
             {
-                flag_WS2812B_breathing = true;
+                flag_WS2812B_breathing_ON_OFF = true;
             }
             
             

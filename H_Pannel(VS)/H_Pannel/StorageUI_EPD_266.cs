@@ -137,6 +137,14 @@ namespace H_Pannel_lib
             byte[] LED_Bytes = Get_Pannel_LEDBytes(color);
             return Set_Stroage_LED_UDP(uDP_Class, IP, LED_Bytes);
         }
+        static public bool Set_WS2812B_breathing(UDP_Class uDP_Class, string IP, byte WS2812B_breathing_onAddVal, byte WS2812B_breathing_offSubVal, Color color)
+        {
+            if (uDP_Class != null)
+            {
+                return Communication.Set_WS2812B_breathing(uDP_Class, IP, WS2812B_breathing_onAddVal, WS2812B_breathing_offSubVal, color);
+            }
+            return false;
+        }
         static public bool Set_Stroage_LED_UDP(UDP_Class uDP_Class, string IP, byte[] LED_Bytes)
         {
             if (uDP_Class != null)
@@ -426,7 +434,15 @@ namespace H_Pannel_lib
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
             return DrawToEpd_UDP(uDP_Class, IP, bitmap);
         }
-
+        public bool Set_WS2812B_breathing(Storage storage, byte WS2812B_breathing_onAddVal, byte WS2812B_breathing_offSubVal, Color color)
+        {
+            return Set_WS2812B_breathing(storage.IP, storage.Port, WS2812B_breathing_onAddVal, WS2812B_breathing_offSubVal, color);
+        }
+        public bool Set_WS2812B_breathing(string IP, int Port, byte WS2812B_breathing_onAddVal, byte WS2812B_breathing_offSubVal, Color color)
+        {
+            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+            return Set_WS2812B_breathing(uDP_Class, IP, WS2812B_breathing_onAddVal, WS2812B_breathing_offSubVal, color);
+        }
         public bool Set_LockOpen(Storage storage)
         {
             return Set_LockOpen(storage.IP, storage.Port);
