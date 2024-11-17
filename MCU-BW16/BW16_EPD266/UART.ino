@@ -78,6 +78,7 @@ void serialEvent()
       mySerial.print(" string>>");
       mySerial.println(str_int);
       flag_WS2812B_Refresh = true;
+      flag_WS2812B_breathing_ON_OFF = false;
     }
     if (UART0_RX[0] == 'P')
     {
@@ -167,6 +168,7 @@ void serialEvent()
            myWS2812.rgbBuffer[i * 3 + startLED + 2] = *(UART0_RX + 4 + i * 3 + 2);      // 将光带上第1个LED灯珠的RGB数值中B数值设置为0      
         }     
         flag_WS2812B_Refresh = true;
+        flag_WS2812B_breathing_ON_OFF = false;
         Get_Checksum();
       }
       else if (UART0_RX[1] == 'D')

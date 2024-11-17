@@ -210,8 +210,7 @@ void Core0Task1( void * pvParameters )
        if(flag_boradInit)
        {
           serialEvent();
-          
-          
+                    
           MyLED_IS_Connented.Blink();
           if( WiFi.status() == WL_CONNECTED  )
           {
@@ -253,17 +252,6 @@ void Core0Task2( void * pvParameters )
           #ifdef HandSensor
           serial2Event();
           #endif
-//         if( WiFi.status() == WL_CONNECTED  )
-//          {
-//              #ifdef HandSensor
-//              serial2Event();
-//              #endif
-//         
-//          }
-//          else
-//          {
-//             
-//          }
        }
       delay(0);
     }

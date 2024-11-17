@@ -162,6 +162,7 @@ void onPacketCallBack()
             epd.RefreshCanvas();
             delay(100);
             flag_WS2812B_Refresh = true;
+            flag_WS2812B_breathing_ON_OFF = false;
             Get_Checksum_UDP();
            
           }  
@@ -204,6 +205,7 @@ void onPacketCallBack()
                    myWS2812.rgbBuffer[i * 3 + 0 + 2] = (int)(0);      // 将光带上第1个LED灯珠的RGB数值中B数值设置为0      
                 }
                 flag_WS2812B_Refresh = true;    
+                flag_WS2812B_breathing_ON_OFF = false;
             }
             else
             {
@@ -247,6 +249,7 @@ void onPacketCallBack()
             }  
 //            flag_WS2812B_Refresh = true;
             myWS2812.Show(bytes ,numofLED );
+            flag_WS2812B_breathing_ON_OFF = false;
             Get_Checksum_UDP();
             flag_JsonSend = true;
           }

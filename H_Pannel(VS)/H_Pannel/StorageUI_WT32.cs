@@ -583,9 +583,29 @@ namespace H_Pannel_lib
         {
             List<byte> list_bytes = new List<byte>();
             byte[] bytes = WT32_GPADC.Get_Storage_JepgBytes(storage);
-            Set_Jpegbuffer(storage.IP, storage.Port, bytes);
-            this.Set_ScreenPageInit(storage.IP, storage.Port, false);
-            return true;
+            int retry = 0;
+            bool flag_OK = false;
+            while(true)
+            {
+                if (retry >= 2) break;
+                if (Set_Jpegbuffer(storage.IP, storage.Port, bytes) == false)
+                {
+                    retry++;
+                    continue;
+                }
+                if (this.Set_ScreenPageInit(storage.IP, storage.Port, false) == false)
+                {
+                    retry++;
+                    continue;
+                }
+
+                flag_OK = true;
+
+                break;
+            }
+
+ 
+            return flag_OK;
         }
         public bool Set_Framebuffer(string IP, int Port, long start_ptr, byte[] value)
         {
