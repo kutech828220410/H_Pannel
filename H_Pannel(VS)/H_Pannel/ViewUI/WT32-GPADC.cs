@@ -1460,7 +1460,7 @@ namespace H_Pannel_lib
                 return;
             }
             DialogResult dialogResult = DialogResult.None;
-            int value = -1;
+            double value = -1;
             this.Invoke(new Action(delegate
             {
                 Dialog_NumPannel dialog_NumPannel = new Dialog_NumPannel();
@@ -1476,7 +1476,7 @@ namespace H_Pannel_lib
             {
                 this.CurrentStorage.SetValue((Storage.ValueName)List_ValueSelected[i], Storage.ValueType.Position, p0);
                 int temp = (int)this.CurrentStorage.GetValue((Storage.ValueName)List_ValueSelected[i], Storage.ValueType.Width);
-                p0.X = p0.X + value + temp;
+                p0.X = p0.X + (int)value + temp;
             }
             this.DrawToPictureBox();
         }
@@ -1496,7 +1496,7 @@ namespace H_Pannel_lib
             {
                 Dialog_NumPannel dialog_NumPannel = new Dialog_NumPannel();
                 dialogResult = dialog_NumPannel.ShowDialog();
-                value = dialog_NumPannel.Value;
+                value = (int)dialog_NumPannel.Value;
             }));
                     
             if (dialogResult != DialogResult.Yes) return;

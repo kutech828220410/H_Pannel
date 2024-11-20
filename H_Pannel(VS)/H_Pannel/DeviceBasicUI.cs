@@ -1290,7 +1290,7 @@ namespace H_Pannel_lib
                         Dialog_NumPannel dialog_NumPannel = new Dialog_NumPannel();
                         if (dialog_NumPannel.ShowDialog() == DialogResult.Yes)
                         {
-                            int num = dialog_NumPannel.Value;
+                            double num = dialog_NumPannel.Value;
                             List<Task> taskList = new List<Task>();
                             for (int i = 0; i < list_value.Count; i++)
                             {
@@ -1298,7 +1298,7 @@ namespace H_Pannel_lib
                                 int Port = list_value[i][(int)enum_UDP_DataReceive.Port].ObjectToString().StringToInt32();
                                 taskList.Add(Task.Run(() =>
                                 {
-                                    Set_UDP_SendTime(IP, Port, num);
+                                    Set_UDP_SendTime(IP, Port, (int)num);
                                 }));
                             }
                             Task allTask = Task.WhenAll(taskList);
@@ -1365,7 +1365,7 @@ namespace H_Pannel_lib
                         Dialog_NumPannel dialog_NumPannel = new Dialog_NumPannel();
                         if (dialog_NumPannel.ShowDialog() == DialogResult.Yes)
                         {
-                            int num = dialog_NumPannel.Value;
+                            double num = dialog_NumPannel.Value;
                             List<Task> taskList = new List<Task>();
                             for (int i = 0; i < list_value.Count; i++)
                             {
@@ -1373,7 +1373,7 @@ namespace H_Pannel_lib
                                 int Port = list_value[i][(int)enum_UDP_DataReceive.Port].ObjectToString().StringToInt32();
                                 taskList.Add(Task.Run(() =>
                                 {
-                                    Set_LocalPort(IP, Port, num);
+                                    Set_LocalPort(IP, Port, (int)num);
                                 }));
                             }
                             Task allTask = Task.WhenAll(taskList);
@@ -1574,7 +1574,7 @@ namespace H_Pannel_lib
                         Dialog_NumPannel dialog_NumPannel = new Dialog_NumPannel();
                         if (dialog_NumPannel.ShowDialog() == DialogResult.Yes)
                         {
-                            int num = dialog_NumPannel.Value;
+                            double num = dialog_NumPannel.Value;
                             List<Task> taskList = new List<Task>();
                             for (int i = 0; i < list_value.Count; i++)
                             {
@@ -1582,7 +1582,7 @@ namespace H_Pannel_lib
                                 int Port = list_value[i][(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
                                 taskList.Add(Task.Run(() =>
                                 {
-                                    Set_UDP_SendTime(IP, Port, num);
+                                    Set_UDP_SendTime(IP, Port, (int)num);
                                 }));
                             }
                             Task allTask = Task.WhenAll(taskList);
@@ -1648,7 +1648,7 @@ namespace H_Pannel_lib
                         Dialog_NumPannel dialog_NumPannel = new Dialog_NumPannel();
                         if (dialog_NumPannel.ShowDialog() == DialogResult.Yes)
                         {
-                            int num = dialog_NumPannel.Value;
+                            double num = dialog_NumPannel.Value;
                             List<Task> taskList = new List<Task>();
                             for (int i = 0; i < list_value.Count; i++)
                             {
@@ -1657,7 +1657,7 @@ namespace H_Pannel_lib
                                 int Port = list_value[i][(int)enum_DeviceTable.Port].ObjectToString().StringToInt32();
                                 taskList.Add(Task.Run(() =>
                                 {
-                                    this.SQL_ReplaceDevice(value, IP, num);
+                                    this.SQL_ReplaceDevice(value, IP, (int)num);
                                 }));
                             }
                             Task allTask = Task.WhenAll(taskList);

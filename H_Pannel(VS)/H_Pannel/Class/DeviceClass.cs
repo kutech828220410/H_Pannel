@@ -43,12 +43,12 @@ namespace H_Pannel_lib
   
     static public class StockClassMethod
     {
-        static public int GetTolalQty(this List<StockClass> stockClasses)
+        static public double GetTolalQty(this List<StockClass> stockClasses)
         {
-            int qty = 0;
+            double qty = 0;
             for(int i = 0; i < stockClasses.Count; i++)
             {
-                qty += stockClasses[i].Qty.StringToInt32();
+                qty += stockClasses[i].Qty.StringToDouble();
             }
             return qty;
         }
@@ -487,10 +487,10 @@ namespace H_Pannel_lib
                     if (flag_break) break;
                 }
 
-                int 庫存 = 0;
+                double 庫存 = 0;
                 for (int i = 0; i < this.list_Validity_period.Count; i++)
                 {
-                    庫存 = this.list_Inventory[i].StringToInt32();
+                    庫存 = this.list_Inventory[i].StringToDouble();
                     if (庫存 > 0 || (this.list_Inventory[i] == "00" && !ClearAll))
                     {
                         效期_temp.Add(this.list_Validity_period[i].ToDateString("/"));
@@ -526,7 +526,7 @@ namespace H_Pannel_lib
           
 
         }
-        public int 取得庫存(string 效期)
+        public double 取得庫存(string 效期)
         {
             if (!效期.Check_Date_String()) return -1;
             效期 = 效期.StringToDateTime().ToDateString("/");
@@ -537,15 +537,15 @@ namespace H_Pannel_lib
             {
                 if (this.List_Validity_period[i].ToDateString("/") == 效期.ToDateString("/"))
                 {
-                    return this.List_Inventory[i].StringToInt32();
+                    return this.List_Inventory[i].StringToDouble();
                 }
             }
             return -1;
         }
-        public int 取得庫存()
+        public double 取得庫存()
         {
-            int 庫存 = 0;
-            int temp = 0;
+            double 庫存 = 0;
+            double temp = 0;
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
             if (this.List_Inventory == null) this.List_Inventory = new List<string>();
             if (this.List_Lot_number == null) this.List_Lot_number = new List<string>();
@@ -665,8 +665,8 @@ namespace H_Pannel_lib
                 max_shipping = value;
             }
         }
-        private int max_Inventory = 0;
-        public int Max_Inventory
+        private double max_Inventory = 0;
+        public double Max_Inventory
         { 
             get => max_Inventory;
             set
@@ -762,7 +762,7 @@ namespace H_Pannel_lib
 
      
 
-        public void 效期庫存異動(string 效期, int 異動量)
+        public void 效期庫存異動(string 效期, double 異動量)
         {
             this.效期庫存異動(效期, 異動量.ToString());
         }
@@ -794,7 +794,7 @@ namespace H_Pannel_lib
         }
         public void 效期庫存異動(string 效期, string 批號, string 異動量, bool 清除無庫存效期)
         {
-            if (異動量.StringToInt32() == 0) return;
+            if (異動量.StringToDouble() == 0) return;
             if (!效期.Check_Date_String()) return;
             效期 = 效期.StringToDateTime().ToDateString("/");
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
@@ -805,8 +805,8 @@ namespace H_Pannel_lib
                 if (this.List_Validity_period[i].ToDateString("/") == 效期.ToDateString("/"))
                 {
                     if (批號.StringIsEmpty() == false) this.List_Lot_number[i] = 批號;
-                    int 現有庫存 = this.List_Inventory[i].StringToInt32();
-                    int 異動庫存 = 異動量.StringToInt32();
+                    double 現有庫存 = this.List_Inventory[i].StringToDouble();
+                    double 異動庫存 = 異動量.StringToDouble();
                     this.List_Inventory[i] = (現有庫存 + 異動庫存).ToString();
                     this.確認效期庫存();
                     return;
@@ -844,7 +844,7 @@ namespace H_Pannel_lib
         }
         public void 效期庫存覆蓋(string 效期, string 批號, string 異動量, bool 清除無庫存效期)
         {
-            if (異動量.StringToInt32() < 0) return;
+            if (異動量.StringToDouble() < 0) return;
             if (!效期.Check_Date_String()) return;
             效期 = 效期.StringToDateTime().ToDateString("/");
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
@@ -854,7 +854,7 @@ namespace H_Pannel_lib
             {
                 if (this.List_Validity_period[i].ToDateString("/") == 效期.ToDateString("/"))
                 {
-                    int 異動庫存 = 異動量.StringToInt32();
+                    double 異動庫存 = 異動量.StringToDouble();
                     this.List_Inventory[i] = (異動庫存).ToString();
                     this.list_Lot_number[i] = 批號;
                     this.確認效期庫存();
@@ -873,8 +873,8 @@ namespace H_Pannel_lib
         }
         public void 新增效期(string 效期, string 批號, string 庫存)
         {
-            if (庫存.StringToInt32() == -1 && 庫存 != "00") return;
-            if (庫存.StringToInt32() < 0 && 庫存 != "00") return;
+            if (庫存.StringToDouble() == -1 && 庫存 != "00") return;
+            if (庫存.StringToDouble() < 0 && 庫存 != "00") return;
             if (!效期.Check_Date_String()) return;
             效期 = 效期.StringToDateTime().ToDateString("/");
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
@@ -912,30 +912,30 @@ namespace H_Pannel_lib
             }
         }
 
-        public int 庫存異動(int 總異動量, out List<string> 效期, out List<string> 批號, out List<string> 異動量)
+        public double 庫存異動(double 總異動量, out List<string> 效期, out List<string> 批號, out List<string> 異動量)
         {
             return 庫存異動(總異動量.ToString(), out 效期, out 批號, out 異動量, true);
         }
-        public int 庫存異動(int 總異動量, out List<string> 效期, out List<string> 異動量)
+        public double 庫存異動(double 總異動量, out List<string> 效期, out List<string> 異動量)
         {
             return this.庫存異動(總異動量.ToString(), out 效期, out 異動量, true);
         }
-        public int 庫存異動(string 總異動量, out List<string> 效期, out List<string> 異動量, bool 要寫入)
+        public double 庫存異動(string 總異動量, out List<string> 效期, out List<string> 異動量, bool 要寫入)
         {
             List<string> 批號 = new List<string>();
             return 庫存異動(總異動量, out 效期, out 批號, out 異動量, 要寫入);
         }
-        public int 庫存異動(string 總異動量, out List<string> 效期, out List<string> 批號, out List<string> 異動量, bool 要寫入)
+        public double 庫存異動(string 總異動量, out List<string> 效期, out List<string> 批號, out List<string> 異動量, bool 要寫入)
         {
             效期 = new List<string>();
             批號 = new List<string>();
             異動量 = new List<string>();
             if (總異動量.StringIsEmpty()) return -1;
-            if (總異動量.StringToInt32() == 0) return -1;
-            int int_總異動量 = 總異動量.StringToInt32();
-            int 總庫存 = 取得庫存();
-            int 剩餘庫存數量 = 0;
-            int 效期庫存 = 0;
+            if (總異動量.StringToDouble() == 0) return -1;
+            double int_總異動量 = 總異動量.StringToDouble();
+            double 總庫存 = 取得庫存();
+            double 剩餘庫存數量 = 0;
+            double 效期庫存 = 0;
             if (this.List_Validity_period == null) this.List_Validity_period = new List<string>();
             if (this.List_Inventory == null) this.List_Inventory = new List<string>();
             this.List_Validity_period = this.List_Validity_period.OrderBy(r => DateTime.Parse(r.ToDateString())).ToList();
@@ -973,7 +973,7 @@ namespace H_Pannel_lib
             int_總異動量 = 0;
             for (int i = 0; i < 效期.Count; i++)
             {
-                int_總異動量 += 異動量[i].StringToInt32();
+                int_總異動量 += 異動量[i].StringToDouble();
             }
             return int_總異動量;
 
@@ -1028,7 +1028,7 @@ namespace H_Pannel_lib
             {
                 for (int i = 0; i < stockClasses.Count; i++)
                 {
-                    this.效期庫存異動(stockClasses[i].Validity_period, stockClasses[i].Qty.StringToInt32());
+                    this.效期庫存異動(stockClasses[i].Validity_period, stockClasses[i].Qty.StringToDouble());
                 }
             }
             return stockClasses;
@@ -1327,12 +1327,12 @@ namespace H_Pannel_lib
             return flag;
         }
         
-        static public int GetInventory(this List<DeviceBasic> deviceBasics)
+        static public double GetInventory(this List<DeviceBasic> deviceBasics)
         {
-            int 庫存 = 0;
+            double 庫存 = 0;
             for (int i = 0; i < deviceBasics.Count; i++)
             {
-                庫存 += deviceBasics[i].Inventory.StringToInt32();
+                庫存 += deviceBasics[i].Inventory.StringToDouble();
             }
 
             return 庫存;
@@ -2382,7 +2382,7 @@ namespace H_Pannel_lib
                             if (Value is string)
                             {
                                 if (Value.ObjectToString().StringIsEmpty()) Value = "0";
-                                this.Max_Inventory = Value.ObjectToString().StringToInt32();
+                                this.Max_Inventory = Value.ObjectToString().StringToDouble();
 
                             }
                         }

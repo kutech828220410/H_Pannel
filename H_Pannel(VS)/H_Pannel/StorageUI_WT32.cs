@@ -835,7 +835,7 @@ namespace H_Pannel_lib
 
                             taskList.Add(Task.Run(() =>
                             {
-                                Set_WS2812_Blink(IP, Port, dialog_NumPannel.Value, colorDialog.Color);
+                                Set_WS2812_Blink(IP, Port, (int)dialog_NumPannel.Value, colorDialog.Color);
                             }));
                         }
                         Task allTask = Task.WhenAll(taskList);
@@ -1044,7 +1044,7 @@ namespace H_Pannel_lib
 
                             taskList.Add(Task.Run(() =>
                             {
-                                Set_WS2812_Blink(IP, Port, dialog_NumPannel.Value, colorDialog.Color);
+                                Set_WS2812_Blink(IP, Port, (int)dialog_NumPannel.Value, colorDialog.Color);
                             }));
                         }
                         Task allTask = Task.WhenAll(taskList);

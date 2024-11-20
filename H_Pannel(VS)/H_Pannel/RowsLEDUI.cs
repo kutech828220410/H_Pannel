@@ -636,11 +636,11 @@ namespace H_Pannel_lib
                 if (colorDialog.ShowDialog() != DialogResult.OK) return;
                 Dialog_NumPannel dialog_NumPannel = new Dialog_NumPannel("亮燈亮度增量大小");
                 if (dialog_NumPannel.ShowDialog() != DialogResult.Yes) return;
-                int Add_val = dialog_NumPannel.Value;
+                int Add_val = (int)dialog_NumPannel.Value;
 
                 dialog_NumPannel = new Dialog_NumPannel("亮燈亮度減量大小");
                 if (dialog_NumPannel.ShowDialog() != DialogResult.Yes) return;
-                int Sub_val = dialog_NumPannel.Value;
+                int Sub_val = (int)dialog_NumPannel.Value;
                 Set_WS2812B_breathing(list_UDP_Class[0], iPEndPoints[0].Address.ToString(), (byte)Add_val, (byte)Sub_val, colorDialog.Color);
             }
         }
@@ -680,7 +680,7 @@ namespace H_Pannel_lib
                 List<RowsLED> rowsLEDs = new List<RowsLED>();
                 for (int i = 0; i < iPEndPoints.Count; i++)
                 {
-                    int value = dialog_NumPannel.Value;
+                    double value = dialog_NumPannel.Value;
                     string IP = iPEndPoints[i].Address.ToString();
                     int Port = iPEndPoints[i].Port;
                     taskList.Add(Task.Run(() =>
@@ -688,7 +688,7 @@ namespace H_Pannel_lib
                         RowsLED rowsLED = this.SQL_GetRowsLED(IP);
                         if (rowsLED != null)
                         {
-                            rowsLED.Maximum = value;
+                            rowsLED.Maximum = (int)value;
                             rowsLEDs.LockAdd(rowsLED);
                         }                   
                     }));
