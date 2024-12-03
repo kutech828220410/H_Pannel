@@ -29,6 +29,7 @@ namespace H_Pannel_lib
             private int input_dir = 0;
             private int output_dir = 0;
             private int laserDistance = 0;
+            private bool lASER_ON = false;
 
             public string IP { get => iP; set => iP = value; }
             public int Port { get => port; set => port = value; }
@@ -40,6 +41,7 @@ namespace H_Pannel_lib
             public int Output_dir { get => output_dir; set => output_dir = value; }
             public int LaserDistance { get => laserDistance; set => laserDistance = value; }
             public bool WS2812_State { get; set; }
+            public bool LASER_ON { get => lASER_ON; set => lASER_ON = value; }
 
             public bool Get_Input_dir(int index)
             {
@@ -332,7 +334,13 @@ namespace H_Pannel_lib
             }
         }
 
-
+        public UDP_READ Get_UDP_READ(string IP)
+        {
+            string json = this.GetUDPJsonString(IP);
+            if (json.StringIsEmpty()) return null;
+            UDP_READ uDP_READ = json.JsonDeserializet<UDP_READ>();
+            return uDP_READ;
+        }
         protected override void SQL_AddDevice(string IP, int Port)
         {
             List<object[]> list_SQL_Value = this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(false);

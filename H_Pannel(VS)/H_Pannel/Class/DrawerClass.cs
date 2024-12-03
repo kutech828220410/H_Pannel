@@ -627,10 +627,13 @@ namespace H_Pannel_lib
         private Enum_DrawerType drawerType = Enum_DrawerType._4X8;
         public enum Enum_DrawerType
         {
+            //原始版本
             _4X8,
             _3X8,
+            //大抽屜版本
             _5X8_A,
             _4X8_A,
+
         }
         public Drawer()
         {
