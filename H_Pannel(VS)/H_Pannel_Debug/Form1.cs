@@ -85,7 +85,12 @@ namespace WT32_SC01
 
             this.drawerUI_EPD_583.sqL_DataGridView_UDP_DataReceive.RowDoubleClickEvent += SqL_DataGridView_UDP_DataReceive_EPD583_RowDoubleClickEvent;
             this.drawerUI_EPD_583.sqL_DataGridView_DeviceTable.RowDoubleClickEvent += SqL_DataGridView_DeviceTable_EPD583_RowDoubleClickEvent;
+            this.rJ_Button_epD_583_Pannel_上傳.MouseDownEvent += RJ_Button_epD_583_Pannel_上傳_MouseDownEvent;
             this.rJ_Button_epD_583_Pannel_儲位亮燈.MouseDownEvent += RJ_Button_epD_583_Pannel_儲位亮燈_MouseDownEvent;
+            this.rJ_Button_epD_583_Pannel_儲位滅燈.MouseDownEvent += RJ_Button_epD_583_Pannel_儲位滅燈_MouseDownEvent;
+            this.rJ_Button_epD_583_Pannel_面板亮燈.MouseDownEvent += RJ_Button_epD_583_Pannel_面板亮燈_MouseDownEvent;
+            this.rJ_Button_epD_583_Pannel_面板滅燈.MouseDownEvent += RJ_Button_epD_583_Pannel_面板滅燈_MouseDownEvent;
+            this.rJ_Button_epD_583_Pannel_全部亮燈.MouseDownEvent += RJ_Button_epD_583_Pannel_全部亮燈_MouseDownEvent;
             this.rJ_Button_epD_583_Pannel_全部滅燈.MouseDownEvent += RJ_Button_epD_583_Pannel_全部滅燈_MouseDownEvent;
             this.rJ_Button_epD_583_Pannel_TEST.MouseDownEvent += RJ_Button_epD_583_Pannel_TEST_MouseDownEvent;
 
@@ -129,6 +134,9 @@ namespace WT32_SC01
             lcD114_Panel.Init(this.storageUI_LCD_114.List_UDP_Local);
             this.rJ_Button_lcD114_Panel_Write.MouseDownEvent += RJ_Button_lcD114_Panel_Write_MouseDownEvent;
         }
+
+   
+
         int index = 0;
         private void RJ_Button_lcD114_Panel_Write_MouseDownEvent(MouseEventArgs mevent)
         {
@@ -394,7 +402,7 @@ namespace WT32_SC01
                 epD_583_Pannel_IP = dialog_IP_Config.IP;
             }
         }
-        private void rJ_Button_epD_583_Pannel_上傳_Click(object sender, EventArgs e)
+        private void RJ_Button_epD_583_Pannel_上傳_MouseDownEvent(MouseEventArgs mevent)
         {
             Drawer drawer = this.epD_583_Pannel.CurrentDrawer;
             if (drawer == null) return;
@@ -404,22 +412,22 @@ namespace WT32_SC01
         {
             this.epD_583_Pannel.BoxLightOn(Color.Blue);
         }
-        private void rJ_Button_epD_583_Pannel_儲位滅燈_Click(object sender, EventArgs e)
+        private void RJ_Button_epD_583_Pannel_全部亮燈_MouseDownEvent(MouseEventArgs mevent)
         {
-            this.epD_583_Pannel.BoxLightOff();
+            this.epD_583_Pannel.AllLightOn(Color.White);
         }
-        private void rJ_Button_epD_583_Pannel_面板亮燈_Click(object sender, EventArgs e)
-        {
-            this.epD_583_Pannel.PannelLightOn(Color.Red);
-        }
-        private void rJ_Button_epD_583_Pannel_面板滅燈_Click(object sender, EventArgs e)
+        private void RJ_Button_epD_583_Pannel_面板滅燈_MouseDownEvent(MouseEventArgs mevent)
         {
             this.epD_583_Pannel.PannelLightOff();
         }
-        private void rJ_Button_epD_583_Pannel_全部亮燈_Click(object sender, EventArgs e)
+        private void RJ_Button_epD_583_Pannel_面板亮燈_MouseDownEvent(MouseEventArgs mevent)
         {
-            this.epD_583_Pannel.AllLightOn(Color.White);
-        }    
+            this.epD_583_Pannel.PannelLightOn(Color.Red);
+        }
+        private void RJ_Button_epD_583_Pannel_儲位滅燈_MouseDownEvent(MouseEventArgs mevent)
+        {
+            this.epD_583_Pannel.BoxLightOff();
+        }
         private void RJ_Button_epD_583_Pannel_全部滅燈_MouseDownEvent(MouseEventArgs mevent)
         {
             this.epD_583_Pannel.AllLightOn(Color.Black);

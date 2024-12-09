@@ -148,6 +148,11 @@ void loop()
       {
          wiFiConfig.Set_Serverport(30000);
       }
+      if(EPD_TYPE == "EPD420_D")
+      {
+         wiFiConfig.Set_Localport(29005);
+         wiFiConfig.Set_Serverport(30005);
+      }
       if(Device == "RowLED") wiFiConfig.Set_Serverport(30001);
       if(Device == "OLCD114") 
       {

@@ -633,7 +633,9 @@ namespace H_Pannel_lib
             //大抽屜版本
             _5X8_A,
             _4X8_A,
-
+            //ADC抽屜版本
+            _1X8_ADC,
+            _3X8_ADC,
         }
         public Drawer()
         {
@@ -832,6 +834,16 @@ namespace H_Pannel_lib
                 this.Num_Of_Columns = 4;
                 this.Num_Of_Rows = 8;
             }
+            else if (this.drawerType == Enum_DrawerType._3X8_ADC)
+            {
+                this.Num_Of_Columns = 3;
+                this.Num_Of_Rows = 8;
+            }
+            else if (this.drawerType == Enum_DrawerType._1X8_ADC)
+            {
+                this.Num_Of_Columns = 1;
+                this.Num_Of_Rows = 8;
+            }
             this.BoxInit();
         }
         public void Clear()
@@ -856,6 +868,11 @@ namespace H_Pannel_lib
             {
                 this.pannelWidth = 800;
                 this.pannelHeight = 480;
+            }
+            if (this.DeviceType == DeviceType.EPD420 || this.DeviceType == DeviceType.EPD420_lock)
+            {
+                this.pannelWidth = 400;
+                this.pannelHeight = 300;
             }
             int x, y, width, height;
             Size Box_size = this.GetBoxSize();
@@ -889,6 +906,11 @@ namespace H_Pannel_lib
             {
                 this.pannelWidth = 800;
                 this.pannelHeight = 480;
+            }
+            if (this.DeviceType == DeviceType.EPD420 || this.DeviceType == DeviceType.EPD420_lock)
+            {
+                this.pannelWidth = 400;
+                this.pannelHeight = 300;
             }
             int x, y, width, height;
             height = 0;

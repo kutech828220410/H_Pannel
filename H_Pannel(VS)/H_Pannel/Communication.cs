@@ -7599,6 +7599,131 @@ namespace H_Pannel_lib
             }
           
         }
+        static public Bitmap EPD420_GetBitmap(Drawer drawer)
+        {
+            Bitmap bitmap = new Bitmap(drawer.PannelWidth, drawer.PannelHeight);
+            Graphics g = Graphics.FromImage(bitmap);
+            List<Box[]> Boxes = drawer.Boxes;
+            for (int i = 0; i < Boxes.Count; i++)
+            {
+                for (int k = 0; k < Boxes[i].Length; k++)
+                {
+                    Rectangle rect = DrawerUI_EPD_583.Get_Box_Combine(drawer, Boxes[i][k]);
+                    Box _box = Boxes[i][k];
+                    if (Boxes[i][k].Slave == false)
+                    {
+                        float posy = 0;
+                        Color backgroundColor = (_box.IsWarning ? Color.Red : Color.White);
+                        Color foreColor = (_box.IsWarning ? Color.White : Color.Black);
+                        g.FillRectangle(new SolidBrush(backgroundColor), rect);
+                        g.DrawRectangle(new Pen(Color.Black, _box.Pen_Width), rect);
+
+                        g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        g.CompositingQuality = CompositingQuality.HighQuality;
+                        g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+
+                        _box.SetValue(Device.ValueName.藥品碼, Device.ValueType.ForeColor, foreColor);
+                        _box.SetValue(Device.ValueName.藥品碼, Device.ValueType.BackColor, backgroundColor);
+
+                        _box.SetValue(Device.ValueName.藥品名稱, Device.ValueType.ForeColor, foreColor);
+                        _box.SetValue(Device.ValueName.藥品名稱, Device.ValueType.BackColor, backgroundColor);
+
+                        _box.SetValue(Device.ValueName.藥品學名, Device.ValueType.ForeColor, foreColor);
+                        _box.SetValue(Device.ValueName.藥品學名, Device.ValueType.BackColor, backgroundColor);
+
+                        _box.SetValue(Device.ValueName.藥品中文名稱, Device.ValueType.ForeColor, foreColor);
+                        _box.SetValue(Device.ValueName.藥品中文名稱, Device.ValueType.BackColor, backgroundColor);
+
+                        _box.SetValue(Device.ValueName.包裝單位, Device.ValueType.ForeColor, foreColor);
+                        _box.SetValue(Device.ValueName.包裝單位, Device.ValueType.BackColor, backgroundColor);
+
+                        _box.SetValue(Device.ValueName.效期, Device.ValueType.ForeColor, foreColor);
+                        _box.SetValue(Device.ValueName.效期, Device.ValueType.BackColor, backgroundColor);
+
+                        _box.SetValue(Device.ValueName.庫存, Device.ValueType.ForeColor, foreColor);
+                        _box.SetValue(Device.ValueName.庫存, Device.ValueType.BackColor, backgroundColor);
+
+
+                        if ((_box.DRUGKIND.StringIsEmpty() == false && _box.DRUGKIND != "N") || _box.IsAnesthetic || _box.IsShapeSimilar || _box.IsSoundSimilar)
+                        {
+                            int temp_height = (int)g.MeasureString(_box.Name, _box.Name_font, new Size(10000, 10000), StringFormat.GenericDefault).Height;
+                            int temp_x = 2;
+                            posy += 2;
+                            g.FillRectangle(new SolidBrush(Color.White), new Rectangle(rect.X + temp_x, rect.Y + (int)posy, rect.Width, (int)temp_height));
+                            if ((_box.DRUGKIND.StringIsEmpty() == false && _box.DRUGKIND != "N"))
+                            {
+                                DrawHexagonText(g, new Point(rect.X + temp_x, rect.Y + (int)posy), (int)temp_height, _box.DRUGKIND, new Font("Arial", _box.Name_font.Size), Color.White, Color.Black, Color.Red);
+                                temp_x += ((int)temp_height + 5);
+                            }
+                            if (_box.IsAnesthetic)
+                            {
+                                DrawCircleText(g, new Point(rect.X + temp_x, rect.Y + (int)posy), (int)temp_height, "麻", new Font("Arial", _box.Name_font.Size), Color.White, Color.Black, Color.Red);
+                                temp_x += ((int)temp_height + 5);
+                            }
+                            if (_box.IsShapeSimilar)
+                            {
+                                DrawSquareText(g, new Point(rect.X + temp_x, rect.Y + (int)posy), (int)temp_height, "形", new Font("Arial", _box.Name_font.Size), Color.Black, Color.Black, Color.White);
+                                temp_x += ((int)temp_height + 5);
+                            }
+                            if (_box.IsSoundSimilar)
+                            {
+                                DrawSquareText(g, new Point(rect.X + temp_x, rect.Y + (int)posy), (int)temp_height, "音", new Font("Arial", _box.Name_font.Size), Color.Black, Color.Black, Color.White);
+                                temp_x += ((int)temp_height + 5);
+                            }
+                            posy += (int)temp_height;
+                        }
+
+                        SizeF size_Name = g.MeasureString(_box.Name, _box.Name_font, new Size(rect.Width, rect.Height), StringFormat.GenericDefault);
+                        size_Name = new SizeF((int)size_Name.Width, (int)size_Name.Height);
+                        g.DrawString(_box.Name, _box.Name_font, new SolidBrush(foreColor), new RectangleF(rect.X, rect.Y + posy, rect.Width, rect.Height), StringFormat.GenericDefault);
+                        posy += size_Name.Height;
+                        posy += 3;
+
+                        if (_box.Validity_period_Visable)
+                        {
+                            for (int m = 0; m < _box.List_Validity_period.Count; m++)
+                            {
+                                if (_box.List_Inventory[m] == "00") continue;
+                                string str = $"{_box.List_Validity_period[m]} [{_box.List_Inventory[m]}]";
+                                _box.Validity_period_font = new Font(_box.Validity_period_font, FontStyle.Bold);
+                                SizeF size_Validity_period = TextRenderer.MeasureText(str, _box.Validity_period_font);
+                                Color Validity_foreColor = (_box.IsWarning ? Color.White : Color.Black);
+
+                                g.DrawString(str, _box.Validity_period_font, new SolidBrush(Validity_foreColor), rect.X + 5, rect.Y + posy);
+                                Color color_pen = _box.IsWarning ? Color.White : Color.Red;
+                                g.DrawRectangle(new Pen(new SolidBrush(color_pen), 1), rect.X + 5, rect.Y + posy, size_Validity_period.Width, size_Validity_period.Height);
+                                posy += size_Validity_period.Height;
+                            }
+                        }
+
+                        SizeF size_Code = TextRenderer.MeasureText($"{_box.Code}[{_box.Inventory}]", _box.Code_font);
+                        string Code_Inventory = "";
+                        if (_box.Code_Visable) Code_Inventory += $"{_box.Code}";
+                        if (_box.Inventory_Visable) Code_Inventory += $"[{_box.Inventory}]";
+                        if (_box.Code.StringIsEmpty() == false)
+                        {
+                            if (_box.Code_Visable || _box.Inventory_Visable)
+                            {
+                                g.DrawString($"{Code_Inventory}", _box.Code_font, new SolidBrush(foreColor), rect.X, ((rect.Y + rect.Height) - size_Code.Height));
+                            }
+
+                        }
+                    }
+
+
+                }
+            }
+            string[] ip_array = drawer.IP.Split('.');
+            if (ip_array.Length == 4)
+            {
+                string ip = ip_array[2] + "." + ip_array[3];
+                SizeF size_IP = TextRenderer.MeasureText(ip, new Font("微軟正黑體", 10, FontStyle.Bold));
+                g.DrawString(ip, new Font("微軟正黑體", 8, FontStyle.Bold), new SolidBrush(Color.Black), (DrawerUI_EPD_583.Pannel_Width - size_IP.Width), (DrawerUI_EPD_583.Pannel_Height - size_IP.Height));
+            }
+            g.Dispose();
+            return bitmap;
+        }
         static public Bitmap EPD583_GetBitmap(Drawer drawer)
         {
             Bitmap bitmap = new Bitmap(DrawerUI_EPD_583.Pannel_Width, DrawerUI_EPD_583.Pannel_Height);

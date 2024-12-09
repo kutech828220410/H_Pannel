@@ -131,7 +131,11 @@ namespace H_Pannel_lib
                 NumOfLED_Pannel = 6;
                 NumOfLED_Drawer = 372 - NumOfLED_Pannel;
             }
-
+            if (enum_DrawerType == Drawer.Enum_DrawerType._1X8_ADC)
+            {
+                NumOfLED_Pannel = 6;
+                NumOfLED_Drawer = 117 - NumOfLED_Pannel;
+            }
             for (int i = NumOfLED_Drawer * 3; i < Drawer.NumOfLED * 3; i++)
             {
                 if (i > LED_Bytes.Length) return LED_Bytes;
@@ -215,8 +219,8 @@ namespace H_Pannel_lib
                 if (row >= drawer.Boxes[i].Length) return drawer.LED_Bytes;
             }
             Rectangle rect = Get_Box_Combine(drawer, col, row);
-            int width = rect.Width / (Pannel_Width / drawer.Num_Of_Columns);
-            int height = rect.Height / (Pannel_Height / drawer.Num_Of_Rows);
+            int width = rect.Width / (drawer.PannelWidth / drawer.Num_Of_Columns);
+            int height = rect.Height / (drawer.PannelHeight / drawer.Num_Of_Rows);
             return Set_LEDBytes(col, row, width, height, ref drawer.LED_Bytes, color, drawer.DrawerType);
         }
         static public byte[] Set_LEDBytes(Drawer drawer, int col_x, int row_y, ref byte[] LEDBytes, Color color)
@@ -228,8 +232,8 @@ namespace H_Pannel_lib
             }
 
             Rectangle rect = Get_Box_Combine(drawer, col_x, row_y);
-            int width = rect.Width / (Pannel_Width / drawer.Num_Of_Columns);
-            int height = rect.Height / (Pannel_Height / drawer.Num_Of_Rows);
+            int width = rect.Width / (drawer.PannelWidth / drawer.Num_Of_Columns);
+            int height = rect.Height / (drawer.PannelHeight / drawer.Num_Of_Rows);
             return Set_LEDBytes(col_x, row_y, width, height, ref LEDBytes, color, drawer.DrawerType);
         }
         static public byte[] Set_LEDBytes(int col_x, int row_y, int width, int height, ref byte[] LEDBytes, Color color, Drawer.Enum_DrawerType enum_DrawerType)
@@ -254,6 +258,16 @@ namespace H_Pannel_lib
             if (enum_DrawerType == Drawer.Enum_DrawerType._5X8_A)
             {
                 Num_Of_Columns = 5;
+                Num_Of_Rows = 8;
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._1X8_ADC)
+            {
+                Num_Of_Columns = 1;
+                Num_Of_Rows = 8;
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._3X8_ADC)
+            {
+                Num_Of_Columns = 3;
                 Num_Of_Rows = 8;
             }
             for (int i = 0; i < width; i++)
@@ -291,6 +305,16 @@ namespace H_Pannel_lib
             {
                 NumOfLED_Pannel = 6;
                 NumOfLED_Drawer = 372 - NumOfLED_Pannel;
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._1X8_ADC)
+            {
+                NumOfLED_Pannel = 6;
+                NumOfLED_Drawer = 117 - NumOfLED_Pannel;
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._3X8_ADC)
+            {
+                NumOfLED_Pannel = 6;
+                NumOfLED_Drawer = 285;
             }
             for (int i = NumOfLED_Drawer ; i < NumOfLED ; i++)
             {
@@ -451,6 +475,14 @@ namespace H_Pannel_lib
             if (deviceType == DeviceType.EPD730 || deviceType == DeviceType.EPD730_lock)
             {
                 return Communication.EPD_730_DrawImage(uDP_Class, IP, bmp);
+            }
+            if (deviceType == DeviceType.EPD583 || deviceType == DeviceType.EPD583_lock)
+            {
+                return Communication.EPD_583_DrawImage(uDP_Class, IP, bmp);
+            }
+            if (deviceType == DeviceType.EPD420 || deviceType == DeviceType.EPD420_lock)
+            {
+                return Communication.EPD_420_DrawImage(uDP_Class, IP, bmp);
             }
             return Communication.EPD_583_DrawImage(uDP_Class, IP, bmp);
         }
@@ -627,6 +659,14 @@ namespace H_Pannel_lib
             if (drawer.DeviceType == DeviceType.EPD730 || drawer.DeviceType == DeviceType.EPD730_lock)
             {
                 return Communication.EPD730_GetBitmap(drawer);
+            }
+            if (drawer.DeviceType == DeviceType.EPD583 || drawer.DeviceType == DeviceType.EPD583_lock)
+            {
+                return Communication.EPD583_GetBitmap(drawer);
+            }
+            if (drawer.DeviceType == DeviceType.EPD420 || drawer.DeviceType == DeviceType.EPD420_lock)
+            {
+                return Communication.EPD420_GetBitmap(drawer);
             }
             return Communication.EPD583_GetBitmap(drawer);
 
@@ -833,7 +873,47 @@ namespace H_Pannel_lib
                     List_Drawer_H_Line_Leds.Add(values.ToArray());
                 }
             }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._1X8_ADC)
+            {
+                int index = 0;
+
+                index = 110;
+                for (int k = 0; k < 9; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 7; i++)
+                    {
+                        values.Add(index - ((k * 7) + i));
+                    }
+                    List_Drawer_H_Line_Leds.Add(values.ToArray());
+                }
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._3X8_ADC)
+            {
+                for (int k = 0; k < 9; k++)
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (k == 0) List_Drawer_H_Line_Leds.Add(Get_3X8_H_Line_ADC((264 - k * 21) + i * 7));
+                        if (k == 1) List_Drawer_H_Line_Leds.Add(Get_3X8_H_Line_ADC((264 - k * 21) + (2 - i) * 7));
+                        if (k == 2) List_Drawer_H_Line_Leds.Add(Get_3X8_H_Line_ADC((264 - k * 21) + i * 7));
+                        if (k == 3) List_Drawer_H_Line_Leds.Add(Get_3X8_H_Line_ADC((264 - k * 21) + (2 - i) * 7));
+                        if (k == 4) List_Drawer_H_Line_Leds.Add(Get_3X8_H_Line_ADC((264 - k * 21) + i * 7));
+                        if (k == 5) List_Drawer_H_Line_Leds.Add(Get_3X8_H_Line_ADC((264 - k * 21) + (2 - i) * 7));
+                        if (k == 6) List_Drawer_H_Line_Leds.Add(Get_3X8_H_Line_ADC((264 - k * 21) + i * 7));
+                        if (k == 7) List_Drawer_H_Line_Leds.Add(Get_3X8_H_Line_ADC((264 - k * 21) + (2 - i) * 7));
+                        if (k == 8) List_Drawer_H_Line_Leds.Add(Get_3X8_H_Line_ADC((264 - k * 21) + i * 7));
+                    }
+                }
+          
+
+
+            }
             return List_Drawer_H_Line_Leds;
+        }
+        static private int[] Get_3X8_H_Line_ADC(int index)
+        {
+            return new int[] { index + 0, index + 1, index + 2, index + 3, index + 4, index + 5, index + 6};
         }
         public static List<int[]> Get_V_Line_Leds(Drawer.Enum_DrawerType enum_DrawerType)
         {
@@ -1002,6 +1082,77 @@ namespace H_Pannel_lib
                     List_Drawer_V_Line_Leds.Add(values.ToArray());
                 }
             }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._1X8_ADC)
+            {
+                int index = 0;
+                index = 0;
+                for (int k = 0; k < 8; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 3; i++)
+                    {
+                        values.Add(index + ((k * 3) + i));
+                    }
+                    List_Drawer_V_Line_Leds.Add(values.ToArray());
+                }
+                index = 47;
+                for (int k = 0; k < 8; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 3; i++)
+                    {
+                        values.Add(index - ((k * 3) + i));
+                    }
+                    List_Drawer_V_Line_Leds.Add(values.ToArray());
+                }
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._3X8_ADC)
+            {
+                int index = 0;
+                index = 95;
+                for (int k = 0; k < 8; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 3; i++)
+                    {
+                        values.Add(index - ((k * 3) + i));
+                    }
+                    List_Drawer_V_Line_Leds.Add(values.ToArray());
+                }
+                index = 48;
+                for (int k = 0; k < 8; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 3; i++)
+                    {
+                        values.Add(index + ((k * 3) + i));
+                    }
+                    List_Drawer_V_Line_Leds.Add(values.ToArray());
+                }
+                index = 47;
+                for (int k = 0; k < 8; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 3; i++)
+                    {
+                        values.Add(index - ((k * 3) + i));
+                    }
+                    List_Drawer_V_Line_Leds.Add(values.ToArray());
+                }
+                index = 0;
+                for (int k = 0; k < 8; k++)
+                {
+                    List<int> values = new List<int>();
+                    for (int i = 0; i < 3; i++)
+                    {
+                        values.Add(index + ((k * 3) + i));
+                    }
+                    List_Drawer_V_Line_Leds.Add(values.ToArray());
+                }
+             
+            
+              
+            }
             return List_Drawer_V_Line_Leds;
         }
 
@@ -1035,6 +1186,8 @@ namespace H_Pannel_lib
             設為小抽屜3X8,
             設為大抽屜4X8_A,
             設為小抽屜5X8_A,
+            設為小抽屜1X8_ADC,
+            設為小抽屜3X8_ADC,
         }
         private enum ContextMenuStrip_面板格式
         {
@@ -1042,6 +1195,8 @@ namespace H_Pannel_lib
             設為EPD583無鎖控,
             設為EPD730有鎖控,
             設為EPD730無鎖控,
+            設為EPD420有鎖控,
+            設為EPD420無鎖控,
         }
         private enum ContextMenuStrip_參數設定
         {         
@@ -1542,8 +1697,10 @@ namespace H_Pannel_lib
                         int Port = iPEndPoints[i].Port;
                         Drawer drawer = this.SQL_GetDrawer(IP);
                         if (drawer == null) continue;
-                        if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD583有鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD583_lock);
                         if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD583無鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD583);
+                        if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD583有鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD583_lock);
+                        if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD420無鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD420);
+                        if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD420有鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD420_lock);
                         if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD730有鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD730);
                         if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD730無鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD730_lock);
 
@@ -1576,6 +1733,8 @@ namespace H_Pannel_lib
                             if (dialog_ContextMenuStrip.Value == ContextMenuStrip_抽屜格式.設為大抽屜4X8_A.GetEnumName()) drawer.SetDrawerType(Drawer.Enum_DrawerType._4X8_A);
                             if (dialog_ContextMenuStrip.Value == ContextMenuStrip_抽屜格式.設為小抽屜3X8.GetEnumName()) drawer.SetDrawerType(Drawer.Enum_DrawerType._3X8);
                             if (dialog_ContextMenuStrip.Value == ContextMenuStrip_抽屜格式.設為小抽屜5X8_A.GetEnumName()) drawer.SetDrawerType(Drawer.Enum_DrawerType._4X8_A);
+                            if (dialog_ContextMenuStrip.Value == ContextMenuStrip_抽屜格式.設為小抽屜1X8_ADC.GetEnumName()) drawer.SetDrawerType(Drawer.Enum_DrawerType._1X8_ADC);
+                            if (dialog_ContextMenuStrip.Value == ContextMenuStrip_抽屜格式.設為小抽屜3X8_ADC.GetEnumName()) drawer.SetDrawerType(Drawer.Enum_DrawerType._3X8_ADC);
                             taskList.Add(Task.Run(() =>
                             {
                                 SQL_ReplaceDrawer(drawer);

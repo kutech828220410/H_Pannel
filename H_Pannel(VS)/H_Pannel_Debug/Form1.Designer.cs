@@ -74,6 +74,7 @@
             this.EPD266 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.rJ_Button_lcD114_Panel_Write = new MyUI.RJ_Button();
             this.rJ_Button_EPD266_TEST = new MyUI.RJ_Button();
             this.rJ_Button_EPD_266_初始化 = new MyUI.RJ_Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -117,7 +118,6 @@
             this.H_RFID = new System.Windows.Forms.TabPage();
             this.sqL_DataGridView_h_RFID_Datas = new SQLUI.SQL_DataGridView();
             this.rJ_Button_H_RFID_初始化 = new MyUI.RJ_Button();
-            this.rJ_Button_lcD114_Panel_Write = new MyUI.RJ_Button();
             this.LCD144 = new System.Windows.Forms.TabPage();
             this.storageUI_WT32 = new H_Pannel_lib.StorageUI_WT32();
             this.pannel35_Pannel = new H_Pannel_lib.Pannel35_Pannel();
@@ -1071,6 +1071,38 @@
             this.tabPage1.Text = "資料設定";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // rJ_Button_lcD114_Panel_Write
+            // 
+            this.rJ_Button_lcD114_Panel_Write.AutoResetState = false;
+            this.rJ_Button_lcD114_Panel_Write.BackColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_lcD114_Panel_Write.BackgroundColor = System.Drawing.Color.DodgerBlue;
+            this.rJ_Button_lcD114_Panel_Write.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.rJ_Button_lcD114_Panel_Write.BorderRadius = 5;
+            this.rJ_Button_lcD114_Panel_Write.BorderSize = 0;
+            this.rJ_Button_lcD114_Panel_Write.buttonType = MyUI.RJ_Button.ButtonType.Push;
+            this.rJ_Button_lcD114_Panel_Write.DisenableColor = System.Drawing.Color.Gray;
+            this.rJ_Button_lcD114_Panel_Write.FlatAppearance.BorderSize = 0;
+            this.rJ_Button_lcD114_Panel_Write.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rJ_Button_lcD114_Panel_Write.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rJ_Button_lcD114_Panel_Write.ForeColor = System.Drawing.Color.White;
+            this.rJ_Button_lcD114_Panel_Write.GUID = "";
+            this.rJ_Button_lcD114_Panel_Write.Image_padding = new System.Windows.Forms.Padding(0);
+            this.rJ_Button_lcD114_Panel_Write.Location = new System.Drawing.Point(1412, 590);
+            this.rJ_Button_lcD114_Panel_Write.Name = "rJ_Button_lcD114_Panel_Write";
+            this.rJ_Button_lcD114_Panel_Write.ProhibitionBorderLineWidth = 1;
+            this.rJ_Button_lcD114_Panel_Write.ProhibitionLineWidth = 4;
+            this.rJ_Button_lcD114_Panel_Write.ProhibitionSymbolSize = 30;
+            this.rJ_Button_lcD114_Panel_Write.ShadowColor = System.Drawing.Color.DimGray;
+            this.rJ_Button_lcD114_Panel_Write.ShadowSize = 0;
+            this.rJ_Button_lcD114_Panel_Write.ShowLoadingForm = false;
+            this.rJ_Button_lcD114_Panel_Write.Size = new System.Drawing.Size(126, 67);
+            this.rJ_Button_lcD114_Panel_Write.State = false;
+            this.rJ_Button_lcD114_Panel_Write.TabIndex = 40;
+            this.rJ_Button_lcD114_Panel_Write.Text = "Write";
+            this.rJ_Button_lcD114_Panel_Write.TextColor = System.Drawing.Color.White;
+            this.rJ_Button_lcD114_Panel_Write.TextHeight = 0;
+            this.rJ_Button_lcD114_Panel_Write.UseVisualStyleBackColor = false;
+            // 
             // rJ_Button_EPD266_TEST
             // 
             this.rJ_Button_EPD266_TEST.AutoResetState = false;
@@ -1434,7 +1466,6 @@
             this.rJ_Button_epD_583_Pannel_全部亮燈.TextColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_全部亮燈.TextHeight = 0;
             this.rJ_Button_epD_583_Pannel_全部亮燈.UseVisualStyleBackColor = false;
-            this.rJ_Button_epD_583_Pannel_全部亮燈.Click += new System.EventHandler(this.rJ_Button_epD_583_Pannel_全部亮燈_Click);
             // 
             // rJ_Button_epD_583_Pannel_面板滅燈
             // 
@@ -1467,7 +1498,6 @@
             this.rJ_Button_epD_583_Pannel_面板滅燈.TextColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_面板滅燈.TextHeight = 0;
             this.rJ_Button_epD_583_Pannel_面板滅燈.UseVisualStyleBackColor = false;
-            this.rJ_Button_epD_583_Pannel_面板滅燈.Click += new System.EventHandler(this.rJ_Button_epD_583_Pannel_面板滅燈_Click);
             // 
             // rJ_Button_epD_583_Pannel_面板亮燈
             // 
@@ -1500,7 +1530,6 @@
             this.rJ_Button_epD_583_Pannel_面板亮燈.TextColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_面板亮燈.TextHeight = 0;
             this.rJ_Button_epD_583_Pannel_面板亮燈.UseVisualStyleBackColor = false;
-            this.rJ_Button_epD_583_Pannel_面板亮燈.Click += new System.EventHandler(this.rJ_Button_epD_583_Pannel_面板亮燈_Click);
             // 
             // rJ_Button_epD_583_Pannel_儲位滅燈
             // 
@@ -1533,7 +1562,6 @@
             this.rJ_Button_epD_583_Pannel_儲位滅燈.TextColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.TextHeight = 0;
             this.rJ_Button_epD_583_Pannel_儲位滅燈.UseVisualStyleBackColor = false;
-            this.rJ_Button_epD_583_Pannel_儲位滅燈.Click += new System.EventHandler(this.rJ_Button_epD_583_Pannel_儲位滅燈_Click);
             // 
             // rJ_Button_epD_583_Pannel_儲位亮燈
             // 
@@ -1598,7 +1626,6 @@
             this.rJ_Button_epD_583_Pannel_上傳.TextColor = System.Drawing.Color.White;
             this.rJ_Button_epD_583_Pannel_上傳.TextHeight = 0;
             this.rJ_Button_epD_583_Pannel_上傳.UseVisualStyleBackColor = false;
-            this.rJ_Button_epD_583_Pannel_上傳.Click += new System.EventHandler(this.rJ_Button_epD_583_Pannel_上傳_Click);
             // 
             // rJ_Button_EPD_583_初始化
             // 
@@ -2070,38 +2097,6 @@
             this.rJ_Button_H_RFID_初始化.TextColor = System.Drawing.Color.White;
             this.rJ_Button_H_RFID_初始化.TextHeight = 0;
             this.rJ_Button_H_RFID_初始化.UseVisualStyleBackColor = false;
-            // 
-            // rJ_Button_lcD114_Panel_Write
-            // 
-            this.rJ_Button_lcD114_Panel_Write.AutoResetState = false;
-            this.rJ_Button_lcD114_Panel_Write.BackColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_lcD114_Panel_Write.BackgroundColor = System.Drawing.Color.DodgerBlue;
-            this.rJ_Button_lcD114_Panel_Write.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.rJ_Button_lcD114_Panel_Write.BorderRadius = 5;
-            this.rJ_Button_lcD114_Panel_Write.BorderSize = 0;
-            this.rJ_Button_lcD114_Panel_Write.buttonType = MyUI.RJ_Button.ButtonType.Push;
-            this.rJ_Button_lcD114_Panel_Write.DisenableColor = System.Drawing.Color.Gray;
-            this.rJ_Button_lcD114_Panel_Write.FlatAppearance.BorderSize = 0;
-            this.rJ_Button_lcD114_Panel_Write.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rJ_Button_lcD114_Panel_Write.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rJ_Button_lcD114_Panel_Write.ForeColor = System.Drawing.Color.White;
-            this.rJ_Button_lcD114_Panel_Write.GUID = "";
-            this.rJ_Button_lcD114_Panel_Write.Image_padding = new System.Windows.Forms.Padding(0);
-            this.rJ_Button_lcD114_Panel_Write.Location = new System.Drawing.Point(1412, 590);
-            this.rJ_Button_lcD114_Panel_Write.Name = "rJ_Button_lcD114_Panel_Write";
-            this.rJ_Button_lcD114_Panel_Write.ProhibitionBorderLineWidth = 1;
-            this.rJ_Button_lcD114_Panel_Write.ProhibitionLineWidth = 4;
-            this.rJ_Button_lcD114_Panel_Write.ProhibitionSymbolSize = 30;
-            this.rJ_Button_lcD114_Panel_Write.ShadowColor = System.Drawing.Color.DimGray;
-            this.rJ_Button_lcD114_Panel_Write.ShadowSize = 0;
-            this.rJ_Button_lcD114_Panel_Write.ShowLoadingForm = false;
-            this.rJ_Button_lcD114_Panel_Write.Size = new System.Drawing.Size(126, 67);
-            this.rJ_Button_lcD114_Panel_Write.State = false;
-            this.rJ_Button_lcD114_Panel_Write.TabIndex = 40;
-            this.rJ_Button_lcD114_Panel_Write.Text = "Write";
-            this.rJ_Button_lcD114_Panel_Write.TextColor = System.Drawing.Color.White;
-            this.rJ_Button_lcD114_Panel_Write.TextHeight = 0;
-            this.rJ_Button_lcD114_Panel_Write.UseVisualStyleBackColor = false;
             // 
             // LCD144
             // 
