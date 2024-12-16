@@ -242,6 +242,8 @@ namespace H_Pannel_lib
             SendTestData = (byte)'Z',
 
             Set_WS2812B_breathing = (byte)'@',
+            Set_WS2812_Buffer_B = (byte)'#',
+
             Set_ADCMotorTrigger = (byte)'!',
 
             EPD_Set_Sleep = (byte)'a',
@@ -516,6 +518,15 @@ namespace H_Pannel_lib
                 return false;
             }
             return Command_Set_WS2812_Buffer(uDP_Class, IP, start_ptr, bytes_RGB);
+        }
+        static public bool Set_WS2812_Buffer_B(UDP_Class uDP_Class, string IP, int start_ptr, byte[] bytes_RGB)
+        {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"Set_WS2812_Buffer_B {DateTime.Now.ToDateTimeString()} : Ping Failed {IP} ");
+                return false;
+            }
+            return Command_Set_WS2812_Buffer_B(uDP_Class, IP, start_ptr, bytes_RGB);
         }
         static public byte[] Get_WS2812_Buffer(UDP_Class uDP_Class, string IP , int lenth)
         {
@@ -3312,6 +3323,74 @@ namespace H_Pannel_lib
             if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Set_WS2812_Buffer {string.Format(flag_OK ? "sucess" : "failed")} {DateTime.Now.ToDateTimeString()}!");
             return flag_OK;
         }
+        static private bool Command_Set_WS2812_Buffer_B(UDP_Class uDP_Class, string IP, int start_ptr, byte[] bytes_RGB)
+        {
+            bool flag_OK = true;
+            byte checksum = 0;
+            List<byte> list_byte = new List<byte>();
+            list_byte.Add(2);
+            list_byte.Add((byte)(UDP_Command.Set_WS2812_Buffer_B));
+            list_byte.Add((byte)start_ptr);
+            list_byte.Add((byte)(start_ptr >> 8));
+            for (int i = 0; i < bytes_RGB.Length; i++)
+            {
+                list_byte.Add(bytes_RGB[i]);
+            }
+            list_byte.Add(3);
+            for (int i = 0; i < list_byte.Count; i++)
+            {
+                checksum += list_byte[i];
+            }
+            MyTimer MyTimer_UART_TimeOut = new MyTimer();
+            int retry = 0;
+            int cnt = 0;
+            while (true)
+            {
+                if (cnt == 0)
+                {
+                    if (retry >= 3)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    uDP_Class.Set_ReadLineClearByIP(IP);
+                    uDP_Class.WriteByte(list_byte.ToArray(), IP);
+                    MyTimer_UART_TimeOut.TickStop();
+                    MyTimer_UART_TimeOut.StartTickTime(250);
+                    cnt++;
+                }
+                else if (cnt == 1)
+                {
+                    if (retry >= 3)
+                    {
+                        flag_OK = false;
+                        break;
+                    }
+                    if (MyTimer_UART_TimeOut.IsTimeOut())
+                    {
+                        retry++;
+                        cnt = 0;
+                    }
+                    string UDP_RX = uDP_Class.Get_ReadLineByIP(IP);
+                    if (UDP_RX != "")
+                    {
+                        if (UDP_RX == checksum.ToString("000"))
+                        {
+                            flag_OK = true;
+                            break;
+                        }
+                        else
+                        {
+                            cnt = 0;
+                        }
+                    }
+                }
+                System.Threading.Thread.Sleep(1);
+            }
+            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Set_WS2812_Buffer {string.Format(flag_OK ? "sucess" : "failed")} {DateTime.Now.ToDateTimeString()}!");
+            return flag_OK;
+        }
+
         static private byte[] Command_Get_WS2812_Buffer(UDP_Class uDP_Class, string IP , int lenth)
         {
             bool flag_OK = true;

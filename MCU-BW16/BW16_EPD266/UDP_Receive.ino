@@ -233,13 +233,7 @@ void onPacketCallBack()
             if(flag_udp_232back)printf("startpo : %d\n", startpo);
             if(flag_udp_232back)printf("numofLED : %d\n", numofLED);
             if(flag_udp_232back)printf("startLED : %d\n", startLED);
-            
-//            for(int i = 0 ; i < numofLED ; i++)
-//            {             
-//               myWS2812.rgbBuffer[i * 3 + startLED + 0] = *(UdpRead + 4 + i * 3 + 0);     // 将光带上第1个LED灯珠的RGB数值中R数值设置为255
-//               myWS2812.rgbBuffer[i * 3 + startLED + 1] = *(UdpRead + 4 + i * 3 + 1);   // 将光带上第1个LED灯珠的RGB数值中G数值设置为255
-//               myWS2812.rgbBuffer[i * 3 + startLED + 2] = *(UdpRead + 4 + i * 3 + 2);      // 将光带上第1个LED灯珠的RGB数值中B数值设置为0      
-//            }                 
+               
             byte bytes[numofLED * 3];
             for(int i = 0 ; i < numofLED ; i++)
             {             
@@ -247,9 +241,33 @@ void onPacketCallBack()
                bytes[i * 3 + 0 + 1] = *(UdpRead + 4 + i * 3 + 1);   // 将光带上第1个LED灯珠的RGB数值中G数值设置为255
                bytes[i * 3 + 0 + 2] = *(UdpRead + 4 + i * 3 + 2);      // 将光带上第1个LED灯珠的RGB数值中B数值设置为0      
             }  
-//            flag_WS2812B_Refresh = true;
             myWS2812.Show(bytes ,numofLED );
             flag_WS2812B_breathing_ON_OFF = false;
+            flag_WS2812B_breathing_Ex_ON_OFF = false;
+            Get_Checksum_UDP();
+            flag_JsonSend = true;
+          }
+          else if (*(UdpRead + 1) == '#')
+          {
+            int len = UdpRead_len - 5;
+            int startpo = (*(UdpRead + 2)) | (*(UdpRead + 3) << 8);
+            int numofLED = len / 3 ;
+            int startLED = startpo / 3;         
+            if(flag_udp_232back)printf("Set WS2812 Buffer B\n");
+            if(flag_udp_232back)printf("len : %d\n", len);
+            if(flag_udp_232back)printf("startpo : %d\n", startpo);
+            if(flag_udp_232back)printf("numofLED : %d\n", numofLED);
+            if(flag_udp_232back)printf("startLED : %d\n", startLED);
+            
+            for(int i = 0 ; i < numofLED ; i++)
+            {             
+               myWS2812.rgbBuffer[i * 3 + startLED + 0] = *(UdpRead + 4 + i * 3 + 0);     // 将光带上第1个LED灯珠的RGB数值中R数值设置为255
+               myWS2812.rgbBuffer[i * 3 + startLED + 1] = *(UdpRead + 4 + i * 3 + 1);   // 将光带上第1个LED灯珠的RGB数值中G数值设置为255
+               myWS2812.rgbBuffer[i * 3 + startLED + 2] = *(UdpRead + 4 + i * 3 + 2);      // 将光带上第1个LED灯珠的RGB数值中B数值设置为0      
+            }                 
+           
+            flag_WS2812B_breathing_ON_OFF = false;
+            flag_WS2812B_breathing_Ex_ON_OFF = true;
             Get_Checksum_UDP();
             flag_JsonSend = true;
           }

@@ -1374,6 +1374,8 @@ namespace H_Pannel_lib
         EPD730_lock = 15,
         EPD730 = 16,
         EPD213_lock = 17,
+        EPD420_D = 18,
+        EPD420_D_lock = 19,
         EPD213 = 118,
     }
     public enum HorizontalAlignment
@@ -1461,7 +1463,7 @@ namespace H_Pannel_lib
                 {
                     return new Size(296, 128);
                 }
-                if (DeviceType == DeviceType.EPD420 || DeviceType == DeviceType.EPD420_lock)
+                if (DeviceType.GetEnumName().Contains("EPD420"))
                 {
                     return new Size(400, 300);
                 }

@@ -100,7 +100,7 @@ void EPD::DrawFrame_RW()
 }
 void EPD::RefreshCanvas()
 { 
-   if(EPD_TYPE == "EPD420")
+   if(EPD_TYPE == "EPD420" || EPD_TYPE == "EPD420_D")
    {
      SPI_Begin();
      SendCommand(0x22);
@@ -214,7 +214,7 @@ void EPD::Wakeup()
 
 
     SPI_Begin();
-    if(EPD_TYPE == "EPD420")
+    if(EPD_TYPE == "EPD420" || EPD_TYPE == "EPD420_D")
     {
       mySerial -> println("EPD420 Init...");
       SPI_Begin();

@@ -405,15 +405,24 @@ namespace H_Pannel_lib
         {
             if (uDP_Class != null)
             {
+                bool flag_black = true;
                 byte[] LED_Bytes_buf = new byte[LED_Bytes.Length];
                 for (int i = 0; i < (LED_Bytes_buf.Length / 3); i++)
                 {
                     LED_Bytes_buf[i * 3 + 0] = (byte)(LED_Bytes[i * 3 + 0] * Lightness);
                     LED_Bytes_buf[i * 3 + 1] = (byte)(LED_Bytes[i * 3 + 1] * Lightness);
                     LED_Bytes_buf[i * 3 + 2] = (byte)(LED_Bytes[i * 3 + 2] * Lightness);
+                    if (LED_Bytes_buf[i * 3 + 0] != 0 || LED_Bytes_buf[i * 3 + 1] != 0 || LED_Bytes_buf[i * 3 + 2] != 0) flag_black = false;
                 }
-
-                return Communication.Set_WS2812_Buffer(uDP_Class, IP, 0, LED_Bytes_buf);
+                if(flag_black)
+                {
+                    return Communication.Set_WS2812_Buffer_B(uDP_Class, IP, 0, LED_Bytes_buf);
+                }
+                else
+                {
+                    return Communication.Set_WS2812_Buffer_B(uDP_Class, IP, 0, LED_Bytes_buf);
+                }
+              
             }
             return false;
         }
@@ -480,7 +489,7 @@ namespace H_Pannel_lib
             {
                 return Communication.EPD_583_DrawImage(uDP_Class, IP, bmp);
             }
-            if (deviceType == DeviceType.EPD420 || deviceType == DeviceType.EPD420_lock)
+            if (deviceType.GetEnumName().Contains("EPD420"))
             {
                 return Communication.EPD_420_DrawImage(uDP_Class, IP, bmp);
             }
@@ -664,7 +673,7 @@ namespace H_Pannel_lib
             {
                 return Communication.EPD583_GetBitmap(drawer);
             }
-            if (drawer.DeviceType == DeviceType.EPD420 || drawer.DeviceType == DeviceType.EPD420_lock)
+            if (drawer.DeviceType.GetEnumName().Contains("EPD420"))
             {
                 return Communication.EPD420_GetBitmap(drawer);
             }
@@ -1699,8 +1708,8 @@ namespace H_Pannel_lib
                         if (drawer == null) continue;
                         if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD583無鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD583);
                         if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD583有鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD583_lock);
-                        if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD420無鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD420);
-                        if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD420有鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD420_lock);
+                        if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD420無鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD420_D);
+                        if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD420有鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD420_D_lock);
                         if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD730有鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD730);
                         if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD730無鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD730_lock);
 
