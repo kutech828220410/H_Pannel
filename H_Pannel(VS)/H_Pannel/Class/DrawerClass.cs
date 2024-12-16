@@ -808,6 +808,11 @@ namespace H_Pannel_lib
                 this.pannelWidth = 800;
                 this.pannelHeight = 480;
             }
+            if (deviceType == DeviceType.EPD420_D_lock || deviceType == DeviceType.EPD420_D)
+            {
+                this.pannelWidth = 400;
+                this.pannelHeight = 300;
+            }
             List<Box> list_Boxes = this.GetAllBoxes();
             for (int i = 0; i < list_Boxes.Count; i++)
             {
