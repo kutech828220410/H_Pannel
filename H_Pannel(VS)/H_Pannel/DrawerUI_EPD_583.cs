@@ -395,13 +395,17 @@ namespace H_Pannel_lib
                 }
             }
             drawer.LED_Bytes = Set_Pannel_LEDBytes(drawer, color);
-            return Set_LED_UDP(uDP_Class, drawer.IP, drawer.LED_Bytes);
+            return Set_LED_UDP(uDP_Class, drawer.IP, drawer.LED_Bytes, drawer.BreathLight);
         }
         static public bool Set_LED_UDP(UDP_Class uDP_Class, Drawer drawer)
         {
-            return Set_LED_UDP(uDP_Class , drawer.IP, drawer.LED_Bytes) ;
+            return Set_LED_UDP(uDP_Class, drawer.IP, drawer.LED_Bytes, drawer.BreathLight);
         }
-        static public bool Set_LED_UDP(UDP_Class uDP_Class, string IP ,byte[] LED_Bytes)
+        static public bool Set_LED_UDP(UDP_Class uDP_Class, string IP, byte[] LED_Bytes)
+        {
+            return Set_LED_UDP(uDP_Class, IP, LED_Bytes, false);
+        }
+        static public bool Set_LED_UDP(UDP_Class uDP_Class, string IP, byte[] LED_Bytes ,bool flag_breath)
         {
             if (uDP_Class != null)
             {
@@ -412,20 +416,22 @@ namespace H_Pannel_lib
                     LED_Bytes_buf[i * 3 + 0] = (byte)(LED_Bytes[i * 3 + 0] * Lightness);
                     LED_Bytes_buf[i * 3 + 1] = (byte)(LED_Bytes[i * 3 + 1] * Lightness);
                     LED_Bytes_buf[i * 3 + 2] = (byte)(LED_Bytes[i * 3 + 2] * Lightness);
-                    if (LED_Bytes_buf[i * 3 + 0] != 0 || LED_Bytes_buf[i * 3 + 1] != 0 || LED_Bytes_buf[i * 3 + 2] != 0) flag_black = false;
+                    if (LED_Bytes[i * 3 + 0] != 0 || LED_Bytes[i * 3 + 1] != 0 || LED_Bytes[i * 3 + 2] != 0) flag_black = false;
                 }
-                if(flag_black)
+                if (flag_breath == false)
                 {
-                    return Communication.Set_WS2812_Buffer_B(uDP_Class, IP, 0, LED_Bytes_buf);
+                    return Communication.Set_WS2812_Buffer(uDP_Class, IP, 0, LED_Bytes_buf);
                 }
                 else
                 {
                     return Communication.Set_WS2812_Buffer_B(uDP_Class, IP, 0, LED_Bytes_buf);
+                   
                 }
-              
+
             }
             return false;
         }
+       
         static public bool Set_LED_UDP(UDP_Class uDP_Class, Drawer drawer, Color color)
         {
             return Set_LED_UDP(uDP_Class, drawer.IP, color);
@@ -445,16 +451,20 @@ namespace H_Pannel_lib
         static public bool Set_LED_Clear_UDP(UDP_Class uDP_Class, Drawer drawer)
         {
             drawer.SetAllBoxes_LightOff();
-            return Set_LED_Clear_UDP(uDP_Class, drawer.IP);
+            return Set_LED_Clear_UDP(uDP_Class, drawer.IP, drawer.BreathLight);
         }
         static public bool Set_LED_Clear_UDP(UDP_Class uDP_Class, string IP)
+        {
+            return Set_LED_Clear_UDP(uDP_Class, IP , false);
+        }
+        static public bool Set_LED_Clear_UDP(UDP_Class uDP_Class, string IP , bool flag_breath)
         {
             byte[] LED_Bytes = Get_Empty_LEDBytes();
             int cnt = 0;
             while(true)
             {
                 if (cnt >= 1) break;
-                if (!Set_LED_UDP(uDP_Class, IP, LED_Bytes))
+                if (!Set_LED_UDP(uDP_Class, IP, LED_Bytes, flag_breath))
                 {
                     return false;
                 }
@@ -1211,6 +1221,8 @@ namespace H_Pannel_lib
         {         
             設為隔板亮燈,
             設為把手亮燈,
+            設為呼吸亮燈,
+            設為一般亮燈,
         }
 
 
@@ -1344,12 +1356,16 @@ namespace H_Pannel_lib
         public bool Set_LED_Clear_UDP(Drawer drawer)
         {
             drawer.LED_Bytes = Get_Empty_LEDBytes();
-            return Set_LED_Clear_UDP(drawer.IP, drawer.Port);
+            return Set_LED_Clear_UDP(drawer.IP, drawer.Port, drawer.BreathLight);
         }
-        public bool Set_LED_Clear_UDP(string IP , int Port)
+        public bool Set_LED_Clear_UDP(string IP, int Port)
+        {
+            return Set_LED_Clear_UDP(IP, Port, false);
+        }
+        public bool Set_LED_Clear_UDP(string IP , int Port , bool flag_breath)
         {
             UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return Set_LED_Clear_UDP(uDP_Class, IP);
+            return Set_LED_Clear_UDP(uDP_Class, IP, flag_breath);
         }
         public bool DrawToEpd_BarCode_UDP(Drawer drawer)
         {
@@ -1786,6 +1802,42 @@ namespace H_Pannel_lib
                             Drawer drawer = this.SQL_GetDrawer(IP);
                             if (drawer == null) continue;
                             drawer.IsAllLight = false;
+                            taskList.Add(Task.Run(() =>
+                            {
+                                SQL_ReplaceDrawer(drawer);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                        this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                    }
+                    if (dialog_ContextMenuStrip.Value == ContextMenuStrip_參數設定.設為呼吸亮燈.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Drawer drawer = this.SQL_GetDrawer(IP);
+                            if (drawer == null) continue;
+                            drawer.BreathLight = true;
+                            taskList.Add(Task.Run(() =>
+                            {
+                                SQL_ReplaceDrawer(drawer);
+                            }));
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                        this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
+                    }
+                    if (dialog_ContextMenuStrip.Value == ContextMenuStrip_參數設定.設為一般亮燈.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Drawer drawer = this.SQL_GetDrawer(IP);
+                            if (drawer == null) continue;
+                            drawer.BreathLight = false;
                             taskList.Add(Task.Run(() =>
                             {
                                 SQL_ReplaceDrawer(drawer);

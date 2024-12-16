@@ -724,6 +724,7 @@ namespace H_Pannel_lib
         private bool isAllLight = true;
         private string speaker = "";
         private bool alarmEnable = false;
+        private bool breathLight = false;
 
         public List<Box[]> Boxes { get => boxes; set => boxes = value; }
         public int Station { get => station; set => station = value; }
@@ -770,6 +771,8 @@ namespace H_Pannel_lib
         public bool IsAllLight { get => isAllLight; set => isAllLight = value; }
         public string Speaker { get => speaker; set => speaker = value; }
         public bool AlarmEnable { get => alarmEnable; set => alarmEnable = value; }
+        public bool BreathLight { get => breathLight; set => breathLight = value; }
+
 
         public Enum_DrawerType DrawerType 
         { 

@@ -44,6 +44,7 @@ String GetwayStr;
 bool flag_WS2812B_Refresh = true;
 bool flag_WS2812B_breathing_ON_OFF  = false;
 bool flag_WS2812B_breathing_Ex_ON_OFF  = false;
+bool flag_WS2812B_breathing_Ex_lightOff  = false;
 int WS2812B_breathing_ON_OFF_cnt = 0;
 int WS2812B_breathing_Ex_ON_OFF_cnt = 0;
 int WS2812B_breathing_onAddVal  = 20;
@@ -317,6 +318,22 @@ void WS2812B_breathing_ON_OFF()
 }
 void WS2812B_breathing_Ex_ON_OFF()
 {
+   if(flag_WS2812B_breathing_Ex_lightOff)
+   {
+       int numofLED = NUM_WS2812B_CRGB;
+       byte bytes[numofLED * 3];
+       for(int i = 0 ; i < numofLED ; i++)
+       {             
+         bytes[i * 3 + 0 + 0] = 0;
+         bytes[i * 3 + 0 + 1] = 0;
+         bytes[i * 3 + 0 + 2] = 0;
+       }
+       WS2812B_breathing_Ex_ON_OFF_cnt = 0;
+       flag_WS2812B_breathing_Ex_ON_OFF = false;
+       flag_WS2812B_breathing_Ex_lightOff= false;
+       myWS2812.Show(bytes ,numofLED);
+       return;
+   }
    if(WS2812B_breathing_Ex_ON_OFF_cnt == 0)
    {
        int numofLED = NUM_WS2812B_CRGB;
@@ -333,21 +350,23 @@ void WS2812B_breathing_Ex_ON_OFF()
          bytes[i * 3 + 0 + 1] = (int)(myWS2812.rgbBuffer[i * 3 + 0 + 1] * WS2812B_breathing_val);   // 将光带上第1个LED灯珠的RGB数值中G数值设置为255
          bytes[i * 3 + 0 + 2] = (int)(myWS2812.rgbBuffer[i * 3 + 0 + 2] * WS2812B_breathing_val);      // 将光带上第1个LED灯珠的RGB数值中B数值设置为0      
 
-         if(bytes[i * 3 + 0 + 0] != 0 || bytes[i * 3 + 0 + 1] != 0 || bytes[i * 3 + 0 + 2] != 0)flag_black = false;
+         if(myWS2812.rgbBuffer[i * 3 + 0 + 0] != 0 || myWS2812.rgbBuffer[i * 3 + 0 + 1]!= 0 || myWS2812.rgbBuffer[i * 3 + 0 + 2] != 0)flag_black = false;
        }                                                  
        myWS2812.Show(bytes ,numofLED);
-       if(flag_black == true)
-       {
-          WS2812B_breathing_Ex_ON_OFF_cnt = 0;
-          flag_WS2812B_breathing_Ex_ON_OFF = false;
-          return;
-       }
+//       if(flag_black == true)
+//       {
+//          WS2812B_breathing_Ex_ON_OFF_cnt = 0;
+//          flag_WS2812B_breathing_Ex_ON_OFF = false;
+//          myWS2812.Show(bytes ,numofLED);
+//          return;
+//       }
    }
    if(WS2812B_breathing_Ex_ON_OFF_cnt == 1)
    {
        int numofLED = NUM_WS2812B_CRGB;
        bool flag_black = true;
        WS2812B_breathing_val -= ((float)WS2812B_breathing_offSubVal * 0.01);
+       if(WS2812B_breathing_val < 0) WS2812B_breathing_val = 0;
        if(WS2812B_breathing_val <= 0.1) 
        {
            WS2812B_breathing_Ex_ON_OFF_cnt++;
@@ -359,15 +378,16 @@ void WS2812B_breathing_Ex_ON_OFF()
          bytes[i * 3 + 0 + 1] = (int)(myWS2812.rgbBuffer[i * 3 + 0 + 1] * WS2812B_breathing_val);   // 将光带上第1个LED灯珠的RGB数值中G数值设置为255
          bytes[i * 3 + 0 + 2] = (int)(myWS2812.rgbBuffer[i * 3 + 0 + 2] * WS2812B_breathing_val);      // 将光带上第1个LED灯珠的RGB数值中B数值设置为0    
 
-         if(bytes[i * 3 + 0 + 0] != 0 || bytes[i * 3 + 0 + 1] != 0 || bytes[i * 3 + 0 + 2] != 0)flag_black = false;
+         if(myWS2812.rgbBuffer[i * 3 + 0 + 0] != 0 || myWS2812.rgbBuffer[i * 3 + 0 + 1]!= 0 || myWS2812.rgbBuffer[i * 3 + 0 + 2] != 0)flag_black = false;
        }                                                  
        myWS2812.Show(bytes ,numofLED);
-       if(flag_black == true)
-       {
-          WS2812B_breathing_Ex_ON_OFF_cnt = 0;
-          flag_WS2812B_breathing_Ex_ON_OFF = false;          
-          return;
-       }
+//       if(flag_black == true)
+//       {
+//          WS2812B_breathing_Ex_ON_OFF_cnt = 0;
+//          flag_WS2812B_breathing_Ex_ON_OFF = false;   
+//          myWS2812.Show(bytes ,numofLED);       
+//          return;
+//       }
    }
    if(WS2812B_breathing_Ex_ON_OFF_cnt == 2)
    {

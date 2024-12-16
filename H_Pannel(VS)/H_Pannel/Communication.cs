@@ -3387,7 +3387,7 @@ namespace H_Pannel_lib
                 }
                 System.Threading.Thread.Sleep(1);
             }
-            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Set_WS2812_Buffer {string.Format(flag_OK ? "sucess" : "failed")} {DateTime.Now.ToDateTimeString()}!");
+            if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Set_WS2812_Buffer B{string.Format(flag_OK ? "sucess" : "failed")} {DateTime.Now.ToDateTimeString()}!");
             return flag_OK;
         }
 

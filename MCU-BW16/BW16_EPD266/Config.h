@@ -1,4 +1,4 @@
-#define VERSION "Ver 1.5.35"
+#define VERSION "Ver 1.5.37"
 //#define HandSensor
 //#define RowLED_Device
 //#define EPD213

@@ -258,16 +258,22 @@ void onPacketCallBack()
             if(flag_udp_232back)printf("startpo : %d\n", startpo);
             if(flag_udp_232back)printf("numofLED : %d\n", numofLED);
             if(flag_udp_232back)printf("startLED : %d\n", startLED);
-            
+            bool flag_black = true;
             for(int i = 0 ; i < numofLED ; i++)
             {             
                myWS2812.rgbBuffer[i * 3 + startLED + 0] = *(UdpRead + 4 + i * 3 + 0);     // 将光带上第1个LED灯珠的RGB数值中R数值设置为255
                myWS2812.rgbBuffer[i * 3 + startLED + 1] = *(UdpRead + 4 + i * 3 + 1);   // 将光带上第1个LED灯珠的RGB数值中G数值设置为255
                myWS2812.rgbBuffer[i * 3 + startLED + 2] = *(UdpRead + 4 + i * 3 + 2);      // 将光带上第1个LED灯珠的RGB数值中B数值设置为0      
+               if(myWS2812.rgbBuffer[i * 3 + startLED + 0] > 0)flag_black =false;
+               if(myWS2812.rgbBuffer[i * 3 + startLED + 1] > 0)flag_black =false;
+               if(myWS2812.rgbBuffer[i * 3 + startLED + 2] > 0)flag_black =false;
             }                 
            
             flag_WS2812B_breathing_ON_OFF = false;
             flag_WS2812B_breathing_Ex_ON_OFF = true;
+
+            if(flag_black)flag_WS2812B_breathing_Ex_lightOff = true;
+            
             Get_Checksum_UDP();
             flag_JsonSend = true;
           }
