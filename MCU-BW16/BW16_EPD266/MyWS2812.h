@@ -12,12 +12,13 @@ class MyWS2812
 {
    public:   
     int PIN_CS = PB3;
-    void Init(int NumOfLed);   
+    void Init(int NumOfLed , SemaphoreHandle_t mutex);   
     void SetRGB(int lednum ,byte R, byte G, byte B);
     byte* rgbBuffer;
     byte* GetRGB();
     void Show(byte bytes[] , int numOfLed);
     void Show();
+    void ClearBytes();
     int numOfLed = 0;
     double brightness = 100;
     bool IsON(int lednum);
@@ -30,6 +31,8 @@ class MyWS2812
     byte rgb_light_curent[500];
     void RGBConvert2812Bytes(int lednum ,byte R, byte G, byte B);
     void RGBConvert2812Bytes(byte R, byte G, byte B, byte* bytes);
+    SemaphoreHandle_t xSpiMutex = NULL; // 互斥鎖指針
+
     
 };
 

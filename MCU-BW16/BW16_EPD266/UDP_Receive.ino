@@ -137,13 +137,15 @@ void onPacketCallBack()
           }        
           else if(*(UdpRead + 1) == 'b' && UdpRead_len == 3)
           {
-            if(flag_udp_232back)printf("EPD Wakeup\n");            
-            epd.Wakeup();   
+            if(flag_udp_232back)printf("EPD Wakeup\n");     
+            flag_WS2812B_breathing_Ex_lightOff = true;       
+            epd.Wakeup();            
             Get_Checksum_UDP();                           
           }  
           else if(*(UdpRead + 1) == 'c' && UdpRead_len == 3)
           {
             if(flag_udp_232back)printf("EPD DrawFrame_RW\n");
+            flag_WS2812B_breathing_Ex_lightOff = true;
             epd.DrawFrame_RW();
             delay(10);
             Get_Checksum_UDP();         
@@ -151,6 +153,7 @@ void onPacketCallBack()
           else if(*(UdpRead + 1) == 'd' && UdpRead_len == 3)
           {
             if(flag_udp_232back)printf("EPD DrawFrame_BW\n");
+            flag_WS2812B_breathing_Ex_lightOff = true;
             epd.DrawFrame_BW();
             delay(10);
             Get_Checksum_UDP();           
@@ -159,10 +162,14 @@ void onPacketCallBack()
           else if(*(UdpRead + 1) == 'f' && UdpRead_len == 3)
           {
             if(flag_udp_232back)printf("EPD RefreshCanvas\n");
+            
             epd.RefreshCanvas();
             delay(100);
-            flag_WS2812B_Refresh = true;
-            flag_WS2812B_breathing_ON_OFF = false;
+            myWS2812.ClearBytes();
+            
+            flag_WS2812B_breathing_Ex_lightOff = true;
+//            flag_WS2812B_Refresh = true;
+//            flag_WS2812B_breathing_ON_OFF = false;
             Get_Checksum_UDP();
            
           }  
@@ -272,7 +279,14 @@ void onPacketCallBack()
             flag_WS2812B_breathing_ON_OFF = false;
             flag_WS2812B_breathing_Ex_ON_OFF = true;
 
-            if(flag_black)flag_WS2812B_breathing_Ex_lightOff = true;
+            if(flag_black)
+            {
+                flag_WS2812B_breathing_Ex_lightOff = true;
+            }
+            else
+            {
+                flag_WS2812B_breathing_Ex_lightOff = false;
+            }
             
             Get_Checksum_UDP();
             flag_JsonSend = true;

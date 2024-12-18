@@ -45,6 +45,7 @@ bool flag_WS2812B_Refresh = true;
 bool flag_WS2812B_breathing_ON_OFF  = false;
 bool flag_WS2812B_breathing_Ex_ON_OFF  = false;
 bool flag_WS2812B_breathing_Ex_lightOff  = false;
+bool flag_WS2812B_breathing_Ex_dTrigger = false;
 int WS2812B_breathing_ON_OFF_cnt = 0;
 int WS2812B_breathing_Ex_ON_OFF_cnt = 0;
 int WS2812B_breathing_onAddVal  = 20;
@@ -72,6 +73,7 @@ TaskHandle_t Core0Task1Handle;
 TaskHandle_t Core0Task2Handle;
 TaskHandle_t Core0Task3Handle;
 TaskHandle_t Core0Task4Handle;
+SemaphoreHandle_t xSpiMutex;
 
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
@@ -80,6 +82,9 @@ void setup()
     MyTimer_BoardInit.StartTickTime(3000);          
     MyTimer_OLCD_144_Init.StartTickTime(5000);          
     MyTimer_CheckWIFI.StartTickTime(180000);   
+    // 初始化互斥鎖
+    xSpiMutex = xSemaphoreCreateMutex();
+
 }
 bool flag_pb2 = true;
 void loop() 
@@ -171,12 +176,12 @@ void loop()
       MyLED_IS_Connented.Init(SYSTEM_LED_PIN);
       SPI.begin(); //SCLK, MISO, MOSI, SS
       delay(200);
-      myWS2812.Init(NUM_WS2812B_CRGB);
+      myWS2812.Init(NUM_WS2812B_CRGB , xSpiMutex);
       
       if(Device == "EPD")
       {
         mySerial.println("EPD device init ...");
-        epd.Init(); 
+        epd.Init(xSpiMutex); 
         delay(200);
       }
      
@@ -204,6 +209,8 @@ void loop()
           sub_UDP_Send();
           onPacketCallBack();
       } 
+
+      
       MyTimer_CheckWS2812.StartTickTime(30000);
 
       
@@ -247,7 +254,8 @@ void Core0Task1( void * pvParameters )
                myWS2812.Show();
                flag_JsonSend = true;
                flag_WS2812B_Refresh = false;
-          }  
+          }
+            
        }
           
        delay(10);

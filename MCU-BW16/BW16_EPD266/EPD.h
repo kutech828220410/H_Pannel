@@ -22,7 +22,7 @@ class EPD
   int PIN_DC = PA26;
   int PIN_BUSY = PA27;
   
-  void Init();
+  void Init(SemaphoreHandle_t mutex);
   void Clear();
   void SetCursor(int Xstart, int Ystart);
   void SetWindows(int Xstart, int Ystart, int Xend, int Yend);
@@ -47,6 +47,7 @@ class EPD
   void SendDataSPI(unsigned char data);
   void HardwareReset();
   void WaitUntilIdle();
+  SemaphoreHandle_t xSpiMutex = NULL; // 互斥鎖指針
 };
 
 #endif

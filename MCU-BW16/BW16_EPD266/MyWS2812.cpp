@@ -1,8 +1,9 @@
 #include "MyWS2812.h"
 #include <SPI.h>
 
-void MyWS2812::Init(int NumOfLed)
+void MyWS2812::Init(int NumOfLed , SemaphoreHandle_t mutex)
 {
+    xSpiMutex = mutex;
     pinMode(this -> PIN_CS, OUTPUT);
     numOfLed = NumOfLed;
     rgbBuffer = (byte*) malloc(500 * 3);
@@ -10,6 +11,16 @@ void MyWS2812::Init(int NumOfLed)
     {
        *(rgbBuffer + i) = 0;
     }
+    
+}
+void MyWS2812::ClearBytes()
+{
+    for(int i = 0 ; i < numOfLed ;i++)
+    {
+       *(rgbBuffer + (i + 0)* 3 + 0) = 0;
+       *(rgbBuffer + (i + 0)* 3 + 1) = 0;
+       *(rgbBuffer + (i + 0)* 3 + 2) = 0;
+    }  
 }
 void MyWS2812::SetRGB(int lednum ,byte R, byte G, byte B)
 { 
@@ -34,50 +45,58 @@ byte* MyWS2812::GetRGB()
 }
 void MyWS2812::Show()
 {    
-    
-    digitalWrite(this -> PIN_CS , HIGH);
-    delay(10);
-    SPI.begin(); 
-    SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
-    for(int i = 0 ; i < offset * 24; i++)
+    if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE) 
     {
-      *(rgbBytesBuffer + i) = 0;
+      digitalWrite(this -> PIN_CS , HIGH);
+      delay(10);
+      SPI.begin(); 
+      SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
+      for(int i = 0 ; i < offset * 24; i++)
+      {
+        *(rgbBytesBuffer + i) = 0;
+      }
+      for(int i = 0 ; i < numOfLed ;i++)
+      {
+          RGBConvert2812Bytes(i + offset,*(rgbBuffer + i * 3 + 0), *(rgbBuffer + i * 3 + 1), *(rgbBuffer + i * 3 + 2));  
+      }      
+      SPI.transfer(rgbBytesBuffer , numOfLed * 24 + offset * 24);
+      SPI.endTransaction();
+      delay(100);
+      digitalWrite(this -> PIN_CS , LOW);
+      xSemaphoreGive(xSpiMutex);
     }
-    for(int i = 0 ; i < numOfLed ;i++)
-    {
-        RGBConvert2812Bytes(i + offset,*(rgbBuffer + i * 3 + 0), *(rgbBuffer + i * 3 + 1), *(rgbBuffer + i * 3 + 2));  
-    }      
-    SPI.transfer(rgbBytesBuffer , numOfLed * 24 + offset * 24);
-    SPI.endTransaction();
-    delay(100);
-    digitalWrite(this -> PIN_CS , LOW);
+    
 }
 void MyWS2812::Show(byte bytes[] , int _numOfLed)
 {    
-    
-    digitalWrite(this -> PIN_CS , HIGH);
-    delay(10);
-    flag_IS_ON = false;
-    for(int i = 0 ; i < offset * 24; i++)
+    if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE) 
     {
-      *(rgbBytesBuffer + i) = 0;
+      digitalWrite(this -> PIN_CS , HIGH);
+      delay(10);
+      flag_IS_ON = false;
+      for(int i = 0 ; i < offset * 24; i++)
+      {
+        *(rgbBytesBuffer + i) = 0;
+      }
+      for(int i = 0 ; i < _numOfLed ;i++)
+      {
+          RGBConvert2812Bytes(i + offset, bytes[i * 3 + 0], bytes[i * 3 + 1], bytes[i * 3 + 2]);  
+  
+          if((bytes[i * 3 + 0]) > 0) flag_IS_ON = true;
+          if((bytes[i * 3 + 1]) > 0) flag_IS_ON = true;
+          if((bytes[i * 3 + 2]) > 0) flag_IS_ON = true;
+      }    
+      
+      SPI.begin(); 
+      SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
+       
+      SPI.transfer(rgbBytesBuffer , _numOfLed * 24 + offset * 24);
+      SPI.endTransaction();
+      delay(10);
+      digitalWrite(this -> PIN_CS , LOW);
+      xSemaphoreGive(xSpiMutex);
     }
-    for(int i = 0 ; i < _numOfLed ;i++)
-    {
-        RGBConvert2812Bytes(i + offset, bytes[i * 3 + 0], bytes[i * 3 + 1], bytes[i * 3 + 2]);  
-
-        if((bytes[i * 3 + 0]) > 0) flag_IS_ON = true;
-        if((bytes[i * 3 + 1]) > 0) flag_IS_ON = true;
-        if((bytes[i * 3 + 2]) > 0) flag_IS_ON = true;
-    }    
     
-    SPI.begin(); 
-    SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
-     
-    SPI.transfer(rgbBytesBuffer , _numOfLed * 24 + offset * 24);
-    SPI.endTransaction();
-    delay(100);
-    digitalWrite(this -> PIN_CS , LOW);
 }
 
 

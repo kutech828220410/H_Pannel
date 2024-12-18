@@ -1,8 +1,9 @@
 #include "EPD.h"
 #include "Arduino.h"
 #include <SPI.h>
-void EPD::Init()
+void EPD::Init(SemaphoreHandle_t mutex)
 {
+    xSpiMutex = mutex;
     this -> framebuffer = (byte*) malloc(EPD_WIDTH * EPD_HEIGHT);
     pinMode(this -> PIN_CS, OUTPUT);
     pinMode(this -> PIN_RST, OUTPUT);
@@ -45,83 +46,103 @@ bool EPD::GetReady()
 }
 void EPD::Clear()
 {
-    //send black data
-    SPI_Begin();
-    this -> BW_Command();
-    for (int j = 0; j < EPD_HEIGHT; j++)
+    if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE) 
     {
-        for (int i = 0; i < EPD_WIDTH; i++) {
-            SendData(0x00);
-        }
+      //send black data
+      SPI_Begin();
+      this -> BW_Command();
+      for (int j = 0; j < EPD_HEIGHT; j++)
+      {
+          for (int i = 0; i < EPD_WIDTH; i++) {
+              SendData(0x00);
+          }
+      }
+      
+      //send red data
+      this -> RW_Command();
+      for (int j = 0; j < EPD_HEIGHT; j++) 
+      {
+          for (int i = 0; i < EPD_WIDTH; i++) {
+              SendData(0xFF);
+          }
+      }
+      SPI_End();
+      this -> RefreshCanvas(); 
+       // WaitUntilIdle();
+      xSemaphoreGive(xSpiMutex);
     }
     
-    //send red data
-    this -> RW_Command();
-    for (int j = 0; j < EPD_HEIGHT; j++) 
-    {
-        for (int i = 0; i < EPD_WIDTH; i++) {
-            SendData(0xFF);
-        }
-    }
-    SPI_End();
-    this -> RefreshCanvas(); 
-   // WaitUntilIdle();
 
 }
 void EPD::DrawFrame_BW()
 {
-    //send black data
-    SPI_Begin();
-    this -> BW_Command();
-
-    for (int j = 0; j < EPD_HEIGHT; j++)
+    if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE) 
     {
-        for (int i = 0; i < EPD_WIDTH; i++) 
-        {
-            SendData(*(framebuffer + j * EPD_WIDTH + i));
-        }
-    }    
-    SPI_End();
+      //send black data
+      SPI_Begin();
+      this -> BW_Command();
+  
+      for (int j = 0; j < EPD_HEIGHT; j++)
+      {
+          for (int i = 0; i < EPD_WIDTH; i++) 
+          {
+              SendData(*(framebuffer + j * EPD_WIDTH + i));
+          }
+      }    
+      SPI_End();
+      xSemaphoreGive(xSpiMutex);
+    }
+    
 }
 void EPD::DrawFrame_RW()
 {
-    //send red data
-    SPI_Begin();
-    this -> RW_Command();
-
-    for (int j = 0; j < EPD_HEIGHT; j++) 
+    if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE) 
     {
-        for (int i = 0; i < EPD_WIDTH; i++) 
-        {
-          SendData(*(framebuffer + j * EPD_WIDTH + i));
-        }
+      //send red data
+      SPI_Begin();
+      this -> RW_Command();
+  
+      for (int j = 0; j < EPD_HEIGHT; j++) 
+      {
+          for (int i = 0; i < EPD_WIDTH; i++) 
+          {
+            SendData(*(framebuffer + j * EPD_WIDTH + i));
+          }
+      }
+      SPI_End();
+      xSemaphoreGive(xSpiMutex);
     }
-    SPI_End();
+    
 }
 void EPD::RefreshCanvas()
 { 
-   if(EPD_TYPE == "EPD420" || EPD_TYPE == "EPD420_D")
+   if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE) 
    {
-     SPI_Begin();
-     SendCommand(0x22);
-     SendData(0xF7);
-     SendCommand(0x20);
-     SPI_End();
-   }
-   else if(EPD_TYPE == "EPD583")
-   {
-     SPI_Begin();
-     SendCommand(0x12);
-     SPI_End();
-   }
-   else
-   {
-     SPI_Begin();
-     SendCommand(0x20);
-     SPI_End();
+     if(EPD_TYPE == "EPD420" || EPD_TYPE == "EPD420_D")
+     {
+       SPI_Begin();
+       SendCommand(0x22);
+       SendData(0xF7);
+       SendCommand(0x20);
+       SPI_End();
+     }
+     else if(EPD_TYPE == "EPD583")
+     {
+       SPI_Begin();
+       SendCommand(0x12);
+       SPI_End();
+     }
+     else
+     {
+       SPI_Begin();
+       SendCommand(0x20);
+       SPI_End();
+     }
+     
+     this -> SetToSleep = true;
+     xSemaphoreGive(xSpiMutex);
    }
    
-   this -> SetToSleep = true;
 }
 void EPD::Sleep_Check()
 {
@@ -152,7 +173,6 @@ void EPD::BW_Command()
    {
      SendCommand(0x24);
    }
-   
 } 
 void EPD::RW_Command()
 {
@@ -168,6 +188,7 @@ void EPD::RW_Command()
    {
      SendCommand(0x26);
    }
+   
 } 
 void EPD::SendCommand(unsigned char command)
 {
@@ -212,90 +233,94 @@ void EPD::Wakeup()
     this -> HardwareReset();
  
 
-
-    SPI_Begin();
-    if(EPD_TYPE == "EPD420" || EPD_TYPE == "EPD420_D")
+    if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE) 
     {
-      mySerial -> println("EPD420 Init...");
-      SPI_Begin();
-      WaitUntilIdle();
-      SendCommand(0x12);//soft  reset
-      WaitUntilIdle();
-      SendCommand(0x3C); //BorderWavefrom
-      SendData(0x05);  
-  
-      SendCommand(0x18); //Read built-in temperature sensor
-      SendData(0x80); 
-  
-      SendCommand(0x11); //data entry mode       
-      SendData(0x03);
-  
-      SendCommand(0x44); //set Ram-X address start/end position   
-      SendData(0x00);
-      SendData(400/8-1);
-  
-      SendCommand(0x45); //set Ram-Y address start/end position          
-      SendData(0x00);
-      SendData(0x00); 
-      SendData((300-1)%256);    
-      SendData((300-1)/256);
-  
-      SendCommand(0x4E);   // set RAM x address count to 0;
-      SendData(0x00);
-      SendCommand(0x4F);   // set RAM y address count to 0X199;    
-      SendData(0x00);    
-      SendData(0x00);
-    }
-    else if(EPD_TYPE == "EPD583")
-    {
-      mySerial -> println("EPD583 Init...");
-      SPI_Begin(); 
-      SendCommand(0x01);      //POWER SETTING
-      SendData (0x07);    //VGH=20V,VGL=-20V
-      SendData (0x07);    //VGH=20V,VGL=-20V
-      SendData (0x3f);    //VDH=15V
-      SendData (0x3f);    //VDL=-15V
-      SendCommand(0x04); //POWER ON
-     
-      WaitUntilIdle();
+        SPI_Begin();
+        if(EPD_TYPE == "EPD420" || EPD_TYPE == "EPD420_D")
+        {
+          mySerial -> println("EPD420 Init...");
+          SPI_Begin();
+          WaitUntilIdle();
+          SendCommand(0x12);//soft  reset
+          WaitUntilIdle();
+          SendCommand(0x3C); //BorderWavefrom
+          SendData(0x05);  
       
-      SendCommand(0X00);      //PANNEL SETTING
-      SendData(0x0F);   //KW-3f   KWR-2F  BWROTP 0f BWOTP 1f
-    
-      SendCommand(0x61);          //tres      
-      SendData (0x02);    //source 648
-      SendData (0x88);
-      SendData (0x01);    //gate 480
-      SendData (0xe0);
-    
-      SendCommand(0X15);    
-      SendData(0x00);   
-    
-      SendCommand(0X50);      //VCOM AND DATA INTERVAL SETTING
-      SendData(0x11);
-      SendData(0x07);
-    
-      SendCommand(0X60);      //TCON SETTING
-      SendData(0x22);
-    }
-    else
-    {
-      SPI_Begin();
-      WaitUntilIdle();
-      SendCommand(0x12);//soft  reset
-      WaitUntilIdle();
-      SendCommand(0x11); //data entry mode       
-      SendData(0x03);
-    
-      SetWindows(0, 0, EPD_WIDTH * 8 -1, EPD_HEIGHT-1);
+          SendCommand(0x18); //Read built-in temperature sensor
+          SendData(0x80); 
       
-      SendCommand(0x21); //  Display update control
-      SendData(0x00);
-      SendData(0x80);  
-    
-      SetCursor(0, 0);
-      SPI_End();
+          SendCommand(0x11); //data entry mode       
+          SendData(0x03);
+      
+          SendCommand(0x44); //set Ram-X address start/end position   
+          SendData(0x00);
+          SendData(400/8-1);
+      
+          SendCommand(0x45); //set Ram-Y address start/end position          
+          SendData(0x00);
+          SendData(0x00); 
+          SendData((300-1)%256);    
+          SendData((300-1)/256);
+      
+          SendCommand(0x4E);   // set RAM x address count to 0;
+          SendData(0x00);
+          SendCommand(0x4F);   // set RAM y address count to 0X199;    
+          SendData(0x00);    
+          SendData(0x00);
+        }
+        else if(EPD_TYPE == "EPD583")
+        {
+          mySerial -> println("EPD583 Init...");
+          SPI_Begin(); 
+          SendCommand(0x01);      //POWER SETTING
+          SendData (0x07);    //VGH=20V,VGL=-20V
+          SendData (0x07);    //VGH=20V,VGL=-20V
+          SendData (0x3f);    //VDH=15V
+          SendData (0x3f);    //VDL=-15V
+          SendCommand(0x04); //POWER ON
+         
+          WaitUntilIdle();
+          
+          SendCommand(0X00);      //PANNEL SETTING
+          SendData(0x0F);   //KW-3f   KWR-2F  BWROTP 0f BWOTP 1f
+        
+          SendCommand(0x61);          //tres      
+          SendData (0x02);    //source 648
+          SendData (0x88);
+          SendData (0x01);    //gate 480
+          SendData (0xe0);
+        
+          SendCommand(0X15);    
+          SendData(0x00);   
+        
+          SendCommand(0X50);      //VCOM AND DATA INTERVAL SETTING
+          SendData(0x11);
+          SendData(0x07);
+        
+          SendCommand(0X60);      //TCON SETTING
+          SendData(0x22);
+        }
+        else
+        {
+          SPI_Begin();
+          WaitUntilIdle();
+          SendCommand(0x12);//soft  reset
+          WaitUntilIdle();
+          SendCommand(0x11); //data entry mode       
+          SendData(0x03);
+        
+          SetWindows(0, 0, EPD_WIDTH * 8 -1, EPD_HEIGHT-1);
+          
+          SendCommand(0x21); //  Display update control
+          SendData(0x00);
+          SendData(0x80);  
+        
+          SetCursor(0, 0);
+          SPI_End();
+        }
+        xSemaphoreGive(xSpiMutex);
     }
+    
     
 }
 void EPD::WaitUntilIdle()
@@ -331,25 +356,30 @@ void EPD::WaitUntilIdle()
 }
 void EPD::Sleep()
 {  
-    if(EPD_TYPE == "EPD583")
+    if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE) 
     {
-      this -> HardwareReset();
-//    mySerial -> println("Sleep!");
-      SPI_Begin();
-      SendCommand(0x02); 
-      SPI_End();  
-      //this -> WaitUntilIdle();
-      SPI_Begin();
-      SendCommand(0x07); 
-      SendData(0xA5);
-      SPI_End();
+        if(EPD_TYPE == "EPD583")
+        {
+          this -> HardwareReset();
+    //    mySerial -> println("Sleep!");
+          SPI_Begin();
+          SendCommand(0x02); 
+          SPI_End();  
+          //this -> WaitUntilIdle();
+          SPI_Begin();
+          SendCommand(0x07); 
+          SendData(0xA5);
+          SPI_End();
+        }
+        else
+        {
+          SPI_Begin();
+          SendCommand(0x10);
+          SendData(0x01);
+          SPI_End();
+        }
+        xSemaphoreGive(xSpiMutex);
     }
-    else
-    {
-      SPI_Begin();
-      SendCommand(0x10);
-      SendData(0x01);
-      SPI_End();
-    }
+    
     
 }
