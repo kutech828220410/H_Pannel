@@ -65,7 +65,20 @@ void serialEvent()
       mySerial.println("flag_WS2812B_breathing_ON_OFF");
       flag_WS2812B_breathing_ON_OFF = !flag_WS2812B_breathing_ON_OFF;
     }
-    
+    if (UART0_RX[0] == 'D')
+    {
+      mySerial.print(F("Humidity: "));
+      mySerial.print(dht_h);
+      mySerial.print(F("%  Temperature: "));
+      mySerial.print(dht_t);
+      mySerial.print(F("°C "));
+      mySerial.print(dht_f);
+      mySerial.print(F("°F  Heat index: "));
+      mySerial.print(dht_hic);
+      mySerial.print(F("°C "));
+      mySerial.print(dht_hif);
+      mySerial.println(F("°F"));
+    }
     if (UART0_RX[0] == 'b')
     {
       String str_int = "";

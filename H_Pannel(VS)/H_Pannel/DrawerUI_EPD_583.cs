@@ -54,6 +54,8 @@ namespace H_Pannel_lib
             private int rSSI = -100;
             private int input_dir = 0;
             private int output_dir = 0;
+            private float dht_h = 0;
+            private float dht_t = 0;
 
             public string IP { get => iP; set => iP = value; }
             public int Port { get => port; set => port = value; }
@@ -63,6 +65,8 @@ namespace H_Pannel_lib
             public int RSSI { get => rSSI; set => rSSI = value; }
             public int Input_dir { get => input_dir; set => input_dir = value; }
             public int Output_dir { get => output_dir; set => output_dir = value; }
+            public float Dht_h { get => dht_h; set => dht_h = value; }
+            public float Dht_t { get => dht_t; set => dht_t = value; }
 
 
             public bool Get_Input_dir(int index)

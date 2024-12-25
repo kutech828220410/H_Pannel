@@ -1,14 +1,22 @@
-#define VERSION "Ver 1.5.40"
+#define VERSION "Ver 1.5.41"
+
+#define DHTSensor
 //#define HandSensor
 //#define RowLED_Device
 //#define EPD213
-#define EPD266
+//#define EPD266
 //#define EPD290
 //#define EPD420
 //#define EPD420_D
 //#define EPD583
 //#define OLCD_114
 //#define MCP23017
+
+#ifdef DHTSensor
+#define DHTPIN PA27
+#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
+#endif
+
 
 #define LASER_D_MIN 20
 #define LASER_D_MAX 115
@@ -37,11 +45,13 @@
 #define EPD_HEIGHT 300
 #define EPD_TYPE "EPD420"
 #define EPD_Device
+
 #elif defined(EPD420_D)
 #define EPD_WIDTH 50
 #define EPD_HEIGHT 300
 #define EPD_TYPE "EPD420_D"
 #define EPD_Device
+
 #elif defined(EPD583)
 #define EPD_WIDTH 81
 #define EPD_HEIGHT 480

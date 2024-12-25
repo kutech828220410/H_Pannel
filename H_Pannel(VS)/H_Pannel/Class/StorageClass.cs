@@ -30,6 +30,7 @@ namespace H_Pannel_lib
         private bool tOFON = false;
         private enum_DrawType _enum_drawType = Storage.enum_DrawType.type1;
 
+
         public byte[] LED_Bytes = new byte[450 * 3];
         [JsonIgnore]
         public byte[] LED_Bytes_buf = new byte[450 * 3];
@@ -42,6 +43,7 @@ namespace H_Pannel_lib
         public bool TOFON { get => tOFON; set => tOFON = value; }
         public bool AlarmEnable { get => alarmEnable; set => alarmEnable = value; }
         public enum_DrawType Enum_drawType { get => _enum_drawType; set => _enum_drawType = value; }
+
 
         public bool ActionDone = false;
         public Storage(int station)

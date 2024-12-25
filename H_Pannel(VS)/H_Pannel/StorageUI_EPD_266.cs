@@ -30,6 +30,8 @@ namespace H_Pannel_lib
             private int output_dir = 0;
             private int laserDistance = 0;
             private bool lASER_ON = false;
+            private float _dht_h = 0;
+            private float _dht_t = 0;
 
             public string IP { get => iP; set => iP = value; }
             public int Port { get => port; set => port = value; }
@@ -42,6 +44,8 @@ namespace H_Pannel_lib
             public int LaserDistance { get => laserDistance; set => laserDistance = value; }
             public bool WS2812_State { get; set; }
             public bool LASER_ON { get => lASER_ON; set => lASER_ON = value; }
+            public float dht_h { get => _dht_h; set => _dht_h = value; }
+            public float dht_t { get => _dht_t; set => _dht_t = value; }
 
             public bool Get_Input_dir(int index)
             {

@@ -1,5 +1,6 @@
 #include "Config.h"
 #include "EPD.h"
+#include "DHT.h"
 #include "OLCD114.h"
 #include <WiFi.h>
 #include <WiFiUdp.h> 
@@ -17,6 +18,7 @@
 #include <SPI.h>
 #include <SD.h>
 #include <SoftwareSerial.h>
+
 #ifdef MCP23017
 #include "DFRobot_MCP23017.h"
 DFRobot_MCP23017 mcp(Wire, /*addr =*/0x20);//constructor, change the Level of A2, A1, A0 via DIP switch to revise the I2C address within 0x20~0x27.
@@ -77,6 +79,17 @@ SemaphoreHandle_t xSpiMutex;
 
 SoftwareSerial mySerial(PA8, PA7); // RX, TX
 SoftwareSerial mySerial2(PB2, PB1); // RX, TX
+
+#ifdef DHTSensor
+DHT dht(DHTPIN, DHTTYPE);
+float dht_h = 0;
+float dht_t = 0;
+float dht_f = 0;
+float dht_hif = 0;
+float dht_hic = 0;
+#endif
+
+
 void setup() 
 {
     MyTimer_BoardInit.StartTickTime(3000);          
@@ -167,7 +180,9 @@ void loop()
         wiFiConfig.Set_Localport(29008);
         wiFiConfig.Set_Serverport(30008);
       }
-      
+      #ifdef DHTSensor
+        dht.begin();
+      #endif
       Localport = wiFiConfig.Get_Localport();
       Serverport = wiFiConfig.Get_Serverport();
       ServerIp = wiFiConfig.Get_Server_IPAdressClass();
@@ -269,6 +284,22 @@ void Core0Task2( void * pvParameters )
        
        if(flag_boradInit)
        {
+          #ifdef DHTSensor
+          dht_h = dht.readHumidity();
+          // Read temperature as Celsius (the default)
+          dht_t = dht.readTemperature();
+          // Read temperature as Fahrenheit (isFahrenheit = true)
+          dht_f = dht.readTemperature(true);
+          // Check if any reads failed and exit early (to try again).
+          if (isnan(dht_h) || isnan(dht_t) || isnan(dht_f)) 
+          {
+              mySerial.println(F("Failed to read from DHT sensor!"));
+          }
+          // Compute heat index in Fahrenheit (the default)
+          dht_hif = dht.computeHeatIndex(dht_f, dht_h);
+          // Compute heat index in Celsius (isFahreheit = false)
+          dht_hic = dht.computeHeatIndex(dht_t, dht_h, false);
+          #endif
           #ifdef HandSensor
           serial2Event();
           #endif

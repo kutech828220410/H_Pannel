@@ -602,7 +602,6 @@ namespace H_Pannel_lib
         public static int NumOfLED = 450;
         public bool input = false;
 
-
         private string area = "";
         public string Area { get => area; set => area = value; }
 
