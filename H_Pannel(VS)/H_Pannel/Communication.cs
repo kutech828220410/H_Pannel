@@ -18,6 +18,12 @@ using System.Text;
 using System.Reflection;
 namespace H_Pannel_lib
 {
+    public enum ColorMode
+    {
+        RedWhiteBlack,
+        RedWhiteBlackYellow
+    }
+
     public enum Hex_Type
     {
         H_L,
@@ -9041,6 +9047,83 @@ namespace H_Pannel_lib
 
             // 繪製文字
             g.DrawString(text, font, textBrush, textX, textY);
+        }
+
+
+        // 抖动算法處理函式
+        public static Bitmap ApplyDithering(Bitmap inputBmp, ColorMode mode)
+        {
+            // 定義顏色表
+            Color[] palette;
+            switch (mode)
+            {
+                case ColorMode.RedWhiteBlackYellow:
+                    palette = new Color[] { Color.Red, Color.White, Color.Black, Color.Yellow };
+                    break;
+                case ColorMode.RedWhiteBlack:
+                default:
+                    palette = new Color[] { Color.Red, Color.White, Color.Black };
+                    break;
+            }
+
+            // 建立輸出影像
+            Bitmap outputBmp = new Bitmap(inputBmp.Width, inputBmp.Height);
+
+            // Floyd-Steinberg抖动矩陣
+            int[,] ditherMatrix = new int[inputBmp.Width, inputBmp.Height];
+
+            for (int y = 0; y < inputBmp.Height; y++)
+            {
+                for (int x = 0; x < inputBmp.Width; x++)
+                {
+                    Color originalColor = inputBmp.GetPixel(x, y);
+                    int grayValue = (originalColor.R + originalColor.G + originalColor.B) / 3;
+
+                    // 計算接近的調色盤顏色
+                    Color nearestColor = GetNearestColor(palette, grayValue);
+                    outputBmp.SetPixel(x, y, nearestColor);
+
+                    // 計算誤差
+                    int error = grayValue - GetGrayValue(nearestColor);
+
+                    // 分散誤差
+                    if (x + 1 < inputBmp.Width)
+                        ditherMatrix[x + 1, y] += error * 7 / 16;
+                    if (x - 1 >= 0 && y + 1 < inputBmp.Height)
+                        ditherMatrix[x - 1, y + 1] += error * 3 / 16;
+                    if (y + 1 < inputBmp.Height)
+                        ditherMatrix[x, y + 1] += error * 5 / 16;
+                    if (x + 1 < inputBmp.Width && y + 1 < inputBmp.Height)
+                        ditherMatrix[x + 1, y + 1] += error * 1 / 16;
+                }
+            }
+
+            return outputBmp;
+        }
+        // 找到與調色盤中最接近的顏色
+        private static Color GetNearestColor(Color[] palette, int grayValue)
+        {
+            Color nearestColor = palette[0];
+            int minDifference = int.MaxValue;
+
+            foreach (Color color in palette)
+            {
+                int paletteGray = GetGrayValue(color);
+                int difference = Math.Abs(grayValue - paletteGray);
+
+                if (difference < minDifference)
+                {
+                    minDifference = difference;
+                    nearestColor = color;
+                }
+            }
+
+            return nearestColor;
+        }
+        // 計算顏色的灰階值
+        private static int GetGrayValue(Color color)
+        {
+            return (color.R + color.G + color.B) / 3;
         }
     }
 }
