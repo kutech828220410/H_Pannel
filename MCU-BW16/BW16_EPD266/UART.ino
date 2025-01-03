@@ -67,6 +67,7 @@ void serialEvent()
     }
     if (UART0_RX[0] == 'D')
     {
+      #ifdef DHTSensor
       mySerial.print(F("Humidity: "));
       mySerial.print(dht_h);
       mySerial.print(F("%  Temperature: "));
@@ -78,6 +79,7 @@ void serialEvent()
       mySerial.print(F("°C "));
       mySerial.print(dht_hif);
       mySerial.println(F("°F"));
+      #endif
     }
     if (UART0_RX[0] == 'b')
     {

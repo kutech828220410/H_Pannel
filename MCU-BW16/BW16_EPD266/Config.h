@@ -1,11 +1,11 @@
-#define VERSION "Ver 1.5.41"
+#define VERSION "Ver 1.5.42"
 
-#define DHTSensor
+//#define DHTSensor
 //#define HandSensor
 //#define RowLED_Device
 //#define EPD213
 //#define EPD266
-//#define EPD290
+#define EPD290
 //#define EPD420
 //#define EPD420_D
 //#define EPD583
