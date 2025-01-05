@@ -8,7 +8,7 @@ public class Program
     {
         Console.WriteLine("請輸入影像檔案路徑:");
         string inputPath = Console.ReadLine();
-        inputPath = @"C:\Users\Administrator\Downloads\02.bmp";
+        inputPath = @"C:\Users\User\Downloads\01.bmp";
 
         try
         {
@@ -16,7 +16,7 @@ public class Program
             int mode = int.Parse(Console.ReadLine());
 
             Bitmap inputBmp = new Bitmap(inputPath);
-            inputBmp = H_Pannel_lib.Communication.ScaleImage(inputBmp, 792, 372);
+            inputBmp = H_Pannel_lib.Communication.ScaleImage(inputBmp, 792, 272);
             Bitmap outputBmp = ApplyFloydSteinbergDithering(inputBmp, mode);
             Console.WriteLine("影像處理完成，按任意鍵顯示結果。");
             Console.ReadKey();
@@ -29,6 +29,10 @@ public class Program
                 FileName = tempOutputPath,
                 UseShellExecute = true
             });
+            byte[] bytes = new byte[0];
+            H_Pannel_lib.Communication.BitmapToByte(outputBmp, ref bytes, H_Pannel_lib.EPD_Type.EPD579G);
+            string str = H_Pannel_lib.Communication.BytesToHexString(bytes);
+
         }
         catch (Exception ex)
         {

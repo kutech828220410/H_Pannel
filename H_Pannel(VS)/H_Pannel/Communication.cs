@@ -43,6 +43,7 @@ namespace H_Pannel_lib
         EPD290_V3,
         EPD420,
         EPD1020,
+        EPD579G,
         EPD730F
     }
     public class Driver_IO_Board
@@ -7489,6 +7490,11 @@ namespace H_Pannel_lib
             EPD_7IN3F_YELLOW = 0x5,  // 101
             EPD_7IN3F_ORANGE = 0x6,  // 110
             EPD_7IN3F_CLEAN = 0x7,   // 111   unavailable Afterimage
+
+            EPD_5IN79G_BLACK = 0x0,
+            EPD_5IN79G_WHITE = 0x1,
+            EPD_5IN79G_YELLOW = 0x2,
+            EPD_5IN79G_RED = 0x3,
         }
         static public Bitmap Storage_GetBitmap(Storage storage)
         {
@@ -8242,6 +8248,45 @@ namespace H_Pannel_lib
             }
             return sb_uint16s.ToString().ToUpper();
         }
+        static unsafe public string BytesToHexString(byte[] bytes, Hex_Type hex_Type)
+        {
+            System.Text.StringBuilder sb_uint16s = new StringBuilder();
+            int index = 0;
+            string temp = "";
+            for (int i = 0; i < bytes.Length / 2; i++)
+            {
+                if (hex_Type == Hex_Type.H_L) temp = $"0x{bytes[(i * 2) + 1].ToString("X2")}{bytes[(i * 2) + 0].ToString("X2")},";
+                if (hex_Type == Hex_Type.L_H) temp = $"0x{bytes[(i * 2) + 0].ToString("X2")}{bytes[(i * 2) + 1].ToString("X2")},";
+                sb_uint16s.Append(temp);
+                index++;
+                if (index >= 20)
+                {
+                    sb_uint16s.Append($"\n");
+                    index = 0;
+                }
+            }
+            return sb_uint16s.ToString().ToUpper();
+        }
+        static unsafe public string BytesToHexString(byte[] bytes)
+        {
+            System.Text.StringBuilder sb_uint16s = new StringBuilder();
+            int index = 0;
+            string temp = "";
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                temp = $"0x{bytes[i].ToString("X2")}";
+                if (i != bytes.Length - 1) temp += ",";
+                sb_uint16s.Append(temp);
+                index++;
+                if (index >= 80)
+                {
+                    sb_uint16s.Append($"\n");
+                    index = 0;
+                }
+            }
+            return sb_uint16s.ToString();
+        }
+
         static unsafe public void BitmapToHexString(Bitmap bimage, ref string BW, ref string RW, EPD_Type ePD_Type)
         {
             byte[] BW_bytes = new byte[0];
@@ -8580,7 +8625,7 @@ namespace H_Pannel_lib
 
             return true;
         }
-        static unsafe public void BitmapToByte(Bitmap bimage, ref byte[] _7colors_bytes, EPD_Type ePD_Type)
+        static unsafe public void BitmapToByte(Bitmap bimage, ref byte[] _bytes, EPD_Type ePD_Type)
         {
             List<byte> list_bytes = new List<byte>();
             //pictureBox1.Image = bimage;
@@ -8596,19 +8641,20 @@ namespace H_Pannel_lib
             int[] G = new int[8];
             int[] B = new int[8];
             byte temp = 0;
-            byte temp_L = 0;
-            byte temp_H = 0;
+            byte[] temp_bytes = new byte[8];
             int flag_index = 0;
             unsafe
             {
                 byte* SrcPtr = (byte*)SurfacePtr;
                 for (int y = 0; y < height; y++)
                 {
-                    SrcWidthxY = ByteOfWidth * y;
-                    for (int x = 0; x < (width / 2); x++)
+                    
+                    if (ePD_Type == EPD_Type.EPD730F)
                     {
-                        if (ePD_Type == EPD_Type.EPD730F)
+                        SrcWidthxY = ByteOfWidth * y;
+                        for (int x = 0; x < (width / 2); x++)
                         {
+
                             SrcIndex = SrcWidthxY + (x * 6);
 
                             B[0] = SrcPtr[SrcIndex + 00];
@@ -8618,43 +8664,82 @@ namespace H_Pannel_lib
                             B[1] = SrcPtr[SrcIndex + 03];
                             G[1] = SrcPtr[SrcIndex + 04];
                             R[1] = SrcPtr[SrcIndex + 05];
-                            temp_L = 0;
-                            temp_H = 0;
-                            if (IsEqualColor(Color.White, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_WHITE;
-                            else if (IsEqualColor(Color.Yellow, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_YELLOW;
-                            else if (IsEqualColor(Color.Red, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_RED;
-                            else if (IsEqualColor(Color.Green, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_GREEN;
-                            else if (IsEqualColor(Color.Blue, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_BLUE;
-                            else if (IsEqualColor(Color.Orange, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_ORANGE;
-                            else if (IsEqualColor(Color.Black, R[0], G[0], B[0]) == true) temp_L = (int)EPDColors.EPD_7IN3F_BLACK;
+                            temp_bytes[0] = 0;
+                            temp_bytes[1] = 0;
+                            if (IsEqualColor(Color.White, R[0], G[0], B[0]) == true) temp_bytes[0] = (int)EPDColors.EPD_7IN3F_WHITE;
+                            else if (IsEqualColor(Color.Yellow, R[0], G[0], B[0]) == true) temp_bytes[0] = (int)EPDColors.EPD_7IN3F_YELLOW;
+                            else if (IsEqualColor(Color.Red, R[0], G[0], B[0]) == true) temp_bytes[0] = (int)EPDColors.EPD_7IN3F_RED;
+                            else if (IsEqualColor(Color.Green, R[0], G[0], B[0]) == true) temp_bytes[0] = (int)EPDColors.EPD_7IN3F_GREEN;
+                            else if (IsEqualColor(Color.Blue, R[0], G[0], B[0]) == true) temp_bytes[0] = (int)EPDColors.EPD_7IN3F_BLUE;
+                            else if (IsEqualColor(Color.Orange, R[0], G[0], B[0]) == true) temp_bytes[0] = (int)EPDColors.EPD_7IN3F_ORANGE;
+                            else if (IsEqualColor(Color.Black, R[0], G[0], B[0]) == true) temp_bytes[0] = (int)EPDColors.EPD_7IN3F_BLACK;
                             else
                             {
 
                             }
 
-                            if (IsEqualColor(Color.White, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_WHITE;
-                            else if (IsEqualColor(Color.Yellow, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_YELLOW;
-                            else if (IsEqualColor(Color.Red, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_RED;
-                            else if (IsEqualColor(Color.Green, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_GREEN;
-                            else if (IsEqualColor(Color.Blue, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_BLUE;
-                            else if (IsEqualColor(Color.Orange, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_ORANGE;
-                            else if (IsEqualColor(Color.Black, R[1], G[1], B[1]) == true) temp_H = (int)EPDColors.EPD_7IN3F_BLACK;
+                            if (IsEqualColor(Color.White, R[1], G[1], B[1]) == true) temp_bytes[1] = (int)EPDColors.EPD_7IN3F_WHITE;
+                            else if (IsEqualColor(Color.Yellow, R[1], G[1], B[1]) == true) temp_bytes[1] = (int)EPDColors.EPD_7IN3F_YELLOW;
+                            else if (IsEqualColor(Color.Red, R[1], G[1], B[1]) == true) temp_bytes[1] = (int)EPDColors.EPD_7IN3F_RED;
+                            else if (IsEqualColor(Color.Green, R[1], G[1], B[1]) == true) temp_bytes[1] = (int)EPDColors.EPD_7IN3F_GREEN;
+                            else if (IsEqualColor(Color.Blue, R[1], G[1], B[1]) == true) temp_bytes[1] = (int)EPDColors.EPD_7IN3F_BLUE;
+                            else if (IsEqualColor(Color.Orange, R[1], G[1], B[1]) == true) temp_bytes[1] = (int)EPDColors.EPD_7IN3F_ORANGE;
+                            else if (IsEqualColor(Color.Black, R[1], G[1], B[1]) == true) temp_bytes[1] = (int)EPDColors.EPD_7IN3F_BLACK;
                             else
                             {
 
                             }
-               
-                            temp = (byte)(temp_H | (temp_L << 4));
+
+                            temp = (byte)(temp_bytes[0] | (temp_bytes[1] << 4));
+                            list_bytes.Add(temp);
+                        }               
+                    }
+                    else if (ePD_Type == EPD_Type.EPD579G)
+                    {
+                        SrcWidthxY = (ByteOfWidth + 0) * y;
+                        for (int x = 0; x < (width / 4); x++)
+                        {
+
+                            SrcIndex = SrcWidthxY + (x * 12);
+
+                            B[0] = SrcPtr[SrcIndex + 00];
+                            G[0] = SrcPtr[SrcIndex + 01];
+                            R[0] = SrcPtr[SrcIndex + 02];
+
+                            B[1] = SrcPtr[SrcIndex + 03];
+                            G[1] = SrcPtr[SrcIndex + 04];
+                            R[1] = SrcPtr[SrcIndex + 05];
+
+                            B[2] = SrcPtr[SrcIndex + 06];
+                            G[2] = SrcPtr[SrcIndex + 07];
+                            R[2] = SrcPtr[SrcIndex + 08];
+
+                            B[3] = SrcPtr[SrcIndex + 09];
+                            G[3] = SrcPtr[SrcIndex + 10];
+                            R[3] = SrcPtr[SrcIndex + 11];
+
+                            temp_bytes[0] = 0;
+                            temp_bytes[1] = 0;
+                            temp_bytes[2] = 0;
+                            temp_bytes[3] = 0;
+                            for (int m = 0; m < 4; m++)
+                            {
+                                if (Color.White.R == R[m] && Color.White.G == G[m] && Color.White.B == B[m]) temp_bytes[m] = (int)EPDColors.EPD_5IN79G_WHITE;
+                                else if (Color.Black.R == R[m] && Color.Black.G == G[m] && Color.Black.B == B[m]) temp_bytes[m] = (int)EPDColors.EPD_5IN79G_BLACK;
+                                else if (Color.Red.R == R[m] && Color.Red.G == G[m] && Color.Red.B == B[m]) temp_bytes[m] = (int)EPDColors.EPD_5IN79G_RED;
+                                else if (Color.Yellow.R == R[m] && Color.Yellow.G == G[m] && Color.Yellow.B == B[m]) temp_bytes[m] = (int)EPDColors.EPD_5IN79G_YELLOW;
+                            }
+
+
+                            temp = (byte)((temp_bytes[0] << 6) | (temp_bytes[1] << 4) | (temp_bytes[2] << 2) | (temp_bytes[3] << 0));
                             list_bytes.Add(temp);
                         }
-                       
-                        
                     }
                 }
             }
 
             bimage.UnlockBits(bmData);
-            _7colors_bytes = list_bytes.ToArray();
+            _bytes = list_bytes.ToArray();
             //bimage.Dispose();
         }
         static private List<byte> BmpByteToGray(List<byte> list_bmp_Byte, ref int len)
