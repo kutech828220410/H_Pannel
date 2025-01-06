@@ -8,7 +8,7 @@ public class Program
     {
         Console.WriteLine("請輸入影像檔案路徑:");
         string inputPath = Console.ReadLine();
-        inputPath = @"C:\Users\User\Downloads\01.bmp";
+        inputPath = @"C:\Users\Administrator\Downloads\01_213.bmp";
 
         try
         {
@@ -16,13 +16,15 @@ public class Program
             int mode = int.Parse(Console.ReadLine());
 
             Bitmap inputBmp = new Bitmap(inputPath);
-            inputBmp = H_Pannel_lib.Communication.ScaleImage(inputBmp, 792, 272);
+            inputBmp = H_Pannel_lib.Communication.ScaleImage(inputBmp, 250, 124);
             Bitmap outputBmp = ApplyFloydSteinbergDithering(inputBmp, mode);
             Console.WriteLine("影像處理完成，按任意鍵顯示結果。");
             Console.ReadKey();
 
             // 顯示影像
             string tempOutputPath = "dithered_image.bmp";
+            outputBmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            outputBmp.RotateFlip(RotateFlipType.Rotate180FlipY);
             outputBmp.Save(tempOutputPath, ImageFormat.Bmp);
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
             {
@@ -30,7 +32,7 @@ public class Program
                 UseShellExecute = true
             });
             byte[] bytes = new byte[0];
-            H_Pannel_lib.Communication.BitmapToByte(outputBmp, ref bytes, H_Pannel_lib.EPD_Type.EPD579G);
+            H_Pannel_lib.Communication.BitmapToByte(outputBmp, ref bytes, H_Pannel_lib.EPD_Type.EPD213_BRW_V0);
             string str = H_Pannel_lib.Communication.BytesToHexString(bytes);
 
         }
@@ -87,7 +89,7 @@ public class Program
 
                     if (x + 1 < width)
                     {
-                        DistributeError(inputPtr, stride, x + 1, y, errorR, errorG, errorB, 5 / 16.0);
+                        DistributeError(inputPtr, stride, x + 1, y, errorR, errorG, errorB, 7 / 16.0);
                     }
                     if (x - 1 >= 0 && y + 1 < height)
                     {
@@ -100,6 +102,14 @@ public class Program
                     if (x + 1 < width && y + 1 < height)
                     {
                         DistributeError(inputPtr, stride, x + 1, y + 1, errorR, errorG, errorB, 1 / 16.0);
+                    }
+
+                    // Force near-white colors to exact white in 3-color mode
+                    if (mode == 1 && nearestColor == Color.White && (r > 240 && g > 240 && b > 240))
+                    {
+                        outputPtr[index] = 255;
+                        outputPtr[index + 1] = 255;
+                        outputPtr[index + 2] = 255;
                     }
                 }
             }
@@ -148,4 +158,6 @@ public class Program
         if (value > max) return max;
         return value;
     }
+
+
 }
