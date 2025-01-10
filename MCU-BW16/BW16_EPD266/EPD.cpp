@@ -5,6 +5,7 @@ void EPD::Init(SemaphoreHandle_t mutex)
 {
     xSpiMutex = mutex;
     this -> framebuffer = (byte*) malloc(EPD_WIDTH * EPD_HEIGHT);
+    buffer_max = EPD_WIDTH * EPD_HEIGHT;
     pinMode(this -> PIN_CS, OUTPUT);
     pinMode(this -> PIN_RST, OUTPUT);
     pinMode(this -> PIN_DC, OUTPUT);
@@ -90,6 +91,22 @@ void EPD::Clear()
               for (int i = 0; i < Width8; i++) 
               {
                   SendData((color<<6) | (color<<4) | (color<<2) | color);
+              }
+           }
+      }
+      else if(EPD_TYPE == "EPD213_BRW_V0")
+      {
+           mySerial -> println("EPD213_BRW_V0 Clear function start...");
+           byte color = 0x0;
+           SendCommand(0x10);
+           for (int j = 0; j < 250; j++) 
+           {
+              if(j >= 0 && j < 80)color = WHITE;
+              if(j >= 80 && j < 160)color = BLACK;
+              if(j >= 160 && j < 250)color = RED;
+              for (int i = 0; i < 31; i++) 
+              {
+                  SendData((color << 6) | (color << 4) | (color << 2) | color);
               }
            }
       }
@@ -250,22 +267,23 @@ void EPD::RefreshCanvas()
        SendCommand(0x12);
        SPI_End();
      }
-     else if(EPD_TYPE == "EPD579G")
+     else if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
      {
-       mySerial -> println("EPD579G Clear (RefreshCanvas)function start...");
+       mySerial -> println("EPD579G (RefreshCanvas)function start...");
        SPI_Begin();
        SendCommand(0x04);
-       WaitUntilIdle();
+       delay(200);
+//       WaitUntilIdle();
     
        SendCommand(0x12);
        SendData(0x00);
-       WaitUntilIdle();
+//       WaitUntilIdle();
        
-       SendCommand(0x02);
-       SendData(0x00);
-       WaitUntilIdle();
+//       SendCommand(0x02);
+//       SendData(0x00);
+//       WaitUntilIdle();
        SPI_End();
-       mySerial -> println("EPD579G Clear (RefreshCanvas)function done...");
+       mySerial -> println("EPD579G (RefreshCanvas)function done...");
      }
      else
      {
@@ -308,6 +326,10 @@ void EPD::BW_Command()
      SendData(0x02);
      SendCommand(0x10);
    }
+   else if(EPD_TYPE == "EPD213_BRW_V0")
+   {
+     SendCommand(0x10);
+   }
    else
    {
      SendCommand(0x24);
@@ -327,6 +349,10 @@ void EPD::RW_Command()
    {
      SendCommand(0xA2);  //********************
      SendData(0x01);
+     SendCommand(0x10);
+   }
+   else if(EPD_TYPE == "EPD213_BRW_V0")
+   {
      SendCommand(0x10);
    }
    else
@@ -454,7 +480,8 @@ void EPD::Wakeup()
           SendData(0x01);
           
           SendCommand(0xA5);
-          WaitUntilIdle();
+          delay(500);
+//          WaitUntilIdle();
           //--------------------------------------//  
           SendCommand(0xA2); //Master
           SendData(0x01);
@@ -563,6 +590,95 @@ void EPD::Wakeup()
           SendData(0xE3);
           SPI_End();
         }
+        else if(EPD_TYPE == "EPD213_BRW_V0")
+        {
+          mySerial -> println("EPD213_BRW_V0 Init...");
+          SPI_Begin(); 
+          SendCommand(0x00);                                                                                                                                                                                 
+          SendData(0x07);
+          SendData(0x29);
+        
+          SendCommand(0x01);
+          SendData(0x07);
+         
+          SendCommand(0x03);
+          SendData(0x10);
+          SendData(0x54);
+          SendData(0x44);
+          
+          SendCommand(0x06);
+          SendData(0x40);
+          SendData(0x40);
+          SendData(0x40);
+          
+          SendCommand(0x30);
+          SendData(0x08);
+        
+          SendCommand(0x41);
+          SendData(0x00);
+        
+          SendCommand(0x50);
+          SendData(0x37);
+          
+          SendCommand(0x60);
+          SendData(0x03);
+          SendData(0x03);
+          
+          SendCommand(0x61);
+          SendData(0x00);
+          SendData(0x7C);
+          SendData(0x00);
+          SendData(0xFA);
+          
+          SendCommand(0x65);
+          SendData(0x00);
+          SendData(0x00);
+          SendData(0x00);
+          SendData(0x00);
+         
+          SendCommand(0xE7);
+          SendData(0x1C);
+          
+          SendCommand(0xE3);
+          SendData(0x00);
+          
+          SendCommand(0xE0);
+          SendData(0x00); 
+        
+        
+          
+          SendCommand(0xFF);        
+          SendData(0xA5);       
+          
+          SendCommand(0xEF);        // PWM Set
+          SendData(0x02);     
+          SendData(0x88);  
+          SendData(0x04); 
+          SendData(0x1A); 
+          SendData(0X06); 
+          SendData(0X15); 
+          SendData(0X08);
+          SendData(0X22);
+          
+          SendCommand(0xDA);        
+          SendData(0X08);     
+          
+          SendCommand(0xE8);   
+          SendData(0X08);     
+          
+          SendCommand(0xDC);//CPCK EN
+          SendData(0X01);
+          
+          SendCommand(0xDD);//CPCK EN
+          SendData(0X08); 
+          
+          SendCommand(0xDE);//CPCK EN
+          SendData(0X3C); 
+        
+          SendCommand(0xFF);        // Exit Test command    ***********
+          SendData(0xE3);  
+          SPI_End();
+        }
         else
         {
           SPI_Begin();
@@ -606,7 +722,7 @@ void EPD::WaitUntilIdle()
       delay(200); 
       mySerial -> println("Wait EPD BUSY release!");
    }
-   if(EPD_TYPE == "EPD579G")
+   if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
    {
       mySerial -> print("e-Paper busy H\r\n ");
       while(digitalRead(PIN_BUSY) == LOW) 
@@ -642,7 +758,7 @@ void EPD::Sleep()
           SendData(0xA5);
           SPI_End();
         }
-        if(EPD_TYPE == "EPD579G")
+        if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
         {
           SPI_Begin();
           SendCommand(0x07); 

@@ -41,8 +41,8 @@ void serialEvent()
     }
     if (UART0_RX[0] == 'd' &&UART0_RX[1] == 'e' &&UART0_RX[2] == 'b' &&UART0_RX[3] == 'u' &&UART0_RX[4] == 'g' && UART0_len >= 5)
     {
-      mySerial.print("debug mode enable! \n");
-
+       flag_udp_232back = true;
+       mySerial.print("debug mode enable! \n");
     }
     if (UART0_RX[0] == 'r' && UART0_len == 3)
     {

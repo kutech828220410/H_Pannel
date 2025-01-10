@@ -920,7 +920,7 @@ namespace H_Pannel_lib
         {
             if (!Basic.Net.Ping(IP, 2, 150))
             {
-                Console.WriteLine($"EPD1020 DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                Console.WriteLine($"EPD579G DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
                 return false;
             }
             using (Bitmap inputBmp = ScaleImage(bmp, 792, 272))
@@ -930,15 +930,15 @@ namespace H_Pannel_lib
                     int frameDIV = 10;
 
                     bool flag_OK;
-                    int width = bmp.Width;
-                    int height = bmp.Height;
+                    int width = _bmp.Width;
+                    int height = _bmp.Height;
                     byte[] bytes = new byte[(width / 4) * height];
                     H_Pannel_lib.Communication.BitmapToByte(_bmp, ref bytes, H_Pannel_lib.EPD_Type.EPD579G);
                     MyTimer myTimer = new MyTimer();
                     myTimer.StartTickTime(50000);
                     flag_OK = EPD_DrawFramebuffer(uDP_Class, IP, bytes, (width / 4) * height / frameDIV);
                   
-                    if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 579G DrawFramebuffer {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+                    if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD579G DrawFramebuffer {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
                     return flag_OK;
                 }            
             }
@@ -954,6 +954,48 @@ namespace H_Pannel_lib
             if (!flag_OK) return false;
             return true;
         }
+
+        static public bool EPD_213_BRW_V0_DrawFramebuffer(UDP_Class uDP_Class, string IP, Bitmap bmp)
+        {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"EPD213_BRW_V0 DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
+            using (Bitmap inputBmp = ScaleImage(bmp, 250, 124))
+            {
+                inputBmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                inputBmp.RotateFlip(RotateFlipType.Rotate180FlipY);
+                using (Bitmap _bmp = DitheringProcessor.ApplyFloydSteinbergDithering(inputBmp, DitheringProcessor.DitheringMode.FourColor))
+                {
+                    int frameDIV = 2;
+
+                    bool flag_OK;
+                    int width = _bmp.Width;
+                    int height = _bmp.Height;
+                    byte[] bytes = new byte[(width / 4) * height];
+                    H_Pannel_lib.Communication.BitmapToByte(_bmp, ref bytes, H_Pannel_lib.EPD_Type.EPD213_BRW_V0);
+                    MyTimer myTimer = new MyTimer();
+                    myTimer.StartTickTime(50000);
+                    flag_OK = EPD_DrawFramebuffer(uDP_Class, IP, bytes, (width / 4) * height / frameDIV);
+
+                    if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD213_BRW_V0 DrawFramebuffer {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+                    return flag_OK;
+                }
+            }
+
+
+        }
+        static public bool EPD_213_BRW_V0_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
+        {
+            bool flag_OK = false;
+            flag_OK = EPD_213_BRW_V0_DrawFramebuffer(uDP_Class, IP, bmp);
+            if (!flag_OK) return false;
+            flag_OK = EPD_RefreshCanvas(uDP_Class, IP);
+            if (!flag_OK) return false;
+            return true;
+        }
+
 
         static public bool LCD_144_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {

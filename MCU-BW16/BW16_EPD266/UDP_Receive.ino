@@ -207,14 +207,26 @@ void onPacketCallBack()
             int startpo_L = (*(UdpRead + 2)) | (*(UdpRead + 3) << 8);
             int startpo_H = (*(UdpRead + 4)) | (*(UdpRead + 5) << 8);
             long startpo = startpo_L | (startpo_H << 16);
-            for(int i = 0 ; i < len ; i ++)
+            int max_temp = startpo + len;
+            if(max_temp > epd.buffer_max)
             {
-               *(epd.framebuffer +startpo + i) = *(UdpRead + 6 + i);
+              if(flag_udp_232back)printf("EPD framebuffer overload buffer_max\n");
+              if(flag_udp_232back)printf("buffer_max : %d\n" ,epd.buffer_max);
+              if(flag_udp_232back)printf("len : %d\n" ,len);
+              if(flag_udp_232back)printf("startpo : %d\n" ,startpo);             
             }
-            if(flag_udp_232back)printf("EPD framebuffer\n");
-            if(flag_udp_232back)printf("len : %d\n" ,len);
-            if(flag_udp_232back)printf("startpo : %d\n" ,startpo);
-            Get_Checksum_UDP();
+            else
+            {
+              for(int i = 0 ; i < len ; i ++)
+              {
+                 *(epd.framebuffer +startpo + i) = *(UdpRead + 6 + i);
+              }
+              if(flag_udp_232back)printf("EPD framebuffer\n");
+              if(flag_udp_232back)printf("len : %d\n" ,len);
+              if(flag_udp_232back)printf("startpo : %d\n" ,startpo);
+              Get_Checksum_UDP();
+            }
+            
           }
           else if (*(UdpRead + 1) == '@')
           {

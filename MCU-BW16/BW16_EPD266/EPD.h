@@ -5,6 +5,10 @@
 #include "Timer.h"
 #include "Config.h"
 
+#define  BLACK   0x0
+#define  WHITE   0x1
+#define  YELLOW   0x1
+#define  RED     0x3
 
 #include <SoftwareSerial.h>
 
@@ -21,7 +25,7 @@ class EPD
   int PIN_RST = PA25;
   int PIN_DC = PA26;
   int PIN_BUSY = PA27;
-  
+  long buffer_max = 0;
   void Init(SemaphoreHandle_t mutex);
   void Clear();
   void SetCursor(int Xstart, int Ystart);
