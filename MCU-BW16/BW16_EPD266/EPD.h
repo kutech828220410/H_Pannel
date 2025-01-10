@@ -28,6 +28,7 @@ class EPD
   void SetWindows(int Xstart, int Ystart, int Xend, int Yend);
   void SPI_Begin();
   void SPI_End();
+  void SendSPI(char* framebuffer , int size, int offset);
   void DrawFrame_BW();
   void DrawFrame_RW();
   void RefreshCanvas();

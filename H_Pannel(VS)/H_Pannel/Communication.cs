@@ -915,6 +915,45 @@ namespace H_Pannel_lib
 
 
         }
+        
+        static public bool EPD_579G_DrawFramebuffer(UDP_Class uDP_Class, string IP, Bitmap bmp)
+        {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"EPD1020 DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
+            using (Bitmap inputBmp = ScaleImage(bmp, 792, 272))
+            {
+                using (Bitmap _bmp = DitheringProcessor.ApplyFloydSteinbergDithering(inputBmp, DitheringProcessor.DitheringMode.FourColor))
+                {
+                    int frameDIV = 10;
+
+                    bool flag_OK;
+                    int width = bmp.Width;
+                    int height = bmp.Height;
+                    byte[] bytes = new byte[(width / 4) * height];
+                    H_Pannel_lib.Communication.BitmapToByte(_bmp, ref bytes, H_Pannel_lib.EPD_Type.EPD579G);
+                    MyTimer myTimer = new MyTimer();
+                    myTimer.StartTickTime(50000);
+                    flag_OK = EPD_DrawFramebuffer(uDP_Class, IP, bytes, (width / 4) * height / frameDIV);
+                  
+                    if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 579G DrawFramebuffer {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+                    return flag_OK;
+                }            
+            }
+
+
+        }
+        static public bool EPD_579G_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
+        {
+            bool flag_OK = false;
+            flag_OK = EPD_579G_DrawFramebuffer(uDP_Class, IP, bmp);
+            if (!flag_OK) return false;
+            flag_OK = EPD_RefreshCanvas(uDP_Class, IP);
+            if (!flag_OK) return false;
+            return true;
+        }
 
         static public bool LCD_144_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
@@ -1176,6 +1215,43 @@ namespace H_Pannel_lib
             return true;
 
         }
+        static public bool EPD_DrawFramebuffer(UDP_Class uDP_Class, string IP, byte[] datas, int Split_DataSize)
+        {
+            int Width_Size = Split_DataSize;
+            int NumOfArray = datas.Length / (Split_DataSize);
+            List<byte[]> list_data = new List<byte[]>();
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                byte[] Array_temp = new byte[Width_Size];
+                for (int k = 0; k < Width_Size; k++)
+                {
+                    Array_temp[k] = datas[i * Width_Size + k];
+                }
+                list_data.Add(Array_temp);
+            }
+
+            if (!EPD_Set_WakeUp(uDP_Class, IP))
+            {
+                return false;
+            }
+
+            for (int i = 0; i < NumOfArray; i++)
+            {
+                if (!EPD_Send_Framebuffer(uDP_Class, IP, i * Width_Size, list_data[i]))
+                {
+                    return false;
+                }
+            }
+            if (!EPD_DrawFrame_BW(uDP_Class, IP))
+            {
+                return false;
+            }
+     
+
+            return true;
+
+        }
+
         static public bool EPD_DrawImageSPI(UDP_Class uDP_Class, string IP, byte[] datas, int Split_DataSize)
         {
             int Width_Size = Split_DataSize;
@@ -1295,6 +1371,7 @@ namespace H_Pannel_lib
             return true;
 
         }
+
         static private bool Command_Set_Cusor_position(UDP_Class uDP_Class, string IP, int x, int y, int width, int height)
         {
             bool flag_OK = true;
@@ -9183,80 +9260,8 @@ namespace H_Pannel_lib
         }
 
 
-        // 抖动算法處理函式
-        public static Bitmap ApplyDithering(Bitmap inputBmp, ColorMode mode)
-        {
-            // 定義顏色表
-            Color[] palette;
-            switch (mode)
-            {
-                case ColorMode.RedWhiteBlackYellow:
-                    palette = new Color[] { Color.Red, Color.White, Color.Black, Color.Yellow };
-                    break;
-                case ColorMode.RedWhiteBlack:
-                default:
-                    palette = new Color[] { Color.Red, Color.White, Color.Black };
-                    break;
-            }
 
-            // 建立輸出影像
-            Bitmap outputBmp = new Bitmap(inputBmp.Width, inputBmp.Height);
+      
 
-            // Floyd-Steinberg抖动矩陣
-            int[,] ditherMatrix = new int[inputBmp.Width, inputBmp.Height];
-
-            for (int y = 0; y < inputBmp.Height; y++)
-            {
-                for (int x = 0; x < inputBmp.Width; x++)
-                {
-                    Color originalColor = inputBmp.GetPixel(x, y);
-                    int grayValue = (originalColor.R + originalColor.G + originalColor.B) / 3;
-
-                    // 計算接近的調色盤顏色
-                    Color nearestColor = GetNearestColor(palette, grayValue);
-                    outputBmp.SetPixel(x, y, nearestColor);
-
-                    // 計算誤差
-                    int error = grayValue - GetGrayValue(nearestColor);
-
-                    // 分散誤差
-                    if (x + 1 < inputBmp.Width)
-                        ditherMatrix[x + 1, y] += error * 7 / 16;
-                    if (x - 1 >= 0 && y + 1 < inputBmp.Height)
-                        ditherMatrix[x - 1, y + 1] += error * 3 / 16;
-                    if (y + 1 < inputBmp.Height)
-                        ditherMatrix[x, y + 1] += error * 5 / 16;
-                    if (x + 1 < inputBmp.Width && y + 1 < inputBmp.Height)
-                        ditherMatrix[x + 1, y + 1] += error * 1 / 16;
-                }
-            }
-
-            return outputBmp;
-        }
-        // 找到與調色盤中最接近的顏色
-        private static Color GetNearestColor(Color[] palette, int grayValue)
-        {
-            Color nearestColor = palette[0];
-            int minDifference = int.MaxValue;
-
-            foreach (Color color in palette)
-            {
-                int paletteGray = GetGrayValue(color);
-                int difference = Math.Abs(grayValue - paletteGray);
-
-                if (difference < minDifference)
-                {
-                    minDifference = difference;
-                    nearestColor = color;
-                }
-            }
-
-            return nearestColor;
-        }
-        // 計算顏色的灰階值
-        private static int GetGrayValue(Color color)
-        {
-            return (color.R + color.G + color.B) / 3;
-        }
     }
 }

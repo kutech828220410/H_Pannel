@@ -183,6 +183,7 @@
     <Compile Include="Dialog\Dialog_RWB_顏色選擇.Designer.cs">
       <DependentUpon>Dialog_RWB_顏色選擇.cs</DependentUpon>
     </Compile>
+    <Compile Include="DitheringProcessor.cs" />
     <Compile Include="DrawerUI.cs">
       <SubType>UserControl</SubType>
     </Compile>

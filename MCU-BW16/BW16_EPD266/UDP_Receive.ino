@@ -178,6 +178,29 @@ void onPacketCallBack()
              Send_String(str_distance , wiFiConfig.localport);
              if(flag_udp_232back)printf("LaserDistance : %d\n" ,str_distance);
           } 
+          else if (*(UdpRead + 1) == 'h')
+          {
+            epd.BW_Command();
+            Get_Checksum();        
+          }
+          else if (*(UdpRead + 1) == 'i')
+          {
+            epd.RW_Command();
+            Get_Checksum();        
+          }
+          else if(*(UdpRead + 1) == 'j')
+          {
+            int len = UdpRead_len - 7;
+            int startpo_L = (*(UdpRead + 2)) | (*(UdpRead + 3) << 8);
+            int startpo_H = (*(UdpRead + 4)) | (*(UdpRead + 5) << 8);
+            long startpo = startpo_L | (startpo_H << 16);
+            epd.SendSPI(UdpRead ,len , 6);
+            if(flag_udp_232back)printf("EPD EPD_SendSPI\n");
+            if(flag_udp_232back)printf("len : %d\n" ,len);
+            if(flag_udp_232back)printf("startpo : %d\n" ,startpo);
+    
+            Get_Checksum_UDP();      
+          }
           else if (*(UdpRead + 1) == 'e')
           {
             int len = UdpRead_len - 7;

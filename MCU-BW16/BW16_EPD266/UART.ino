@@ -39,6 +39,11 @@ void serialEvent()
         ota_platform_reset();
       }
     }
+    if (UART0_RX[0] == 'd' &&UART0_RX[1] == 'e' &&UART0_RX[2] == 'b' &&UART0_RX[3] == 'u' &&UART0_RX[4] == 'g' && UART0_len >= 5)
+    {
+      mySerial.print("debug mode enable! \n");
+
+    }
     if (UART0_RX[0] == 'r' && UART0_len == 3)
     {
       String str = "";
@@ -49,7 +54,7 @@ void serialEvent()
       mySerial.println(str);
       mySerial2.print(str);
     }
-    if (UART0_RX[0] == 's')
+    if (UART0_RX[0] == 's'&& UART0_len == 3)
     {
       String str = "";
       for (int i = 0 ; i < UART0_len ; i++)
@@ -60,12 +65,17 @@ void serialEvent()
       mySerial.println(str);
       mySerial2.print(str);
     }
-    if (UART0_RX[0] == 'w')
+    if (UART0_RX[0] == 'c'&& UART0_len == 3)
+    {
+      mySerial.print("EPD Clear..\n ");
+      epd.Clear();
+    }
+    if (UART0_RX[0] == 'w'&& UART0_len == 3)
     {
       mySerial.println("flag_WS2812B_breathing_ON_OFF");
       flag_WS2812B_breathing_ON_OFF = !flag_WS2812B_breathing_ON_OFF;
     }
-    if (UART0_RX[0] == 'D')
+    if (UART0_RX[0] == 'D'&& UART0_len == 3)
     {
       #ifdef DHTSensor
       mySerial.print(F("Humidity: "));
@@ -81,7 +91,7 @@ void serialEvent()
       mySerial.println(F("°F"));
       #endif
     }
-    if (UART0_RX[0] == 'b')
+    if (UART0_RX[0] == 'b'&& UART0_len == 3)
     {
       String str_int = "";
       str_int += (char)UART0_RX[1];
@@ -95,12 +105,12 @@ void serialEvent()
       flag_WS2812B_Refresh = true;
       flag_WS2812B_breathing_ON_OFF = false;
     }
-    if (UART0_RX[0] == 'P')
+    if (UART0_RX[0] == 'P'&& UART0_len == 3)
     {
       mySerial.print("SetOutputPINTrigger(1 , (1 == 1));\n");
       SetOutputPINTrigger(1 , true);
     }
-    if(UART0_RX[0] == 'M')
+    if(UART0_RX[0] == 'M'&& UART0_len == 3)
     {
       uint8_t mac[6];
       WiFi.macAddress(mac);
@@ -239,8 +249,7 @@ void serialEvent()
       }
       else if (UART0_RX[1] == 'h')
       {
-        OLCD114.LCD_ShowPicture();
-        Get_Checksum();
+        OLCD114.LCD_ShowPicture();         
       }
       else if (UART0_RX[1] == '1' && UART0_len == 5)
       {

@@ -5,10 +5,12 @@
 //#define RowLED_Device
 //#define EPD213
 //#define EPD266
-#define EPD290
+//#define EPD290
 //#define EPD420
 //#define EPD420_D
 //#define EPD583
+#define EPD579G
+
 //#define OLCD_114
 //#define MCP23017
 
@@ -57,6 +59,13 @@
 #define EPD_HEIGHT 480
 #define EPD_TYPE "EPD583"
 #define EPD_Device
+
+#elif defined(EPD579G)
+#define EPD_WIDTH 198
+#define EPD_HEIGHT 272
+#define EPD_TYPE "EPD579G"
+#define EPD_Device
+
 #else
 #define EPD_WIDTH 0
 #define EPD_HEIGHT 0

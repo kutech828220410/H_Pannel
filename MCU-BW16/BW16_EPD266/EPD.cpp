@@ -17,7 +17,16 @@ void EPD::Init(SemaphoreHandle_t mutex)
     this -> Wakeup();
     
 }
-
+void EPD::SendSPI(char* framebuffer ,int size, int offset)
+{
+  
+   SPI_Begin();
+   for (int i = offset; i < size; i++) 
+   {
+      SendData(*(framebuffer + i));
+   }
+   SPI_End();
+}
 void EPD::SetCursor(int Xstart, int Ystart)
 {
     SendCommand(0x4E); // SET_RAM_X_ADDRESS_COUNTER
@@ -50,24 +59,65 @@ void EPD::Clear()
     {
       //send black data
       SPI_Begin();
-      this -> BW_Command();
-      for (int j = 0; j < EPD_HEIGHT; j++)
+      if(EPD_TYPE == "EPD579G")
       {
-          for (int i = 0; i < EPD_WIDTH; i++) {
-              SendData(0x00);
+           mySerial -> println("EPD579G Clear function start...");
+           byte color = 0x2;
+           int Width4 = EPD_WIDTH;
+           int Width8 = EPD_WIDTH / 2;
+           int Height = EPD_HEIGHT;
+           BW_Command();
+           for (int j = 0; j < Height / 2; j++) 
+           {
+              for (int i = 0; i < Width8; i++) 
+              {
+                  SendData((color<<6) | (color<<4) | (color<<2) | color);
+              }
+      
+              for (int i = 0; i < Width8; i++) 
+              {
+                  SendData((color<<6) | (color<<4) | (color<<2) | color);
+              }
+           }
+           RW_Command();
+           for (int j = 0; j < Height / 2; j++) 
+           {
+              for (int i = 0; i < Width8; i++) 
+              {
+                  SendData((color<<6) | (color<<4) | (color<<2) | color);
+              }
+      
+              for (int i = 0; i < Width8; i++) 
+              {
+                  SendData((color<<6) | (color<<4) | (color<<2) | color);
+              }
+           }
+      }
+      else
+      {
+          this -> BW_Command();
+          for (int j = 0; j < EPD_HEIGHT; j++)
+          {
+              for (int i = 0; i < EPD_WIDTH; i++) {
+                  SendData(0x00);
+              }
+          }
+          
+          //send red data
+          this -> RW_Command();
+          for (int j = 0; j < EPD_HEIGHT; j++) 
+          {
+              for (int i = 0; i < EPD_WIDTH; i++) {
+                  SendData(0xFF);
+              }
           }
       }
       
-      //send red data
-      this -> RW_Command();
-      for (int j = 0; j < EPD_HEIGHT; j++) 
-      {
-          for (int i = 0; i < EPD_WIDTH; i++) {
-              SendData(0xFF);
-          }
-      }
       SPI_End();
-      this -> RefreshCanvas(); 
+      mySerial -> println("EPD579G Clear function done...");
+      
+      RefreshCanvas(); 
+      
        // WaitUntilIdle();
       xSemaphoreGive(xSpiMutex);
     }
@@ -80,15 +130,50 @@ void EPD::DrawFrame_BW()
     {
       //send black data
       SPI_Begin();
-      this -> BW_Command();
-  
-      for (int j = 0; j < EPD_HEIGHT; j++)
+      if(EPD_TYPE == "EPD579G")
       {
-          for (int i = 0; i < EPD_WIDTH; i++) 
-          {
-              SendData(*(framebuffer + j * EPD_WIDTH + i));
-          }
-      }    
+         int Width4 = EPD_WIDTH;
+         int Width8 = EPD_WIDTH / 2;
+         int Height = EPD_HEIGHT;
+         BW_Command();
+         for (int j = 0; j < Height / 2; j++) 
+         {
+            for (int i = 0; i < Width8; i++) 
+            {
+                SendData(pgm_read_byte(&framebuffer[i + j * Width4]));
+            }
+    
+            for (int i = 0; i < Width8; i++) 
+            {
+                SendData(pgm_read_byte(&framebuffer[i + (Height - j - 1) * Width4]));
+            }
+         }
+         RW_Command();
+         for (int j = 0; j < Height / 2; j++) 
+         {
+            for (int i = 0; i < Width8; i++) 
+            {
+                SendData(pgm_read_byte(&framebuffer[j * Width4 + i + Width8]));
+            }
+    
+            for (int i = 0; i < Width8; i++) 
+            {
+                SendData(pgm_read_byte(&framebuffer[(Height - j - 1) * Width4 + i + Width8]));
+            }
+         }
+      }
+      else
+      {
+        this -> BW_Command();
+  
+        for (int j = 0; j < EPD_HEIGHT; j++)
+        {
+            for (int i = 0; i < EPD_WIDTH; i++) 
+            {
+                SendData(*(framebuffer + j * EPD_WIDTH + i));
+            }
+        } 
+      }            
       SPI_End();
       xSemaphoreGive(xSpiMutex);
     }
@@ -100,15 +185,50 @@ void EPD::DrawFrame_RW()
     {
       //send red data
       SPI_Begin();
-      this -> RW_Command();
-  
-      for (int j = 0; j < EPD_HEIGHT; j++) 
+      if(EPD_TYPE == "EPD579G")
       {
-          for (int i = 0; i < EPD_WIDTH; i++) 
-          {
-            SendData(*(framebuffer + j * EPD_WIDTH + i));
-          }
+         int Width4 = EPD_WIDTH;
+         int Width8 = EPD_WIDTH / 2;
+         int Height = EPD_HEIGHT;
+         BW_Command();
+         for (int j = 0; j < Height / 2; j++) 
+         {
+            for (int i = 0; i < Width8; i++) 
+            {
+                SendData(pgm_read_byte(&framebuffer[i + j * Width4]));
+            }
+    
+            for (int i = 0; i < Width8; i++) 
+            {
+                SendData(pgm_read_byte(&framebuffer[i + (Height - j - 1) * Width4]));
+            }
+         }
+         RW_Command();
+         for (int j = 0; j < Height / 2; j++) 
+         {
+            for (int i = 0; i < Width8; i++) 
+            {
+                SendData(pgm_read_byte(&framebuffer[j * Width4 + i + Width8]));
+            }
+    
+            for (int i = 0; i < Width8; i++) 
+            {
+                SendData(pgm_read_byte(&framebuffer[(Height - j - 1) * Width4 + i + Width8]));
+            }
+         }
       }
+      else
+      {
+         RW_Command();
+  
+         for (int j = 0; j < EPD_HEIGHT; j++) 
+         {
+            for (int i = 0; i < EPD_WIDTH; i++) 
+            {
+              SendData(*(framebuffer + j * EPD_WIDTH + i));
+            }
+         }
+      }     
       SPI_End();
       xSemaphoreGive(xSpiMutex);
     }
@@ -116,9 +236,7 @@ void EPD::DrawFrame_RW()
 }
 void EPD::RefreshCanvas()
 { 
-   if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE) 
-   {
-     if(EPD_TYPE == "EPD420" || EPD_TYPE == "EPD420_D")
+   if(EPD_TYPE == "EPD420" || EPD_TYPE == "EPD420_D")
      {
        SPI_Begin();
        SendCommand(0x22);
@@ -132,6 +250,23 @@ void EPD::RefreshCanvas()
        SendCommand(0x12);
        SPI_End();
      }
+     else if(EPD_TYPE == "EPD579G")
+     {
+       mySerial -> println("EPD579G Clear (RefreshCanvas)function start...");
+       SPI_Begin();
+       SendCommand(0x04);
+       WaitUntilIdle();
+    
+       SendCommand(0x12);
+       SendData(0x00);
+       WaitUntilIdle();
+       
+       SendCommand(0x02);
+       SendData(0x00);
+       WaitUntilIdle();
+       SPI_End();
+       mySerial -> println("EPD579G Clear (RefreshCanvas)function done...");
+     }
      else
      {
        SPI_Begin();
@@ -140,8 +275,6 @@ void EPD::RefreshCanvas()
      }
      
      this -> SetToSleep = true;
-     xSemaphoreGive(xSpiMutex);
-   }
    
 }
 void EPD::Sleep_Check()
@@ -169,6 +302,12 @@ void EPD::BW_Command()
    {
      SendCommand(0x10);
    }
+   else if(EPD_TYPE == "EPD579G")
+   {
+     SendCommand(0xA2);  //********************
+     SendData(0x02);
+     SendCommand(0x10);
+   }
    else
    {
      SendCommand(0x24);
@@ -183,6 +322,12 @@ void EPD::RW_Command()
    if(EPD_TYPE == "EPD583")
    {
      SendCommand(0x13);
+   }
+   else if(EPD_TYPE == "EPD579G")
+   {
+     SendCommand(0xA2);  //********************
+     SendData(0x01);
+     SendCommand(0x10);
    }
    else
    {
@@ -204,6 +349,7 @@ void EPD::SPI_Begin()
 {
 //   SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
    if(EPD_TYPE == "EPD583")SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
+   else if(EPD_TYPE == "EPD579G")SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
    else SPI.beginTransaction(SPISettings(80000000, MSBFIRST, SPI_MODE0));    
 }
 void EPD::SPI_End()
@@ -300,6 +446,123 @@ void EPD::Wakeup()
           SendCommand(0X60);      //TCON SETTING
           SendData(0x22);
         }
+        else if(EPD_TYPE == "EPD579G")
+        {
+          mySerial -> println("EPD579G Init...");
+          SPI_Begin(); 
+          SendCommand(0xE0);
+          SendData(0x01);
+          
+          SendCommand(0xA5);
+          WaitUntilIdle();
+          //--------------------------------------//  
+          SendCommand(0xA2); //Master
+          SendData(0x01);
+          
+          SendCommand(0x00);
+          SendData(0x03);
+          SendData(0x29);
+          
+      
+          //-------------------------------------//  
+          SendCommand(0xA2); //Slave
+          SendData(0x02);
+          
+          SendCommand(0x00);
+          SendData(0x07);
+          SendData(0x29);
+          
+          SendCommand(0xA2);
+          SendData(0x00);
+          //-------------------------------------//
+          
+          SendCommand(0x01);
+          SendData(0x07);
+         
+          SendCommand(0x03);
+          SendData(0x10);
+          SendData(0x54);
+          SendData(0x44);
+          
+          SendCommand(0x06);
+          SendData(0x38);
+          SendData(0x38);
+          SendData(0x38);
+          SendData(0x00);
+        
+          SendCommand(0x30);
+          SendData(0x02);
+        
+          SendCommand(0x41);
+          SendData(0x00);
+        
+          SendCommand(0x50);
+          SendData(0x97);
+          
+          SendCommand(0x60);
+          SendData(0x02);
+          SendData(0x02); 
+          
+          SendCommand(0x61);
+          SendData(0x01);
+          SendData(0x8C); 
+          SendData(0x01); 
+          SendData(0x10);
+          
+          SendCommand(0x65);
+          SendData(0x00);
+          SendData(0x00);
+          SendData(0x00);
+          SendData(0x00);
+          
+          SendCommand(0xE7);
+          SendData(0x1C);
+          
+          SendCommand(0xE3);
+          SendData(0x77);
+          
+          SendCommand(0xFF);
+          SendData(0xA5);
+          
+          SendCommand(0xEF);
+          SendData(0x01);
+          SendData(0x2D);
+          SendData(0x08);
+          SendData(0x14);
+          SendData(0x0C);
+          SendData(0x1C);
+          SendData(0x0E);
+          SendData(0x07);
+          
+          SendCommand(0xDB);   
+          SendData(0x00);
+          
+          SendCommand(0xF9);
+          SendData(0x00);
+          
+          SendCommand(0xCF);   
+          SendData(0x00);
+          
+          SendCommand(0xDF);   
+          SendData(0x00);
+          
+          SendCommand(0xFD);   
+          SendData(0x01);
+          
+          SendCommand(0xE8);
+          SendData(0x03);
+          
+          SendCommand(0xDC);
+          SendData(0x00);
+          SendCommand(0xDD);
+          SendData(0x0A);
+          SendCommand(0xDE);
+          SendData(0x41);
+        
+          SendCommand(0xFF);
+          SendData(0xE3);
+          SPI_End();
+        }
         else
         {
           SPI_Begin();
@@ -339,16 +602,24 @@ void EPD::WaitUntilIdle()
          
          busy = digitalRead(this -> PIN_BUSY);
       }
-//      SPI_End();
       while(busy);    
       delay(200); 
       mySerial -> println("Wait EPD BUSY release!");
+   }
+   if(EPD_TYPE == "EPD579G")
+   {
+      mySerial -> print("e-Paper busy H\r\n ");
+      while(digitalRead(PIN_BUSY) == LOW) 
+      {      
+          delay(20);
+      } 
+      mySerial -> print("e-Paper busy release H\r\n "); 
    }
    else
    {
      while(digitalRead(PIN_BUSY) == HIGH) 
      {  
-
+         delay(20);
      } 
    }
    
@@ -366,6 +637,13 @@ void EPD::Sleep()
           SendCommand(0x02); 
           SPI_End();  
           //this -> WaitUntilIdle();
+          SPI_Begin();
+          SendCommand(0x07); 
+          SendData(0xA5);
+          SPI_End();
+        }
+        if(EPD_TYPE == "EPD579G")
+        {
           SPI_Begin();
           SendCommand(0x07); 
           SendData(0xA5);

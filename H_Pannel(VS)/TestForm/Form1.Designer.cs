@@ -57,12 +57,12 @@ namespace TestForm
             this.系統 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.EPD290 = new System.Windows.Forms.TabPage();
-            this.EPD266 = new System.Windows.Forms.TabPage();
-            this.PLC = new System.Windows.Forms.TabPage();
-            this.lowerMachine_Panel = new LadderUI.LowerMachine_Panel();
-            this.plC_UI_Init = new MyUI.PLC_UI_Init();
             this.storageUI_EPD_290 = new H_Pannel_lib.StorageUI_EPD_290();
+            this.EPD266 = new System.Windows.Forms.TabPage();
             this.storageUI_EPD_266 = new H_Pannel_lib.StorageUI_EPD_266();
+            this.PLC = new System.Windows.Forms.TabPage();
+            this.plC_UI_Init = new MyUI.PLC_UI_Init();
+            this.lowerMachine_Panel = new LadderUI.LowerMachine_Panel();
             this.tabControl1.SuspendLayout();
             this.測試單元.SuspendLayout();
             this.plC_RJ_GroupBox2.ContentsPanel.SuspendLayout();
@@ -693,7 +693,7 @@ namespace TestForm
             this.plC_RJ_GroupBox1.ContentsPanel.Name = "ContentsPanel";
             this.plC_RJ_GroupBox1.ContentsPanel.ShadowColor = System.Drawing.Color.DimGray;
             this.plC_RJ_GroupBox1.ContentsPanel.ShadowSize = 0;
-            this.plC_RJ_GroupBox1.ContentsPanel.Size = new System.Drawing.Size(532, 91);
+            this.plC_RJ_GroupBox1.ContentsPanel.Size = new System.Drawing.Size(678, 91);
             this.plC_RJ_GroupBox1.ContentsPanel.TabIndex = 2;
             this.plC_RJ_GroupBox1.GUID = "";
             this.plC_RJ_GroupBox1.Location = new System.Drawing.Point(200, 16);
@@ -703,7 +703,7 @@ namespace TestForm
             this.plC_RJ_GroupBox1.PannelBorderColor = System.Drawing.Color.SkyBlue;
             this.plC_RJ_GroupBox1.PannelBorderRadius = 5;
             this.plC_RJ_GroupBox1.PannelBorderSize = 2;
-            this.plC_RJ_GroupBox1.Size = new System.Drawing.Size(532, 136);
+            this.plC_RJ_GroupBox1.Size = new System.Drawing.Size(678, 136);
             this.plC_RJ_GroupBox1.TabIndex = 41;
             this.plC_RJ_GroupBox1.TitleBackColor = System.Drawing.Color.DeepSkyBlue;
             this.plC_RJ_GroupBox1.TitleBorderColor = System.Drawing.Color.PaleVioletRed;
@@ -932,53 +932,6 @@ namespace TestForm
             this.EPD290.Text = "EPD290";
             this.EPD290.UseVisualStyleBackColor = true;
             // 
-            // EPD266
-            // 
-            this.EPD266.Controls.Add(this.storageUI_EPD_266);
-            this.EPD266.Location = new System.Drawing.Point(4, 22);
-            this.EPD266.Name = "EPD266";
-            this.EPD266.Size = new System.Drawing.Size(1417, 863);
-            this.EPD266.TabIndex = 2;
-            this.EPD266.Text = "EPD266";
-            this.EPD266.UseVisualStyleBackColor = true;
-            // 
-            // PLC
-            // 
-            this.PLC.Controls.Add(this.plC_UI_Init);
-            this.PLC.Controls.Add(this.lowerMachine_Panel);
-            this.PLC.Location = new System.Drawing.Point(4, 22);
-            this.PLC.Name = "PLC";
-            this.PLC.Size = new System.Drawing.Size(1417, 863);
-            this.PLC.TabIndex = 1;
-            this.PLC.Text = "PLC";
-            this.PLC.UseVisualStyleBackColor = true;
-            // 
-            // lowerMachine_Panel
-            // 
-            this.lowerMachine_Panel.Location = new System.Drawing.Point(15, 15);
-            this.lowerMachine_Panel.Name = "lowerMachine_Panel";
-            this.lowerMachine_Panel.Size = new System.Drawing.Size(869, 565);
-            this.lowerMachine_Panel.TabIndex = 0;
-            this.lowerMachine_Panel.掃描速度 = 0;
-            // 
-            // plC_UI_Init
-            // 
-            this.plC_UI_Init.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.plC_UI_Init.Location = new System.Drawing.Point(900, 15);
-            this.plC_UI_Init.Name = "plC_UI_Init";
-            this.plC_UI_Init.Size = new System.Drawing.Size(72, 25);
-            this.plC_UI_Init.TabIndex = 1;
-            this.plC_UI_Init.光道視覺元件初始化 = false;
-            this.plC_UI_Init.全螢幕顯示 = false;
-            this.plC_UI_Init.掃描速度 = 100;
-            this.plC_UI_Init.起始畫面標題內容 = "鴻森整合機電有限公司";
-            this.plC_UI_Init.起始畫面標題字體 = new System.Drawing.Font("標楷體", 20F, System.Drawing.FontStyle.Bold);
-            this.plC_UI_Init.起始畫面背景 = ((System.Drawing.Image)(resources.GetObject("plC_UI_Init.起始畫面背景")));
-            this.plC_UI_Init.起始畫面顯示 = false;
-            this.plC_UI_Init.邁得威視元件初始化 = false;
-            this.plC_UI_Init.開機延遲 = 0;
-            this.plC_UI_Init.音效 = false;
-            // 
             // storageUI_EPD_290
             // 
             this.storageUI_EPD_290._Password = "";
@@ -1006,6 +959,16 @@ namespace TestForm
             this.storageUI_EPD_290.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_290.UDP_ServerPorts")));
             this.storageUI_EPD_290.UserName = "root";
             // 
+            // EPD266
+            // 
+            this.EPD266.Controls.Add(this.storageUI_EPD_266);
+            this.EPD266.Location = new System.Drawing.Point(4, 22);
+            this.EPD266.Name = "EPD266";
+            this.EPD266.Size = new System.Drawing.Size(178, 42);
+            this.EPD266.TabIndex = 2;
+            this.EPD266.Text = "EPD266";
+            this.EPD266.UseVisualStyleBackColor = true;
+            // 
             // storageUI_EPD_266
             // 
             this.storageUI_EPD_266._Password = "";
@@ -1022,7 +985,7 @@ namespace TestForm
             this.storageUI_EPD_266.Port = ((uint)(3306u));
             this.storageUI_EPD_266.Server_IP_Adress = "0.0.0.0";
             this.storageUI_EPD_266.Server_Port = "0";
-            this.storageUI_EPD_266.Size = new System.Drawing.Size(1417, 863);
+            this.storageUI_EPD_266.Size = new System.Drawing.Size(178, 42);
             this.storageUI_EPD_266.SSID = "";
             this.storageUI_EPD_266.Station = "0";
             this.storageUI_EPD_266.Subnet = "0.0.0.0";
@@ -1032,6 +995,43 @@ namespace TestForm
             this.storageUI_EPD_266.UDP_SendTime = "0";
             this.storageUI_EPD_266.UDP_ServerPorts = ((System.Collections.Generic.List<string>)(resources.GetObject("storageUI_EPD_266.UDP_ServerPorts")));
             this.storageUI_EPD_266.UserName = "root";
+            // 
+            // PLC
+            // 
+            this.PLC.Controls.Add(this.plC_UI_Init);
+            this.PLC.Controls.Add(this.lowerMachine_Panel);
+            this.PLC.Location = new System.Drawing.Point(4, 22);
+            this.PLC.Name = "PLC";
+            this.PLC.Size = new System.Drawing.Size(178, 42);
+            this.PLC.TabIndex = 1;
+            this.PLC.Text = "PLC";
+            this.PLC.UseVisualStyleBackColor = true;
+            // 
+            // plC_UI_Init
+            // 
+            this.plC_UI_Init.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.plC_UI_Init.Location = new System.Drawing.Point(900, 15);
+            this.plC_UI_Init.Name = "plC_UI_Init";
+            this.plC_UI_Init.Size = new System.Drawing.Size(72, 25);
+            this.plC_UI_Init.TabIndex = 1;
+            this.plC_UI_Init.光道視覺元件初始化 = false;
+            this.plC_UI_Init.全螢幕顯示 = false;
+            this.plC_UI_Init.掃描速度 = 100;
+            this.plC_UI_Init.起始畫面標題內容 = "鴻森整合機電有限公司";
+            this.plC_UI_Init.起始畫面標題字體 = new System.Drawing.Font("標楷體", 20F, System.Drawing.FontStyle.Bold);
+            this.plC_UI_Init.起始畫面背景 = ((System.Drawing.Image)(resources.GetObject("plC_UI_Init.起始畫面背景")));
+            this.plC_UI_Init.起始畫面顯示 = false;
+            this.plC_UI_Init.邁得威視元件初始化 = false;
+            this.plC_UI_Init.開機延遲 = 0;
+            this.plC_UI_Init.音效 = false;
+            // 
+            // lowerMachine_Panel
+            // 
+            this.lowerMachine_Panel.Location = new System.Drawing.Point(15, 15);
+            this.lowerMachine_Panel.Name = "lowerMachine_Panel";
+            this.lowerMachine_Panel.Size = new System.Drawing.Size(869, 565);
+            this.lowerMachine_Panel.TabIndex = 0;
+            this.lowerMachine_Panel.掃描速度 = 0;
             // 
             // Form1
             // 
