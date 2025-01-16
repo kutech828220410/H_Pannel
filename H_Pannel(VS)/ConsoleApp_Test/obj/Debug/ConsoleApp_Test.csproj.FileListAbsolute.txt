@@ -1,0 +1,9 @@
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Debug\ConsoleApp_Test.exe.config
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Debug\ConsoleApp_Test.exe
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Debug\ConsoleApp_Test.pdb
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Debug\H_Pannel_lib.dll
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Debug\ConsoleApp_Test.csproj.AssemblyReference.cache
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Debug\ConsoleApp_Test.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Debug\ConsoleApp_Test.csproj.CopyComplete
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Debug\ConsoleApp_Test.exe
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Debug\ConsoleApp_Test.pdb
