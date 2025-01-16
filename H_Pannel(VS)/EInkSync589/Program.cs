@@ -23,7 +23,7 @@ namespace EInkSync589
                 UDP_Class uDP_Class = new UDP_Class(ServerIP, 29000);
 
 
-                List<DataTable> dataTables = MyOffice.ExcelClass.NPOI_LoadFile2DataTables(@"C:\標籤牆圖檔名_IP對照表.xlsx");
+                List<DataTable> dataTables = MyOffice.ExcelClass.NPOI_LoadFile2DataTables(@"C:\Users\Administrator\Desktop\wall.xlsx");
                 for (int i = 0; i < dataTables.Count; i++)
                 {
                     if (dataTables[i].TableName == "台南")

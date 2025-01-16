@@ -37,7 +37,6 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Re
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Release\MVSDK.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Release\System.Numerics.Vectors.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Release\System.Buffers.dll
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Release\Basic.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Release\ConsoleApp_Test.csproj.AssemblyReference.cache
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Release\ConsoleApp_Test.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Release\ConsoleApp_Test.csproj.CopyComplete
@@ -103,6 +102,5 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Re
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Release\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Release\System.Buffers.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Release\Newtonsoft.Json.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Release\ConsoleApp_Test.exe.config
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Release\System.Memory.xml
