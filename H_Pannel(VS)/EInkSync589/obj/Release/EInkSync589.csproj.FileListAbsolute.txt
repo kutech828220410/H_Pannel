@@ -48,5 +48,13 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Releas
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\CallBackUI.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\MeasureSystemFunction.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\MVSDK.dll
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Release\EInkSync589.exe.config
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\ICSharpCode.SharpZipLib.dll
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\System.Buffers.xml
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\System.Memory.xml
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\System.Numerics.Vectors.xml
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\System.Text.Encodings.Web.xml
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\System.Text.Json.xml
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\System.Threading.Tasks.Extensions.xml
+C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\System.ValueTuple.xml
