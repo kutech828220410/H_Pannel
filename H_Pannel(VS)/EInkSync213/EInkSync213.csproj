@@ -38,8 +38,9 @@
     <Reference Include="Basic">
       <HintPath>..\0.DLL\Basic.dll</HintPath>
     </Reference>
-    <Reference Include="H_Pannel_lib">
-      <HintPath>..\0.DLL\H_Pannel_lib.dll</HintPath>
+    <Reference Include="H_Pannel_lib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\H_Pannel_Debug\bin\Release\H_Pannel_lib.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\0.DLL\ICSharpCode.SharpZipLib.dll</HintPath>

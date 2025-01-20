@@ -44,16 +44,16 @@ namespace EInkSync589
                                                     
                         }
                         Task.WhenAll(tasks).Wait();
-                        tasks.Clear();
+                        List<Task> tasks_refresh = new List<Task>();
                         foreach (object[] value in list_value)
                         {
                             string ip_temp = $"192.168.{value[1].ObjectToString()}";
-                            tasks.Add(Task.Run(new Action(delegate
+                            tasks_refresh.Add(Task.Run(new Action(delegate
                             {
                                 H_Pannel_lib.Communication.EPD_RefreshCanvas(uDP_Class, ip_temp);
                             })));                                        
                         }
-                        Task.WhenAll(tasks).Wait();
+                        Task.WhenAll(tasks_refresh).Wait();
                     }
                 }
 

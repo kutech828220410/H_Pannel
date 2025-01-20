@@ -1,4 +1,4 @@
-#define VERSION "Ver 1.5.42"
+#define VERSION "Ver 1.5.44"
 
 //#define DHTSensor
 //#define HandSensor
