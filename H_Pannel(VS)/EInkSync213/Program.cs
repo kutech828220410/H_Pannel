@@ -14,12 +14,13 @@ namespace EInkSync213
     {
         static string ServerIP = "192.168.5.250";
         static string path = @"C:\image\Light_bmp";
+        static string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         static void Main(string[] args)
         {
             UDP_Class uDP_Class = new UDP_Class(ServerIP, 29000);
             while(true)
             {
-                List<DataTable> dataTables = MyOffice.ExcelClass.NPOI_LoadFile2DataTables(@"C:\Users\Administrator\Desktop\Light.xlsx");
+                List<DataTable> dataTables = MyOffice.ExcelClass.NPOI_LoadFile2DataTables($@"{ desktopPath}\Light.xlsx");
                 Communication.ConsoleWrite = false;
 
                 int index_DrawFramebuffer = 0;

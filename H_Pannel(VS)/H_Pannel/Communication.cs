@@ -932,7 +932,7 @@ namespace H_Pannel_lib
             {
                 using (Bitmap _bmp = DitheringProcessor.ApplyFloydSteinbergDithering(inputBmp, DitheringProcessor.DitheringMode.FourColor))
                 {
-                    _bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
+                    //_bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
                     int frameDIV = 10;
 
                     bool flag_OK;
