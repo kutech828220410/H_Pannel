@@ -58,7 +58,7 @@ namespace EInkSync589
                             {
                                 for (int n = 0; n < 14; n++)
                                 {
-                                    int temp = m * 9 + n;
+                                    int temp = m * 14 + n;
                                     if (temp >= list_value.Count) continue;
                                     object[] value = list_value[temp];
 
@@ -92,7 +92,7 @@ namespace EInkSync589
                                         }
                                         finally
                                         {
-                                            Console.WriteLine($"EPD_579G_DrawFramebuffer {index_DrawFramebuffer}/{list_value.Count}");
+                                            Console.WriteLine($"{ip_temp} EPD_579G_DrawFramebuffer {index_DrawFramebuffer}/{list_value.Count}");
                                             index_DrawFramebuffer++;
                                         }
 
@@ -104,7 +104,7 @@ namespace EInkSync589
                                 List<Task> tasks_refresh = new List<Task>();
                                 for (int n = 0; n < 14; n++)
                                 {
-                                    int temp = m * 9 + n;
+                                    int temp = m * 14 + n;
                                     if (temp >= list_value.Count) continue;
                                     object[] value = list_value[temp];
 
@@ -135,7 +135,7 @@ namespace EInkSync589
                                         }
                                         finally
                                         {
-                                            Console.WriteLine($"EPD_RefreshCanvas {index_RefreshCanvas}/{list_value.Count}");
+                                            Console.WriteLine($"{ip_temp} EPD_RefreshCanvas {index_RefreshCanvas}/{list_value.Count}");
                                             index_RefreshCanvas++;
                                         }
                                     })));
