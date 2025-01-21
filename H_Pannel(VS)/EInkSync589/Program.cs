@@ -54,77 +54,110 @@ namespace EInkSync589
                             Console.WriteLine($"★★★★★★{dataTables[i].TableName} ★★★★★★");
                             List<object[]> list_value = dataTables[i].DataTableToRowList();
                             List<Task> tasks = new List<Task>();
-                            foreach (object[] value in list_value)
+                            for (int m = 0; m < 9; m++)
                             {
-                                string filename = $@"{wall2_path}\{value[0].ObjectToString().Replace("Wall","Wall2")}.bmp";
-                                if (index % 2 == 1)
+                                for (int n = 0; n < 14; n++)
                                 {
-                                    filename = $@"{wall_path}\{value[0].ObjectToString()}.bmp";
+                                    int temp = m * 9 + n;
+                                    if (temp >= list_value.Count) continue;
+                                    object[] value = list_value[temp];
+
+                                    string filename = $@"{wall2_path}\{value[0].ObjectToString().Replace("Wall", "Wall2")}.bmp";
+                                    if (index % 2 == 1)
+                                    {
+                                        filename = $@"{wall_path}\{value[0].ObjectToString()}.bmp";
+                                    }
+                                    if (dataTables[i].TableName == "街廓學" || dataTables[i].TableName == "馬祖") filename = $@"{table_path}\{value[0].ObjectToString()}.bmp";
+                                    string ip_temp = $"192.168.{value[1].ObjectToString()}";
+                                    DitheringProcessor.DitheringMode ditheringMode = DitheringProcessor.DitheringMode.FourColor;
+                                    tasks.Add(Task.Run(new Action(delegate
+                                    {
+
+                                        try
+                                        {
+                                            bool flag = false;
+                                            Bitmap inputBmp = new Bitmap(filename);
+                                            flag = H_Pannel_lib.Communication.EPD_579G_DrawFramebuffer(uDP_Class, ip_temp, inputBmp);
+                                            inputBmp.Dispose();
+                                            if (flag == false)
+                                            {
+                                                Console.WriteLine($"{ip_temp} EPD_579G_DrawFramebuffer failed..");
+                                                return;
+                                            }
+
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Console.WriteLine($"{ip_temp} Exception : {ex.Message}");
+                                        }
+                                        finally
+                                        {
+                                            Console.WriteLine($"EPD_579G_DrawFramebuffer {index_DrawFramebuffer}/{list_value.Count}");
+                                            index_DrawFramebuffer++;
+                                        }
+
+                                    })));
+                                
+                                   
                                 }
-                                if(dataTables[i].TableName == "街廓學" || dataTables[i].TableName == "馬祖") filename = $@"{table_path}\{value[0].ObjectToString()}.bmp";
-                                string ip_temp = $"192.168.{value[1].ObjectToString()}";
-                                DitheringProcessor.DitheringMode ditheringMode = DitheringProcessor.DitheringMode.FourColor;
-                                tasks.Add(Task.Run(new Action(delegate
+                                Task.WhenAll(tasks).Wait();
+                                List<Task> tasks_refresh = new List<Task>();
+                                for (int n = 0; n < 14; n++)
                                 {
+                                    int temp = m * 9 + n;
+                                    if (temp >= list_value.Count) continue;
+                                    object[] value = list_value[temp];
 
-
-                                    try
+                                    string filename = $@"{wall2_path}\{value[0].ObjectToString().Replace("Wall", "Wall2")}.bmp";
+                                    if (index % 2 == 1)
                                     {
-                                        bool flag = false;
-                                        Bitmap inputBmp = new Bitmap(filename);
-                                        flag = H_Pannel_lib.Communication.EPD_579G_DrawFramebuffer(uDP_Class, ip_temp, inputBmp);
-                                        inputBmp.Dispose();
-                                        if (flag == false)
+                                        filename = $@"{wall_path}\{value[0].ObjectToString()}.bmp";
+                                    }
+                                    if (dataTables[i].TableName == "街廓學" || dataTables[i].TableName == "馬祖") filename = $@"{table_path}\{value[0].ObjectToString()}.bmp";
+                                    string ip_temp = $"192.168.{value[1].ObjectToString()}";
+                                    DitheringProcessor.DitheringMode ditheringMode = DitheringProcessor.DitheringMode.FourColor;
+                                    
+                                   
+                                    tasks_refresh.Add(Task.Run(new Action(delegate
+                                    {
+                                        try
                                         {
-                                            Console.WriteLine($"{ip_temp} EPD_579G_DrawFramebuffer failed..");
+                                            bool flag = false;
+                                            flag = H_Pannel_lib.Communication.EPD_RefreshCanvas(uDP_Class, ip_temp);
+                                            if (flag == false)
+                                            {
+                                                Console.WriteLine($"{ip_temp} EPD_RefreshCanvas failed..");
+                                            }
                                         }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Console.WriteLine($"{ip_temp} Exception : {ex.Message}");
-                                    }
-                                    finally
-                                    {
-                                        Console.WriteLine($"{index_DrawFramebuffer}/{list_value.Count}");
-                                        index_DrawFramebuffer++;
-                                    }
-                                })));
-
-                            }
-                            Task.WhenAll(tasks).Wait();
-                            List<Task> tasks_refresh = new List<Task>();
-                            foreach (object[] value in list_value)
-                            {
-                                string ip_temp = $"192.168.{value[1].ObjectToString()}";
-                                tasks_refresh.Add(Task.Run(new Action(delegate
-                                {
-                                    try
-                                    {
-                                        bool flag = false;
-                                        flag = H_Pannel_lib.Communication.EPD_RefreshCanvas(uDP_Class, ip_temp);
-                                        if (flag == false)
+                                        catch (Exception ex)
                                         {
-                                            Console.WriteLine($"{ip_temp} EPD_RefreshCanvas failed..");
+                                            Console.WriteLine($"{ip_temp} Exception : {ex.Message}");
                                         }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Console.WriteLine($"{ip_temp} Exception : {ex.Message}");
-                                    }
-                                    finally
-                                    {
-                                        Console.WriteLine($"{index_RefreshCanvas}/{list_value.Count}");
-                                        index_RefreshCanvas++;
-                                    }
-                                })));
-
-
+                                        finally
+                                        {
+                                            Console.WriteLine($"EPD_RefreshCanvas {index_RefreshCanvas}/{list_value.Count}");
+                                            index_RefreshCanvas++;
+                                        }
+                                    })));
+                                     
+                                }
+                                Task.WhenAll(tasks_refresh).Wait();
+                                Console.WriteLine($"Sleep 1s....");
+                                System.Threading.Thread.Sleep(1000);
+                                Console.WriteLine($"Sleep 2s....");
+                                System.Threading.Thread.Sleep(1000);
+                                Console.WriteLine($"Sleep 3s....");
+                                System.Threading.Thread.Sleep(1000);
                             }
-                            Task.WhenAll(tasks_refresh).Wait();
-                           
+
+
+
+
+
+
                         }
                     }
-                    System.Threading.Thread.Sleep(10000);
+                   
                     index++;
 
                 }
