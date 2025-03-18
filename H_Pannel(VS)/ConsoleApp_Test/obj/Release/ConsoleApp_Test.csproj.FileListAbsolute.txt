@@ -39,7 +39,6 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Re
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Release\System.Buffers.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Release\ConsoleApp_Test.csproj.AssemblyReference.cache
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Release\ConsoleApp_Test.csproj.CoreCompileInputs.cache
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Release\ConsoleApp_Test.csproj.CopyComplete
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Release\ConsoleApp_Test.exe
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Release\ConsoleApp_Test.pdb
 C:\Users\User\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Release\ConsoleApp_Test.exe.config
@@ -104,3 +103,5 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Re
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Release\ConsoleApp_Test.exe.config
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\bin\Release\System.Memory.xml
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Release\ConsoleApp_Test.csproj.SuggestedBindingRedirects.cache
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\ConsoleApp_Test\obj\Release\ConsoleA.D471CFE7.Up2Date

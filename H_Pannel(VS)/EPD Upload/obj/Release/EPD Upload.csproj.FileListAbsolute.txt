@@ -62,7 +62,6 @@ C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD_Upload.Properties.Resources.resources
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.csproj.GenerateResource.cache
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.csproj.CoreCompileInputs.cache
-C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.csproj.CopyComplete
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.exe
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.pdb
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\Newtonsoft.Json.dll
@@ -561,3 +560,6 @@ C:\Users\User\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Uplo
 C:\Users\User\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.pdb
 C:\Users\User\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\H_Pannel_lib.pdb
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\H_Pannel_lib.pdb
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\System.Threading.Tasks.Extensions.dll
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.csproj.SuggestedBindingRedirects.cache
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.csproj.Up2Date

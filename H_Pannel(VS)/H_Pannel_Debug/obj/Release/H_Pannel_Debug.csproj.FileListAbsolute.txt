@@ -850,7 +850,6 @@ C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Rel
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.Properties.Resources.resources
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.csproj.GenerateResource.cache
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.csproj.CoreCompileInputs.cache
-C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.csproj.CopyComplete
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.exe
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.pdb
 C:\Users\Administrator\Source\Repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\Newtonsoft.Json.dll
@@ -1399,3 +1398,5 @@ C:\Users\User\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pa
 C:\Users\User\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.pdb
 C:\Users\User\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\H_Pannel_lib.pdb
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\bin\Release\H_Pannel_lib.pdb
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel_Debug.csproj.SuggestedBindingRedirects.cache
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel_Debug\obj\Release\H_Pannel.26351E3E.Up2Date

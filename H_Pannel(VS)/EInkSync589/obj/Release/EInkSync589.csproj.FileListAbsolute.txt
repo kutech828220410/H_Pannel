@@ -9,7 +9,6 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Releas
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\NPOI.OpenXmlFormats.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Release\EInkSync589.csproj.AssemblyReference.cache
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Release\EInkSync589.csproj.CoreCompileInputs.cache
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Release\EInkSync589.csproj.CopyComplete
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Release\EInkSync589.exe
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Release\EInkSync589.pdb
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\System.Text.Json.dll
@@ -50,3 +49,6 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Releas
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\MVSDK.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Release\EInkSync589.exe.config
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\ICSharpCode.SharpZipLib.dll
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Release\stdole.dll
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Release\EInkSync589.csproj.SuggestedBindingRedirects.cache
+C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Release\EInkSync.DB11BEFA.Up2Date

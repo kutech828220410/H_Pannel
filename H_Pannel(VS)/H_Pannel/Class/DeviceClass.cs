@@ -389,11 +389,14 @@ namespace H_Pannel_lib
         private string _Code = "";
         public string Code
         {
-            get => _Code;
+            get
+            {
+                return _Code.Trim();
+            }
             set
             {
                 if (_Code != value) flag_replace = true;
-                _Code = value;
+                _Code = value.Trim();
                 
             }
         }

@@ -196,7 +196,9 @@
     <Compile Include="DrawerUI_EPD_583.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="StorageUI_LCD_114.cs" />
+    <Compile Include="StorageUI_LCD_114.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="StorageUI_LCD_114.Designer.cs">
       <DependentUpon>StorageUI_LCD_114.cs</DependentUpon>
     </Compile>
