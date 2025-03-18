@@ -676,6 +676,11 @@ namespace H_Pannel_lib
         }
         static public bool EPD_RefreshCanvas(UDP_Class uDP_Class, string IP)
         {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"EPD_RefreshCanvas {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
             return Command_EPD_RefreshCanvas(uDP_Class, IP);
         }
         static public bool EPD_Send_Framebuffer(UDP_Class uDP_Class, string IP, long start_ptr, byte[] value)
@@ -927,7 +932,7 @@ namespace H_Pannel_lib
             {
                 using (Bitmap _bmp = DitheringProcessor.ApplyFloydSteinbergDithering(inputBmp, DitheringProcessor.DitheringMode.FourColor))
                 {
-                    _bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
+                    //_bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
                     int frameDIV = 10;
 
                     bool flag_OK;
