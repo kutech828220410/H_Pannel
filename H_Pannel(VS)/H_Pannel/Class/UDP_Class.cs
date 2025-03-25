@@ -14,10 +14,78 @@ using System.Diagnostics;
 using System.Net.Sockets;
 using System.Net;
 using System.Drawing.Drawing2D;
+using System.Collections.Concurrent;
+using System.Threading;
 
 
 namespace H_Pannel_lib
 {
+    public class IpLockManager
+    {
+        // 全域同步物件，用來保護 _lockedIps 的存取
+        private readonly object _syncLock = new object();
+        // 儲存目前已鎖定的 IP 集合
+        private readonly HashSet<string> _lockedIps = new HashSet<string>();
+
+        /// <summary>
+        /// 鎖定指定的 IP，若該 IP 已被鎖定，則會等待直到解鎖後才繼續
+        /// </summary>
+        /// <param name="ip">要鎖定的 IP 字串</param>
+        /// <returns>IDisposable 物件，呼叫 Dispose() 時會釋放該 IP 的鎖定</returns>
+        public IDisposable LockIp(string ip)
+        {
+            lock (_syncLock)
+            {
+                // 當 IP 已被鎖定時，等待直到有執行緒釋放鎖定
+                while (_lockedIps.Contains(ip))
+                {
+                    Monitor.Wait(_syncLock);
+                }
+                // 加入該 IP 到鎖定集合中
+                _lockedIps.Add(ip);
+            }
+
+            // 回傳一個輔助物件，Dispose 時會釋放該 IP 的鎖定
+            return new Releaser(() =>
+            {
+                lock (_syncLock)
+                {
+                    _lockedIps.Remove(ip);
+                    // 喚醒所有等待的執行緒
+                    Monitor.PulseAll(_syncLock);
+                }
+            });
+        }
+
+        /// <summary>
+        /// 檢查指定的 IP 是否已被鎖定
+        /// </summary>
+        /// <param name="ip">要檢查的 IP 字串</param>
+        /// <returns>若 IP 被鎖定回傳 true，否則回傳 false</returns>
+        public bool IsLocked(string ip)
+        {
+            lock (_syncLock)
+            {
+                return _lockedIps.Contains(ip);
+            }
+        }
+
+        // 輔助類別：當 Dispose() 時會執行傳入的 Action 釋放鎖定
+        private class Releaser : IDisposable
+        {
+            private Action _releaseAction;
+            public Releaser(Action releaseAction)
+            {
+                _releaseAction = releaseAction;
+            }
+            public void Dispose()
+            {
+                _releaseAction?.Invoke();
+                _releaseAction = null;
+            }
+        }
+    }
+
     public static class UDP_ClassMethod
     {
         public static UDP_Class SortByPort(this List<UDP_Class> uDP_Classes , int Port)

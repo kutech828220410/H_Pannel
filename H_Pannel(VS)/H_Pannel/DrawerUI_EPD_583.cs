@@ -9,11 +9,18 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using Basic;
 using MyUI;
+using DrawingClass;
+using MySqlX.XDevAPI.Relational;
+using SkiaSharp;
+using static H_Pannel_lib.Drawer;
+using System.Net;
+using static HIS_DB_Lib.deviceApiClass;
 
 namespace H_Pannel_lib
 {
     public class DrawerUI_EPD_583 : DrawerUI
     {
+        IpLockManager ipLockManager = new IpLockManager();
         public class LightSensorClass
         {
             public List<string> H_Sensor_Check = new List<string>();
@@ -296,30 +303,54 @@ namespace H_Pannel_lib
             }
             return Set_Pannel_LEDBytes(ref drawer.LED_Bytes, color, drawer.DrawerType);
         }
-        static public byte[] Set_Pannel_LEDBytes(ref byte[] LED_Bytes, Color color, Drawer.Enum_DrawerType enum_DrawerType)
+        static public int GetPanel_LED_num(Drawer.Enum_DrawerType enum_DrawerType)
         {
             int NumOfLED_Pannel = 42;
-            int NumOfLED_Drawer = 450 - NumOfLED_Pannel;
             if (enum_DrawerType == Drawer.Enum_DrawerType._3X8 || enum_DrawerType == Drawer.Enum_DrawerType._4X8)
             {
                 NumOfLED_Pannel = 42;
-                NumOfLED_Drawer = 450 - NumOfLED_Pannel;
             }
             if (enum_DrawerType == Drawer.Enum_DrawerType._4X8_A || enum_DrawerType == Drawer.Enum_DrawerType._5X8_A)
             {
                 NumOfLED_Pannel = 6;
-                NumOfLED_Drawer = 372 - NumOfLED_Pannel;
             }
             if (enum_DrawerType == Drawer.Enum_DrawerType._1X8_ADC)
             {
                 NumOfLED_Pannel = 6;
-                NumOfLED_Drawer = 117 - NumOfLED_Pannel;
             }
             if (enum_DrawerType == Drawer.Enum_DrawerType._3X8_ADC)
             {
                 NumOfLED_Pannel = 6;
+            }
+            return NumOfLED_Pannel;
+        }
+        static public int GetDrawer_LED_num(Drawer.Enum_DrawerType enum_DrawerType)
+        {
+            int NumOfLED_Pannel = GetPanel_LED_num(enum_DrawerType);
+            int NumOfLED_Drawer = 450 - GetPanel_LED_num(enum_DrawerType);
+            if (enum_DrawerType == Drawer.Enum_DrawerType._3X8 || enum_DrawerType == Drawer.Enum_DrawerType._4X8)
+            {
+                NumOfLED_Drawer = 450 - NumOfLED_Pannel;
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._4X8_A || enum_DrawerType == Drawer.Enum_DrawerType._5X8_A)
+            {
+                NumOfLED_Drawer = 372 - NumOfLED_Pannel;
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._1X8_ADC)
+            {
+                NumOfLED_Drawer = 117 - NumOfLED_Pannel;
+            }
+            if (enum_DrawerType == Drawer.Enum_DrawerType._3X8_ADC)
+            {
                 NumOfLED_Drawer = 285;
             }
+            return NumOfLED_Drawer;
+        }
+        static public byte[] Set_Pannel_LEDBytes(ref byte[] LED_Bytes, Color color, Drawer.Enum_DrawerType enum_DrawerType)
+        {
+            int NumOfLED_Pannel = GetPanel_LED_num(enum_DrawerType);
+            int NumOfLED_Drawer = GetDrawer_LED_num(enum_DrawerType);
+          
             for (int i = NumOfLED_Drawer ; i < NumOfLED ; i++)
             {
                 if (i * 3 > LED_Bytes.Length) return LED_Bytes;
@@ -414,6 +445,7 @@ namespace H_Pannel_lib
             if (uDP_Class != null)
             {
                 bool flag_black = true;
+     
                 byte[] LED_Bytes_buf = new byte[LED_Bytes.Length];
                 for (int i = 0; i < (LED_Bytes_buf.Length / 3); i++)
                 {
@@ -422,6 +454,7 @@ namespace H_Pannel_lib
                     LED_Bytes_buf[i * 3 + 2] = (byte)(LED_Bytes[i * 3 + 2] * Lightness);
                     if (LED_Bytes[i * 3 + 0] != 0 || LED_Bytes[i * 3 + 1] != 0 || LED_Bytes[i * 3 + 2] != 0) flag_black = false;
                 }
+                
                 if (flag_breath == false)
                 {
                     return Communication.Set_WS2812_Buffer(uDP_Class, IP, 0, LED_Bytes_buf);
@@ -495,6 +528,7 @@ namespace H_Pannel_lib
         }
         static public bool DrawToEpd_UDP(UDP_Class uDP_Class, string IP, Bitmap bmp , DeviceType deviceType)
         {
+         
             if (deviceType == DeviceType.EPD730 || deviceType == DeviceType.EPD730_lock)
             {
                 return Communication.EPD_730_DrawImage(uDP_Class, IP, bmp);
@@ -1281,8 +1315,15 @@ namespace H_Pannel_lib
         }
         public bool Set_Pannel_LED_UDP(string IP, int Port, byte[] LED_Bytes, Color color, Drawer.Enum_DrawerType enum_DrawerType)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return Set_Pannel_LED_UDP(uDP_Class, IP, LED_Bytes, color, enum_DrawerType);
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                return Set_Pannel_LED_UDP(uDP_Class, IP, LED_Bytes, color, enum_DrawerType);
+            }
+                   
         }
         public bool Set_Drawer_LED_UDP(Drawer drawer, Box box, Color color)
         {
@@ -1308,12 +1349,28 @@ namespace H_Pannel_lib
         }
         public bool Set_Drawer_LED_UDP(Drawer drawer, int[] col, int[] row, Color color)
         {
-            return this.Set_Drawer_LED_UDP(drawer, col, row, color, false);
+            string ipAddress = drawer.IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                return this.Set_Drawer_LED_UDP(drawer, col, row, color, false);
+            }
+                    
         }
         public bool Set_Drawer_LED_UDP(Drawer drawer, int[] col, int[] row, Color color, bool ClearAll)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
-            return Set_Drawer_LED_UDP(uDP_Class , drawer, col, row, color, ClearAll);
+            string ipAddress = drawer.IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
+                return Set_Drawer_LED_UDP(uDP_Class, drawer, col, row, color, ClearAll);
+            }
+
+         
+
         }
         static public bool Set_WS2812B_breathing(UDP_Class uDP_Class, string IP, byte WS2812B_breathing_onAddVal, byte WS2812B_breathing_offSubVal, Color color)
         {
@@ -1329,33 +1386,77 @@ namespace H_Pannel_lib
         }
         public bool Set_WS2812B_breathing(string IP, int Port, byte WS2812B_breathing_onAddVal, byte WS2812B_breathing_offSubVal, Color color)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return Set_WS2812B_breathing(uDP_Class, IP, WS2812B_breathing_onAddVal, WS2812B_breathing_offSubVal, color);
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                return Set_WS2812B_breathing(uDP_Class, IP, WS2812B_breathing_onAddVal, WS2812B_breathing_offSubVal, color);
+            }
+           
+ 
         }
         public bool Set_LED_UDP(Drawer drawer)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
-            return Set_LED_UDP(uDP_Class, drawer);
+            string ipAddress = drawer.IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
+                return Set_LED_UDP(uDP_Class, drawer);
+            }
         }
         public bool Set_LED_UDP( Drawer drawer, List<Box> boxes, Color color)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
-            return Set_LED_UDP(uDP_Class, drawer, boxes, color);
+            string ipAddress = drawer.IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
+                return Set_LED_UDP(uDP_Class, drawer, boxes, color);
+            }
+      
         }
         public bool Set_LED_UDP(Drawer drawer, Box box ,Color color)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
-            return Set_LED_UDP(uDP_Class ,drawer, box, color);
+            string ipAddress = drawer.IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
+                return Set_LED_UDP(uDP_Class, drawer, box, color);
+            }
         }
         public bool Set_LED_UDP(Drawer drawer, Color color)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
-            return Set_LED_UDP(uDP_Class, drawer.IP, color);
+            string ipAddress = drawer.IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
+                return Set_LED_UDP(uDP_Class, drawer.IP, color);
+            }
+
+     
+
         }
         public bool Set_LED_UDP(string IP, int Port, Color color)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return Set_LED_UDP(uDP_Class, IP, color);
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                return Set_LED_UDP(uDP_Class, IP, color);
+            }
+
+
         }
         public bool Set_LED_Clear_UDP(Drawer drawer)
         {
@@ -1368,28 +1469,71 @@ namespace H_Pannel_lib
         }
         public bool Set_LED_Clear_UDP(string IP , int Port , bool flag_breath)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return Set_LED_Clear_UDP(uDP_Class, IP, flag_breath);
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                return Set_LED_Clear_UDP(uDP_Class, IP, flag_breath);
+            }
+
+         
+
+     
         }
         public bool DrawToEpd_BarCode_UDP(Drawer drawer)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
-            return DrawToEpd_BarCode_UDP(uDP_Class, drawer);
+            string ipAddress = drawer.IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
+                return DrawToEpd_BarCode_UDP(uDP_Class, drawer);
+            }
+
+      
+          
         }
         public bool DrawToEpd_UDP(Drawer drawer)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
-            return DrawToEpd_UDP(uDP_Class, drawer);
+            string ipAddress = drawer.IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(drawer.Port);
+                return DrawToEpd_UDP(uDP_Class, drawer);
+            }
+            
         }
         public bool DrawToEpd_UDP(string IP, int Port, Bitmap bitmap)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return DrawToEpd_UDP(uDP_Class, IP , bitmap , DeviceType.EPD583);
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                return DrawToEpd_UDP(uDP_Class, IP, bitmap, DeviceType.EPD583);
+            }
+          
+
         }
         public bool DrawToEpd_UDP(string IP, int Port, Bitmap bitmap , DeviceType deviceType)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return DrawToEpd_UDP(uDP_Class, IP, bitmap , deviceType);
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                return DrawToEpd_UDP(uDP_Class, IP, bitmap, deviceType);
+            }
+
+            
+         
         }
         public bool Set_LockOpen(Drawer drawer)
         {
@@ -1397,8 +1541,16 @@ namespace H_Pannel_lib
         }
         public bool Set_LockOpen(string IP, int Port)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return Set_LockOpen(uDP_Class, IP);
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                return Set_LockOpen(uDP_Class, IP);
+            }
+
+           
         }
         public bool GetInput(Drawer drawer)
         {

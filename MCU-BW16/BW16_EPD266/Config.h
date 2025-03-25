@@ -1,4 +1,4 @@
-#define VERSION "Ver 1.5.43"
+#define VERSION "Ver 1.5.44"
 
 //#define DHTSensor
 //#define HandSensor
@@ -7,9 +7,9 @@
 //#define EPD266
 //#define EPD290
 //#define EPD420
-//#define EPD420_D
+#define EPD420_D
 //#define EPD583
-#define EPD579G
+//#define EPD579G
 //#define EPD213_BRW_V0
 
 //#define OLCD_114

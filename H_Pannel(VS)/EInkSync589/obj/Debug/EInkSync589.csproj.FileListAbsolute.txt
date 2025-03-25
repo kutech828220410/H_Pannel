@@ -1,9 +1,0 @@
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Debug\EInkSync589.csproj.AssemblyReference.cache
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Debug\EInkSync589.csproj.CoreCompileInputs.cache
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Debug\EInkSync589.exe.config
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Debug\EInkSync589.exe
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Debug\EInkSync589.pdb
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\bin\Debug\H_Pannel_lib.dll
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Debug\EInkSync589.csproj.CopyComplete
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Debug\EInkSync589.exe
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync589\obj\Debug\EInkSync589.pdb

@@ -10,10 +10,13 @@ using System.Drawing.Text;
 using Basic;
 using MyUI;
 using System.Reflection;
+using CCWin.SkinControl;
+using SkiaSharp;
 namespace H_Pannel_lib
 {
     public partial class StorageUI_EPD_266 : StorageUI
     {
+        IpLockManager ipLockManager = new IpLockManager();
         static public double Lightness = 1.0D;
 
         [Serializable]
@@ -170,6 +173,7 @@ namespace H_Pannel_lib
         }
         static public bool DrawToEpd_UDP(UDP_Class uDP_Class, string IP, Bitmap bitmap)
         {
+          
             if (uDP_Class != null)
             {
                 bool flag_ok = false;
@@ -382,23 +386,48 @@ namespace H_Pannel_lib
         public bool Set_Stroage_LED_UDP(string IP, int Port, Color color)
         {
             byte[] LED_Bytes = Get_Pannel_LEDBytes(color);
-            return this.Set_Stroage_LED_UDP(IP, Port , LED_Bytes);
+            return this.Set_Stroage_LED_UDP(IP, Port, LED_Bytes);
+
         }
         public bool Set_TOF(string IP, int Port, bool statu)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            if (uDP_Class == null) return false;
-            return Set_Stroage_TOF(uDP_Class, IP, statu);
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                if (uDP_Class == null) return false;
+                return Set_Stroage_TOF(uDP_Class, IP, statu);
+            }
+
+         
         }
         public bool Set_Stroage_LED_UDP(string IP, int Port, byte[] LED_Bytes)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return Set_Stroage_LED_UDP(uDP_Class,IP, LED_Bytes);
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                return Set_Stroage_LED_UDP(uDP_Class, IP, LED_Bytes);
+            }
+
+         
         }
         public byte[] Get_Stroage_LED_UDP(string IP, int Port)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return Communication.Get_WS2812_Buffer(uDP_Class, IP , NumOfLED * 3);
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                return Communication.Get_WS2812_Buffer(uDP_Class, IP, NumOfLED * 3);
+            }
+
+           
         }
         public bool Set_ClearCanvas_UART()
         {
@@ -430,21 +459,44 @@ namespace H_Pannel_lib
         }
         public bool DrawToEpd_UDP(string IP)
         {
-            Storage storage = this.SQL_GetStorage(IP);
-            using (Bitmap bitmap = Get_Storage_bmp(storage))
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
             {
-                return DrawToEpd_UDP(IP, storage.Port, bitmap);
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                // 執行針對該 IP 的相關操作...
+                Storage storage = this.SQL_GetStorage(IP);
+                using (Bitmap bitmap = Get_Storage_bmp(storage))
+                {
+                    return DrawToEpd_UDP(IP, storage.Port, bitmap);
+                }
             }
+
+        
         }
         public bool DrawToEpd_UDP(Storage storage)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(storage.Port);
-            return DrawToEpd_UDP(uDP_Class, storage);
+            string ipAddress = storage.IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(storage.Port);
+                return DrawToEpd_UDP(uDP_Class, storage);
+            }
+
+
+         
         }
         public bool DrawToEpd_UDP(string IP, int Port, Bitmap bitmap)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return DrawToEpd_UDP(uDP_Class, IP, bitmap);
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                return DrawToEpd_UDP(uDP_Class, IP, bitmap);
+            }
+
+         
         }
         public bool Set_WS2812B_breathing(Storage storage, byte WS2812B_breathing_onAddVal, byte WS2812B_breathing_offSubVal, Color color)
         {
@@ -452,8 +504,15 @@ namespace H_Pannel_lib
         }
         public bool Set_WS2812B_breathing(string IP, int Port, byte WS2812B_breathing_onAddVal, byte WS2812B_breathing_offSubVal, Color color)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return Set_WS2812B_breathing(uDP_Class, IP, WS2812B_breathing_onAddVal, WS2812B_breathing_offSubVal, color);
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                return Set_WS2812B_breathing(uDP_Class, IP, WS2812B_breathing_onAddVal, WS2812B_breathing_offSubVal, color);
+            }
+
+      
         }
         public bool Set_LockOpen(Storage storage)
         {
@@ -461,8 +520,15 @@ namespace H_Pannel_lib
         }
         public bool Set_LockOpen(string IP, int Port)
         {
-            UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
-            return Set_LockOpen(uDP_Class, IP);
+            string ipAddress = IP;
+            using (var lockHandle = ipLockManager.LockIp(ipAddress))
+            {
+                Console.WriteLine($"IP {ipAddress} 已成功鎖定");
+                UDP_Class uDP_Class = List_UDP_Local.SortByPort(Port);
+                return Set_LockOpen(uDP_Class, IP);
+
+            }
+           
         }
         public bool Set_OutputPIN(Storage storage, bool state)
         {
