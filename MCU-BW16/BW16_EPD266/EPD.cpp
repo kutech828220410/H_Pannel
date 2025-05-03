@@ -110,6 +110,46 @@ void EPD::Clear()
               }
            }
       }
+      else if(EPD_TYPE == "EPD579B")
+      {
+          mySerial -> println("EPD579B Clear function start...");
+          //發送M-Part BW資料
+          SendCommand(0x24);
+          for (int j = 0; j < EPD_HEIGHT; j++) 
+          {
+              for (int i = 0; i < EPD_WIDTH / 2; i++) 
+              {
+                  SendData(0x00);
+              }
+          }
+          //發送M-Part RED資料
+          SendCommand(0X26);
+          for (int j = 0; j < EPD_HEIGHT ; j++) 
+          {
+              for (int i = 0; i < EPD_WIDTH / 2; i++) 
+              {
+                  SendData(0x00);
+              }
+          }    
+          //發送S-Part BW資料
+          SendCommand(0xA4);
+          for (int j = 0; j < EPD_HEIGHT; j++) 
+          {
+              for (int i = 0; i < EPD_WIDTH / 2; i++) 
+              {
+                  SendData(0x00);
+              }
+          }
+          //發送S-Part RED資料
+          SendCommand(0XA6);
+          for (int j = 0; j < EPD_HEIGHT; j++) 
+          {
+              for (int i = 0; i < EPD_WIDTH / 2; i++) 
+              {
+                  SendData(0x00);
+              }
+          }
+      }
       else
       {
           this -> BW_Command();
@@ -179,6 +219,28 @@ void EPD::DrawFrame_BW()
             }
          }
       }
+      else if(EPD_TYPE == "EPD579B")
+      {
+        //發送M-Part BW資料
+        SendCommand(0x24);
+        for (int j = 0; j < 272; j++) 
+        {
+            for (int i = 0; i < 50; i++) 
+            {
+                SendData(*(framebuffer + j * 99 + i));
+            }
+        }
+        
+        //發送S-Part BW資料
+        SendCommand(0xA4);
+        for (int j = 0; j < 272; j++) 
+        {
+            for (int i = 0; i < 50; i++) 
+            {
+                SendData(*(framebuffer + j * 99 + i + 49));
+            }
+        }
+      }
       else
       {
         this -> BW_Command();
@@ -234,6 +296,29 @@ void EPD::DrawFrame_RW()
             }
          }
       }
+      else if(EPD_TYPE == "EPD579B")
+      {
+
+        //發送M-Part RW資料
+        SendCommand(0x26);
+        for (int j = 0; j < 272; j++) 
+        {
+            for (int i = 0; i < 50; i++) 
+            {
+               SendData(*(framebuffer + j * 99 + i));
+            }
+        }
+        
+        //發送S-Part RW資料
+        SendCommand(0xA6);
+        for (int j = 0; j < 272; j++) 
+        {
+            for (int i = 0; i < 50; i++) 
+            {
+                SendData(*(framebuffer + j * 99 + i + 49));
+            }
+        }
+      }
       else
       {
          RW_Command();
@@ -253,13 +338,23 @@ void EPD::DrawFrame_RW()
 }
 void EPD::RefreshCanvas()
 { 
-   if(EPD_TYPE == "EPD420" || EPD_TYPE == "EPD420_D")
+     if(EPD_TYPE == "EPD420" || EPD_TYPE == "EPD420_D")
      {
        SPI_Begin();
        SendCommand(0x22);
        SendData(0xF7);
        SendCommand(0x20);
        SPI_End();
+     }
+     else if(EPD_TYPE == "EPD579B")
+     {
+       mySerial -> println("EPD579B (RefreshCanvas)function start...");
+       SPI_Begin();
+       SendCommand(0x22);
+       SendData(0xD7);
+       SendCommand(0x20);
+       SPI_End();
+       mySerial -> println("EPD579B (RefreshCanvas)function done...");
      }
      else if(EPD_TYPE == "EPD583")
      {
@@ -273,18 +368,12 @@ void EPD::RefreshCanvas()
        SPI_Begin();
        SendCommand(0x04);
        delay(200);
-//       WaitUntilIdle();
-    
        SendCommand(0x12);
        SendData(0x00);
-//       WaitUntilIdle();
-       
-//       SendCommand(0x02);
-//       SendData(0x00);
-//       WaitUntilIdle();
        SPI_End();
        mySerial -> println("EPD579G (RefreshCanvas)function done...");
      }
+     
      else
      {
        SPI_Begin();
@@ -375,7 +464,7 @@ void EPD::SPI_Begin()
 {
 //   SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
    if(EPD_TYPE == "EPD583")SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
-   else if(EPD_TYPE == "EPD579G")SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
+   else if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD579B")SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
    else SPI.beginTransaction(SPISettings(80000000, MSBFIRST, SPI_MODE0));    
 }
 void EPD::SPI_End()
@@ -471,6 +560,89 @@ void EPD::Wakeup()
         
           SendCommand(0X60);      //TCON SETTING
           SendData(0x22);
+        }
+        else if(EPD_TYPE == "EPD579B")
+        {
+          mySerial -> println("EPD579B Init...");
+          SPI_Begin(); 
+          WaitUntilIdle();
+          SendCommand(0x12);  // POWER ON
+          WaitUntilIdle();
+      
+          SendCommand(0x18);  
+          SendData(0x80); 
+      
+          SendCommand(0x3C);  
+          SendData(0x01);      
+      
+          SendCommand(0x0C);  
+          SendData(0x8B); 
+          SendData(0x9C); 
+          SendData(0xE4); 
+          SendData(0x0F); 
+      
+          SendCommand(0x03);  
+          SendData(0x17);   
+      
+      
+              
+          SendCommand(0x01);  // Driver Output Control
+          SendData(0x0F);
+          SendData(0x01);
+          SendData(0x0E);
+          delay(100);
+          SendCommand(0x21);  // Display Update Control
+          SendData(0x00);
+          SendData(0x10);
+          delay(100);
+          
+          
+          
+          SendCommand(0x3C);  // 波形控制
+          SendData(0x01);
+          SendCommand(0x2C);  // 波形控制
+          SendData(0x38);
+
+          SendCommand(0x11);  // Data Entry Mode
+          SendData(0x01);  // 確保方向正確
+          delay(100);
+          SendCommand(0x44);  // Set RAM X Address
+          SendData(0x00);     // X Start Address
+          SendData(0x31);     // X End Address 
+          
+          SendCommand(0x45);  // Set RAM Y Address
+          SendData(0x0F);     // Y Start L
+          SendData(0x01);     // Y Start H
+          SendData(0x00);     // Y End L 
+          SendData(0x00);     // Y End H
+      
+          SendCommand(0x91);  
+          SendData(0x00);  
+          
+          SendCommand(0xC4);  // Set X Address Counter
+          SendData(0x31);
+          SendData(0x00);
+      
+          SendCommand(0xC5);  // Set X Address Counter
+          SendData(0x0F);
+          SendData(0x01);
+          SendData(0x00);
+          SendData(0x00);
+          
+          SendCommand(0x4E);  // Set X Address Counter
+          SendData(0x00);
+          
+          SendCommand(0x4F);  // Set Y Address Counter
+          SendData(0x0F);
+          SendData(0x01);
+      
+          SendCommand(0xCE);  // Set X Address Counter
+          SendData(0x31);
+          
+          SendCommand(0xCF);  // Set Y Address Counter
+          SendData(0x0F);
+          SendData(0x01);
+          SPI_End();
         }
         else if(EPD_TYPE == "EPD579G")
         {
@@ -722,6 +894,16 @@ void EPD::WaitUntilIdle()
       delay(200); 
       mySerial -> println("Wait EPD BUSY release!");
    }
+   if(EPD_TYPE == "EPD579B")
+   {
+      byte busy;
+      do
+      {
+        busy = digitalRead(PIN_BUSY);
+        delay(10);   
+      }
+      while(busy);   
+   }
    if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
    {
       mySerial -> print("e-Paper busy H\r\n ");
@@ -765,6 +947,13 @@ void EPD::Sleep()
           SendData(0xA5);
           SPI_End();
         }
+        if(EPD_TYPE == "EPD579B")
+        {
+          SPI_Begin();
+          SendCommand(0X10);    //deep sleep
+          SendData(0x03);
+          SPI_End();
+        }     
         else
         {
           SPI_Begin();

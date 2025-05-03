@@ -1,4 +1,4 @@
-#define VERSION "Ver 1.5.44"
+#define VERSION "Ver 1.5.45"
 
 //#define DHTSensor
 //#define HandSensor
@@ -7,9 +7,10 @@
 //#define EPD266
 //#define EPD290
 //#define EPD420
-#define EPD420_D
+//#define EPD420_D
 //#define EPD583
 //#define EPD579G
+#define EPD579B
 //#define EPD213_BRW_V0
 
 //#define OLCD_114
@@ -72,6 +73,11 @@
 #define EPD_TYPE "EPD579G"
 #define EPD_Device
 
+#elif defined(EPD579B)
+#define EPD_WIDTH 100
+#define EPD_HEIGHT 272
+#define EPD_TYPE "EPD579B"
+#define EPD_Device
 #else
 #define EPD_WIDTH 0
 #define EPD_HEIGHT 0

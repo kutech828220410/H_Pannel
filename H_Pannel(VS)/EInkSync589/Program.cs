@@ -12,7 +12,6 @@ namespace EInkSync589
     class Program
     {
         static string ServerIP = "192.168.5.250";
-        static string ClientIP = "192.168.40.10";
         static string wall_path = @"C:\image\Wall_bmp";
         static string wall2_path = @"C:\image\Wall2_bmp";
         static string table_path = @"C:\image\Table_bmp";

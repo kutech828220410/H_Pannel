@@ -13,9 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPD Upload", "EPD Upload\EP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_Test", "ConsoleApp_Test\ConsoleApp_Test.csproj", "{513774DD-43D5-4601-861A-E10DF91B59F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EInkSync589", "EInkSync589\EInkSync589.csproj", "{E3E5EFD3-BA62-4E5D-8320-6A5BBD7438AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EInkSync579", "EInkSync589\EInkSync579.csproj", "{E3E5EFD3-BA62-4E5D-8320-6A5BBD7438AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EInkSync213", "EInkSync213\EInkSync213.csproj", "{0191138C-546E-4902-B7A3-474AF4AD8BF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EinkSyncTest", "EinkSyncTest\EinkSyncTest.csproj", "{F4C4C911-5BFC-48EA-ACEB-DFDC12BA24DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{0191138C-546E-4902-B7A3-474AF4AD8BF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0191138C-546E-4902-B7A3-474AF4AD8BF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0191138C-546E-4902-B7A3-474AF4AD8BF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4C4C911-5BFC-48EA-ACEB-DFDC12BA24DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4C4C911-5BFC-48EA-ACEB-DFDC12BA24DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4C4C911-5BFC-48EA-ACEB-DFDC12BA24DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4C4C911-5BFC-48EA-ACEB-DFDC12BA24DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

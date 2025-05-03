@@ -45,6 +45,7 @@ namespace H_Pannel_lib
         EPD420,
         EPD1020,
         EPD579G,
+        EPD579B,
         EPD730F
     }
     public class Driver_IO_Board
@@ -920,7 +921,42 @@ namespace H_Pannel_lib
 
 
         }
-        
+        static public bool EPD_579B_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
+        {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"EPD579B DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
+            Console.WriteLine($"EPD579B DrawImage start {DateTime.Now.ToDateTimeString()} ");
+            using (Bitmap inputBmp = ScaleImage(bmp, 792, 272))
+            {
+                using (Bitmap _bmp = DitheringProcessor.ApplyFloydSteinbergDithering(inputBmp, DitheringProcessor.DitheringMode.ThreeColor))
+                {
+                    //_bmp.Save($@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\test.bmp");
+                    int EPD579B_frameDIV = 12;
+               
+
+                    bool flag_OK;
+                    int width = _bmp.Width;
+                    int height = _bmp.Height;
+                    //_bmp.RotateFlip(RotateFlipType.Rotate90FlipXY);
+                    byte[] bytes_BW = new byte[(height / 1) * (width / 8)];
+                    byte[] bytes_RW = new byte[(height / 1) * (width / 8)];
+                    BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD579B);
+                    MyTimer myTimer = new MyTimer();
+                    myTimer.StartTickTime(50000);
+                    int sp = (height / 1) * (width / 8) / EPD579B_frameDIV;
+                    flag_OK = EPD_DrawImage(uDP_Class, IP, bytes_BW, bytes_RW, sp);
+                    if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 579B DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+                    return flag_OK;
+                }
+            }
+
+           
+
+
+        }
         static public bool EPD_579G_DrawFramebuffer(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
             if (!Basic.Net.Ping(IP, 2, 150))
@@ -8519,7 +8555,7 @@ namespace H_Pannel_lib
                         {
                             temp_BW <<= 1;
                             temp_RW <<= 1;
-                            if (ePD_Type == EPD_Type.EPD583 || ePD_Type == EPD_Type.EPD213_B || ePD_Type == EPD_Type.EPD266_B || ePD_Type == EPD_Type.EPD1020)
+                            if (ePD_Type == EPD_Type.EPD583 || ePD_Type == EPD_Type.EPD213_B || ePD_Type == EPD_Type.EPD266_B || ePD_Type == EPD_Type.EPD1020 || ePD_Type == EPD_Type.EPD579B)
                             {
                                 if (R[i] > 0 && G[i] <= 128 && B[i] <= 128)
                                 {
@@ -8657,6 +8693,105 @@ namespace H_Pannel_lib
                     SrcWidthxY = ByteOfWidth * y;
 
                     for (int x = 0; x < (16); x++)
+                    {
+                        SrcIndex = SrcWidthxY + (x * 24);
+
+                        B[0] = SrcPtr[SrcIndex + 00];
+                        G[0] = SrcPtr[SrcIndex + 01];
+                        R[0] = SrcPtr[SrcIndex + 02];
+
+                        B[1] = SrcPtr[SrcIndex + 03];
+                        G[1] = SrcPtr[SrcIndex + 04];
+                        R[1] = SrcPtr[SrcIndex + 05];
+
+                        B[2] = SrcPtr[SrcIndex + 06];
+                        G[2] = SrcPtr[SrcIndex + 07];
+                        R[2] = SrcPtr[SrcIndex + 08];
+
+                        B[3] = SrcPtr[SrcIndex + 09];
+                        G[3] = SrcPtr[SrcIndex + 10];
+                        R[3] = SrcPtr[SrcIndex + 11];
+
+                        B[4] = SrcPtr[SrcIndex + 12];
+                        G[4] = SrcPtr[SrcIndex + 13];
+                        R[4] = SrcPtr[SrcIndex + 14];
+
+                        B[5] = SrcPtr[SrcIndex + 15];
+                        G[5] = SrcPtr[SrcIndex + 16];
+                        R[5] = SrcPtr[SrcIndex + 17];
+
+                        B[6] = SrcPtr[SrcIndex + 18];
+                        G[6] = SrcPtr[SrcIndex + 19];
+                        R[6] = SrcPtr[SrcIndex + 20];
+
+                        B[7] = SrcPtr[SrcIndex + 21];
+                        G[7] = SrcPtr[SrcIndex + 22];
+                        R[7] = SrcPtr[SrcIndex + 23];
+                        temp_BW = 0;
+                        temp_RW = 0;
+                        for (int i = 0; i < 8; i++)
+                        {
+                            temp_BW <<= 1;
+                            temp_RW <<= 1;
+                            if (R[i] > 0 && G[i] <= 128 && B[i] <= 128)
+                            {
+                                temp_BW |= (byte)(0x00);
+                                temp_RW |= (byte)(0x01);
+                            }
+                            else if (R[i] > 0 && G[i] > 0 && B[i] >= 0)
+                            {
+                                temp_BW |= (byte)(0x01);
+                                temp_RW |= (byte)(0x00);
+                            }
+                            else if (R[i] == 0 && G[i] == 0 && B[i] == 0)
+                            {
+                                temp_BW |= (byte)(0x00);
+                                temp_RW |= (byte)(0x00);
+                            }
+
+
+                        }
+
+
+                        list_byte_image_BW.Add(temp_BW);
+                        list_byte_image_RW.Add(temp_RW);
+                        flag_index++;
+                    }
+                }
+            }
+
+            bimage.UnlockBits(bmData);
+            BW_bytes = list_byte_image_BW.ToArray();
+            RW_bytes = list_byte_image_RW.ToArray();
+            //bimage.Dispose();
+        }
+        static unsafe public void BitmapToByteEPD579B(Bitmap bimage, ref byte[] BW_bytes, ref byte[] RW_bytes)
+        {
+            List<byte> list_byte_image_BW = new List<byte>();
+            List<byte> list_byte_image_RW = new List<byte>();
+            //pictureBox1.Image = bimage;
+            BitmapData bmData = bimage.LockBits(new Rectangle(0, 0, bimage.Width, bimage.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            int width = bmData.Width;
+            int height = bmData.Height;
+            int ByteOfSkip = GetBitmapSkip(width, 3);
+            IntPtr SurfacePtr = bmData.Scan0;
+            int ByteOfWidth = width * 3 + ByteOfSkip;
+            int SrcWidthxY;
+            int SrcIndex;
+            int[] R = new int[8];
+            int[] G = new int[8];
+            int[] B = new int[8];
+            byte temp_BW = 0;
+            byte temp_RW = 0;
+            int flag_index = 0;
+            unsafe
+            {
+                byte* SrcPtr = (byte*)SurfacePtr;
+                for (int y = 0; y < height; y++)
+                {
+                    SrcWidthxY = ByteOfWidth * y;
+
+                    for (int x = 0; x < (width / 8); x++)
                     {
                         SrcIndex = SrcWidthxY + (x * 24);
 
