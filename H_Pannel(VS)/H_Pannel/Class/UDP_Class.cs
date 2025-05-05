@@ -181,7 +181,7 @@ namespace H_Pannel_lib
         public UDP_Class(string IP, int port)
         {
             this.Port = port;
-            udpClient =new UdpClient(Port);
+            udpClient = new UdpClient(Port);
             udpClient.Client.SendBufferSize = 409600;
             udpClient.Client.ReceiveBufferSize = 409600;
             udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
