@@ -197,7 +197,7 @@ namespace H_Pannel_lib
 
         static public bool ConsoleWrite = false;
         static public int UDP_TimeOut = 1000;
-        static public int UDP_RetryNum = 5;
+        static public int UDP_RetryNum = 10;
         static public readonly int Image_Buffer_SIZE = 1200;
         static public ChipType Chip_Type = ChipType.BW16;
         //static public int EPD583_frameDIV = 10;
@@ -934,7 +934,7 @@ namespace H_Pannel_lib
                 using (Bitmap _bmp = DitheringProcessor.ApplyFloydSteinbergDithering(inputBmp, DitheringProcessor.DitheringMode.ThreeColor))
                 {
                     //_bmp.Save($@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\test.bmp");
-                    int EPD579B_frameDIV = 12;
+                    int EPD579B_frameDIV = 24;
                
 
                     bool flag_OK;
@@ -969,7 +969,7 @@ namespace H_Pannel_lib
                 using (Bitmap _bmp = DitheringProcessor.ApplyFloydSteinbergDithering(inputBmp, DitheringProcessor.DitheringMode.FourColor))
                 {
                     //_bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
-                    int frameDIV = 10;
+                    int frameDIV = 12;
 
                     bool flag_OK;
                     int width = _bmp.Width;
@@ -984,7 +984,21 @@ namespace H_Pannel_lib
                     return flag_OK;
                 }            
             }
+        }
+        static public bool EPD_SPIdata_and_RefreshCanvas(UDP_Class uDP_Class, string IP)
+        {
 
+
+            if (!EPD_DrawFrame_BW(uDP_Class, IP))
+            {
+                return false;
+            }
+            if (!EPD_RefreshCanvas(uDP_Class, IP))
+            {
+                return false;
+            }
+
+            return true;
 
         }
         static public bool EPD_579G_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
@@ -992,7 +1006,7 @@ namespace H_Pannel_lib
             bool flag_OK = false;
             flag_OK = EPD_579G_DrawFramebuffer(uDP_Class, IP, bmp);
             if (!flag_OK) return false;
-            flag_OK = EPD_RefreshCanvas(uDP_Class, IP);
+            flag_OK = EPD_SPIdata_and_RefreshCanvas(uDP_Class, IP);
             if (!flag_OK) return false;
             return true;
         }
@@ -1326,10 +1340,10 @@ namespace H_Pannel_lib
                     return false;
                 }
             }
-            if (!EPD_DrawFrame_BW(uDP_Class, IP))
-            {
-                return false;
-            }
+            //if (!EPD_DrawFrame_BW(uDP_Class, IP))
+            //{
+            //    return false;
+            //}
      
 
             return true;
@@ -4684,7 +4698,7 @@ namespace H_Pannel_lib
             {
                 if (cnt == 0)
                 {
-                    if (retry >= UDP_RetryNum)
+                    if (retry >= 2)
                     {
                         flag_OK = false;
                         break;
@@ -4692,12 +4706,12 @@ namespace H_Pannel_lib
                     uDP_Class.Set_ReadLineClearByIP(IP);
                     uDP_Class.WriteByte(list_byte.ToArray(), IP);
                     MyTimer_UART_TimeOut.TickStop();
-                    MyTimer_UART_TimeOut.StartTickTime(UDP_TimeOut);
+                    MyTimer_UART_TimeOut.StartTickTime(2000);
                     cnt++;
                 }
                 else if (cnt == 1)
                 {
-                    if (retry >= UDP_RetryNum)
+                    if (retry >= 2)
                     {
                         flag_OK = false;
                         break;
@@ -4745,7 +4759,7 @@ namespace H_Pannel_lib
             {
                 if (cnt == 0)
                 {
-                    if (retry >= UDP_RetryNum)
+                    if (retry >= 3)
                     {
                         flag_OK = false;
                         break;
@@ -4753,12 +4767,12 @@ namespace H_Pannel_lib
                     uDP_Class.Set_ReadLineClearByIP(IP);
                     uDP_Class.WriteByte(list_byte.ToArray(), IP);
                     MyTimer_UART_TimeOut.TickStop();
-                    MyTimer_UART_TimeOut.StartTickTime(UDP_TimeOut);
+                    MyTimer_UART_TimeOut.StartTickTime(500);
                     cnt++;
                 }
                 else if (cnt == 1)
                 {
-                    if (retry >= UDP_RetryNum)
+                    if (retry >= 3)
                     {
                         flag_OK = false;
                         break;
@@ -4968,6 +4982,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                             if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD Send Framebuffer recieve 'RETRY'!");
+                            System.Threading.Thread.Sleep(100);
                         }
                         else if (UDP_RX == checksum.ToString("000"))
                         {

@@ -5,6 +5,8 @@
 #include "Timer.h"
 #include "Config.h"
 
+
+
 #define  BLACK   0x0
 #define  WHITE   0x1
 #define  YELLOW   0x1
@@ -42,6 +44,8 @@ class EPD
   void Sleep_Check();
   void Sleep();
   void Wakeup();
+  unsigned char Color_get(unsigned char color);
+  
   private: 
   MyTimer MyTimer_SleepWaitTime;
   void SpiDelay(unsigned char xrate);
@@ -52,6 +56,7 @@ class EPD
   void SendDataSPI(unsigned char data);
   void HardwareReset();
   void WaitUntilIdle();
+  
   SemaphoreHandle_t xSpiMutex = NULL; // 互斥鎖指針
 };
 

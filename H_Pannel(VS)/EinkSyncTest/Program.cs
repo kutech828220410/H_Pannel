@@ -12,7 +12,7 @@ namespace EinkSyncConsole
         [STAThread]
         static void Main(string[] args)
         {
-            Communication.ConsoleWrite = true;
+            Communication.ConsoleWrite = false;
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
             string defaultIP = LoadLastIP();
@@ -35,7 +35,7 @@ namespace EinkSyncConsole
                 using (Bitmap bmp = (Bitmap)Bitmap.FromFile(imagePath))
                 {
                     UDP_Class udp = new UDP_Class("192.168.5.250", 29000); // 固定主機端 Server IP
-                    bool success = Communication.EPD_579B_DrawImage(udp, ip, bmp);
+                    bool success = Communication.EPD_579G_DrawImage(udp, ip, bmp);
                     Console.WriteLine(success ? "✅ 傳送成功！" : "❌ 傳送失敗！");
                 }
 

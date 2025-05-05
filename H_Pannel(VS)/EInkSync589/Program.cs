@@ -1,182 +1,186 @@
 ﻿using System;
-using System.Drawing.Imaging;
 using System.Drawing;
-using H_Pannel_lib;
-using MyOffice;
 using System.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.IO;
+using H_Pannel_lib;
+using MyOffice;
 using Basic;
+using System.Linq;
+using System.Text;
 
 namespace EInkSync589
 {
+    public static class Logger
+    {
+        private static readonly string logFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logs");
+        private static readonly string logFilePath;
+        private static readonly object _lock = new object();
+
+        static Logger()
+        {
+            string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            if (!Directory.Exists(logFolder)) Directory.CreateDirectory(logFolder);
+            logFilePath = Path.Combine(logFolder, $"log_{timestamp}.txt");
+        }
+
+        public static void Log(string message)
+        {
+            WriteLine($"[INFO] {message}");
+        }
+
+        public static void Log(string ip, string message, int current, int total)
+        {
+            string line = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] ({current}/{total}) {ip} {message}";
+            WriteLine(line);
+        }
+
+        private static void WriteLine(string line)
+        {
+            lock (_lock)
+            {
+                try
+                {
+                    File.AppendAllText(logFilePath, line + Environment.NewLine);
+                }
+                catch
+                {
+                    // 防止 log 寫入錯誤影響主程式
+                }
+            }
+        }
+    }
+
     class Program
     {
-        // 設定伺服器 IP
         static string ServerIP = "192.168.5.250";
-
-        // 各類型圖片所在資料夾路徑
-        static string wall_path = @"C:\image\01.Tech wall";
-        static string wall2_path = @"C:\image\02.Landscape-1";
-        static string table_path = @"C:\image\03.Landscape-2";
-     
         static string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-        // 控制刷新牆面和桌面裝置的布林旗標
         static bool flag_wall_refresh = true;
         static bool flag_table_refresh = false;
 
         static void Main(string[] args)
         {
-            Communication.ConsoleWrite = true;
-
+            Communication.ConsoleWrite = false;
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.UTF8;
             try
             {
-                int index = 0; // 用來控制圖片切換
-                UDP_Class uDP_Class = new UDP_Class(ServerIP, 29000); // 建立 UDP 傳輸物件
+                UDP_Class uDP_Class = new UDP_Class(ServerIP, 29000);
+                List<DataTable> dataTables = MyOffice.ExcelClass.NPOI_LoadFile2DataTables($"{desktopPath}\\wall2.xlsx");
+                Dictionary<string, List<object[]>> tableDeviceMap = new Dictionary<string, List<object[]>>();
+                List<Task> drawTasks = new List<Task>();
 
-                while (true)
+                // 先統計所有裝置數量（總進度用）
+                int totalDrawCount = 0;
+                foreach (var table in dataTables)
                 {
-                    Communication.ConsoleWrite = false;
+                    if (!ShouldProcessTable(table.TableName)) continue;
+                    var list = table.DataTableToRowList();
+                    tableDeviceMap[table.TableName] = list;
+                    totalDrawCount += list.Count;
+                }
 
-                    int index_DrawFramebuffer = 0;
-                    int index_RefreshCanvas = 0;
-
-                    // 載入 Excel 檔案（wall.xlsx）中的所有工作表為 DataTable
-                    List<DataTable> dataTables = MyOffice.ExcelClass.NPOI_LoadFile2DataTables($@"{desktopPath}\wall2.xlsx");
-
-                    // 遍歷每個 DataTable（代表不同地區）
-                    for (int i = 0; i < dataTables.Count; i++)
+                int globalIndex = 0;
+                foreach (var kvp in tableDeviceMap)
+                {
+                    var list = kvp.Value;
+                    for (int i = 0; i < list.Count; i++)
                     {
-                        // 過濾只處理指定地區的工作表
-                        if (dataTables[i].TableName == "花蓮" || dataTables[i].TableName == "台東"
-                            || dataTables[i].TableName == "高雄" || dataTables[i].TableName == "台南"
-                            || dataTables[i].TableName == "台北左" || dataTables[i].TableName == "台北右"
-                            || dataTables[i].TableName == "台中" || dataTables[i].TableName == "嘉義")
+                        var value = list[i];
+                        string filename = value[0].ToString();
+                        string ip = $"192.168.{value[1]}";
+
+                        drawTasks.Add(Task.Run(() =>
                         {
-                            // 若牆面刷新關閉，跳過牆面地區
-                            if (flag_wall_refresh == false &&
-                                (dataTables[i].TableName != "台中" && dataTables[i].TableName != "嘉義"))
-                                continue;
-
-                            // 若桌面刷新關閉，跳過桌面地區
-                            if (flag_table_refresh == false &&
-                                (dataTables[i].TableName == "台中" || dataTables[i].TableName == "嘉義"))
-                                continue;
-
-                            // 初始化刷新及繪圖次數
-                            index_RefreshCanvas = 0;
-                            index_DrawFramebuffer = 0;
-
-                            Console.WriteLine($"★★★★★★{dataTables[i].TableName} ★★★★★★");
-
-                            List<object[]> list_value = dataTables[i].DataTableToRowList(); // 取得所有行資料
-                            List<Task> tasks = new List<Task>();
-
-                            // 每次處理 9 列 x 14 欄 = 最多 126 台裝置
-                            for (int m = 0; m < 9; m++)
+                            int current = System.Threading.Interlocked.Increment(ref globalIndex);
+                            try
                             {
-                                for (int n = 0; n < 14; n++)
+                                using (Bitmap bmp = new Bitmap(filename))
                                 {
-                                    int temp = m * 14 + n;
-                                    if (temp >= list_value.Count) continue;
-
-                                    object[] value = list_value[temp];
-
-                                    // 依照檔名與切換 index 判斷圖片來源路徑
-                                    string filename = $@"{value[0].ObjectToString()}";
-
-
-                                    string ip_temp = $"192.168.{value[1].ObjectToString()}";
-
-                                    // 加入非同步繪圖任務
-                                    tasks.Add(Task.Run(() =>
-                                    {
-                                        try
-                                        {
-                                            bool flag = false;
-                                            Bitmap inputBmp = new Bitmap(filename);
-                                            flag = H_Pannel_lib.Communication.EPD_579G_DrawFramebuffer(uDP_Class, ip_temp, inputBmp);
-                                            inputBmp.Dispose();
-                                            if (!flag)
-                                            {
-                                                Console.WriteLine($"{ip_temp} EPD_579G_DrawFramebuffer failed..");
-                                                return;
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Console.WriteLine($"{ip_temp} Exception : {ex.Message}");
-                                        }
-                                        finally
-                                        {
-                                            Console.WriteLine($"{ip_temp} EPD_579G_DrawFramebuffer {index_DrawFramebuffer}/{list_value.Count}");
-                                            index_DrawFramebuffer++;
-                                        }
-                                    }));
+                                    bool result = Communication.EPD_579G_DrawFramebuffer(uDP_Class, ip, bmp);
+                                    Console.WriteLine(result ? $"{ip} ✅ Draw OK ({current}/{totalDrawCount})" : $"{ip} ❌ Draw FAIL ({current}/{totalDrawCount})");
+                                    if (!result) Logger.Log(ip, "Draw FAIL", current, totalDrawCount);
                                 }
-
-                                // 等待所有繪圖任務完成
-                                Task.WhenAll(tasks).Wait();
-
-                                // 執行 RefreshCanvas 指令
-                                List<Task> tasks_refresh = new List<Task>();
-                                for (int n = 0; n < 14; n++)
-                                {
-                                    int temp = m * 14 + n;
-                                    if (temp >= list_value.Count) continue;
-                                    object[] value = list_value[temp];
-
-                               
-
-                                    string ip_temp = $"192.168.{value[1].ObjectToString()}";
-
-                                    // 加入非同步刷新任務
-                                    tasks_refresh.Add(Task.Run(() =>
-                                    {
-                                        try
-                                        {
-                                            bool flag = H_Pannel_lib.Communication.EPD_RefreshCanvas(uDP_Class, ip_temp);
-                                            if (!flag)
-                                            {
-                                                Console.WriteLine($"{ip_temp} EPD_RefreshCanvas failed..");
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Console.WriteLine($"{ip_temp} Exception : {ex.Message}");
-                                        }
-                                        finally
-                                        {
-                                            Console.WriteLine($"{ip_temp} EPD_RefreshCanvas {index_RefreshCanvas}/{list_value.Count}");
-                                            index_RefreshCanvas++;
-                                        }
-                                    }));
-                                }
-
-                                // 等待所有刷新任務完成
-                                Task.WhenAll(tasks_refresh).Wait();
-
-                                // 每次分批繪圖與刷新後休息 3 秒
-                                Console.WriteLine($"Sleep 1s....");
-                                System.Threading.Thread.Sleep(1000);
-                                Console.WriteLine($"Sleep 2s....");
-                                System.Threading.Thread.Sleep(1000);
-                                Console.WriteLine($"Sleep 3s....");
-                                System.Threading.Thread.Sleep(1000);
                             }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"{ip} Exception: {ex.Message} ({current}/{totalDrawCount})");
+                                Logger.Log(ip, $"Exception: {ex.Message}", current, totalDrawCount);
+                            }
+                        }));
+                    }
+                }
+
+                Task.WhenAll(drawTasks).Wait();
+                Console.WriteLine("✅ 所有圖片上傳完成");
+
+                int maxDevices = GetMaxDeviceCount(tableDeviceMap);
+                int batchSize = 14;
+
+                for (int start = 0; start < maxDevices; start += batchSize)
+                {
+                    List<Task> refreshTasks = new List<Task>();
+
+                    foreach (var kvp in tableDeviceMap)
+                    {
+                        var list = kvp.Value;
+                        int total = list.Count;
+
+                        for (int i = start; i < start + batchSize && i < total; i++)
+                        {
+                            var value = list[i];
+                            string ip = $"192.168.{value[1]}";
+                            int current = i + 1;
+
+                            refreshTasks.Add(Task.Run(() =>
+                            {
+                                try
+                                {
+                                    bool result = Communication.EPD_SPIdata_and_RefreshCanvas(uDP_Class, ip);
+                                    Console.WriteLine(result ? $"{ip} ✅ Refresh OK ({current}/{total})" : $"{ip} ❌ Refresh FAIL ({current}/{total})");
+                                    if (!result) Logger.Log(ip, "Refresh FAIL", current, total);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine($"{ip} Exception: {ex.Message} ({current}/{total})");
+                                    Logger.Log(ip, $"Exception: {ex.Message}", current, total);
+                                }
+                            }));
                         }
                     }
 
-                    // index 為圖片版本切換控制變數（兩種圖片輪替）
-                    index++;
+                    Task.WhenAll(refreshTasks).Wait();
+                    Console.WriteLine($"🌀 第 {start / batchSize + 1} 批刷新完成，等待 1 秒...");
+                    System.Threading.Thread.Sleep(1000);
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Exception : {ex.Message}");
-                Console.ReadLine(); // 保持主控台視窗開啟
+                Logger.Log("SYSTEM", $"Critical Error: {ex.Message}", 0, 0);
+                Console.ReadLine();
             }
+        }
+
+        static bool ShouldProcessTable(string tableName)
+        {
+            string[] wallTables = { "花蓮", "台東", "高雄", "台南", "台北左", "台北右" };
+            string[] tableTables = { "台中", "嘉義" };
+
+            if (wallTables.Contains(tableName)) return flag_wall_refresh;
+            if (tableTables.Contains(tableName)) return flag_table_refresh;
+            return false;
+        }
+
+        static int GetMaxDeviceCount(Dictionary<string, List<object[]>> tableDeviceMap)
+        {
+            int max = 0;
+            foreach (var list in tableDeviceMap.Values)
+            {
+                if (list.Count > max) max = list.Count;
+            }
+            return max;
         }
     }
 }

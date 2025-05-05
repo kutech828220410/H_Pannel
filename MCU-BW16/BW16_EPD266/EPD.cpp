@@ -4,7 +4,7 @@
 void EPD::Init(SemaphoreHandle_t mutex)
 {
     xSpiMutex = mutex;
-    this -> framebuffer = (byte*) malloc(EPD_WIDTH * EPD_HEIGHT);
+    framebuffer = (byte*) malloc(EPD_WIDTH * EPD_HEIGHT);
     buffer_max = EPD_WIDTH * EPD_HEIGHT;
     pinMode(this -> PIN_CS, OUTPUT);
     pinMode(this -> PIN_RST, OUTPUT);
@@ -110,6 +110,39 @@ void EPD::Clear()
               }
            }
       }
+       else if(EPD_TYPE == "DEPG0579RYT158FxX")
+      {
+            Wakeup();
+            mySerial -> println("DEPG0579RYT158FxX Clear function start...");
+            int i, j;
+            SendCommand(0xA2);
+            SendData(0x01); // M
+            SendCommand(0x10); // DTM1
+            for (i = 0; i < 272; i++)
+            {
+              for (j = 0; j < 99; j++)
+              {
+                if(j >= 0 && j < 25) SendData(0x00);//黑
+                if(j >= 25 && j < 50) SendData(0xff);//紅
+                if(j >= 50 && j < 75) SendData(0xaa);//黃
+                if(j >= 75 && j < 99) SendData(0x55);//白
+               
+              }
+            }
+            SendCommand(0xA2);
+            SendData(0x02);  // S
+            SendCommand(0x10); // DTM1
+            for (i = 0; i < 272; i++)
+            {
+              for (j = 0; j < 99; j++)
+              {
+                if(j >= 0 && j < 25) SendData(0x00);
+                if(j >= 25 && j < 50) SendData(0xff);
+                if(j >= 50 && j < 75) SendData(0xaa);
+                if(j >= 75 && j < 99) SendData(0x55);
+              }
+            }
+      }
       else if(EPD_TYPE == "EPD579B")
       {
           mySerial -> println("EPD579B Clear function start...");
@@ -171,7 +204,7 @@ void EPD::Clear()
       }
       
       SPI_End();
-      mySerial -> println("EPD579G Clear function done...");
+      mySerial -> println("Clear function done...");
       
       RefreshCanvas(); 
       
@@ -218,6 +251,132 @@ void EPD::DrawFrame_BW()
                 SendData(pgm_read_byte(&framebuffer[(Height - j - 1) * Width4 + i + Width8]));
             }
          }
+      }
+      else if(EPD_TYPE == "DEPG0579RYT158FxX")
+      {
+
+//          int i, j;
+//          byte tempOriginal;
+//          int tempcol = 0;
+//          int templine = 0;
+//          int templine1 = 271;
+//          
+//          SendCommand(0xA2);
+//          SendData(0x01); // M
+//          SendCommand(0x10);
+//          for (i = 0; i < 26928; i++)
+//          {
+//            tempOriginal = *(framebuffer + templine * 99 * 2 + tempcol + 99);
+//            tempcol++;
+//          
+//            if (tempcol > 99)
+//            {
+//              templine1 = 271 - templine;
+//              tempOriginal = *(framebuffer + templine1 * 99 * 2 + tempcol + 99 - 99 - 1);
+//            }
+//            if (tempcol >= 99 * 2)
+//            {
+//              templine++;
+//              tempcol = 0;
+//            }
+//            SendData(tempOriginal);
+//          }
+//          tempcol = 0;
+//          templine = 0;
+//          templine1 = 271;
+//          
+//          SendCommand(0xA2);
+//          SendData(0x02); // S
+//          SendCommand(0x10);
+//          for (i = 0; i < 26928; i++)
+//          {
+//            tempOriginal = *(framebuffer + templine * 99 * 2 + tempcol);
+//            tempcol++;
+//            if (tempcol > 99)
+//            {
+//              templine1 = 271 - templine;
+//              tempOriginal = *(framebuffer + templine1 * 99 * 2 + tempcol - 99 - 1);
+//            }
+//            if (tempcol >= 99 * 2)
+//            {
+//              templine++;
+//              tempcol = 0;
+//            }
+//            SendData(tempOriginal);
+//          }
+
+
+
+            unsigned int i,j;
+            unsigned char temp1;
+            unsigned char data_H1,data_H2,data_L1,data_L2,data;
+            int Source_BITS = 792/2;
+            int Gate_BITS = 272;
+            
+            SendCommand(0xA2);
+            SendData(0x01);
+            SendCommand(0x10);        
+            for(i=0;i<Gate_BITS/2;i++)  //Source_BITS*Gate_BITS/4
+            { 
+              for(j=0;j<Source_BITS/4;j++)
+              {   
+                temp1=*(framebuffer + ((272-i-1)*2*Source_BITS/4+j)); 
+          
+                data_H1=Color_get(temp1>>6&0x03)<<6;      
+                data_H2=Color_get(temp1>>4&0x03)<<4;
+                data_L1=Color_get(temp1>>2&0x03)<<2;
+                data_L2=Color_get(temp1&0x03);
+                
+                data=data_H1|data_H2|data_L1|data_L2;
+                SendData(data);
+              }
+                  
+              for(j=0;j<Source_BITS/4;j++)
+              {   
+                temp1=*(framebuffer + (i*2*Source_BITS/4+j)); 
+          
+                data_H1=Color_get(temp1>>6&0x03)<<6;      
+                data_H2=Color_get(temp1>>4&0x03)<<4;
+                data_L1=Color_get(temp1>>2&0x03)<<2;
+                data_L2=Color_get(temp1&0x03);
+                
+                data=data_H1|data_H2|data_L1|data_L2;
+                SendData(data);
+              }
+            }   
+            
+            
+            SendCommand(0xA2);
+            SendData(0x02);
+            SendCommand(0x10);        
+            for(i=0;i<Gate_BITS/2;i++)  //Source_BITS*Gate_BITS/4
+            { 
+              for(j=Source_BITS/4;j<2*Source_BITS/4;j++)
+              {   
+                temp1=*(framebuffer + ((272-i-1)*2*Source_BITS/4+j)); 
+          
+                data_H1=Color_get(temp1>>6&0x03)<<6;      
+                data_H2=Color_get(temp1>>4&0x03)<<4;
+                data_L1=Color_get(temp1>>2&0x03)<<2;
+                data_L2=Color_get(temp1&0x03);
+                
+                data=data_H1|data_H2|data_L1|data_L2;
+                SendData(data);
+              } 
+            
+              for(j=Source_BITS/4;j<2*Source_BITS/4;j++)
+              {   
+                temp1=*(framebuffer + (i*2*Source_BITS/4+j)); 
+          
+                data_H1=Color_get(temp1>>6&0x03)<<6;      
+                data_H2=Color_get(temp1>>4&0x03)<<4;
+                data_L1=Color_get(temp1>>2&0x03)<<2;
+                data_L2=Color_get(temp1&0x03);
+                
+                data=data_H1|data_H2|data_L1|data_L2;
+                SendData(data);
+              }
+            }     
       }
       else if(EPD_TYPE == "EPD579B")
       {
@@ -362,6 +521,19 @@ void EPD::RefreshCanvas()
        SendCommand(0x12);
        SPI_End();
      }
+     else if(EPD_TYPE == "DEPG0579RYT158FxX")
+     {
+       mySerial -> println("DEPG0579RYT158FxX (RefreshCanvas)function start...");
+       SPI_Begin();
+       SendCommand(0x04);
+       WaitUntilIdle();
+       SendCommand(0xA2); 
+       SendData(0x00);         
+       SendCommand(0x12); 
+       SendData(0x01);
+       SPI_End();
+       mySerial -> println("DEPG0579RYT158FxX (RefreshCanvas)function done...");
+     }
      else if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
      {
        mySerial -> println("EPD579G (RefreshCanvas)function start...");
@@ -464,7 +636,7 @@ void EPD::SPI_Begin()
 {
 //   SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
    if(EPD_TYPE == "EPD583")SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
-   else if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD579B")SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
+   else if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD579B" || EPD_TYPE == "DEPG0579RYT158FxX")SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
    else SPI.beginTransaction(SPISettings(80000000, MSBFIRST, SPI_MODE0));    
 }
 void EPD::SPI_End()
@@ -489,12 +661,12 @@ void EPD::Wakeup()
 {
     this -> MyTimer_SleepWaitTime.TickStop();  
     this -> MyTimer_SleepWaitTime.StartTickTime(90000);
-//    mySerial -> println("Wake up!");
+//    mySerial -> println(" Wake up ...");
     this -> SetToSleep = false;
     this -> HardwareReset();
  
 
-    if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE) 
+    if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE || true) 
     {
         SPI_Begin();
         if(EPD_TYPE == "EPD420" || EPD_TYPE == "EPD420_D")
@@ -546,10 +718,10 @@ void EPD::Wakeup()
           SendData(0x0F);   //KW-3f   KWR-2F  BWROTP 0f BWOTP 1f
         
           SendCommand(0x61);          //tres      
-          SendData (0x02);    //source 648
-          SendData (0x88);
-          SendData (0x01);    //gate 480
-          SendData (0xe0);
+          SendData(0x02);    //source 648
+          SendData(0x88);
+          SendData(0x01);    //gate 480
+          SendData(0xe0);
         
           SendCommand(0X15);    
           SendData(0x00);   
@@ -560,6 +732,54 @@ void EPD::Wakeup()
         
           SendCommand(0X60);      //TCON SETTING
           SendData(0x22);
+        }
+        else if(EPD_TYPE == "DEPG0579RYT158FxX")
+        {
+          int Source_BITS = 792/2;
+          int Gate_BITS = 272;
+          mySerial -> println("DEPG0579RYT158FxX Init...");
+          WaitUntilIdle();
+          SPI_Begin(); 
+          SendCommand(0xA2);
+          SendData(0x01);
+          
+          SendCommand(0x00);  //PSR
+          SendData(0x07);
+          SendData(0x29);
+        
+          SendCommand(0xA2);
+          SendData(0x02);
+          
+          SendCommand(0x00);  //PSR
+          SendData(0x03);
+          SendData(0x29);  
+          
+          SendCommand(0xA2);
+          SendData(0x00);  
+          
+          SendCommand(0x06);//BTST
+          SendData(0x32);
+          SendData(0x32);
+          SendData(0x32);
+          SendData(0x32);
+        
+          SendCommand(0x61);//0x61 
+          SendData(Source_BITS/256); 
+          SendData(Source_BITS%256); 
+          SendData(Gate_BITS/256); 
+          SendData(Gate_BITS%256); 
+        
+          SendCommand(0x50);//CDI
+          SendData(0x97);  //border white
+          
+          SendCommand(0xE9);
+          SendData(0x01);  
+          
+          SendCommand(0xE0);
+          SendData(0x01);  
+        
+          SendCommand(0x04); //Power on
+          WaitUntilIdle();
         }
         else if(EPD_TYPE == "EPD579B")
         {
@@ -894,7 +1114,7 @@ void EPD::WaitUntilIdle()
       delay(200); 
       mySerial -> println("Wait EPD BUSY release!");
    }
-   if(EPD_TYPE == "EPD579B")
+   else if(EPD_TYPE == "EPD579B")
    {
       byte busy;
       do
@@ -904,7 +1124,25 @@ void EPD::WaitUntilIdle()
       }
       while(busy);   
    }
-   if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
+   else if(EPD_TYPE == "DEPG0579RYT158FxX")
+   {
+      int retry = 0 ;
+      while(true)
+      {
+         if(retry >= 100)
+         {
+            mySerial -> print("e-Paper (DEPG0579RYT158FxX) read pin busy timeout...\r\n ");
+            break;
+         }
+         if(digitalRead(PIN_BUSY) == HIGH)
+         {
+            break;
+         }
+         delay(10);
+         retry++;
+      }
+   }
+   else if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
    {
       mySerial -> print("e-Paper busy H\r\n ");
       while(digitalRead(PIN_BUSY) == LOW) 
@@ -923,6 +1161,28 @@ void EPD::WaitUntilIdle()
    
 
 }
+unsigned char EPD::Color_get(unsigned char color)
+{
+    unsigned datas;
+    switch(color)
+    {
+      case 0x00:
+        datas=WHITE;  
+        break;    
+      case 0x01:
+        datas=YELLOW;
+        break;
+      case 0x02:
+        datas=RED;
+        break;    
+      case 0x03:
+        datas=BLACK;
+        break;      
+      default:
+        break;      
+    }
+     return datas;
+}
 void EPD::Sleep()
 {  
     if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE) 
@@ -940,20 +1200,30 @@ void EPD::Sleep()
           SendData(0xA5);
           SPI_End();
         }
-        if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
+        else if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
         {
           SPI_Begin();
           SendCommand(0x07); 
           SendData(0xA5);
           SPI_End();
         }
-        if(EPD_TYPE == "EPD579B")
+        else if(EPD_TYPE == "EPD579B")
         {
           SPI_Begin();
           SendCommand(0X10);    //deep sleep
           SendData(0x03);
           SPI_End();
         }     
+        else if(EPD_TYPE == "DEPG0579RYT158FxX")
+        {
+          SPI_Begin();
+          SendCommand(0X12);    //deep sleep
+          SendData(0x01);
+          delay(50);
+          SendCommand(0x02);    
+          SendData(0x01);
+          SPI_End();
+        }
         else
         {
           SPI_Begin();
@@ -963,6 +1233,6 @@ void EPD::Sleep()
         }
         xSemaphoreGive(xSpiMutex);
     }
-    
+   
     
 }

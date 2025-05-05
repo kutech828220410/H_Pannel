@@ -281,3 +281,48 @@ C:\Users\Andy\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Uplo
 C:\Users\Andy\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.exe
 C:\Users\Andy\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.pdb
 C:\Users\Andy\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\H_Pannel_lib.pdb
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\EPD Upload.exe.config
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\EPD Upload.exe
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\EPD Upload.pdb
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\Basic.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\CSkin.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\DrawingClass.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\H_Pannel_lib.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\MyUI.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\Newtonsoft.Json.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\SkiaSharp.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\SLDUI.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\SQLUI.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\System.Buffers.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\System.Memory.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\System.Numerics.Vectors.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\Interop.SpeechLib.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\HIS_DB_Lib.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\zxing.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\CallBackUI.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\PopupControl.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\SunnyUI.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\System.ValueTuple.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\System.Threading.Tasks.Extensions.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\SunnyUI.Common.dll
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\Basic.xml
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\H_Pannel_lib.pdb
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\H_Pannel_lib.dll.config
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\Newtonsoft.Json.xml
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\SkiaSharp.pdb
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\SkiaSharp.xml
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\System.Buffers.xml
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\System.Memory.xml
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\System.Numerics.Vectors.xml
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\zxing.xml
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.csproj.AssemblyReference.cache
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD_Upload.Dialog_藥碼輸入.resources
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD_Upload.Form1.resources
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD_Upload.Properties.Resources.resources
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.csproj.GenerateResource.cache
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.csproj.CoreCompileInputs.cache
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.csproj.Up2Date
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.exe
+C:\venice\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.pdb
