@@ -969,7 +969,7 @@ namespace H_Pannel_lib
                 using (Bitmap _bmp = DitheringProcessor.ApplyFloydSteinbergDithering(inputBmp, DitheringProcessor.DitheringMode.FourColor))
                 {
                     //_bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
-                    int frameDIV = 12;
+                    int frameDIV = 8;
 
                     bool flag_OK;
                     int width = _bmp.Width;
@@ -4986,7 +4986,7 @@ namespace H_Pannel_lib
                             retry++;
                             cnt = 0;
                             if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD Send Framebuffer recieve 'RETRY'!");
-                            System.Threading.Thread.Sleep(100);
+                            System.Threading.Thread.Sleep(20);
                         }
                         else if (UDP_RX == checksum.ToString("000"))
                         {

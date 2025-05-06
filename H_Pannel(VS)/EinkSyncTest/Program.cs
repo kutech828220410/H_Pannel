@@ -14,7 +14,7 @@ namespace EinkSyncConsole
         [STAThread]
         static void Main(string[] args)
         {
-            Communication.ConsoleWrite = false;
+            Communication.ConsoleWrite = true;
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
 
@@ -41,7 +41,7 @@ namespace EinkSyncConsole
                 {
                     using (Bitmap bmp = (Bitmap)Bitmap.FromFile(imagePath))
                     {
-                        UDP_Class udp = new UDP_Class("192.168.5.250", 29000); // 固定主機端 Server IP
+                        UDP_Class udp = new UDP_Class("192.168.5.250", 29000 , false); // 固定主機端 Server IP
                         bool success = Communication.EPD_579G_DrawImage(udp, ip, bmp);
                         Console.WriteLine(success ? "✅ 傳送成功！" : "❌ 傳送失敗！");
                     }
@@ -75,7 +75,7 @@ namespace EinkSyncConsole
         {
             if (File.Exists(configPath))
                 return File.ReadAllText(configPath).Trim();
-            return "192.168.46.72"; // 預設 IP
+            return "192.168.46.20"; // 預設 IP
         }
 
         static void SaveLastIP(string ip)

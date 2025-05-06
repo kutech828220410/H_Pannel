@@ -4,6 +4,7 @@ using System.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.IO;
+using System.Net.NetworkInformation;
 using H_Pannel_lib;
 using MyOffice;
 using Basic;
@@ -67,7 +68,7 @@ namespace EInkSync589
             try
             {
                 UDP_Class uDP_Class = new UDP_Class(ServerIP, 29000);
-                List<DataTable> dataTables = MyOffice.ExcelClass.NPOI_LoadFile2DataTables($"{desktopPath}\\wall46-47.xlsx");
+                List<DataTable> dataTables = MyOffice.ExcelClass.NPOI_LoadFile2DataTables($"{desktopPath}\\desk48.xlsx");
                 Dictionary<string, List<object[]>> tableDeviceMap = new Dictionary<string, List<object[]>>();
 
                 int totalDrawCount = 0;
@@ -87,14 +88,20 @@ namespace EInkSync589
                     var list = kvp.Value;
                     foreach (var value in list)
                     {
+                        string filename = value[0].ToString();
+                        string ip = $"192.168.{value[1]}";
+                        int current = System.Threading.Interlocked.Increment(ref globalIndex);
                         tasks.Add(Task.Run(() =>
                         {
-                            int current = System.Threading.Interlocked.Increment(ref globalIndex);
-                            string filename = value[0].ToString();
-                            string ip = $"192.168.{value[1]}";
-
                             try
                             {
+                                if (!Ping(ip, 2, 500))
+                                {
+                                    Console.WriteLine($"{ip} ❌ Ping 失敗，略過刷新 ({current}/{totalDrawCount})");
+                                    Logger.Log(ip, "Ping 失敗，略過刷新", current, totalDrawCount);
+                                    return;
+                                }
+
                                 using (Bitmap bmp = new Bitmap(filename))
                                 {
                                     bool result = Communication.EPD_579G_DrawFramebuffer(uDP_Class, ip, bmp);
@@ -106,11 +113,12 @@ namespace EInkSync589
                             {
                                 Console.WriteLine($"{ip} Exception: {ex.Message} ({current}/{totalDrawCount})");
                                 Logger.Log(ip, $"Exception: {ex.Message}", current, totalDrawCount);
+                                return;
                             }
 
                             try
                             {
-                                bool result = Communication.EPD_RefreshCanvas(uDP_Class, ip);
+                                bool result = Communication.EPD_SPIdata_and_RefreshCanvas(uDP_Class, ip);
                                 Console.WriteLine(result ? $"{ip} ✅ Refresh OK ({current}/{totalDrawCount})" : $"{ip} ❌ Refresh FAIL ({current}/{totalDrawCount})");
                                 if (!result) Logger.Log(ip, "Refresh FAIL", current, totalDrawCount);
                             }
@@ -119,8 +127,6 @@ namespace EInkSync589
                                 Console.WriteLine($"{ip} Exception: {ex.Message} ({current}/{totalDrawCount})");
                                 Logger.Log(ip, $"Exception: {ex.Message}", current, totalDrawCount);
                             }
-
-                            System.Threading.Thread.Sleep(100); // Optional delay between each device
                         }));
                     }
                 }
@@ -138,11 +144,32 @@ namespace EInkSync589
 
         static bool ShouldProcessTable(string tableName)
         {
-            string[] wallTables = { "花蓮", "台東", "高雄", "台南", "台北左", "台北右" , "台中", "嘉義" };
-            string[] tableTables = {  };
+            string[] wallTables = { "花蓮", "台東", "高雄", "台南", "台北左", "台北右", "台中", "嘉義", "馬祖", "街廓學" };
+            string[] tableTables = { };
 
             if (wallTables.Contains(tableName)) return flag_wall_refresh;
             if (tableTables.Contains(tableName)) return flag_table_refresh;
+            return false;
+        }
+
+        public static bool Ping(string IP, int retrynum, int timeout)
+        {
+            Ping ping = new Ping();
+            for (int i = 0; i < retrynum; i++)
+            {
+                try
+                {
+                    PingReply reply = ping.Send(IP, timeout);
+                    if (reply.Status == IPStatus.Success)
+                    {
+                        return true;
+                    }
+                }
+                catch
+                {
+                    // Ignore and retry
+                }
+            }
             return false;
         }
 

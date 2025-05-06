@@ -195,6 +195,24 @@ namespace H_Pannel_lib
             this.MyThread_Program.Trigger();
             this.stopwatch.Start();
         }
+        public UDP_Class(string IP, int port , bool servermode)
+        {
+            this.Port = port;
+            if(servermode)  udpClient = new UdpClient(Port);
+            else udpClient = new UdpClient(0);
+            udpClient.Client.SendBufferSize = 409600;
+            udpClient.Client.ReceiveBufferSize = 409600;
+            udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+            udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ExclusiveAddressUse, false);
+
+            udpClient.BeginReceive(new AsyncCallback(ReceiveCallback), udpClient);
+            this.MyThread_Program = new MyThread();
+            this.MyThread_Program.Add_Method(sub_ReadByte);
+            this.MyThread_Program.AutoRun(true);
+            this.MyThread_Program.SetSleepTime(1);
+            this.MyThread_Program.Trigger();
+            this.stopwatch.Start();
+        }
         private void ReceiveCallback(IAsyncResult result)
         {
             UdpClient ts = (UdpClient)result.AsyncState;
