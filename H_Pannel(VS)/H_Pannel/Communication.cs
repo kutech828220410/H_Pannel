@@ -1034,7 +1034,11 @@ namespace H_Pannel_lib
                     MyTimer myTimer = new MyTimer();
                     myTimer.StartTickTime(50000);
                     flag_OK = EPD_DrawFramebuffer(uDP_Class, IP, bytes, (width / 4) * height / frameDIV);
-
+                    flag_OK = EPD_DrawFrame_BW(uDP_Class, IP);
+                    //if (!EPD_DrawFrame_BW(uDP_Class, IP))
+                    //{
+                    //    return false;
+                    //}
                     if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD213_BRW_V0 DrawFramebuffer {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
                     return flag_OK;
                 }

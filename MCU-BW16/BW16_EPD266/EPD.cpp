@@ -254,129 +254,56 @@ void EPD::DrawFrame_BW()
       }
       else if(EPD_TYPE == "DEPG0579RYT158FxX")
       {
-
-//          int i, j;
-//          byte tempOriginal;
-//          int tempcol = 0;
-//          int templine = 0;
-//          int templine1 = 271;
-//          
-//          SendCommand(0xA2);
-//          SendData(0x01); // M
-//          SendCommand(0x10);
-//          for (i = 0; i < 26928; i++)
-//          {
-//            tempOriginal = *(framebuffer + templine * 99 * 2 + tempcol + 99);
-//            tempcol++;
-//          
-//            if (tempcol > 99)
-//            {
-//              templine1 = 271 - templine;
-//              tempOriginal = *(framebuffer + templine1 * 99 * 2 + tempcol + 99 - 99 - 1);
-//            }
-//            if (tempcol >= 99 * 2)
-//            {
-//              templine++;
-//              tempcol = 0;
-//            }
-//            SendData(tempOriginal);
-//          }
-//          tempcol = 0;
-//          templine = 0;
-//          templine1 = 271;
-//          
-//          SendCommand(0xA2);
-//          SendData(0x02); // S
-//          SendCommand(0x10);
-//          for (i = 0; i < 26928; i++)
-//          {
-//            tempOriginal = *(framebuffer + templine * 99 * 2 + tempcol);
-//            tempcol++;
-//            if (tempcol > 99)
-//            {
-//              templine1 = 271 - templine;
-//              tempOriginal = *(framebuffer + templine1 * 99 * 2 + tempcol - 99 - 1);
-//            }
-//            if (tempcol >= 99 * 2)
-//            {
-//              templine++;
-//              tempcol = 0;
-//            }
-//            SendData(tempOriginal);
-//          }
-
-
-
-            unsigned int i,j;
-            unsigned char temp1;
-            unsigned char data_H1,data_H2,data_L1,data_L2,data;
-            int Source_BITS = 792/2;
-            int Gate_BITS = 272;
-            
-            SendCommand(0xA2);
-            SendData(0x01);
-            SendCommand(0x10);        
-            for(i=0;i<Gate_BITS/2;i++)  //Source_BITS*Gate_BITS/4
-            { 
-              for(j=0;j<Source_BITS/4;j++)
-              {   
-                temp1=*(framebuffer + ((272-i-1)*2*Source_BITS/4+j)); 
+          int i, j;
+          byte tempOriginal;
+          int tempcol = 0;
+          int templine = 0;
+          int templine1 = 271;
           
-                data_H1=Color_get(temp1>>6&0x03)<<6;      
-                data_H2=Color_get(temp1>>4&0x03)<<4;
-                data_L1=Color_get(temp1>>2&0x03)<<2;
-                data_L2=Color_get(temp1&0x03);
-                
-                data=data_H1|data_H2|data_L1|data_L2;
-                SendData(data);
-              }
-                  
-              for(j=0;j<Source_BITS/4;j++)
-              {   
-                temp1=*(framebuffer + (i*2*Source_BITS/4+j)); 
+          SendCommand(0xA2);
+          SendData(0x01); // M
+          SendCommand(0x10);
+          for (i = 0; i < 26928; i++)
+          {
+            tempOriginal = *(framebuffer + templine * 99 * 2 + tempcol + 99);
+            tempcol++;
           
-                data_H1=Color_get(temp1>>6&0x03)<<6;      
-                data_H2=Color_get(temp1>>4&0x03)<<4;
-                data_L1=Color_get(temp1>>2&0x03)<<2;
-                data_L2=Color_get(temp1&0x03);
-                
-                data=data_H1|data_H2|data_L1|data_L2;
-                SendData(data);
-              }
-            }   
-            
-            
-            SendCommand(0xA2);
-            SendData(0x02);
-            SendCommand(0x10);        
-            for(i=0;i<Gate_BITS/2;i++)  //Source_BITS*Gate_BITS/4
-            { 
-              for(j=Source_BITS/4;j<2*Source_BITS/4;j++)
-              {   
-                temp1=*(framebuffer + ((272-i-1)*2*Source_BITS/4+j)); 
+            if (tempcol > 99)
+            {
+              templine1 = 271 - templine;
+              tempOriginal = *(framebuffer + templine1 * 99 * 2 + tempcol + 99 - 99 - 1);
+            }
+            if (tempcol >= 99 * 2)
+            {
+              templine++;
+              tempcol = 0;
+            }
+            SendData(tempOriginal);
+          }
+          tempcol = 0;
+          templine = 0;
+          templine1 = 271;
           
-                data_H1=Color_get(temp1>>6&0x03)<<6;      
-                data_H2=Color_get(temp1>>4&0x03)<<4;
-                data_L1=Color_get(temp1>>2&0x03)<<2;
-                data_L2=Color_get(temp1&0x03);
-                
-                data=data_H1|data_H2|data_L1|data_L2;
-                SendData(data);
-              } 
-            
-              for(j=Source_BITS/4;j<2*Source_BITS/4;j++)
-              {   
-                temp1=*(framebuffer + (i*2*Source_BITS/4+j)); 
-          
-                data_H1=Color_get(temp1>>6&0x03)<<6;      
-                data_H2=Color_get(temp1>>4&0x03)<<4;
-                data_L1=Color_get(temp1>>2&0x03)<<2;
-                data_L2=Color_get(temp1&0x03);
-                
-                data=data_H1|data_H2|data_L1|data_L2;
-                SendData(data);
-              }
-            }     
+          SendCommand(0xA2);
+          SendData(0x02); // S
+          SendCommand(0x10);
+          for (i = 0; i < 26928; i++)
+          {
+            tempOriginal = *(framebuffer + templine * 99 * 2 + tempcol);
+            tempcol++;
+            if (tempcol > 99)
+            {
+              templine1 = 271 - templine;
+              tempOriginal = *(framebuffer + templine1 * 99 * 2 + tempcol - 99 - 1);
+            }
+            if (tempcol >= 99 * 2)
+            {
+              templine++;
+              tempcol = 0;
+            }
+            SendData(tempOriginal);
+          }
+
       }
       else if(EPD_TYPE == "EPD579B")
       {
@@ -525,8 +452,6 @@ void EPD::RefreshCanvas()
      {
        mySerial -> println("DEPG0579RYT158FxX (RefreshCanvas)function start...");
        SPI_Begin();
-       SendCommand(0x04);
-       WaitUntilIdle();
        SendCommand(0xA2); 
        SendData(0x00);         
        SendCommand(0x12); 
@@ -735,49 +660,138 @@ void EPD::Wakeup()
         }
         else if(EPD_TYPE == "DEPG0579RYT158FxX")
         {
-          int Source_BITS = 792/2;
-          int Gate_BITS = 272;
+          
           mySerial -> println("DEPG0579RYT158FxX Init...");
           WaitUntilIdle();
-          SPI_Begin(); 
-          SendCommand(0xA2);
-          SendData(0x01);
+          SendCommand(0xE6);
+          SendData(0x16);
+          SendCommand(0xE0);
+          SendData(0x03);
+          delay(10);
+          SendCommand(0xA5);
+          WaitUntilIdle();
           
-          SendCommand(0x00);  //PSR
+          SendCommand(0xA2);
+          SendData(0x01); // M
+          SendCommand(0x00);
+          SendData(0x03);
+          SendData(0x29);
+          SendCommand(0xA2);
+          SendData(0x00);
+          
+          SendCommand(0xA2);
+          SendData(0x02); // S
+          SendCommand(0x00);
           SendData(0x07);
           SendData(0x29);
-        
           SendCommand(0xA2);
+          SendData(0x00);
+          
+          SendCommand(0x01);
+          SendData(0x07);
+          SendData(0x00);
+          SendData(0x28);
+          SendData(0x78);
+          SendData(0x24);
+          SendData(0x2C);
+          
+          /* Extend VGL discharging time start */
+          SendCommand(0x03); // POFS
+          SendData(0x10);
+          SendData(0x54);
+          SendData(0x00);
+          /* Extend VGL discharging time end */
+          
+          SendCommand(0x06);
+          SendData(0xC0);
+          SendData(0xC0);
+          SendData(0xC0);
+          
+          SendCommand(0x30); // frame go with waveform
           SendData(0x02);
           
-          SendCommand(0x00);  //PSR
-          SendData(0x03);
-          SendData(0x29);  
+          SendCommand(0x41);
+          SendData(0x00);
           
-          SendCommand(0xA2);
-          SendData(0x00);  
+          SendCommand(0x50);
+          SendData(0x37);
           
-          SendCommand(0x06);//BTST
-          SendData(0x32);
-          SendData(0x32);
-          SendData(0x32);
-          SendData(0x32);
-        
-          SendCommand(0x61);//0x61 
-          SendData(Source_BITS/256); 
-          SendData(Source_BITS%256); 
-          SendData(Gate_BITS/256); 
-          SendData(Gate_BITS%256); 
-        
-          SendCommand(0x50);//CDI
-          SendData(0x97);  //border white
+          SendCommand(0x60);
+          SendData(0x02);
+          SendData(0x02);
+          
+          SendCommand(0x61);
+          SendData(0x01);
+          SendData(0x8c);
+          SendData(0x01);
+          SendData(0x10);
+          
+          SendCommand(0x65);
+          SendData(0x00);
+          SendData(0x00);
+          SendData(0x00);
+          SendData(0x00);
+          
+          SendCommand(0x82); 
+          SendData(0xaC);
+          
+          SendCommand(0xE7);
+          SendData(0x1C);
+          
+          SendCommand(0xE3);
+          SendData(0x77);
+          
+          //   SendCommand(0xE0);
+          //   SendData(0x00);
+          
+          SendCommand(0xFF);
+          SendData(0xA5);
+          
+          /* improve pwm start */
+          SendCommand(0xEF);
+          SendData(0X01);
+          SendData(0X1E);
+          SendData(0X06);
+          SendData(0X1E);
+          SendData(0X0E);
+          SendData(0x1C);
+          SendData(0x21);
+          SendData(0X10);
+          /* improve pwm end */
+          
+          SendCommand(0xDB);
+          SendData(0x00);
+          
+          SendCommand(0xF9);
+          SendData(0x00);
+          
+          SendCommand(0xCF);
+          SendData(0x00);
+          
+          SendCommand(0xDF);
+          SendData(0x3F);
+          
+          SendCommand(0xFD);
+          SendData(0x01);
+          
+          SendCommand(0xE8);
+          SendData(0x00);
+          SendCommand(0xDC);
+          SendData(0x00);
+          
+          SendCommand(0xDD);
+          SendData(0x01);
+          
+          /* improve pwm start */
+          SendCommand(0xDE);
+          SendData(0x15);
+          /* improve pwm end  */
+          
+          SendCommand(0xFF);
+          SendData(0xE3);
           
           SendCommand(0xE9);
-          SendData(0x01);  
-          
-          SendCommand(0xE0);
-          SendData(0x01);  
-        
+          SendData(0x01);
           SendCommand(0x04); //Power on
           WaitUntilIdle();
         }
@@ -881,12 +895,13 @@ void EPD::Wakeup()
           SendCommand(0x00);
           SendData(0x03);
           SendData(0x29);
-          
+          SendCommand(0xA2); //Slave
+          SendData(0x00);
       
           //-------------------------------------//  
+       
           SendCommand(0xA2); //Slave
           SendData(0x02);
-          
           SendCommand(0x00);
           SendData(0x07);
           SendData(0x29);
@@ -897,17 +912,21 @@ void EPD::Wakeup()
           
           SendCommand(0x01);
           SendData(0x07);
-         
+          SendData(0x00);
+          SendData(0x28);
+          SendData(0x78);
+          SendData(0x24);
+          SendData(0x2C);
+          
           SendCommand(0x03);
           SendData(0x10);
           SendData(0x54);
-          SendData(0x44);
+          SendData(0x00);
           
           SendCommand(0x06);
-          SendData(0x38);
-          SendData(0x38);
-          SendData(0x38);
-          SendData(0x00);
+          SendData(0xC0);
+          SendData(0xC0);
+          SendData(0xC0);
         
           SendCommand(0x30);
           SendData(0x02);
@@ -916,7 +935,7 @@ void EPD::Wakeup()
           SendData(0x00);
         
           SendCommand(0x50);
-          SendData(0x97);
+          SendData(0x37);
           
           SendCommand(0x60);
           SendData(0x02);
@@ -944,14 +963,14 @@ void EPD::Wakeup()
           SendData(0xA5);
           
           SendCommand(0xEF);
-          SendData(0x01);
-          SendData(0x2D);
-          SendData(0x08);
-          SendData(0x14);
-          SendData(0x0C);
+          SendData(0X01);
+          SendData(0X1E);
+          SendData(0X06);
+          SendData(0X1E);
+          SendData(0X0E);
           SendData(0x1C);
-          SendData(0x0E);
-          SendData(0x07);
+          SendData(0x21);
+          SendData(0X10);
           
           SendCommand(0xDB);   
           SendData(0x00);
@@ -963,23 +982,27 @@ void EPD::Wakeup()
           SendData(0x00);
           
           SendCommand(0xDF);   
-          SendData(0x00);
+          SendData(0x3F);
           
           SendCommand(0xFD);   
           SendData(0x01);
           
           SendCommand(0xE8);
-          SendData(0x03);
+          SendData(0x00);
           
           SendCommand(0xDC);
           SendData(0x00);
           SendCommand(0xDD);
-          SendData(0x0A);
+          SendData(0x01);
           SendCommand(0xDE);
-          SendData(0x41);
+          SendData(0x15);
         
           SendCommand(0xFF);
           SendData(0xE3);
+
+          SendCommand(0xE9);
+          SendData(0xE1);
+          
           SPI_End();
         }
         else if(EPD_TYPE == "EPD213_BRW_V0")
@@ -1129,7 +1152,7 @@ void EPD::WaitUntilIdle()
       int retry = 0 ;
       while(true)
       {
-         if(retry >= 100)
+         if(retry >= 300)
          {
             mySerial -> print("e-Paper (DEPG0579RYT158FxX) read pin busy timeout...\r\n ");
             break;

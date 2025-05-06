@@ -67,11 +67,9 @@ namespace EInkSync589
             try
             {
                 UDP_Class uDP_Class = new UDP_Class(ServerIP, 29000);
-                List<DataTable> dataTables = MyOffice.ExcelClass.NPOI_LoadFile2DataTables($"{desktopPath}\\wall2.xlsx");
+                List<DataTable> dataTables = MyOffice.ExcelClass.NPOI_LoadFile2DataTables($"{desktopPath}\\wall46-47.xlsx");
                 Dictionary<string, List<object[]>> tableDeviceMap = new Dictionary<string, List<object[]>>();
-                List<Task> drawTasks = new List<Task>();
 
-                // 先統計所有裝置數量（總進度用）
                 int totalDrawCount = 0;
                 foreach (var table in dataTables)
                 {
@@ -82,18 +80,19 @@ namespace EInkSync589
                 }
 
                 int globalIndex = 0;
+                List<Task> tasks = new List<Task>();
+
                 foreach (var kvp in tableDeviceMap)
                 {
                     var list = kvp.Value;
-                    for (int i = 0; i < list.Count; i++)
+                    foreach (var value in list)
                     {
-                        var value = list[i];
-                        string filename = value[0].ToString();
-                        string ip = $"192.168.{value[1]}";
-
-                        drawTasks.Add(Task.Run(() =>
+                        tasks.Add(Task.Run(() =>
                         {
                             int current = System.Threading.Interlocked.Increment(ref globalIndex);
+                            string filename = value[0].ToString();
+                            string ip = $"192.168.{value[1]}";
+
                             try
                             {
                                 using (Bitmap bmp = new Bitmap(filename))
@@ -108,52 +107,26 @@ namespace EInkSync589
                                 Console.WriteLine($"{ip} Exception: {ex.Message} ({current}/{totalDrawCount})");
                                 Logger.Log(ip, $"Exception: {ex.Message}", current, totalDrawCount);
                             }
+
+                            try
+                            {
+                                bool result = Communication.EPD_RefreshCanvas(uDP_Class, ip);
+                                Console.WriteLine(result ? $"{ip} ✅ Refresh OK ({current}/{totalDrawCount})" : $"{ip} ❌ Refresh FAIL ({current}/{totalDrawCount})");
+                                if (!result) Logger.Log(ip, "Refresh FAIL", current, totalDrawCount);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"{ip} Exception: {ex.Message} ({current}/{totalDrawCount})");
+                                Logger.Log(ip, $"Exception: {ex.Message}", current, totalDrawCount);
+                            }
+
+                            System.Threading.Thread.Sleep(100); // Optional delay between each device
                         }));
                     }
                 }
 
-                Task.WhenAll(drawTasks).Wait();
-                Console.WriteLine("✅ 所有圖片上傳完成");
-
-                int maxDevices = GetMaxDeviceCount(tableDeviceMap);
-                int batchSize = 14;
-
-                for (int start = 0; start < maxDevices; start += batchSize)
-                {
-                    List<Task> refreshTasks = new List<Task>();
-
-                    foreach (var kvp in tableDeviceMap)
-                    {
-                        var list = kvp.Value;
-                        int total = list.Count;
-
-                        for (int i = start; i < start + batchSize && i < total; i++)
-                        {
-                            var value = list[i];
-                            string ip = $"192.168.{value[1]}";
-                            int current = i + 1;
-
-                            refreshTasks.Add(Task.Run(() =>
-                            {
-                                try
-                                {
-                                    bool result = Communication.EPD_SPIdata_and_RefreshCanvas(uDP_Class, ip);
-                                    Console.WriteLine(result ? $"{ip} ✅ Refresh OK ({current}/{total})" : $"{ip} ❌ Refresh FAIL ({current}/{total})");
-                                    if (!result) Logger.Log(ip, "Refresh FAIL", current, total);
-                                }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine($"{ip} Exception: {ex.Message} ({current}/{total})");
-                                    Logger.Log(ip, $"Exception: {ex.Message}", current, total);
-                                }
-                            }));
-                        }
-                    }
-
-                    Task.WhenAll(refreshTasks).Wait();
-                    Console.WriteLine($"🌀 第 {start / batchSize + 1} 批刷新完成，等待 1 秒...");
-                    System.Threading.Thread.Sleep(1000);
-                }
+                Task.WhenAll(tasks).Wait();
+                Console.WriteLine("✅ 所有圖片上傳與刷新完成");
             }
             catch (Exception ex)
             {
@@ -165,8 +138,8 @@ namespace EInkSync589
 
         static bool ShouldProcessTable(string tableName)
         {
-            string[] wallTables = { "花蓮", "台東", "高雄", "台南", "台北左", "台北右" };
-            string[] tableTables = { "台中", "嘉義" };
+            string[] wallTables = { "花蓮", "台東", "高雄", "台南", "台北左", "台北右" , "台中", "嘉義" };
+            string[] tableTables = {  };
 
             if (wallTables.Contains(tableName)) return flag_wall_refresh;
             if (tableTables.Contains(tableName)) return flag_table_refresh;
