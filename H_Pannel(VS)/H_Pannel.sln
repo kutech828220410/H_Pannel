@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H_Pannel_Debug", "H_Pannel_Debug\H_Pannel_Debug.csproj", "{D352DB88-9AA9-4E27-94B6-D01406748230}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EInkSync213", "EInkSync213\EInkSync213.csproj", "{0191138C-546E-4902-B7A3-474AF4AD8BF6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EinkSyncTest", "EinkSyncTest\EinkSyncTest.csproj", "{F4C4C911-5BFC-48EA-ACEB-DFDC12BA24DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EinkSync579_wall", "EinkSync579_wall\EinkSync579_wall.csproj", "{58BA07D5-6C3C-406A-95D7-B3D3B20FCACF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{F4C4C911-5BFC-48EA-ACEB-DFDC12BA24DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4C4C911-5BFC-48EA-ACEB-DFDC12BA24DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4C4C911-5BFC-48EA-ACEB-DFDC12BA24DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58BA07D5-6C3C-406A-95D7-B3D3B20FCACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58BA07D5-6C3C-406A-95D7-B3D3B20FCACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58BA07D5-6C3C-406A-95D7-B3D3B20FCACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58BA07D5-6C3C-406A-95D7-B3D3B20FCACF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
