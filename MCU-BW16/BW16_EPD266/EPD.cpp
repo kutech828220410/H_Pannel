@@ -461,14 +461,16 @@ void EPD::RefreshCanvas()
      }
      else if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
      {
-       mySerial -> println("EPD579G (RefreshCanvas)function start...");
+       mySerial -> print(EPD_TYPE);
+       mySerial -> println(" (RefreshCanvas)function start...");
        SPI_Begin();
        SendCommand(0x04);
        delay(200);
        SendCommand(0x12);
        SendData(0x00);
        SPI_End();
-       mySerial -> println("EPD579G (RefreshCanvas)function done...");
+       mySerial -> print(EPD_TYPE);
+       mySerial -> println(" (RefreshCanvas)function done...");
      }
      
      else
@@ -1223,13 +1225,14 @@ void EPD::Sleep()
           SendData(0xA5);
           SPI_End();
         }
-        else if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
-        {
-          SPI_Begin();
-          SendCommand(0x07); 
-          SendData(0xA5);
-          SPI_End();
-        }
+//        else if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
+//        {
+//          mySerial -> println("Sleep ....");
+//          SPI_Begin();
+//          SendCommand(0x07); 
+//          SendData(0xA5);
+//          SPI_End();
+//        }
         else if(EPD_TYPE == "EPD579B")
         {
           SPI_Begin();
