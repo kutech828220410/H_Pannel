@@ -162,16 +162,12 @@ void onPacketCallBack()
           else if(*(UdpRead + 1) == 'f' && UdpRead_len == 3)
           {
             if(flag_udp_232back)printf("EPD RefreshCanvas\n");
-            
+            Get_Checksum_UDP();
             epd.RefreshCanvas();
             delay(100);
-            myWS2812.ClearBytes();
-            
+            myWS2812.ClearBytes();           
             flag_WS2812B_breathing_Ex_lightOff = true;
-//            flag_WS2812B_Refresh = true;
-//            flag_WS2812B_breathing_ON_OFF = false;
-            Get_Checksum_UDP();
-           
+                     
           }  
           else if(*(UdpRead + 1) == 'g' && UdpRead_len == 3)
           {                                  

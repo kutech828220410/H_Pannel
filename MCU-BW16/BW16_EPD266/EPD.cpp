@@ -459,7 +459,7 @@ void EPD::RefreshCanvas()
        SPI_End();
        mySerial -> println("DEPG0579RYT158FxX (RefreshCanvas)function done...");
      }
-     else if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
+     else if(EPD_TYPE == "EPD579G")
      {
        mySerial -> print(EPD_TYPE);
        mySerial -> println(" (RefreshCanvas)function start...");
@@ -472,7 +472,23 @@ void EPD::RefreshCanvas()
        mySerial -> print(EPD_TYPE);
        mySerial -> println(" (RefreshCanvas)function done...");
      }
-     
+     else if(EPD_TYPE == "EPD213_BRW_V0")
+     {
+       mySerial -> print(EPD_TYPE);
+       mySerial -> println(" (RefreshCanvas)function start...");
+       SPI_Begin();
+       SendCommand(0x04);
+       WaitUntilIdle();
+       SendCommand(0x12);
+       SendData(0x00);
+       WaitUntilIdle();
+       SendCommand(0x02);
+       SendData(0x00);
+       WaitUntilIdle();
+       SPI_End();
+       mySerial -> print(EPD_TYPE);
+       mySerial -> println(" (RefreshCanvas)function done...");
+     }
      else
      {
        SPI_Begin();
