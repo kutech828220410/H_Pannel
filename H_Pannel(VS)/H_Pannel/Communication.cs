@@ -5137,7 +5137,7 @@ namespace H_Pannel_lib
                 int cnt = 0;
                 MySerialPort.ClearReadByte();
                 List<byte> list_byte = new List<byte>();
-                list_byte.Add(2);
+                //list_byte.Add(2);
                 list_byte.Add((byte)(station));
                 list_byte.Add((byte)(UART_Command.RS485_GetIO));
                 list_byte.Add(3);
@@ -5238,7 +5238,7 @@ namespace H_Pannel_lib
                 int cnt = 0;
                 MySerialPort.ClearReadByte();
                 List<byte> list_byte = new List<byte>();
-                list_byte.Add(2);
+                //list_byte.Add(2);
                 list_byte.Add((byte)(station));
                 list_byte.Add((byte)(UART_Command.RS485_SetOutput));
                 list_byte.Add((byte)(output >> 0));
@@ -5330,7 +5330,7 @@ namespace H_Pannel_lib
                 int cnt = 0;
                 MySerialPort.ClearReadByte();
                 List<byte> list_byte = new List<byte>();
-                list_byte.Add(2);
+                //list_byte.Add(2);
                 list_byte.Add((byte)(station));
                 list_byte.Add((byte)(UART_Command.RS485_SetOutputPIN));
                 list_byte.Add((byte)(PIN >> 0));
