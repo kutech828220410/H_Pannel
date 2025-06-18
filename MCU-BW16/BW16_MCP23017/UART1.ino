@@ -67,7 +67,7 @@ void serialEvent1()
        mySerial_485.println(" UART1 TEST OK!");
        Set_RS485_Rx_Enable();
     }
-    if ( (UART1_RX[UART1_len - 3] == 3) && ((byte)wiFiConfig.station == UART1_RX[1]))
+    if ( (UART1_RX[UART1_len - 3] == 3) && ((byte)wiFiConfig.station == UART1_RX[0]))
     {
        uint16_t CRC16 = 0;
        byte read_CRC16_L =  UART1_RX[UART1_len - 2];
