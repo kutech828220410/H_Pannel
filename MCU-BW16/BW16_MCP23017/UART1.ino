@@ -77,7 +77,7 @@ void serialEvent1()
        CRC16 = Get_CRC16(UART1_RX , UART1_len);
        caculate_CRC16_L = CRC16;
        caculate_CRC16_H = CRC16 >> 8;
-       byte command = UART1_RX[2];
+       byte command = UART1_RX[1];
        if(CRC16 == 0)
        {
            if(command == 'E')
@@ -90,14 +90,13 @@ void serialEvent1()
                byte output_H = output >> 8;
                byte len = 10;
                byte tx[len];
-               tx[0] = 2;
-               tx[1] = (byte)wiFiConfig.station;
-               tx[2] = command;
-               tx[3] = input_L;
-               tx[4] = input_H;
-               tx[5] = output_L;
-               tx[6] = output_H;
-               tx[7] = 3;
+               tx[0] = (byte)wiFiConfig.station;
+               tx[1] = command;
+               tx[2] = input_L;
+               tx[3] = input_H;
+               tx[4] = output_L;
+               tx[5] = output_H;
+               tx[6] = 3;
                CRC16 = Get_CRC16(tx , len - 2);
                caculate_CRC16_L = CRC16;
                caculate_CRC16_H = CRC16 >> 8;
@@ -113,18 +112,17 @@ void serialEvent1()
            }
            else if(command == 'F')
            {
-               int output_L = UART1_RX[3]; 
-               int output_H = UART1_RX[4];
+               int output_L = UART1_RX[2]; 
+               int output_H = UART1_RX[3];
                int output = output_L | (output_H << 8);
                output = ~output;
                byte len = 8;
                byte tx[len];
-               tx[0] = 2;
-               tx[1] = (byte)wiFiConfig.station;
-               tx[2] = command;
-               tx[3] = output_L;
-               tx[4] = output_H;
-               tx[5] = 3;
+               tx[0] = (byte)wiFiConfig.station;
+               tx[1] = command;
+               tx[2] = output_L;
+               tx[3] = output_H;
+               tx[4] = 3;
                CRC16 = Get_CRC16(tx , len - 2);
                caculate_CRC16_L = CRC16;
                caculate_CRC16_H = CRC16 >> 8;
@@ -139,16 +137,15 @@ void serialEvent1()
            }
            else if(command == 'G')
            {
-               int PIN = UART1_RX[3]; 
-               int state = UART1_RX[4];
+               int PIN = UART1_RX[2]; 
+               int state = UART1_RX[3];
                byte len = 8;
                byte tx[len];
-               tx[0] = 2;
-               tx[1] = (byte)wiFiConfig.station;
-               tx[2] = command;
-               tx[3] = PIN;
-               tx[4] = state;
-               tx[5] = 3;
+               tx[0] = (byte)wiFiConfig.station;
+               tx[1] = command;
+               tx[2] = PIN;
+               tx[3] = state;
+               tx[4] = 3;
                CRC16 = Get_CRC16(tx , len - 2);
                caculate_CRC16_L = CRC16;
                caculate_CRC16_H = CRC16 >> 8;

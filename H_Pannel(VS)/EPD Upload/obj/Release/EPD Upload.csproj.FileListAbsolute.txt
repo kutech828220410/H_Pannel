@@ -370,3 +370,4 @@ C:\Users\User'\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upl
 C:\Users\User'\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.csproj.Up2Date
 C:\Users\User'\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.exe
 C:\Users\User'\Source\Repos\H_Pannel\H_Pannel(VS)\EPD Upload\obj\Release\EPD Upload.pdb
+C:\Users\User'\source\repos\H_Pannel\H_Pannel(VS)\EPD Upload\bin\Release\H_Pannel_lib.pdb

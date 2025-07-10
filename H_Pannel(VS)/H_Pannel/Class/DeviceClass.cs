@@ -420,11 +420,17 @@ namespace H_Pannel_lib
                 _Name = value;
             }
         }
+        private string _Inventory = "";
+        [JsonInclude]
         public string Inventory
         {
             get
             {
                 return this.取得庫存().ToString();
+            }
+            set
+            {
+                _Inventory = this.取得庫存().ToString();
             }
         }
 
