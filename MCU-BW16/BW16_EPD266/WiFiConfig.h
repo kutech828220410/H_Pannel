@@ -4,6 +4,7 @@
 #include "UDP.h"
 #include <WiFi.h>
 #include <SoftwareSerial.h>
+#include <PubSubClient.h>
 
 class WiFiConfig
 {
@@ -20,6 +21,11 @@ class WiFiConfig
    int uDP_SemdTime = 0;
    int input_dir = 0;
    int output_dir = 0;
+   WiFiClient wifiClient;
+   PubSubClient client;
+ 
+   void MQTT_callback(char* topic, byte* payload, unsigned int length);  
+   void MQTT_reconnect();
    void WIFI_Connenct();
    void WIFI_Disconnenct();
    void Init(String Version);

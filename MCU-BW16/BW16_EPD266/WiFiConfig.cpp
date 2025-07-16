@@ -8,9 +8,66 @@
 #include "lwip/netif.h"
 #include "wifi_drv.h"
 #include "wifi_conf.h"
+#include <PubSubClient.h>
+#include "Config.h"
+
+void WiFiConfig::MQTT_callback(char* topic, byte* payload, unsigned int length) 
+{
+    mySerial -> print("Message arrived [");
+    mySerial -> print(topic);  // 顯示主題
+    mySerial -> print("] ");
+    for (int i = 0; i < length; i++) 
+    {
+        mySerial -> print((char)(payload[i]));  // 顯示接收到的內容（假設是文字）
+    }
+    mySerial -> println();
+}
+void WiFiConfig::MQTT_reconnect() 
+{
+    client.loop();
+    if (client.connected()) return;
+
+    while (!client.connected()) 
+    {
+        String ip = Get_IPAdress_Str();
+        const char* clientId = ip.c_str();
+
+        mySerial->println("=== MQTT 重新連線中 ===");
+
+        mySerial->print("Broker IP: ");
+        mySerial->println(server_IPAdress);
+
+        mySerial->print("Port: ");
+        mySerial->println(1883);
+
+        mySerial->print("Client ID: ");
+        mySerial->println(clientId);
+
+        mySerial->print("Connecting...");
+
+        client.setKeepAlive(2);  // ✅ 正確設定 keepAlive
+
+        if (client.connect(clientId)) 
+        {
+            mySerial->println("Connected");
+            client.publish("connected", "test");
+            client.subscribe("client_test");
+        } 
+        else 
+        {
+            mySerial->print("Failed, rc=");
+            mySerial->print(client.state());
+            mySerial->println(" - retry in 2s");
+            delay(2000);
+        }
+    }
+}
+
+
 
 //
-void WiFiConfig::setMacAddress() {
+void WiFiConfig::setMacAddress() 
+{
     // 讀取當前 MAC 地址
     uint8_t currentMac[6];
     WiFi.macAddress(currentMac);
@@ -66,6 +123,20 @@ void WiFiConfig::Init(String Version)
     mySerial -> println(PC_Restart);   
     mySerial -> println(IsUpdate); 
     mySerial -> println(IsLocker); 
+    
+    #ifdef MQTT
+    mySerial -> println("初始化 MQTT client...");
+    client.setClient(wifiClient);
+    mySerial -> println("已指定 WiFi client");
+    
+    mySerial -> print("設定 MQTT 伺服器 IP: ");
+    mySerial -> println(server_IPAdress);  // IPAddress 類別支援 println
+    
+    client.setServer(server_IPAdress, 1883);
+    mySerial -> println("已設定 MQTT server: port 1883");  
+    #else
+
+    #endif
 
     //this -> WIFI_Connenct();
 

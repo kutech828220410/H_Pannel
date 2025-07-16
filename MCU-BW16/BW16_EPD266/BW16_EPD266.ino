@@ -181,7 +181,7 @@ void loop()
         wiFiConfig.Set_Serverport(30008);
       }
       #ifdef DHTSensor
-        dht.begin();
+      dht.begin();
       #endif
       Localport = wiFiConfig.Get_Localport();
       Serverport = wiFiConfig.Get_Serverport();
@@ -201,15 +201,12 @@ void loop()
       }
      
       xTaskCreate(Core0Task1,"Core0Task1", 1024,NULL,1,&Core0Task1Handle); 
-//      delay(200);    
       xTaskCreate(Core0Task2,"Core0Task2", 1024,NULL,1,&Core0Task2Handle);
-//      delay(200);
       flag_boradInit = true;
    }
    if(flag_boradInit)
    {
-      
-      
+            
       sub_IO_Program();
       if(WiFi.status() != WL_CONNECTED)
       {
@@ -221,8 +218,13 @@ void loop()
       }  
       if(WiFi.status() == WL_CONNECTED)
       {       
+          #ifdef MQTT
+          wiFiConfig.MQTT_reconnect();
+          
+          #else
           sub_UDP_Send();
           onPacketCallBack();
+          #endif
       } 
 
       
@@ -392,13 +394,7 @@ void WS2812B_breathing_Ex_ON_OFF()
          if(myWS2812.rgbBuffer[i * 3 + 0 + 0] != 0 || myWS2812.rgbBuffer[i * 3 + 0 + 1]!= 0 || myWS2812.rgbBuffer[i * 3 + 0 + 2] != 0)flag_black = false;
        }                                                  
        myWS2812.Show(bytes ,numofLED);
-//       if(flag_black == true)
-//       {
-//          WS2812B_breathing_Ex_ON_OFF_cnt = 0;
-//          flag_WS2812B_breathing_Ex_ON_OFF = false;
-//          myWS2812.Show(bytes ,numofLED);
-//          return;
-//       }
+
    }
    if(WS2812B_breathing_Ex_ON_OFF_cnt == 1)
    {
@@ -420,13 +416,7 @@ void WS2812B_breathing_Ex_ON_OFF()
          if(myWS2812.rgbBuffer[i * 3 + 0 + 0] != 0 || myWS2812.rgbBuffer[i * 3 + 0 + 1]!= 0 || myWS2812.rgbBuffer[i * 3 + 0 + 2] != 0)flag_black = false;
        }                                                  
        myWS2812.Show(bytes ,numofLED);
-//       if(flag_black == true)
-//       {
-//          WS2812B_breathing_Ex_ON_OFF_cnt = 0;
-//          flag_WS2812B_breathing_Ex_ON_OFF = false;   
-//          myWS2812.Show(bytes ,numofLED);       
-//          return;
-//       }
+
    }
    if(WS2812B_breathing_Ex_ON_OFF_cnt == 2)
    {

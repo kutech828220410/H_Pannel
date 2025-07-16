@@ -40,35 +40,35 @@ namespace MqttServerExample
             {
                 string topic = e.ApplicationMessage.Topic;
                 string payload = Encoding.UTF8.GetString(e.ApplicationMessage.Payload);
-                Console.WriteLine($"收到訊息 - 主題: {topic}，內容: {payload}");
+                Console.WriteLine($"[{e.ClientId}] 收到訊息 - 主題: {topic}，內容: {payload}");
                 return Task.CompletedTask;
             };
 
             await mqttServer.StartAsync();
             Console.WriteLine("MQTT Server 啟動完成，等待裝置連線中...");
 
-            // 啟動背景任務，每3秒列出目前連線裝置
-            _ = Task.Run(async () =>
-            {
-                while (true)
-                {
-                    var clients = await mqttServer.GetClientsAsync();
-                    Console.WriteLine("=== 目前連線裝置列表 ===");
-                    if (clients.Count == 0)
-                    {
-                        Console.WriteLine("(無連線裝置)");
-                    }
-                    else
-                    {
-                        foreach (var client in clients)
-                        {
-                            Console.WriteLine($"ClientId: {client.Id}");
-                        }
-                    }
-                    Console.WriteLine("========================");
-                    await Task.Delay(3000);
-                }
-            });
+            //// 啟動背景任務，每3秒列出目前連線裝置
+            //_ = Task.Run(async () =>
+            //{
+            //    while (true)
+            //    {
+            //        var clients = await mqttServer.GetClientsAsync();
+            //        Console.WriteLine("=== 目前連線裝置列表 ===");
+            //        if (clients.Count == 0)
+            //        {
+            //            Console.WriteLine("(無連線裝置)");
+            //        }
+            //        else
+            //        {
+            //            foreach (var client in clients)
+            //            {
+            //                Console.WriteLine($"ClientId: {client.Id}");
+            //            }
+            //        }
+            //        Console.WriteLine("========================");
+            //        await Task.Delay(3000);
+            //    }
+            //});
 
             Console.ReadKey();
 
