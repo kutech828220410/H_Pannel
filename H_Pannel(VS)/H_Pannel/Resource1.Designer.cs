@@ -109,5 +109,15 @@ namespace H_Pannel_lib {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 高警訊_4 {
+            get {
+                object obj = ResourceManager.GetObject("高警訊_4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

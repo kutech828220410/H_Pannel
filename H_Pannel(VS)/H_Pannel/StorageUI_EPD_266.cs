@@ -249,6 +249,7 @@ namespace H_Pannel_lib
         {
             清除畫布,
             測試資訊,
+            繪製面板,
             
         }
         private enum ContextMenuStrip_DeviceTable_IO設定
@@ -611,7 +612,36 @@ namespace H_Pannel_lib
                         }
                         Task allTask = Task.WhenAll(taskList);
                     }
+                    else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_DeviceTable_畫面設置.繪製面板.GetEnumName())
+                    {
+                        List<Task> taskList = new List<Task>();
+                        for (int i = 0; i < iPEndPoints.Count; i++)
+                        {
+                            string IP = iPEndPoints[i].Address.ToString();
+                            int Port = iPEndPoints[i].Port;
+                            Storage storage = this.SQL_GetStorage(IP);
+                            if (storage != null)
+                            {
+                                Bitmap bmp = Get_Storage_bmp(storage);
+                                int width = bmp.Width;
+                                int height = bmp.Height;
+                                bmp.RotateFlip(RotateFlipType.Rotate90FlipXY);
+                                byte[] bytes_BW = new byte[(height / 8) * width];
+                                byte[] bytes_RW = new byte[(height / 8) * width];
+                                Communication.BitmapToByte(bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD290_V2);
+                                string jsonString_RW = ByteToStringHex(bytes_RW);
+                                string jsonString_BW = ByteToStringHex(bytes_BW);
+                               
+                                taskList.Add(Task.Run(() =>
+                                {
+                                    DrawToEpd_UDP(IP, Port, bmp);
+                                    bmp.Dispose();
+                                }));
+                            }
 
+                        }
+                        Task allTask = Task.WhenAll(taskList);
+                    }
                 }
             }
             else if (selectedText == ContextMenuStrip_Main.IO設定.GetEnumName())
@@ -1179,7 +1209,10 @@ namespace H_Pannel_lib
 
             }
         }
-
+        public string ByteToStringHex(byte[] value)
+        {
+            return string.Join(",", value.Select(b => $"0x{b:X2}"));
+        }
         private void InitializeComponent()
         {
             this.SuspendLayout();

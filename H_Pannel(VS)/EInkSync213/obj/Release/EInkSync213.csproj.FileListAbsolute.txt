@@ -49,8 +49,6 @@ C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync213\bin\Releas
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync213\bin\Release\AxAltairUDrv.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync213\bin\Release\MVSDK.dll
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync213\bin\Release\stdole.dll
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync213\bin\Release\H_Pannel_lib.pdb
-C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync213\bin\Release\H_Pannel_lib.dll.config
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync213\bin\Release\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync213\bin\Release\System.Buffers.xml
 C:\Users\Administrator\source\repos\H_Pannel\H_Pannel(VS)\EInkSync213\bin\Release\System.Memory.xml

@@ -52,6 +52,7 @@ namespace H_Pannel_lib
         高警訊_1,
         高警訊_2,
         高警訊_3,
+        高警訊_4,
         LASA_1,
         LASA_2,
 
@@ -3301,6 +3302,10 @@ namespace H_Pannel_lib
                 if (vlaueClass.Value == enum_PictureType.高警訊_3.GetEnumName())
                 {
                     bitmap = Resource1.高警訊_3;
+                }
+                if (vlaueClass.Value == enum_PictureType.高警訊_4.GetEnumName())
+                {
+                    bitmap = Resource1.高警訊_4;
                 }
                 else if (vlaueClass.Value == enum_PictureType.LASA_1.GetEnumName())
                 {
