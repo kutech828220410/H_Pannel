@@ -27,11 +27,16 @@ void WiFiConfig::MQTT_reconnect()
     client.loop();
     if (client.connected()) return;
 
+    // 取得 MAC 字串作為 clientId
+    static char macStr[18];
+    uint8_t mac[6];
+    WiFi.macAddress(mac);
+    snprintf(macStr, sizeof(macStr), "%02X:%02X:%02X:%02X:%02X:%02X",
+             mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+    const char* clientId = macStr;
+
     while (!client.connected()) 
     {
-        String ip = Get_IPAdress_Str();
-        const char* clientId = ip.c_str();
-
         mySerial->println("=== MQTT 重新連線中 ===");
 
         mySerial->print("Broker IP: ");
@@ -40,7 +45,7 @@ void WiFiConfig::MQTT_reconnect()
         mySerial->print("Port: ");
         mySerial->println(1883);
 
-        mySerial->print("Client ID: ");
+        mySerial->print("Client ID (MAC): ");
         mySerial->println(clientId);
 
         mySerial->print("Connecting...");
@@ -50,8 +55,10 @@ void WiFiConfig::MQTT_reconnect()
         if (client.connect(clientId)) 
         {
             mySerial->println("Connected");
-            client.publish("connected", "test");
-            client.subscribe("client_test");
+            MQTT_publishMessage("connected", clientId , true); // 發佈自己的 MAC
+            #ifdef DHTSensor
+            client.subscribe("DHT");
+            #endif
         } 
         else 
         {
@@ -62,7 +69,28 @@ void WiFiConfig::MQTT_reconnect()
         }
     }
 }
+bool WiFiConfig::MQTT_publishMessage(const char* topic, const char* payload, bool retained)
+{
+    if (!client.connected()) {
+        mySerial->println("[MQTT] 尚未連線，無法發送訊息");
+        return false;
+    }
 
+    mySerial->print("[MQTT] 發送主題: ");
+    mySerial->print(topic);
+    mySerial->print("，內容: ");
+    mySerial->println(payload);
+
+    bool success = client.publish(topic, payload, retained);
+    
+    if (success) {
+        mySerial->println("[MQTT] 發送成功");
+    } else {
+        mySerial->println("[MQTT] 發送失敗");
+    }
+
+    return success;
+}
 
 
 //
@@ -87,7 +115,17 @@ void WiFiConfig::setMacAddress()
     wifi_change_mac_address_from_ram(0, currentMac);
 }
 
+char* WiFiConfig::getMacAddress()
+{
+    static char macStr[18]; // MAC 字串格式 "XX:XX:XX:XX:XX:XX" 共 17 字元 + 結尾字元
+    uint8_t mac[6];
+    WiFi.macAddress(mac);
 
+    snprintf(macStr, sizeof(macStr), "%02X:%02X:%02X:%02X:%02X:%02X",
+             mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+
+    return macStr;
+}
 
 void WiFiConfig::Init(String Version)
 {
@@ -151,19 +189,6 @@ void WiFiConfig::WIFI_Connenct()
 {
     WiFi.disablePowerSave();
     
-//    setMacAddress(netif_default);
-//    byte mac[6];
-//    WiFi.macAddress(mac);
-//    
-//    String HEX_0 =  String(mac[0], HEX); 
-//    String HEX_1 =  String(mac[1], HEX); 
-//    String HEX_2 =  String(mac[2], HEX); 
-//    String HEX_3 =  String(mac[3], HEX); 
-//    String HEX_4 =  String(mac[4], HEX); 
-//    String HEX_5 =  String(mac[5], HEX);   
-//    
-//    String MacAdress = "MacAdress :" + HEX_0 + ":"+ HEX_1 + ":"+ HEX_2 + ":"+ HEX_3 + ":"+ HEX_4 + ":"+ HEX_5;   
-//    mySerial -> println(MacAdress);
     
     byte* ipAdress_ptr = this -> Get_IPAdress();
     byte* gateway_ptr = this -> Get_Gateway();

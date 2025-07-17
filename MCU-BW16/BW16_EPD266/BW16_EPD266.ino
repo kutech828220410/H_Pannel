@@ -115,9 +115,7 @@ void loop()
       flag_OLCD_144_boradInit = true;
    }
    if(MyTimer_BoardInit.IsTimeOut() && !flag_boradInit)
-   {     
-
-      
+   {          
       mySerial.begin(115200);        
       mySerial.println(VERSION);  
       
@@ -219,12 +217,11 @@ void loop()
       if(WiFi.status() == WL_CONNECTED)
       {       
           #ifdef MQTT
-          wiFiConfig.MQTT_reconnect();
-          
-          #else
-          sub_UDP_Send();
+          wiFiConfig.MQTT_reconnect();        
+          #else         
           onPacketCallBack();
           #endif
+          sub_UDP_Send();
       } 
 
       
@@ -302,6 +299,7 @@ void Core0Task2( void * pvParameters )
           // Compute heat index in Celsius (isFahreheit = false)
           dht_hic = dht.computeHeatIndex(dht_t, dht_h, false);
           #endif
+          
           #ifdef HandSensor
           serial2Event();
           #endif

@@ -1,4 +1,6 @@
 #include "Arduino.h"
+#include "Config.h"
+
 int cnt_UDP_Send = 65534;
 MyTimer UDP_Send_Timer;
 DynamicJsonDocument doc(1024);
@@ -52,7 +54,15 @@ void sub_UDP_Send()
          #endif
          JsonOutput = "";
          serializeJson(doc, JsonOutput);
-         Send_StringTo(JsonOutput, wiFiConfig.server_IPAdress, wiFiConfig.serverport);
+         #ifdef MQTT
+         #ifdef DHTSensor
+         wiFiConfig.MQTT_publishMessage("DHTSensor" , JsonOutput.c_str() , false);  
+         #endif
+         #else
+         Send_StringTo(JsonOutput, wiFiConfig.server_IPAdress, wiFiConfig.serverport);      
+         #endif
+         
+              
          flag_JsonSend = false;
          cnt_UDP_Send++;
       }

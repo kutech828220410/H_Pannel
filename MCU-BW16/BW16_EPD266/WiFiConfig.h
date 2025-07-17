@@ -25,9 +25,11 @@ class WiFiConfig
    PubSubClient client;
  
    void MQTT_callback(char* topic, byte* payload, unsigned int length);  
+   bool MQTT_publishMessage(const char* topic, const char* payload, bool retained = false);
    void MQTT_reconnect();
    void WIFI_Connenct();
    void WIFI_Disconnenct();
+
    void Init(String Version);
    void Set_IPAdress(byte IP0 ,byte IP1 ,byte IP2 ,byte IP3);
    void Set_Subnet(byte IP0 ,byte IP1 ,byte IP2 ,byte IP3);  
@@ -49,6 +51,7 @@ class WiFiConfig
    void HandleClient();
    void httpInit();
    void setMacAddress();
+   char* getMacAddress();
    int GetRSSI();
    byte* Get_IPAdress();
    byte* Get_Subnet();
