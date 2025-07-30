@@ -191,7 +191,7 @@ namespace H_Pannel_lib
             {
                 if(boxes[i].IP == drawer.IP)
                 {
-                    if (color == Color.Black || check_lighton == false)
+                    if ((color.R == 0 && color.G == 0 && color.B == 0 ) || check_lighton == false)
                     {
                         led_bytes = Set_LEDBytes(drawer, boxes[i].Column, boxes[i].Row, color);
                         boxes[i].LightOn = false;

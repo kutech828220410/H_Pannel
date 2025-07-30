@@ -593,6 +593,7 @@ namespace H_Pannel_lib
     [Serializable]
     public class Drawer
     {
+        public bool flag_replace = false;
         public string serverIP = "";
         public uint serverPort = 0;
         public string dbName = "";
@@ -605,6 +606,17 @@ namespace H_Pannel_lib
         private string area = "";
         public string Area { get => area; set => area = value; }
 
+        private int _SortIndex = 0;
+        public int SortIndex
+        {
+            get => _SortIndex;
+            set
+            {
+                if (_SortIndex != value) flag_replace = true;
+                _SortIndex = value;
+            }
+
+        }
         [JsonIgnore]
         public byte[] LED_Bytes = new byte[NumOfLED * 3];
         [JsonIgnore]

@@ -1,6 +1,6 @@
 #define VERSION "Ver 1.5.501"
-#define MQTT
-#define DHTSensor
+//#define MQTT
+//#define DHTSensor
 //#define HandSensor
 //#define RowLED_Device
 //#define EPD213
@@ -13,6 +13,7 @@
 //#define EPD579B
 //#define DEPG0579RYT158FxX
 //#define EPD213_BRW_V0
+#define EPD7IN3E
 
 //#define OLCD_114
 //#define MCP23017
@@ -85,6 +86,12 @@
 #define EPD_WIDTH 198
 #define EPD_HEIGHT 272
 #define EPD_TYPE "DEPG0579RYT158FxX"
+#define EPD_Device
+
+#elif defined(EPD7IN3E)
+#define EPD_WIDTH 198
+#define EPD_HEIGHT 272
+#define EPD_TYPE "EPD7IN3E"
 #define EPD_Device
 
 #else

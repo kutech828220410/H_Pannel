@@ -152,6 +152,26 @@ void EPD::DrawFrame_RW()
 void EPD::RefreshCanvas()
 {
    SPI_Begin();
+
+//   SendCommand(0x04); // POWER_ON
+//   WaitUntilIdle();
+//
+//    //Second setting 
+//   SendCommand(0x06);
+//   SendData(0x6F);
+//   SendData(0x1F);
+//   SendData(0x17);
+//   SendData(0x49);
+//
+//   SendCommand(0x12); // DISPLAY_REFRESH
+//   SendData(0x00);
+//   WaitUntilIdle();
+//    
+//   SendCommand(0x02); // POWER_OFF
+//   SendData(0X00);
+//   WaitUntilIdle();
+
+
    SendCommand(0x04);  // POWER_ON
    WaitUntilIdle();
    delay(10);

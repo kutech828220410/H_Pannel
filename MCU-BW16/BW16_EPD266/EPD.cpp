@@ -210,9 +210,7 @@ void EPD::Clear()
       
        // WaitUntilIdle();
       xSemaphoreGive(xSpiMutex);
-    }
-    
-
+    }   
 }
 void EPD::DrawFrame_BW()
 {
@@ -614,503 +612,31 @@ void EPD::Wakeup()
         SPI_Begin();
         if(EPD_TYPE == "EPD420" || EPD_TYPE == "EPD420_D")
         {
-          mySerial -> println("EPD420 Init...");
-          SPI_Begin();
-          WaitUntilIdle();
-          SendCommand(0x12);//soft  reset
-          WaitUntilIdle();
-          SendCommand(0x3C); //BorderWavefrom
-          SendData(0x05);  
-      
-          SendCommand(0x18); //Read built-in temperature sensor
-          SendData(0x80); 
-      
-          SendCommand(0x11); //data entry mode       
-          SendData(0x03);
-      
-          SendCommand(0x44); //set Ram-X address start/end position   
-          SendData(0x00);
-          SendData(400/8-1);
-      
-          SendCommand(0x45); //set Ram-Y address start/end position          
-          SendData(0x00);
-          SendData(0x00); 
-          SendData((300-1)%256);    
-          SendData((300-1)/256);
-      
-          SendCommand(0x4E);   // set RAM x address count to 0;
-          SendData(0x00);
-          SendCommand(0x4F);   // set RAM y address count to 0X199;    
-          SendData(0x00);    
-          SendData(0x00);
+            EPD420_init();
         }
         else if(EPD_TYPE == "EPD583")
         {
-          mySerial -> println("EPD583 Init...");
-          SPI_Begin(); 
-          SendCommand(0x01);      //POWER SETTING
-          SendData (0x07);    //VGH=20V,VGL=-20V
-          SendData (0x07);    //VGH=20V,VGL=-20V
-          SendData (0x3f);    //VDH=15V
-          SendData (0x3f);    //VDL=-15V
-          SendCommand(0x04); //POWER ON
-         
-          WaitUntilIdle();
-          
-          SendCommand(0X00);      //PANNEL SETTING
-          SendData(0x0F);   //KW-3f   KWR-2F  BWROTP 0f BWOTP 1f
-        
-          SendCommand(0x61);          //tres      
-          SendData(0x02);    //source 648
-          SendData(0x88);
-          SendData(0x01);    //gate 480
-          SendData(0xe0);
-        
-          SendCommand(0X15);    
-          SendData(0x00);   
-        
-          SendCommand(0X50);      //VCOM AND DATA INTERVAL SETTING
-          SendData(0x11);
-          SendData(0x07);
-        
-          SendCommand(0X60);      //TCON SETTING
-          SendData(0x22);
+            EPD583_init();
+        }
+        else if(EPD_TYPE == "EPD7IN3E")
+        {
+            EPD7IN3E_init();
         }
         else if(EPD_TYPE == "DEPG0579RYT158FxX")
         {
-          
-          mySerial -> println("DEPG0579RYT158FxX Init...");
-          WaitUntilIdle();
-          SendCommand(0xE6);
-          SendData(0x16);
-          SendCommand(0xE0);
-          SendData(0x03);
-          delay(10);
-          SendCommand(0xA5);
-          WaitUntilIdle();
-          
-          SendCommand(0xA2);
-          SendData(0x01); // M
-          SendCommand(0x00);
-          SendData(0x03);
-          SendData(0x29);
-          SendCommand(0xA2);
-          SendData(0x00);
-          
-          SendCommand(0xA2);
-          SendData(0x02); // S
-          SendCommand(0x00);
-          SendData(0x07);
-          SendData(0x29);
-          SendCommand(0xA2);
-          SendData(0x00);
-          
-          SendCommand(0x01);
-          SendData(0x07);
-          SendData(0x00);
-          SendData(0x28);
-          SendData(0x78);
-          SendData(0x24);
-          SendData(0x2C);
-          
-          /* Extend VGL discharging time start */
-          SendCommand(0x03); // POFS
-          SendData(0x10);
-          SendData(0x54);
-          SendData(0x00);
-          /* Extend VGL discharging time end */
-          
-          SendCommand(0x06);
-          SendData(0xC0);
-          SendData(0xC0);
-          SendData(0xC0);
-          
-          SendCommand(0x30); // frame go with waveform
-          SendData(0x02);
-          
-          SendCommand(0x41);
-          SendData(0x00);
-          
-          SendCommand(0x50);
-          SendData(0x37);
-          
-          SendCommand(0x60);
-          SendData(0x02);
-          SendData(0x02);
-          
-          SendCommand(0x61);
-          SendData(0x01);
-          SendData(0x8c);
-          SendData(0x01);
-          SendData(0x10);
-          
-          SendCommand(0x65);
-          SendData(0x00);
-          SendData(0x00);
-          SendData(0x00);
-          SendData(0x00);
-          
-          SendCommand(0x82); 
-          SendData(0xaC);
-          
-          SendCommand(0xE7);
-          SendData(0x1C);
-          
-          SendCommand(0xE3);
-          SendData(0x77);
-          
-          //   SendCommand(0xE0);
-          //   SendData(0x00);
-          
-          SendCommand(0xFF);
-          SendData(0xA5);
-          
-          /* improve pwm start */
-          SendCommand(0xEF);
-          SendData(0X01);
-          SendData(0X1E);
-          SendData(0X06);
-          SendData(0X1E);
-          SendData(0X0E);
-          SendData(0x1C);
-          SendData(0x21);
-          SendData(0X10);
-          /* improve pwm end */
-          
-          SendCommand(0xDB);
-          SendData(0x00);
-          
-          SendCommand(0xF9);
-          SendData(0x00);
-          
-          SendCommand(0xCF);
-          SendData(0x00);
-          
-          SendCommand(0xDF);
-          SendData(0x3F);
-          
-          SendCommand(0xFD);
-          SendData(0x01);
-          
-          SendCommand(0xE8);
-          SendData(0x00);
-          SendCommand(0xDC);
-          SendData(0x00);
-          
-          SendCommand(0xDD);
-          SendData(0x01);
-          
-          /* improve pwm start */
-          SendCommand(0xDE);
-          SendData(0x15);
-          /* improve pwm end  */
-          
-          SendCommand(0xFF);
-          SendData(0xE3);
-          
-          SendCommand(0xE9);
-          SendData(0x01);
-          SendCommand(0x04); //Power on
-          WaitUntilIdle();
+            DEPG0579RYT158FxX_init();         
         }
         else if(EPD_TYPE == "EPD579B")
         {
-          mySerial -> println("EPD579B Init...");
-          SPI_Begin(); 
-          WaitUntilIdle();
-          SendCommand(0x12);  // POWER ON
-          WaitUntilIdle();
-      
-          SendCommand(0x18);  
-          SendData(0x80); 
-      
-          SendCommand(0x3C);  
-          SendData(0x01);      
-      
-          SendCommand(0x0C);  
-          SendData(0x8B); 
-          SendData(0x9C); 
-          SendData(0xE4); 
-          SendData(0x0F); 
-      
-          SendCommand(0x03);  
-          SendData(0x17);   
-      
-      
-              
-          SendCommand(0x01);  // Driver Output Control
-          SendData(0x0F);
-          SendData(0x01);
-          SendData(0x0E);
-          delay(100);
-          SendCommand(0x21);  // Display Update Control
-          SendData(0x00);
-          SendData(0x10);
-          delay(100);
-          
-          
-          
-          SendCommand(0x3C);  // 波形控制
-          SendData(0x01);
-          SendCommand(0x2C);  // 波形控制
-          SendData(0x38);
-
-          SendCommand(0x11);  // Data Entry Mode
-          SendData(0x01);  // 確保方向正確
-          delay(100);
-          SendCommand(0x44);  // Set RAM X Address
-          SendData(0x00);     // X Start Address
-          SendData(0x31);     // X End Address 
-          
-          SendCommand(0x45);  // Set RAM Y Address
-          SendData(0x0F);     // Y Start L
-          SendData(0x01);     // Y Start H
-          SendData(0x00);     // Y End L 
-          SendData(0x00);     // Y End H
-      
-          SendCommand(0x91);  
-          SendData(0x00);  
-          
-          SendCommand(0xC4);  // Set X Address Counter
-          SendData(0x31);
-          SendData(0x00);
-      
-          SendCommand(0xC5);  // Set X Address Counter
-          SendData(0x0F);
-          SendData(0x01);
-          SendData(0x00);
-          SendData(0x00);
-          
-          SendCommand(0x4E);  // Set X Address Counter
-          SendData(0x00);
-          
-          SendCommand(0x4F);  // Set Y Address Counter
-          SendData(0x0F);
-          SendData(0x01);
-      
-          SendCommand(0xCE);  // Set X Address Counter
-          SendData(0x31);
-          
-          SendCommand(0xCF);  // Set Y Address Counter
-          SendData(0x0F);
-          SendData(0x01);
-          SPI_End();
+            EPD579B_init();       
         }
         else if(EPD_TYPE == "EPD579G")
         {
-          mySerial -> println("EPD579G Init...");
-          SPI_Begin(); 
-          SendCommand(0xE0);
-          SendData(0x01);
-          
-          SendCommand(0xA5);
-          delay(500);
-//          WaitUntilIdle();
-          //--------------------------------------//  
-          SendCommand(0xA2); //Master
-          SendData(0x01);
-          
-          SendCommand(0x00);
-          SendData(0x03);
-          SendData(0x29);
-          SendCommand(0xA2); //Slave
-          SendData(0x00);
-      
-          //-------------------------------------//  
-       
-          SendCommand(0xA2); //Slave
-          SendData(0x02);
-          SendCommand(0x00);
-          SendData(0x07);
-          SendData(0x29);
-          
-          SendCommand(0xA2);
-          SendData(0x00);
-          //-------------------------------------//
-          
-          SendCommand(0x01);
-          SendData(0x07);
-          SendData(0x00);
-          SendData(0x28);
-          SendData(0x78);
-          SendData(0x24);
-          SendData(0x2C);
-          
-          SendCommand(0x03);
-          SendData(0x10);
-          SendData(0x54);
-          SendData(0x00);
-          
-          SendCommand(0x06);
-          SendData(0xC0);
-          SendData(0xC0);
-          SendData(0xC0);
-        
-          SendCommand(0x30);
-          SendData(0x02);
-        
-          SendCommand(0x41);
-          SendData(0x00);
-        
-          SendCommand(0x50);
-          SendData(0x37);
-          
-          SendCommand(0x60);
-          SendData(0x02);
-          SendData(0x02); 
-          
-          SendCommand(0x61);
-          SendData(0x01);
-          SendData(0x8C); 
-          SendData(0x01); 
-          SendData(0x10);
-          
-          SendCommand(0x65);
-          SendData(0x00);
-          SendData(0x00);
-          SendData(0x00);
-          SendData(0x00);
-          
-          SendCommand(0xE7);
-          SendData(0x1C);
-          
-          SendCommand(0xE3);
-          SendData(0x77);
-          
-          SendCommand(0xFF);
-          SendData(0xA5);
-          
-          SendCommand(0xEF);
-          SendData(0X01);
-          SendData(0X1E);
-          SendData(0X06);
-          SendData(0X1E);
-          SendData(0X0E);
-          SendData(0x1C);
-          SendData(0x21);
-          SendData(0X10);
-          
-          SendCommand(0xDB);   
-          SendData(0x00);
-          
-          SendCommand(0xF9);
-          SendData(0x00);
-          
-          SendCommand(0xCF);   
-          SendData(0x00);
-          
-          SendCommand(0xDF);   
-          SendData(0x3F);
-          
-          SendCommand(0xFD);   
-          SendData(0x01);
-          
-          SendCommand(0xE8);
-          SendData(0x00);
-          
-          SendCommand(0xDC);
-          SendData(0x00);
-          SendCommand(0xDD);
-          SendData(0x01);
-          SendCommand(0xDE);
-          SendData(0x15);
-        
-          SendCommand(0xFF);
-          SendData(0xE3);
-
-          SendCommand(0xE9);
-          SendData(0xE1);
-          
-          SPI_End();
+            EPD579G_init();        
         }
         else if(EPD_TYPE == "EPD213_BRW_V0")
         {
-          mySerial -> println("EPD213_BRW_V0 Init...");
-          SPI_Begin(); 
-          SendCommand(0x00);                                                                                                                                                                                 
-          SendData(0x07);
-          SendData(0x29);
-        
-          SendCommand(0x01);
-          SendData(0x07);
-         
-          SendCommand(0x03);
-          SendData(0x10);
-          SendData(0x54);
-          SendData(0x44);
-          
-          SendCommand(0x06);
-          SendData(0x40);
-          SendData(0x40);
-          SendData(0x40);
-          
-          SendCommand(0x30);
-          SendData(0x08);
-        
-          SendCommand(0x41);
-          SendData(0x00);
-        
-          SendCommand(0x50);
-          SendData(0x37);
-          
-          SendCommand(0x60);
-          SendData(0x03);
-          SendData(0x03);
-          
-          SendCommand(0x61);
-          SendData(0x00);
-          SendData(0x7C);
-          SendData(0x00);
-          SendData(0xFA);
-          
-          SendCommand(0x65);
-          SendData(0x00);
-          SendData(0x00);
-          SendData(0x00);
-          SendData(0x00);
-         
-          SendCommand(0xE7);
-          SendData(0x1C);
-          
-          SendCommand(0xE3);
-          SendData(0x00);
-          
-          SendCommand(0xE0);
-          SendData(0x00); 
-        
-        
-          
-          SendCommand(0xFF);        
-          SendData(0xA5);       
-          
-          SendCommand(0xEF);        // PWM Set
-          SendData(0x02);     
-          SendData(0x88);  
-          SendData(0x04); 
-          SendData(0x1A); 
-          SendData(0X06); 
-          SendData(0X15); 
-          SendData(0X08);
-          SendData(0X22);
-          
-          SendCommand(0xDA);        
-          SendData(0X08);     
-          
-          SendCommand(0xE8);   
-          SendData(0X08);     
-          
-          SendCommand(0xDC);//CPCK EN
-          SendData(0X01);
-          
-          SendCommand(0xDD);//CPCK EN
-          SendData(0X08); 
-          
-          SendCommand(0xDE);//CPCK EN
-          SendData(0X3C); 
-        
-          SendCommand(0xFF);        // Exit Test command    ***********
-          SendData(0xE3);  
-          SPI_End();
+            EPD213_BRW_V0_init();          
         }
         else
         {
@@ -1145,10 +671,8 @@ void EPD::WaitUntilIdle()
       unsigned char busy;
       SPI_Begin();
       do
-      {        
-         
-         SendCommand(0x71);
-         
+      {                
+         SendCommand(0x71);        
          busy = digitalRead(this -> PIN_BUSY);
       }
       while(busy);    
@@ -1183,7 +707,7 @@ void EPD::WaitUntilIdle()
          retry++;
       }
    }
-   else if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0")
+   else if(EPD_TYPE == "EPD579G" || EPD_TYPE == "EPD213_BRW_V0" || EPD_TYPE == "EPD7IN3E")
    {
       mySerial -> print("e-Paper busy H\r\n ");
       while(digitalRead(PIN_BUSY) == LOW) 
@@ -1275,6 +799,574 @@ void EPD::Sleep()
         }
         xSemaphoreGive(xSpiMutex);
     }
-   
+}
+void EPD::EPD420_init()
+{
+      mySerial -> println("EPD420 Init...");
+      SPI_Begin();
+      WaitUntilIdle();
+      SendCommand(0x12);//soft  reset
+      WaitUntilIdle();
+      SendCommand(0x3C); //BorderWavefrom
+      SendData(0x05);  
+  
+      SendCommand(0x18); //Read built-in temperature sensor
+      SendData(0x80); 
+  
+      SendCommand(0x11); //data entry mode       
+      SendData(0x03);
+  
+      SendCommand(0x44); //set Ram-X address start/end position   
+      SendData(0x00);
+      SendData(400/8-1);
+  
+      SendCommand(0x45); //set Ram-Y address start/end position          
+      SendData(0x00);
+      SendData(0x00); 
+      SendData((300-1)%256);    
+      SendData((300-1)/256);
+  
+      SendCommand(0x4E);   // set RAM x address count to 0;
+      SendData(0x00);
+      SendCommand(0x4F);   // set RAM y address count to 0X199;    
+      SendData(0x00);    
+      SendData(0x00);
+}
+void EPD::EPD583_init()
+{
+      mySerial -> println("EPD583 Init...");
+      SPI_Begin(); 
+      SendCommand(0x01);      //POWER SETTING
+      SendData (0x07);    //VGH=20V,VGL=-20V
+      SendData (0x07);    //VGH=20V,VGL=-20V
+      SendData (0x3f);    //VDH=15V
+      SendData (0x3f);    //VDL=-15V
+      SendCommand(0x04); //POWER ON
+     
+      WaitUntilIdle();
+      
+      SendCommand(0X00);      //PANNEL SETTING
+      SendData(0x0F);   //KW-3f   KWR-2F  BWROTP 0f BWOTP 1f
     
+      SendCommand(0x61);          //tres      
+      SendData(0x02);    //source 648
+      SendData(0x88);
+      SendData(0x01);    //gate 480
+      SendData(0xe0);
+    
+      SendCommand(0X15);    
+      SendData(0x00);   
+    
+      SendCommand(0X50);      //VCOM AND DATA INTERVAL SETTING
+      SendData(0x11);
+      SendData(0x07);
+    
+      SendCommand(0X60);      //TCON SETTING
+      SendData(0x22);
+}
+void EPD::EPD7IN3E_init()
+{
+      mySerial -> println("EPD7IN3E Init...");
+      SPI_Begin();   
+      SendCommand(0x04); //POWER ON       
+      WaitUntilIdle();         
+      SendCommand(0xAA);    // CMDH
+      SendData(0x49);
+      SendData(0x55);
+      SendData(0x20);
+      SendData(0x08);
+      SendData(0x09);
+      SendData(0x18);
+  
+      SendCommand(0x01);//
+      SendData(0x3F);
+  
+      SendCommand(0x00);  
+      SendData(0x5F);
+      SendData(0x69);
+  
+      SendCommand(0x03);
+      SendData(0x00);
+      SendData(0x54);
+      SendData(0x00);
+      SendData(0x44); 
+  
+      SendCommand(0x05);
+      SendData(0x40);
+      SendData(0x1F);
+      SendData(0x1F);
+      SendData(0x2C);
+  
+      SendCommand(0x06);
+      SendData(0x6F);
+      SendData(0x1F);
+      SendData(0x17);
+      SendData(0x49);
+  
+      SendCommand(0x08);
+      SendData(0x6F);
+      SendData(0x1F);
+      SendData(0x1F);
+      SendData(0x22);
+  
+      SendCommand(0x30);
+      SendData(0x03);
+      
+      SendCommand(0x50);
+      SendData(0x3F);
+  
+      SendCommand(0x60);
+      SendData(0x02);
+      SendData(0x00);
+  
+      SendCommand(0x61);
+      SendData(0x03);
+      SendData(0x20);
+      SendData(0x01); 
+      SendData(0xE0);
+  
+      SendCommand(0x84);
+      SendData(0x01);
+  
+      SendCommand(0xE3);
+      SendData(0x2F);
+  
+      SendCommand(0x04);     //PWR on  
+      WaitUntilIdle();  
+      mySerial -> println("EPD7IN3E done...");  
+}
+void EPD::DEPG0579RYT158FxX_init()
+{
+      mySerial -> println("DEPG0579RYT158FxX Init...");
+      WaitUntilIdle();
+      SendCommand(0xE6);
+      SendData(0x16);
+      SendCommand(0xE0);
+      SendData(0x03);
+      delay(10);
+      SendCommand(0xA5);
+      WaitUntilIdle();
+      
+      SendCommand(0xA2);
+      SendData(0x01); // M
+      SendCommand(0x00);
+      SendData(0x03);
+      SendData(0x29);
+      SendCommand(0xA2);
+      SendData(0x00);
+      
+      SendCommand(0xA2);
+      SendData(0x02); // S
+      SendCommand(0x00);
+      SendData(0x07);
+      SendData(0x29);
+      SendCommand(0xA2);
+      SendData(0x00);
+      
+      SendCommand(0x01);
+      SendData(0x07);
+      SendData(0x00);
+      SendData(0x28);
+      SendData(0x78);
+      SendData(0x24);
+      SendData(0x2C);
+      
+      /* Extend VGL discharging time start */
+      SendCommand(0x03); // POFS
+      SendData(0x10);
+      SendData(0x54);
+      SendData(0x00);
+      /* Extend VGL discharging time end */
+      
+      SendCommand(0x06);
+      SendData(0xC0);
+      SendData(0xC0);
+      SendData(0xC0);
+      
+      SendCommand(0x30); // frame go with waveform
+      SendData(0x02);
+      
+      SendCommand(0x41);
+      SendData(0x00);
+      
+      SendCommand(0x50);
+      SendData(0x37);
+      
+      SendCommand(0x60);
+      SendData(0x02);
+      SendData(0x02);
+      
+      SendCommand(0x61);
+      SendData(0x01);
+      SendData(0x8c);
+      SendData(0x01);
+      SendData(0x10);
+      
+      SendCommand(0x65);
+      SendData(0x00);
+      SendData(0x00);
+      SendData(0x00);
+      SendData(0x00);
+      
+      SendCommand(0x82); 
+      SendData(0xaC);
+      
+      SendCommand(0xE7);
+      SendData(0x1C);
+      
+      SendCommand(0xE3);
+      SendData(0x77);
+      
+      //   SendCommand(0xE0);
+      //   SendData(0x00);
+      
+      SendCommand(0xFF);
+      SendData(0xA5);
+      
+      /* improve pwm start */
+      SendCommand(0xEF);
+      SendData(0X01);
+      SendData(0X1E);
+      SendData(0X06);
+      SendData(0X1E);
+      SendData(0X0E);
+      SendData(0x1C);
+      SendData(0x21);
+      SendData(0X10);
+      /* improve pwm end */
+      
+      SendCommand(0xDB);
+      SendData(0x00);
+      
+      SendCommand(0xF9);
+      SendData(0x00);
+      
+      SendCommand(0xCF);
+      SendData(0x00);
+      
+      SendCommand(0xDF);
+      SendData(0x3F);
+      
+      SendCommand(0xFD);
+      SendData(0x01);
+      
+      SendCommand(0xE8);
+      SendData(0x00);
+      SendCommand(0xDC);
+      SendData(0x00);
+      
+      SendCommand(0xDD);
+      SendData(0x01);
+      
+      /* improve pwm start */
+      SendCommand(0xDE);
+      SendData(0x15);
+      /* improve pwm end  */
+      
+      SendCommand(0xFF);
+      SendData(0xE3);
+      
+      SendCommand(0xE9);
+      SendData(0x01);
+      SendCommand(0x04); //Power on
+      WaitUntilIdle();
+}
+void EPD::EPD579B_init()
+{
+      mySerial -> println("EPD579B Init...");
+      SPI_Begin(); 
+      WaitUntilIdle();
+      SendCommand(0x12);  // POWER ON
+      WaitUntilIdle();
+  
+      SendCommand(0x18);  
+      SendData(0x80); 
+  
+      SendCommand(0x3C);  
+      SendData(0x01);      
+  
+      SendCommand(0x0C);  
+      SendData(0x8B); 
+      SendData(0x9C); 
+      SendData(0xE4); 
+      SendData(0x0F); 
+  
+      SendCommand(0x03);  
+      SendData(0x17);   
+  
+  
+          
+      SendCommand(0x01);  // Driver Output Control
+      SendData(0x0F);
+      SendData(0x01);
+      SendData(0x0E);
+      delay(100);
+      SendCommand(0x21);  // Display Update Control
+      SendData(0x00);
+      SendData(0x10);
+      delay(100);
+      
+      
+      
+      SendCommand(0x3C);  // 波形控制
+      SendData(0x01);
+      SendCommand(0x2C);  // 波形控制
+      SendData(0x38);
+
+      SendCommand(0x11);  // Data Entry Mode
+      SendData(0x01);  // 確保方向正確
+      delay(100);
+      SendCommand(0x44);  // Set RAM X Address
+      SendData(0x00);     // X Start Address
+      SendData(0x31);     // X End Address 
+      
+      SendCommand(0x45);  // Set RAM Y Address
+      SendData(0x0F);     // Y Start L
+      SendData(0x01);     // Y Start H
+      SendData(0x00);     // Y End L 
+      SendData(0x00);     // Y End H
+  
+      SendCommand(0x91);  
+      SendData(0x00);  
+      
+      SendCommand(0xC4);  // Set X Address Counter
+      SendData(0x31);
+      SendData(0x00);
+  
+      SendCommand(0xC5);  // Set X Address Counter
+      SendData(0x0F);
+      SendData(0x01);
+      SendData(0x00);
+      SendData(0x00);
+      
+      SendCommand(0x4E);  // Set X Address Counter
+      SendData(0x00);
+      
+      SendCommand(0x4F);  // Set Y Address Counter
+      SendData(0x0F);
+      SendData(0x01);
+  
+      SendCommand(0xCE);  // Set X Address Counter
+      SendData(0x31);
+      
+      SendCommand(0xCF);  // Set Y Address Counter
+      SendData(0x0F);
+      SendData(0x01);
+      SPI_End();
+}
+void EPD::EPD579G_init()
+{
+      mySerial -> println("EPD579G Init...");
+      SPI_Begin(); 
+      SendCommand(0xE0);
+      SendData(0x01);
+      
+      SendCommand(0xA5);
+      delay(500);
+//          WaitUntilIdle();
+      //--------------------------------------//  
+      SendCommand(0xA2); //Master
+      SendData(0x01);
+      
+      SendCommand(0x00);
+      SendData(0x03);
+      SendData(0x29);
+      SendCommand(0xA2); //Slave
+      SendData(0x00);
+  
+      //-------------------------------------//  
+   
+      SendCommand(0xA2); //Slave
+      SendData(0x02);
+      SendCommand(0x00);
+      SendData(0x07);
+      SendData(0x29);
+      
+      SendCommand(0xA2);
+      SendData(0x00);
+      //-------------------------------------//
+      
+      SendCommand(0x01);
+      SendData(0x07);
+      SendData(0x00);
+      SendData(0x28);
+      SendData(0x78);
+      SendData(0x24);
+      SendData(0x2C);
+      
+      SendCommand(0x03);
+      SendData(0x10);
+      SendData(0x54);
+      SendData(0x00);
+      
+      SendCommand(0x06);
+      SendData(0xC0);
+      SendData(0xC0);
+      SendData(0xC0);
+    
+      SendCommand(0x30);
+      SendData(0x02);
+    
+      SendCommand(0x41);
+      SendData(0x00);
+    
+      SendCommand(0x50);
+      SendData(0x37);
+      
+      SendCommand(0x60);
+      SendData(0x02);
+      SendData(0x02); 
+      
+      SendCommand(0x61);
+      SendData(0x01);
+      SendData(0x8C); 
+      SendData(0x01); 
+      SendData(0x10);
+      
+      SendCommand(0x65);
+      SendData(0x00);
+      SendData(0x00);
+      SendData(0x00);
+      SendData(0x00);
+      
+      SendCommand(0xE7);
+      SendData(0x1C);
+      
+      SendCommand(0xE3);
+      SendData(0x77);
+      
+      SendCommand(0xFF);
+      SendData(0xA5);
+      
+      SendCommand(0xEF);
+      SendData(0X01);
+      SendData(0X1E);
+      SendData(0X06);
+      SendData(0X1E);
+      SendData(0X0E);
+      SendData(0x1C);
+      SendData(0x21);
+      SendData(0X10);
+      
+      SendCommand(0xDB);   
+      SendData(0x00);
+      
+      SendCommand(0xF9);
+      SendData(0x00);
+      
+      SendCommand(0xCF);   
+      SendData(0x00);
+      
+      SendCommand(0xDF);   
+      SendData(0x3F);
+      
+      SendCommand(0xFD);   
+      SendData(0x01);
+      
+      SendCommand(0xE8);
+      SendData(0x00);
+      
+      SendCommand(0xDC);
+      SendData(0x00);
+      SendCommand(0xDD);
+      SendData(0x01);
+      SendCommand(0xDE);
+      SendData(0x15);
+    
+      SendCommand(0xFF);
+      SendData(0xE3);
+
+      SendCommand(0xE9);
+      SendData(0xE1);
+      
+      SPI_End();
+}
+void EPD::EPD213_BRW_V0_init()
+{ 
+      mySerial -> println("EPD213_BRW_V0 Init...");
+      SPI_Begin(); 
+      SendCommand(0x00);                                                                                                                                                                                 
+      SendData(0x07);
+      SendData(0x29);
+    
+      SendCommand(0x01);
+      SendData(0x07);
+     
+      SendCommand(0x03);
+      SendData(0x10);
+      SendData(0x54);
+      SendData(0x44);
+      
+      SendCommand(0x06);
+      SendData(0x40);
+      SendData(0x40);
+      SendData(0x40);
+      
+      SendCommand(0x30);
+      SendData(0x08);
+    
+      SendCommand(0x41);
+      SendData(0x00);
+    
+      SendCommand(0x50);
+      SendData(0x37);
+      
+      SendCommand(0x60);
+      SendData(0x03);
+      SendData(0x03);
+      
+      SendCommand(0x61);
+      SendData(0x00);
+      SendData(0x7C);
+      SendData(0x00);
+      SendData(0xFA);
+      
+      SendCommand(0x65);
+      SendData(0x00);
+      SendData(0x00);
+      SendData(0x00);
+      SendData(0x00);
+     
+      SendCommand(0xE7);
+      SendData(0x1C);
+      
+      SendCommand(0xE3);
+      SendData(0x00);
+      
+      SendCommand(0xE0);
+      SendData(0x00); 
+    
+    
+      
+      SendCommand(0xFF);        
+      SendData(0xA5);       
+      
+      SendCommand(0xEF);        // PWM Set
+      SendData(0x02);     
+      SendData(0x88);  
+      SendData(0x04); 
+      SendData(0x1A); 
+      SendData(0X06); 
+      SendData(0X15); 
+      SendData(0X08);
+      SendData(0X22);
+      
+      SendCommand(0xDA);        
+      SendData(0X08);     
+      
+      SendCommand(0xE8);   
+      SendData(0X08);     
+      
+      SendCommand(0xDC);//CPCK EN
+      SendData(0X01);
+      
+      SendCommand(0xDD);//CPCK EN
+      SendData(0X08); 
+      
+      SendCommand(0xDE);//CPCK EN
+      SendData(0X3C); 
+    
+      SendCommand(0xFF);        // Exit Test command    ***********
+      SendData(0xE3);  
+      SPI_End();
 }

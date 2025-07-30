@@ -56,6 +56,14 @@ class EPD
   void SendDataSPI(unsigned char data);
   void HardwareReset();
   void WaitUntilIdle();
+
+  void EPD420_init();
+  void EPD583_init();
+  void EPD7IN3E_init();
+  void DEPG0579RYT158FxX_init();
+  void EPD579B_init();
+  void EPD579G_init();
+  void EPD213_BRW_V0_init();
   
   SemaphoreHandle_t xSpiMutex = NULL; // 互斥鎖指針
 };

@@ -466,6 +466,17 @@ namespace H_Pannel_lib
             }
         }
 
+        private int _SortIndex = 0;
+        public int SortIndex
+        {
+            get => _SortIndex;
+            set
+            {
+                if (_SortIndex != value) flag_replace = true;
+                _SortIndex = value;
+            }
+        }
+
         public List<string> List_Validity_period
         {
             get
