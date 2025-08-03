@@ -1,0 +1,9 @@
+MyWS2812.cpp:4:6:void MyWS2812::Init(int, SemaphoreHandle_t)	16	static
+MyWS2812.cpp:16:6:void MyWS2812::ClearBytes()	8	static
+MyWS2812.cpp:25:6:void MyWS2812::SetRGB(int, byte, byte, byte)	4	static
+MyWS2812.cpp:31:6:bool MyWS2812::IsON(int)	0	static
+MyWS2812.cpp:42:7:byte* MyWS2812::GetRGB()	0	static
+MyWS2812.cpp:115:6:void MyWS2812::RGBConvert2812Bytes(byte, byte, byte, byte*)	32	static
+MyWS2812.cpp:104:6:void MyWS2812::RGBConvert2812Bytes(int, byte, byte, byte)	56	static
+MyWS2812.cpp:46:6:void MyWS2812::Show()	40	static
+MyWS2812.cpp:70:6:void MyWS2812::Show(byte*, int)	48	static

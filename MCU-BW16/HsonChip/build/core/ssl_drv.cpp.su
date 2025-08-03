@@ -1,0 +1,8 @@
+ssl_drv.cpp:23:6:bool SSLDrv::getData(sslclient_context*, uint8_t*, uint8_t)	24	static
+ssl_drv.cpp:8:10:uint16_t SSLDrv::availData(sslclient_context*)	8	static
+ssl_drv.cpp:64:5:int SSLDrv::getDataBuf(sslclient_context*, uint8_t*, uint16_t)	16	static
+ssl_drv.cpp:91:6:void SSLDrv::stopClient(sslclient_context*)	8	static
+ssl_drv.cpp:97:6:bool SSLDrv::sendData(sslclient_context*, const uint8_t*, uint16_t)	8	static
+ssl_drv.cpp:114:5:int SSLDrv::startClient(sslclient_context*, uint32_t, uint32_t, unsigned char*, unsigned char*, unsigned char*, unsigned char*, unsigned char*, char*)	16	static
+ssl_drv.cpp:123:5:int SSLDrv::getLastErrno(sslclient_context*)	0	static
+ssl_drv.cpp:128:5:int SSLDrv::setSockRecvTimeout(int, int)	0	static

@@ -529,7 +529,6 @@ C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\AxOvkMsr.d
 C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\MeasureSystemFunction.dll
 C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\AxAltairUDrv.dll
 C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\MVSDK.dll
-C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\Basic.xml
 C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\Newtonsoft.Json.xml
 C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\bin\Release\SkiaSharp.pdb

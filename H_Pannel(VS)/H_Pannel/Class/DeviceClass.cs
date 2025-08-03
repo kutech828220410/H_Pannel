@@ -1423,11 +1423,14 @@ namespace H_Pannel_lib
         EPD1020_lock = 12,
         EPD420 = 13,
         EPD420_lock = 14,
-        EPD730_lock = 15,
-        EPD730 = 16,
+        EPD730F_lock = 15,
+        EPD730F = 16,
         EPD213_lock = 17,
         EPD420_D = 18,
         EPD420_D_lock = 19,
+        EPD730E_lock = 20,
+        EPD730E = 21,
+
         EPD213 = 118,
     }
     public enum HorizontalAlignment

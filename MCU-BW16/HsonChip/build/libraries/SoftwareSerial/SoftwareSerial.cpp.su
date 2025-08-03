@@ -1,0 +1,16 @@
+SoftwareSerial.cpp:157:5:virtual int SoftwareSerial::read()	8	static
+SoftwareSerial.cpp:175:5:virtual int SoftwareSerial::available()	0	static
+SoftwareSerial.cpp:193:6:virtual void SoftwareSerial::flush()	0	static
+SoftwareSerial.cpp:203:5:virtual int SoftwareSerial::peek()	0	static
+SoftwareSerial.cpp:56:6:void handle_interrupt(uint32_t, uint32_t)	16	static
+SoftwareSerial.cpp:184:8:virtual size_t SoftwareSerial::write(uint8_t)	16	static
+SoftwareSerial.cpp:79:6:bool SoftwareSerial::listen()	8	static
+SoftwareSerial.cpp:96:6:bool SoftwareSerial::stopListening()	8	static
+SoftwareSerial.cpp:107:1:SoftwareSerial::SoftwareSerial(uint8_t, uint8_t, bool)	16	static
+SoftwareSerial.cpp:136:6:void SoftwareSerial::begin(long int)	16	static
+SoftwareSerial.cpp:146:6:void SoftwareSerial::end()	8	static
+SoftwareSerial.cpp:127:1:SoftwareSerial::~SoftwareSerial()	8	static
+SoftwareSerial.cpp:219:6:void SoftwareSerial::setBufferSize(uint32_t)	16	static
+SoftwareSerial.cpp:228:6:void SoftwareSerial::setAvailableCallback(void (*)(char))	0	static
+SoftwareSerial.cpp:233:6:void SoftwareSerial::begin(long int, int, int, int)	24	static
+SoftwareSerial.cpp:246:6:void SoftwareSerial::begin(long int, int, int, int, int, int, int)	32	static

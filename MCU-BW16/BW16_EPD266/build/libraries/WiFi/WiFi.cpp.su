@@ -1,0 +1,36 @@
+WiFi.cpp:27:1:WiFiClass::WiFiClass()	0	static
+WiFi.cpp:31:6:static void WiFiClass::init()	0	static
+WiFi.cpp:36:7:static char* WiFiClass::firmwareVersion()	0	static
+WiFi.cpp:41:5:int WiFiClass::begin(char*)	8	static
+WiFi.cpp:55:5:int WiFiClass::begin(char*, uint8_t, const char*)	32	static
+WiFi.cpp:70:5:int WiFiClass::begin(char*, const char*)	24	static
+WiFi.cpp:85:5:int WiFiClass::disconnect()	8	static
+WiFi.cpp:90:10:uint8_t* WiFiClass::macAddress(uint8_t*)	8	static
+WiFi.cpp:97:11:IPAddress WiFiClass::localIP()	8	static
+WiFi.cpp:104:6:void WiFiClass::printLocalIPv6()	0	static
+WiFi.cpp:110:11:IPAddress WiFiClass::subnetMask()	8	static
+WiFi.cpp:117:11:IPAddress WiFiClass::gatewayIP()	8	static
+WiFi.cpp:124:7:char* WiFiClass::SSID()	0	static
+WiFi.cpp:129:10:uint8_t* WiFiClass::BSSID(uint8_t*)	8	static
+WiFi.cpp:136:9:int32_t WiFiClass::RSSI()	0	static
+WiFi.cpp:141:9:uint8_t WiFiClass::encryptionType()	0	static
+WiFi.cpp:147:8:int8_t WiFiClass::scanNetworks()	8	static
+WiFi.cpp:163:7:char* WiFiClass::SSID(uint8_t)	0	static
+WiFi.cpp:168:9:int32_t WiFiClass::RSSI(uint8_t)	0	static
+WiFi.cpp:173:9:uint8_t WiFiClass::encryptionType(uint8_t)	0	static
+WiFi.cpp:178:10:uint32_t WiFiClass::encryptionTypeEx(uint8_t)	0	static
+WiFi.cpp:183:9:uint8_t WiFiClass::status()	0	static
+WiFi.cpp:188:5:int WiFiClass::hostByName(const char*, IPAddress&)	0	static
+WiFi.cpp:193:5:int WiFiClass::hostByNamev6(const char*, IPv6Address&)	16	static
+WiFi.cpp:199:5:int WiFiClass::apbegin(char*, char*, uint8_t)	16	static
+WiFi.cpp:217:5:int WiFiClass::apbegin(char*, char*, char*, uint8_t)	24	static
+WiFi.cpp:238:5:int WiFiClass::disablePowerSave()	0	static
+WiFi.cpp:243:6:void WiFiClass::config(IPAddress)	120	static
+WiFi.cpp:262:6:void WiFiClass::setDNS(IPAddress)	88	static
+WiFi.cpp:247:6:void WiFiClass::config(IPAddress, IPAddress)	56	static
+WiFi.cpp:252:6:void WiFiClass::config(IPAddress, IPAddress, IPAddress)	128	static
+WiFi.cpp:257:6:void WiFiClass::config(IPAddress, IPAddress, IPAddress, IPAddress)	120	static
+WiFi.cpp:266:6:void WiFiClass::setDNS(IPAddress, IPAddress)	80	static
+WiFi.cpp:270:6:void WiFiClass::setHostname(const char*)	0	static
+WiFi.cpp:274:13:const char* WiFiClass::getHostname()	0	static
+WiFi.cpp:278:15:cpp)	16	static

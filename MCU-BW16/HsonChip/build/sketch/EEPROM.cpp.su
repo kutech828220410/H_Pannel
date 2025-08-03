@@ -1,0 +1,11 @@
+EEPROM.cpp:37:1:EEPROMClass::EEPROMClass(uint32_t)	4	static
+EEPROM.cpp:43:1:EEPROMClass::EEPROMClass()	4	static
+EEPROM.cpp:49:6:void EEPROMClass::begin(size_t)	16	static
+EEPROM.cpp:95:9:uint8_t EEPROMClass::read(int)	8	static
+EEPROM.cpp:108:6:void EEPROMClass::write(int, uint8_t)	4	static
+EEPROM.cpp:127:6:void EEPROMClass::update(int, uint8_t)	0	static
+EEPROM.cpp:131:6:bool EEPROMClass::commit()	16	static
+EEPROM.cpp:76:6:bool EEPROMClass::end()	16	static
+EEPROM.cpp:149:11:uint8_t* EEPROMClass::getDataPtr()	0	static
+EEPROM.cpp:154:17:const uint8_t* EEPROMClass::getConstDataPtr() const	0	static
+EEPROM.cpp:158:19:cpp)	0	static

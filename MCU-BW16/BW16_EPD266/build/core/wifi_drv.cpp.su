@@ -1,0 +1,38 @@
+wifi_drv.cpp:55:13:void init_wifi_struct()	24	static
+wifi_drv.cpp:490:14:static rtw_result_t WiFiDrv::wifidrv_scan_result_handler(rtw_scan_handler_result_t*)	16	static
+wifi_drv.cpp:680:13:static const char* WiFiDrv::getHostname()	24	static
+wifi_drv.cpp:71:6:static void WiFiDrv::wifiDriverInit()	8	static
+wifi_drv.cpp:92:8:static int8_t WiFiDrv::wifiSetNetwork(char*, uint8_t)	104	static
+wifi_drv.cpp:148:8:static int8_t WiFiDrv::wifiSetPassphrase(char*, uint8_t, const char*, uint8_t)	112	static
+wifi_drv.cpp:206:8:static int8_t WiFiDrv::wifiSetKey(char*, uint8_t, uint8_t, const void*, uint8_t)	120	static
+wifi_drv.cpp:292:8:static int8_t WiFiDrv::apSetNetwork(char*, uint8_t)	16	static
+wifi_drv.cpp:306:8:static int8_t WiFiDrv::apSetPassphrase(const char*, uint8_t)	16	static
+wifi_drv.cpp:319:8:static int8_t WiFiDrv::apSetChannel(const char*)	8	static
+wifi_drv.cpp:326:8:static int8_t WiFiDrv::apActivate(uint8_t)	128	static
+wifi_drv.cpp:419:8:static int8_t WiFiDrv::disconnect()	8	static
+wifi_drv.cpp:425:9:static uint8_t WiFiDrv::getConnectionStatus()	8	static
+wifi_drv.cpp:436:10:static uint8_t* WiFiDrv::getMacAddress()	0	static
+wifi_drv.cpp:441:6:static void WiFiDrv::getIpAddress(IPAddress&)	8	static
+wifi_drv.cpp:446:6:static void WiFiDrv::getIpv6Address()	8	static
+wifi_drv.cpp:452:6:static void WiFiDrv::getSubnetMask(IPAddress&)	8	static
+wifi_drv.cpp:457:6:static void WiFiDrv::getGatewayIP(IPAddress&)	8	static
+wifi_drv.cpp:462:7:static char* WiFiDrv::getCurrentSSID()	8	static
+wifi_drv.cpp:468:10:static uint8_t* WiFiDrv::getCurrentBSSID()	8	static
+wifi_drv.cpp:477:9:static int32_t WiFiDrv::getCurrentRSSI()	16	static
+wifi_drv.cpp:484:9:static uint8_t WiFiDrv::getCurrentEncryptionType()	8	static
+wifi_drv.cpp:509:8:static int8_t WiFiDrv::startScanNetworks()	8	static
+wifi_drv.cpp:519:9:static uint8_t WiFiDrv::getScanNetworks()	0	static
+wifi_drv.cpp:524:7:static char* WiFiDrv::getSSIDNetworks(uint8_t)	0	static
+wifi_drv.cpp:533:9:static uint8_t WiFiDrv::getEncTypeNetowrks(uint8_t)	0	static
+wifi_drv.cpp:555:10:static uint32_t WiFiDrv::getEncTypeNetowrksEx(uint8_t)	0	static
+wifi_drv.cpp:561:9:static int32_t WiFiDrv::getRSSINetworks(uint8_t)	0	static
+wifi_drv.cpp:571:7:static char* WiFiDrv::getFwVersion()	0	static
+wifi_drv.cpp:577:5:static int WiFiDrv::getHostByName(const char*, IPAddress&)	32	static
+wifi_drv.cpp:590:5:static int WiFiDrv::getHostByNamev6(const char*, IPv6Address&)	40	static
+wifi_drv.cpp:620:5:static int WiFiDrv::disablePowerSave()	0	static
+wifi_drv.cpp:625:6:static void WiFiDrv::config(uint8_t, IPAddress, IPAddress, IPAddress)	24	static
+wifi_drv.cpp:649:6:static void WiFiDrv::setDNS(uint8_t, IPAddress, IPAddress)	40	static
+wifi_drv.cpp:670:5:static int WiFiDrv::getIPv6Status()	0	static
+wifi_drv.cpp:674:6:static void WiFiDrv::setHostname(const char*)	0	static
+wifi_drv.cpp:680:13:static const char* WiFiDrv::getHostname()	8	static
+wifi_drv.cpp:687:1:cpp)	24	static

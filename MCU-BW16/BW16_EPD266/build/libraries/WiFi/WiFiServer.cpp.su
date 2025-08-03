@@ -1,0 +1,14 @@
+WiFiServer.cpp:89:8:virtual size_t WiFiServer::write(uint8_t)	16	static
+WiFiServer.cpp:124:6:virtual void WiFiServer::close()	0	static
+WiFiServer.cpp:30:6:virtual void WiFiServer::begin()	16	static
+WiFiServer.cpp:50:5:virtual int WiFiServer::available(int)	8	static
+WiFiServer.cpp:73:5:virtual int WiFiServer::recv(uint8_t*, size_t)	16	static
+WiFiServer.cpp:93:8:virtual size_t WiFiServer::write(const uint8_t*, size_t)	16	static
+WiFiServer.cpp:111:6:virtual void WiFiServer::stop()	8	static
+WiFiServer.cpp:59:9:virtual uint8_t WiFiServer::connected()	8	static
+WiFiServer.cpp:129:5:virtual int WiFiServer::setTimeout(int)	16	static
+WiFiServer.cpp:26:1:WiFiServer::WiFiServer(uint16_t)	4	static
+WiFiServer.cpp:42:12:WiFiClient WiFiServer::available(uint8_t*)	8	static
+WiFiServer.cpp:138:5:int WiFiServer::enableIPv6()	0	static
+WiFiServer.cpp:142:5:int WiFiServer::getIPv6Status()	0	static
+WiFiServer.cpp:144:1:cpp)	16	static

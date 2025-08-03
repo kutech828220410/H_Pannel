@@ -1,0 +1,14 @@
+Mypicojpeg.cpp:1487:13:void upsampleCb(uint8, uint8)	32	static
+Mypicojpeg.cpp:1524:13:void upsampleCbH(uint8, uint8)	28	static
+Mypicojpeg.cpp:1555:13:void upsampleCbV(uint8, uint8)	48	static
+Mypicojpeg.cpp:1596:13:void upsampleCr(uint8, uint8)	28	static
+Mypicojpeg.cpp:1633:13:void upsampleCrH(uint8, uint8)	24	static
+Mypicojpeg.cpp:1664:13:void upsampleCrV(uint8, uint8)	36	static
+Mypicojpeg.cpp:239:26:uint8 getChar()	24	static
+Mypicojpeg.cpp:262:26:uint8 getOctet(uint8)	24	static
+Mypicojpeg.cpp:280:15:uint16 getBits(uint8, uint8)	40	static
+Mypicojpeg.cpp:760:14:uint8 processMarkers(uint8*)	64	static
+Mypicojpeg.cpp:327:26:uint8 getBit()	24	static
+Mypicojpeg.cpp:399:26:uint8 huffDecode(const HuffTable*, const uint8*)	32	static
+Mypicojpeg.cpp:2263:15:unsigned char pjpeg_decode_mcu()	56	static
+Mypicojpeg.cpp:2282:15:unsigned char pjpeg_decode_init(pjpeg_image_info_t*, pjpeg_need_bytes_callback_t, void*, unsigned char)	72	static

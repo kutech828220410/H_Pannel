@@ -1,0 +1,18 @@
+server_drv.cpp:10:5:int ServerDrv::startClient(uint32_t, uint16_t, uint8_t)	16	static
+server_drv.cpp:19:5:int ServerDrv::startClientV6(const char*, uint16_t, uint8_t)	16	static
+server_drv.cpp:28:5:int ServerDrv::startClientv6(uint32_t*, uint16_t, uint8_t)	8	static
+server_drv.cpp:35:5:int ServerDrv::startServer(uint16_t, uint8_t)	16	static
+server_drv.cpp:61:5:int ServerDrv::getAvailable(int)	8	static
+server_drv.cpp:69:5:int ServerDrv::availData(int)	32	static
+server_drv.cpp:90:6:bool ServerDrv::recvData(int, uint8_t*, uint16_t)	8	static
+server_drv.cpp:99:6:bool ServerDrv::getData(int, uint8_t*, uint8_t)	24	static
+server_drv.cpp:118:5:int ServerDrv::getDataBuf(int, uint8_t*, uint16_t)	32	static
+server_drv.cpp:131:5:int ServerDrv::getLastErrno(int)	0	static
+server_drv.cpp:135:6:void ServerDrv::stopSocket(int)	8	static
+server_drv.cpp:140:6:bool ServerDrv::sendData(int, const uint8_t*, uint16_t)	8	static
+server_drv.cpp:157:6:bool ServerDrv::sendtoData(int, const uint8_t*, uint16_t, uint32_t, uint16_t)	32	static
+server_drv.cpp:175:6:void ServerDrv::getRemoteData(int, uint32_t*, uint16_t*)	4	static
+server_drv.cpp:181:5:int ServerDrv::setSockRecvTimeout(int, int)	0	static
+server_drv.cpp:185:5:static int ServerDrv::enableIPv6()	0	static
+server_drv.cpp:189:5:static int ServerDrv::getIPv6Status()	0	static
+server_drv.cpp:193:6:void ServerDrv::setIPv6UDPServer()	0	static

@@ -1,0 +1,10 @@
+wiring_digital.c:35:6:gpioIrqHandler	0	static
+wiring_digital.c:244:10:digitalPinToPort	8	static
+wiring_digital.c:261:10:digitalPinToBitMask	8	static
+wiring_digital.c:279:10:digitalSetIrqHandler	0	static
+wiring_digital.c:284:10:digitalClearIrqHandler	0	static
+wiring_digital.c:289:6:pinRemoveMode	24	static
+wiring_digital.c:41:6:pinMode	32	static
+wiring_digital.c:164:6:digitalWrite	16	static
+wiring_digital.c:189:5:digitalRead	8	static
+wiring_digital.c:216:6:digitalChangeDir	16	static

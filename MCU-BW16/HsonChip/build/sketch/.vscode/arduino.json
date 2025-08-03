@@ -1,0 +1,16 @@
+#line 1 "C:\\Users\\Evan\\source\\repos\\H_Pannel\\MCU-BW16\\BW16_EPD266\\.vscode\\arduino.json"
+{
+  "port": "COM9",
+  "monitorPortSettings": {
+    "port": "COM9",
+    "baudRate": 115200,
+    "lineEnding": "\r\n",
+    "dataBits": 8,
+    "parity": "none",
+    "stopBits": "one"
+  },
+  "optimize_for_debug": false,
+  "configuration": "AutoUploadMode=Disable,EraseFlash=Disable",
+  "board": "realtek:AmebaD:ameba_rtl8720dn_bw16",
+  "configurationRequired": true
+}

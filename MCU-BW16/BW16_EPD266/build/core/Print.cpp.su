@@ -1,0 +1,26 @@
+Print.cpp:34:8:virtual size_t Print::write(const uint8_t*, size_t)	24	static
+Print.cpp:47:8:size_t Print::print(const __FlashStringHelper*)	16	static
+Print.cpp:52:8:size_t Print::print(const String&)	0	static
+Print.cpp:57:8:size_t Print::print(const char*)	16	static
+Print.cpp:62:8:size_t Print::print(char)	0	static
+Print.cpp:112:8:size_t Print::println(const __FlashStringHelper*)	16	static
+Print.cpp:119:8:size_t Print::print(const Printable&)	0	static
+Print.cpp:124:8:size_t Print::println()	0	static
+Print.cpp:129:8:size_t Print::println(const String&)	16	static
+Print.cpp:136:8:size_t Print::println(const char*)	16	static
+Print.cpp:143:8:size_t Print::println(char)	16	static
+Print.cpp:192:8:size_t Print::println(const Printable&)	16	static
+Print.cpp:201:8:size_t Print::printNumber(long unsigned int, uint8_t)	64	static
+Print.cpp:82:8:size_t Print::print(long int, int)	24	static
+Print.cpp:72:8:size_t Print::print(int, int)	0	static
+Print.cpp:157:8:size_t Print::println(int, int)	16	static
+Print.cpp:171:8:size_t Print::println(long int, int)	16	static
+Print.cpp:98:8:size_t Print::print(long unsigned int, int)	4	static
+Print.cpp:67:8:size_t Print::print(unsigned char, int)	0	static
+Print.cpp:150:8:size_t Print::println(unsigned char, int)	16	static
+Print.cpp:77:8:size_t Print::print(unsigned int, int)	0	static
+Print.cpp:164:8:size_t Print::println(unsigned int, int)	16	static
+Print.cpp:178:8:size_t Print::println(long unsigned int, int)	16	static
+Print.cpp:220:8:size_t Print::printFloat(double, uint8_t)	40	static
+Print.cpp:107:8:size_t Print::print(double, int)	0	static
+Print.cpp:185:8:size_t Print::println(double, int)	16	static

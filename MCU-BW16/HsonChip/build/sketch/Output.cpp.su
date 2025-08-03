@@ -1,0 +1,11 @@
+Output.cpp:311:6:void MyOutput::Set_toggle(bool)	0	static
+Output.cpp:316:6:void MyOutput::Init(int)	16	static
+Output.cpp:322:6:void MyOutput::Init(int, bool)	16	static
+Output.cpp:329:6:void MyOutput::Init(int, int)	16	static
+Output.cpp:336:6:void MyOutput::Set_State(bool)	0	static
+Output.cpp:346:6:bool MyOutput::GetLogic(bool)	0	static
+Output.cpp:357:6:void MyOutput::ADC_Trigger(int)	0	static
+Output.cpp:376:6:void MyOutput::ADC_Blink()	16	static
+Output.cpp:441:6:void MyOutput::Normal_Blink()	16	static
+Output.cpp:364:6:void MyOutput::Blink()	0	static
+Output.cpp:341:6:void MyOutput::Blink(int)	0	static

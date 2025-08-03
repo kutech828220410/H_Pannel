@@ -529,9 +529,9 @@ namespace H_Pannel_lib
         static public bool DrawToEpd_UDP(UDP_Class uDP_Class, string IP, Bitmap bmp , DeviceType deviceType)
         {
          
-            if (deviceType == DeviceType.EPD730 || deviceType == DeviceType.EPD730_lock)
+            if (deviceType == DeviceType.EPD730F || deviceType == DeviceType.EPD730F_lock)
             {
-                return Communication.EPD_730_DrawImage(uDP_Class, IP, bmp);
+                return Communication.EPD_730F_DrawImage(uDP_Class, IP, bmp);
             }
             if (deviceType == DeviceType.EPD583 || deviceType == DeviceType.EPD583_lock)
             {
@@ -713,7 +713,7 @@ namespace H_Pannel_lib
         }
         static public Bitmap Get_Drawer_bmp(Drawer drawer)
         {
-            if (drawer.DeviceType == DeviceType.EPD730 || drawer.DeviceType == DeviceType.EPD730_lock)
+            if (drawer.DeviceType == DeviceType.EPD730F || drawer.DeviceType == DeviceType.EPD730F_lock)
             {
                 return Communication.EPD730_GetBitmap(drawer);
             }
@@ -1700,7 +1700,7 @@ namespace H_Pannel_lib
 
                 g.Dispose();
             }
-            if (deviceType == DeviceType.EPD730 || deviceType == DeviceType.EPD730_lock)
+            if (deviceType == DeviceType.EPD730F || deviceType == DeviceType.EPD730F_lock)
             {
                 int width = 800;
                 int height = 480;
@@ -1882,8 +1882,8 @@ namespace H_Pannel_lib
                         if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD583有鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD583_lock);
                         if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD420無鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD420_D);
                         if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD420有鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD420_D_lock);
-                        if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD730有鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD730);
-                        if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD730無鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD730_lock);
+                        if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD730有鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD730F);
+                        if (dialog_ContextMenuStrip.Value == ContextMenuStrip_面板格式.設為EPD730無鎖控.GetEnumName()) drawer.SetDeviceType(DeviceType.EPD730F_lock);
 
                         taskList.Add(Task.Run(() =>
                         {

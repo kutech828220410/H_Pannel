@@ -1,0 +1,33 @@
+C:\Users\Evan\source\repos\H_Pannel\MCU-BW16\BW16_EPD266\build\core\wiring.c.o: \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\cores\ambd\wiring.c \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\cores\ambd\Arduino.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\cores\ambd\binary.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\cores\ambd\wiring_constants.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\variants\rtl8720dn_bw16/pins_arduino.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\variants\rtl8720dn_bw16/variant.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\cores\ambd/Arduino.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\cores\ambd\wiring.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\cores\ambd\wiring_digital.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\cores\ambd\wiring_analog.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\cores\ambd\WInterrupts.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\cores\ambd\wiring_os.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\cores\ambd\wiring_watchdog.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\cores\ambd\wiring_shift.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/cmsis_os.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/FreeRTOS.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/project/realtek_amebaD_va0_example/inc/inc_hp/FreeRTOSConfig.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/project/realtek_amebaD_va0_example/inc/inc_hp/platform_autoconf.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/projdefs.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/portable.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/deprecated_definitions.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/portable/GCC/ARM_CM33/non_secure/portmacro.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/mpu_wrappers.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/task.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/list.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/timers.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/task.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/queue.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/semphr.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/queue.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/event_groups.h \
+ C:\Users\Evan\AppData\Local\Arduino15\packages\realtek\hardware\AmebaD\3.1.4\system/component/os/freertos/freertos_v10.2.0/Source/include/timers.h

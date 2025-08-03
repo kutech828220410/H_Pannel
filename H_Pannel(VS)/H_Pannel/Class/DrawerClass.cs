@@ -814,7 +814,7 @@ namespace H_Pannel_lib
                 this.pannelWidth = 648;
                 this.pannelHeight = 480;
             }
-            if (deviceType == DeviceType.EPD730 || deviceType == DeviceType.EPD730_lock)
+            if (deviceType == DeviceType.EPD730F || deviceType == DeviceType.EPD730F_lock)
             {
                 this.pannelWidth = 800;
                 this.pannelHeight = 480;
@@ -883,7 +883,7 @@ namespace H_Pannel_lib
                 this.pannelWidth = 648;
                 this.pannelHeight = 480;
             }
-            if (this.DeviceType == DeviceType.EPD730 || this.DeviceType == DeviceType.EPD730_lock)
+            if (this.DeviceType == DeviceType.EPD730F || this.DeviceType == DeviceType.EPD730F_lock)
             {
                 this.pannelWidth = 800;
                 this.pannelHeight = 480;
@@ -921,7 +921,7 @@ namespace H_Pannel_lib
                 this.pannelWidth = 648;
                 this.pannelHeight = 480;
             }
-            if (this.DeviceType == DeviceType.EPD730 || this.DeviceType == DeviceType.EPD730_lock)
+            if (this.DeviceType == DeviceType.EPD730F || this.DeviceType == DeviceType.EPD730F_lock)
             {
                 this.pannelWidth = 800;
                 this.pannelHeight = 480;

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
-using System.Windows.Forms; // 需在專案加入 System.Windows.Forms 引用
-using H_Pannel_lib;
 using System.Text;
+using System.Windows.Forms;
+using H_Pannel_lib; // 假設 ApplyFloydSteinbergDithering 在此命名空間
 
 namespace EinkSyncConsole
 {
@@ -21,6 +21,7 @@ namespace EinkSyncConsole
             while (true)
             {
                 string defaultIP = LoadLastIP();
+                defaultIP = "192.168.0.20";
                 Console.Clear();
                 Console.WriteLine($"上次使用的 IP：{defaultIP}");
                 Console.Write("請輸入目標 IP（按 Enter 使用預設）：");
@@ -41,9 +42,32 @@ namespace EinkSyncConsole
                 {
                     using (Bitmap bmp = (Bitmap)Bitmap.FromFile(imagePath))
                     {
-                        UDP_Class udp = new UDP_Class("192.168.5.250", 29000 , false); // 固定主機端 Server IP
-                        bool success = Communication.EPD_579G_DrawImage(udp, ip, bmp);
-                        Console.WriteLine(success ? "✅ 傳送成功！" : "❌ 傳送失敗！");
+                        using (Bitmap bmp_buf_ = Communication.ScaleImage(bmp, 800, 480))
+                        using (Bitmap bmp_buf = bmp_buf_.ApplyFloydSteinbergDithering(DitheringProcessor.DitheringMode.SixColor))
+                        {
+
+                            {
+                                string desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                                string fileName = $"dithered_6color_{DateTime.Now:yyyyMMdd_HHmmss}.bmp";
+                                string savePath = Path.Combine(desktop, fileName);
+
+                                //bmp_buf_.Save(savePath, System.Drawing.Imaging.ImageFormat.Bmp);
+                                Console.WriteLine($"✅ 已儲存處理圖片到桌面：{savePath}");
+                                UDP_Class uDP_Class = new UDP_Class("192.168.0.20", 29005, false);
+
+                                Communication.EPD_730E_DrawImage(uDP_Class, ip, bmp);
+
+                                ShowImage(new Bitmap(bmp_buf)); // 顯示處理後圖片
+                                                                 // 儲存處理後圖片到桌面
+                            }
+
+
+                        }
+
+                        // 範例傳送，可自行開啟
+                        //UDP_Class udp = new UDP_Class("192.168.5.250", 29000 , false);
+                        //bool success = Communication.EPD_579G_DrawImage(udp, ip, bmp_buf);
+                        //Console.WriteLine(success ? "✅ 傳送成功！" : "❌ 傳送失敗！");
                     }
 
                     SaveLastIP(ip);
@@ -65,7 +89,7 @@ namespace EinkSyncConsole
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                ofd.Filter = "Bitmap 圖片 (*.bmp)|*.bmp";
+                ofd.Filter = "圖片檔案 (*.bmp;*.jpg;*.jpeg;*.png)|*.bmp;*.jpg;*.jpeg;*.png";
                 ofd.Title = "選擇電子紙圖片檔案";
                 return ofd.ShowDialog() == DialogResult.OK ? ofd.FileName : "";
             }
@@ -81,6 +105,27 @@ namespace EinkSyncConsole
         static void SaveLastIP(string ip)
         {
             File.WriteAllText(configPath, ip);
+        }
+
+        static void ShowImage(Bitmap bmp)
+        {
+            Form form = new Form
+            {
+                Text = "圖片預覽",
+                Width = bmp.Width + 40,
+                Height = bmp.Height + 60,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+
+            PictureBox pictureBox = new PictureBox
+            {
+                Dock = DockStyle.Fill,
+                Image = bmp,
+                SizeMode = PictureBoxSizeMode.Zoom
+            };
+
+            form.Controls.Add(pictureBox);
+            Application.Run(form); // 阻塞直到關閉視窗
         }
     }
 }

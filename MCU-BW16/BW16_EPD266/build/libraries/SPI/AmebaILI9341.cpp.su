@@ -1,0 +1,26 @@
+AmebaILI9341.cpp:8:1:AmebaILI9341::AmebaILI9341(int, int, int)	20	static
+AmebaILI9341.cpp:150:6:void AmebaILI9341::setAddress(uint16_t, uint16_t, uint16_t, uint16_t)	32	static
+AmebaILI9341.cpp:190:6:void AmebaILI9341::writecommand(uint8_t)	4	static
+AmebaILI9341.cpp:196:6:void AmebaILI9341::writedata(uint8_t)	4	static
+AmebaILI9341.cpp:202:6:void AmebaILI9341::setRotation(uint8_t)	16	static
+AmebaILI9341.cpp:240:6:void AmebaILI9341::fillRectangle(int16_t, int16_t, int16_t, int16_t, uint16_t)	32	static
+AmebaILI9341.cpp:230:6:void AmebaILI9341::fillScreen(uint16_t)	16	static
+AmebaILI9341.cpp:235:6:void AmebaILI9341::clr()	16	static
+AmebaILI9341.cpp:270:6:void AmebaILI9341::drawPixel(int16_t, int16_t, uint16_t)	24	static
+AmebaILI9341.cpp:282:6:void AmebaILI9341::drawLine(int16_t, int16_t, int16_t, int16_t, uint16_t)	64	static
+AmebaILI9341.cpp:375:6:void AmebaILI9341::drawLine(int16_t, int16_t, int16_t, int16_t)	24	static
+AmebaILI9341.cpp:380:6:void AmebaILI9341::drawRectangle(int16_t, int16_t, int16_t, int16_t, uint16_t)	40	static
+AmebaILI9341.cpp:388:6:void AmebaILI9341::drawRectangle(int16_t, int16_t, int16_t, int16_t)	24	static
+AmebaILI9341.cpp:393:6:void AmebaILI9341::drawCircle(int16_t, int16_t, int16_t, uint16_t)	80	static
+AmebaILI9341.cpp:427:6:void AmebaILI9341::drawCircle(int16_t, int16_t, int16_t)	16	static
+AmebaILI9341.cpp:451:9:int16_t AmebaILI9341::getWidth()	0	static
+AmebaILI9341.cpp:456:9:int16_t AmebaILI9341::getHeight()	0	static
+AmebaILI9341.cpp:461:6:void AmebaILI9341::setCursor(int16_t, int16_t)	0	static
+AmebaILI9341.cpp:467:6:void AmebaILI9341::setForeground(uint16_t)	0	static
+AmebaILI9341.cpp:472:6:void AmebaILI9341::setBackground(uint16_t)	0	static
+AmebaILI9341.cpp:477:6:void AmebaILI9341::setFontSize(uint8_t)	0	static
+AmebaILI9341.cpp:487:6:void AmebaILI9341::drawChar(int16_t, int16_t, unsigned char, uint16_t, uint16_t, uint8_t)	48	static
+AmebaILI9341.cpp:482:6:void AmebaILI9341::drawChar(unsigned char)	40	static
+AmebaILI9341.cpp:432:8:virtual size_t AmebaILI9341::write(uint8_t)	16	static
+AmebaILI9341.cpp:528:6:void AmebaILI9341::reset()	8	static
+AmebaILI9341.cpp:27:6:void AmebaILI9341::begin()	16	static

@@ -1,0 +1,3 @@
+Timer.cpp:3:6:void MyTimer::StartTickTime(long int)	8	static
+Timer.cpp:12:6:void MyTimer::TickStop()	0	static
+Timer.cpp:16:6:bool MyTimer::IsTimeOut()	8	static

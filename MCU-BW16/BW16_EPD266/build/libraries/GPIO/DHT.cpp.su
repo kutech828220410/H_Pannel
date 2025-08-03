@@ -1,0 +1,10 @@
+DHT.cpp:40:1:DHT::DHT(uint8_t, uint8_t, uint8_t)	12	static
+DHT.cpp:65:6:void DHT::begin(uint8_t)	16	static
+DHT.cpp:134:7:float DHT::convertCtoF(float)	8	static
+DHT.cpp:142:7:float DHT::convertFtoC(float)	8	static
+DHT.cpp:193:7:float DHT::computeHeatIndex(float, float, bool)	64	static
+DHT.cpp:230:6:bool DHT::read(bool)	344	static
+DHT.cpp:87:7:float DHT::readTemperature(bool, bool)	32	static
+DHT.cpp:150:7:float DHT::readHumidity(bool)	16	static
+DHT.cpp:176:7:float DHT::computeHeatIndex(bool)	24	static
+DHT.cpp:350:10:uint32_t DHT::expectPulse(bool)	16	static

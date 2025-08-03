@@ -1,0 +1,9 @@
+FlashMemory.cpp:16:1:FlashMemoryClass::FlashMemoryClass(unsigned int, unsigned int)	8	static
+FlashMemory.cpp:25:1:FlashMemoryClass::~FlashMemoryClass()	8	static
+FlashMemory.cpp:32:6:void FlashMemoryClass::begin(unsigned int, unsigned int)	0	static
+FlashMemory.cpp:37:6:void FlashMemoryClass::read()	0	static
+FlashMemory.cpp:41:6:void FlashMemoryClass::update(bool)	8	static
+FlashMemory.cpp:48:14:unsigned int FlashMemoryClass::readWord(unsigned int)	16	static
+FlashMemory.cpp:56:6:void FlashMemoryClass::writeWord(unsigned int, unsigned int)	32	static
+FlashMemory.cpp:82:90:cpp)	8	static
+FlashMemory.cpp:82:90:cpp)	0	static

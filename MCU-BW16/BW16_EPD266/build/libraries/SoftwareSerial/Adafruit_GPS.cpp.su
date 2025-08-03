@@ -1,0 +1,17 @@
+Adafruit_GPS.cpp:34:9:boolean Adafruit_GPS::parse(char*)	64	static
+Adafruit_GPS.cpp:254:6:char Adafruit_GPS::read()	16	static
+Adafruit_GPS.cpp:318:1:Adafruit_GPS::Adafruit_GPS(SoftwareSerial*)	16	static
+Adafruit_GPS.cpp:326:1:Adafruit_GPS::Adafruit_GPS(HardwareSerial*)	16	static
+Adafruit_GPS.cpp:332:6:void Adafruit_GPS::common_init()	16	static
+Adafruit_GPS.cpp:352:6:void Adafruit_GPS::begin(uint16_t)	8	static
+Adafruit_GPS.cpp:371:6:void Adafruit_GPS::sendCommand(const char*)	0	static
+Adafruit_GPS.cpp:385:9:boolean Adafruit_GPS::newNMEAreceived()	0	static
+Adafruit_GPS.cpp:389:6:void Adafruit_GPS::pause(boolean)	0	static
+Adafruit_GPS.cpp:393:7:char* Adafruit_GPS::lastNMEA()	0	static
+Adafruit_GPS.cpp:399:9:uint8_t Adafruit_GPS::parseHex(char)	0	static
+Adafruit_GPS.cpp:416:9:boolean Adafruit_GPS::waitForSentence(const char*, uint8_t)	56	static
+Adafruit_GPS.cpp:435:9:boolean Adafruit_GPS::LOCUS_StartLogger()	16	static
+Adafruit_GPS.cpp:441:9:boolean Adafruit_GPS::LOCUS_StopLogger()	16	static
+Adafruit_GPS.cpp:447:9:boolean Adafruit_GPS::LOCUS_ReadStatus()	48	static
+Adafruit_GPS.cpp:495:9:boolean Adafruit_GPS::standby()	8	static
+Adafruit_GPS.cpp:507:9:boolean Adafruit_GPS::wakeup()	8	static

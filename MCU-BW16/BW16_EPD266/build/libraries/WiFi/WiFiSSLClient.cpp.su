@@ -1,0 +1,23 @@
+WiFiSSLClient.cpp:133:8:virtual size_t WiFiSSLClient::write(uint8_t)	16	static
+WiFiSSLClient.cpp:156:1:virtual WiFiSSLClient::operator bool()	0	static
+WiFiSSLClient.cpp:244:6:virtual void WiFiSSLClient::flush()	8	static
+WiFiSSLClient.cpp:84:5:virtual int WiFiSSLClient::read()	32	static
+WiFiSSLClient.cpp:233:5:virtual int WiFiSSLClient::peek()	16	static
+WiFiSSLClient.cpp:105:5:virtual int WiFiSSLClient::read(uint8_t*, size_t)	24	static
+WiFiSSLClient.cpp:47:9:virtual uint8_t WiFiSSLClient::connected()	8	static
+WiFiSSLClient.cpp:61:5:virtual int WiFiSSLClient::available()	24	static
+WiFiSSLClient.cpp:120:6:virtual void WiFiSSLClient::stop()	8	static
+WiFiSSLClient.cpp:137:8:virtual size_t WiFiSSLClient::write(const uint8_t*, size_t)	16	static
+WiFiSSLClient.cpp:11:1:WiFiSSLClient::WiFiSSLClient()	12	static
+WiFiSSLClient.cpp:27:1:WiFiSSLClient::WiFiSSLClient(uint8_t)	16	static
+WiFiSSLClient.cpp:190:5:int WiFiSSLClient::connect(IPAddress, uint16_t, unsigned char*, unsigned char*, unsigned char*)	48	static
+WiFiSSLClient.cpp:177:5:int WiFiSSLClient::connect(const char*, uint16_t, unsigned char*, unsigned char*, unsigned char*)	88	static
+WiFiSSLClient.cpp:218:5:int WiFiSSLClient::connect(IPAddress, uint16_t, unsigned char*, unsigned char*)	40	static
+WiFiSSLClient.cpp:160:5:virtual int WiFiSSLClient::connect(IPAddress, uint16_t)	64	static
+WiFiSSLClient.cpp:205:5:int WiFiSSLClient::connect(const char*, uint16_t, unsigned char*, unsigned char*)	88	static
+WiFiSSLClient.cpp:166:5:virtual int WiFiSSLClient::connect(const char*, uint16_t)	24	static
+WiFiSSLClient.cpp:250:6:void WiFiSSLClient::setRootCA(unsigned char*)	0	static
+WiFiSSLClient.cpp:254:6:void WiFiSSLClient::setClientCertificate(unsigned char*, unsigned char*)	0	static
+WiFiSSLClient.cpp:259:6:void WiFiSSLClient::setPreSharedKey(unsigned char*, unsigned char*)	0	static
+WiFiSSLClient.cpp:264:5:int WiFiSSLClient::setRecvTimeout(int)	8	static
+WiFiSSLClient.cpp:271:1:cpp)	16	static

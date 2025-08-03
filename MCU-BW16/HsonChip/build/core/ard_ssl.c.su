@@ -1,0 +1,9 @@
+ard_ssl.c:74:14:my_calloc	16	static
+ard_ssl.c:12:21:ard_ssl_arc4random	8	static
+ard_ssl.c:43:12:my_random	32	static
+ard_ssl.c:101:5:start_ssl_client	96	static
+ard_ssl.c:324:6:stop_ssl_socket	8	static
+ard_ssl.c:343:5:send_ssl_data	0	static
+ard_ssl.c:354:5:get_ssl_receive	48	static
+ard_ssl.c:388:5:get_ssl_sock_errno	24	static
+ard_ssl.c:395:5:get_ssl_bytes_avail	0	static

@@ -1,0 +1,21 @@
+WiFiClient.cpp:130:8:virtual size_t WiFiClient::write(uint8_t)	16	static
+WiFiClient.cpp:153:1:virtual WiFiClient::operator bool()	0	static
+WiFiClient.cpp:225:6:virtual void WiFiClient::flush()	8	static
+WiFiClient.cpp:69:5:virtual int WiFiClient::read()	24	static
+WiFiClient.cpp:215:5:virtual int WiFiClient::peek()	16	static
+WiFiClient.cpp:91:5:virtual int WiFiClient::read(uint8_t*, size_t)	16	static
+WiFiClient.cpp:106:5:virtual int WiFiClient::recv(uint8_t*, size_t)	16	static
+WiFiClient.cpp:121:6:virtual void WiFiClient::stop()	8	static
+WiFiClient.cpp:134:8:virtual size_t WiFiClient::write(const uint8_t*, size_t)	16	static
+WiFiClient.cpp:185:5:virtual int WiFiClient::connect(IPAddress, uint16_t)	16	static
+WiFiClient.cpp:199:5:virtual int WiFiClient::connectv6(IPv6Address, uint16_t)	16	static
+WiFiClient.cpp:157:5:virtual int WiFiClient::connect(const char*, uint16_t)	152	static
+WiFiClient.cpp:30:9:virtual uint8_t WiFiClient::connected()	8	static
+WiFiClient.cpp:44:5:virtual int WiFiClient::available()	16	static
+WiFiClient.cpp:16:1:WiFiClient::WiFiClient()	12	static
+WiFiClient.cpp:21:1:WiFiClient::WiFiClient(uint8_t)	4	static
+WiFiClient.cpp:233:5:int WiFiClient::setRecvTimeout(int)	16	static
+WiFiClient.cpp:242:5:int WiFiClient::read(char*, size_t)	8	static
+WiFiClient.cpp:248:5:int WiFiClient::enableIPv6()	0	static
+WiFiClient.cpp:252:5:int WiFiClient::getIPv6Status()	0	static
+WiFiClient.cpp:254:1:cpp)	16	static

@@ -1,0 +1,4 @@
+Input.cpp:126:6:void MyInput::Init(int)	0	static
+Input.cpp:132:6:void MyInput::Set_toggle(bool)	0	static
+Input.cpp:143:6:void MyInput::GetState()	16	static
+Input.cpp:137:6:void MyInput::GetState(int)	0	static

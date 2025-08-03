@@ -1,0 +1,31 @@
+EPD.cpp:576:6:void EPD::SPI_Begin()	16	static
+EPD.cpp:576:6:void EPD::SPI_Begin()	16	static
+EPD.cpp:53:6:bool EPD::GetReady()	8	static
+EPD.cpp:576:6:void EPD::SPI_Begin()	16	static
+EPD.cpp:583:6:void EPD::SPI_End()	0	static
+EPD.cpp:588:6:void EPD::SpiTransfer(unsigned char)	16	static
+EPD.cpp:566:6:void EPD::SendCommand(unsigned char)	16	static
+EPD.cpp:571:6:void EPD::SendData(unsigned char)	16	static
+EPD.cpp:21:6:void EPD::SendSPI(char*, int, int)	24	static
+EPD.cpp:31:6:void EPD::SetCursor(int, int)	16	static
+EPD.cpp:40:6:void EPD::SetWindows(int, int, int, int)	24	static
+EPD.cpp:516:6:void EPD::BW_Command()	16	static
+EPD.cpp:540:6:void EPD::RW_Command()	16	static
+EPD.cpp:215:6:void EPD::DrawFrame_BW()	32	static
+EPD.cpp:345:6:void EPD::DrawFrame_RW()	32	static
+EPD.cpp:594:6:void EPD::HardwareReset()	8	static
+EPD.cpp:664:6:void EPD::WaitUntilIdle()	16	static
+EPD.cpp:423:6:void EPD::RefreshCanvas()	16	static
+EPD.cpp:729:15:unsigned char EPD::Color_get(unsigned char)	0	static
+EPD.cpp:751:6:void EPD::Sleep()	16	static
+EPD.cpp:500:6:void EPD::Sleep_Check()	16	static
+EPD.cpp:803:6:void EPD::EPD420_init()	8	static
+EPD.cpp:835:6:void EPD::EPD583_init()	8	static
+EPD.cpp:867:6:void EPD::EPD7IN3E_init()	8	static
+EPD.cpp:601:6:void EPD::Wakeup()	16	static
+EPD.cpp:4:6:void EPD::Init(SemaphoreHandle_t)	8	static
+EPD.cpp:57:6:void EPD::Clear()	24	static
+EPD.cpp:938:6:void EPD::DEPG0579RYT158FxX_init()	8	static
+EPD.cpp:1074:6:void EPD::EPD579B_init()	8	static
+EPD.cpp:1157:6:void EPD::EPD579G_init()	8	static
+EPD.cpp:1284:6:void EPD::EPD213_BRW_V0_init()	8	static

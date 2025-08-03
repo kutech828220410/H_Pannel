@@ -1,0 +1,3 @@
+LED.cpp:5:6:void MyLED::Init(int)	0	static
+LED.cpp:15:6:void MyLED::Blink()	16	static
+LED.cpp:10:6:void MyLED::Blink(int)	0	static

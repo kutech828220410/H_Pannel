@@ -1,0 +1,24 @@
+OLCD114.cpp:112:6:void OLCD114::OLED_DC_Clr()	0	static
+OLCD114.cpp:116:6:void OLCD114::OLED_DC_Set()	0	static
+OLCD114.cpp:120:6:void OLCD114::OLED_CS_Clr()	24	static
+OLCD114.cpp:138:6:void OLCD114::OLED_CS_Set()	8	static
+OLCD114.cpp:158:6:void OLCD114::LCD_Writ_Bus(uint8_t)	0	static
+OLCD114.cpp:167:6:void OLCD114::LCD_WR_DATA8(uint8_t)	8	static
+OLCD114.cpp:177:6:void OLCD114::LCD_WR_DATA(short int)	16	static
+OLCD114.cpp:188:6:void OLCD114::LCD_WR_REG(uint8_t)	8	static
+OLCD114.cpp:9:6:void OLCD114::Lcd_Init()	8	static
+OLCD114.cpp:200:6:void OLCD114::LCD_Address_Set(uint8_t, uint8_t, uint8_t, uint8_t)	24	static
+OLCD114.cpp:432:6:void OLCD114::LCD_ShowChar(short int, short int, uint8_t, short int)	56	static
+OLCD114.cpp:250:6:void OLCD114::LCD_Clear(short int)	32	static
+OLCD114.cpp:272:6:void OLCD114::LCD_DrawPoint(short int, short int, short int)	24	static
+OLCD114.cpp:292:6:void OLCD114::LCD_Fill(short int, short int, short int, short int, short int)	40	static
+OLCD114.cpp:282:6:void OLCD114::LCD_DrawPoint_big(short int, short int, short int)	24	static
+OLCD114.cpp:310:6:void OLCD114::LCD_DrawLine(short int, short int, short int, short int, short int)	64	static
+OLCD114.cpp:350:6:void OLCD114::LCD_DrawRectangle(short int, short int, short int, short int, short int)	40	static
+OLCD114.cpp:363:6:void OLCD114::Draw_Circle(short int, short int, uint8_t, short int)	80	static
+OLCD114.cpp:392:5:uint32_t OLCD114::mypow(uint8_t, uint8_t)	0	static
+OLCD114.cpp:406:6:void OLCD114::LCD_ShowNum(short int, short int, short int, uint8_t, short int)	72	static
+OLCD114.cpp:432:6:void OLCD114::LCD_ShowChar(short int, short int, uint8_t, short int)	8	static
+OLCD114.cpp:459:6:void OLCD114::LCD_ShowNum1(short int, short int, float, uint8_t, short int)	56	static
+OLCD114.cpp:484:6:void OLCD114::LCD_ShowPicture(short int, short int, short int, short int)	40	static
+OLCD114.cpp:498:6:void OLCD114::LCD_ShowPicture()	32	static

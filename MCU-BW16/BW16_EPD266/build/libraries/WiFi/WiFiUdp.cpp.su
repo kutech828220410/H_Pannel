@@ -1,0 +1,25 @@
+WiFiUdp.h:66:17:virtual int WiFiUDP::read(char*, size_t)	0	static
+WiFiUdp.cpp:150:8:virtual size_t WiFiUDP::write(uint8_t)	16	static
+WiFiUdp.cpp:174:5:virtual int WiFiUDP::parsePacket()	0	static
+WiFiUdp.cpp:205:6:virtual void WiFiUDP::flush()	8	static
+WiFiUdp.cpp:111:5:virtual int WiFiUDP::beginPacket(const char*, uint16_t)	80	static
+WiFiUdp.cpp:86:5:virtual int WiFiUDP::available()	8	static
+WiFiUdp.cpp:101:6:virtual void WiFiUDP::stop()	8	static
+WiFiUdp.cpp:138:5:virtual int WiFiUDP::endPacket()	8	static
+WiFiUdp.cpp:121:5:virtual int WiFiUDP::beginPacket(IPAddress, uint16_t)	8	static
+WiFiUdp.cpp:154:8:virtual size_t WiFiUDP::write(const uint8_t*, size_t)	24	static
+WiFiUdp.cpp:178:5:virtual int WiFiUDP::read()	16	static
+WiFiUdp.cpp:195:5:virtual int WiFiUDP::peek()	16	static
+WiFiUdp.cpp:190:5:virtual int WiFiUDP::read(unsigned char*, size_t)	4	static
+WiFiUdp.cpp:219:10:virtual uint16_t WiFiUDP::remotePort()	16	static
+WiFiUdp.cpp:209:11:virtual IPAddress WiFiUDP::remoteIP()	16	static
+WiFiUdp.cpp:236:5:virtual int WiFiUDP::enableIPv6()	0	static
+WiFiUdp.cpp:240:5:virtual int WiFiUDP::getIPv6Status()	0	static
+WiFiUdp.cpp:244:6:virtual void WiFiUDP::UDPServerv6()	0	static
+WiFiUdp.cpp:37:9:virtual uint8_t WiFiUDP::begin(uint16_t)	8	static
+WiFiUdp.cpp:53:5:virtual int WiFiUDP::connect(const char*, uint16_t)	120	static
+WiFiUdp.cpp:34:1:WiFiUDP::WiFiUDP()	8	static
+WiFiUdp.cpp:160:5:int WiFiUDP::writeImmediately(const uint8_t*, size_t)	24	static
+WiFiUdp.cpp:167:5:int WiFiUDP::writeImmediately(const uint8_t*, size_t, uint32_t, uint16_t)	24	static
+WiFiUdp.cpp:229:6:void WiFiUDP::setRecvTimeout(int)	0	static
+WiFiUdp.cpp:246:1:cpp)	16	static
