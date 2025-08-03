@@ -69,8 +69,14 @@ void serialEvent()
     }
     if (UART0_RX[0] == 'c'&& UART0_len == 3)
     {
+      #ifdef EPD3IN6E
+      mySerial.print("EPD3IN6E Show7Block..\n ");
+      epd.Show7Block();
+      #else
       mySerial.print("EPD Clear..\n ");
       epd.Clear();
+      #endif
+      
     }
     if (UART0_RX[0] == 'w'&& UART0_len == 3)
     {

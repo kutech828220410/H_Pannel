@@ -581,3 +581,5 @@ C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_l
 C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel.DC91EED3.Up2Date
 C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.dll
 C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.pdb
+C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.EPD360E_Paint_Form.resources
+C:\Users\Evan\source\repos\H_Pannel\H_Pannel(VS)\H_Pannel\obj\Release\H_Pannel_lib.Dialog_6Color_select.resources

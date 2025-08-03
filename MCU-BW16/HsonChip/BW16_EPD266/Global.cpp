@@ -40,6 +40,8 @@ bool flag_writeMode = false;
     EPD epd;
 #elif defined(EPD7IN3E)
     EPD730E epd;
+#elif defined(EPD3IN6E)
+    EPD360E epd;    
 #else
     EPD epd;
 #endif

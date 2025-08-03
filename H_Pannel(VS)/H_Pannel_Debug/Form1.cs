@@ -107,8 +107,7 @@ namespace WT32_SC01
 
 
             this.storageUI_EPD_266.Init();
-            this.epD_266_Pannel.Init(this.storageUI_EPD_266.List_UDP_Local);
-            this.epD_266_Pannel.MouseDown += EpD_266_Pannel_MouseDown;
+        
             this.storagePanel.SureClick += StoragePanel_SureClick;
 
             this.storageUI_EPD_290.Init();
@@ -248,20 +247,8 @@ namespace WT32_SC01
         }
 
         #region EPD266
-        private void EpD_266_Pannel_MouseDown(object sender, MouseEventArgs e)
-        {
-            EPD266_Paint_Form ePD266_Paint_Form = new EPD266_Paint_Form(this.epD_266_Pannel.CurrentStorage);
-            if (ePD266_Paint_Form.ShowDialog() != DialogResult.Yes) return;
-
-            Storage storage = ePD266_Paint_Form.CurrentStorage;
-
-            storageUI_EPD_266.SQL_ReplaceStorage(storage);
-        }
-        private void rJ_Button_EPD_266_初始化_Click(object sender, EventArgs e)
-        {
-            this.storageUI_EPD_266.Init();
-            this.epD_266_Pannel.Init(this.storageUI_EPD_266.List_UDP_Local);        
-        }
+      
+       
         private void RJ_Button_EPD266_TEST_MouseDownEvent(MouseEventArgs mevent)
         {
             MyUI.MyTimer myTimer = new MyUI.MyTimer();
@@ -319,7 +306,6 @@ namespace WT32_SC01
             string IP = RowValue[(int)enum_DeviceTable.IP].ObjectToString();
             Storage storage = this.storageUI_EPD_266.SQL_GetStorage(IP);
             if (storage == null) return;
-            this.epD_266_Pannel.DrawToPictureBox(storage);
             this.storagePanel.DrawToPictureBox(storage);
         }
         #endregion

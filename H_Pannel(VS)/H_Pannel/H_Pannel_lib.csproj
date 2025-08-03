@@ -136,6 +136,12 @@
     <Compile Include="Dialog\Dialog_RFID_DeviceSetting.Designer.cs">
       <DependentUpon>Dialog_RFID_DeviceSetting.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\Dialog_6Color_select.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Dialog_6Color_select.Designer.cs">
+      <DependentUpon>Dialog_6Color_select.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\Dialog_選取顯示網段.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,6 +214,12 @@
     </Compile>
     <Compile Include="StorageUI_LCD_114.Designer.cs">
       <DependentUpon>StorageUI_LCD_114.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewUI\EPD360E_Paint_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewUI\EPD360E_Paint_Form.Designer.cs">
+      <DependentUpon>EPD360E_Paint_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewUI\LCD114_Panel.cs">
       <SubType>UserControl</SubType>
@@ -343,6 +355,9 @@
     <EmbeddedResource Include="Dialog\Dialog_RFID_DeviceSetting.resx">
       <DependentUpon>Dialog_RFID_DeviceSetting.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dialog\Dialog_6Color_select.resx">
+      <DependentUpon>Dialog_6Color_select.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialog\Dialog_選取顯示網段.resx">
       <DependentUpon>Dialog_選取顯示網段.cs</DependentUpon>
     </EmbeddedResource>
@@ -394,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StorageUI_WT32.resx">
       <DependentUpon>StorageUI_WT32.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewUI\EPD360E_Paint_Form.resx">
+      <DependentUpon>EPD360E_Paint_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewUI\EPD420_Paint_Form .resx">
       <DependentUpon>EPD420_Paint_Form .cs</DependentUpon>

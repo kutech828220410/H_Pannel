@@ -819,6 +819,16 @@ namespace H_Pannel_lib
                 this.pannelWidth = 800;
                 this.pannelHeight = 480;
             }
+            if (deviceType == DeviceType.EPD730E || deviceType == DeviceType.EPD730E_lock)
+            {
+                this.pannelWidth = 800;
+                this.pannelHeight = 480;
+            }
+            if (deviceType == DeviceType.EPD360E || deviceType == DeviceType.EPD360E_lock)
+            {
+                this.pannelWidth = 600;
+                this.pannelHeight = 400;
+            }
             if (deviceType == DeviceType.EPD420_D_lock || deviceType == DeviceType.EPD420_D)
             {
                 this.pannelWidth = 400;
@@ -888,6 +898,16 @@ namespace H_Pannel_lib
                 this.pannelWidth = 800;
                 this.pannelHeight = 480;
             }
+            if (deviceType == DeviceType.EPD730E || deviceType == DeviceType.EPD730E_lock)
+            {
+                this.pannelWidth = 800;
+                this.pannelHeight = 480;
+            }
+            if (deviceType == DeviceType.EPD360E || deviceType == DeviceType.EPD360E_lock)
+            {
+                this.pannelWidth = 600;
+                this.pannelHeight = 400;
+            }
             if (this.DeviceType == DeviceType.EPD420 || this.DeviceType == DeviceType.EPD420_lock)
             {
                 this.pannelWidth = 400;
@@ -925,6 +945,16 @@ namespace H_Pannel_lib
             {
                 this.pannelWidth = 800;
                 this.pannelHeight = 480;
+            }
+            if (deviceType == DeviceType.EPD730E || deviceType == DeviceType.EPD730E_lock)
+            {
+                this.pannelWidth = 800;
+                this.pannelHeight = 480;
+            }
+            if (deviceType == DeviceType.EPD360E || deviceType == DeviceType.EPD360E_lock)
+            {
+                this.pannelWidth = 600;
+                this.pannelHeight = 400;
             }
             if (this.DeviceType == DeviceType.EPD420 || this.DeviceType == DeviceType.EPD420_lock)
             {

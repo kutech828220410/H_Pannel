@@ -1,4 +1,4 @@
-#define VERSION "Ver 1.5.502"
+#define VERSION "Ver 1.5.503"
 #define RESOURCE "OTA_All.bin"  
 
 #define SPI_MOSI_PIN PA12
@@ -20,7 +20,8 @@
 //#define EPD579B
 //#define DEPG0579RYT158FxX
 //#define EPD213_BRW_V0
-#define EPD7IN3E
+// #define EPD7IN3E
+#define EPD3IN6E
 
 //#define OLCD_114
 //#define MCP23017
@@ -99,6 +100,12 @@
 #define EPD_WIDTH 800 / 4
 #define EPD_HEIGHT 480
 #define EPD_TYPE "EPD7IN3E"
+#define EPD_Device
+
+#elif defined(EPD3IN6E)
+#define EPD_WIDTH 600 / 4
+#define EPD_HEIGHT 400
+#define EPD_TYPE "EPD3IN6E"
 #define EPD_Device
 
 #else

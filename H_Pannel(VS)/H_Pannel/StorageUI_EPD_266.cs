@@ -172,7 +172,11 @@ namespace H_Pannel_lib
                     flag_ok = Communication.EPD_420_DrawImage(uDP_Class, IP, bitmap);
                     return flag_ok;
                 }
-
+                if (bitmap.Width == 600 && bitmap.Height == 400)
+                {
+                    flag_ok = Communication.EPD_360E_DrawImage(uDP_Class, IP, bitmap);
+                    return flag_ok;
+                }
             }
             return false;
         }
@@ -208,6 +212,8 @@ namespace H_Pannel_lib
         static public Bitmap Get_Storage_bmp(Storage storage)
         {
             if (Get_Storage_bmpChangeEvent != null) return Get_Storage_bmpChangeEvent(storage);
+
+   
             return Communication.Storage_GetBitmap(storage);
 
         }
@@ -282,6 +288,8 @@ namespace H_Pannel_lib
             設為EPD290無鎖控,
             設為EPD420有鎖控,
             設為EPD420無鎖控,
+            設為EPD360E有鎖控,
+            設為EPD360E無鎖控,
         }
         public StorageUI_EPD_266()
         {
@@ -730,166 +738,36 @@ namespace H_Pannel_lib
             {
                 Dialog_ContextMenuStrip dialog_ContextMenuStrip = new Dialog_ContextMenuStrip(new ContextMenuStrip_UDP_DataReceive_面板種類().GetEnumNames());
                 if (dialog_ContextMenuStrip.ShowDialog() != DialogResult.Yes) return;
-                if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD213有鎖控.GetEnumName())
+
+                // 建立 enum 與對應 DeviceType 的映射表
+                Dictionary<string, DeviceType> deviceTypeMap = new Dictionary<string, DeviceType>
+                {
+                    { ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD213有鎖控.GetEnumName(), DeviceType.EPD213_lock },
+                    { ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD213無鎖控.GetEnumName(), DeviceType.EPD213 },
+                    { ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD266有鎖控.GetEnumName(), DeviceType.EPD266_lock },
+                    { ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD266無鎖控.GetEnumName(), DeviceType.EPD266 },
+                    { ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD290有鎖控.GetEnumName(), DeviceType.EPD290_lock },
+                    { ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD290無鎖控.GetEnumName(), DeviceType.EPD290 },
+                    { ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD420有鎖控.GetEnumName(), DeviceType.EPD420_lock },
+                    { ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD420無鎖控.GetEnumName(), DeviceType.EPD420 },
+                    { ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD360E有鎖控.GetEnumName(), DeviceType.EPD360E_lock },
+                    { ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD360E無鎖控.GetEnumName(), DeviceType.EPD360E },
+                };
+
+                if (deviceTypeMap.TryGetValue(dialog_ContextMenuStrip.Value, out DeviceType selectedDeviceType))
                 {
                     List<Task> taskList = new List<Task>();
-                    for (int i = 0; i < iPEndPoints.Count; i++)
+                    foreach (var endpoint in iPEndPoints)
                     {
-                        string IP = iPEndPoints[i].Address.ToString();
-                        int Port = iPEndPoints[i].Port;
+                        string IP = endpoint.Address.ToString();
                         Storage storage = this.SQL_GetStorage(IP);
                         if (storage == null) continue;
-                        storage.SetDeviceType(DeviceType.EPD213_lock);
-                        taskList.Add(Task.Run(() =>
-                        {
-                            this.SQL_ReplaceStorage(storage);
-                        }));
+
+                        storage.SetDeviceType(selectedDeviceType);
+                        taskList.Add(Task.Run(() => this.SQL_ReplaceStorage(storage)));
                     }
-                    Task allTask = Task.WhenAll(taskList);
-                    this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
-                }
-                else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD213無鎖控.GetEnumName())
-                {
-                    List<Task> taskList = new List<Task>();
-                    for (int i = 0; i < iPEndPoints.Count; i++)
-                    {
-                        string IP = iPEndPoints[i].Address.ToString();
-                        int Port = iPEndPoints[i].Port;
-                        Storage storage = this.SQL_GetStorage(IP);
-                        if (storage == null) continue;
-                        storage.SetDeviceType(DeviceType.EPD213);
-                        taskList.Add(Task.Run(() =>
-                        {
-                            this.SQL_ReplaceStorage(storage);
-                        }));
-                    }
-                    Task allTask = Task.WhenAll(taskList);
-                    this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
-                }
-                else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD266有鎖控.GetEnumName())
-                {
-                    List<Task> taskList = new List<Task>();
-                    for (int i = 0; i < iPEndPoints.Count; i++)
-                    {
-                        string IP = iPEndPoints[i].Address.ToString();
-                        int Port = iPEndPoints[i].Port;
-                        Storage storage = this.SQL_GetStorage(IP);
-                        if (storage == null) continue;
-                        storage.SetDeviceType(DeviceType.EPD266_lock);
-                        taskList.Add(Task.Run(() =>
-                        {
-                            this.SQL_ReplaceStorage(storage);
-                        }));
-                    }
-                    Task allTask = Task.WhenAll(taskList);
-                    this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
-                }
-                else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD266無鎖控.GetEnumName())
-                {
-                    List<Task> taskList = new List<Task>();
-                    for (int i = 0; i < iPEndPoints.Count; i++)
-                    {
-                        string IP = iPEndPoints[i].Address.ToString();
-                        int Port = iPEndPoints[i].Port;
-                        Storage storage = this.SQL_GetStorage(IP);
-                        if (storage == null) continue;
-                        storage.SetDeviceType(DeviceType.EPD266);
-                        taskList.Add(Task.Run(() =>
-                        {
-                            this.SQL_ReplaceStorage(storage);
-                        }));
-                    }
-                    Task allTask = Task.WhenAll(taskList);
-                    this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
-                }
-                else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD290有鎖控.GetEnumName())
-                {
-                    List<Task> taskList = new List<Task>();
-                    for (int i = 0; i < iPEndPoints.Count; i++)
-                    {
-                        string IP = iPEndPoints[i].Address.ToString();
-                        int Port = iPEndPoints[i].Port;
-                        Storage storage = this.SQL_GetStorage(IP);
-                        if (storage == null) continue;
-                        storage.SetDeviceType(DeviceType.EPD290_lock);
-                        taskList.Add(Task.Run(() =>
-                        {
-                            this.SQL_ReplaceStorage(storage);
-                        }));
-                    }
-                    Task allTask = Task.WhenAll(taskList);
-                    this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
-                }
-                else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD290無鎖控.GetEnumName())
-                {
-                    List<Task> taskList = new List<Task>();
-                    for (int i = 0; i < iPEndPoints.Count; i++)
-                    {
-                        string IP = iPEndPoints[i].Address.ToString();
-                        int Port = iPEndPoints[i].Port;
-                        Storage storage = this.SQL_GetStorage(IP);
-                        if (storage == null) continue;
-                        storage.SetDeviceType(DeviceType.EPD290);
-                        taskList.Add(Task.Run(() =>
-                        {
-                            this.SQL_ReplaceStorage(storage);
-                        }));
-                    }
-                    Task allTask = Task.WhenAll(taskList);
-                    this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
-                }
-                else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD290有鎖控.GetEnumName())
-                {
-                    List<Task> taskList = new List<Task>();
-                    for (int i = 0; i < iPEndPoints.Count; i++)
-                    {
-                        string IP = iPEndPoints[i].Address.ToString();
-                        int Port = iPEndPoints[i].Port;
-                        Storage storage = this.SQL_GetStorage(IP);
-                        if (storage == null) continue;
-                        storage.SetDeviceType(DeviceType.EPD290_lock);
-                        taskList.Add(Task.Run(() =>
-                        {
-                            this.SQL_ReplaceStorage(storage);
-                        }));
-                    }
-                    Task allTask = Task.WhenAll(taskList);
-                    this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
-                }
-                else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD420無鎖控.GetEnumName())
-                {
-                    List<Task> taskList = new List<Task>();
-                    for (int i = 0; i < iPEndPoints.Count; i++)
-                    {
-                        string IP = iPEndPoints[i].Address.ToString();
-                        int Port = iPEndPoints[i].Port;
-                        Storage storage = this.SQL_GetStorage(IP);
-                        if (storage == null) continue;
-                        storage.SetDeviceType(DeviceType.EPD420);
-                        taskList.Add(Task.Run(() =>
-                        {
-                            this.SQL_ReplaceStorage(storage);
-                        }));
-                    }
-                    Task allTask = Task.WhenAll(taskList);
-                    this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
-                }
-                else if (dialog_ContextMenuStrip.Value == ContextMenuStrip_UDP_DataReceive_面板種類.設為EPD420有鎖控.GetEnumName())
-                {
-                    List<Task> taskList = new List<Task>();
-                    for (int i = 0; i < iPEndPoints.Count; i++)
-                    {
-                        string IP = iPEndPoints[i].Address.ToString();
-                        int Port = iPEndPoints[i].Port;
-                        Storage storage = this.SQL_GetStorage(IP);
-                        if (storage == null) continue;
-                        storage.SetDeviceType(DeviceType.EPD420_lock);
-                        taskList.Add(Task.Run(() =>
-                        {
-                            this.SQL_ReplaceStorage(storage);
-                        }));
-                    }
-                    Task allTask = Task.WhenAll(taskList);
+
+                    Task.WhenAll(taskList).Wait();
                     this.sqL_DataGridView_DeviceTable.SQL_GetAllRows(true);
                 }
             }

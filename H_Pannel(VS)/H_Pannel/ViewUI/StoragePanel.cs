@@ -33,7 +33,7 @@ namespace H_Pannel_lib
 
         public delegate void SureClickHandler(Storage storage);
         public event SureClickHandler SureClick;
-
+        private double sclae = 1D;
         [ReadOnly(false), Browsable(false)]
         public Storage CurrentStorage
         {
@@ -104,6 +104,12 @@ namespace H_Pannel_lib
                 if (ePD420_Paint_Form.ShowDialog() != DialogResult.Yes) return;
                 if (SureClick != null) SureClick(currentStorage);
             }
+            if (CurrentStorage.DeviceType == DeviceType.EPD360E || CurrentStorage.DeviceType == DeviceType.EPD360E_lock)
+            {
+                EPD360E_Paint_Form ePD360E_Paint_Form = new EPD360E_Paint_Form(this.CurrentStorage);
+                if (ePD360E_Paint_Form.ShowDialog() != DialogResult.Yes) return;
+                if (SureClick != null) SureClick(currentStorage);
+            }
             base.OnMouseDown(e);
         }
 
@@ -117,39 +123,49 @@ namespace H_Pannel_lib
         public void DrawToPictureBox(Storage storage)
         {
             if (storage == null) return;
+            if (storage.DeviceType.GetEnumName().Contains("EPD360E")) sclae = 0.75D;
+            else sclae = 1;
             this.Invoke(new Action(delegate 
             {
-                this.Width = storage.PanelSize.Width;
-                this.Height = storage.PanelSize.Height;
+                this.Width = (int)(storage.PanelSize.Width * sclae);
+                this.Height = (int)(storage.PanelSize.Height * sclae);
             }));
             this.currentStorage = storage;
-            using (Bitmap bitmap = this.Get_Storage_bmp(storage))
+            using (Bitmap bitmap = this.Get_Storage_bmp(storage , sclae))
             {
+                if(sclae != 1)
+                {
+                    bitmap.ScaleImage(Width, Height);   
+                }
                 using (Graphics g = pictureBox.CreateGraphics())
                 {
                     g.DrawImage(bitmap, new PointF());
                 }
             }
         }
-        virtual public Bitmap Get_Storage_bmp(Storage storage)
+        virtual public Bitmap Get_Storage_bmp(Storage storage , double scale = 1)
         {
             if(storage.DeviceType == DeviceType.EPD266 || storage.DeviceType == DeviceType.EPD266_lock)
             {
-                return Communication.Storage_GetBitmap(storage);
+                return Communication.Storage_GetBitmap(storage, scale);
             }
             if (storage.DeviceType == DeviceType.EPD290 || storage.DeviceType == DeviceType.EPD290_lock)
             {
-                return Communication.Storage_GetBitmap(storage);
+                return Communication.Storage_GetBitmap(storage, scale);
             }
             if (storage.DeviceType == DeviceType.EPD213 || storage.DeviceType == DeviceType.EPD213_lock)
             {
-                return Communication.Storage_GetBitmap(storage);
+                return Communication.Storage_GetBitmap(storage, scale);
             }
             if (storage.DeviceType == DeviceType.EPD420 || storage.DeviceType == DeviceType.EPD420_lock)
             {
-                return Communication.Storage_GetBitmap(storage);
+                return Communication.Storage_GetBitmap(storage, scale);
             }
-            return Communication.Get_Storage_bmp(storage, new StoragePanel.enum_ValueName().GetEnumNames(), 1);
+            if (storage.DeviceType == DeviceType.EPD360E || storage.DeviceType == DeviceType.EPD360E_lock)
+            {
+                return Communication.Storage_GetBitmap(storage, scale);
+            }
+            return Communication.Get_Storage_bmp(storage, new StoragePanel.enum_ValueName().GetEnumNames(), scale);
         }
         public static Bitmap ScaleImage(Bitmap SrcBitmap, int dstWidth, int dstHeight)
         {

@@ -49,6 +49,7 @@ namespace H_Pannel_lib
     public enum enum_PictureType
     {
         無,
+        藥品圖片,
         高警訊_1,
         高警訊_2,
         高警訊_3,
@@ -623,6 +624,14 @@ namespace H_Pannel_lib
             public bool IsLightOn = false;
 
         }
+        private class CachedBitmapInfo
+        {
+            public Bitmap Original;
+            public Bitmap Dithered;
+            public bool IsDithered;
+        }
+
+        private static Dictionary<string, CachedBitmapInfo> bitmapCache = new Dictionary<string, CachedBitmapInfo>();
 
         public string serverIP = "";
         public uint serverPort = 0;
@@ -1127,6 +1136,63 @@ namespace H_Pannel_lib
             list_Lot_number.Clear();
             list_Inventory.Clear();
         }
+
+
+        public static void SetBitmapToCache(string drugCode, Bitmap bmp)
+        {
+            if (string.IsNullOrWhiteSpace(drugCode) || bmp == null) return;
+
+            if (bitmapCache.ContainsKey(drugCode))
+            {
+                bitmapCache[drugCode].Original?.Dispose();
+                bitmapCache[drugCode].Dithered?.Dispose();
+                bitmapCache[drugCode] = new CachedBitmapInfo
+                {
+                    Original = bmp,
+                    Dithered = null,
+                    IsDithered = false
+                };
+            }
+            else
+            {
+                bitmapCache.Add(drugCode, new CachedBitmapInfo
+                {
+                    Original = bmp,
+                    Dithered = null,
+                    IsDithered = false
+                });
+            }
+        }
+
+        public static Bitmap GetDitheredBitmapFromCache(string drugCode)
+        {
+            if (!bitmapCache.ContainsKey(drugCode)) return null;
+
+            var info = bitmapCache[drugCode];
+
+            if (!info.IsDithered)
+            {
+                info.Dithered = info.Original?.ApplyFloydSteinbergDitheringSixColor();
+                info.IsDithered = true;
+            }
+
+            return info.Dithered;
+        }
+        public static void ClearBitmapCache()
+        {
+            foreach (var entry in bitmapCache.Values)
+            {
+                entry.Original?.Dispose();
+                entry.Dithered?.Dispose();
+            }
+            bitmapCache.Clear();
+        }
+
+        public static bool ContainsBitmap(string drugCode)
+        {
+            return bitmapCache.ContainsKey(drugCode);
+        }
+
     }
 
 
@@ -1375,7 +1441,8 @@ namespace H_Pannel_lib
             bool flag = (device.DeviceType == DeviceType.EPD266 || device.DeviceType == DeviceType.EPD266_lock
                         || device.DeviceType == DeviceType.EPD290 || device.DeviceType == DeviceType.EPD290_lock
                         || device.DeviceType == DeviceType.EPD420 || device.DeviceType == DeviceType.EPD420_lock
-                        || device.DeviceType == DeviceType.EPD213 || device.DeviceType == DeviceType.EPD213_lock);
+                        || device.DeviceType == DeviceType.EPD213 || device.DeviceType == DeviceType.EPD213_lock
+                         || device.DeviceType == DeviceType.EPD360E || device.DeviceType == DeviceType.EPD360E_lock);
             return flag;
         }
         
@@ -1430,7 +1497,8 @@ namespace H_Pannel_lib
         EPD420_D_lock = 19,
         EPD730E_lock = 20,
         EPD730E = 21,
-
+        EPD360E_lock = 22,
+        EPD360E = 23,
         EPD213 = 118,
     }
     public enum HorizontalAlignment
@@ -1522,6 +1590,10 @@ namespace H_Pannel_lib
                 {
                     return new Size(400, 300);
                 }
+                if (DeviceType.GetEnumName().Contains("EPD360E"))
+                {
+                    return new Size(600, 400);
+                }
                 if (DeviceType == DeviceType.Pannel35 || DeviceType == DeviceType.Pannel35_lock)
                 {
                     return new Size(360, 240);
@@ -1569,6 +1641,7 @@ namespace H_Pannel_lib
             BorderSize,
             BorderColor,
             Visable,
+            BorderRadius,
 
         }
         public class VlaueClass
@@ -1604,6 +1677,7 @@ namespace H_Pannel_lib
             public int Height = 0;
             public HorizontalAlignment HorizontalAlignment = HorizontalAlignment.Left;
             public int BorderSize = 0;
+            public int BorderRadius = 0;
             public Color BorderColor = Color.Black;
             public bool Visable = false;
             public bool flag_breathing = false;
@@ -1731,6 +1805,10 @@ namespace H_Pannel_lib
                         {
                             if (Value is int) this.Name_BorderSize = (int)Value;
                         }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.Name_BorderRadius = (int)Value;
+                        }
                         else if (valueType == ValueType.BorderColor)
                         {
                             if (Value is Color) this.Name_BorderColor = (Color)Value;
@@ -1784,6 +1862,10 @@ namespace H_Pannel_lib
                         else if (valueType == ValueType.BorderSize)
                         {
                             if (Value is int) this.ChineseName_BorderSize = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.ChineseName_BorderRadius = (int)Value;
                         }
                         else if (valueType == ValueType.BorderColor)
                         {
@@ -1839,6 +1921,10 @@ namespace H_Pannel_lib
                         {
                             if (Value is int) this.Package_BorderSize = (int)Value;
                         }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.Package_BorderRadius = (int)Value;
+                        }
                         else if (valueType == ValueType.BorderColor)
                         {
                             if (Value is Color) this.Package_BorderColor = (Color)Value;
@@ -1891,6 +1977,10 @@ namespace H_Pannel_lib
                         else if (valueType == ValueType.BorderSize)
                         {
                             if (Value is int) this.Scientific_Name_BorderSize = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.Scientific_Name_BorderRadius = (int)Value;
                         }
                         else if (valueType == ValueType.BorderColor)
                         {
@@ -1945,6 +2035,10 @@ namespace H_Pannel_lib
                         {
                             if (Value is int) this.Code_BorderSize = (int)Value;
                         }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.Code_BorderRadius = (int)Value;
+                        }
                         else if (valueType == ValueType.BorderColor)
                         {
                             if (Value is Color) this.Code_BorderColor = (Color)Value;
@@ -1997,6 +2091,10 @@ namespace H_Pannel_lib
                         else if (valueType == ValueType.BorderSize)
                         {
                             if (Value is int) this.Label_BorderSize = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.Label_BorderRadius = (int)Value;
                         }
                         else if (valueType == ValueType.BorderColor)
                         {
@@ -2051,6 +2149,10 @@ namespace H_Pannel_lib
                         {
                             if (Value is int) this.Validity_period_BorderSize = (int)Value;
                         }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.Validity_period_BorderRadius = (int)Value;
+                        }
                         else if (valueType == ValueType.BorderColor)
                         {
                             if (Value is Color) this.Validity_period_BorderColor = (Color)Value;
@@ -2104,6 +2206,10 @@ namespace H_Pannel_lib
                         {
                             if (Value is int) this.StorageName_BorderSize = (int)Value;
                         }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.StorageName_BorderRadius = (int)Value;
+                        }
                         else if (valueType == ValueType.BorderColor)
                         {
                             if (Value is Color) this.StorageName_BorderColor = (Color)Value;
@@ -2155,6 +2261,10 @@ namespace H_Pannel_lib
                         else if (valueType == ValueType.BorderSize)
                         {
                             if (Value is int) this.MinPackage_BorderSize = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.MinPackage_BorderRadius = (int)Value;
                         }
                         else if (valueType == ValueType.BorderColor)
                         {
@@ -2208,6 +2318,10 @@ namespace H_Pannel_lib
                         {
                             if (Value is int) this.Min_Package_Num_BorderSize = (int)Value;
                         }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.Min_Package_Num_BorderRadius = (int)Value;
+                        }
                         else if (valueType == ValueType.BorderColor)
                         {
                             if (Value is Color) this.Min_Package_Num_BorderColor = (Color)Value;
@@ -2259,6 +2373,10 @@ namespace H_Pannel_lib
                         else if (valueType == ValueType.BorderSize)
                         {
                             if (Value is int) this.BarCode_BorderSize = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.BarCode_BorderRadius = (int)Value;
                         }
                         else if (valueType == ValueType.BorderColor)
                         {
@@ -2418,6 +2536,10 @@ namespace H_Pannel_lib
                         {
                             if (Value is int) this.Inventory_BorderSize = (int)Value;
                         }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.Inventory_BorderRadius = (int)Value;
+                        }
                         else if (valueType == ValueType.BorderColor)
                         {
                             if (Value is Color) this.Inventory_BorderColor = (Color)Value;
@@ -2474,6 +2596,10 @@ namespace H_Pannel_lib
                         else if (valueType == ValueType.BorderSize)
                         {
                             if (Value is int) this.Max_Inventory_BorderSize = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.Max_Inventory_BorderRadius = (int)Value;
                         }
                         else if (valueType == ValueType.BorderColor)
                         {
@@ -2632,6 +2758,10 @@ namespace H_Pannel_lib
                         {
                             if (Value is int) this.CustomText1_BorderSize = (int)Value;
                         }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.CustomText1_BorderRadius = (int)Value;
+                        }
                         else if (valueType == ValueType.BorderColor)
                         {
                             if (Value is Color) this.CustomText1_BorderColor = (Color)Value;
@@ -2686,6 +2816,10 @@ namespace H_Pannel_lib
                         {
                             if (Value is int) this.CustomText2_BorderSize = (int)Value;
                         }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.CustomText2_BorderRadius = (int)Value;
+                        }
                         else if (valueType == ValueType.BorderColor)
                         {
                             if (Value is Color) this.CustomText2_BorderColor = (Color)Value;
@@ -2739,6 +2873,10 @@ namespace H_Pannel_lib
                         else if (valueType == ValueType.BorderSize)
                         {
                             if (Value is int) this.CustomText3_BorderSize = (int)Value;
+                        }
+                        else if (valueType == ValueType.BorderRadius)
+                        {
+                            if (Value is int) this.CustomText3_BorderRadius = (int)Value;
                         }
                         else if (valueType == ValueType.BorderColor)
                         {
@@ -2800,6 +2938,10 @@ namespace H_Pannel_lib
             {
                 return vlaueClass.BorderSize;
             }
+            else if (valueType == ValueType.BorderRadius)
+            {
+                return vlaueClass.BorderRadius;
+            }
             else if (valueType == ValueType.BorderColor)
             {
                 return vlaueClass.BorderColor;
@@ -2834,6 +2976,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.Name_Height;
                         vlaueClass.HorizontalAlignment = this.Name_HorizontalAlignment;
                         vlaueClass.BorderSize = this.Name_BorderSize;
+                        vlaueClass.BorderRadius = this.Name_BorderRadius;
                         vlaueClass.BorderColor = this.Name_BorderColor;
                         vlaueClass.Visable = this.Name_Visable;
                         if (vlaueClass.Width > this.PanelSize.Width) vlaueClass.Width = this.PanelSize.Width;
@@ -2857,6 +3000,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.ChineseName_Height;
                         vlaueClass.HorizontalAlignment = this.ChineseName_HorizontalAlignment;
                         vlaueClass.BorderSize = this.ChineseName_BorderSize;
+                        vlaueClass.BorderRadius = this.ChineseName_BorderRadius;
                         vlaueClass.BorderColor = this.ChineseName_BorderColor;
                         vlaueClass.Visable = this.ChineseName_Visable;
 
@@ -2878,6 +3022,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.CustomText1_Height;
                         vlaueClass.HorizontalAlignment = this.CustomText1_HorizontalAlignment;
                         vlaueClass.BorderSize = this.CustomText1_BorderSize;
+                        vlaueClass.BorderRadius = this.CustomText1_BorderRadius;
                         vlaueClass.BorderColor = this.CustomText1_BorderColor;
                         vlaueClass.Visable = this.CustomText1_Visable;
 
@@ -2899,6 +3044,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.CustomText2_Height;
                         vlaueClass.HorizontalAlignment = this.CustomText2_HorizontalAlignment;
                         vlaueClass.BorderSize = this.CustomText2_BorderSize;
+                        vlaueClass.BorderRadius = this.CustomText2_BorderRadius;
                         vlaueClass.BorderColor = this.CustomText2_BorderColor;
                         vlaueClass.Visable = this.CustomText2_Visable;
 
@@ -2920,6 +3066,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.CustomText3_Height;
                         vlaueClass.HorizontalAlignment = this.CustomText3_HorizontalAlignment;
                         vlaueClass.BorderSize = this.CustomText3_BorderSize;
+                        vlaueClass.BorderRadius = this.CustomText3_BorderRadius;
                         vlaueClass.BorderColor = this.CustomText3_BorderColor;
                         vlaueClass.Visable = this.CustomText3_Visable;
 
@@ -2941,6 +3088,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.Package_Height;
                         vlaueClass.HorizontalAlignment = this.Package_HorizontalAlignment;
                         vlaueClass.BorderSize = this.Package_BorderSize;
+                        vlaueClass.BorderRadius = this.Package_BorderRadius;
                         vlaueClass.BorderColor = this.Package_BorderColor;
                         vlaueClass.Visable = this.Package_Visable;
                         //Size size = TextRenderer.MeasureText(vlaueClass.StringValue, vlaueClass.Font);
@@ -2961,6 +3109,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.Scientific_Name_Height;
                         vlaueClass.HorizontalAlignment = this.Scientific_Name_HorizontalAlignment;
                         vlaueClass.BorderSize = this.Scientific_Name_BorderSize;
+                        vlaueClass.BorderRadius = this.Scientific_Name_BorderRadius;
                         vlaueClass.BorderColor = this.Scientific_Name_BorderColor;
                         vlaueClass.Visable = this.Scientific_Name_Visable;
 
@@ -2982,6 +3131,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.Code_Height;
                         vlaueClass.HorizontalAlignment = this.Code_HorizontalAlignment;
                         vlaueClass.BorderSize = this.Code_BorderSize;
+                        vlaueClass.BorderRadius = this.Code_BorderRadius;
                         vlaueClass.BorderColor = this.Code_BorderColor;
                         vlaueClass.Visable = this.Code_Visable;
 
@@ -3003,6 +3153,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.Label_Height;
                         vlaueClass.HorizontalAlignment = this.Label_HorizontalAlignment;
                         vlaueClass.BorderSize = this.Label_BorderSize;
+                        vlaueClass.BorderRadius = this.Label_BorderRadius;
                         vlaueClass.BorderColor = this.Label_BorderColor;
                         vlaueClass.Visable = this.Label_Visable;
 
@@ -3032,6 +3183,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.Validity_period_Height;
                         vlaueClass.HorizontalAlignment = this.Validity_period_HorizontalAlignment;
                         vlaueClass.BorderSize = this.Validity_period_BorderSize;
+                        vlaueClass.BorderRadius = this.Validity_period_BorderRadius;
                         vlaueClass.BorderColor = this.Validity_period_BorderColor;
                         vlaueClass.Visable = this.Validity_period_Visable;
 
@@ -3053,6 +3205,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.StorageName_Height;
                         vlaueClass.HorizontalAlignment = this.StorageName_HorizontalAlignment;
                         vlaueClass.BorderSize = this.StorageName_BorderSize;
+                        vlaueClass.BorderRadius = this.StorageName_BorderRadius;
                         vlaueClass.BorderColor = this.StorageName_BorderColor;
                         vlaueClass.Visable = this.StorageName_Visable;
 
@@ -3074,6 +3227,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.MinPackage_Height;
                         vlaueClass.HorizontalAlignment = this.MinPackage_HorizontalAlignment;
                         vlaueClass.BorderSize = this.MinPackage_BorderSize;
+                        vlaueClass.BorderRadius = this.MinPackage_BorderRadius;
                         vlaueClass.BorderColor = this.MinPackage_BorderColor;
                         vlaueClass.Visable = this.MinPackage_Visable;
 
@@ -3095,6 +3249,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.Min_Package_Num_Height;
                         vlaueClass.HorizontalAlignment = this.Min_Package_Num_HorizontalAlignment;
                         vlaueClass.BorderSize = this.Min_Package_Num_BorderSize;
+                        vlaueClass.BorderRadius = this.Min_Package_Num_BorderRadius;
                         vlaueClass.BorderColor = this.Min_Package_Num_BorderColor;
                         vlaueClass.Visable = this.Min_Package_Num_Visable;
 
@@ -3116,6 +3271,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.BarCode_Height;
                         vlaueClass.HorizontalAlignment = this.BarCode_HorizontalAlignment;
                         vlaueClass.BorderSize = this.BarCode_BorderSize;
+                        vlaueClass.BorderRadius = this.BarCode_BorderRadius;
                         vlaueClass.BorderColor = this.BarCode_BorderColor;
                         vlaueClass.Visable = this.BarCode_Visable;
 
@@ -3191,6 +3347,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.Inventory_Height;
                         vlaueClass.HorizontalAlignment = this.Inventory_HorizontalAlignment;
                         vlaueClass.BorderSize = this.Inventory_BorderSize;
+                        vlaueClass.BorderRadius = this.Inventory_BorderRadius;
                         vlaueClass.BorderColor = this.Inventory_BorderColor;
                         vlaueClass.Visable = this.Inventory_Visable;
 
@@ -3212,6 +3369,7 @@ namespace H_Pannel_lib
                         vlaueClass.Height = this.Max_Inventory_Height;
                         vlaueClass.HorizontalAlignment = this.Max_Inventory_HorizontalAlignment;
                         vlaueClass.BorderSize = this.Max_Inventory_BorderSize;
+                        vlaueClass.BorderRadius = this.Max_Inventory_BorderRadius;
                         vlaueClass.BorderColor = this.Max_Inventory_BorderColor;
                         vlaueClass.Visable = this.Max_Inventory_Visable;
 
@@ -3305,19 +3463,24 @@ namespace H_Pannel_lib
             else if (valueName == ValueName.圖片1|| valueName == ValueName.圖片2)
             {
                 Bitmap bitmap = null;
-                if (vlaueClass.Value == enum_PictureType.高警訊_1.GetEnumName())
+                if (vlaueClass.Value == enum_PictureType.藥品圖片.GetEnumName())
+                {
+                    bitmap = Device.GetDitheredBitmapFromCache(Code);
+          
+                }
+                else if (vlaueClass.Value == enum_PictureType.高警訊_1.GetEnumName())
                 {
                     bitmap = Resource1.Alarm_filled_red;
                 }
-                if (vlaueClass.Value == enum_PictureType.高警訊_2.GetEnumName())
+                else if (vlaueClass.Value == enum_PictureType.高警訊_2.GetEnumName())
                 {
                     bitmap = Resource1.高警訊_2;
                 }
-                if (vlaueClass.Value == enum_PictureType.高警訊_3.GetEnumName())
+                else if (vlaueClass.Value == enum_PictureType.高警訊_3.GetEnumName())
                 {
                     bitmap = Resource1.高警訊_3;
                 }
-                if (vlaueClass.Value == enum_PictureType.高警訊_4.GetEnumName())
+                else if (vlaueClass.Value == enum_PictureType.高警訊_4.GetEnumName())
                 {
                     bitmap = Resource1.高警訊_4;
                 }
@@ -3355,7 +3518,7 @@ namespace H_Pannel_lib
             }        
             else
             {
-                Bitmap bitmap = Communication.TextToBitmap(vlaueClass.Value, vlaueClass.Font, bmp_Scale, vlaueClass.Width, vlaueClass.Height, vlaueClass.ForeColor, vlaueClass.BackColor, vlaueClass.BorderSize, vlaueClass.BorderColor, vlaueClass.HorizontalAlignment);
+                Bitmap bitmap = Communication.TextToBitmap(vlaueClass.Value, vlaueClass.Font, bmp_Scale, vlaueClass.Width, vlaueClass.Height, vlaueClass.ForeColor, vlaueClass.BackColor, vlaueClass.BorderSize , vlaueClass.BorderRadius, vlaueClass.BorderColor, vlaueClass.HorizontalAlignment);
                 if (bitmap == null) return null;
                 using (Graphics g = Graphics.FromImage(bitmap))
                 {
@@ -3388,7 +3551,7 @@ namespace H_Pannel_lib
 
             if (valueName != ValueName.BarCode)
             {
-                Bitmap bitmap = Communication.TextToBitmap(vlaueClass.StringValue, vlaueClass.Font, bmp_Scale, vlaueClass.Width, vlaueClass.Height, vlaueClass.ForeColor, vlaueClass.BackColor, vlaueClass.BorderSize, vlaueClass.BorderColor, vlaueClass.HorizontalAlignment);
+                Bitmap bitmap = Communication.TextToBitmap(vlaueClass.StringValue, vlaueClass.Font, bmp_Scale, vlaueClass.Width, vlaueClass.Height, vlaueClass.ForeColor, vlaueClass.BackColor, vlaueClass.BorderSize, vlaueClass.BorderRadius, vlaueClass.BorderColor, vlaueClass.HorizontalAlignment);
                 if (bitmap == null) return null;
                 using (Graphics g = Graphics.FromImage(bitmap))
                 {
@@ -3537,6 +3700,8 @@ namespace H_Pannel_lib
         public int Name_Height { get => _Name_Height; set => _Name_Height = value; }
         private int _Name_BorderSize = 2;
         public int Name_BorderSize { get => _Name_BorderSize; set => _Name_BorderSize = value; }
+        private int _Name_BorderRadius = 0;
+        public int Name_BorderRadius { get => _Name_BorderRadius; set => _Name_BorderRadius = value; }
         [JsonIgnore]
         public Color Name_BorderColor = Color.Black;
         [Browsable(false)]
@@ -3597,6 +3762,8 @@ namespace H_Pannel_lib
         public int ChineseName_Height { get => _ChineseName_Height; set => _ChineseName_Height = value; }
         private int _ChineseName_BorderSize = 2;
         public int ChineseName_BorderSize { get => _ChineseName_BorderSize; set => _ChineseName_BorderSize = value; }
+        private int _ChineseName_BorderRadius = 0;
+        public int ChineseName_BorderRadius { get => _ChineseName_BorderRadius; set => _ChineseName_BorderRadius = value; }
         [JsonIgnore]
         public Color ChineseName_BorderColor = Color.Black;
         [Browsable(false)]
@@ -3658,6 +3825,8 @@ namespace H_Pannel_lib
         public int Package_Height { get => _Package_Height; set => _Package_Height = value; }
         private int _Package_BorderSize = 2;
         public int Package_BorderSize { get => _Package_BorderSize; set => _Package_BorderSize = value; }
+        private int _Package_BorderRadius = 0;
+        public int Package_BorderRadius { get => _Package_BorderRadius; set => _Package_BorderRadius = value; }
         [JsonIgnore]
         public Color Package_BorderColor = Color.Black;
         [Browsable(false)]
@@ -3718,6 +3887,8 @@ namespace H_Pannel_lib
         public int Scientific_Name_Height { get => _Scientific_Name_Height; set => _Scientific_Name_Height = value; }
         private int _Scientific_Name_BorderSize = 2;
         public int Scientific_Name_BorderSize { get => _Scientific_Name_BorderSize; set => _Scientific_Name_BorderSize = value; }
+        private int _Scientific_Name_BorderRadius = 0;
+        public int Scientific_Name_BorderRadius { get => _Scientific_Name_BorderRadius; set => _Scientific_Name_BorderRadius = value; }
         [JsonIgnore]
         public Color Scientific_Name_BorderColor = Color.Black;
         [Browsable(false)]
@@ -3778,6 +3949,8 @@ namespace H_Pannel_lib
         public int Code_Height { get => _Code_Height; set => _Code_Height = value; }
         private int _Code_BorderSize = 2;
         public int Code_BorderSize { get => _Code_BorderSize; set => _Code_BorderSize = value; }
+        private int _Code_BorderRadius = 0;
+        public int Code_BorderRadius { get => _Code_BorderRadius; set => _Code_BorderRadius = value; }
         [JsonIgnore]
         public Color Code_BorderColor = Color.Black;
         [Browsable(false)]
@@ -3839,6 +4012,8 @@ namespace H_Pannel_lib
         public int Label_Height { get => _Label_Height; set => _Label_Height = value; }
         private int _Label_BorderSize = 2;
         public int Label_BorderSize { get => _Label_BorderSize; set => _Label_BorderSize = value; }
+        private int _Label_BorderRadius = 0;
+        public int Label_BorderRadius { get => _Label_BorderRadius; set => _Label_BorderRadius = value; }
         [JsonIgnore]
         public Color Label_BorderColor = Color.Black;
         [Browsable(false)]
@@ -3900,6 +4075,8 @@ namespace H_Pannel_lib
         public int Validity_period_Height { get => _Validity_period_Height; set => _Validity_period_Height = value; }
         private int _Validity_period_BorderSize = 2;
         public int Validity_period_BorderSize { get => _Validity_period_BorderSize; set => _Validity_period_BorderSize = value; }
+        private int _Validity_period_BorderRadius = 0;
+        public int Validity_period_BorderRadius { get => _Validity_period_BorderRadius; set => _Validity_period_BorderRadius = value; }
         [JsonIgnore]
         public Color Validity_period_BorderColor = Color.Black;
         [Browsable(false)]
@@ -3960,6 +4137,8 @@ namespace H_Pannel_lib
         public int StorageName_Height { get => _StorageName_Height; set => _StorageName_Height = value; }
         private int _StorageName_BorderSize = 2;
         public int StorageName_BorderSize { get => _StorageName_BorderSize; set => _StorageName_BorderSize = value; }
+        private int _StorageName_BorderRadius = 0;
+        public int StorageName_BorderRadius { get => _StorageName_BorderRadius; set => _StorageName_BorderRadius = value; }
         [JsonIgnore]
         public Color StorageName_BorderColor = Color.Black;
         [Browsable(false)]
@@ -4021,6 +4200,8 @@ namespace H_Pannel_lib
         public int MinPackage_Height { get => _MinPackage_Height; set => _MinPackage_Height = value; }
         private int _MinPackage_BorderSize = 2;
         public int MinPackage_BorderSize { get => _MinPackage_BorderSize; set => _MinPackage_BorderSize = value; }
+        private int _MinPackage_BorderRadius = 0;
+        public int MinPackage_BorderRadius { get => _MinPackage_BorderRadius; set => _MinPackage_BorderRadius = value; }
         [JsonIgnore]
         public Color MinPackage_BorderColor = Color.Black;
         [Browsable(false)]
@@ -4081,6 +4262,8 @@ namespace H_Pannel_lib
         public int Min_Package_Num_Height { get => _Min_Package_Num_Height; set => _Min_Package_Num_Height = value; }
         private int _Min_Package_Num_BorderSize = 2;
         public int Min_Package_Num_BorderSize { get => _Min_Package_Num_BorderSize; set => _Min_Package_Num_BorderSize = value; }
+        private int _Min_Package_Num_BorderRadius = 0;
+        public int Min_Package_Num_BorderRadius { get => _Min_Package_Num_BorderRadius; set => _Min_Package_Num_BorderRadius = value; }
         [JsonIgnore]
         public Color Min_Package_Num_BorderColor = Color.Black;
         [Browsable(false)]
@@ -4141,6 +4324,8 @@ namespace H_Pannel_lib
         public int BarCode_Height { get => _BarCode_Height; set => _BarCode_Height = value; }
         private int _BarCode_BorderSize = 2;
         public int BarCode_BorderSize { get => _BarCode_BorderSize; set => _BarCode_BorderSize = value; }
+        private int _BarCode_BorderRadius = 0;
+        public int BarCode_BorderRadius { get => _BarCode_BorderRadius; set => _BarCode_BorderRadius = value; }
         [JsonIgnore]
         public Color BarCode_BorderColor = Color.Black;
         [Browsable(false)]
@@ -4201,6 +4386,8 @@ namespace H_Pannel_lib
         public int Inventory_Height { get => _Inventory_Height; set => _Inventory_Height = value; }
         private int _Inventory_BorderSize = 2;
         public int Inventory_BorderSize { get => _Inventory_BorderSize; set => _Inventory_BorderSize = value; }
+        private int _Inventory_BorderRadius = 0;
+        public int Inventory_BorderRadius { get => _Inventory_BorderRadius; set => _Inventory_BorderRadius = value; }
         [JsonIgnore]
         public Color Inventory_BorderColor = Color.Black;
         [Browsable(false)]
@@ -4261,6 +4448,8 @@ namespace H_Pannel_lib
         public int Max_Inventory_Height { get => _Max_Inventory_Height; set => _Max_Inventory_Height = value; }
         private int _Max_Inventory_BorderSize = 2;
         public int Max_Inventory_BorderSize { get => _Max_Inventory_BorderSize; set => _Max_Inventory_BorderSize = value; }
+        private int _Max_Inventory_BorderRadius = 0;
+        public int Max_Inventory_BorderRadius { get => _Max_Inventory_BorderRadius; set => _Max_Inventory_BorderRadius = value; }
         [JsonIgnore]
         public Color Max_Inventory_BorderColor = Color.Black;
         [Browsable(false)]
@@ -4564,6 +4753,8 @@ namespace H_Pannel_lib
         public int CustomText1_Height { get => _CustomText1_Height; set => _CustomText1_Height = value; }
         private int _CustomText1_BorderSize = 2;
         public int CustomText1_BorderSize { get => _CustomText1_BorderSize; set => _CustomText1_BorderSize = value; }
+        private int _CustomText1_BorderRadius = 0;
+        public int CustomText1_BorderRadius { get => _CustomText1_BorderRadius; set => _CustomText1_BorderRadius = value; }
         [JsonIgnore]
         public Color CustomText1_BorderColor = Color.Black;
         [Browsable(false)]
@@ -4624,6 +4815,8 @@ namespace H_Pannel_lib
         public int CustomText2_Height { get => _CustomText2_Height; set => _CustomText2_Height = value; }
         private int _CustomText2_BorderSize = 2;
         public int CustomText2_BorderSize { get => _CustomText2_BorderSize; set => _CustomText2_BorderSize = value; }
+        private int _CustomText2_BorderRadius = 0;
+        public int CustomText2_BorderRadius { get => _CustomText2_BorderRadius; set => _CustomText2_BorderRadius = value; }
         [JsonIgnore]
         public Color CustomText2_BorderColor = Color.Black;
         [Browsable(false)]
@@ -4684,6 +4877,8 @@ namespace H_Pannel_lib
         public int CustomText3_Height { get => _CustomText3_Height; set => _CustomText3_Height = value; }
         private int _CustomText3_BorderSize = 2;
         public int CustomText3_BorderSize { get => _CustomText3_BorderSize; set => _CustomText3_BorderSize = value; }
+        private int _CustomText3_BorderRadius = 0;
+        public int CustomText3_BorderRadius { get => _CustomText3_BorderRadius; set => _CustomText3_BorderRadius = value; }
         [JsonIgnore]
         public Color CustomText3_BorderColor = Color.Black;
         [Browsable(false)]

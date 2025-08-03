@@ -19,6 +19,7 @@
 #include "./Timer.h"
 #include "./LED.h"
 #include "./EPD730E.h"
+#include "./EPD360E.h"
 
 #ifdef MCP23017
 #include "DFRobot_MCP23017.h"
@@ -60,6 +61,8 @@ extern bool flag_writeMode;
     extern EPD epd;
 #elif defined(EPD7IN3E)
     extern EPD730E epd;
+#elif defined(EPD3IN6E)
+    extern EPD360E epd;
 #else
     extern EPD epd;
 #endif

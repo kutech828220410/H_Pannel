@@ -42,7 +42,7 @@ namespace EinkSyncConsole
                 {
                     using (Bitmap bmp = (Bitmap)Bitmap.FromFile(imagePath))
                     {
-                        using (Bitmap bmp_buf_ = Communication.ScaleImage(bmp, 800, 480))
+                        using (Bitmap bmp_buf_ = Communication.ScaleImage(bmp, 600, 400))
                         using (Bitmap bmp_buf = bmp_buf_.ApplyFloydSteinbergDithering(DitheringProcessor.DitheringMode.SixColor))
                         {
 
@@ -53,9 +53,9 @@ namespace EinkSyncConsole
 
                                 //bmp_buf_.Save(savePath, System.Drawing.Imaging.ImageFormat.Bmp);
                                 Console.WriteLine($"✅ 已儲存處理圖片到桌面：{savePath}");
-                                UDP_Class uDP_Class = new UDP_Class("192.168.0.20", 29005, false);
+                                UDP_Class uDP_Class = new UDP_Class("192.168.0.20", 29000, false);
 
-                                Communication.EPD_730E_DrawImage(uDP_Class, ip, bmp);
+                                Communication.EPD_360E_DrawImage(uDP_Class, ip, bmp);
 
                                 ShowImage(new Bitmap(bmp_buf)); // 顯示處理後圖片
                                                                  // 儲存處理後圖片到桌面
