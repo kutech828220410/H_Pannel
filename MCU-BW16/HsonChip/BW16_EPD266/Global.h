@@ -3,11 +3,11 @@
 
 #include <Arduino.h>
 
-#include "./src/IO.h"
-#include "./src/UART0_Handler.h"
-#include "./src/UART1_Handler.h"
-#include "./src/UDP_Receive.h"
-#include "./src/UDP_Reporter.h"
+#include "./IO.h"
+#include "./UART0_Handler.h"
+#include "./UART1_Handler.h"
+#include "./UDP_Receive.h"
+#include "./UDP_Reporter.h"
 
 #include "./Global.h"
 #include "./Config.h"
@@ -21,10 +21,14 @@
 #include "./EPD730E.h"
 #include "./EPD360E.h"
 
-#ifdef MCP23017
+#if defined(MCP23017)
 #include "DFRobot_MCP23017.h"
 extern DFRobot_MCP23017 mcp;//constructor, change the Level of A2, A1, A0 via DIP switch to revise the I2C address within 0x20~0x27.
+#else if defined(MCP23008)
+#include "Adafruit_MCP23008.h"
+extern Adafruit_MCP23008 mcp;
 #endif
+
 
 #ifdef DHTSensor
 extern DHT dht;

@@ -5,7 +5,7 @@
 //#define RowLED_Device
 //#define EPD213
 //#define EPD266
-//#define EPD290
+#define EPD290
 //#define EPD420
 //#define EPD420_D
 //#define EPD583
@@ -13,7 +13,7 @@
 //#define EPD579B
 //#define DEPG0579RYT158FxX
 //#define EPD213_BRW_V0
-#define EPD7IN3E
+//#define EPD7IN3E
 
 //#define OLCD_114
 //#define MCP23017

@@ -2,7 +2,7 @@
 #include "IO.h"
 
 
-#ifdef MCP23017
+#if defined(MCP23017)
 #define INPUT_PIN01 0
 #define INPUT_PIN02 1
 #define INPUT_PIN03 2
@@ -22,6 +22,28 @@
 #define OUTPUT_PIN06 13
 #define OUTPUT_PIN07 14
 #define OUTPUT_PIN08 15
+#define OUTPUT_PIN09 -1
+#define OUTPUT_PIN10 -1
+#else if defined(MCP23008)
+#define INPUT_PIN01 1
+#define INPUT_PIN02 2
+#define INPUT_PIN03 3
+#define INPUT_PIN04 -1
+#define INPUT_PIN05 -1
+#define INPUT_PIN06 -1
+#define INPUT_PIN07 -1
+#define INPUT_PIN08 -1
+#define INPUT_PIN09 -1
+#define INPUT_PIN10 -1
+
+#define OUTPUT_PIN01 0
+#define OUTPUT_PIN02 4
+#define OUTPUT_PIN03 5
+#define OUTPUT_PIN04 -1
+#define OUTPUT_PIN05 -1
+#define OUTPUT_PIN06 -1
+#define OUTPUT_PIN07 -1
+#define OUTPUT_PIN08 -1
 #define OUTPUT_PIN09 -1
 #define OUTPUT_PIN10 -1
 #else
@@ -88,7 +110,7 @@ void IO_Init()
     Output_dir = wiFiConfig.Get_Output_dir();
     Set_Output_dir(Output_dir);
 
-    #ifdef MCP23017
+    #if defined(MCP23017) || defined(MCP23008)
     MyOutput_PIN01.Init(OUTPUT_PIN01 ,mcp);
     MyOutput_PIN02.Init(OUTPUT_PIN02 ,mcp);
     MyOutput_PIN03.Init(OUTPUT_PIN03 ,mcp);

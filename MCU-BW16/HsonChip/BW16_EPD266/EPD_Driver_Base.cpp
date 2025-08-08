@@ -8,12 +8,17 @@ void EPD_Driver_Base::Init(SemaphoreHandle_t mutex)
     xSpiMutex = mutex;
     
     pinMode(this -> PIN_CS, OUTPUT);
+    pinMode(this -> PIN_BUSY, INPUT);     
+    digitalWrite(this -> PIN_CS , HIGH);
+    #ifdef MCP23008
+    _mcp ->pinMode(PIN_DC , OUTPUT);
+    _mcp ->pinMode(PIN_RST , OUTPUT);
+    #else
     pinMode(this -> PIN_RST, OUTPUT);
     pinMode(this -> PIN_DC, OUTPUT);
-    pinMode(this -> PIN_BUSY, INPUT); 
+    #endif
     
-    digitalWrite(this -> PIN_CS , HIGH);
-   
+    
     delay(20);
     melloc_init();
     this -> Wakeup();  
@@ -73,12 +78,20 @@ bool EPD_Driver_Base::GetReady()
 
 void EPD_Driver_Base::SendCommand(unsigned char command)
 {
+   #ifdef MCP23008
+   _mcp ->digitalWrite(PIN_DC, LOW);
+   #else
    digitalWrite(this -> PIN_DC, LOW);
+   #endif 
    SpiTransfer(command);
 }
 void EPD_Driver_Base::SendData(unsigned char data)
 {
+   #ifdef MCP23008
+   _mcp ->digitalWrite(PIN_DC, HIGH);
+   #else
    digitalWrite(this -> PIN_DC, HIGH);
+   #endif
    SpiTransfer(data);
 }
 
@@ -95,8 +108,16 @@ void EPD_Driver_Base::SpiTransfer(unsigned char value)
 }
 void EPD_Driver_Base::HardwareReset()
 {
-   digitalWrite(this -> PIN_RST, LOW);                //module reset    
+   #ifdef MCP23008
+   _mcp ->digitalWrite(PIN_RST, LOW);
+   delay(10);
+   _mcp ->digitalWrite(PIN_RST, HIGH);
+   delay(10);
+   #else
+   digitalWrite(this -> PIN_RST, LOW);
    delay(10);
    digitalWrite(this -> PIN_RST, HIGH);
-   delay(10);   
+   delay(10); 
+   #endif 
+     
 }

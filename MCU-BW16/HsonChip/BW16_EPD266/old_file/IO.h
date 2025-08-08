@@ -2,10 +2,10 @@
 #define IO_H
 
 #include "Arduino.h"
-#include "..\Output.h"
-#include "..\Input.h" 
-#include "..\WiFiConfig.h"
-#include "..\Global.h"
+#include "Output.h"
+#include "Input.h" 
+#include "WiFiConfig.h"
+#include "Global.h"
 
 extern MyOutput MyOutput_PIN01, MyOutput_PIN02, MyOutput_PIN03, MyOutput_PIN04, MyOutput_PIN05;
 extern MyOutput MyOutput_PIN06, MyOutput_PIN07, MyOutput_PIN08, MyOutput_PIN09, MyOutput_PIN10;

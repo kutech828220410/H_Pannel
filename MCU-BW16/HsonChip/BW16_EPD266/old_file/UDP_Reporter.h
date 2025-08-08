@@ -6,7 +6,7 @@
 #include "../Timer.h"
 #include "../Config.h"
 #include "../Global.h"
-#include "../src/IO.h"
+#include "IO.h"
 #include "../src/UART0_Handler.h"
 #include "../src/UART1_Handler.h"
 

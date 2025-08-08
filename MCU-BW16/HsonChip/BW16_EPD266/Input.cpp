@@ -1,17 +1,11 @@
 #include "Timer.h"
 #include "Input.h"
 #include "Arduino.h"
+#include "Global.h"
 #include "Config.h"
 
-#ifdef MCP23017
-void MyInput::Init(int PIN_Num)
-{
-   this -> PIN_NUM = PIN_Num ;
-   if(PIN_Num != -1)
-   {
-      pinMode(PIN_Num, INPUT_PULLUP);
-   }
-}
+#if defined(MCP23017)
+#include "DFRobot_MCP23017.h"
 void MyInput::Init(int PIN_Num ,DFRobot_MCP23017& mcp)
 {
    this -> _mcp = &mcp;
@@ -34,13 +28,39 @@ void MyInput::Init(int PIN_Num ,DFRobot_MCP23017& mcp)
    else if(PIN_Num == 13) _mcp -> pinMode(_mcp->eGPB5 , INPUT_PULLUP);
    else if(PIN_Num == 14) _mcp -> pinMode(_mcp->eGPB6 , INPUT_PULLUP);
    else if(PIN_Num == 15) _mcp -> pinMode(_mcp->eGPB7 , INPUT_PULLUP);
-
- 
 }
+#elif defined(MCP23008)
+#include "Adafruit_MCP23008.h"
+void MyInput::Init(int PIN_Num ,Adafruit_MCP23008& mcp)
+{
+   this -> _mcp = &mcp;
+   this -> PIN_NUM = PIN_Num ;
+   if(PIN_Num == -1)return;
+   this -> flag_mcp = true;
+   if(PIN_Num != -1) 
+   {
+      printf("Adafruit_MCP23008 pinMode : %d\n" , PIN_Num);
+      _mcp -> pinMode(PIN_Num , INPUT);
+      _mcp -> pullUp(PIN_Num , HIGH);
+   }
+   
+}
+#else    
+
+#endif
+void MyInput::Init(int PIN_Num)
+{
+   this -> PIN_NUM = PIN_Num ;
+   if(PIN_Num != -1)
+   {
+      pinMode(PIN_Num, INPUT_PULLUP);
+   }
+}
+
 void MyInput::Set_toggle(bool value)
 {
    this -> flag_toogle = value ;
-   printf("set input flag %d  , pin : %d\n" , value , this -> PIN_NUM);
+   if(flag_udp_232back)printf("set input flag %d  , pin : %d\n" , value , this -> PIN_NUM);
 }
 void MyInput::GetState(int Time)
 {
@@ -51,8 +71,8 @@ void MyInput::GetState(int Time)
 void MyInput::GetState()
 {
   int PIN = this -> PIN_NUM;
-  if(this -> flag_mcp)
-  {
+  if(PIN == -1) return;
+  #if defined(MCP23017)
      if(PIN == 0) flag_state = _mcp -> digitalRead(_mcp->eGPA0);
      else if(PIN == 1) flag_state = _mcp -> digitalRead(_mcp->eGPA1);
      else if(PIN == 2) flag_state = _mcp -> digitalRead(_mcp->eGPA2);
@@ -69,82 +89,13 @@ void MyInput::GetState()
      else if(PIN == 13) flag_state = _mcp -> digitalRead(_mcp->eGPB5);
      else if(PIN == 14) flag_state = _mcp -> digitalRead(_mcp->eGPB6);
      else if(PIN == 15) flag_state = _mcp -> digitalRead(_mcp->eGPB7);
-  }
-  else
-  {
-     this -> flag_state = digitalRead(this -> PIN_NUM);
-  }
-  
-  if(this -> flag_toogle)
-  {
-    this -> flag_state = !(this -> flag_state);
-  }
-  if(this -> flag_state)
-  {
-     this -> cnt_off = 1;
-     if(this -> cnt_on == 1)
-     {
-        myTimer.TickStop();
-        myTimer.StartTickTime(this -> OnDelayTime);
-        this -> cnt_on ++;
-     }
-     if(this -> cnt_on == 2)
-     {
-        if(myTimer.IsTimeOut())
-        {
-           this -> State = this -> flag_state;
-           if(Input_ON != nullptr) Input_ON();
-           //printf("Input ON PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
-           this -> cnt_on ++;
-        }
-     }
-  }
-  else
-  {
-     this -> cnt_on = 1;
-     if(this -> cnt_off == 1)
-     {
-        myTimer.TickStop();
-        myTimer.StartTickTime(this -> OffDelayTime);
-        this -> cnt_off ++;
-     }
-     if(this -> cnt_off == 2)
-     {
-        if(myTimer.IsTimeOut())
-        {
-           this -> State = this -> flag_state;
-           if(Input_OFF != nullptr) Input_OFF();
-           //printf("Input OFF PIN : %d , OnDelayTime : %d\n",PIN,OffDelayTime);
-           this -> cnt_off ++;
-        }
-     }
-  }
-  
-  
-}
-#else
-void MyInput::Init(int PIN_Num)
-{
-   this -> PIN_NUM = PIN_Num ;
-   if(PIN_Num != -1)pinMode(PIN_Num, INPUT_PULLUP);
-}
+  #elif defined(MCP23008)
+     flag_state = _mcp -> digitalRead(PIN);
+  #else
+     flag_state = digitalRead(this -> PIN_NUM);
+  #endif
 
-void MyInput::Set_toggle(bool value)
-{
-   this -> flag_toogle = value ;
-   printf("set input flag %d  , pin : %d\n" , value , this -> PIN_NUM);
-}
-void MyInput::GetState(int Time)
-{
-  this -> OnDelayTime = Time;
-  this -> OffDelayTime = Time;
-  MyInput::GetState();
-}
-void MyInput::GetState()
-{
-  if(PIN_NUM == -1)return;
-  int PIN = this -> PIN_NUM;
-  this -> flag_state = digitalRead(this -> PIN_NUM);
+  
   if(this -> flag_toogle)
   {
     this -> flag_state = !(this -> flag_state);
@@ -164,7 +115,7 @@ void MyInput::GetState()
         {
            this -> State = this -> flag_state;
            if(Input_ON != nullptr) Input_ON();
-           //Serial.printf("Input ON PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
+           if(flag_udp_232back)printf("Input ON PIN : %d , OnDelayTime : %d\n",PIN,OnDelayTime);
            this -> cnt_on ++;
         }
      }
@@ -184,7 +135,7 @@ void MyInput::GetState()
         {
            this -> State = this -> flag_state;
            if(Input_OFF != nullptr) Input_OFF();
-           //Serial.printf("Input OFF PIN : %d , OnDelayTime : %d\n",PIN,OffDelayTime);
+           if(flag_udp_232back)printf("Input OFF PIN : %d , OnDelayTime : %d\n",PIN,OffDelayTime);
            this -> cnt_off ++;
         }
      }
@@ -192,4 +143,3 @@ void MyInput::GetState()
   
   
 }
-#endif

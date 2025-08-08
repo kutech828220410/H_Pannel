@@ -10,13 +10,24 @@ void EPD::Init(SemaphoreHandle_t mutex)
 
     framebuffer = (byte*) malloc(EPD_WIDTH * EPD_HEIGHT);
     buffer_max = EPD_WIDTH * EPD_HEIGHT;
+    
     pinMode(this -> PIN_CS, OUTPUT);
+    pinMode(this -> PIN_BUSY, INPUT);     
+    digitalWrite(this -> PIN_CS , HIGH);
+    #ifdef MCP23008
+    mySerial->println("define MCP23008 , set RST(6),D/C(7) PIN mode...");
+    _mcp ->pinMode(PIN_RST , OUTPUT);
+    _mcp ->pinMode(PIN_DC , OUTPUT);
+    mySerial->println("define MCP23008 , set RST(GPA6),D/C(GPA7) PIN done!");
+    #else
     pinMode(this -> PIN_RST, OUTPUT);
     pinMode(this -> PIN_DC, OUTPUT);
-    pinMode(this -> PIN_BUSY, INPUT); 
+    #endif
     
     digitalWrite(this -> PIN_CS , HIGH);
-   
+    _mcp ->digitalWrite(PIN_DC, false);
+    PIN_DC_buf = false;
+    
     delay(20);
 
     this -> Wakeup();
@@ -569,12 +580,31 @@ void EPD::RW_Command()
 } 
 void EPD::SendCommand(unsigned char command)
 {
+   #ifdef MCP23008
+   if(PIN_DC_buf != false)
+   {
+      mySerial->println("define MCP23008 , set DC(GPA7) false...");
+      _mcp ->digitalWrite(PIN_DC, false);
+      PIN_DC_buf = false;
+   }
+   
+   #else
    digitalWrite(this -> PIN_DC, LOW);
+   #endif 
    SpiTransfer(command);
 }
 void EPD::SendData(unsigned char data)
 {
+   #ifdef MCP23008
+   if(PIN_DC_buf != true)
+   {
+      mySerial->println("define MCP23008 , set DC(GPA7) true...");
+      _mcp ->digitalWrite(PIN_DC, true);
+      PIN_DC_buf = true;
+   }
+   #else
    digitalWrite(this -> PIN_DC, HIGH);
+   #endif
    SpiTransfer(data);
 }
 void EPD::SPI_Begin()
@@ -597,16 +627,24 @@ void EPD::SpiTransfer(unsigned char value)
 }
 void EPD::HardwareReset()
 {
-   digitalWrite(this -> PIN_RST, LOW);                //module reset    
+   #ifdef MCP23008
+   mySerial->println("define MCP23008 , set RST(GPA6) false...");
+   _mcp ->digitalWrite(PIN_RST, false);
+   delay(10);
+   mySerial->println("define MCP23008 , set RST(GPA6) true...");
+   _mcp ->digitalWrite(PIN_RST, true);
+   delay(10);
+   #else
+   digitalWrite(this -> PIN_RST, LOW);
    delay(10);
    digitalWrite(this -> PIN_RST, HIGH);
-   delay(10);   
+   delay(10); 
+   #endif   
 }
 void EPD::Wakeup()
 {
     this -> MyTimer_SleepWaitTime.TickStop();  
     this -> MyTimer_SleepWaitTime.StartTickTime(90000);
-//    mySerial -> println(" Wake up ...");
     this -> SetToSleep = false;
     this -> HardwareReset();
  
@@ -644,6 +682,9 @@ void EPD::Wakeup()
         }
         else
         {
+          mySerial -> print(EPD_TYPE);
+          mySerial -> println(" Wake up ...");
+
           SPI_Begin();
           WaitUntilIdle();
           SendCommand(0x12);//soft  reset
@@ -722,9 +763,17 @@ void EPD::WaitUntilIdle()
    }
    else
    {
+     int retry = 0 ;
      while(digitalRead(PIN_BUSY) == HIGH) 
      {  
+         if(retry >= 300)
+         {
+            mySerial -> print(EPD_TYPE);
+            mySerial -> print("e-Paper read pin busy timeout...\r\n ");           
+            break;
+         }
          delay(20);
+         retry++;
      } 
    }
    

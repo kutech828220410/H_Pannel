@@ -4,7 +4,11 @@
 #include "Arduino.h"
 #include "Timer.h"
 #include "Config.h"
-
+#if defined(MCP23017)
+#include "DFRobot_MCP23017.h"
+#else if defined(MCP23008)
+#include "Adafruit_MCP23008.h"
+#endif
 
 #define BLACK   0x0
 #define WHITE   0x1
@@ -14,18 +18,30 @@
 class EPD_Driver_Base {
 public:
     virtual ~EPD_Driver_Base();
+    #if defined(MCP23017)
+    DFRobot_MCP23017 *_mcp;
+    #else if defined(MCP23008)
+    Adafruit_MCP23008 *_mcp;
+    #endif
     SoftwareSerial *mySerial;
     SemaphoreHandle_t xSpiMutex = NULL; // 互斥鎖指針  
     MyTimer MyTimer_SleepWaitTime;
     byte* framebuffer;
     bool SetToSleep = false;
+    
     int PIN_SCK = PA14;
     int PIN_MOSI = PA12;
     int PIN_MISO = PA13;
     int PIN_CS = PA15;
+    int PIN_BUSY = PA27;
+    #ifdef MCP23008
+    int PIN_RST = 6;
+    int PIN_DC = 7;
+    #else
     int PIN_RST = PA25;
     int PIN_DC = PA26;
-    int PIN_BUSY = PA27;
+    #endif
+    
     long buffer_max = 0;
     int sleep_check_time = 90000;
     void Init(SemaphoreHandle_t mutex);

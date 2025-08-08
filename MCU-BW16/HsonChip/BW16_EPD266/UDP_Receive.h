@@ -2,7 +2,7 @@
 #define UDP_RECEIVE_H
 //UDP_Receive
 #include <Arduino.h>
-#include "..\Global.h"
+#include "Global.h"
 
 #define UDP_BUFFER_SIZE 19000
 #define UDP_RX_BUFFER_SIZE 1500

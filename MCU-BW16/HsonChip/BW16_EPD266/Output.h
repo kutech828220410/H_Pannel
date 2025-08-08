@@ -3,8 +3,10 @@
 #include "Timer.h"
 #include "Config.h"
 typedef void (*OutputHandle) (void);
-#ifdef MCP23017
+
+#if defined(MCP23017) || defined(MCP23008)
 #include "DFRobot_MCP23017.h"
+#include "Adafruit_MCP23008.h"
 
 
 #define cSetb0    0x0001
@@ -24,11 +26,18 @@ typedef void (*OutputHandle) (void);
 #define cSetb14    0x0080
 #define cSetb15    0x0080
 
+#endif
 
 class MyOutput
 {
    public:
+   #if defined(MCP23017)
    DFRobot_MCP23017 *_mcp;
+   void Init(int PIN_Num ,DFRobot_MCP23017& mcp);
+   #elif defined(MCP23008)
+   Adafruit_MCP23008 *_mcp;
+   void Init(int PIN_Num ,Adafruit_MCP23008& mcp);
+   #endif
    bool flag_mcp = false;
    bool flag_toogle = false;
    bool Trigger = false;
@@ -36,40 +45,13 @@ class MyOutput
    bool State_ON = false;
    bool State_OFF = false;
    bool BlinkEnable = false;
+   bool ADC_Mode = false;
    void Init(int PIN_Num);
-   void Init(int PIN_Num ,DFRobot_MCP23017& mcp);
    void Init(int PIN_Num , bool flag_toogle);
+   void Init(int PIN_Num_I,int PIN_Num_O);
    void Set_toggle(bool value);
    void Set_State(bool ON_OFF);
    void Set_StateEx(bool ON_OFF);
-   void Blink(int Time);
-   void Blink();
-   int OnDelayTime = -1;
-   int OnDelayTime_buf = -2;
-   OutputHandle Output_ON = nullptr;
-   OutputHandle Output_OFF = nullptr;
-   private:  
-   bool state = false;
-   bool GetLogic(bool value);
-   int PIN_NUM = -1;
-   int cnt = 254;
-   MyTimer myTimer;
-};
-#else
-
-class MyOutput
-{
-   public:
-   bool flag_toogle = false;
-   bool Trigger = false;
-   bool State = false;
-   bool ADC_Mode = false;
-   void Init(int PIN_Num);
-   void Init(int PIN_Num_I,int PIN_Num_O);
-   void Init(int PIN_Num , bool flag_toogle);
-   
-   void Set_toggle(bool value);
-   void Set_State(bool ON_OFF);
    void ADC_Trigger(int time_ms);
    void Blink(int Time);
    void Blink();
@@ -89,7 +71,7 @@ class MyOutput
    int cnt = 254;
    MyTimer myTimer;
 };
-#endif
+
 
 
 

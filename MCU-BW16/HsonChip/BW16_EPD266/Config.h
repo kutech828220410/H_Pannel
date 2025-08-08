@@ -1,4 +1,4 @@
-#define VERSION "Ver 1.5.503"
+#define VERSION "Ver 1.5.504"
 #define RESOURCE "OTA_All.bin"  
 
 #define SPI_MOSI_PIN PA12
@@ -12,7 +12,7 @@
 //#define RowLED_Device
 //#define EPD213
 //#define EPD266
-//#define EPD290
+#define EPD290
 //#define EPD420
 //#define EPD420_D
 //#define EPD583
@@ -20,11 +20,12 @@
 //#define EPD579B
 //#define DEPG0579RYT158FxX
 //#define EPD213_BRW_V0
-// #define EPD7IN3E
-#define EPD3IN6E
+//#define EPD7IN3E
+//#define EPD3IN6E
 
 //#define OLCD_114
 //#define MCP23017
+//#define MCP23008
 
 #ifdef DHTSensor
 #define DHTPIN PA27

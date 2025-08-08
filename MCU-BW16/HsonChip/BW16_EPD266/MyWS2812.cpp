@@ -1,4 +1,5 @@
 #include "MyWS2812.h"
+#include "Global.h"
 #include <SPI.h>
 
 void MyWS2812::Init(int NumOfLed , SemaphoreHandle_t mutex)
@@ -10,8 +11,7 @@ void MyWS2812::Init(int NumOfLed , SemaphoreHandle_t mutex)
     for(int i = 0 ; i < 1500 ;i++)
     {
        *(rgbBuffer + i) = 0;
-    }
-    
+    }    
 }
 void MyWS2812::ClearBytes()
 {
@@ -47,8 +47,10 @@ void MyWS2812::Show()
 {    
     if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE) 
     {
+      if(flag_udp_232back)mySerial.println("WS2812 Show [digitalWrite CS HIGH]");
       digitalWrite(this -> PIN_CS , HIGH);
       delay(10);
+      if(flag_udp_232back)mySerial.println("WS2812 Show [SPI.begin]");
       SPI.begin(); 
       SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
       for(int i = 0 ; i < offset * 24; i++)
@@ -59,9 +61,11 @@ void MyWS2812::Show()
       {
           RGBConvert2812Bytes(i + offset,*(rgbBuffer + i * 3 + 0), *(rgbBuffer + i * 3 + 1), *(rgbBuffer + i * 3 + 2));  
       }      
+      if(flag_udp_232back)mySerial.println("WS2812 Show [SPI.transfer]");
       SPI.transfer(rgbBytesBuffer , numOfLed * 24 + offset * 24);
       SPI.endTransaction();
       delay(100);
+      if(flag_udp_232back)mySerial.println("WS2812 Show [digitalWrite CS LOW]");
       digitalWrite(this -> PIN_CS , LOW);
       xSemaphoreGive(xSpiMutex);
     }
@@ -71,6 +75,7 @@ void MyWS2812::Show(byte bytes[] , int _numOfLed)
 {    
     if (xSemaphoreTake(xSpiMutex, pdMS_TO_TICKS(2000)) == pdTRUE) 
     {
+      if(flag_udp_232back)mySerial.println("WS2812 Show [digitalWrite CS HIGH]");
       digitalWrite(this -> PIN_CS , HIGH);
       delay(10);
       flag_IS_ON = false;
@@ -86,13 +91,14 @@ void MyWS2812::Show(byte bytes[] , int _numOfLed)
           if((bytes[i * 3 + 1]) > 0) flag_IS_ON = true;
           if((bytes[i * 3 + 2]) > 0) flag_IS_ON = true;
       }    
-      
+      if(flag_udp_232back)mySerial.println("WS2812 Show [SPI.begin]");
       SPI.begin(); 
       SPI.beginTransaction(SPISettings(10000000, MSBFIRST, SPI_MODE0));
-       
+      if(flag_udp_232back)mySerial.println("WS2812 Show [SPI.transfer]");
       SPI.transfer(rgbBytesBuffer , _numOfLed * 24 + offset * 24);
       SPI.endTransaction();
       delay(10);
+      if(flag_udp_232back)mySerial.println("WS2812 Show [digitalWrite CS LOW]");
       digitalWrite(this -> PIN_CS , LOW);
       xSemaphoreGive(xSpiMutex);
     }

@@ -7,7 +7,6 @@
 #define One 0b11111000
 
 #define WS2812_BITNUM 24
-#define WS2812_CS PB3
 class MyWS2812
 {
    public:   

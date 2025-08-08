@@ -3,20 +3,8 @@
 #include "Arduino.h"
 #include "Config.h"
 
-#ifdef MCP23017
+#if defined(MCP23017)
 #include "DFRobot_MCP23017.h"
-
-void MyOutput::Set_toggle(bool value)
-{
-   this -> flag_toogle = value;
-   this -> Set_State(this -> State);
-}
-void MyOutput::Init(int PIN_Num)
-{
-   this -> PIN_NUM = PIN_Num ;
-   if(PIN_Num != -1)pinMode(PIN_Num, OUTPUT);
-   if(PIN_Num != -1)digitalWrite(PIN_Num, this -> GetLogic(false));
-}
 void MyOutput::Init(int PIN_Num ,DFRobot_MCP23017& mcp)
 {
    this -> _mcp = &mcp;
@@ -40,6 +28,27 @@ void MyOutput::Init(int PIN_Num ,DFRobot_MCP23017& mcp)
    else if(PIN_Num == 14) _mcp -> pinMode(_mcp->eGPB6 , OUTPUT);
    else if(PIN_Num == 15) _mcp -> pinMode(_mcp->eGPB7 , OUTPUT);
 }
+
+#elif defined(MCP23008)
+#include "Adafruit_MCP23008.h"
+void MyOutput::Init(int PIN_Num ,Adafruit_MCP23008& mcp)
+{
+   this -> _mcp = &mcp;
+   this -> PIN_NUM = PIN_Num ;
+   if(PIN_Num == -1)return;
+   this -> flag_mcp = true;
+   if(PIN_Num != -1) _mcp -> pinMode(PIN_Num , OUTPUT);
+}
+#endif
+
+
+void MyOutput::Init(int PIN_Num)
+{
+   this -> PIN_NUM = PIN_Num ;
+   if(PIN_Num != -1)pinMode(PIN_Num, OUTPUT);
+   if(PIN_Num != -1)digitalWrite(PIN_Num, this -> GetLogic(false));
+}
+
 void MyOutput::Init(int PIN_Num , bool flag_toogle)
 {
    this -> flag_toogle = flag_toogle;
@@ -58,7 +67,7 @@ void MyOutput::Set_State(bool ON_OFF)
     }
     else
     {
- 
+       
        digitalWrite(this -> PIN_NUM, this -> GetLogic(ON_OFF));
     }
 }
@@ -66,8 +75,7 @@ void MyOutput::Set_StateEx(bool ON_OFF)
 {
     State = ON_OFF;
     if(this -> PIN_NUM == -1) return;
-    if(this -> flag_mcp) 
-    {
+    #if defined(MCP23017)
        if(this -> PIN_NUM == 0) _mcp -> digitalWrite(_mcp->eGPA0 , this -> GetLogic(ON_OFF));
        else if(this -> PIN_NUM == 1) _mcp -> digitalWrite(_mcp->eGPA1 , this -> GetLogic(ON_OFF));
        else if(this -> PIN_NUM == 2) _mcp -> digitalWrite(_mcp->eGPA2 , this -> GetLogic(ON_OFF));
@@ -84,12 +92,12 @@ void MyOutput::Set_StateEx(bool ON_OFF)
        else if(this -> PIN_NUM == 13) _mcp -> digitalWrite(_mcp->eGPB5 , this -> GetLogic(ON_OFF));
        else if(this -> PIN_NUM == 14) _mcp -> digitalWrite(_mcp->eGPB6 , this -> GetLogic(ON_OFF));
        else if(this -> PIN_NUM == 15) _mcp -> digitalWrite(_mcp->eGPB7 , this -> GetLogic(ON_OFF));
-    }
-    else
-    {
- 
-       digitalWrite(this -> PIN_NUM, this -> GetLogic(ON_OFF));
-    }
+    #elif defined(MCP23008)
+       _mcp -> digitalWrite(PIN_NUM , this -> GetLogic(ON_OFF));
+    #else
+        digitalWrite(this -> PIN_NUM, this -> GetLogic(ON_OFF));
+    #endif
+
 }
 void MyOutput::Blink(int Time)
 {
@@ -109,6 +117,11 @@ bool MyOutput::GetLogic(bool value)
 }
 void MyOutput::Blink()
 {
+  if(ADC_Mode)
+  {
+     ADC_Blink();
+     return;
+  }
   int PIN = this -> PIN_NUM;
 
   if( (this -> cnt) == 254)
@@ -116,29 +129,28 @@ void MyOutput::Blink()
     State = false;
     if(PIN != -1)
     {
-       if(this -> flag_mcp)
-       {
-         if(this -> PIN_NUM == 0) _mcp -> digitalWrite(_mcp->eGPA0 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 1) _mcp -> digitalWrite(_mcp->eGPA1 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 2) _mcp -> digitalWrite(_mcp->eGPA2 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 3) _mcp -> digitalWrite(_mcp->eGPA3 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 4) _mcp -> digitalWrite(_mcp->eGPA4 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 5) _mcp -> digitalWrite(_mcp->eGPA5 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 6) _mcp -> digitalWrite(_mcp->eGPA6 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 7) _mcp -> digitalWrite(_mcp->eGPA7 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 8) _mcp -> digitalWrite(_mcp->eGPB0 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 9) _mcp -> digitalWrite(_mcp->eGPB1 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 10) _mcp -> digitalWrite(_mcp->eGPB2 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 11) _mcp -> digitalWrite(_mcp->eGPB3 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 12) _mcp -> digitalWrite(_mcp->eGPB4 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 13) _mcp -> digitalWrite(_mcp->eGPB5 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 14) _mcp -> digitalWrite(_mcp->eGPB6 , this -> GetLogic(false));
-         else if(this -> PIN_NUM == 15) _mcp -> digitalWrite(_mcp->eGPB7 , this -> GetLogic(false));
-       }
-       else
-       {
-         digitalWrite(PIN, this -> GetLogic(false));
-       }
+         #if defined(MCP23017)
+           if(this -> PIN_NUM == 0) _mcp -> digitalWrite(_mcp->eGPA0 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 1) _mcp -> digitalWrite(_mcp->eGPA1 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 2) _mcp -> digitalWrite(_mcp->eGPA2 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 3) _mcp -> digitalWrite(_mcp->eGPA3 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 4) _mcp -> digitalWrite(_mcp->eGPA4 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 5) _mcp -> digitalWrite(_mcp->eGPA5 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 6) _mcp -> digitalWrite(_mcp->eGPA6 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 7) _mcp -> digitalWrite(_mcp->eGPA7 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 8) _mcp -> digitalWrite(_mcp->eGPB0 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 9) _mcp -> digitalWrite(_mcp->eGPB1 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 10) _mcp -> digitalWrite(_mcp->eGPB2 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 11) _mcp -> digitalWrite(_mcp->eGPB3 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 12) _mcp -> digitalWrite(_mcp->eGPB4 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 13) _mcp -> digitalWrite(_mcp->eGPB5 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 14) _mcp -> digitalWrite(_mcp->eGPB6 , this -> GetLogic(false));
+           else if(this -> PIN_NUM == 15) _mcp -> digitalWrite(_mcp->eGPB7 , this -> GetLogic(false));
+         #elif defined(MCP23008)
+           _mcp -> digitalWrite(PIN_NUM , this -> GetLogic(false));
+         #else
+           digitalWrite(PIN, this -> GetLogic(false));
+         #endif
        
     }
     (this -> cnt) = 255 ;
@@ -149,8 +161,7 @@ void MyOutput::Blink()
     State_ON = false;
     if(PIN != -1)
     {
-       if(this -> flag_mcp)
-       {
+       #if defined(MCP23017)
          if(this -> PIN_NUM == 0) _mcp -> digitalWrite(_mcp->eGPA0 , this -> GetLogic(true));
          else if(this -> PIN_NUM == 1) _mcp -> digitalWrite(_mcp->eGPA1 , this -> GetLogic(true));
          else if(this -> PIN_NUM == 2) _mcp -> digitalWrite(_mcp->eGPA2 , this -> GetLogic(true));
@@ -167,12 +178,12 @@ void MyOutput::Blink()
          else if(this -> PIN_NUM == 13) _mcp -> digitalWrite(_mcp->eGPB5 , this -> GetLogic(true));
          else if(this -> PIN_NUM == 14) _mcp -> digitalWrite(_mcp->eGPB6 , this -> GetLogic(true));
          else if(this -> PIN_NUM == 15) _mcp -> digitalWrite(_mcp->eGPB7 , this -> GetLogic(true));
-       }
-       else
-       {
+       #elif defined(MCP23008)
+         _mcp -> digitalWrite(PIN_NUM , this -> GetLogic(true));
+       #else
          digitalWrite(PIN, this -> GetLogic(true));
-       }
-       
+       #endif
+
     }
     if(Output_ON != nullptr) Output_ON();
     this -> OnDelayTime_buf = OnDelayTime;    
@@ -184,8 +195,7 @@ void MyOutput::Blink()
     State_OFF = false;
     if(PIN != -1)
     {
-       if(this -> flag_mcp)
-       {
+       #if defined(MCP23017)
          if(this -> PIN_NUM == 0) _mcp -> digitalWrite(_mcp->eGPA0 , this -> GetLogic(false));
          else if(this -> PIN_NUM == 1) _mcp -> digitalWrite(_mcp->eGPA1 , this -> GetLogic(false));
          else if(this -> PIN_NUM == 2) _mcp -> digitalWrite(_mcp->eGPA2 , this -> GetLogic(false));
@@ -202,11 +212,12 @@ void MyOutput::Blink()
          else if(this -> PIN_NUM == 13) _mcp -> digitalWrite(_mcp->eGPB5 , this -> GetLogic(false));
          else if(this -> PIN_NUM == 14) _mcp -> digitalWrite(_mcp->eGPB6 , this -> GetLogic(false));
          else if(this -> PIN_NUM == 15) _mcp -> digitalWrite(_mcp->eGPB7 , this -> GetLogic(false));
-       }
-       else
-       {
+       #elif defined(MCP23008)
+         _mcp -> digitalWrite(PIN_NUM , this -> GetLogic(false));
+       #else    
          digitalWrite(PIN, this -> GetLogic(false));
-       }
+       #endif
+
        
     }
     if(Output_OFF != nullptr) Output_OFF();
@@ -231,29 +242,28 @@ void MyOutput::Blink()
     State = true;
     if(PIN != -1)
     {
-       if(this -> flag_mcp)
-       {
-         if(this -> PIN_NUM == 0) _mcp -> digitalWrite(_mcp->eGPA0 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 1) _mcp -> digitalWrite(_mcp->eGPA1 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 2) _mcp -> digitalWrite(_mcp->eGPA2 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 3) _mcp -> digitalWrite(_mcp->eGPA3 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 4) _mcp -> digitalWrite(_mcp->eGPA4 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 5) _mcp -> digitalWrite(_mcp->eGPA5 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 6) _mcp -> digitalWrite(_mcp->eGPA6 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 7) _mcp -> digitalWrite(_mcp->eGPA7 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 8) _mcp -> digitalWrite(_mcp->eGPB0 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 9) _mcp -> digitalWrite(_mcp->eGPB1 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 10) _mcp -> digitalWrite(_mcp->eGPB2 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 11) _mcp -> digitalWrite(_mcp->eGPB3 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 12) _mcp -> digitalWrite(_mcp->eGPB4 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 13) _mcp -> digitalWrite(_mcp->eGPB5 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 14) _mcp -> digitalWrite(_mcp->eGPB6 , this -> GetLogic(true));
-         else if(this -> PIN_NUM == 15) _mcp -> digitalWrite(_mcp->eGPB7 , this -> GetLogic(true));
-       }
-       else
-       {
-         digitalWrite(PIN, this -> GetLogic(true));
-       }
+         #if defined(MCP23017)
+           if(this -> PIN_NUM == 0) _mcp -> digitalWrite(_mcp->eGPA0 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 1) _mcp -> digitalWrite(_mcp->eGPA1 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 2) _mcp -> digitalWrite(_mcp->eGPA2 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 3) _mcp -> digitalWrite(_mcp->eGPA3 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 4) _mcp -> digitalWrite(_mcp->eGPA4 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 5) _mcp -> digitalWrite(_mcp->eGPA5 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 6) _mcp -> digitalWrite(_mcp->eGPA6 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 7) _mcp -> digitalWrite(_mcp->eGPA7 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 8) _mcp -> digitalWrite(_mcp->eGPB0 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 9) _mcp -> digitalWrite(_mcp->eGPB1 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 10) _mcp -> digitalWrite(_mcp->eGPB2 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 11) _mcp -> digitalWrite(_mcp->eGPB3 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 12) _mcp -> digitalWrite(_mcp->eGPB4 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 13) _mcp -> digitalWrite(_mcp->eGPB5 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 14) _mcp -> digitalWrite(_mcp->eGPB6 , this -> GetLogic(true));
+           else if(this -> PIN_NUM == 15) _mcp -> digitalWrite(_mcp->eGPB7 , this -> GetLogic(true));
+         #elif defined(MCP23008)
+           _mcp -> digitalWrite(PIN_NUM , this -> GetLogic(true));
+         #else    
+           digitalWrite(PIN, this -> GetLogic(true));
+         #endif
        
     }
     if(Output_ON != nullptr) Output_ON();
@@ -267,9 +277,8 @@ void MyOutput::Blink()
     {
       State = false;
       if(PIN != -1)
-      {
-         if(this -> flag_mcp)
-         {
+      { 
+         #if defined(MCP23017)
            if(this -> PIN_NUM == 0) _mcp -> digitalWrite(_mcp->eGPA0 , this -> GetLogic(false));
            else if(this -> PIN_NUM == 1) _mcp -> digitalWrite(_mcp->eGPA1 , this -> GetLogic(false));
            else if(this -> PIN_NUM == 2) _mcp -> digitalWrite(_mcp->eGPA2 , this -> GetLogic(false));
@@ -286,12 +295,12 @@ void MyOutput::Blink()
            else if(this -> PIN_NUM == 13) _mcp -> digitalWrite(_mcp->eGPB5 , this -> GetLogic(false));
            else if(this -> PIN_NUM == 14) _mcp -> digitalWrite(_mcp->eGPB6 , this -> GetLogic(false));
            else if(this -> PIN_NUM == 15) _mcp -> digitalWrite(_mcp->eGPB7 , this -> GetLogic(false));
-         }
-         else
-         {
+         #elif defined(MCP23008)
+           _mcp -> digitalWrite(PIN_NUM , this -> GetLogic(false));
+         #else    
            digitalWrite(PIN, this -> GetLogic(false));
-         }
-         
+         #endif
+
       }
       if(Output_OFF != nullptr) Output_OFF();
       myTimer.StartTickTime(this -> OnDelayTime);
@@ -307,24 +316,10 @@ void MyOutput::Blink()
     }
   }
 }
-#else
 void MyOutput::Set_toggle(bool value)
 {
    this -> flag_toogle = value;
    this -> Set_State(this -> State);
-}
-void MyOutput::Init(int PIN_Num)
-{
-   this -> PIN_NUM = PIN_Num ;
-   if(PIN_Num != -1)pinMode(PIN_Num, OUTPUT);
-   if(PIN_Num != -1)digitalWrite(PIN_Num, this -> GetLogic(false));
-}
-void MyOutput::Init(int PIN_Num , bool flag_toogle)
-{
-   this -> flag_toogle = flag_toogle;
-   this -> PIN_NUM = PIN_Num ;
-   if(PIN_Num != -1)pinMode(PIN_Num, OUTPUT);
-   if(PIN_Num != -1)digitalWrite(PIN_Num, this -> GetLogic(false));
 }
 void MyOutput::Init(int PIN_Num_I,int PIN_Num_O)
 {
@@ -333,27 +328,8 @@ void MyOutput::Init(int PIN_Num_I,int PIN_Num_O)
    if(PIN_Num_O != -1)pinMode(PIN_Num_O, OUTPUT);
    if(PIN_Num_O != -1)digitalWrite(PIN_Num_O, this -> GetLogic(false));
 }
-void MyOutput::Set_State(bool ON_OFF)
-{
-    State = ON_OFF;
-    if(this -> PIN_NUM != -1)digitalWrite(this -> PIN_NUM, this -> GetLogic(ON_OFF));
-}
-void MyOutput::Blink(int Time)
-{
-  this -> OnDelayTime = Time;
-  MyOutput::Blink();
-}
-bool MyOutput::GetLogic(bool value)
-{
-  if(this -> flag_toogle == false)
-  {
-     return value;
-  }
-  else
-  {
-    return !value;
-  }
-}
+
+
 void MyOutput::ADC_Trigger(int time_ms)
 {
    ADC_Mode = true;
@@ -361,18 +337,7 @@ void MyOutput::ADC_Trigger(int time_ms)
    cnt = 1 ;   
    Trigger = true;
 }
-void MyOutput::Blink()
-{
-  if(ADC_Mode)
-  {
-     ADC_Blink();
-  }
-  else
-  {
-     Normal_Blink();
-  }
-  
-}
+
 void MyOutput::ADC_Blink()
 {
    int PIN = this -> PIN_NUM;
@@ -520,4 +485,3 @@ void MyOutput::Normal_Blink()
     }
   }
 }
-#endif

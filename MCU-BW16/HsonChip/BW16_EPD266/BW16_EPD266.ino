@@ -22,8 +22,10 @@
 #include <SD.h>
 #include <SoftwareSerial.h>
 
-#ifdef MCP23017
+#if defined(MCP23017)
 #include "DFRobot_MCP23017.h"
+#else if defined(MCP23008)
+#include "Adafruit_MCP23008.h"
 #endif
 
 TaskHandle_t Core0Task1Handle;
@@ -63,13 +65,20 @@ void loop()
       mySerial.begin(115200);        
       mySerial.println(VERSION);  
       
-      #ifdef MCP23017
+      #if defined(MCP23017) || defined(MCP23008)
+
+      #if defined(MCP23017)
       while(mcp.begin() != 0)
       {
         mySerial.println("Initialization of the chip failed, please confirm that the chip connection is correct!");
         delay(1000);
       }
-      delay(500);    
+      delay(500); 
+      #else if defined(MCP23008)
+      mcp.begin(0x00);
+      delay(500); 
+      #endif
+      #if defined(MCP23017)
       mcp.pinMode(mcp.eGPA0, /*mode = */INPUT_PULLUP);
       mcp.pinMode(mcp.eGPA1, /*mode = */INPUT_PULLUP);
       mcp.pinMode(mcp.eGPA2, /*mode = */INPUT_PULLUP);
@@ -94,9 +103,12 @@ void loop()
       mcp.digitalWrite(mcp.eGPB4 , false);   
       mcp.digitalWrite(mcp.eGPB5 , false);   
       mcp.digitalWrite(mcp.eGPB6 , false);   
-      mcp.digitalWrite(mcp.eGPB7 , true);   
+      mcp.digitalWrite(mcp.eGPB7 , true);  
+      oLCD114._mcp = &mcp;
+      #endif
+         
       
-      oLCD114_mcp = &mcp;
+      epd._mcp = &mcp;
       mySerial.println("mcp.pinMode....ok");   
       delay(200);
       #endif

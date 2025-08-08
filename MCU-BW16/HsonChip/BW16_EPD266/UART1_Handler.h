@@ -2,10 +2,10 @@
 #define UART1_HANDLER_H
 
 #include <Arduino.h>
-#include "../Timer.h"
-#include "../Global.h"
-#include "../Config.h"
-#include "../src/IO.h"
+#include "Timer.h"
+#include "Global.h"
+#include "Config.h"
+#include "IO.h"
 
 
 // 設定 UART1 緩衝區大小

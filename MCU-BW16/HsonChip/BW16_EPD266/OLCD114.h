@@ -5,7 +5,7 @@
 #include <SPI.h>
 #include "Arduino.h"
 #include <SoftwareSerial.h>
-#ifdef MCP23017
+#if defined(MCP23017) || defined(MCP23008)
 #include "DFRobot_MCP23017.h"
 #endif
 typedef void (*OutputHandle) (void);
@@ -61,7 +61,7 @@ class OLCD114
    public:
    uint16_t* framebuffer;
    SoftwareSerial *mySerial;
-   #ifdef MCP23017
+   #if defined(MCP23017) || defined(MCP23008)
    DFRobot_MCP23017 *_mcp;
    #endif
    int index = 1;

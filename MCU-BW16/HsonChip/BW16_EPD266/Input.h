@@ -5,17 +5,27 @@
 
 typedef void (*InputHandle) (void);
 
-#ifdef MCP23017
+#if defined(MCP23017)|| defined(MCP23008)
+
 #include "DFRobot_MCP23017.h"
+#include "Adafruit_MCP23008.h"
 class MyInput
 {
    public:
+   
+   #if defined(MCP23017)
    DFRobot_MCP23017 *_mcp;
+   void Init(int PIN_Num ,DFRobot_MCP23017& mcp);
+   #else if defined(MCP23008)
+   Adafruit_MCP23008 *_mcp;
+   void Init(int PIN_Num ,Adafruit_MCP23008& mcp);
+   #endif
+   
    bool flag_mcp = false;
    bool flag_toogle = false;
    bool State = false;
    void Init(int PIN_Num);
-   void Init(int PIN_Num ,DFRobot_MCP23017& mcp);
+   
    void Set_toggle(bool value);
    void GetState(int Time);
    void GetState();
