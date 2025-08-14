@@ -9458,9 +9458,10 @@ namespace H_Pannel_lib
             Size string_size = TextRenderer.MeasureText(text, font);
             return TextToBitmap(text, font, 1, string_size.Width, string_size.Height, foreColor, backColor, 0 , 0, Color.Black, HorizontalAlignment.Left);
         }
-        public static Bitmap TextToBitmap(string text, Font font, double scale, int width, int height,
-          Color foreColor, Color backColor, int borderSize, int borderRadius, Color borderColor,
-          HorizontalAlignment horizontalAlignment)
+        static public Bitmap TextToBitmap(
+     string text, Font font, double scale, int width, int height,
+     Color foreColor, Color backColor, int borderSize, int borderRadius, Color borderColor,
+     HorizontalAlignment horizontalAlignment)
         {
             if (string.IsNullOrEmpty(text)) text = "";
 
@@ -9474,67 +9475,78 @@ namespace H_Pannel_lib
                 g.SmoothingMode = SmoothingMode.HighQuality;
                 g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 g.CompositingQuality = CompositingQuality.HighQuality;
-                g.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit;
+                g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit; // 換成清晰的抗鋸齒
 
                 if (borderSize > 0 || backColor != Color.Transparent)
                     DrawPath(g, _Width, _Height, borderRadius, borderSize, borderColor, backColor);
 
                 Font _font = new Font(font.Name, (int)(font.Size * scale), font.Style, font.Unit);
 
-                // 文字區域 padding（避免文字貼圓角）
+                // padding
                 int paddingLeft = borderRadius > 0 ? borderRadius / 2 : 0;
                 int paddingRight = borderRadius > 0 ? borderRadius / 2 : 0;
 
-                Size stringSize = MeasureMultilineText(text, _font, new Size(_Width, _Height));
-                int stringY = (_Height - stringSize.Height) / 2;
-
-                // 計算 X 座標
-                int stringX = paddingLeft;
-                if (horizontalAlignment == HorizontalAlignment.Center)
-                {
-                    stringX = (_Width - stringSize.Width) / 2;
-                }
-                else if (horizontalAlignment == HorizontalAlignment.Right)
-                {
-                    stringX = _Width - stringSize.Width - paddingRight;
-                }
-
-                // 限制繪圖區域寬度，防止裁切
                 int availableWidth = _Width - paddingLeft - paddingRight;
-                Rectangle drawRect = new Rectangle(stringX, stringY, availableWidth, stringSize.Height);
 
-                using (Brush textBrush = new SolidBrush(foreColor))
+                // 使用允許多行的 StringFormat
                 using (StringFormat format = new StringFormat())
                 {
+                    format.Alignment = horizontalAlignment == HorizontalAlignment.Center
+                        ? StringAlignment.Center
+                        : horizontalAlignment == HorizontalAlignment.Right
+                            ? StringAlignment.Far
+                            : StringAlignment.Near;
                     format.LineAlignment = StringAlignment.Center;
-                    format.Alignment = StringAlignment.Near;
-                    format.FormatFlags = StringFormatFlags.NoWrap;
-                    g.DrawString(text, _font, textBrush, drawRect, format);
+                    format.FormatFlags = StringFormatFlags.LineLimit; // 允許換行
+                    format.Trimming = StringTrimming.Word; // 以單詞為單位換行
+
+                    // 先計算文字高度（多行）
+                    Size stringSize = MeasureMultilineText(text, _font, new Size(availableWidth, _Height), format);
+                    int stringY = (_Height - stringSize.Height) / 2;
+
+                    Rectangle drawRect = new Rectangle(paddingLeft, stringY, availableWidth, stringSize.Height);
+
+                    using (Brush textBrush = new SolidBrush(foreColor))
+                    {
+                        g.DrawString(text, _font, textBrush, drawRect, format);
+                    }
                 }
             }
 
             return bitmap;
         }
-        static public Size MeasureMultilineText(string text, Font font, Size maxSize)
+
+        static public Size MeasureMultilineText(string text, Font font, Size maxSize, StringFormat format = null)
         {
-            SizeF stringSize;
-            using (Graphics g = Graphics.FromHwnd(IntPtr.Zero))
+            if (string.IsNullOrEmpty(text)) return Size.Empty;
+            if (maxSize.Width <= 0 || maxSize.Height <= 0) return Size.Empty;
+
+            // 建立離屏 Graphics，避免 HWND 依賴與 DPI 問題
+            using (var bmp = new Bitmap(1, 1))
+            using (var g = Graphics.FromImage(bmp))
             {
-                // 定義格式，讓文字能夠換行
-                StringFormat format = new StringFormat(StringFormat.GenericTypographic)
+                g.PageUnit = GraphicsUnit.Pixel;
+                g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+
+                using (var fmt = (StringFormat)(format?.Clone() ?? new StringFormat()))
                 {
-                    Trimming = StringTrimming.Word,
-                    FormatFlags = StringFormatFlags.LineLimit
-                };
+                    // 允許換行並在邊界截斷（依單詞/字）
+                    fmt.FormatFlags &= ~StringFormatFlags.NoWrap;   // 確保不是不換行
+                    fmt.FormatFlags |= StringFormatFlags.LineLimit; // 行數限制到版面
+                    fmt.Trimming = StringTrimming.Word;
 
-                // 設定最大尺寸，這樣文字會在達到這個尺寸時換行
-                RectangleF layoutRectangle = new RectangleF(0, 0, maxSize.Width, maxSize.Height);
+                    // 量測（會自動依 maxSize 寬度換行）
+                    var layout = new SizeF(Math.Max(1, maxSize.Width), Math.Max(1, maxSize.Height));
+                    var sizeF = g.MeasureString(text, font, layout, fmt);
+                    var size = Size.Ceiling(sizeF);
 
-                // 使用Graphics.MeasureString來測量文字尺寸
-                stringSize = g.MeasureString(text, font, layoutRectangle.Size, format);
+                    // 將尺寸限制在 maxSize 內（避免超出繪圖區）
+                    if (size.Width > maxSize.Width) size.Width = maxSize.Width;
+                    if (size.Height > maxSize.Height) size.Height = maxSize.Height;
+
+                    return size;
+                }
             }
-
-            return Size.Ceiling(stringSize);
         }
         static public Bitmap CreateBarCode(string content, int Width, int Height)
         {
