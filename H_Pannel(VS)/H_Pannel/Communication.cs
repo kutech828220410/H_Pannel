@@ -716,7 +716,7 @@ namespace H_Pannel_lib
 
             if (Chip_Type == ChipType.BW16)
             {
-                EPD583_frameDIV = 10;
+                EPD583_frameDIV = 16;
             }
             bool flag_OK;
 
@@ -729,7 +729,7 @@ namespace H_Pannel_lib
                     int height = _bmp.Height;
                     byte[] bytes = new byte[(width / 2) * height];
 
-                    _bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    _bmp.RotateFlip(RotateFlipType.Rotate270FlipNone);
                     //_bmp.Save($@"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\test.bmp");
 
                     BitmapToByte(_bmp, ref bytes, EPD_Type.EPD360E);
@@ -5164,7 +5164,7 @@ namespace H_Pannel_lib
                     uDP_Class.Set_ReadLineClearByIP(IP);
                     uDP_Class.WriteByte(list_byte.ToArray(), IP);
                     MyTimer_UART_TimeOut.TickStop();
-                    MyTimer_UART_TimeOut.StartTickTime(UDP_TimeOut);
+                    MyTimer_UART_TimeOut.StartTickTime(300);
                     cnt++;
                 }
                 else if (cnt == 1)
