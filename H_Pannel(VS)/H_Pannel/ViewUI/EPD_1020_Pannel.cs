@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Net;
 using Basic;
 using MyUI;
+using DrawingClass;
 namespace H_Pannel_lib
 {
     public partial class EPD_1020_Pannel : UserControl
@@ -104,54 +105,70 @@ namespace H_Pannel_lib
             this.pictureBox.Paint += PictureBox_Paint;
         }
 
-        public void CombineBoxes()
+        // 共用: 設定 Box 的 Master/Slave 屬性
+        private void ConfigureBox(Box box, int index, List<int[]> list_Col_Row)
         {
-            int col;
-            int row;
-            if (this.Select_Column.Count <= 1) return;
-            List<int[]> list_Col_Row = new List<int[]>();
-
-            for (int i = 0; i < this.Select_Column.Count; i++)
+            if (index == 0) // 第一個 → Master
             {
-                list_Col_Row.Add(new int[] { Select_Column[i], Select_Row[i] });
+                box.Slave = false;
+                box.SlaveBox_Column = list_Col_Row[index + 1][0];
+                box.SlaveBox_Row = list_Col_Row[index + 1][1];
+                box.MasterBox_Column = -1;
+                box.MasterBox_Row = -1;
+            }
+            else if (index == list_Col_Row.Count - 1) // 最後一個 → Slave, 沒有下一個
+            {
+                box.Slave = true;
+                box.SlaveBox_Column = -1;
+                box.SlaveBox_Row = -1;
+                box.MasterBox_Column = list_Col_Row[0][0];
+                box.MasterBox_Row = list_Col_Row[0][1];
+            }
+            else // 中間 → Slave, 指向下一個
+            {
+                box.Slave = true;
+                box.SlaveBox_Column = list_Col_Row[index + 1][0];
+                box.SlaveBox_Row = list_Col_Row[index + 1][1];
+                box.MasterBox_Column = list_Col_Row[0][0];
+                box.MasterBox_Row = list_Col_Row[0][1];
+            }
+
+            // 清除基本資訊
+            box.Name = "";
+            box.Code = "";
+            box.Clear();
+        }
+
+        // 版本 A: 可傳入 Drawer, selectColumns, selectRows
+        public void CombineBoxes(Drawer drawer, List<int> selectColumns, List<int> selectRows)
+        {
+            if (selectColumns == null || selectRows == null || selectColumns.Count <= 1 || selectColumns.Count != selectRows.Count)
+                return;
+
+            List<int[]> list_Col_Row = new List<int[]>();
+            for (int i = 0; i < selectColumns.Count; i++)
+            {
+                list_Col_Row.Add(new int[] { selectColumns[i], selectRows[i] });
             }
             list_Col_Row.Sort(new IcpCol());
 
-
             for (int i = 0; i < list_Col_Row.Count; i++)
             {
-                col = list_Col_Row[i][0];
-                row = list_Col_Row[i][1];
-                if (i == 0)
-                {
-                    this.CurrentDrawer.Boxes[col][row].Slave = false;
-                    this.CurrentDrawer.Boxes[col][row].SlaveBox_Column = list_Col_Row[i + 1][0];
-                    this.CurrentDrawer.Boxes[col][row].SlaveBox_Row = list_Col_Row[i + 1][1];
-                    this.CurrentDrawer.Boxes[col][row].MasterBox_Column = -1;
-                    this.CurrentDrawer.Boxes[col][row].MasterBox_Row = -1;
-                }
-                else if (i == this.Select_Column.Count - 1)
-                {
-                    this.CurrentDrawer.Boxes[col][row].Slave = true;
-                    this.CurrentDrawer.Boxes[col][row].SlaveBox_Column = -1;
-                    this.CurrentDrawer.Boxes[col][row].SlaveBox_Row = -1;
-                    this.CurrentDrawer.Boxes[col][row].MasterBox_Column = list_Col_Row[0][0];
-                    this.CurrentDrawer.Boxes[col][row].MasterBox_Row = list_Col_Row[0][1];
-                }
-                else
-                {
-                    this.CurrentDrawer.Boxes[col][row].Slave = true;
-                    this.CurrentDrawer.Boxes[col][row].SlaveBox_Column = list_Col_Row[i + 1][0];
-                    this.CurrentDrawer.Boxes[col][row].SlaveBox_Row = list_Col_Row[i + 1][1];
-                    this.CurrentDrawer.Boxes[col][row].MasterBox_Column = list_Col_Row[0][0];
-                    this.CurrentDrawer.Boxes[col][row].MasterBox_Row = list_Col_Row[0][1];
-                }
-                this.CurrentDrawer.Boxes[col][row].Name = "";
-                this.CurrentDrawer.Boxes[col][row].Code = "";
-                this.CurrentDrawer.Boxes[col][row].Clear();
+                int col = list_Col_Row[i][0];
+                int row = list_Col_Row[i][1];
+                ConfigureBox(drawer.Boxes[col][row], i, list_Col_Row);
             }
+
+        
+          
+        }
+
+        // 版本 B: 呼叫版本 A
+        public void CombineBoxes()
+        {
+            CombineBoxes(this.CurrentDrawer, this.Select_Column, this.Select_Row);
             this.DrawToPictureBox(this.CurrentDrawer);
-            if (DrawerChangeEvent != null) DrawerChangeEvent(CurrentDrawer);
+            if (DrawerChangeEvent != null) DrawerChangeEvent(this.CurrentDrawer);
         }
         public void SeparateBoxes()
         {

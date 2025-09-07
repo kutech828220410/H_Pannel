@@ -504,6 +504,10 @@ namespace H_Pannel_lib
             return index;
         }
 
+        public (List<int> cols, List<int> rows) GetSelect()
+        {
+            return (Select_Column, Select_Row);
+        }
         private Rectangle Get_Box_Combine(Box box)
         {
             return DrawerUI_EPD_583.Get_Box_Combine(currentDrawer, box);

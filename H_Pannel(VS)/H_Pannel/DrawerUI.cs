@@ -123,8 +123,6 @@ namespace H_Pannel_lib
             return Drawer.Boxes[col][row];
         }
 
-
-
         public List<Drawer> SQL_GetAllDrawers()
         {
             List<Drawer> drawers = new List<Drawer>();

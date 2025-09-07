@@ -1468,7 +1468,11 @@ namespace H_Pannel_lib
             device.Package = medClass.包裝單位;
 
             return device;
-        }
+        }   
+
+
+
+    
     }
   
 
@@ -3462,60 +3466,22 @@ namespace H_Pannel_lib
             }
             else if (valueName == ValueName.圖片1|| valueName == ValueName.圖片2)
             {
-                Bitmap bitmap = null;
-                if (vlaueClass.Value == enum_PictureType.藥品圖片.GetEnumName())
-                {
-                    bitmap = Device.GetDitheredBitmapFromCache(Code);
-          
-                }
-                else if (vlaueClass.Value == enum_PictureType.高警訊_1.GetEnumName())
-                {
-                    bitmap = Resource1.Alarm_filled_red;
-                }
-                else if (vlaueClass.Value == enum_PictureType.高警訊_2.GetEnumName())
-                {
-                    bitmap = Resource1.高警訊_2;
-                }
-                else if (vlaueClass.Value == enum_PictureType.高警訊_3.GetEnumName())
-                {
-                    bitmap = Resource1.高警訊_3;
-                }
-                else if (vlaueClass.Value == enum_PictureType.高警訊_4.GetEnumName())
-                {
-                    bitmap = Resource1.高警訊_4;
-                }
-                else if (vlaueClass.Value == enum_PictureType.LASA_1.GetEnumName())
-                {
-                    bitmap = Resource1.LASA圖標;
-                }
-                else if (vlaueClass.Value == enum_PictureType.LASA_2.GetEnumName())
-                {
-                    bitmap = Resource1.LASA_2;
-                }
-                Size Rect_Size = new Size((int)(vlaueClass.Width * bmp_Scale), (int)(vlaueClass.Height * bmp_Scale));
-                if (bitmap == null) return null;
-                bitmap = Communication.ScaleImage(bitmap, Rect_Size.Width, Rect_Size.Height);
-                if (bitmap != null)
-                {
-                    using (Graphics g = Graphics.FromImage(bitmap))
-                    {
-                        if (color != null)
-                        {
-                            g.SmoothingMode = SmoothingMode.HighQuality; //使繪圖質量最高，即消除鋸齒
-                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                            g.CompositingQuality = CompositingQuality.HighQuality;
-                            g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+                // 計算縮放後的尺寸
+                Size rectSize = new Size((int)(vlaueClass.Width * bmp_Scale),
+                                         (int)(vlaueClass.Height * bmp_Scale));
 
-                            float[] dashValues = { 2, 2, 2, 2 };
-                            Pen pen = new Pen((Color)color, BorderSize);
-                            if (dash) pen.DashPattern = dashValues;
-
-                            g.DrawRectangle(pen, BorderSize / 2, BorderSize / 2, (int)(vlaueClass.Width * bmp_Scale - BorderSize), (int)(vlaueClass.Height * bmp_Scale - BorderSize));
-                        }
-                    }
+                // 將字串 Value 轉換成 enum_PictureType
+                if (!Enum.TryParse<enum_PictureType>(vlaueClass.Value, out var picType))
+                {
+                    return null; // 無效的值就直接回傳 null
                 }
+
+                // 呼叫封裝好的靜態函式
+                Bitmap bitmap = Communication.GetPictureBitmap(picType, rectSize.Width, rectSize.Height, color, BorderSize, dash, Code);
+
                 return bitmap;
-            }        
+
+            }
             else
             {
                 Bitmap bitmap = Communication.TextToBitmap(vlaueClass.Value, vlaueClass.Font, bmp_Scale, vlaueClass.Width, vlaueClass.Height, vlaueClass.ForeColor, vlaueClass.BackColor, vlaueClass.BorderSize , vlaueClass.BorderRadius, vlaueClass.BorderColor, vlaueClass.HorizontalAlignment);

@@ -582,6 +582,108 @@ namespace H_Pannel_lib
             }
             return null;
         }
+
+        public static Drawer CombineBoxes(this Drawer drawer, List<int> selectColumns, List<int> selectRows)
+        {
+            if (drawer == null || selectColumns == null || selectRows == null ||
+                selectColumns.Count <= 1 || selectColumns.Count != selectRows.Count)
+                return drawer;
+
+            List<int[]> list_Col_Row = new List<int[]>();
+            for (int i = 0; i < selectColumns.Count; i++)
+            {
+                list_Col_Row.Add(new int[] { selectColumns[i], selectRows[i] });
+            }
+            list_Col_Row.Sort(new IcpCol());
+
+            for (int i = 0; i < list_Col_Row.Count; i++)
+            {
+                int col = list_Col_Row[i][0];
+                int row = list_Col_Row[i][1];
+                ConfigureBox(drawer.Boxes[col][row], i, list_Col_Row);
+            }
+
+            return drawer;
+        }
+        public static Drawer SeparateBoxes(this Drawer drawer, List<int> selectColumns, List<int> selectRows)
+        {
+            if (drawer == null || selectColumns == null || selectRows == null ||
+                selectColumns.Count <= 1 || selectColumns.Count != selectRows.Count)
+                return drawer;
+
+            List<int[]> list_Col_Row = new List<int[]>();
+            for (int i = 0; i < selectColumns.Count; i++)
+            {
+                list_Col_Row.Add(new int[] { selectColumns[i], selectRows[i] });
+            }
+            list_Col_Row.Sort(new IcpCol());
+
+            for (int i = 0; i < list_Col_Row.Count; i++)
+            {
+                int col = list_Col_Row[i][0];
+                int row = list_Col_Row[i][1];
+
+                var box = drawer.Boxes[col][row];
+                box.Slave = false;
+                box.SlaveBox_Column = -1;
+                box.SlaveBox_Row = -1;
+                box.MasterBox_Column = -1;
+                box.MasterBox_Row = -1;
+                box.Name = "";
+                box.Code = "";
+                box.Clear();
+            }
+
+            return drawer;
+        }
+        private static void ConfigureBox(Box box, int index, List<int[]> list_Col_Row)
+        {
+            if (index == 0) // 第一個 → Master
+            {
+                box.Slave = false;
+                box.SlaveBox_Column = list_Col_Row[index + 1][0];
+                box.SlaveBox_Row = list_Col_Row[index + 1][1];
+                box.MasterBox_Column = -1;
+                box.MasterBox_Row = -1;
+            }
+            else if (index == list_Col_Row.Count - 1) // 最後一個 → Slave, 沒有下一個
+            {
+                box.Slave = true;
+                box.SlaveBox_Column = -1;
+                box.SlaveBox_Row = -1;
+                box.MasterBox_Column = list_Col_Row[0][0];
+                box.MasterBox_Row = list_Col_Row[0][1];
+            }
+            else // 中間 → Slave, 指向下一個
+            {
+                box.Slave = true;
+                box.SlaveBox_Column = list_Col_Row[index + 1][0];
+                box.SlaveBox_Row = list_Col_Row[index + 1][1];
+                box.MasterBox_Column = list_Col_Row[0][0];
+                box.MasterBox_Row = list_Col_Row[0][1];
+            }
+
+            // 清除基本資訊
+            box.Name = "";
+            box.Code = "";
+            box.Clear();
+        }
+
+
+        private class IcpCol : IComparer<int[]>
+        {
+            public int Compare(int[] x, int[] y)
+            {
+                return (x[0] * 10 + x[1]).CompareTo((y[0] * 10 + y[1]));
+            }
+        }
+        private class IcpRow : IComparer<int[]>
+        {
+            public int Compare(int[] x, int[] y)
+            {
+                return x[1].CompareTo(y[1]);
+            }
+        }
     }
 
     [Serializable]
@@ -1012,6 +1114,8 @@ namespace H_Pannel_lib
             int height = (int)((double)this.PannelHeight / (double)num_Of_Rows);
             return new Size(width, height);
         }
+
+     
     }
     [Serializable]
     public class Box : Device
