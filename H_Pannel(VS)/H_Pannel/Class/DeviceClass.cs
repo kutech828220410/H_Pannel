@@ -396,7 +396,7 @@ namespace H_Pannel_lib
     [Serializable]
     public class DeviceSimple
     {
-        public bool flag_replace = false;
+        private bool flag_replace = false;
         public string GUID
         {
             get

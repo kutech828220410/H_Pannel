@@ -695,7 +695,7 @@ namespace H_Pannel_lib
     [Serializable]
     public class Drawer
     {
-        public bool flag_replace = false;
+        private bool flag_replace = false;
         public string serverIP = "";
         public uint serverPort = 0;
         public string dbName = "";
