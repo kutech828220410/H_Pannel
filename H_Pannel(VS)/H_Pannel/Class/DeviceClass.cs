@@ -616,19 +616,30 @@ namespace H_Pannel_lib
         [Serializable]
         public class LightStateClass
         {
-            public bool State = false;
-            public double Interval = 0;
-            public double LightOffTime = 0;
-            public Color LightColor = Color.Black;
-            public DateTime LightingDateTime = DateTime.Now;
-            public bool IsLightOn = false;
+            private bool state = false;
+            private double interval = 0;
+            private double lightOffTime = 0;
+            private Color lightColor = Color.Black;
+            private DateTime lightingDateTime = DateTime.Now;
+            private bool isLightOn = false;
+
+            public bool State { get => state; set => state = value; }
+            public double Interval { get => interval; set => interval = value; }
+            public double LightOffTime { get => lightOffTime; set => lightOffTime = value; }
+            public Color LightColor { get => lightColor; set => lightColor = value; }
+            public DateTime LightingDateTime { get => lightingDateTime; set => lightingDateTime = value; }
+            public bool IsLightOn { get => isLightOn; set => isLightOn = value; }
 
         }
         private class CachedBitmapInfo
         {
-            public Bitmap Original;
-            public Bitmap Dithered;
-            public bool IsDithered;
+            private Bitmap original;
+            private Bitmap dithered;
+            private bool isDithered;
+
+            public Bitmap Original { get => original; set => original = value; }
+            public Bitmap Dithered { get => dithered; set => dithered = value; }
+            public bool IsDithered { get => isDithered; set => isDithered = value; }
         }
 
         private static Dictionary<string, CachedBitmapInfo> bitmapCache = new Dictionary<string, CachedBitmapInfo>();
