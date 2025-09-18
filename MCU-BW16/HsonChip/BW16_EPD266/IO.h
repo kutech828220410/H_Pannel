@@ -37,7 +37,7 @@ void SetOutputPINTrigger(byte pin_num, bool value);
 void SetOutput(int value);
 void SetOutputPIN(byte pin_num, bool value);
 
-#ifdef MCP23017
+#if defined(MCP23017)|| defined(MCP23008)
 void SetOutputEx(int value);
 #endif
 

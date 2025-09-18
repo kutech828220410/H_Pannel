@@ -33,7 +33,7 @@ TaskHandle_t Core0Task2Handle;
 TaskHandle_t Core0Task3Handle;
 TaskHandle_t Core0Task4Handle;
 
-
+int wtd_count = 0;
 
 
 void setup() 
@@ -46,6 +46,7 @@ void setup()
 
 }
 bool flag_pb2 = true;
+
 void loop() 
 {
    if(MyTimer_OLCD_144_Init.IsTimeOut() && !flag_OLCD_144_boradInit)
@@ -179,8 +180,50 @@ void loop()
           #endif
           sub_UDP_Send();
       } 
-
+      #if defined(BETTERY)  
+      mcp.digitalWrite(BETTERY_OUTPUT , true);
+      if(mcp.digitalRead(BETTERY_INPUT) == false)
+      {
+         mySerial.println(F("mcp.digitalRead(BETTERY_INPUT)"));
+      }
+      mySerial.println(F("mcp.digitalWrite(BETTERY_OUTPUT , true);"));
+      delay(500);
+      mcp.digitalWrite(BETTERY_OUTPUT , false);
+      mySerial.println(F("mcp.digitalWrite(BETTERY_OUTPUT , false);"));
+      delay(500);
+      #endif
       
+      #if defined(WTD_OUTPUT)  
+      if(wtd_count <= 10)
+      {
+        mcp.digitalWrite(WTD_OUTPUT , false);
+        delay(500);
+        mcp.digitalWrite(WTD_OUTPUT , true);
+        delay(500);
+         mySerial.print(F("wtd feed ...\n"));
+      }
+     
+      wtd_count++;
+      #endif
+      #if defined(DC_MOTOR)  
+      mcp.digitalWrite(DC_MOTOR_OUTPUT , false);
+      delay(500);
+      mcp.digitalWrite(DC_MOTOR_OUTPUT , true);
+      delay(500);
+      mySerial.print(F("DC_MOTOR test done ...\n"));
+      #endif
+      #if defined(LIGHT_SENSOR)  
+      if(mcp.digitalRead(LIGHT_SENSOR_INPUT) == false)
+      {
+         mySerial.println(F("mcp.digitalRead(LIGHT_SENSOR_INPUT)"));
+      }
+      #endif
+      #if defined(BUTTON_EX)  
+      if(mcp.digitalRead(BUTTON_EX_INPUT) == false)
+      {
+         mySerial.println(F("mcp.digitalRead(BUTTON_EX_INPUT)"));
+      }
+      #endif
       MyTimer_CheckWS2812.StartTickTime(30000);
 
       
@@ -227,7 +270,8 @@ void Core0Task1( void * pvParameters )
           }
             
        }
-          
+ 
+
        delay(10);
     }
     
@@ -239,6 +283,7 @@ void Core0Task2( void * pvParameters )
        
        if(flag_boradInit)
        {
+      
           #ifdef DHTSensor
           dht_h = dht.readHumidity();
           // Read temperature as Celsius (the default)

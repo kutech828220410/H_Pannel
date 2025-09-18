@@ -25,9 +25,9 @@
 #define OUTPUT_PIN09 -1
 #define OUTPUT_PIN10 -1
 #elif defined(MCP23008)
-#define INPUT_PIN01 1
-#define INPUT_PIN02 2
-#define INPUT_PIN03 3
+#define INPUT_PIN01 3 // 抽屜input
+#define INPUT_PIN02 4 // FADC 對照
+#define INPUT_PIN03 5 // 外部按鈕/外部12V
 #define INPUT_PIN04 -1
 #define INPUT_PIN05 -1
 #define INPUT_PIN06 -1
@@ -36,9 +36,9 @@
 #define INPUT_PIN09 -1
 #define INPUT_PIN10 -1
 
-#define OUTPUT_PIN01 0
-#define OUTPUT_PIN02 4
-#define OUTPUT_PIN03 5
+#define OUTPUT_PIN01 0 // 抽屜解鎖
+#define OUTPUT_PIN02 1 // FADC馬達/看們狗
+#define OUTPUT_PIN03 2 // 電池充電
 #define OUTPUT_PIN04 -1
 #define OUTPUT_PIN05 -1
 #define OUTPUT_PIN06 -1
@@ -46,6 +46,9 @@
 #define OUTPUT_PIN08 -1
 #define OUTPUT_PIN09 -1
 #define OUTPUT_PIN10 -1
+
+
+
 #else
 #define INPUT_PIN01 PB2
 #define INPUT_PIN02 -1
@@ -163,34 +166,11 @@ bool flag_WL_DISCONNECTED = false;
 void sub_IO_Program()
 {
 
-//    if(!flag_Init)
-//    {
-//       IO_Init();
-//       flag_Init = true;
-//    }
     Input = GetInput();
     Output = GetOutput();
     Input_dir = Get_Input_dir();
     Output_dir = Get_Output_dir();
-//    if(WiFi.status() == WL_CONNECTED)
-//    {
-//       if(flag_WL_CONNECTED)
-//       {
-//          Set_Output_dir(wiFiConfig.Get_Output_dir());
-//          flag_WL_CONNECTED = false;
-//       }
-//       
-//       flag_WL_DISCONNECTED = true;
-//    }
-//    else
-//    {
-//       if(flag_WL_DISCONNECTED)
-//       {
-//          Set_Output_dir(0);
-//          flag_WL_DISCONNECTED = false;
-//       }
-//       flag_WL_CONNECTED = true;
-//    }
+
     Output_Blink();
     if(Input_buf != Input)
     {       
@@ -425,7 +405,7 @@ void SetOutput(int value)
     if(((value >> 9) % 2 ) ==  0) MyOutput_PIN10.Set_State(true);
     else MyOutput_PIN10.Set_State(false);   
 }
-#ifdef MCP23017
+#if defined(MCP23017)|| defined(MCP23008)
 void SetOutputEx(int value)
 {
     if(((value >> 0) % 2 ) ==  0) MyOutput_PIN01.Set_StateEx(true);

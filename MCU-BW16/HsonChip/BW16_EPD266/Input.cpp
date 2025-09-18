@@ -39,7 +39,7 @@ void MyInput::Init(int PIN_Num ,Adafruit_MCP23008& mcp)
    this -> flag_mcp = true;
    if(PIN_Num != -1) 
    {
-      printf("Adafruit_MCP23008 pinMode : %d\n" , PIN_Num);
+      printf("Adafruit_MCP23008 pinMode (Input): %d\n" , PIN_Num);
       _mcp -> pinMode(PIN_Num , INPUT);
       _mcp -> pullUp(PIN_Num , HIGH);
    }

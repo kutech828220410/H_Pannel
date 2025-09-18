@@ -1,4 +1,4 @@
-#define VERSION "Ver 1.5.504"
+#define VERSION "Ver 1.5.505"
 #define RESOURCE "OTA_All.bin"  
 
 #define SPI_MOSI_PIN PA12
@@ -6,6 +6,33 @@
 #define NUM_OF_LEDS NUM_WS2812B_CRGB
 #define SYSTEM_LED_PIN PA30
 
+//#define BETTERY
+//#define WDT
+#define DC_MOTOR
+#define LIGHT_SENSOR
+#define BUTTON_EX
+
+
+#if defined(BETTERY)
+#define BETTERY_OUTPUT 2
+#define BETTERY_INPUT 5
+#endif
+
+#if defined(WDT)
+#define WTD_OUTPUT 1
+#endif
+
+#if defined(DC_MOTOR)
+#define DC_MOTOR_OUTPUT 2
+#endif
+
+#if defined(LIGHT_SENSOR)
+#define LIGHT_SENSOR_INPUT 4
+#endif
+
+#if defined(BUTTON_EX)
+#define BUTTON_EX_INPUT 5
+#endif
 //#define MQTT
 //#define DHTSensor
 //#define HandSensor
@@ -25,7 +52,7 @@
 
 //#define OLCD_114
 //#define MCP23017
-//#define MCP23008
+#define MCP23008
 
 #ifdef DHTSensor
 #define DHTPIN PA27
