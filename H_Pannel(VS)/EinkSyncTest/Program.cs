@@ -21,7 +21,7 @@ namespace EinkSyncConsole
             while (true)
             {
                 string defaultIP = LoadLastIP();
-                defaultIP = "192.168.0.20";
+                defaultIP = "192.168.41.34";
                 Console.Clear();
                 Console.WriteLine($"上次使用的 IP：{defaultIP}");
                 Console.Write("請輸入目標 IP（按 Enter 使用預設）：");
@@ -53,7 +53,7 @@ namespace EinkSyncConsole
 
                                 //bmp_buf_.Save(savePath, System.Drawing.Imaging.ImageFormat.Bmp);
                                 Console.WriteLine($"✅ 已儲存處理圖片到桌面：{savePath}");
-                                UDP_Class uDP_Class = new UDP_Class("192.168.0.20", 29000, false);
+                                UDP_Class uDP_Class = new UDP_Class(defaultIP, 29005, false);
 
                                 Communication.EPD_360E_DrawImage(uDP_Class, ip, bmp);
 
@@ -64,10 +64,7 @@ namespace EinkSyncConsole
 
                         }
 
-                        // 範例傳送，可自行開啟
-                        //UDP_Class udp = new UDP_Class("192.168.5.250", 29000 , false);
-                        //bool success = Communication.EPD_579G_DrawImage(udp, ip, bmp_buf);
-                        //Console.WriteLine(success ? "✅ 傳送成功！" : "❌ 傳送失敗！");
+                      
                     }
 
                     SaveLastIP(ip);

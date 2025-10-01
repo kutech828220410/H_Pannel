@@ -46,6 +46,18 @@ void serialEvent()
        flag_udp_232back = true;
        mySerial.print("debug mode enable! \n");
     }
+    if (UART0_RX[0] == 'm' && UART0_RX[1] == 't' && UART0_len >= 2)
+    {
+       flag_motor_debug = !flag_motor_debug;
+       #if defined(DC_MOTOR)  
+       mcp.digitalWrite(DC_MOTOR_OUTPUT , flag_motor_debug);
+       if(!flag_motor_debug) mySerial.print("motor on...\n");
+       if(flag_motor_debug) mySerial.print("motor off...\n");
+       #else
+       mySerial.print("DC_MOTOR not be define...\n");
+       #endif
+       
+    }
     if (UART0_RX[0] == 'r' && UART0_len == 3)
     {
       String str = "";

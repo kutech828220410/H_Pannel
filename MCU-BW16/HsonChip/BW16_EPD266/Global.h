@@ -73,6 +73,10 @@ extern bool flag_writeMode;
 
 extern OLCD114 oLCD114;
 
+
+extern bool flag_motor_debug;
+
+
 extern WiFiConfig wiFiConfig;
 extern int UDP_SemdTime;
 extern int Localport;

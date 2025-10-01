@@ -9,8 +9,8 @@
 //#define BETTERY
 //#define WDT
 #define DC_MOTOR
-#define LIGHT_SENSOR
-#define BUTTON_EX
+//#define LIGHT_SENSOR
+//#define BUTTON_EX
 
 
 #if defined(BETTERY)
@@ -39,7 +39,7 @@
 //#define RowLED_Device
 //#define EPD213
 //#define EPD266
-#define EPD290
+//#define EPD290
 //#define EPD420
 //#define EPD420_D
 //#define EPD583
@@ -48,7 +48,7 @@
 //#define DEPG0579RYT158FxX
 //#define EPD213_BRW_V0
 //#define EPD7IN3E
-//#define EPD3IN6E
+#define EPD3IN6E
 
 //#define OLCD_114
 //#define MCP23017

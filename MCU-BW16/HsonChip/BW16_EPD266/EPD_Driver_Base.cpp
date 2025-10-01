@@ -11,8 +11,10 @@ void EPD_Driver_Base::Init(SemaphoreHandle_t mutex)
     pinMode(this -> PIN_BUSY, INPUT);     
     digitalWrite(this -> PIN_CS , HIGH);
     #ifdef MCP23008
-    _mcp ->pinMode(PIN_DC , OUTPUT);
+    mySerial->println("define MCP23008 , set RST(6),D/C(7) PIN mode...");
     _mcp ->pinMode(PIN_RST , OUTPUT);
+    _mcp ->pinMode(PIN_DC , OUTPUT);
+    mySerial->println("define MCP23008 , set RST(GPA6),D/C(GPA7) PIN done!");
     #else
     pinMode(this -> PIN_RST, OUTPUT);
     pinMode(this -> PIN_DC, OUTPUT);
@@ -79,7 +81,11 @@ bool EPD_Driver_Base::GetReady()
 void EPD_Driver_Base::SendCommand(unsigned char command)
 {
    #ifdef MCP23008
-   _mcp ->digitalWrite(PIN_DC, LOW);
+   if(PIN_DC_buf == true)
+   {
+      _mcp ->digitalWrite(PIN_DC, false);
+      PIN_DC_buf = false;
+   }
    #else
    digitalWrite(this -> PIN_DC, LOW);
    #endif 
@@ -88,7 +94,11 @@ void EPD_Driver_Base::SendCommand(unsigned char command)
 void EPD_Driver_Base::SendData(unsigned char data)
 {
    #ifdef MCP23008
-   _mcp ->digitalWrite(PIN_DC, HIGH);
+   if(PIN_DC_buf != true)
+   {
+      _mcp ->digitalWrite(PIN_DC, true);
+      PIN_DC_buf = true;
+   }
    #else
    digitalWrite(this -> PIN_DC, HIGH);
    #endif
@@ -109,8 +119,10 @@ void EPD_Driver_Base::SpiTransfer(unsigned char value)
 void EPD_Driver_Base::HardwareReset()
 {
    #ifdef MCP23008
+   mySerial->println("define MCP23008 , set RST(6) LOW...");
    _mcp ->digitalWrite(PIN_RST, LOW);
    delay(10);
+   mySerial->println("define MCP23008 , set RST(6) HIGH...");
    _mcp ->digitalWrite(PIN_RST, HIGH);
    delay(10);
    #else

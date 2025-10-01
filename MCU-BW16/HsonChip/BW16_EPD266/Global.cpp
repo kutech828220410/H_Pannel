@@ -51,6 +51,8 @@ bool flag_writeMode = false;
 
 OLCD114 oLCD114;
 
+bool flag_motor_debug = true;
+
 WiFiConfig wiFiConfig;
 int UDP_SemdTime = 0;
 int Localport = 0;

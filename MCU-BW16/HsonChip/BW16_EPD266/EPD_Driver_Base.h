@@ -18,6 +18,7 @@
 class EPD_Driver_Base {
 public:
     virtual ~EPD_Driver_Base();
+    bool PIN_DC_buf = false;  
     #if defined(MCP23017)
     DFRobot_MCP23017 *_mcp;
     #else if defined(MCP23008)
