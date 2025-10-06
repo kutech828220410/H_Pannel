@@ -113,6 +113,7 @@ void IO_Init()
     Set_Output_dir(Output_dir);
 
     #if defined(MCP23017) || defined(MCP23008)
+    
     MyOutput_PIN01.Init(OUTPUT_PIN01 ,mcp);
     MyOutput_PIN02.Init(OUTPUT_PIN02 ,mcp);
     MyOutput_PIN03.Init(OUTPUT_PIN03 ,mcp);
@@ -134,7 +135,9 @@ void IO_Init()
     MyInput_PIN08.Init(INPUT_PIN08 ,mcp);
     MyInput_PIN09.Init(INPUT_PIN09);
     MyInput_PIN10.Init(INPUT_PIN10);
+    
     #else
+    
     MyOutput_PIN01.Init(INPUT_PIN01,OUTPUT_PIN01);
     MyOutput_PIN02.Init(OUTPUT_PIN02);
     MyOutput_PIN03.Init(OUTPUT_PIN03);
@@ -156,6 +159,7 @@ void IO_Init()
     MyInput_PIN08.Init(INPUT_PIN08);
     MyInput_PIN09.Init(INPUT_PIN09);
     MyInput_PIN10.Init(INPUT_PIN10);
+    
     #endif
  
 
