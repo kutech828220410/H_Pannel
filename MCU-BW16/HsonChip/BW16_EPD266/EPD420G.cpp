@@ -68,8 +68,9 @@ void EPD420G::RefreshCanvas()
     SPI_Begin();
     SendCommand(0x12); // DISPLAY_REFRESH
     SendData(0x00);
-    WaitUntilIdle();
-
+    SPI_End();
+    Sleep();
+    mySerial -> println("EPD420G RefreshCanvas...");
     
 }
 

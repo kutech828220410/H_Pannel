@@ -328,9 +328,7 @@ namespace H_Pannel_lib
                 vlaueClass = CurrentStorage.GetValue(GetSelectValueName());
                 if (vlaueClass.Visable == false) return;
                 this.MouseDownType = GetMouseDownType((int)X, (int)Y, vlaueClass.Position.X, vlaueClass.Position.Y, vlaueClass.Width, vlaueClass.Height);
-                // Output debug information to the console
-                // Console.WriteLine($"MouseDownType: {this.MouseDownType}");
-                // Console.WriteLine($"X: {X}, Y: {Y}, Value Position: ({vlaueClass.Position.X}, {vlaueClass.Position.Y}), Width: {vlaueClass.Width}, Height: {vlaueClass.Height}");
+       
             }
 
             if (this.flag_pictureBox_mouseDown)
@@ -478,9 +476,18 @@ namespace H_Pannel_lib
         }
         private void RJ_Pannel_文字背景顏色_Click(object sender, EventArgs e)
         {
-            Dialog_RWB_顏色選擇 Dialog_RWB_顏色選擇 = new Dialog_RWB_顏色選擇(this.rJ_Pannel_文字背景顏色.BackgroundColor);
-            if (Dialog_RWB_顏色選擇.ShowDialog() != DialogResult.Yes) return;
-            this.rJ_Pannel_文字背景顏色.BackgroundColor = Dialog_RWB_顏色選擇.Value;
+            if (currentStorage.DeviceType.GetEnumName().Contains("G"))
+            {
+                Dialog_4color_select Dialog_4color_select = new Dialog_4color_select(this.rJ_Pannel_文字背景顏色.BackgroundColor);
+                if (Dialog_4color_select.ShowDialog() != DialogResult.Yes) return;
+                this.rJ_Pannel_文字背景顏色.BackgroundColor = Dialog_4color_select.Value;
+            }
+            else
+            {
+                Dialog_3color_select Dialog_3color_select = new Dialog_3color_select(this.rJ_Pannel_文字背景顏色.BackgroundColor);
+                if (Dialog_3color_select.ShowDialog() != DialogResult.Yes) return;
+                this.rJ_Pannel_文字背景顏色.BackgroundColor = Dialog_3color_select.Value;
+            }
 
             Storage.ValueName valueName = (GetSelectValueName());
             CurrentStorage.SetValue(valueName, Device.ValueType.BackColor, this.rJ_Pannel_文字背景顏色.BackgroundColor);
@@ -488,9 +495,18 @@ namespace H_Pannel_lib
         }
         private void RJ_Pannel_字體顏色_Click(object sender, EventArgs e)
         {
-            Dialog_RWB_顏色選擇 Dialog_RWB_顏色選擇 = new Dialog_RWB_顏色選擇(this.rJ_Pannel_字體顏色.BackgroundColor);
-            if (Dialog_RWB_顏色選擇.ShowDialog() != DialogResult.Yes) return;
-            this.rJ_Pannel_字體顏色.BackgroundColor = Dialog_RWB_顏色選擇.Value;
+            if (currentStorage.DeviceType.GetEnumName().Contains("G"))
+            {
+                Dialog_4color_select Dialog_4color_select = new Dialog_4color_select(this.rJ_Pannel_字體顏色.BackgroundColor);
+                if (Dialog_4color_select.ShowDialog() != DialogResult.Yes) return;
+                this.rJ_Pannel_字體顏色.BackgroundColor = Dialog_4color_select.Value;
+            }
+            else
+            {
+                Dialog_3color_select Dialog_3color_select = new Dialog_3color_select(this.rJ_Pannel_字體顏色.BackgroundColor);
+                if (Dialog_3color_select.ShowDialog() != DialogResult.Yes) return;
+                this.rJ_Pannel_字體顏色.BackgroundColor = Dialog_3color_select.Value;
+            }
 
             Storage.ValueName valueName = (GetSelectValueName());
             CurrentStorage.SetValue(valueName, Device.ValueType.ForeColor, this.rJ_Pannel_字體顏色.BackgroundColor);
@@ -499,9 +515,18 @@ namespace H_Pannel_lib
         }
         private void RJ_Pannel_邊框顏色_Click(object sender, EventArgs e)
         {
-            Dialog_RWB_顏色選擇 Dialog_RWB_顏色選擇 = new Dialog_RWB_顏色選擇(this.rJ_Pannel_邊框顏色.BackgroundColor);
-            if (Dialog_RWB_顏色選擇.ShowDialog() != DialogResult.Yes) return;
-            this.rJ_Pannel_邊框顏色.BackgroundColor = Dialog_RWB_顏色選擇.Value;
+            if (currentStorage.DeviceType.GetEnumName().Contains("G"))
+            {
+                Dialog_4color_select Dialog_4color_select = new Dialog_4color_select(this.rJ_Pannel_邊框顏色.BackgroundColor);
+                if (Dialog_4color_select.ShowDialog() != DialogResult.Yes) return;
+                this.rJ_Pannel_邊框顏色.BackgroundColor = Dialog_4color_select.Value;
+            }
+            else
+            {
+                Dialog_3color_select Dialog_3color_select = new Dialog_3color_select(this.rJ_Pannel_邊框顏色.BackgroundColor);
+                if (Dialog_3color_select.ShowDialog() != DialogResult.Yes) return;
+                this.rJ_Pannel_邊框顏色.BackgroundColor = Dialog_3color_select.Value;
+            }
 
             Storage.ValueName valueName = (GetSelectValueName());
             CurrentStorage.SetValue(valueName, Device.ValueType.BorderColor, this.rJ_Pannel_邊框顏色.BackgroundColor);
@@ -509,9 +534,19 @@ namespace H_Pannel_lib
         }
         private void RJ_Pannel_背景顏色_Click(object sender, EventArgs e)
         {
-            Dialog_RWB_顏色選擇 Dialog_RWB_顏色選擇 = new Dialog_RWB_顏色選擇(this.rJ_Pannel_背景顏色.BackgroundColor);
-            if (Dialog_RWB_顏色選擇.ShowDialog() != DialogResult.Yes) return;
-            this.rJ_Pannel_背景顏色.BackgroundColor = Dialog_RWB_顏色選擇.Value;
+            if(currentStorage.DeviceType.GetEnumName().Contains("G"))
+            {
+                Dialog_4color_select Dialog_4color_select = new Dialog_4color_select(this.rJ_Pannel_背景顏色.BackgroundColor);
+                if (Dialog_4color_select.ShowDialog() != DialogResult.Yes) return;
+                this.rJ_Pannel_背景顏色.BackgroundColor = Dialog_4color_select.Value;
+            }
+            else
+            {
+                Dialog_3color_select Dialog_3color_select = new Dialog_3color_select(this.rJ_Pannel_背景顏色.BackgroundColor);
+                if (Dialog_3color_select.ShowDialog() != DialogResult.Yes) return;
+                this.rJ_Pannel_背景顏色.BackgroundColor = Dialog_3color_select.Value;
+            }
+        
 
             CurrentStorage.BackColor = rJ_Pannel_背景顏色.BackgroundColor;
             this.DrawToPictureBox();

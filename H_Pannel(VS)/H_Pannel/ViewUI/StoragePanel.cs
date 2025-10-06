@@ -98,7 +98,7 @@ namespace H_Pannel_lib
                 if (ePD290_Paint_Form.ShowDialog() != DialogResult.Yes) return;
                 if (SureClick != null) SureClick(currentStorage);
             }
-            if (CurrentStorage.DeviceType == DeviceType.EPD420 || CurrentStorage.DeviceType == DeviceType.EPD420_lock)
+            if (CurrentStorage.DeviceType.GetEnumName().Contains("EPD420"))
             {
                 EPD420_Paint_Form ePD420_Paint_Form = new EPD420_Paint_Form(this.CurrentStorage);
                 if (ePD420_Paint_Form.ShowDialog() != DialogResult.Yes) return;

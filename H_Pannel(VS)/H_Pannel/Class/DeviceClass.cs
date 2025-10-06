@@ -1441,6 +1441,7 @@ namespace H_Pannel_lib
             bool flag = (device.DeviceType == DeviceType.EPD266 || device.DeviceType == DeviceType.EPD266_lock
                         || device.DeviceType == DeviceType.EPD290 || device.DeviceType == DeviceType.EPD290_lock
                         || device.DeviceType == DeviceType.EPD420 || device.DeviceType == DeviceType.EPD420_lock
+                        || device.DeviceType == DeviceType.EPD420G || device.DeviceType == DeviceType.EPD420G_lock
                         || device.DeviceType == DeviceType.EPD213 || device.DeviceType == DeviceType.EPD213_lock
                          || device.DeviceType == DeviceType.EPD360E || device.DeviceType == DeviceType.EPD360E_lock);
             return flag;
@@ -1503,8 +1504,8 @@ namespace H_Pannel_lib
         EPD730E = 21,
         EPD360E_lock = 22,
         EPD360E = 23,
-        EPD420G = 13,
-        EPD420G_lock = 14,
+        EPD420G = 24,
+        EPD420G_lock = 25,
         EPD213 = 118,
     }
     public enum HorizontalAlignment
@@ -3484,7 +3485,7 @@ namespace H_Pannel_lib
                 return bitmap;
 
             }
-            else
+            else//繪製文字
             {
                 Bitmap bitmap = Communication.TextToBitmap(vlaueClass.Value, vlaueClass.Font, bmp_Scale, vlaueClass.Width, vlaueClass.Height, vlaueClass.ForeColor, vlaueClass.BackColor, vlaueClass.BorderSize , vlaueClass.BorderRadius, vlaueClass.BorderColor, vlaueClass.HorizontalAlignment);
                 if (bitmap == null) return null;

@@ -105,7 +105,10 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -179,17 +182,23 @@
     <Compile Include="Dialog\Dialog_燈數設定.Designer.cs">
       <DependentUpon>Dialog_燈數設定.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\Dialog_EPD730_顏色選擇.cs">
+    <Compile Include="Dialog\Dialog_7color_select.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dialog\Dialog_EPD730_顏色選擇.Designer.cs">
-      <DependentUpon>Dialog_EPD730_顏色選擇.cs</DependentUpon>
+    <Compile Include="Dialog\Dialog_7color_select.Designer.cs">
+      <DependentUpon>Dialog_7color_select.cs</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\Dialog_RWB_顏色選擇.cs">
+    <Compile Include="Dialog\Dialog_3color_select.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dialog\Dialog_RWB_顏色選擇.Designer.cs">
-      <DependentUpon>Dialog_RWB_顏色選擇.cs</DependentUpon>
+      <DependentUpon>Dialog_3color_select.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\Dialog_4color_select.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialog\Dialog_4color_select.Designer.cs">
+      <DependentUpon>Dialog_4color_select.cs</DependentUpon>
     </Compile>
     <Compile Include="DitheringProcessor.cs" />
     <Compile Include="DrawerUI.cs">
@@ -204,6 +213,7 @@
     <Compile Include="DrawerUI_EPD_583.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Class\Driver_IO_Board.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -346,6 +356,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Dialog\Dialog_4color_select.resx">
+      <DependentUpon>Dialog_4color_select.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dialog\Dialog_DrawerHandSensorCheck.resx">
       <DependentUpon>Dialog_DrawerHandSensorCheck.cs</DependentUpon>
     </EmbeddedResource>
@@ -376,11 +389,11 @@
     <EmbeddedResource Include="Dialog\Dialog_燈數設定.resx">
       <DependentUpon>Dialog_燈數設定.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dialog\Dialog_EPD730_顏色選擇.resx">
-      <DependentUpon>Dialog_EPD730_顏色選擇.cs</DependentUpon>
+    <EmbeddedResource Include="Dialog\Dialog_7color_select.resx">
+      <DependentUpon>Dialog_7color_select.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dialog\Dialog_RWB_顏色選擇.resx">
-      <DependentUpon>Dialog_RWB_顏色選擇.cs</DependentUpon>
+      <DependentUpon>Dialog_3color_select.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DrawerUI_EPD_420.resx">
       <DependentUpon>DrawerUI_EPD_420.cs</DependentUpon>

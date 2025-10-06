@@ -10,11 +10,11 @@ using System.Windows.Forms;
 using MyUI;
 namespace H_Pannel_lib
 {
-    public partial class Dialog_EPD730_顏色選擇 : MyDialog
+    public partial class Dialog_7color_select : MyDialog
     {
         public Color Value = Color.White;
         private Communication.EPDColors _ePDColors = Communication.EPDColors.EPD_7IN3F_WHITE;
-        public Dialog_EPD730_顏色選擇(Color color)
+        public Dialog_7color_select(Color color)
         {
             InitializeComponent();
 
@@ -38,7 +38,7 @@ namespace H_Pannel_lib
             if (color == Color.Black) this._ePDColors = Communication.EPDColors.EPD_7IN3F_BLACK;
         }
 
-        public Dialog_EPD730_顏色選擇(Communication.EPDColors ePDColors)
+        public Dialog_7color_select(Communication.EPDColors ePDColors)
         {
             InitializeComponent();
 

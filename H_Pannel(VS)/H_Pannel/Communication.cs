@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Drawing.Text;
-using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.IO;
 using Basic;
@@ -18,6 +17,9 @@ using System.Text;
 using System.Reflection;
 using SkiaSharp;
 using System.Threading;
+using System.Drawing;
+using System.Windows.Forms;
+
 namespace H_Pannel_lib
 {
     public enum ColorMode
@@ -53,148 +55,9 @@ namespace H_Pannel_lib
         EPD730E,
         EPD360E,
     }
-    public class Driver_IO_Board
-    {
-        public delegate void ProgramEventHandler(Driver_IO_Board driver_IO_Board);
-        public event ProgramEventHandler ProgramEvent;
-        public int SleepTime = 0;
-        public StationClass this[byte station]
-        {
-            get
-            {
-                for (int i = 0; i < stationClasses.Count; i++)
-                {
-                    if (stationClasses[i].station == station) return stationClasses[i];
-                }
-                return null;
-            }
-        }
-        public class StationClass
-        {
-            public StationClass(int station)
-            {
-                this.station = station;
-            }
-            public class InputClass
-            {
-                public int Port { get; set; }
-                public bool this[int index]
-                {
-                    get
-                    {
-                        return Port.GetBit(index);
-                    }
-                }
-            }
-            public class OutputClass
-            {
-                public int Port { get; set; }
-                private int port_Refresh = 0;
-                public int Port_Refresh
-                {
-                    get
-                    {
-                        return port_Refresh;
-                    }
-                    set
-                    {
-                        port_Refresh = value;
-                    }
-                }
-                private int port_Refresh_state = 0;
-                public int Port_Refresh_state
-                {
-                    get
-                    {
-                        return port_Refresh_state;
-                    }
-                    set
-                    {
-                        port_Refresh_state = value;
-                    }
-                }
+ 
 
-                public bool this[int index]
-                {
-                    get
-                    {
-                        return Port.GetBit(index);
-                    }
-                    set
-                    {
-                        port_Refresh_state = port_Refresh_state.SetBit(index, value);
-                        port_Refresh = port_Refresh.SetBit(index, true);
-                    }
-                }
 
-            }
-            public InputClass Input = new InputClass();
-            public OutputClass Output = new OutputClass();
-            public int station { get; set; }
-            public bool flag_Setoutput = false;
-            public int Setoutput_Value = 0;
-            public void SetOutput(int index, bool state)
-            {
-                int Port_Refresh_state_temp = Output.Port_Refresh_state;
-                Output.Port_Refresh_state = Port_Refresh_state_temp.SetBit(index, state);
-
-                int Port_Refresh_temp = Output.Port_Refresh;
-                Output.Port_Refresh = Port_Refresh_temp.SetBit(index, state);
-            }
-        }
-        public List<StationClass> stationClasses = new List<StationClass>();
-        private MyThread myThread;
-        private MySerialPort mySerialPort;
-        public void Init(MySerialPort MySerialPort, params byte[] stations)
-        {
-            mySerialPort = MySerialPort;
-            for (int i = 0; i < stations.Length; i++)
-            {
-                this.stationClasses.Add(new StationClass(stations[i]));
-            }
-            myThread = new MyThread();
-            myThread.Add_Method(sub_program);
-            myThread.AutoRun(true);
-            myThread.SetSleepTime(SleepTime);
-            myThread.Trigger();
-        }
-        private void sub_program()
-        {
-            for (int i = 0; i < stationClasses.Count; i++)
-            {
-                StationClass stationClass = stationClasses[i];
-                int station = stationClass.station;
-                int input = 0;
-                int output = 0;
-                if(Communication.UART_Command_RS485_GetIO(mySerialPort, station, ref input, ref output))
-                {
-                    stationClass.Input.Port = input;
-                    stationClass.Output.Port = output;
-                }
-         
-              
-            }
-            if (ProgramEvent != null) ProgramEvent(this);
-            for (int i = 0; i < stationClasses.Count; i++)
-            {
-                StationClass stationClass = stationClasses[i];
-                int station = stationClass.station;
-                int output = stationClass.Output.Port;
-                if (stationClass.Output.Port_Refresh > 0)
-                {
-                    for (int k = 0; k < 16; k++)
-                    {
-                        if (stationClass.Output.Port_Refresh.GetBit(k))
-                        {
-                            output.SetBit(k, stationClass.Output.Port_Refresh_state.GetBit(k));
-                        }
-                    }
-                    Communication.UART_Command_RS485_SetOutput(mySerialPort, station, output);
-                    stationClass.Output.Port_Refresh = 0;
-                }
-            }
-        }
-    }
     public class Communication
     {
 
@@ -764,7 +627,6 @@ namespace H_Pannel_lib
 
         }
 
-
         static public bool EPD_730F_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
             if (!Basic.Net.Ping(IP, 2, 150))
@@ -971,36 +833,7 @@ namespace H_Pannel_lib
                 return flag_OK;
             }
         }
-
-        static public bool EPD_1020_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
-        {
-            if (!Basic.Net.Ping(IP, 2, 150))
-            {
-                Console.WriteLine($"EPD1020 DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
-                return false;
-            }
-            using (Bitmap _bmp = bmp.DeepClone())
-            {
-                int frameDIV = 10;
-
-                bool flag_OK;
-                int width = bmp.Width;
-                int height = bmp.Height;
-                byte[] bytes_BW = new byte[(width / 8) * height];
-                byte[] bytes_RW = new byte[(width / 8) * height];
-                if (width == 960 && height == 640) _bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
-                if (width == 640 && height == 960) _bmp.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                if (width == 640 && height == 960) _bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
-                BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD1020);
-                MyTimer myTimer = new MyTimer();
-                myTimer.StartTickTime(50000);
-                flag_OK = EPD_DrawImageEx0(uDP_Class, IP, bytes_BW, bytes_RW, (width / 8) * height / frameDIV);
-                if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 1020 DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
-                return flag_OK;
-            }
-
-
-        }
+    
         static public bool EPD_420_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
             if (!Basic.Net.Ping(IP, 2, 150))
@@ -1028,6 +861,52 @@ namespace H_Pannel_lib
 
 
         }
+        static public bool EPD_420G_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
+        {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"EPD_420G_DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
+            using (Bitmap _bmp = bmp.DeepClone())
+            {
+                MyTimer myTimer = new MyTimer();
+                myTimer.StartTickTime(50000);
+
+                _bmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+
+                int frameDIV = 12;
+                bool flag_OK;
+                int width = _bmp.Width;
+                int height = _bmp.Height;
+                byte[] bytes = new byte[(width / 4) * height];
+
+          
+
+                H_Pannel_lib.Communication.BitmapToByte(_bmp, ref bytes, H_Pannel_lib.EPD_Type.EPD420G);
+                myTimer.StartTickTime(50000);
+                flag_OK = EPD_DrawFramebuffer(uDP_Class, IP, bytes, (width / 4) * height / frameDIV);
+                if(!flag_OK)
+                {
+                    return false;
+                }
+                flag_OK = EPD_DrawFrame_BW(uDP_Class, IP);
+                if (!flag_OK)
+                {
+                    return false;
+                }
+                flag_OK = EPD_RefreshCanvas(uDP_Class, IP);
+                if (!flag_OK)
+                {
+                    return false;
+                }
+                if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 420G DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+                return flag_OK;
+            }
+
+
+        }
+
         static public bool EPD_579B_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
             if (!Basic.Net.Ping(IP, 2, 150))
@@ -1102,6 +981,36 @@ namespace H_Pannel_lib
             return true;
         }
 
+        static public bool EPD_1020_DrawImage(UDP_Class uDP_Class, string IP, Bitmap bmp)
+        {
+            if (!Basic.Net.Ping(IP, 2, 150))
+            {
+                Console.WriteLine($"EPD1020 DrawImage start {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                return false;
+            }
+            using (Bitmap _bmp = bmp.DeepClone())
+            {
+                int frameDIV = 10;
+
+                bool flag_OK;
+                int width = bmp.Width;
+                int height = bmp.Height;
+                byte[] bytes_BW = new byte[(width / 8) * height];
+                byte[] bytes_RW = new byte[(width / 8) * height];
+                if (width == 960 && height == 640) _bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
+                if (width == 640 && height == 960) _bmp.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                if (width == 640 && height == 960) _bmp.RotateFlip(RotateFlipType.Rotate180FlipX);
+                BitmapToByte(_bmp, ref bytes_BW, ref bytes_RW, EPD_Type.EPD1020);
+                MyTimer myTimer = new MyTimer();
+                myTimer.StartTickTime(50000);
+                flag_OK = EPD_DrawImageEx0(uDP_Class, IP, bytes_BW, bytes_RW, (width / 8) * height / frameDIV);
+                if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD 1020 DrawImage {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
+                return flag_OK;
+            }
+
+
+        }
+
         static public bool EPD_213_BRW_V0_DrawFramebuffer(UDP_Class uDP_Class, string IP, Bitmap bmp)
         {
             if (!Basic.Net.Ping(IP, 2, 150))
@@ -1126,10 +1035,7 @@ namespace H_Pannel_lib
                     myTimer.StartTickTime(50000);
                     flag_OK = EPD_DrawFramebuffer(uDP_Class, IP, bytes, (width / 4) * height / frameDIV);
                     flag_OK = EPD_DrawFrame_BW(uDP_Class, IP);
-                    //if (!EPD_DrawFrame_BW(uDP_Class, IP))
-                    //{
-                    //    return false;
-                    //}
+                
                     if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : EPD213_BRW_V0 DrawFramebuffer {string.Format(flag_OK ? "sucess" : "failed")}!   Time : {myTimer.GetTickTime().ToString("0.000")} ms");
                     return flag_OK;
                 }
@@ -1272,7 +1178,7 @@ namespace H_Pannel_lib
                 if (ip_array.Length == 4)
                 {
                     string ip = ip_array[2] + "." + ip_array[3];
-                    size_IP = TextRenderer.MeasureText(ip, new Font("微軟正黑體", 8, FontStyle.Bold));
+                    size_IP =TextRenderer.MeasureText(ip, new Font("微軟正黑體", 8, FontStyle.Bold));
                     g.DrawString(ip, new Font("微軟正黑體", 8, FontStyle.Bold), new SolidBrush((Color)storage.GetValue(Storage.ValueName.IP, Storage.ValueType.ForeColor)), (float)((panelWidth - size_IP.Width) * canvasScale), (float)((panelHeight - size_IP.Height) * canvasScale));
                 }
 
@@ -7897,6 +7803,11 @@ namespace H_Pannel_lib
             EPD_7IN3E_BLUE = 0x5,  /// 101
             EPD_7IN3E_GREEN = 0x6,  /// 110
 
+            EPD_4IN20G_BLACK = 0x0,
+            EPD_4IN20G_WHITE = 0x1,
+            EPD_4IN20G_YELLOW = 0x2,
+            EPD_4IN20G_RED = 0x3,
+
             EPD_5IN79G_BLACK = 0x0,
             EPD_5IN79G_WHITE = 0x1,
             EPD_5IN79G_YELLOW = 0x2,
@@ -8944,6 +8855,9 @@ namespace H_Pannel_lib
                 case EPD_Type.EPD360E:
                     ConvertToEPD360E(SrcPtr, width, height, stride, list_bytes);
                     break;
+                case EPD_Type.EPD420G:
+                    ConvertToEPD420G(SrcPtr, width, height, stride, list_bytes);
+                    break;
                 case EPD_Type.EPD579G:
                     ConvertToEPD579G(SrcPtr, width, height, stride, list_bytes);
                     break;
@@ -9356,6 +9270,39 @@ namespace H_Pannel_lib
             }
 
             return bmp;
+        }
+
+        private static unsafe void ConvertToEPD420G(byte* SrcPtr, int width, int height, int ByteOfWidth, List<byte> list_bytes)
+        {
+            int SrcWidthxY, SrcIndex;
+            int[] R = new int[4], G = new int[4], B = new int[4];
+            byte[] temp_bytes = new byte[4];
+            byte temp;
+            for (int y = 0; y < height; y++)
+            {
+                SrcWidthxY = ByteOfWidth * y;
+                for (int x = 0; x < (width / 4); x++)
+                {
+                    SrcIndex = SrcWidthxY + x * 12;
+                    for (int m = 0; m < 4; m++)
+                    {
+                        B[m] = SrcPtr[SrcIndex + m * 3];
+                        G[m] = SrcPtr[SrcIndex + m * 3 + 1];
+                        R[m] = SrcPtr[SrcIndex + m * 3 + 2];
+                        temp_bytes[m] = GetEPD420GColorByte(R[m], G[m], B[m]);
+                    }
+                    temp = (byte)((temp_bytes[0] << 6) | (temp_bytes[1] << 4) | (temp_bytes[2] << 2) | temp_bytes[3]);
+                    list_bytes.Add(temp);
+                }
+            }
+        }
+        private static byte GetEPD420GColorByte(int r, int g, int b)
+        {
+            if (IsEqualColor(Color.White, r, g, b)) return (byte)EPDColors.EPD_4IN20G_WHITE;
+            if (IsEqualColor(Color.Black, r, g, b)) return (byte)EPDColors.EPD_4IN20G_BLACK;
+            if (IsEqualColor(Color.Red, r, g, b)) return (byte)EPDColors.EPD_4IN20G_RED;
+            if (IsEqualColor(Color.Yellow, r, g, b)) return (byte)EPDColors.EPD_4IN20G_YELLOW;
+            return 0;
         }
 
         private static unsafe void ConvertToEPD579G(byte* SrcPtr, int width, int height, int ByteOfWidth, List<byte> list_bytes)
@@ -10061,6 +10008,20 @@ namespace H_Pannel_lib
             }
         }
 
+       
     }
+    public static class BitmapTagExtension
+    {
+        private static readonly Dictionary<Bitmap, string> _tags = new Dictionary<Bitmap, string>();
 
+        public static void SetTag(this Bitmap bmp, string tag)
+        {
+            _tags[bmp] = tag;
+        }
+
+        public static string GetTag(this Bitmap bmp)
+        {
+            return _tags.TryGetValue(bmp, out var tag) ? tag : string.Empty;
+        }
+    }
 }
