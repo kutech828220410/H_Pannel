@@ -687,6 +687,14 @@ void Send_String(String str ,int remoteUdpPort)
 }
 void Send_StringTo(String str ,IPAddress RemoteIP ,int RemotePort)
 {  
+  if(flag_udp_232back)
+  {
+     mySerial.print("send response to ");
+     mySerial.print(RemoteIP);
+     mySerial.print(":");
+     mySerial.print(RemotePort);
+     mySerial.println("");
+  }
    Udp.beginPacket(RemoteIP, RemotePort); //準備傳送資料
    Udp.print(str); //複製資料到傳送快取
    Udp.endPacket();            //傳送資料

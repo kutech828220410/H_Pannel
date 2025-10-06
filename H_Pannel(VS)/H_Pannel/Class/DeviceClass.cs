@@ -1503,6 +1503,8 @@ namespace H_Pannel_lib
         EPD730E = 21,
         EPD360E_lock = 22,
         EPD360E = 23,
+        EPD420G = 13,
+        EPD420G_lock = 14,
         EPD213 = 118,
     }
     public enum HorizontalAlignment

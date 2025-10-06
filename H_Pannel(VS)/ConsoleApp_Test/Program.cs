@@ -10,12 +10,20 @@ public class Program
 
     static void Main(string[] args)
     {
-        Console.WriteLine("請輸入影像檔案路徑:");
-        string inputPath = Console.ReadLine();
-        inputPath = @"C:\Users\Administrator\Downloads\01.bmp";
+  
 
         try
         {
+            string ip = "192.168.0.100";
+            UDP_Class uDP_Class1 = new UDP_Class(ip, 29001, false);
+            RowsLED rowsLED = new RowsLED(ip, 29001);
+
+            bool flag = Communication.Set_WS2812_Buffer(uDP_Class1, ip, 0, rowsLED.LED_Bytes);
+            return;
+
+            Console.WriteLine("請輸入影像檔案路徑:");
+            string inputPath = Console.ReadLine();
+            inputPath = @"C:\Users\Administrator\Downloads\01.bmp";
             Console.WriteLine("選擇模式 (1: 紅白黑, 2: 紅白黑黃):");
             int mode = int.Parse(Console.ReadLine());
             DitheringProcessor.DitheringMode ditheringMode = (mode == 1) ? DitheringProcessor.DitheringMode.ThreeColor : DitheringProcessor.DitheringMode.FourColor;

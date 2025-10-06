@@ -1,4 +1,4 @@
-#define VERSION "Ver 1.5.505"
+#define VERSION "Ver 1.5.506"
 #define RESOURCE "OTA_All.bin"  
 
 #define SPI_MOSI_PIN PA12
@@ -8,7 +8,7 @@
 
 //#define BETTERY
 //#define WDT
-#define DC_MOTOR
+//#define DC_MOTOR
 //#define LIGHT_SENSOR
 //#define BUTTON_EX
 
@@ -41,6 +41,7 @@
 //#define EPD266
 //#define EPD290
 //#define EPD420
+#define EPD4IN20G
 //#define EPD420_D
 //#define EPD583
 //#define EPD579G
@@ -48,11 +49,11 @@
 //#define DEPG0579RYT158FxX
 //#define EPD213_BRW_V0
 //#define EPD7IN3E
-#define EPD3IN6E
+//#define EPD3IN6E
 
 //#define OLCD_114
 //#define MCP23017
-#define MCP23008
+//#define MCP23008
 
 #ifdef DHTSensor
 #define DHTPIN PA27
@@ -86,6 +87,12 @@
 #define EPD_WIDTH 50
 #define EPD_HEIGHT 300
 #define EPD_TYPE "EPD420"
+#define EPD_Device
+
+#elif defined(EPD4IN20G)
+#define EPD_WIDTH 100
+#define EPD_HEIGHT 300
+#define EPD_TYPE "EPD420G"
 #define EPD_Device
 
 #elif defined(EPD420_D)

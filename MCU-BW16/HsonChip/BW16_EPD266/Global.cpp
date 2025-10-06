@@ -29,6 +29,8 @@ bool flag_writeMode = false;
     EPD epd;
 #elif defined(EPD420)
     EPD epd;
+#elif defined(EPD4IN20G)
+    EPD420G epd; 
 #elif defined(EPD420_D)
     EPD epd;
 #elif defined(EPD583)

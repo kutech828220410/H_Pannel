@@ -62,7 +62,7 @@ void sub_UDP_Send()
          #else
          Send_StringTo(JsonOutput, wiFiConfig.server_IPAdress, wiFiConfig.serverport);      
          #endif
-         if(flag_udp_232back)mySerial.println(JsonOutput);
+//         if(flag_udp_232back)mySerial.println(JsonOutput);
 
               
          flag_JsonSend = false;

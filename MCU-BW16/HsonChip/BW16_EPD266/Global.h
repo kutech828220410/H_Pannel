@@ -20,6 +20,7 @@
 #include "./LED.h"
 #include "./EPD730E.h"
 #include "./EPD360E.h"
+#include "./EPD420G.h"
 
 #if defined(MCP23017)
 #include "DFRobot_MCP23017.h"
@@ -51,6 +52,8 @@ extern bool flag_writeMode;
     extern EPD epd;
 #elif defined(EPD420)
     extern EPD epd;
+#elif defined(EPD4IN20G)
+    extern EPD420G epd;    
 #elif defined(EPD420_D)
     extern EPD epd;
 #elif defined(EPD583)

@@ -17,6 +17,7 @@ using System.Drawing.Drawing2D;
 using System.Text;
 using System.Reflection;
 using SkiaSharp;
+using System.Threading;
 namespace H_Pannel_lib
 {
     public enum ColorMode
@@ -44,6 +45,7 @@ namespace H_Pannel_lib
         EPD290_V2,
         EPD290_V3,
         EPD420,
+        EPD420G,
         EPD1020,
         EPD579G,
         EPD579B,
@@ -531,6 +533,19 @@ namespace H_Pannel_lib
                 return false;
             }
             return Command_Set_WS2812_Buffer(uDP_Class, IP, start_ptr, bytes_RGB);
+        }
+        static public async Task<bool> Set_WS2812_BufferAsync(UDP_Class uDP_Class, string IP, int start_ptr, byte[] bytes_RGB, CancellationToken cancellationToken = default)
+        {
+            return await Task.Run(() =>
+            {
+                if (!Basic.Net.Ping(IP, 2, 150))
+                {
+                    Console.WriteLine($"Set_WS2812_Buffer {DateTime.Now.ToDateTimeString()} : Ping Failed {IP}");
+                    return false;
+                }
+
+                return Command_Set_WS2812_Buffer(uDP_Class, IP, start_ptr, bytes_RGB);
+            }, cancellationToken);
         }
         static public bool Set_WS2812_Buffer_B(UDP_Class uDP_Class, string IP, int start_ptr, byte[] bytes_RGB)
         {
@@ -3712,6 +3727,7 @@ namespace H_Pannel_lib
             if (ConsoleWrite) Console.WriteLine($"{IP}:{uDP_Class.Port} : Set_WS2812_Buffer {string.Format(flag_OK ? "sucess" : "failed")} {DateTime.Now.ToDateTimeString()}!");
             return flag_OK;
         }
+
         static private bool Command_Set_WS2812_Buffer_B(UDP_Class uDP_Class, string IP, int start_ptr, byte[] bytes_RGB)
         {
             bool flag_OK = true;
@@ -9480,10 +9496,7 @@ namespace H_Pannel_lib
             Size string_size = TextRenderer.MeasureText(text, font);
             return TextToBitmap(text, font, 1, string_size.Width, string_size.Height, foreColor, backColor, 0 , 0, Color.Black, HorizontalAlignment.Left);
         }
-        static public Bitmap TextToBitmap(
-     string text, Font font, double scale, int width, int height,
-     Color foreColor, Color backColor, int borderSize, int borderRadius, Color borderColor,
-     HorizontalAlignment horizontalAlignment)
+        static public Bitmap TextToBitmap( string text, Font font, double scale, int width, int height,  Color foreColor, Color backColor, int borderSize, int borderRadius, Color borderColor, HorizontalAlignment horizontalAlignment)
         {
             if (string.IsNullOrEmpty(text)) text = "";
 
